@@ -17,6 +17,16 @@ namespace OscaApp.Data
 
     }
 
+    public interface IListaPrecoData
+    {
+        void Add(ListaPreco contato);
+        void Update(ListaPreco contato);
+        ListaPreco Get(Guid id, Guid idOrg);
+        List<ListaPreco> GetAll(Guid idOrg);
+
+    }
+
+
     public interface IContatoData
     {
         void Add(Contato contato);

@@ -15,7 +15,8 @@ namespace OscaApp.Data
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
-     
+        public DbSet<ListaPreco> ListaPrecos { get; set; }
+
 
     }
 }

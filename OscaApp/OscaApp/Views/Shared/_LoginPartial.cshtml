@@ -8,14 +8,14 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="form-inline">
         <i class="fa fa-2x fa-user" style="margin-right:5px;"></i>
-           <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Bem-vindo @UserManager.GetUserName(User) !</a>
+           <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User) !</a>
                 <button type="submit" class="btn btn-link"> Sair </button>
     </form>
 }
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">Registrar</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Entrar</a></li>
     </ul>
 }
