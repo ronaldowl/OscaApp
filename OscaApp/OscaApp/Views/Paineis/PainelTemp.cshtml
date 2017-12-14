@@ -1,0 +1,73 @@
+﻿
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-8 ">
+            <br />
+
+            <h1> Painel Financeiro</h1>
+            <h5>
+                Utilize este painel para gerenciar as informações de fluxo de caixa
+            </h5>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+
+        <div class="col-sm-5">
+            <div class="card m-2">
+                <div class="card-body">
+                    <a asp-controller="Paineis" asp-action="PainelGerenciamento"><h4>Contas a Pagar</h4></a>
+                    Veja as informações de cadastro da sua Organização, valor da fatura e dados do administrador
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="card m-2">
+                <div class="card-body">
+                    <a href="#"><h4>Contas a Receber</h4></a>
+                    Consulte, altere e cadastre novos usuários na sua Organização
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="card m-2">
+                <div class="card-body">
+                    <a href="#"><h4>Retatórios</h4></a>
+                    Consulte as informações detalhadas de fluxo de caixa
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <br /> <br />
+    <br />   <br /><br /><br />
+    <div class="row">
+        <div style="background-color:darkgrey; width: 100%; height:20px"></div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <div class="card-body">
+                    <a asp-controller="Paineis" asp-action="PainelOperacional"><h5>Painel Operacional</h5></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <div class="card-body">
+                    <a  asp-controller="Paineis" asp-action="PainelVendas"><h5>Painel de Vendas</h5></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <div class="card-body">
+                    <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Painel Serviço</h5></a>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+

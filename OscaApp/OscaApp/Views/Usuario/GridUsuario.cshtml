@@ -1,0 +1,71 @@
+﻿@model List<OscaApp.Models.ApplicationUser>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card  " id="osc_Grid">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Lista de Usuários: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <form class="form-inline">
+                                        <div class="form-group col-md-2">
+                                            <button id="osc_novo" type="button" class="btn btn-info  glyphicon glyphicon-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateUsuario", "Usuario", null)'"> <span>Novo</span></button>
+                                        </div>                                       
+                                        <div class="form-group  col-md-4">
+                                            <div class="input-group">
+                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                <span class="input-group-btn ">
+                                                    <button type="submit" class="btn btn-info">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelGerenciamento", "Paineis", null)'"> <span>Painél Gerenciamento</span></button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                  
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Criado Por</th>
+                                <th>Criado Em</th>
+
+                            </tr>
+                        </thead>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.UserName</td>
+                                <td>@item.Email</td>
+                                <td>@item.PhoneNumber</td>
+                                <td>System</td>
+                                <td>XX-XX-XXXX</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

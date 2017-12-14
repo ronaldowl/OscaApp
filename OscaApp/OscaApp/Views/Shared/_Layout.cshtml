@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - OSCA Serviços Online</title>
+   
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        @*<link rel="stylesheet" href="~/css/osc_global.css" />*@
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+
+
+    <style>
+        .barraMain {
+            background: #0c0c0c;
+            background-color: #0C0C0A;
+            height: 50px;
+            color: aliceblue
+        }
+    </style>
+</head>
+<body>
+
+    <div id="barra_main" class="col-md-12 barraMain sticky-top">
+        <a asp-controller="Paineis" asp-action="PainelOperacional" style="float:left;margin-left:10px; font-weight:bold; font-size:30px">OSCA</a>
+        <div style="float:right;">@await Html.PartialAsync("_LoginPartial") </div>
+    </div>
+    <div class="container-fluid body-content">
+        <br />
+        @RenderBody()
+    </div>
+    <environment names="Development">
+        <script src="~/lib/popper.js/dist/popper.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/osc_global.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
+    <footer class="fixed-bottom card" style="border-radius:0; background-color:#0C0C0A">
+             @await Html.PartialAsync("LoginFooter")
+    </footer>
+</body>
+</html>

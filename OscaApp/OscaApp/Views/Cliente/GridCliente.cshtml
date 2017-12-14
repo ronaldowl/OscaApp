@@ -1,0 +1,89 @@
+﻿@model X.PagedList.PagedList<OscaApp.Models.Cliente>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 offset-1">
+            <br />
+            <div class="card  " id="osc_Grid">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Lista de Clientes: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <form class="form-inline">                                     
+                                            <div class="form-group col-md-2">
+                                                <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <button id="osc_importar" type="button" class="btn btn-info  fa fa-download" value="Importar"> <span>Importar</span></button>
+                                            </div>
+                                            <div class="form-group  col-md-4">
+                                                <div class="input-group">
+                                                    @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                    <span class="input-group-btn ">
+                                                        <button type="submit" class="btn btn-info">
+                                                            <span class="fa fa-search"></span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                            </div>              
+                                            <div class="form-group col-md-2">
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelOperacional", "Paineis", null)'"> <span>Painél Operacional</span></button>
+                                            </div>                                                                             
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-11">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Cliente</th>
+                                            <th>CNPJ/CPF</th>
+                                            <th>Tipo de Pessoa</th>
+                                            <th>E-mail</th>
+                                            <th>Telefone</th>
+                                        </tr>
+                                    </thead>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateCliente", new { id = item.id })</td>
+                                            <td>@item.nomeCliente</td>
+                                            <td>@item.cnpj_cpf</td>
+                                            <td>@item.tipoPessoa</td>
+                                            <td>@item.email</td>
+                                            <td>@item.telefone</td>
+                                        </tr>
+                                    }
+                                </table>
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridCliente", "Cliente", new { page }))</td>
+                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="~/js/osc_cliente.js" asp-append-version="true"></script>
+    <script src="~/js/osc_global.js" asp-append-version="true"></script>

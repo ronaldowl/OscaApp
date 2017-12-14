@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-OscaApp-AFC4F6D0-F487-4C79-95FC-14171CC528B4</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Remove="Properties\PublishProfiles\CustomProfile1.pubxml" />
+    <None Remove="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Remove="Properties\PublishProfiles\OscaApp - Web Deploy.pubxml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" PrivateAssets="All" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="7.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Cliente\FormCreateCliente.cshtml" />
+    <None Include="Views\Cliente\FormUpdateCliente.cshtml" />
+    <None Include="Views\Cliente\GridCliente.cshtml" />
+    <None Include="Views\Contato\FormCreateContato.cshtml" />
+    <None Include="Views\Contato\FormUpdateContato.cshtml" />
+    <None Include="Views\Contato\GridContato.cshtml" />
+    <None Include="Views\Endereco\FormCreateEndereco.cshtml" />
+    <None Include="Views\Endereco\FormUpdateEndereco.cshtml" />
+    <None Include="Views\Fornecedor\FormCreateFornecedor.cshtml" />
+    <None Include="Views\Fornecedor\FormUpdateFornecedor.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
+    <None Include="Views\Home\Contact.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\ListaPreco\FormCreateListaPreco.cshtml" />
+    <None Include="Views\ListaPreco\FormUpdateListaPreco.cshtml" />
+    <None Include="Views\Organizacao\FormUpdateOrganizacao.cshtml" />
+    <None Include="Views\Paineis\PainelCadastro.cshtml" />
+    <None Include="Views\Paineis\PainelConfiguracoes.cshtml" />
+    <None Include="Views\Paineis\PainelFinanceiro.cshtml" />
+    <None Include="Views\Paineis\PainelGerenciamento.cshtml" />
+    <None Include="Views\Paineis\PainelOperacional.cshtml" />
+    <None Include="Views\Paineis\PainelServico.cshtml" />
+    <None Include="Views\Paineis\PainelTemp.cshtml" />
+    <None Include="Views\Paineis\PainelVendas.cshtml" />
+    <None Include="Views\Usuario\FormCreateUsuario.cshtml" />
+    <None Include="Views\Usuario\FormUpdateUsuario.cshtml" />
+    <None Include="Views\Usuario\GridUsuario.cshtml" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="http://json.schemastore.org/appveyor" /></VisualStudio></ProjectExtensions>
+
+</Project>

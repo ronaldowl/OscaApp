@@ -1,0 +1,152 @@
+﻿@model OscaApp.ViewModels.PainelOperacionalViewModel
+
+@{
+    ViewData["Title"] = "Painel Operacional";
+}
+<div id="context">
+    @Html.HiddenFor(m => m.contextPage.idUsuario)
+    @Html.HiddenFor(m => m.contextPage.idOrganizacao)
+    @Html.HiddenFor(m => m.contextPage.nomeUsuario)
+    @Html.HiddenFor(m => m.contextPage.organizacao)
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 ">
+            <br />
+
+            <h1> Painel de Operacional</h1>
+            <h5>
+                Utilize este painel para ir diretamente para principais atividades
+            </h5>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <table>
+                                <tr><td> </td><td><a asp-controller="Cliente" asp-action="GridCliente"><h4>Cliente</h4></a></td></tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            Consulte e cadastre novos cliente
+
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <table>
+                                <tr><td> </td><td><a asp-controller="Contato" asp-action="GridContato"><h4>Contato</h4></a></td></tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            Cadastre os contatos da sua empresa
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <table>
+                                <tr><td></td><td><a href="#"><h4>Ordem de Serviço</h4></a></td></tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            Crie uma nova ordem de serviço para seu cliente
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <table>
+                                <tr><td> </td><td><a href="#"><h4>Produtos</h4></a></td></tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            Consulte e cadastre novos Produtos
+
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <table>
+                                <tr><td> </td><td><a href="#"><h4>Pedido</h4></a></td></tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                           Crie e edite novos Pedidos
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <table>
+                                <tr><td> </td><td><a href="#"><h4>Agendamento</h4></a></td></tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                           Consulte os agendamento da sua empresa
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-success" id="osc_paineis">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Módulos</h2></>
+                        <br />
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-10 offset-3">
+                        <div class="card m-2">
+                            <div class="card-header">
+                                <table>
+                                    <tr><td><i class="fa fa-2x fa-handshake-o" aria-hidden="true"></i></td><td><a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 offset-3">
+                        <div class="card m-2">
+                            <div class="card-header">
+                                <table>
+                                    <tr><td><i class="fa fa-2x fa-life-ring" aria-hidden="true"></i></td><td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 offset-3">
+                        <div class="card m-2">
+                            <div class="card-header">
+                                <table>
+                                    <tr><td><i class="fa fa-2x fa-money" aria-hidden="true"></i></td><td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-10 offset-3">
+                        <div class="card m-2">
+                            <div class="card-header">
+                                <table>
+                                    <tr><td><i class="fa fa-2x fa-cogs" aria-hidden="true"></i></td><td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td></tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+ 

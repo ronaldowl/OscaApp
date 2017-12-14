@@ -1,0 +1,326 @@
+﻿@model OscaApp.ViewModels.OrganizacaoViewModel
+<div id="contexto">
+
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+    @Html.HiddenFor(m => m.organizacao.id)
+
+</div>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="container" id="osc_barrabotoes">
+            <label>
+                <button id="osc_salvar" type="submit" class="btn btn-info glyphicon glyphicon-floppy-disk" value="Salvar"> <span>Salvar</span></button>
+            </label>
+            <label>
+                <button id="osc_fechar" type="button" class="btn btn-info  glyphicon glyphicon-remove-circle" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Fechar</span></button>
+            </label>
+            <label>
+                <button id="osc_novo" type="button" class="btn btn-info  glyphicon glyphicon-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateFornecedor", "Fornecedor" , null)'"> <span>Novo</span></button>
+            </label>
+            <label>
+                <button id="osc_status_inativa" type="button" class="btn btn-info  glyphicon glyphicon-alert" value="Inativar"> <span>Inativar</span></button>
+            </label>
+            <label>
+                <button id="osc_status_Ativar" type="button" class="btn btn-info  glyphicon glyphicon-alert" value="Ativar"> <span>Ativar</span></button>
+            </label>
+            <label>
+                <button id="osc_status_Deletar" type="button" class="btn btn-info  glyphicon glyphicon-alert" value="Deletar"> <span>Deletar</span></button>
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <form action="FormUpdateOrganizacao" method="post">
+
+                <div class="panel panel-default" id="osc_MainForm">
+                    <div class="panel-heading">
+                        <div class="panel-title">Atualização de Organizacao</div>
+                    </div>
+                    <div class="panel-body">
+                        <br />
+                        <div class="row">
+                            <!--col1-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.nomeOrganizao">Nome</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_codigo" asp-for="@Model.organizacao.nomeOrganizao" type="text" class="form-control"   />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.plano">Plano</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_codigo" asp-for="@Model.organizacao.plano" type="text" class="form-control" />
+                                    </div>
+                                </div>                            
+                            </div>
+                            <!--col2-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.cpf_cnpj">CPF/CNPJ</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_codigo" asp-for="@Model.organizacao.cpf_cnpj" type="text" class="form-control" />
+                                    </div>
+                                </div>   
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.statusOrganizacao">Status</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-phone-alt"></span>
+                                        </span>
+                                        <input id="osc_telefone" asp-for="@Model.organizacao.statusOrganizacao" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>                            
+                                </div>
+                            <!--col3-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.valorPorUsuario">Valor por Usuário</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-phone-alt"></span>
+                                        </span>
+                                        <input id="osc_totalPagar" asp-for="@Model.organizacao.valorPorUsuario" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.totalPagar">Total a Pagar</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-phone-alt"></span>
+                                        </span>
+                                        <input id="osc_totalPagar" asp-for="@Model.organizacao.totalPagar" type="text" class="form-control"   />
+                                    </div>
+                                </div>
+                                 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default" id="osc_ContatoForm">
+                    <div class="panel-heading">
+                        <div class="panel-title">informações do Administrador da Organizacao</div>
+                    </div>
+                    <div class="panel-body">
+
+                        <br />
+
+                        <div class="row">
+                            <!--col1-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.nomeAdministrador">Nome</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_codigo" asp-for="@Model.organizacao.nomeAdministrador" type="text" class="form-control"/>
+                                    </div>
+                                </div>
+                           
+                       
+                            </div>
+                            <!--col2-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.telefoneAdministrador">Telefone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_codigo" asp-for="@Model.organizacao.telefoneAdministrador" type="text" class="form-control" />
+                                    </div>
+                                </div>                               
+                            </div>
+                            <!--col3-->
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.emailAdministrador">E-mail</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_codigo" asp-for="@Model.organizacao.emailAdministrador" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="panel panel-default" id="osc_EnderecoForm">
+                    <div class="panel-heading">
+                        <div class="panel-title">Informações do Endereço</div>
+                    </div>
+                    <div class="panel-body">
+                        <br />
+                        <div class="row">
+                            <!--col1-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.logradouro">Lougradouro</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_logradouro" asp-for="@Model.organizacao.logradouro" type="text" class="form-control"  />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">CEP</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input id="osc_cep" asp-for="@Model.organizacao.cep" placeholder="CEP" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Bairro</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input id="osc_bairro" asp-for="@Model.organizacao.bairro" type="text" class="form-control" placeholder="Bairro"  />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--col2-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Cidade</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input id="osc_cidade" asp-for="@Model.organizacao.cidade" placeholder="Cidade" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="@Model.organizacao.numero">Numero</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-phone-alt"></span>
+                                        </span>
+                                        <input id="osc_numero" asp-for="@Model.organizacao.numero" type="text" class="form-control" placeholder="(XX) - 000000000" maxlength="15" pattern="[0-9]+$" />
+                                    </div>
+                                </div>
+                              
+                                
+
+                            </div>
+                            <!--col3-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label">Pais</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                            <input id="osc_Pais" asp-for="@Model.organizacao.pais" placeholder="Pais" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Estado</label>
+                                    <div class="selectContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                            <select id="osc_estado" asp-for="@Model.organizacao.estado" class="form-control selectpicker">
+                                                <option value="1"> Acre </option>
+                                                <option value="2"> Alagoas </option>
+                                                <option value="3"> Amapá </option>
+                                                <option value="4"> Amazonas </option>
+                                                <option value="5"> Bahia </option>
+                                                <option value="6"> Ceará </option>
+                                                <option value="7"> Distrito Federal</option>
+                                                <option value="8"> Espirito Santo </option>
+                                                <option value="9"> Goiás </option>
+                                                <option value="10"> Maranhao </option>
+                                                <option value="11"> Mato Grosso </option>
+                                                <option value="12"> Mato Grosso do Sul </option>
+                                                <option value="13"> Minas Gerais </option>
+                                                <option value="14"> Pará </option>
+                                                <option value="15"> Paraiba</option>
+                                                <option value="16"> Paraná </option>
+                                                <option value="17"> Pernambuco</option>
+                                                <option value="18"> Piauí</option>
+                                                <option value="19"> Rio de Janeiro </option>
+                                                <option value="20"> Rio Grande do Norte </option>
+                                                <option value="21"> Rio Grande do Sul </option>
+                                                <option value="22"> Rondônia </option>
+                                                <option value="23"> Roraima </option>
+                                                <option value="24">Santa Catarina </option>
+                                                <option value="25" selected="selected">São Paulo </option>
+                                                <option value="26">Sergipe </option>
+                                                <option value="27"> Tocantins </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                        </form>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-success" id="osc_fatura">
+                <div class="panel-heading">
+                    <div class="panel-title"> Pagamentos efetuados</div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Fornecedor</th>
+                                <th>Nome Vendedor</th>
+                                <th>Telefone</th>
+                            </tr>
+                        </thead>
+                        <tr><td>Fornecedor 1</td><td>Mauro</td><td>964515611</td></tr>
+                        <tr><td>Fornecedor 1</td><td>Thiago</td><td>964515611</td></tr>
+                        <tr><td>Fornecedor 1</td><td>Armando</td><td>964515611</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-success" id="osc_servico">
+                <div class="panel-heading">
+                    <div class="panel-title">Serviços Contratados</div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Data</th>
+
+                            </tr>
+                        </thead>
+                        <tr><td>Atacado</td><td>10/12/2018</td></tr>
+                        <tr><td>Varejo</td><td>10/12/2018</td></tr>
+                        <tr><td>Promoção de Natal</td><td>10/12/2018</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,156 @@
+﻿@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - OSCA Serviços Online</title>
+ 
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/osc_global.css" />
+  
+ 
+    <style>
+        .navbar-fixed-top {
+            background: #0c0c0c;
+        }
+
+            .navbar-fixed-top a, .navbar-fixed-top .navbar-brand:hover, .btn, .btn:hover {
+                color: #fff;
+            }
+
+                .navbar-fixed-top a:hover, a:focus {
+                    color: #000;
+                }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-fixed-top">
+        <div class="container">
+            <div class="text-left">Oscas</div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <center> <h1 style="font-weight:bold">Seja bem vindo!</h1></center>
+            </div><br />
+            <div class="row">
+                <div class="col-md-5">
+                    <section>
+                        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="empresa" class="col-md-3 control-label">Empresa</label>
+                                <div class="col-md-10">
+                                    <input asp-for="empresa" class="form-control" />
+                                    <span asp-validation-for="empresa" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="col-md-3 control-label">E-mail</label>
+                                <div class="col-md-10">
+                                    <span asp-validation-for="Email" class="text-danger "></span>
+                                    <input asp-for="Email" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Password" class="col-md-3 control-label">Senha</label>
+                                <div class="col-md-10">
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-8">
+                                    <div class="checkbox">
+                                        <label asp-for="RememberMe">
+                                            <input asp-for="RememberMe" />
+                                            Lembrar de mim?
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-7">
+                                    <button type="submit" class="btn btn-primary btn-lg" style="width:150px">Entrar</button>
+                                </div>
+                            </div>
+                            <p>
+                                <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">&nbsp;&nbsp; Criar um novo usuário?</a>
+                            </p>
+                            <p>
+                                <a asp-action="ForgotPassword">&nbsp;&nbsp; Esqueceu sua senha?</a>
+                            </p>
+                        </form>
+                    </section>
+                </div>
+                <div class="col-md-5 offset-2">
+                    <section class="alert alert-warning text-justify">
+                        <h4>Próximas manutenções programadas!</h4>
+                        <div>
+                            <p class="">
+                                <ul>
+                                    <li>24 de Janeiro de 2018</li>
+                                    <li>30 de Março de 2018</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Próximas melhorias</h4>
+                        <div>
+                            <p>
+                                <ul>
+                                    <li>Contas a Pagar e Receber</li>
+                                    <li>Nota Fiscal Eletrônica</li>
+                                    <li>Gerenciamento de Estoque</li>
+                                    <li><u>ver mais..</u></li>
+                                </ul>
+                            </p>
+                        </div>
+                    </section>
+                    <section>
+                        <h4>Material de apoio</h4>
+                        <div>
+                            <p>
+                                <ul>
+                                    <li>Treinamento em Vídeo</li>
+                                    <li>FAQ</li>
+                                    <li>Abertura de Chamado</li>
+                                    <li>Documentação</li>
+                                    <li>Entre em contato</li>
+                                </ul>
+                            </p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <nav class="navbar fixed-bottom" style="background-color:#0C0C0A">
+            <div class="col-md8 offset-5">
+                <table>
+                    <tr>
+                        <td style="color:#FFF"><i class="fa  fa-2x fa-home "></i></td>
+                        <td style="color:#FFF"><h4>Osca Online Services 2017 </h4> </td>
+                    </tr>
+                </table>
+            </div>
+        </nav>
+
+    </footer>
+</body>
+</html>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

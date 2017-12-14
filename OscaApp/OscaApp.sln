@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscaApp", "OscaApp\OscaApp.csproj", "{DF9E15E9-30F3-4E87-B206-A78D3CD1EFAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscaAdmin", "OscaAdmin\OscaAdmin.csproj", "{F634AF56-C2CB-4BC8-A496-9C6E9AD6538C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF9E15E9-30F3-4E87-B206-A78D3CD1EFAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF9E15E9-30F3-4E87-B206-A78D3CD1EFAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF9E15E9-30F3-4E87-B206-A78D3CD1EFAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF9E15E9-30F3-4E87-B206-A78D3CD1EFAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F634AF56-C2CB-4BC8-A496-9C6E9AD6538C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F634AF56-C2CB-4BC8-A496-9C6E9AD6538C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F634AF56-C2CB-4BC8-A496-9C6E9AD6538C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F634AF56-C2CB-4BC8-A496-9C6E9AD6538C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {10B87742-AA2B-49E6-A2C9-DB6761A10099}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ronaldowl.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = OscaAdmin\\OscaAdmin.csproj
+		SccProjectName1 = OscaAdmin
+		SccLocalPath1 = OscaAdmin
+		SccProjectUniqueName2 = OscaApp\\OscaApp.csproj
+		SccProjectName2 = OscaApp
+		SccLocalPath2 = OscaApp
+	EndGlobalSection
+EndGlobal
