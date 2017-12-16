@@ -20,11 +20,12 @@ namespace OscaApp.RulesServices
             if (prod.codigo != null)
             {                       
 
-                //Preenche campo default 
-                prod.modificadoEm  = DateTime.Now;
-                prod.criadoEm = DateTime.Now;             
+                //Preenche campo default        
+                prod.criadoEm = DateTime.Now;
+                prod.modificadoEm = DateTime.Now;
                 prod.idOrganizacao = contexto.idOrganizacao;
                 prod.criadoPor = contexto.idUsuario;
+                prod.criadoPorName = contexto.nomeUsuario;
 
                 return true;
             }           

@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace OscaApp.Controllers
 {
@@ -105,9 +106,19 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        public ViewResult GridProduto()
+        public ViewResult GridProduto(string filtro, int Page)
         {
-            return View(produtoData.GetAll(contexto.idOrganizacao));
+            IEnumerable<Produto> retorno = produtoData.GetAll(contexto.idOrganizacao);
+
+           
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nome == filtro || A.codigo == filtro || A.codigoFabricante == filtro) select A;
+
+            retorno = retorno.OrderBy(x => x.nome);
+
+            //Se não passar a número da página, caregar a primeira
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Produto>(Page, 10));
         }
     }
 }
