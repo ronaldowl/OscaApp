@@ -23,9 +23,10 @@ namespace OscaApp.RulesServices
                 modelo.modificadoEm     = DateTime.Now;
                 modelo.modificadoPor    = contexto.idUsuario;
                 modelo.modificadoPorName = contexto.nomeUsuario;
+                modelo.idOrganizacao = contexto.idOrganizacao;
                 ////************ FIM Objetos de controle de acesso ***************
 
-                modelo.idOrganizacao    = contexto.idOrganizacao;              
+
 
                 return true;
             }           
@@ -36,11 +37,13 @@ namespace OscaApp.RulesServices
         {
             modelo = new Cliente();
 
+            ////************ Objetos de controle de acesso ***************
             modelo = entrada.cliente;
             modelo.modificadoEm         = DateTime.Now;
             modelo.modificadoPor        = entrada.contexto.idUsuario;
-            modelo.modificadoPorName    = entrada.contexto.nomeUsuario;          
-                
+            modelo.modificadoPorName    = entrada.contexto.nomeUsuario;
+            ////************ FIM Objetos de controle de acesso ***************
+
             return true;           
         }
         

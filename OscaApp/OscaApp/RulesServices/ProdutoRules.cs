@@ -10,22 +10,25 @@ namespace OscaApp.RulesServices
 {
     public static class ProdutoRules
     {
-        public static bool MontaProdutoCreate(ProdutoViewModel entrada,out Produto prod, ContextPage contexto )
+        public static bool MontaProdutoCreate(ProdutoViewModel entrada,out Produto modelo, ContextPage contexto )
         {
-            prod = new Produto ();
-            prod = entrada.produto;
+            modelo = new Produto ();
+            modelo = entrada.produto;
 
-            prod.codigo = AutoNumber.GeraCodigo(7, contexto.idOrganizacao);
+            modelo.codigo = AutoNumber.GeraCodigo(7, contexto.idOrganizacao);
 
-            if (prod.codigo != null)
-            {                       
+            if (modelo.codigo != null)
+            {
 
-                //Preenche campo default        
-                prod.criadoEm = DateTime.Now;
-                prod.modificadoEm = DateTime.Now;
-                prod.idOrganizacao = contexto.idOrganizacao;
-                prod.criadoPor = contexto.idUsuario;
-                prod.criadoPorName = contexto.nomeUsuario;
+                ////************ Objetos de controle de acesso ***************
+                modelo.criadoEm = DateTime.Now;
+                modelo.criadoPor = contexto.idUsuario;
+                modelo.criadoPorName = contexto.nomeUsuario;
+                modelo.modificadoEm = DateTime.Now;
+                modelo.modificadoPor = contexto.idUsuario;
+                modelo.modificadoPorName = contexto.nomeUsuario;
+                modelo.idOrganizacao = contexto.idOrganizacao;
+                ////************ FIM Objetos de controle de acesso ***************
 
                 return true;
             }           
@@ -35,10 +38,15 @@ namespace OscaApp.RulesServices
         public static bool MontaProdutoUpdate(ProdutoViewModel entrada,out Produto modelo)
         {
                 modelo = new Produto();
-                modelo = entrada.produto;
-                modelo.id = entrada.produto.id;         
-                             
-                return true;
+
+            ////************ Objetos de controle de acesso ***************
+            modelo = entrada.produto;
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = entrada.contexto.idUsuario;
+            modelo.modificadoPorName = entrada.contexto.nomeUsuario;
+            ////************ FIM Objetos de controle de acesso ***************
+
+            return true;
         }       
     }
 }

@@ -80,7 +80,7 @@
                                     <label asp-for="@Model.produto.valorCompra">Valor de Compra</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-money fa-1x"></span>
                                         </span>
                                         <input id="osc_razaosocial" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" />
                                     </div>
@@ -167,7 +167,7 @@
                                 <span class="input-group-addon">
                                     <span class="fa fa-user"></span>
                                 </span>
-                                <input id="osc_criadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_criadoPor" asp-for="@Model.produto.criadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar fa-1x"></span>
                                 </span>
-                                <input id="osc_criadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_criadoEm" asp-for="@Model.produto.criadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>

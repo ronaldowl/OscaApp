@@ -8,25 +8,25 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8">
-            <br /><br />
-            <form action="FormUpdateProduto" method="post">
-                <div class="card  " id="osc_MainForm">
+        <div class="col-md-10 offset-1">
+
+            <form action="FormUpdateProduto" method="post" id="FormUpdateProduto">
+                <div class="card " id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title">
                             <table>
                                 <tr>
-                                    <td><h3>Cliente:&nbsp;&nbsp;</h3></td>
+                                    <td><h3>Produto:&nbsp;&nbsp;</h3></td>
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridProduto", "Produto" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_status_inativa" type="button" class="btn btn-info btn-lg fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
@@ -46,7 +46,6 @@
                     <div class="card-body">
                         <input id="osc_id" asp-for="produto.id" type="hidden" class="form-control" value="@Model.produto.id" />
 
-                        <br />
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -95,7 +94,7 @@
                                     <label asp-for="@Model.produto.valorCompra">Valor de Compra</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-money fa-1x"></span>
                                         </span>
                                         <input id="osc_razaosocial" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" />
                                     </div>
@@ -177,124 +176,42 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.cliente.criadoPorName">Criado Por</label>
+                            <label asp-for="@Model.produto.criadoPorName">Criado Por</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-user"></span>
                                 </span>
-                                <input id="osc_criadoPor" asp-for="@Model.cliente.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_criadoPor" asp-for="@Model.produto.criadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.cliente.criadoEm">Criado Em</label>
+                            <label asp-for="@Model.produto.criadoEm">Criado Em</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar"></span>
                                 </span>
-                                <input id="osc_criadoEm" asp-for="@Model.cliente.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_criadoEm" asp-for="@Model.produto.criadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.cliente.status">Status</label>
+                            <label asp-for="@Model.produto.status">Status</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-exclamation"></span>
                                 </span>
-                                <input id="osc_status" asp-for="@Model.cliente.status" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_status" asp-for="@Model.produto.status" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <br />
-            <br />
-            <div class="card card-success" id="osc_endereco">
-                <div class="card-header card-success">
-                    <div class="card-title">
-                        <table>
-                            <tr>
-                                <td><h5>Endereços:&nbsp;</h5></td>
-                                <td>
-                                    <div id="barra_acoes_endereco">
-                                        <label>
-                                            <button id="osc_endereco" type="button" class="btn btn-info btn-lg fa fa-1x fa-plus" value="Novo Endereço" onclick="location.href='@Url.Action("FormCreateEndereco", "Endereco", new { idCliente = @Model.cliente.id, NomeCliente = @Model.cliente.nomeCliente })'"> <span>Novo</span></button>
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-hover table-responsive">
-                        <thead>
-                            <tr>
-                                <th>Logradouro</th>
-                                <th>Cep</th>
-                                <th>Bairro</th>
-                                <th>Cidade</th>
-                                <th>Tipo de endereço</th>
-                            </tr>
-                        </thead>
- 
-
-                    </table>
                 </div>
             </div>
-            @*<div class="card card-success" id="osc_contato">
-                    <div class="card-heading">
-                        <div class="card-title"> Contatos</div>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-hover table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Telefone</th>
-                                    <th>E-mail</th>
-                                </tr>
-                            </thead>
-                            <tr><td>Sergio Mende Junior</td><td>99565589</td><td>teste@ig.com.br</td></tr>
-                            <tr><td>Mende Junior</td><td>99565589</td><td>teste@ig.com.br</td></tr>
-                            <tr><td> Junior</td><td>99565589</td><td>teste@ig.com.br</td></tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="card card-success" id="osc_servicos">
-                    <div class="panel-heading">
-                        <div class="card-title">Ordens de Serviço</div>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-hover table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>Titulo</th>
-                                    <th>Valor</th>
-                                    <th>Data de entrega</th>
-                                </tr>
-                            </thead>
-                            <tr><td>Troca de placa</td><td>320,00</td><td>10/12/2018</td></tr>
-
-                        </table>
-                    </div>
-                </div>*@
         </div>
-
     </div>
 </div>
 
-<script src="~/js/osc_cliente.js" asp-append-version="true">
-
-    //Carrega as regras do Form
-    Onload();
-
-
-
-
-</script>
+<script src="~/js/osc_cliente.js" asp-append-version="true"></script>

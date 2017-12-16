@@ -35,11 +35,13 @@ namespace OscaApp.RulesServices
         {
             modelo = new Contato();
 
+            ////************ Objetos de controle de acesso ***************
             modelo = entrada.contato;
-            modelo.modificadoEm         = DateTime.Now;
-            modelo.modificadoPor        = entrada.contexto.idUsuario;
-            modelo.modificadoPorName    = entrada.contexto.nomeUsuario;          
-                
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = entrada.contexto.idUsuario;
+            modelo.modificadoPorName = entrada.contexto.nomeUsuario;
+            ////************ FIM Objetos de controle de acesso ***************       
+
             return true;           
         }
         

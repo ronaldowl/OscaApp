@@ -29,17 +29,12 @@ namespace OscaApp.Controllers
 
         }
 
-        [HttpGet]
-        public ViewResult FormCreateProduto()
-        {
-
-            return View();
-        }
-
+    
         [HttpPost]
         public IActionResult FormUpdateProduto(ProdutoViewModel entrada)
         {
             Produto modelo = new Produto();
+            entrada.contexto = this.contexto;
 
             try
             {
@@ -72,11 +67,27 @@ namespace OscaApp.Controllers
              
                 retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
 
+
+                //TODO Formata campos
+
                 if (retorno != null)
                 {
                     modelo.produto = retorno;                   
                 }
             }
+
+            return View(modelo);
+        }
+
+        [HttpGet]
+        public ViewResult FormCreateProduto()
+        {
+
+            ProdutoViewModel modelo = new ProdutoViewModel();
+            modelo.produto = new Produto();
+            modelo.contexto = contexto;
+            modelo.produto.criadoEm = DateTime.Now;
+            modelo.produto.criadoPorName = contexto.nomeUsuario;
 
             return View(modelo);
         }

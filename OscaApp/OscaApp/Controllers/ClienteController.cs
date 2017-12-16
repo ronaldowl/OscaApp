@@ -51,7 +51,7 @@ namespace OscaApp.Controllers
         public IActionResult FormUpdateCliente(ClienteViewModel entrada)
         {
             Cliente modelo = new Cliente();
-            entrada.contexto = contexto;
+            entrada.contexto = this.contexto;
 
 
             try
