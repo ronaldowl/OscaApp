@@ -22,9 +22,10 @@ namespace OscaApp.framework.Models
         public Guid modificadoPor { get; set; }
         public string modificadoPorName { get; set; }
         public DateTime modificadoEm { get; set; }
-        public Guid idOrganizacao { get; set; }    
-                  
-       
+        public Guid idOrganizacao { get; set; }
+        public CustomEnum.Status status { get; set; }
+
+
         public GenericEntity(int _entityType, Guid _id)
         {
             this.entityType = _entityType;

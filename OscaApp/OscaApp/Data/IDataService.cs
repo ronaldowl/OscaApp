@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using OscaApp.Models;
 using OscaApp.framework.Models;
 
@@ -8,13 +7,19 @@ namespace OscaApp.Data
 {
 
     //TODO: Criar uma inteface para cada objeto gravado no banco
+    public interface IFornecedorData
+    {
+        void Add(Fornecedor fornecedor);
+        void Update(Fornecedor fornecedor);
+        Fornecedor Get(Guid id, Guid idOrg);
+        List<Fornecedor> GetAll(Guid idOrg);
+    }
     public interface IClienteData
     {
         void Add(Cliente cliente);
         void Update(Cliente cliente);
         Cliente Get(Guid id, Guid idOrg);
         List<Cliente> GetAll(Guid idOrg);       
-
     }
 
     public interface IListaPrecoData
@@ -23,9 +28,7 @@ namespace OscaApp.Data
         void Update(ListaPreco contato);
         ListaPreco Get(Guid id, Guid idOrg);
         List<ListaPreco> GetAll(Guid idOrg);
-
     }
-
 
     public interface IContatoData
     {
@@ -33,9 +36,7 @@ namespace OscaApp.Data
         void Update(Contato contato);
         Contato Get(Guid id, Guid idOrg);
         List<Contato> GetAll(Guid idOrg);
-
     }
-
 
     public interface IProdutoData
     {
@@ -43,7 +44,6 @@ namespace OscaApp.Data
         void Update(Produto produto);
         Produto Get(Guid id, Guid idOrg);
         List<Produto> GetAll(Guid idOrg);
-
     }
     public interface IEnderecoData
     {
@@ -51,14 +51,11 @@ namespace OscaApp.Data
         void Update(Endereco endereco);
         Endereco Get(Guid id);
         List<Endereco> GetAll(Guid idOrg);
-
     }
 
     public interface ISqlGenericService
     {
-
         String RetornaNovaPosicao(int Entidade, Guid idOrganizacao);    
-
     }
     public interface ISqlGenericManager
     {
@@ -67,10 +64,6 @@ namespace OscaApp.Data
         Guid CriaOrganizacao(string org);
 
         Relacao RetornaContextPage(string email,string org);
-    
-
     }
-
-
-    
+  
 }

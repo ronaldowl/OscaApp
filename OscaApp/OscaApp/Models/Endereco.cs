@@ -22,9 +22,7 @@ namespace OscaApp.Models
        
         public Guid idCliente { get; set; }
         public string idClienteName { get; set; }
-
-
-        public CustomEnum.Status status { get; set; }
+         
         public CustomEnum.TipoEndereco TipoEndereco {get; set;}
         public CustomEntityEnum.Estado estado { get; set; }
 

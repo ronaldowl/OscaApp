@@ -21,7 +21,7 @@ namespace OscaApp.Data
         {
             try
             {
-                db.Clientes.Add(cliente);                
+                db.Fornecedor.Add(cliente);                
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -64,7 +64,7 @@ namespace OscaApp.Data
             try
             {
                
-                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.Fornecedor.FromSql("SELECT * FROM Cliente where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }         
             catch (SqlException ex)
             {
@@ -77,7 +77,7 @@ namespace OscaApp.Data
         public List<Cliente> GetAll(Guid idOrg)
         {
             List<Cliente> retorno = new List<Cliente>();
-            retorno = db.Clientes.FromSql("SELECT * FROM Cliente where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = db.Fornecedor.FromSql("SELECT * FROM Cliente where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return retorno;
 
         }

@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaApp.Models.ListaPreco>
+﻿@model X.PagedList.PagedList<OscaApp.Models.Fornecedor>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -6,18 +6,18 @@
     <div class="row">
         <div class="col-md-11 offset-1">
             <br />
-            <div class="card  " id="osc_Grid">
+            <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold">Listas de preço: &nbsp;&nbsp;</h5>
+                                    <h5 style="font-weight:bold">Lista de Fornecedores: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
                                     <form class="form-inline">                                     
                                             <div class="form-group col-md-2">
-                                                <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateListaPreco", "ListaPreco", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateFornecedor", "Fornecedor", null)'"> <span>Novo</span></button>
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <button id="osc_importar" type="button" class="btn btn-info  fa fa-download" value="Importar"> <span>Importar</span></button>
@@ -36,7 +36,7 @@
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
                                             </div>              
                                             <div class="form-group col-md-2">
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelOperacional", "Paineis", null)'"> <span>Painél Operacional</span></button>
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelCadastro", "Paineis", null)'"> <span>Painél Cadastro</span></button>
                                             </div>                                                                             
                                     </form>
                                 </td>
@@ -49,24 +49,32 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Nome da Lista</th>
-                                            <th>Data de Validade</th>
-                                         
+                                          
+                                            <th>Nome do Fornecedor</th>
+                                            <th>CNPJ</th>
+                                            <th>Nome do Vendedor</th>
+                                            <th>Telefone</th>
+                                            <th>E-mail</th>
+                                            <th>Criado Por</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateListaPreco", new { id = item.id })</td>
-                                            <td>@item.dataValidade</td>
-                                      
+                                            <td>@Html.ActionLink(item.nomeFornecedor.ToString(), "FormUpdateFornecedor", new { id = item.id })</td>
+                                          
+                                            <td>@item.cnpj</td>
+                                            <td>@item.nomeVendedor</td>
+                                            <td>@item.telefone</td>
+                                            <td>@item.email</td>
+                                            <td>@item.criadoPorName</td>
                                         </tr>
                                     }
                                 </table>
                                 <div>
                                     <table>
                                         <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridListaPreco", "ListaPreco", new { page }))</td>
+                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridFornecedor", "Fornecedor", new { page }))</td>
                                             <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
                                         </tr>
                                     </table>

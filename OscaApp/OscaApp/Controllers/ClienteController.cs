@@ -52,8 +52,6 @@ namespace OscaApp.Controllers
         {
             Cliente modelo = new Cliente();
             entrada.contexto = this.contexto;
-
-
             try
             {
                 if (ClienteRules.MontaClienteUpdate(entrada, out modelo))

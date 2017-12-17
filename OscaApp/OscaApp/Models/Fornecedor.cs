@@ -1,21 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using OscaApp.framework.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace OscaApp.Models
 {
-    public class Fornecedor: GenericEntity
+    [Table("Fornecedor")]
+    public class Fornecedor : GenericEntity
     {
-        public String codigo { get; set; }
+    
         public String nomeFornecedor { get; set; }
         public String cnpj { get; set; }
-
         public String nomeVendedor { get; set; }
         public String telefone { get; set; }
         public String email { get; set; }
-
         public String anotacao { get; set; }
 
-        public CustomEnum.Status status { get; set; }
 
         public Fornecedor()
         {

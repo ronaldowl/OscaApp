@@ -19,7 +19,7 @@ namespace OscaApp.Models
         public decimal area { get; set; }
         public decimal peso { get; set; }
         public CustomEnum.FormaVendaProduto formaVendaProduto { get; set; }
-        public CustomEnum.Status status { get; set; }
+     
 
         public Produto()
         {

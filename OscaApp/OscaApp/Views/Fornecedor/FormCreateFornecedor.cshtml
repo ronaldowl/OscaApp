@@ -1,17 +1,17 @@
 ﻿@model OscaApp.ViewModels.FornecedorViewModel
 <div id="contexto">
-    @Html.HiddenFor(m => m.contexto.idOrganizacao)
-    @Html.HiddenFor(m => m.contexto.organizacao)
-    @Html.HiddenFor(m => m.contexto.idUsuario)
-    @Html.HiddenFor(m => m.contexto.nomeUsuario)
-    @Html.HiddenFor(m => m.fornecedor.id)
+    @Html.HiddenFor(m => m.Contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.Contexto.organizacao)
+    @Html.HiddenFor(m => m.Contexto.idUsuario)
+    @Html.HiddenFor(m => m.Contexto.nomeUsuario)
+    @Html.HiddenFor(m => m.Fornecedor.id)
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8 col-lg-offset-2">
-            <br /><br />
+        <div class="col-md-8  offset-2">
+          
             <form action="FormCreateFornecedor" method="post" id="osc_Mainform">
-                <div class="card" id="osc_MainForm">
+                <div class="card">
                     <div class="card-header">
                         <div class="card-title">
                             <table>
@@ -20,10 +20,10 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"><span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridContato", "Contato" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridFornecedor","Fornecedor", null)'"><span>Fechar</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -35,112 +35,110 @@
                 <div class="card-body">
                     <div class="row">
                         <!--col1-->
-                        <div class="col-md-4">
+                        <div class="col-md-4">                         
                             <div class="form-group">
-                                <label asp-for="@Model.fornecedor.codigo">Código</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-asterisk fa-1x"></span>
-                                    </span>
-                                    <input id="osc_codigo" asp-for="@Model.fornecedor.codigo" type="text" class="form-control" disabled="disabled" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Nome do Fornecedor</label>
+                                <label asp-for="@Model.Fornecedor.nomeFornecedor">Nome do Fornecedor</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
-                                        <input id="osc_nomefornecedor" asp-for="@Model.fornecedor.nomeFornecedor" placeholder="Nome" class="form-control" type="text">
+                                        <input id="osc_nomefornecedor" asp-for="@Model.Fornecedor.nomeFornecedor" placeholder="Nome" class="form-control" type="text">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">CNPJ</label>
+                                <label asp-for="@Model.Fornecedor.cnpj">CNPJ</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
-                                        <input id="osc_cpf" asp-for="@Model.fornecedor.cnpj" type="text" class="form-control" placeholder="CPF" onchange="ValidaCPF()" />
+                                        <input id="osc_cpf" asp-for="@Model.Fornecedor.cnpj" type="text" class="form-control" placeholder="CNPJ" onchange="ValidaCNPJ()" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Fornecedor.email">Email</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-1x"></i></span>
+                                        <input id="osc_email" asp-for="@Model.Fornecedor.email" placeholder="Email" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                   
                         <!--col2-->
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="control-label">Nome do Vendedor</label>
+                                <label asp-for="@Model.Fornecedor.nomeVendedor">Nome do Vendedor</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
-                                        <input id="osc_nomeVendedor" asp-for="@Model.fornecedor.nomeVendedor" placeholder="Nome" class="form-control" type="text">
+                                        <input id="osc_nomeVendedor" asp-for="@Model.Fornecedor.nomeVendedor" placeholder="Nome" class="form-control" type="text">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label asp-for="@Model.fornecedor.telefone">Telefone</label>
+                                <label asp-for="@Model.Fornecedor.telefone">Telefone</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <span class="fa fa-phone fa-1x"></span>
                                     </span>
-                                    <input id="osc_telefone" asp-for="@Model.fornecedor.telefone" type="text" class="form-control" placeholder="(XX) - 000000000" maxlength="15" pattern="[0-9]+$" />
+                                    <input id="osc_telefone" asp-for="@Model.Fornecedor.telefone" type="text" class="form-control" placeholder="(XX) - 000000000" maxlength="15" pattern="[0-9]+$" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label">Email</label>
-                                <div class="inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-1x"></i></span>
-                                        <input id="osc_email" asp-for="@Model.fornecedor.email" placeholder="Email" class="form-control" type="text">
-                                    </div>
-                                </div>
-                            </div>
+                          
+                         
                         </div>
                         <!--col3-->
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label asp-for="@Model.fornecedor.anotacao">Anotação</label>
+                                <label asp-for="@Model.Fornecedor.anotacao">Anotação</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <span class="fa fa-comment-o fa-1x"></span>
                                     </span>
-                                    <textarea id="osc_anotacao" asp-for="@Model.fornecedor.anotacao" class="form-control" rows="9" cols="25" placeholder="digite uma anotação"></textarea>
+                                    <textarea id="osc_anotacao" asp-for="@Model.Fornecedor.anotacao" class="form-control" rows="9" cols="25" placeholder="digite uma anotação"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </form>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <div class="card-footer">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.fornecedor.criadoPor">Criado Por</label>
+                            <label asp-for="@Model.Fornecedor.criadoPor">Criado Por</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-user fa-1x"></span>
                                 </span>
-                                <input id="osc_criadoPor" asp-for="@Model.fornecedor.criadoPor" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_criadoPor" asp-for="@Model.Fornecedor.criadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.fornecedor.criadoEm">Criado Em</label>
+                            <label asp-for="@Model.Fornecedor.criadoEm">Criado Em</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar fa-1x"></span>
                                 </span>
-                                <input id="osc_criadoEm" asp-for="@Model.fornecedor.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_criadoEm" asp-for="@Model.Fornecedor.criadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.fornecedor.status">Status</label>
+                            <label asp-for="@Model.Fornecedor.status">Status</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-exclamation fa-1x"></span>
                                 </span>
-                                <input id="osc_status" asp-for="@Model.fornecedor.status" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_status" asp-for="@Model.Fornecedor.status" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>

@@ -23,7 +23,7 @@ namespace OscaApp.Models
         public String celular { get; set; }    
         public String anotacao { get; set; }
         public CustomEnum.Sexo sexo { get; set; }
-        public CustomEnum.Status status { get; set; }
+        
 
 
         public Cliente() {

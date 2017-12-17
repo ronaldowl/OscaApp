@@ -1,31 +1,121 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using OscaApp.Data;
+using OscaApp.Models;
+using OscaApp.RulesServices;
+using OscaApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+using X.PagedList;
+
 
 namespace OscaApp.Controllers
 {
     [Authorize]
     public class FornecedorController : Controller
     {
+        private readonly IFornecedorData fornecedorData;
+        private ContextPage contexto;
 
-        [HttpPost]
-        public IActionResult FormCreateFornecedor(string id)
+
+
+        public FornecedorController(ContexDataService db, IHttpContextAccessor httpContext)
         {
-            return RedirectToAction("FormUpdateFornecedor", new { });
+            this.fornecedorData = new FornecedorData(db);
+            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+
         }
 
         [HttpGet]
-        public IActionResult FormCreateFornecedor()
+        public ViewResult FormCreateFornecedor()
         {
+            FornecedorViewModel modelo = new FornecedorViewModel();
+            modelo.Fornecedor = new Fornecedor();
+            modelo.Contexto = contexto;
+            modelo.Fornecedor.criadoEm = DateTime.Now;
+            modelo.Fornecedor.criadoPorName = contexto.nomeUsuario;
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormCreateFornecedor(FornecedorViewModel entrada)
+        {
+            Fornecedor modelo = new Fornecedor();
+
+            try
+            {
+                if (entrada.Fornecedor.nomeFornecedor!=null)
+                {
+                  if  (FornecedorRules.FornecedorCreate(entrada, out modelo, contexto)) {                    
+                        fornecedorData.Add(modelo);
+                        return RedirectToAction("FormUpdateFornecedor", new { id = modelo.id.ToString() });
+                  }
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: Gravar exceção no LOG
+            }
             return View();
         }
 
-        public IActionResult FormUpdateFornecedor()
+        [HttpGet]
+        public ViewResult FormUpdateFornecedor(string id)
         {
-            return View();
+            FornecedorViewModel modelo = new FornecedorViewModel();
+            modelo.Fornecedor = new Fornecedor();
+            modelo.Fornecedor.id = new Guid(id);
+
+            Fornecedor retorno = new Fornecedor();
+       
+            if (!String.IsNullOrEmpty(id))
+            {
+                retorno = fornecedorData.Get(modelo.Fornecedor.id, contexto.idOrganizacao);
+
+                //TODO Formata campos
+
+                if (retorno != null)
+                {
+                    modelo.Fornecedor = retorno;
+                }
+            }
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormUpdateFornecedor(FornecedorViewModel entrada)
+        {
+            Fornecedor modelo = new Fornecedor();
+            entrada.Contexto = this.contexto;
+            try
+            {
+                if (FornecedorRules.FornecedorUpdate(entrada, out modelo))
+                {
+                    fornecedorData.Update(modelo);
+                    return RedirectToAction("FormUpdateFornecedor", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: Gravar exceção no LOG
+            }
+
+            return RedirectToAction("FormUpdateFornecedor", new { id = modelo.id.ToString() });
+        }
+
+        public ViewResult GridFornecedor(string filtro, int Page)
+        {
+            IEnumerable<Fornecedor> retorno = fornecedorData.GetAll(contexto.idOrganizacao);
+
+            retorno = retorno.OrderBy(x => x.nomeFornecedor);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Fornecedor>(Page, 10));
         }
     }
 }

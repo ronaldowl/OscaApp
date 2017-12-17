@@ -6924,12 +6924,19 @@ a.bg-dark:focus, a.bg-dark:hover {
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sticky-top {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 1020;
-  }
+    .sticky-top {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    .sticky-bottom {
+        position: fixed;
+        width:100%;
+        bottom: 0;
+        z-index: 1021;
+    }
 }
 
 .sr-only {
