@@ -10,8 +10,8 @@ namespace OscaApp.Models
     {
         public decimal valor { get; set; }
 
-        public Relacao produto { get; set; }
+        public Guid produto { get; set; }
 
-        public Relacao listaPreco { get; set; }
+        public Guid listaPreco { get; set; }
     }
 }

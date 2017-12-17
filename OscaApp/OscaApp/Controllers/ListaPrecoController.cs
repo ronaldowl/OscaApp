@@ -36,6 +36,9 @@ namespace OscaApp.Controllers
             modelo.listaPreco.criadoEm = DateTime.Now;
             modelo.listaPreco.criadoPorName = contexto.nomeUsuario;
 
+            //Inicia campo a partir de um ano
+            modelo.dataValidade = DateTime.Now.AddYears(1);
+
             return View(modelo);
         }
 

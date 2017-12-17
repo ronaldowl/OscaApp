@@ -35,7 +35,7 @@
                                                 <button id="osc_status_Ativar" type="button" class="btn btn-info btn-lg fa fa-check-circle-o fa-1x" value="Ativar"> <span>Ativar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_Deletar" type="button" class="btn btn-info btn-lg fa fa-times-circle-o fa-1x" value="Deletar"> <span>Deletar</span></button>
+                                                <button id="osc_endereco" type="button" class="btn btn-info btn-lg fa fa-1x fa-plus" value="Novo Endereço" onclick="location.href='@Url.Action("FormCreateItemListaPreco", "Produto", new { idProduto = @Model.produto.id, NomeProduto = @Model.produto.nome })'"> <span>Novo Produto</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="@Model.produto.nome">Nome*</label>
+                                    <label asp-for="@Model.produto.nome" style="color:red">Nome*</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-asterisk fa-1x"></span>
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="@Model.produto.formaVendaProduto">Forma de Venda</label>
+                                    <label asp-for="@Model.produto.formaVendaProduto" style="color:red">Forma de Venda</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-asterisk fa-1x"></span>
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="@Model.produto.quantidade">Quantidade</label>
+                                    <label asp-for="@Model.produto.quantidade"  style="color:red">Quantidade</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-asterisk fa-1x"></span>
@@ -91,7 +91,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="@Model.produto.valorCompra">Valor de Compra</label>
+                                    <label asp-for="@Model.produto.valorCompra"  style="color:red">Valor de Compra</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-money fa-1x"></span>

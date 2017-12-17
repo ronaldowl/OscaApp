@@ -12,7 +12,7 @@ namespace OscaApp.Models
     {
         public string nome { get; set; }
         public string descricao { get; set; }
-
+        public bool padrao { get; set; }
         public DateTime dataValidade { get; set; }
 
         public ListaPreco()
