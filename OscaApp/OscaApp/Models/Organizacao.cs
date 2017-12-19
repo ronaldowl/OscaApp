@@ -33,6 +33,7 @@ namespace OscaApp.Models
         public string bairro { get; set; }
         public string complemento { get; set; }
         public string anotacao { get; set; }
+        public string nomeAmigavel { get; set; }
 
 
     }
