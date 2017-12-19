@@ -38,7 +38,8 @@
 
     @RenderSection("scripts", required: false)
     <footer class="sticky-bottom" style="background-color:#0C0C0A">
-             @await Html.PartialAsync("LoginFooter")
+            
+        @await Component.InvokeAsync("Footer");
     </footer>
 </body>
 </html>
