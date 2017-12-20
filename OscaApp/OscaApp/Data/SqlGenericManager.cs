@@ -17,15 +17,11 @@ namespace OscaApp.Data
             this.conectStringManager = @"Server=tcp:oscadbservices.database.windows.net,1433;Initial Catalog=OscadbManager;Persist Security Info=False;User ID=ronaldowl_admin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"; 
         }
 
-
         public  Guid CriaOrganizacao(string org)
         {
             object retorno;
-
             try
             {
-                
-
                 using (SqlConnection Connection = new SqlConnection(conectStringManager))
                 {
 

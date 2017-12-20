@@ -51,6 +51,7 @@ namespace OscaApp.Data
         void Update(Endereco endereco);
         Endereco Get(Guid id);
         List<Endereco> GetAll(Guid idOrg);
+        List<Endereco> GetAllByIdClinte(Guid idCliente);
     }
 
     public interface ISqlGenericService

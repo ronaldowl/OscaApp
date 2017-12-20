@@ -29,20 +29,19 @@ namespace OscaApp.Controllers
 
         }
 
-        public ViewResult GridEndereco(string filtro, int Page)
+        public ViewResult GridEndereco(int Page, string idCliente)
         {
-            IEnumerable<Endereco> retorno = enderecoData.GetAll(contexto.idOrganizacao);
-
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.idClienteName == filtro || A.logradouro == filtro) select A;
-
+            IEnumerable<Endereco> retorno = enderecoData.GetAllByIdClinte(new Guid(idCliente));    
+        
             retorno = retorno.OrderBy(x => x.logradouro);
-
-            //Se não passar a número da página, caregar a primeira
+      
             if (Page == 0) Page = 1;
 
             return View(retorno.ToPagedList<Endereco>(Page, 10));
         }
+
+
+
 
         [HttpPost]
         public IActionResult FormUpdateEndereco(EnderecoViewModel entrada)

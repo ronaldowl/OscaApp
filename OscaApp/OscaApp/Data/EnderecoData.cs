@@ -66,6 +66,14 @@ namespace OscaApp.Data
 
         }
 
+        public List<Endereco> GetAllByIdClinte(Guid idCliente)
+        {
+            List<Endereco> retorno = new List<Endereco>();
+            retorno = db.Enderecos.FromSql("SELECT * FROM Endereco where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            return retorno;
+
+        }
+
         public List<Endereco> GetByCliente(Guid idCliente)
         {
             List<Endereco> retorno = new List<Endereco>();

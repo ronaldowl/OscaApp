@@ -26,7 +26,7 @@
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-plus fa-1x" value="Novo" onclick="location.href='@Url.Action("FormCreateEndereco", "Endereco", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-close fa-1x" value="Fechar" onclick="location.href='@Url.Action("GridEndereco", "Endereco" , null)'"><span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-close fa-1x" value="Fechar" onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new {id = @Model.endereco.idCliente })'"><span>Fechar</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_status_inativa" type="button" class="btn btn-info btn-lg fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </form><br /><br />
             <div class="card-footer">
                 <div class="row">
                     <div class="col-md-4">
