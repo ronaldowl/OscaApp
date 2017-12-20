@@ -3,6 +3,7 @@ using OscaApp.framework.Models;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using OscaApp.Models;
 
 
 namespace OscaApp.Data
@@ -79,6 +80,50 @@ namespace OscaApp.Data
                 throw;
             }
             return false;
+        }
+
+        public Organizacao RetornaOrganizacao(Guid idOrg)
+        { 
+              Organizacao retorno = new Organizacao();
+              SqlDataReader dataReader;
+
+            try
+            {
+             
+
+                using (SqlConnection Connection = new SqlConnection(conectStringManager))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.idOrganizacao, o.nomeAmigavel from Organizacao as O where O.nome = '" + idOrg.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+                 
+                    Connection.Open();
+                    dataReader =  _Command.ExecuteReader();
+
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["idOrganizacao"].ToString());                          
+                            retorno.nomeAmigavel = dataReader["nomeAmigavel"].ToString();
+
+                        }
+                    }
+                    Connection.Close();
+
+                   
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
         }
 
         public Relacao RetornaContextPage( string email, string org)
