@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OscaApp.framework.Models;
-using OscaApp.Data;
- 
+using OscaApp.Data; 
 using OscaApp.Models;
 using OscaApp.RulesServices;
 using OscaApp.ViewModels;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
+using System.Linq;
+using X.PagedList;
 
 namespace OscaApp.Controllers
 {
@@ -25,6 +27,21 @@ namespace OscaApp.Controllers
           
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
 
+        }
+
+        public ViewResult GridEndereco(string filtro, int Page)
+        {
+            IEnumerable<Endereco> retorno = enderecoData.GetAll(contexto.idOrganizacao);
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.idClienteName == filtro || A.logradouro == filtro) select A;
+
+            retorno = retorno.OrderBy(x => x.logradouro);
+
+            //Se não passar a número da página, caregar a primeira
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Endereco>(Page, 10));
         }
 
         [HttpPost]
