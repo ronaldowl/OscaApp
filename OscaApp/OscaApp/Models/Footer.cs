@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static OscaApp.framework.Models.CustomEnum;
 
 namespace OscaApp.Models
 {
@@ -11,7 +12,7 @@ namespace OscaApp.Models
         public string nomeOrganizacao { get; set; }
         public string msgAvaliacao { get; set; }
         public int diasAvaliacao { get; set; }
-        public int statusOrg { get; set; }
+        public StatusOrganizacao statusOrg { get; set; }
 
     }
 }

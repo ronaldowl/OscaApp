@@ -20,6 +20,14 @@ namespace OscaApp.framework.Models
             Inativo = 0
         }
 
+        public enum StatusOrganizacao
+        {
+            Inativo = 0,
+            Ativo = 1,            
+            EmAvaliacao = 2,
+            Expirada = 3
+        }
+
         public enum TipoParametro
         {
             texto = 1,

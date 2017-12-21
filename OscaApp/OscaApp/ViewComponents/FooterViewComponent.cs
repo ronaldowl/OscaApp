@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static OscaApp.framework.Models.CustomEnum;
 
 namespace OscaApp.ViewComponents
 {
@@ -26,11 +27,19 @@ namespace OscaApp.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
 
-            Footer modelo = new Footer();
+            Footer modelo = new Footer();       
+            
+            Organizacao org = new Organizacao();
 
-            modelo.nomeOrganizacao = this.contexto.organizacao;
-            modelo.msgAvaliacao = "Falta 20 dias de Avaliação";
-                
+            modelo.nomeOrganizacao = org.nomeAmigavel;
+            modelo.statusOrg = org.statusOrg;
+
+            //consulta se a Organização esta ativa
+            if (org.statusOrg == StatusOrganizacao.EmAvaliacao)
+            {
+                modelo.msgAvaliacao = "Falta 20 dias de Avaliação";
+            }           
+
 
             return View("LoginFooter", modelo);
 
