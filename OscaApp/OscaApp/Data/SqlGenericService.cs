@@ -18,6 +18,35 @@ namespace OscaApp.Data
 
         }
 
+        public  void InicializaOrg(string idOrg)
+        {           
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_InializaNovaOrg",
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    _Command.Parameters.AddWithValue("idOrg", idOrg);
+
+                    Connection.Open();
+                    _Command.ExecuteScalar();
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            
+        }
+
+
 
         public String RetornaNovaPosicao(int Entidade , Guid idOrganizacao)
         {

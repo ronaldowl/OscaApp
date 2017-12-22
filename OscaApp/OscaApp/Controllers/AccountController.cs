@@ -224,6 +224,8 @@ namespace OscaApp.Controllers
             {
                 Guid idOrg = new Guid();
                 SqlGenericManager _sqlManager = new SqlGenericManager();
+                SqlGenericService _sqlService = new SqlGenericService();
+
 
                 //Se for a primeira Organização criar no banco
                 if (_sqlManager.ExisteOrganizacao(model.organizacao.nomeLogin, out idOrg))
@@ -233,6 +235,7 @@ namespace OscaApp.Controllers
                 }
 
                 idOrg = _sqlManager.CriaOrganizacao(model.organizacao.nomeLogin);
+                _sqlService.InicializaOrg(idOrg.ToString());
                 //Prenche contexto da Organizacao
                 model.contexto = new ContextPage(model.organizacao.nomeLogin, model.Email);
 
