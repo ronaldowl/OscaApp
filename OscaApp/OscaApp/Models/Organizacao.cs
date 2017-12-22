@@ -14,15 +14,13 @@ namespace OscaApp.Models
         [Required]
         [StringLength(30, ErrorMessage = "O {0} nome da empresa deve ter no minimo  {2} e no máximo {1} characters de tamanho", MinimumLength = 3)]
 
-        public string nomeOrganizaoLogin { get; set; }
+        public string nomeLogin { get; set; }
         public string nomeAmigavel { get; set; }
         public string cpf_cnpj { get; set; }
         public DateTime dataPagamento { get; set; }
-        public CustomEnum.TipoPessoa tipoPessoa { get; set; }
-        public CustomEnum.Plano plano { get; set; }
+        public CustomEnum.TipoPessoa tipoPessoa { get; set; }       
         public int quantidadeUsuario { get; set; }
-        public decimal totalPagar { get; set; }
-        public decimal valorPorUsuario { get; set; }
+        
         public string nomeAdministrador { get; set; }
         public string emailAdministrador { get; set; }
         public string telefoneAdministrador { get; set; }

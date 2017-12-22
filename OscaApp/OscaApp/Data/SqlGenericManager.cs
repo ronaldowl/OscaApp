@@ -60,7 +60,7 @@ namespace OscaApp.Data
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select O.idOrganizacao from Organizacao as O where O.nome = '" + org + "'",
+                        CommandText = "select O.id from Organizacao as O where O.nomeLogin = '" + org + "'",
                         CommandType = CommandType.Text
                     };
                  
@@ -97,7 +97,7 @@ namespace OscaApp.Data
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select O.idOrganizacao, o.nomeAmigavel from Organizacao as O where O.nome = '" + idOrg.ToString() + "'",
+                        CommandText = "select O.id , o.nomeAmigavel from Organizacao as O where O.nomeLogin = '" + idOrg.ToString() + "'",
                         CommandType = CommandType.Text
                     };
                  
@@ -109,7 +109,7 @@ namespace OscaApp.Data
                     {
                         while (dataReader.Read())
                         {
-                            retorno.id = new Guid(dataReader["idOrganizacao"].ToString());                          
+                            retorno.id = new Guid(dataReader["id"].ToString());                          
                             retorno.nomeAmigavel = dataReader["nomeAmigavel"].ToString();
 
                         }

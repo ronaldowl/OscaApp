@@ -15,6 +15,7 @@ using OscaApp.Models.AccountViewModels;
 using OscaApp.Services;
  
 using Microsoft.AspNetCore.Http;
+using OscaApp.Data;
 
 namespace OscaApp.Controllers
 {
@@ -221,7 +222,22 @@ namespace OscaApp.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                Guid idOrg = new Guid();
+                SqlGenericManager _sqlManager = new SqlGenericManager();
+
+                //Se for a primeira Organização criar no banco
+                if (_sqlManager.ExisteOrganizacao(model.organizacao.nomeLogin, out idOrg))
+                {
+                    model.msgOrganizacao = "** Essa empresa já está cadastrada. ***";
+                    return View(model);
+                }
+
+                idOrg = _sqlManager.CriaOrganizacao(model.organizacao.nomeLogin);
+                //Prenche contexto da Organizacao
+                model.contexto = new ContextPage(model.organizacao.nomeLogin, model.Email);
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = idOrg };
+                 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
