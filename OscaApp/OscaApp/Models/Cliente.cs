@@ -24,8 +24,6 @@ namespace OscaApp.Models
         public String anotacao { get; set; }
         public CustomEnum.Sexo sexo { get; set; }
         
-
-
         public Cliente() {
             this.status = CustomEnum.Status.Ativo;
         }

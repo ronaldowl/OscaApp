@@ -14,47 +14,45 @@ namespace OscaApp.Controllers
         public ViewResult PainelOperacional()
         {
             PainelOperacionalViewModel model = new PainelOperacionalViewModel();
-            //ContextPage contexto = new ContextPage(HttpContext.Session.GetString("email"), HttpContext.Session.GetString("organizacao"));
-            //model.contextPage = contexto;
+         
             return View(model);
         }
         public ViewResult PainelGerenciamento()
-        {
-           // PainelGerenciamentoViewModel model = new PainelGerenciamentoViewModel();
- 
+        {          
             return View();
         }
 
         public ViewResult PainelConfiguracoes()
-        {
-            // PainelGerenciamentoViewModel model = new PainelGerenciamentoViewModel();
-
+        {          
             return View();
         }
         public ViewResult PainelCadastro()
-        {
-            // PainelGerenciamentoViewModel model = new PainelGerenciamentoViewModel();
-
+        {       
             return View();
         }
         public ViewResult PainelVendas()
-        {
-            // PainelGerenciamentoViewModel model = new PainelGerenciamentoViewModel();
-
+        {           
             return View();
         }
         public ViewResult PainelServico()
-        {
-            // PainelGerenciamentoViewModel model = new PainelGerenciamentoViewModel();
-
+        {       
             return View();
         }
         public ViewResult PainelFinanceiro()
-        {
-            // PainelGerenciamentoViewModel model = new PainelGerenciamentoViewModel();
-
+        {           
             return View();
         }
+
+        public ViewResult PainelSuporte()
+        {
+            return View();
+        }
+
+        public ViewResult PainelAll()
+        {
+            return View();
+        }
+
 
 
     }

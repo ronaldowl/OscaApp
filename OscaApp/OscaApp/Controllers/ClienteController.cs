@@ -15,13 +15,9 @@ namespace OscaApp.Controllers
     [Authorize]
     public class ClienteController : Controller
     {
-
-
         private readonly ClienteData  clienteData;
         private readonly EnderecoData enderecoData;
-
-        private ContextPage contexto;
-    
+        private ContextPage contexto;  
 
 
         public ClienteController(ContexDataService db, IHttpContextAccessor httpContext)

@@ -40,6 +40,8 @@ namespace OscaApp
 
             services.AddDbContext<ContexDataService>(options => options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
 
+            services.AddDbContext<ContexDataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             //Serviço de configuração universal
             services.AddSingleton<IConfiguration>(_ => Configuration);

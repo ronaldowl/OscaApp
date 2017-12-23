@@ -53,6 +53,13 @@ namespace OscaApp.Data
         List<Endereco> GetAll(Guid idOrg);
         List<Endereco> GetAllByIdClinte(Guid idCliente);
     }
+    public interface IOrganizacaoData
+    {
+       
+        void Update(Organizacao organizacao);
+        Organizacao Get(Guid idOrg);
+        
+    }
 
     public interface ISqlGenericService
     {
