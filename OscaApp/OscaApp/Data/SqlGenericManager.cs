@@ -18,7 +18,7 @@ namespace OscaApp.Data
             this.conectStringManager = @"Server=tcp:oscadbservices.database.windows.net,1433;Initial Catalog=OscadbManager;Persist Security Info=False;User ID=ronaldowl_admin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"; 
         }
 
-        public  Guid CriaOrganizacao(string org)
+        public  Guid CriaOrganizacao(string org, string email)
         {
             object retorno;
             try
@@ -33,8 +33,9 @@ namespace OscaApp.Data
                         CommandType = CommandType.StoredProcedure
                     };
 
-                    _Command.Parameters.AddWithValue("org", org);                   
-
+                    _Command.Parameters.AddWithValue("org", org);
+                    _Command.Parameters.AddWithValue("Email", email);
+                 
                     Connection.Open();
                     retorno = _Command.ExecuteScalar();
                     Connection.Close();
@@ -126,31 +127,28 @@ namespace OscaApp.Data
             return retorno;
         }
 
-        public Relacao RetornaContextPage( string email, string org)
+        public Relacao RetornaContextPage(string email, string org)
         {
 
             Relacao retorno = new Relacao();
             try
             {
-                SqlDataReader dataReader;
-              
+                SqlDataReader dataReader;              
 
                 using (SqlConnection Connection = new SqlConnection(conectStringManager))
                 {
-
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
                         CommandText = "osc_RetornaContextoOrg",
-                        CommandType = CommandType.StoredProcedure
-                         
+                        CommandType = CommandType.StoredProcedure                         
                     };
 
                     _Command.Parameters.AddWithValue("Org", org);
                     _Command.Parameters.AddWithValue("Email", email);
+
                     Connection.Open();
-                    dataReader = _Command.ExecuteReader();
-                   
+                    dataReader = _Command.ExecuteReader();                   
 
                     if (dataReader.HasRows)
                     {
@@ -160,7 +158,6 @@ namespace OscaApp.Data
                             retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
                             retorno.idName = dataReader["nomeUsuario"].ToString();
                             retorno.organizacao = dataReader["nomeOrganizacao"].ToString();
-
                         }
                     }
 
@@ -174,9 +171,7 @@ namespace OscaApp.Data
                throw;
             }
             return retorno;
-        }
-
-     
+        }     
 
         //public static String RetornaSelectResult()
         //{

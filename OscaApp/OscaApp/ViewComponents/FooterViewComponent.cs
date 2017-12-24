@@ -35,7 +35,7 @@ namespace OscaApp.ViewComponents
             modelo.statusOrg = org.statusOrg;
 
             //consulta se a Organização esta ativa
-            if (org.statusOrg == StatusOrganizacao.EmAvaliacao)
+            if (org.statusOrg == StatusOrg.EmAvaliacao)
             {
                 modelo.msgAvaliacao = "Falta 20 dias de Avaliação";
             }           

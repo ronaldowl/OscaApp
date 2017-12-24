@@ -16,6 +16,7 @@ namespace OscaApp.Models
         public String telefone { get; set; }
         public String email { get; set; }
         public String anotacao { get; set; }
+        public Guid idOrganizacao { get; set; }
 
 
         public Fornecedor()

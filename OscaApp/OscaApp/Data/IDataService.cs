@@ -69,7 +69,7 @@ namespace OscaApp.Data
     {
         bool ExisteOrganizacao(string org, out Guid id);
 
-        Guid CriaOrganizacao(string org);
+        Guid CriaOrganizacao(string org, string email);
 
         Relacao RetornaContextPage(string email,string org);
     }

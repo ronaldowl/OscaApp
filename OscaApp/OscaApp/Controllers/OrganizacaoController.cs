@@ -57,7 +57,7 @@ namespace OscaApp.Controllers
                 //TODO: Gravar exceção no LOG
             }
 
-            return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
+            return RedirectToAction("FormUpdateOrganizacao", null);
         }
 
     }

@@ -14,6 +14,7 @@ namespace OscaApp.Models
         public string descricao { get; set; }
         public bool padrao { get; set; }
         public DateTime dataValidade { get; set; }
+        public Guid idOrganizacao { get; set; }
 
         public ListaPreco()
         {

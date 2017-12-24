@@ -233,15 +233,23 @@ namespace OscaApp.Controllers
                     model.msgOrganizacao = "** Essa empresa já está cadastrada. ***";
                     return View(model);
                 }
+                
+ 
+                //Cria nova Organização
+                idOrg = _sqlManager.CriaOrganizacao(model.organizacao.nomeLogin, model.Email);
 
-                idOrg = _sqlManager.CriaOrganizacao(model.organizacao.nomeLogin);
-                _sqlService.InicializaOrg(idOrg.ToString());
-                //Prenche contexto da Organizacao
-                model.contexto = new ContextPage(model.organizacao.nomeLogin, model.Email);
-
+                //Passa informações da Org para o novo usuário
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = idOrg };
-                 
+
+                //Inicializa valores padrões
+                _sqlService.InicializaOrg(idOrg.ToString());
+                
+                //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
+
+                //Prenche contexto da Organizacao
+                model.contexto = new ContextPage(model.Email, model.organizacao.nomeLogin);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");

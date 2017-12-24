@@ -23,8 +23,9 @@ namespace OscaApp.Models
         public String cidade { get; set; }
         public String bairro { get; set; }
         public String complemento { get; set; }
-        public CustomEnum.Sexo sexo { get; set; }     
-   
+        public CustomEnum.Sexo sexo { get; set; }
+        public Guid idOrganizacao { get; set; }
+
         public CustomEntityEnum.Estado estado { get; set; }
 
         public Contato()

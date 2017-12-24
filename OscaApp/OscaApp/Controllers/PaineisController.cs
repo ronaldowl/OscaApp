@@ -12,10 +12,8 @@ namespace OscaApp.Controllers
     {
 
         public ViewResult PainelOperacional()
-        {
-            PainelOperacionalViewModel model = new PainelOperacionalViewModel();
-         
-            return View(model);
+        {          
+            return View();
         }
         public ViewResult PainelGerenciamento()
         {          

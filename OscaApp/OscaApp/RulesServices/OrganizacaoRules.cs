@@ -11,10 +11,10 @@ namespace OscaApp.RulesServices
 {
     public static class OrganizacaoRules 
     {
-        public static bool CriaNovaOrganizacao(string org, Guid idUsuario )
+        public static bool CriaNovaOrganizacao(string org, string idUser )
         {
             SqlGenericManager conexao = new SqlGenericManager();
-            conexao.CriaOrganizacao(org);
+            conexao.CriaOrganizacao(org, idUser);
             return false;
         }
 

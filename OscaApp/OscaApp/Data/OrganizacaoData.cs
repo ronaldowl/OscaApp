@@ -41,15 +41,10 @@ namespace OscaApp.Data
                 db.Entry(organizacao).Property("bairro").IsModified = true;
                 db.Entry(organizacao).Property("complemento").IsModified = true;
                 db.Entry(organizacao).Property("anotacao").IsModified = true;
-                db.Entry(organizacao).Property("modificadoPorName").IsModified = true;
                 db.Entry(organizacao).Property("modificadoPor").IsModified = true;
+                db.Entry(organizacao).Property("modificadoPorName").IsModified = true;
                 db.Entry(organizacao).Property("modificadoEm").IsModified = true;
-
-
-                //db.Entry(organizacao).Property("dataPagamento").IsModified = true;
-
-
-
+            
 
                 db.SaveChanges(); 
             }

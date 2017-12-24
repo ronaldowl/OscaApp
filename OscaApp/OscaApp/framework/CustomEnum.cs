@@ -20,7 +20,7 @@ namespace OscaApp.framework.Models
             Inativo = 0
         }
 
-        public enum StatusOrganizacao
+        public enum StatusOrg
         {
             Inativo = 0,
             Ativo = 1,            

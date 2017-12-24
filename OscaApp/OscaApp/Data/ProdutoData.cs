@@ -45,7 +45,9 @@ namespace OscaApp.Data
                 db.Entry(produto).Property("peso").IsModified = true;
                 db.Entry(produto).Property("area").IsModified = true;
                 db.Entry(produto).Property("valorCompra").IsModified = true;
-                db.Entry(produto).Property("formaVendaProduto").IsModified = true;              
+                db.Entry(produto).Property("formaVendaProduto").IsModified = true;
+                db.Entry(produto).Property("modificadoPorName").IsModified = true;
+                db.Entry(produto).Property("modificadoPor").IsModified = true;
 
                 db.SaveChanges(); 
             }

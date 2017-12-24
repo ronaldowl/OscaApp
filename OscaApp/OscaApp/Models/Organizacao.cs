@@ -38,25 +38,24 @@ namespace OscaApp.Models
         public string complemento { get; set; }
         public string anotacao { get; set; }
   
-        public StatusOrganizacao statusOrg { get; set; }
-
-        [NotMapped]
-        public DateTime dataExpiracao { get; set; }
-        [NotMapped]
+        public StatusOrg statusOrg { get; set; }        
+        public DateTime dataExpiracao { get; set; }      
         public DateTime dataPagamento { get; set; }
 
-        public Organizacao(Guid idOrg)
-        {
-            //Inicia objeto Org com os campos preenchidos
-            SqlGenericManager sqlData = new SqlGenericManager();
-            var org = sqlData.RetornaOrganizacao(idOrg);
+     
 
-            this.nomeAmigavel = org.nomeAmigavel;
-            this.statusOrg = org.statusOrg;
-            this.dataExpiracao = org.dataExpiracao;
-            this.id = org.id;
+        //public Organizacao(Guid idOrg)
+        //{
+        //    ////Inicia objeto Org com os campos preenchidos
+        //    //SqlGenericManager sqlData = new SqlGenericManager();
+        //    //var org = sqlData.RetornaOrganizacao(idOrg);
 
-        }
+        //    //this.nomeAmigavel = org.nomeAmigavel;
+        //    //this.statusOrg = org.statusOrg;
+        //    //this.dataExpiracao = org.dataExpiracao;
+        //    //this.id = org.id;
+
+        //}
 
         //Contrutor padrão
         public Organizacao()

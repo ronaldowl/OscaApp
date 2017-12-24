@@ -23,6 +23,7 @@ namespace OscaApp.Models
          
         public CustomEnum.TipoEndereco TipoEndereco {get; set;}
         public CustomEntityEnum.Estado estado { get; set; }
+        public Guid idOrganizacao { get; set; }
 
         public Endereco()
         {
