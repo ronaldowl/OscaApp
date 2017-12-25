@@ -29,7 +29,7 @@ namespace OscaApp.ViewComponents
 
             Footer modelo = new Footer();       
             
-            Organizacao org = new Organizacao();
+            Organizacao org = new Organizacao(contexto.idOrganizacao);
 
             modelo.nomeOrganizacao = org.nomeAmigavel;
             modelo.statusOrg = org.statusOrg;
@@ -37,7 +37,7 @@ namespace OscaApp.ViewComponents
             //consulta se a Organização esta ativa
             if (org.statusOrg == StatusOrg.EmAvaliacao)
             {
-                modelo.msgAvaliacao = "Falta 20 dias de Avaliação";
+                modelo.msgAvaliacao = " - Falta 20 dias de Avaliação";
             }           
 
 

@@ -37,7 +37,7 @@
                         <!--col1-->
                         <div class="col-md-4">                         
                             <div class="form-group">
-                                <label asp-for="@Model.Fornecedor.nomeFornecedor">Nome do Fornecedor</label>
+                                <label>Nome do Fornecedor</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label asp-for="@Model.Fornecedor.cnpj">CNPJ</label>
+                                <label>CNPJ</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label asp-for="@Model.Fornecedor.email">Email</label>
+                                <label>Email</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-envelope-o fa-1x"></i></span>
@@ -67,7 +67,7 @@
                         <!--col2-->
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label asp-for="@Model.Fornecedor.nomeVendedor">Nome do Vendedor</label>
+                                <label>Nome do Vendedor</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
@@ -76,21 +76,19 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label asp-for="@Model.Fornecedor.telefone">Telefone</label>
+                                <label>Telefone</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <span class="fa fa-phone fa-1x"></span>
                                     </span>
                                     <input id="osc_telefone" asp-for="@Model.Fornecedor.telefone" type="text" class="form-control" placeholder="(XX) - 000000000" maxlength="15" pattern="[0-9]+$" />
                                 </div>
-                            </div>
-                          
-                         
+                            </div>                        
                         </div>
                         <!--col3-->
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label asp-for="@Model.Fornecedor.anotacao">Anotação</label>
+                                <label>Anotação</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <span class="fa fa-comment-o fa-1x"></span>
@@ -111,7 +109,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.Fornecedor.criadoPor">Criado Por</label>
+                            <label>Criado Por</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-user fa-1x"></span>
@@ -122,7 +120,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.Fornecedor.criadoEm">Criado Em</label>
+                            <label>Criado Em</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-calendar fa-1x"></span>
@@ -133,7 +131,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label asp-for="@Model.Fornecedor.status">Status</label>
+                            <label>Status</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <span class="fa fa-exclamation fa-1x"></span>

@@ -87,7 +87,6 @@ namespace OscaApp.Data
         { 
               Organizacao retorno = new Organizacao();
               SqlDataReader dataReader;
-
             try
             {
              
@@ -98,7 +97,7 @@ namespace OscaApp.Data
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select O.id , o.nomeAmigavel from Organizacao as O where O.nomeLogin = '" + idOrg.ToString() + "'",
+                        CommandText = "select O.id , o.nomeLogin ,o.nomeAmigavel, status, statusOrg from Organizacao as O where O.id = '" + idOrg.ToString() + "'",
                         CommandType = CommandType.Text
                     };
                  
@@ -110,8 +109,11 @@ namespace OscaApp.Data
                     {
                         while (dataReader.Read())
                         {
-                            retorno.id = new Guid(dataReader["id"].ToString());                          
+                            retorno.id = new Guid(dataReader["id"].ToString()); 
+                            retorno.nomeLogin = dataReader["nomeLogin"].ToString();
                             retorno.nomeAmigavel = dataReader["nomeAmigavel"].ToString();
+                            retorno.status = (CustomEnum.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            retorno.statusOrg = (CustomEnum.StatusOrg)Convert.ToInt32(dataReader["statusOrg"].ToString());
 
                         }
                     }

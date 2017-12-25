@@ -7,13 +7,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OscaApp.Controllers
 {
-    [Authorize]
+ 
     public class HomeController : Controller
     {      
 
         public IActionResult About()
-        {
-            ViewData["Message"] = "Desenvolvido por - Trine Assessoria em Informática";
+        {           
 
             return View();
         }

@@ -1,30 +1,24 @@
 ﻿@model RegisterViewModel
-
-
     <h4 class="text-center">Formulário de Ativação de novos Usuário</h4>
-
     <br />
-
-  
-
     <form asp-controller="Usuario" asp-action="FormCreateUsuario" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
         <div asp-validation-summary="All" class="text-danger"></div>       
         <div class="form-group">
-            <label asp-for="Email" class="col-md-2 control-label">E-mail</label>
+            <label class="col-md-2 control-label">E-mail</label>
             <div class="col-md-10">
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="Password" class="col-md-2 control-label">Senha</label>
+            <label class="col-md-2 control-label">Senha</label>
             <div class="col-md-10">
                 <input asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
-            <label asp-for="ConfirmPassword" class="col-md-2 control-label">Confirmar senha</label>
+            <label class="col-md-2 control-label">Confirmar senha</label>
             <div class="col-md-10">
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
