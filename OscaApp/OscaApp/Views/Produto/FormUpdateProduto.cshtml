@@ -96,7 +96,8 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-money fa-1x"></span>
                                         </span>
-                                        <input id="osc_razaosocial" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" />
+                                        <input id="osc_razaosocial" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" asp-format=""/>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -138,6 +139,7 @@
                                         <input id="osc_area" asp-for="@Model.produto.area" type="text" class="form-control" placeholder="Area" maxlength="15" pattern="[0-9]+$" />
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
@@ -150,7 +152,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Peso</label>
+                                    <label>Fabricante</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-asterisk fa-1x"></span>

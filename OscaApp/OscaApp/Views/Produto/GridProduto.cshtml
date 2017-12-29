@@ -51,8 +51,9 @@
                                         <tr>
                                             <th>Código</th>
                                             <th>Nome</th>
-                                            <th>Quantidade</th>
+                                            <th>Qtd</th>
                                             <th>Tipo de Venda</th>
+                                            <th>Fabricante</th>                                           
                                             <th>Valor de Compra</th>
                                             <th>Criado Por</th>
                                         </tr>
@@ -64,7 +65,8 @@
                                             <td>@item.nome</td>
                                             <td>@item.quantidade</td>
                                             <td>@item.formaVendaProduto</td>
-                                            <td>@item.valorCompra</td>
+                                            <td>@item.fabricante</td>
+                                            <td>R$ @item.valorCompra.ToString("N")</td>
                                             <td>@item.criadoPorName</td>
                                         </tr>
                                     }

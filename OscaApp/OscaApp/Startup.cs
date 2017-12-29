@@ -13,6 +13,7 @@ using OscaApp.Models;
 using OscaApp.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Http;
+using OscaApp.framework;
 
 namespace OscaApp
 {
@@ -57,7 +58,7 @@ namespace OscaApp
                 // Set a short timeout for easy testing.
                 options.IdleTimeout = TimeSpan.FromSeconds(100000000);
                 options.Cookie.HttpOnly = true;
-            });
+            });        
 
             //services.AddScoped<IContextPage, ContextPageServices>();
 
@@ -66,7 +67,8 @@ namespace OscaApp
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        {          
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
