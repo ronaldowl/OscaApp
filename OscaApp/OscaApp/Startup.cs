@@ -38,14 +38,12 @@ namespace OscaApp
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
+            //*********Carrega informações do banco de dados
             services.AddDbContext<ContexDataService>(options => options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
-
             services.AddDbContext<ContexDataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-
+            //*************************************************************
             //Serviço de configuração universal
             services.AddSingleton<IConfiguration>(_ => Configuration);
-
 
             //Serviço para acesso a metodos de conexao SQL no banco Manager
             services.AddSingleton<ISqlGenericManager, SqlGenericManager>();
@@ -60,6 +58,8 @@ namespace OscaApp
                 options.IdleTimeout = TimeSpan.FromSeconds(100000000);
                 options.Cookie.HttpOnly = true;
             });
+
+            //services.AddScoped<IContextPage, ContextPageServices>();
 
 
         }
@@ -79,7 +79,6 @@ namespace OscaApp
             }
 
             app.UseStaticFiles();
-
             app.UseAuthentication();
             app.UseSession();
 

@@ -36,21 +36,30 @@
 <body>
 
     <div id="barra_main" class="col-md-12 barraMain sticky-top">
-        <a asp-controller="Paineis" asp-action="PainelOperacional" class="osca">OSCA</a>
+        <a asp-controller="Paineis" asp-action="PainelHome" class="osca">OSCA</a>
+  
         <div style="float:right;">@await Html.PartialAsync("_LoginPartial") </div>
     </div>
     <div class="container-fluid body-content">
         <br />
         @RenderBody()
     </div>
-    <environment names="Development">
-        <script src="~/lib/popper.js/dist/popper.js"></script>
+
+   
+   
+
+
+   
         <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/popper.js/dist/popper.js"></script>       
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/osc_global.js" asp-append-version="true"></script>
-    </environment>
+ 
 
-    @RenderSection("scripts", required: false)
+
+   
+
+    @*@RenderSection("scripts", required: false)*@
     <footer class="fixed-bottom " style="background-color:#0C0C0A">            
         @await Component.InvokeAsync("Footer");
     </footer>

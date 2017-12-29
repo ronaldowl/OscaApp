@@ -1,6 +1,7 @@
 ﻿using System;
 using OscaApp.framework.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace OscaApp.Models
 {
@@ -12,6 +13,9 @@ namespace OscaApp.Models
         public string fabricante { get; set; }
         public string nome { get; set; }
         public string descricao { get; set; }
+
+
+        [DisplayFormat (DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valorCompra { get; set; }
         public int quantidade { get; set; }
         public decimal largura { get; set; }
