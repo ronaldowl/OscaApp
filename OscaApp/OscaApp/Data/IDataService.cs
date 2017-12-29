@@ -43,6 +43,7 @@ namespace OscaApp.Data
         void Add(Produto produto);
         void Update(Produto produto);
         Produto Get(Guid id, Guid idOrg);
+        Relacao GetRelacao(Guid id);
         List<Produto> GetAll(Guid idOrg);
     }
     public interface IEnderecoData

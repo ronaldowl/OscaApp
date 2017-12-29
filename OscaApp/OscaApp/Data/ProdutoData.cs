@@ -4,6 +4,7 @@ using System.Linq;
 using OscaApp.Models;
 using OscaApp.Data;
 using Microsoft.EntityFrameworkCore;
+using OscaApp.framework.Models;
 
 namespace OscaApp.Data
 {
@@ -62,6 +63,20 @@ namespace OscaApp.Data
             List<Produto> retorno = new List<Produto>();
             retorno = db.Produtos.FromSql("SELECT * FROM Produto where  id = '" + id.ToString() + "' and idOrganizacao = '"+ idOrg.ToString() + "'" ).ToList();
             return retorno[0];
+        }
+
+        public Relacao GetRelacao(Guid id)
+        {
+            Relacao relacao = new Relacao();
+            relacao.tipoObjeto = CustomEntityEnum.Entidade.Produto;
+
+            List<Produto> retorno = new List<Produto>();
+            retorno = db.Produtos.FromSql("SELECT * FROM Produto where  id = '" + id.ToString() +  "'").ToList();
+            relacao.id = retorno[0].id;
+            relacao.idName = retorno[0].nome;
+            relacao.idOrganizacao = retorno[0].idOrganizacao;
+
+            return relacao;
         }
         public List<Produto> GetAll(Guid idOrg)
         {
