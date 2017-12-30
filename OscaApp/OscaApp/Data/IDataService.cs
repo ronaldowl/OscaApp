@@ -28,6 +28,8 @@ namespace OscaApp.Data
         void Update(ListaPreco contato);
         ListaPreco Get(Guid id, Guid idOrg);
         List<ListaPreco> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+
     }
 
     public interface IContatoData

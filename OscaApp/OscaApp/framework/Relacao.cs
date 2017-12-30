@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OscaApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace OscaApp.framework.Models
         public String idName { get; set; }
         public String organizacao { get; set; }
         public Guid idOrganizacao { get; set; }
-        public CustomEntityEnum.Entidade tipoObjeto { get; set; }       
+        public CustomEntityEnum.Entidade tipoObjeto { get; set; }
 
 
         public Relacao(Guid _id, CustomEntityEnum.Entidade entityType)
@@ -28,7 +29,27 @@ namespace OscaApp.framework.Models
         public Relacao()
         {
         }
-    }
 
-   
+        //*********************** Métodos de Parse de Objetos do Osca
+
+        /// <summary>
+        /// Método para Lista de Preço
+        /// </summary>
+        /// <param name="itens"></param>
+        /// <returns>List<Relacao></returns>        
+        public static List<Relacao> ConvertToRelacao(List<ListaPreco> itens)
+        {          
+            List<Relacao> lista = new List<Relacao>();          
+
+            //Executar parce de Lista de preço da Relacao
+            foreach (var item in itens)
+            {
+                Relacao X = new Relacao();
+                X.id = item.id;
+                X.idName = item.nome;
+                lista.Add(X);
+            }
+            return lista;
+        }
+    }
 }

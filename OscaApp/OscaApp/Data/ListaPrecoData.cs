@@ -5,6 +5,7 @@ using OscaApp.Models;
 using OscaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
+using OscaApp.framework.Models;
 
 namespace OscaApp.Data
 {
@@ -72,6 +73,17 @@ namespace OscaApp.Data
             List<ListaPreco> retorno = new List<ListaPreco>();
             retorno = db.ListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return retorno;
+
+        }
+
+        public List<Relacao> GetAllRelacao(Guid idOrg)
+        {
+            List<ListaPreco> retorno = new List<ListaPreco>();
+            List<Relacao> lista = new List<Relacao>();
+
+            retorno = db.ListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+            return Relacao.ConvertToRelacao(retorno);
 
         }
     }
