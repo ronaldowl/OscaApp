@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OscaApp.Data;
+using OscaApp.framework;
 using OscaApp.Models;
 using OscaApp.RulesServices;
 using OscaApp.ViewModels;
@@ -46,7 +47,7 @@ namespace OscaApp.Controllers
         public IActionResult FormCreateListaPreco(ListaPrecoViewModel entrada)
         {
             ListaPreco listaPreco = new ListaPreco();
-         try
+            try
             {
                 if (entrada.listaPreco.nome != null)
                 {
@@ -59,9 +60,37 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateListaPreco-post", ex.Message);
             }
             return View();
+        }
+
+        [HttpGet]
+        public ViewResult FormUpdateListaPreco(string id)
+        {
+            ListaPrecoViewModel listapreco = new ListaPrecoViewModel();
+            listapreco.listaPreco = new ListaPreco();
+            listapreco.listaPreco.id = new Guid(id);
+            try
+            {
+                ListaPreco retorno = new ListaPreco();
+                {
+                    retorno = listaPrecoData.Get(new Guid(id), contexto.idOrganizacao);
+
+                    if (retorno != null)
+                    {
+                        listapreco.listaPreco = retorno;
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateListaPreco-get", ex.Message);
+            }
+            return View(listapreco);
         }
 
         [HttpPost]
@@ -79,30 +108,14 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateListaPreco-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateListaPreco", new { id = listapreco.id.ToString() });
         }
 
-        [HttpGet]
-        public ViewResult FormUpdateListaPreco(string id)
-        {
-            ListaPrecoViewModel listapreco = new ListaPrecoViewModel();
-            listapreco.listaPreco= new ListaPreco();
-            listapreco.listaPreco.id = new Guid(id);
 
-            ListaPreco retorno = new ListaPreco();
-            {
-                retorno = listaPrecoData.Get(new Guid(id), contexto.idOrganizacao);
-
-                if (retorno != null)
-                {
-                    listapreco.listaPreco = retorno;
-                }
-            }
-            return View(listapreco);
-        }
 
 
         public ViewResult GridListaPreco(string filtro, int Page)

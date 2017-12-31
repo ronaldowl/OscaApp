@@ -17,6 +17,7 @@ namespace OscaApp.Models
 
         [DisplayFormat (DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valorCompra { get; set; }
+
         public int quantidade { get; set; }
         public decimal largura { get; set; }
         public decimal altura { get; set; }
@@ -29,6 +30,7 @@ namespace OscaApp.Models
         public Produto()
         {
             this.status = CustomEnum.Status.Ativo;
+            this.entityType = 7;
         }
 
     }

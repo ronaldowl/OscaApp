@@ -51,5 +51,25 @@ namespace OscaApp.framework.Models
             }
             return lista;
         }
+
+        /// <summary>
+        /// Método para Lista de Preço
+        /// </summary>
+        /// <param name="itens"></param>
+        /// <returns>List<Relacao></returns>        
+        public static List<Relacao> ConvertToRelacao(List<ItemListaPreco> itens)
+        {
+            List<Relacao> lista = new List<Relacao>();
+
+            //Executar parce de Lista de preço da Relacao
+            foreach (var item in itens)
+            {
+                Relacao X = new Relacao();
+                X.id = item.id;
+               
+                lista.Add(X);
+            }
+            return lista;
+        }
     }
 }

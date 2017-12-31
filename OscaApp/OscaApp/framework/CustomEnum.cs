@@ -81,6 +81,8 @@ namespace OscaApp.framework.Models
             Incidente = 11,
             ListaPreco = 12,
             ItemListaPreco = 13,
+            Fornecedor = 14,
+            Log = 15,
             Organizacao = 1000
 
         }

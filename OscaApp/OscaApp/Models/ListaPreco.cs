@@ -19,6 +19,7 @@ namespace OscaApp.Models
         public ListaPreco()
         {
             this.status = CustomEnum.Status.Ativo;
+            this.entityType = 12;
         }
 
     }

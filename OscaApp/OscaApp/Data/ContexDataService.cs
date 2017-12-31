@@ -11,11 +11,13 @@ namespace OscaApp.Data
 
         }
         public DbSet<Cliente> Fornecedor  { get; set; }
+        public DbSet<LogOscaModel> Logs { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<ListaPreco> ListaPrecos { get; set; }
+        public DbSet<ItemListaPreco> ItemListaPrecos { get; set; }
 
     }
 }

@@ -27,6 +27,7 @@ namespace OscaApp.Models
 
         public Cliente() {
             this.status = CustomEnum.Status.Ativo;
+            this.entityType = 1;
         }
 
     }

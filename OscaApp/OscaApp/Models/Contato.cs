@@ -31,6 +31,7 @@ namespace OscaApp.Models
         public Contato()
         {
             this.status = CustomEnum.Status.Ativo;
+            this.entityType = 2;
         }
     }
 

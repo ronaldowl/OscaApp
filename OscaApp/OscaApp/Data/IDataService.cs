@@ -7,6 +7,7 @@ namespace OscaApp.Data
 {
 
     //TODO: Criar uma inteface para cada objeto gravado no banco
+
     public interface IFornecedorData
     {
         void Add(Fornecedor fornecedor);
@@ -28,6 +29,16 @@ namespace OscaApp.Data
         void Update(ListaPreco contato);
         ListaPreco Get(Guid id, Guid idOrg);
         List<ListaPreco> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+
+    }
+
+    public interface IItemListaPrecoData
+    {
+        void Add(ItemListaPreco contato);
+        void Update(ItemListaPreco contato);
+        ItemListaPreco Get(Guid id);
+        List<ItemListaPreco> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
 
     }

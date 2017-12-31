@@ -22,6 +22,7 @@ namespace OscaApp.Models
         public Fornecedor()
         {
             this.status = CustomEnum.Status.Ativo;
+            this.entityType = 14;
         }
     }
 }
