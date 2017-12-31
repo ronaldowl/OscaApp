@@ -19,6 +19,8 @@ namespace OscaApp.framework
 
         public int codigoEntidade { get; set; }
 
+        public int codigoErro { get; set; }
+
         public Guid idUsuario { get; set; }
 
         public Guid idOrganizacao { get; set; }
@@ -61,64 +63,11 @@ namespace OscaApp.framework
         }
 
 
-        public LogOscaModel get(Guid id)
+        public LogOsca get(Guid id)
         {
 
-            LogOscaModel retorno = new LogOscaModel();
-            string comando = "select id, codigoEntidade, evento, mensagem, idUsuario, dataCriacao from LogOsca where id =   '" + id.ToString() + "'";
-
-            SqlDataReader dataReader;
-            try
-            {
-
-                using (SqlConnection Connection = new SqlConnection(conectStringManager))
-                {
-
-                    var _Command = new SqlCommand()
-                    {
-                        Connection = Connection,
-                        CommandText = comando,
-                        CommandType = CommandType.Text
-                    };
-
-                    Connection.Open();
-                    dataReader = _Command.ExecuteReader();
-
-                    if (dataReader.HasRows)
-                    {
-                        while (dataReader.Read())
-                        {
-
-                            LogOscaModel item = new LogOscaModel();
-
-                            //Execução do Parse para LogOsca
-
-                            item.id = new Guid(dataReader["id"].ToString());
-                            item.CodigoEntidade = Convert.ToInt32(dataReader["codigoEntidade"]);
-                            item.Evento = dataReader["evento"].ToString();
-                            item.Mensagem = dataReader["mensagem"].ToString();
-                            item.IdUsuario = new Guid(dataReader["idUsuario"].ToString());
-                            item.DataCriacao = Convert.ToDateTime(dataReader["dataCriacao"].ToString());
-
-                            retorno = item;
-                        }
-                    }
-                    Connection.Close();
-                };
-            }
-            catch (SqlException ex)
-            {
-
-            }
-
-            return retorno;
-        }
-
-        public List<LogOsca> getAll(Guid idOrganizacao)
-        {
-
-            List<LogOsca> retorno = new List<LogOsca>();
-            string comando = "select id, codigoEntidade, evento, mensagem, idUsuario, dataCriacao from LogOsca where idOrganizacao =   '" + idOrganizacao.ToString() + "'";
+            LogOsca retorno = new LogOsca();
+            string comando = "select id, codigoEntidade, evento, mensagem, idUsuario, dataCriacao, codigoErro from LogOsca where id =   '" + id.ToString() + "'";
 
             SqlDataReader dataReader;
             try
@@ -152,6 +101,61 @@ namespace OscaApp.framework
                             item.mensagem = dataReader["mensagem"].ToString();
                             item.idUsuario = new Guid(dataReader["idUsuario"].ToString());
                             item.dataCriacao = Convert.ToDateTime(dataReader["dataCriacao"].ToString());
+                            item.codigoErro = Convert.ToInt32(dataReader["codigoErro"]);
+
+                            retorno = item;
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+
+            }
+
+            return retorno;
+        }
+
+        public List<LogOsca> getAll(Guid idOrganizacao)
+        {
+
+            List<LogOsca> retorno = new List<LogOsca>();
+            string comando = "select id, codigoEntidade, evento, mensagem, idUsuario, dataCriacao, codigoErro from LogOsca where idOrganizacao =   '" + idOrganizacao.ToString() + "'";
+
+            SqlDataReader dataReader;
+            try
+            {
+
+                using (SqlConnection Connection = new SqlConnection(conectStringManager))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = comando,
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+
+                            LogOsca item = new LogOsca();
+
+                            //Execução do Parse para LogOsca
+
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.codigoEntidade = Convert.ToInt32(dataReader["codigoEntidade"]);
+                            item.evento = dataReader["evento"].ToString();
+                            item.mensagem = dataReader["mensagem"].ToString();
+                            item.idUsuario = new Guid(dataReader["idUsuario"].ToString());
+                            item.dataCriacao = Convert.ToDateTime(dataReader["dataCriacao"].ToString());
+                            item.codigoErro = Convert.ToInt32(dataReader["codigoErro"]);
 
                             retorno.Add(item);
                         }

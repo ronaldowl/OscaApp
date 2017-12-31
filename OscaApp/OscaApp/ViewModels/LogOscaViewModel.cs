@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using OscaApp.framework.Models;
 using OscaApp.Data;
 using OscaApp.Models;
+using OscaApp.framework;
 
 namespace OscaApp.ViewModels
 {
     public class LogOscaViewModel
     {
-        public LogOscaModel logOsca { get; set; }
+        public LogOsca logOsca { get; set; }
         public ContextPage Contexto { get; set; }
 
         public Guid IdUsuario { get; set; }

@@ -14,16 +14,14 @@ namespace OscaApp.Controllers
     [Authorize]
     public class LogOscaController : Controller
     {
-        private readonly LogOsca logOscaData;
+    
         private ContextPage contexto;
+        private LogOsca logOscaData;
 
-        public LogOscaController(ContexDataService db, IHttpContextAccessor httpContext)
-        {
-
-            logOscaData = new LogOsca();
-
+        public LogOscaController(IHttpContextAccessor httpContext)
+        {         
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-
+            this.logOscaData = new LogOsca();
         }
 
         [HttpGet]
@@ -31,21 +29,23 @@ namespace OscaApp.Controllers
         {
             LogOscaViewModel modelo = new LogOscaViewModel();
 
-            modelo.logOsca = new Models.LogOscaModel();
+            modelo.logOsca = new LogOsca();
             modelo.Contexto = contexto;
-            modelo.logOsca.criadoEm = DateTime.Now;
-
+            modelo.logOsca.dataCriacao = DateTime.Now;
             modelo.logOsca = logOscaData.get(new Guid(id));
 
             return View(modelo);
         }
 
-        public ViewResult GridLogOsca(string filtro, int Page)
+        public ViewResult GridLogOsca(int filtro)
         {
-            List<LogOsca> modelo = logOscaData.getAll(contexto.idOrganizacao);
-            //IEnumerable< LogOsca > modelo2 = logOscaData.getAll(contexto.idOrganizacao);
 
-            return View(modelo);
+
+            IEnumerable<LogOsca> modelo = logOscaData.getAll(contexto.idOrganizacao);
+
+           if(filtro > 0) modelo =  from A in modelo where ( A.codigoErro == filtro) select A;
+
+            return View(modelo.ToList());
         }
     }
 }
