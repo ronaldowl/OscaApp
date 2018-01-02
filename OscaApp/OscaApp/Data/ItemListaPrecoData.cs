@@ -6,6 +6,7 @@ using OscaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using OscaApp.framework.Models;
+using OscaApp.framework;
 
 namespace OscaApp.Data
 {
@@ -26,7 +27,7 @@ namespace OscaApp.Data
             }
             catch (Exception ex)
             {
-                throw;
+               
             }
            
         }
@@ -35,10 +36,8 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("nome").IsModified                = true;
-                db.Entry(modelo).Property("descricao").IsModified           = true;
-                db.Entry(modelo).Property("dataValidade").IsModified        = true;
-                db.Entry(modelo).Property("padrao").IsModified              = true;
+                db.Entry(modelo).Property("valor").IsModified               = true;
+                db.Entry(modelo).Property("idListaPreco").IsModified        = true;             
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
@@ -58,7 +57,7 @@ namespace OscaApp.Data
             try
             {
                
-                retorno = db.ItemListaPrecos.FromSql("SELECT * FROM listapreco where  id = '" + id.ToString() +  "'").ToList();
+                retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco where  id = '" + id.ToString() +  "'").ToList();
             }         
             catch (SqlException ex)
             {
@@ -71,7 +70,7 @@ namespace OscaApp.Data
         public List<ItemListaPreco> GetAll(Guid idOrg)
         {
             List<ItemListaPreco> retorno = new List<ItemListaPreco>();
-            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return retorno;
 
         }
@@ -81,7 +80,7 @@ namespace OscaApp.Data
             List<ItemListaPreco> retorno = new List<ItemListaPreco>();
             List<Relacao> lista = new List<Relacao>();
 
-            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 

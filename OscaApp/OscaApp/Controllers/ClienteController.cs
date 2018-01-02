@@ -16,9 +16,9 @@ namespace OscaApp.Controllers
     [Authorize]
     public class ClienteController : Controller
     {
-        private readonly ClienteData  clienteData;
+        private readonly ClienteData clienteData;
         private readonly EnderecoData enderecoData;
-        private ContextPage contexto;  
+        private ContextPage contexto;
 
 
         public ClienteController(ContexDataService db, IHttpContextAccessor httpContext)
@@ -31,31 +31,29 @@ namespace OscaApp.Controllers
 
         public ViewResult GridCliente(string filtro, int Page)
         {
-            
-        try {  
+            try
+            {
+                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
 
-               IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
-              
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeCliente == filtro || A.cnpj_cpf == filtro || A.email == filtro) select A;
+                //realiza busca por Nome, Código, Email e CPF
+                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeCliente == filtro || A.cnpj_cpf == filtro || A.email == filtro) select A;
 
-            retorno = retorno.OrderBy(x => x.nomeCliente);
+                retorno = retorno.OrderBy(x => x.nomeCliente);
 
-            //Se não passar a número da página, caregar a primeira
-            if (Page == 0) Page = 1;  
+                //Se não passar a número da página, caregar a primeira
+                if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Cliente>(Page, 10)); 
-            
-             }   
-              catch (Exception ex)
+                return View(retorno.ToPagedList<Cliente>(Page, 10));
+
+            }
+            catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid",  ex.Message);
-            }   
+                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
+            }
 
-            return View();         
-           
-        }          
+            return View();
+        }
 
         [HttpPost]
         public IActionResult FormUpdateCliente(ClienteViewModel entrada)
@@ -69,13 +67,11 @@ namespace OscaApp.Controllers
                     clienteData.Update(modelo);
                     return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
-
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-post",  ex.Message);
-
+                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
@@ -85,30 +81,30 @@ namespace OscaApp.Controllers
         {
             ClienteViewModel modelo = new ClienteViewModel();
 
-        try
-           {
-            Cliente retorno = new Cliente();
-            //Formulario com os dados do cliente
-            if (!String.IsNullOrEmpty(id))
+            try
             {
-                //campo que sempre contém valor
-                retorno = clienteData.Get(new Guid(id), contexto.idOrganizacao);
-
-                if (retorno != null)
+                Cliente retorno = new Cliente();
+                //Formulario com os dados do cliente
+                if (!String.IsNullOrEmpty(id))
                 {
-                    modelo.cliente = retorno;
+                    //campo que sempre contém valor
+                    retorno = clienteData.Get(new Guid(id), contexto.idOrganizacao);
 
-                    //Preenche informações do grid de Endereço
-                    modelo.enderecos = enderecoData.GetByCliente(modelo.cliente.id);
+                    if (retorno != null)
+                    {
+                        modelo.cliente = retorno;
 
+                        //Preenche informações do grid de Endereço
+                        modelo.enderecos = enderecoData.GetByCliente(modelo.cliente.id);
+
+                    }
                 }
-            }
 
-             }
+            }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-get",  ex.Message);
+                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-get", ex.Message);
 
             }
 
@@ -123,7 +119,7 @@ namespace OscaApp.Controllers
             entrada.contexto = contexto;
 
             try
-            {  
+            {
                 if (entrada.cliente.nomeCliente != null)
                 {
                     if (ClienteRules.MontaClienteCreate(entrada, out modelo, contexto))
@@ -136,8 +132,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                  LogOsca log = new LogOsca();
-                  log.GravaLog(1,this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateCliente",  ex.Message);
+                LogOsca log = new LogOsca();
+                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateCliente", ex.Message);
 
             }
             return View();
@@ -150,7 +146,7 @@ namespace OscaApp.Controllers
             modelo.contexto = contexto;
             modelo.cliente.criadoEm = DateTime.Now;
             modelo.cliente.criadoPorName = contexto.nomeUsuario;
-          
+
             return View(modelo);
         }
     }

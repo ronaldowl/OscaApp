@@ -12,7 +12,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 offset-1">
-            <br /><br />     
+
             <form action="FormCreateContato" method="post">
                 <div class="card  " id="osc_MainForm">
                     <div class="card-header">
@@ -34,10 +34,8 @@
                             </table>
                         </div>
                     </div>
-                    </div>
+                </div>
                 <div class="card-body">
-
-                    <br />
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
@@ -96,7 +94,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-mobile-phone fa-1x"></i></span>
-                                        <input id="osc_celular" asp-for="@Model.contato.celular" placeholder="Celular" maxlength="15" pattern="[0-9]+$"  class="form-control" type="text">
+                                        <input id="osc_celular" asp-for="@Model.contato.celular" placeholder="Celular" maxlength="15" pattern="[0-9]+$" class="form-control" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +117,7 @@
                                     </div>
                                 </div>
                             </div>
-                          
+
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -186,11 +184,11 @@
                                     </div>
                                 </div>
                             </div>
-                        
+
                         </div>
                         <div class="col-md-3">
-                        
-                        
+
+
                             <div class="form-group">
                                 <label class="control-label">Complemento</label>
                                 <div class="inputGroupContainer">
@@ -204,47 +202,47 @@
                     </div>
                 </div>
             </form>
-                    <br /><br />
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user fa-1x"></span>
-                                        </span>
-                                        <input id="osc_criadoPor" for="" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
+            <br /><br /><br /><br />
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Criado Por</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-user fa-1x"></span>
+                                </span>
+                                <input id="osc_criadoPor" for="" type="text" class="form-control" disabled="disabled" />
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
-                                        </span>
-                                        <input id="osc_criadoEm" for="" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Criado Em</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar fa-1x"></span>
+                                </span>
+                                <input id="osc_criadoEm" for="" type="text" class="form-control" disabled="disabled" />
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Status</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-exclamation fa-1x"></span>
-                                        </span>
-                                        <input id="osc_status" for="" type="text" class="form-control" disabled="disabled"  value="Ativo"/>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-exclamation fa-1x"></span>
+                                </span>
+                                <input id="osc_status" for="" type="text" class="form-control" disabled="disabled" value="Ativo" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
- 
+    </div>
+</div>
+
 
 <script src="~/js/osc_contato.js" asp-append-version="true"></script>

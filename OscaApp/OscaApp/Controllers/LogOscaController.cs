@@ -40,7 +40,6 @@ namespace OscaApp.Controllers
         public ViewResult GridLogOsca(int filtro)
         {
 
-
             IEnumerable<LogOsca> modelo = logOscaData.getAll(contexto.idOrganizacao);
 
            if(filtro > 0) modelo =  from A in modelo where ( A.codigoErro == filtro) select A;

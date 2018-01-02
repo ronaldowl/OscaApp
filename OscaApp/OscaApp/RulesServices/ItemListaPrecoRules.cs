@@ -14,15 +14,10 @@ namespace OscaApp.RulesServices
         {
             modelo = new ItemListaPreco ();
             modelo = entrada.itemlistaPreco;
-            modelo.idProduto = entrada.produto.id;
-            modelo.idProdutoName = entrada.produto.idName;
-            
-
-         
+                                
+                     
             if (modelo.idListaPreco  != null)
-            {
-
-
+            {               
 
                 //************ Objetos de controle de acesso ******************
                 modelo.criadoEm = DateTime.Now;

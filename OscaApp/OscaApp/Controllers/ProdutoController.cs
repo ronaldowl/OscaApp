@@ -61,11 +61,12 @@ namespace OscaApp.Controllers
             modelo.produto.id = new Guid(id);
 
             Produto retorno = new Produto();
-            //Formulario com os dados do cliente
+ 
             if (!String.IsNullOrEmpty(id))
             {
              
                 retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
+                modelo.itensListaPreco = new List<ItemProdutoLista>();
 
 
                 //TODO Formata campos

@@ -32,11 +32,11 @@ namespace OscaApp.framework
         public string mensagem { get; set; }
 
 
-        public void GravaLog(int cogidoEntidade, Guid idUsuairo, Guid idOrganizacao, string evento, string mensagem)
+        public void GravaLog(int codigoErro,int cogidoEntidade, Guid idUsuairo, Guid idOrganizacao, string evento, string mensagem)
         {
 
 
-            string comando = "insert into LogOsca (codigoEntidade, idUsuario, idOrganizacao,evento, mensagem) values('" + codigoEntidade.ToString() + "', '" + idUsuario.ToString() + "', '" + idOrganizacao.ToString() + "', '" + evento + "', '" + mensagem + "')";
+            string comando = "insert into LogOsca (codigoErro, codigoEntidade, idUsuario, idOrganizacao,evento, mensagem) values('" + codigoErro.ToString() + "', '" + codigoEntidade.ToString() + "', '" + idUsuario.ToString() + "', '" + idOrganizacao.ToString() + "', '" + evento + "', '" + mensagem + "')";
 
             try
             {

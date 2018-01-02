@@ -61,7 +61,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateListaPreco-post", ex.Message);
+                log.GravaLog(1,12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateListaPreco-post", ex.Message);
             }
             return View();
         }
@@ -88,7 +88,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateListaPreco-get", ex.Message);
+                log.GravaLog(1,12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateListaPreco-get", ex.Message);
             }
             return View(listapreco);
         }
@@ -109,7 +109,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateListaPreco-post", ex.Message);
+                log.GravaLog(1,12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateListaPreco-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateListaPreco", new { id = listapreco.id.ToString() });

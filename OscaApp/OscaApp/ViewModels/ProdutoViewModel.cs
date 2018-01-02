@@ -1,5 +1,6 @@
 ﻿using OscaApp.Data;
 using OscaApp.Models;
+using System.Collections.Generic;
 
 namespace OscaApp.ViewModels
 {
@@ -7,6 +8,7 @@ namespace OscaApp.ViewModels
     {
         public Produto produto { get; set; }
         public ContextPage contexto { get; set; }
+        public List<ItemProdutoLista> itensListaPreco { get; set; }
 
         public ProdutoViewModel()
         {
