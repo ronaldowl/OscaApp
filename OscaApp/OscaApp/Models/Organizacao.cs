@@ -38,7 +38,7 @@ namespace OscaApp.Models
         public string complemento { get; set; }
         public string anotacao { get; set; }
   
-        public StatusOrg statusOrg { get; set; }        
+        public CustomEnumStatus.StatusOrg statusOrg { get; set; }        
         public DateTime dataExpiracao { get; set; }      
         public DateTime dataPagamento { get; set; }
 
@@ -60,7 +60,7 @@ namespace OscaApp.Models
         public Organizacao()
         {
 
-            this.status = CustomEnum.Status.Ativo;
+            this.status = CustomEnumStatus.statusOrg;
             this.entityType = 1000;
 
         }

@@ -20,7 +20,7 @@ namespace OscaApp.framework.Models
         public string criadoPorName { get; set; }        
         public Guid modificadoPor { get; set; }
         public string modificadoPorName { get; set; }    
-        public CustomEnum.Status status { get; set; }
+        public CustomEnumStatus.Status status { get; set; }
 
         virtual public DateTime modificadoEm { get; set; }
         virtual public DateTime criadoEm { get; set; }

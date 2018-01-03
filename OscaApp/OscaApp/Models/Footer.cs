@@ -12,7 +12,7 @@ namespace OscaApp.Models
         public string nomeOrganizacao { get; set; }
         public string msgAvaliacao { get; set; }
         public int diasAvaliacao { get; set; }
-        public StatusOrg statusOrg { get; set; }
+        public CustomEnumStatus.StatusOrg statusOrg { get; set; }
 
     }
 }

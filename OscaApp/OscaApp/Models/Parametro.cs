@@ -1,5 +1,6 @@
 ﻿using System;
 using OscaApp.framework.Models;
+using OscaApp.framework;
 
 
 namespace OscaApp.Models
@@ -13,7 +14,7 @@ namespace OscaApp.Models
         public  String valor { get; set; }
         public String Descrição { get; set; }
         public CustomEnum.TipoParametro tipo { get; set; }
-        public CustomEnum.Status status { get; set; }
+        public CustomEnumStatus.status status { get; set; }
 
     }
 }

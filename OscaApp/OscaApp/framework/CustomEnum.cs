@@ -5,15 +5,8 @@ using System.Threading.Tasks;
 
 namespace OscaApp.framework.Models
 {
-    public class CustomEnum
+     public class CustomEnumStatus
     {
-        public enum Sexo
-        {
-            masculino = 1,
-            feminino = 2,
-            outros = 3
-        }
-
         public enum Status
         {
             Ativo = 1,
@@ -28,12 +21,32 @@ namespace OscaApp.framework.Models
             Expirada = 3
         }
 
+        public enum StatusPedido
+        {
+                      
+            EmAndamento = 1,
+            Fechado = 2,
+            AguardandoProduto = 3,
+            ParaEntrega = 4
+        }
+
+    }
+
+    public class CustomEnum
+    {
+        public enum Sexo
+        {
+            masculino = 1,
+            feminino = 2,
+            outros = 3
+        }     
+
         public enum TipoParametro
         {
             texto = 1,
             inteiro = 2,
             data = 3,
-            logico = 4,
+            logico = 4
         }
         public enum TipoPessoa
         {
@@ -62,6 +75,36 @@ namespace OscaApp.framework.Models
             Taxa = 4,
             Aluguel = 5
         }
+
+        public enum tipoDesconto
+        {
+            Money = 1,
+            Percentual = 2          
+        }
+
+        public enum codicaoPagamento
+        {
+            Avista = 1,
+            Parcelado = 2
+                     
+        }
+
+        public enum tipoPagamento
+        {
+            Dinheiro = 1,
+            Cartao = 2,
+            Cheque = 3,
+            Deposito =4          
+        }
+        public enum metodoEntrega
+        {
+            ClienteRetira = 1,
+            Sedex = 2,
+            Transportadora = 3,
+            Deposito =4,
+            FedEx = 5,
+            Correio = 6          
+        }
     }
 
     public class CustomEntityEnum
@@ -82,7 +125,10 @@ namespace OscaApp.framework.Models
             ListaPreco = 12,
             ItemListaPreco = 13,
             Fornecedor = 14,
-            Log = 15,
+            Log = 15,          
+            ProdutoPedido = 16,
+            ServicoOrdem = 17,
+            ProdutoOrdem = 18,
             Organizacao = 1000
 
         }
