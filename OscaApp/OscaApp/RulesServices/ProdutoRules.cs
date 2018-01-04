@@ -47,6 +47,25 @@ namespace OscaApp.RulesServices
             ////************ FIM Objetos de controle de acesso ***************
 
             return true;
-        }       
+        }
+
+        public static List<ItemProdutoLista> RetornaItemListaProduto(List<ItemListaPreco> itens)
+        {
+            List<ItemProdutoLista> retorno = new List<ItemProdutoLista>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                ItemProdutoLista X = new ItemProdutoLista();
+                X.id = item.id;
+                X.dataCriacao = item.criadoEm;
+                X.idListaPreco = item.idListaPreco;
+                X.nomeListaPreco = sqldata.RetornaListaPreco(item.idListaPreco).nome;
+                X.valorVenda = item.valor.ToString("N2");
+                retorno.Add(X);
+            }
+           
+            return retorno;
+        }
     }
 }

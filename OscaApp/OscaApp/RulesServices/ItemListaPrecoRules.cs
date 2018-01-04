@@ -46,6 +46,9 @@ namespace OscaApp.RulesServices
             //************ FIM Objetos de controle de acesso ***************
 
             return true;
-        }       
+        }
+
+
+      
     }
 }

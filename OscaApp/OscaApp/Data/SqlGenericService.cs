@@ -78,32 +78,8 @@ namespace OscaApp.Data
                 throw;
             }
             return retorno.ToString();
-        }
+        }      
         
-  
-
-        //public static String RetornaSelectResult()
-        //{
-
-        //    using (var conn = new SqlConnection(connectionString))
-        //    using (var cmd = new SqlCommand("select * from Products", conn))
-        //    {
-        //        var dt = new DataTable();
-        //        using (var da = new SqlDataAdapter(cmd))
-        //        {
-        //            da.Fill(dt);
-        //        }
-        //    }
-
-        //    foreach (DataRow row in dt.Rows)
-        //    {
-        //        int productId = Convert.ToInt32(row[0]);
-        //        string productName = row["ProductName"].ToString();
-        //    }
-
-
-
-        //}
 
     }
 }

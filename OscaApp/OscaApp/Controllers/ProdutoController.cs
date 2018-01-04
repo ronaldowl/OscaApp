@@ -18,6 +18,7 @@ namespace OscaApp.Controllers
     {
 
         private readonly ProdutoData produtoData;
+        private readonly ItemListaPrecoData itemListaPrecoData;
         private ContextPage contexto;
        
 
@@ -25,8 +26,8 @@ namespace OscaApp.Controllers
         public ProdutoController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.produtoData = new ProdutoData(db);
+            this.itemListaPrecoData = new ItemListaPrecoData(db);
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-
         }
 
     
@@ -43,7 +44,6 @@ namespace OscaApp.Controllers
                     produtoData.Update(modelo);
                     return RedirectToAction("FormUpdateProduto", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
-
             }
             catch (Exception ex)
             {
@@ -67,9 +67,8 @@ namespace OscaApp.Controllers
              
                 retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
                 modelo.itensListaPreco = new List<ItemProdutoLista>();
-
-
-                //TODO Formata campos
+                modelo.itensListaPreco = ProdutoRules.RetornaItemListaProduto(itemListaPrecoData.GetAllByProduto(modelo.produto.id));
+                          
 
                 if (retorno != null)
                 {
