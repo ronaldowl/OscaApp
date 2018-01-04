@@ -60,7 +60,7 @@ namespace OscaApp.Models
         public Organizacao()
         {
 
-            this.status = CustomEnumStatus.statusOrg;
+            this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 1000;
 
         }

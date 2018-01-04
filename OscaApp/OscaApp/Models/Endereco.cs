@@ -27,7 +27,7 @@ namespace OscaApp.Models
 
         public Endereco()
         {
-            this.status = CustomEnum.Status.Ativo;
+            this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 9;
         }
     }

@@ -14,11 +14,13 @@ namespace OscaApp.Models
         public string descricao { get; set; }
         public bool padrao { get; set; }
         public DateTime dataValidade { get; set; }
+        public DateTime fimValidade { get; set; }
+
         public Guid idOrganizacao { get; set; }
 
         public ListaPreco()
         {
-            this.status = CustomEnum.Status.Ativo;
+            this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 12;
         }
 

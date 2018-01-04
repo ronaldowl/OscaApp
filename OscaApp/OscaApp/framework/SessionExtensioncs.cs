@@ -1,9 +1,10 @@
 using System;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace OscaApp.framework
 {
-    public class SessionExtensioncs
+    public static class SessionExtensioncs
     {        
 
     public static void SetObjectAsJson(this ISession session, string key, object value)

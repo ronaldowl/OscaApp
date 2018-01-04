@@ -112,8 +112,8 @@ namespace OscaApp.Data
                             retorno.id = new Guid(dataReader["id"].ToString()); 
                             retorno.nomeLogin = dataReader["nomeLogin"].ToString();
                             retorno.nomeAmigavel = dataReader["nomeAmigavel"].ToString();
-                            retorno.status = (CustomEnum.Status)Convert.ToInt32(dataReader["status"].ToString());
-                            retorno.statusOrg = (CustomEnum.StatusOrg)Convert.ToInt32(dataReader["statusOrg"].ToString());
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            retorno.statusOrg = (CustomEnumStatus.StatusOrg)Convert.ToInt32(dataReader["statusOrg"].ToString());
 
                         }
                     }

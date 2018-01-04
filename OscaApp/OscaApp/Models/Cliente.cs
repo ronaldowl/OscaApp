@@ -26,7 +26,7 @@ namespace OscaApp.Models
         public Guid idOrganizacao { get; set; }
 
         public Cliente() {
-            this.status = CustomEnum.Status.Ativo;
+            this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 1;
         }
 

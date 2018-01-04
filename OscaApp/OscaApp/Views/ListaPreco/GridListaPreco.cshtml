@@ -4,7 +4,7 @@
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-11 offset-1">
+        <div class="col-md-10 offset-1">
             <br />
             <div class="card  " id="osc_Grid">
                 <div class="card-header">
@@ -19,9 +19,7 @@
                                             <div class="form-group col-md-2">
                                                 <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateListaPreco", "ListaPreco", null)'"> <span>Novo</span></button>
                                             </div>
-                                            <div class="form-group col-md-2">
-                                                <button id="osc_importar" type="button" class="btn btn-info  fa fa-download" value="Importar"> <span>Importar</span></button>
-                                            </div>
+                                          
                                             <div class="form-group  col-md-4">
                                                 <div class="input-group">
                                                     @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
@@ -51,7 +49,10 @@
                                         <tr>
                                             <th>Nome da Lista</th>
                                             <th>Padrão?</th>
-                                            <th>Data de Validade</th>
+                                            <th>Data Inicio Validade</th>
+                                            <th>Data Fim Validade</th>
+                                            <th>Criado Por</th>
+                                            <th>Data de Criação</th>
                                          
                                         </tr>
                                     </thead>
@@ -60,7 +61,10 @@
                                         <tr>
                                             <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateListaPreco", new { id = item.id })</td>
                                             <td>@item.padrao</td>
-                                            <td>@item.dataValidade</td>                                      
+                                            <td>@item.dataValidade</td>     
+                                            <td>@item.fimValidade</td>    
+                                            <td>@item.criadoPorName</td>   
+                                            <td>@item.criadoEm</td>     
                                         </tr>
                                     }
                                 </table>

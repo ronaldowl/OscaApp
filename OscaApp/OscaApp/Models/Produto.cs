@@ -29,7 +29,7 @@ namespace OscaApp.Models
 
         public Produto()
         {
-            this.status = CustomEnum.Status.Ativo;
+            this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 7;
         }
 

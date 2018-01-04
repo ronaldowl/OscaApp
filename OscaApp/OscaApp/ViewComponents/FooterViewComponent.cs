@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static OscaApp.framework.Models.CustomEnum;
+using static OscaApp.framework.Models.CustomEnumStatus;
 
 namespace OscaApp.ViewComponents
 {

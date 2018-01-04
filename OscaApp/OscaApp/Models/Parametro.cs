@@ -14,7 +14,7 @@ namespace OscaApp.Models
         public  String valor { get; set; }
         public String Descrição { get; set; }
         public CustomEnum.TipoParametro tipo { get; set; }
-        public CustomEnumStatus.status status { get; set; }
+        public CustomEnumStatus.Status status { get; set; }
 
     }
 }
