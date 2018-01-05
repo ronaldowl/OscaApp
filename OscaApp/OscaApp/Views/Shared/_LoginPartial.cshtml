@@ -22,7 +22,7 @@
         <i class="fa fa-2x fa-user colorWhite" style="margin-right:5px;"></i>
         <a class="colorWhite" asp-controller="Manage" asp-action="Index" title="Manage">@UserManager.GetUserName(User) !</a>
         <button type="submit" class="btn btn-link colorWhite">Sair</button>&nbsp;&nbsp;&nbsp;
-        <a asp-controller="Home" asp-action="About"><i class="fa fa-2x fa-question-circle-o colorWhite" style="margin-right:5px;"></i></a>
+        <a asp-controller="Home" asp-action="About" data-toggle="modal" data-target="#about"><i class="fa fa-2x fa-question-circle-o colorWhite" style="margin-right:5px;"></i></a>
     </form>
 }
 else

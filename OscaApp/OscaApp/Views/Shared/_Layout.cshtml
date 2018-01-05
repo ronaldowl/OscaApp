@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OSCA Serviços Online</title>
-   
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        @*<link rel="stylesheet" href="~/css/osc_global.css" />*@
-        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    @*<link rel="stylesheet" href="~/css/osc_global.css" />*@
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
 
 
     <style>
@@ -16,17 +16,18 @@
             background-color: #0C0C0A;
             height: 50px;
             color: white;
-            padding-top:5px;
+            padding-top: 5px;
         }
+
         .osca {
-            margin-top:-3px;
-            float:left;
-            margin-left:10px;
-            font-weight:bold;
-            font-size:30px;
-            color:white;
-           
+            margin-top: -3px;
+            float: left;
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 30px;
+            color: white;
         }
+
             .osca:hover, .osca:focus, .osca:active {
                 color: aliceblue;
                 text-decoration: none;
@@ -36,8 +37,8 @@
 <body>
 
     <div id="barra_main" class="col-md-12 barraMain sticky-top">
-        <a asp-controller="Paineis" asp-action="PainelHome" class="osca"><i class="fa fa-1x fa-home" aria-hidden="true"></i>OSCA</a>
-  
+        <a asp-controller="Paineis" asp-action="PainelHome" class="osca"><i class="fa fa-1x fa-home" aria-hidden="true"></i> OSCA</a>
+
         <div style="float:right;">@await Html.PartialAsync("_LoginPartial") </div>
     </div>
     <div class="container-fluid body-content">
@@ -45,22 +46,45 @@
         @RenderBody()
     </div>
 
-   
-   
-
-
-   
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/popper.js/dist/popper.js"></script>       
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/osc_global.js" asp-append-version="true"></script>
- 
-
-
-   
+    <!-- Modal About-->
+    <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="sobreModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title " id="exampleModalLongTitle" style="color:white;font-weight:bold">Sobre</h5>
+                </div>
+                <div class="modal-body">
+                    <center><h3>OSCAS® Serviços Online</h3></center>
+                    <br />
+                    <br />
+                    <br />                   
+                    <h6>Desenvolvido por - Trine Assessoria em Informática</h6>
+                    <br />
+                    <br />
+                    <p>OSCA APP</p>
+                    <p>
+                        Versão 1.9.0
+                    </p>
+                    <p> Para obter mais informações, visite www.oscas.com.br.</p>
+                    <br/>
+                    <p>
+                        Aviso: este programa de computador é protegido pela lei de copyright e tratados internacionais. A reprodução ou distribuição não autorizada deste programa, ou qualquer parte dele, resultará na imposição de rigorosas penas civis e criminais e será objeto de ação judicial promovida na máxima extensão possível, nos termos da lei.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    @*<script src="~/js/osc_global.js" asp-append-version="true"></script>*@
 
     @*@RenderSection("scripts", required: false)*@
-    <footer class="fixed-bottom " style="background-color:#0C0C0A">            
+    <footer class="fixed-bottom " style="background-color:#0C0C0A">
         @await Component.InvokeAsync("Footer");
     </footer>
 </body>

@@ -1,4 +1,4 @@
-﻿@model OscaApp.ViewModels.ClienteViewModel
+﻿@model OscaApp.ViewModels.PedidoViewModel
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -8,15 +8,14 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 offset-1">
-             
-            <form action="FormCreateCliente" method="post" id="FormCreateCliente">
+        <div class="col-md-10 offset-1">             
+            <form action="FormCreatePedido" method="post" id="FormCreatePedido">
                 <div class="card " id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title">
                             <table>
                                 <tr>
-                                    <td><h3>Cliente:&nbsp;&nbsp;</h3></td>
+                                    <td><h3>Pedido:&nbsp;&nbsp;</h3></td>
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
@@ -25,6 +24,10 @@
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Fechar</span></button>
                                             </label>
+                                            <label>
+                                                <button id="osc_produtoPedido" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Incluir Produto</span></button>
+                                            </label>
+ 
                                         </div>
                                     </td>
                                 </tr>
@@ -40,11 +43,11 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-asterisk fa-1x"></span>
                                         </span>
-                                        <input id="osc_codigo" asp-for="@Model.cliente.codigo" type="text" class="form-control" disabled="disabled" />
+                                        <input id="osc_codigo" asp-for="@Model.codigoPedido" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nome Cliente*</label>
+                                    <label>Cliente*</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-1x"></span>
