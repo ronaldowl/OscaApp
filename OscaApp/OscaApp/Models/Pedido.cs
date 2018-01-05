@@ -2,6 +2,7 @@
 using OscaApp.framework.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace OscaApp.Models
 {
@@ -13,12 +14,18 @@ namespace OscaApp.Models
         public Guid idListaPreco { get; set; }
 
         public string codigoPedido { get; set; }
-        public int quantidade { get; set; }
+        public string anotacao { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valorTotal { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valorFrete { get; set; }
-        public decimal valorDescontoMoney { get; set; }
-        public decimal valorDescontoPercentual { get; set; }       
+
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        public decimal valorDesconto { get; set; }
+
+        public int valorDescontoPercentual { get; set; }       
 
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
         public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }

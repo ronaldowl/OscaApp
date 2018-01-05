@@ -11,7 +11,7 @@ namespace OscaApp.ViewModels
     {
         public Pedido pedido { get; set; }
 
-        ContextPage contexto { get; set; }
+        public ContextPage contexto { get; set; }
 
         public Relacao cliente { get; set; }
 
