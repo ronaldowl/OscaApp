@@ -33,6 +33,17 @@ namespace OscaApp.Data
 
     }
 
+
+    public interface IPedidoData
+    {
+        void Add(Pedido contato);
+        void Update(Pedido contato);
+        Pedido Get(Guid id);
+        List<Pedido> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+
+    }
+
     public interface IItemListaPrecoData
     {
         void Add(ItemListaPreco contato);

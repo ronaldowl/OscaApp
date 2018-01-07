@@ -50,28 +50,27 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-1x"></span>
                                         </span>
-                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required" />
+                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="button" class="form-control" required="required" >
+                                        <span class="input-group-btn ">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
+                                                <span class="fa fa-search"></span>
+                                            </button>
+                                        </span>
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                     </div>
                                 </div>
                              
                                 <div class="form-group">
-                                    <label>Lista de Preço</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-1x"></span>
-                                        </span>
-                                        <select id="osc_condicaoPagamento" asp-for="@Model.pedido.condicaoPagamento" class="form-control" required="required">
-                                            <option value="1" selected="">Á Vista</option>
-                                            <option value="2">Parcelado</option>
-                                        </select>
+                                    <label class="control-label">Lista de Preço</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <select asp-items="@Model.listaPrecos" asp-for="@Model.pedido.idListaPreco" id="osc_listaPreco"></select>
+                                        </div>
                                     </div>
                                 </div>
-
-
                             </div>
                             <div class="col-md-3">
-
                                 <div class="form-group">
                                     <label>Tipo Pagamento</label>
                                     <div class="input-group">
@@ -126,40 +125,8 @@
 
 
                             </div>
-                            <div class="col-md-3 ">
-                                <div class="form-group">
-                                    <label>Tipo Desconto</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-1x"></span>
-                                        </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.pedido.tipoDesconto" class="form-control" required="required">
-                                            <option value="1" selected="">Valor</option>
-                                            <option value="2">Percentual</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Valor Desconto</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-money fa-1x"></span>
-                                        </span>
-                                        <input id="osc_valorDescontoMoney" asp-for="@Model.pedido.valorDesconto" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Desconto %</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-caret-right fa-1x"></span>
-                                        </span>
-                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.pedido.valorDescontoPercentual" type="email" class="form-control" placeholder="Email" />
-                                    </div>
-                                </div>
-
-                            </div><div class="col-md-3">
-
+                            
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Valor Total</label>
                                     <div class="input-group">
@@ -211,7 +178,8 @@
                                     <th> Desconto % </th>
                                   
                                     <th>Valor</th>
-                                    <th>Ação</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tr>
@@ -224,7 +192,12 @@
                                 <td>R$ 800,50 </td>
                                 <td>
                                     <label>
-                                        <button id="osc_produtoPedido" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
+                                        <button id="osc_produtoPedidoEdit" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Detalhes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Editar</span></button>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <button id="osc_produtoPedidoDelete" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
                                     </label>
                                 </td>
                             </tr>
@@ -238,39 +211,16 @@
                                 <td>R$ 800,50 </td>
                                 <td>
                                     <label>
-                                        <button id="osc_produtoPedido" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
+                                        <button id="osc_produtoPedidoEdit" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Detalhes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Editar</span></button>
                                     </label>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-1x fa-shopping-basket"></td>
-                                <td>Procesador intel</td>
-                                <td> Valor </td>
-                                <td> 9 </td>
-                                <td> R$ 5,00</td>
-                                <td> 10,00 </td>
-                                <td>R$ 800,50 </td>
                                 <td>
                                     <label>
-                                        <button id="osc_produtoPedido" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
+                                        <button id="osc_produtoPedidoDelete" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
                                     </label>
                                 </td>
                             </tr>
-                            <tr>
-                                <td><i class="fa fa-1x fa-shopping-basket"></td>
-                                <td>Procesador intel</td>
-                                <td> Valor </td>
-                                <td> 9 </td>
-                                <td> R$ 5,00</td>
-                                <td> 10,00 </td>
-                                <td>R$ 800,50 </td>
-                                <td>
-                                    <label>
-                                        <button id="osc_produtoPedido" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
-                                    </label>
-                                </td>
-                            </tr>
-                   
+                                            
                         </table>
                     </div>
                 </div>
@@ -330,6 +280,17 @@
         </div>
     </div>
 </div>
+ 
+<div class="modal fade" id="lookupCliente">
+</div> 
+    <script>
+        function CarregaLookupCliente()
+        {                         
+            $("#lookupCliente").load("/Cliente/LookupCliente", function () {
+                $("#lookupCliente").modal("show");
+            })  
+        }
+    </script>
 
+ 
 
-@*<script src="~/js/osc_cliente.js" asp-append-version="true"></script>*@

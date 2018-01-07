@@ -15,8 +15,17 @@ namespace OscaApp.ViewModels
 
         public Relacao cliente { get; set; }
 
-        public List<SelectListItem> listasPreco { get; set; }
+        public List<SelectListItem> listaPrecos { get; set; }
 
         public List<ProdutoPedido> produtosPedido { get; set; }
+
+
+        public PedidoViewModel()
+        {
+
+            this.pedido = new Pedido();
+            this.listaPrecos = new List<SelectListItem>();
+            
+        }
     }
 }

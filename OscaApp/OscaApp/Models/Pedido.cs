@@ -36,5 +36,16 @@ namespace OscaApp.Models
         [NotMapped]
         public List<ProdutoPedido> produtosPedido { get; set; }
 
+
+        public Pedido()
+        {
+
+            this.status = CustomEnumStatus.Status.Ativo;
+            this.statusPedido = CustomEnumStatus.StatusPedido.EmAndamento;
+            this.entityType = 4;
+            
+
+        }
+
     }
 }

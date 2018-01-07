@@ -10,19 +10,19 @@ using OscaApp.framework;
 
 namespace OscaApp.Data
 {
-    public class ItemListaPrecoData : IItemListaPrecoData
+    public class PedidoData : IPedidoData
     {
         private ContexDataService db;       
 
-        public ItemListaPrecoData(ContexDataService dbContext)
+        public PedidoData(ContexDataService dbContext)
         {
             this.db = dbContext;        
         }
-        public void Add(ItemListaPreco modelo)
+        public void Add(Pedido modelo)
         {
             try
             {
-                db.ItemListaPrecos.Add(modelo);                
+                db.Pedidos.Add(modelo);                
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -31,7 +31,7 @@ namespace OscaApp.Data
             }
            
         }
-        public void Update(ItemListaPreco modelo)
+        public void Update(Pedido modelo)
         {
             try
             {
@@ -51,13 +51,13 @@ namespace OscaApp.Data
             }
 
         }
-        public ItemListaPreco Get(Guid id )
+        public Pedido Get(Guid id )
         {
-            List<ItemListaPreco> retorno = new List<ItemListaPreco>();
+            List<Pedido> retorno = new List<Pedido>();
             try
             {
                
-                retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco where  id = '" + id.ToString() +  "'").ToList();
+                retorno = db.Pedidos.FromSql("SELECT * FROM Pedido where  id = '" + id.ToString() +  "'").ToList();
             }         
             catch (SqlException ex)
             {
@@ -67,28 +67,19 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
-        public List<ItemListaPreco> GetAll(Guid idOrg)
+        public List<Pedido> GetAll(Guid idOrg)
         {
-            List<ItemListaPreco> retorno = new List<ItemListaPreco>();
-            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            List<Pedido> retorno = new List<Pedido>();
+            retorno = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return retorno;
 
-        }
-
-        public List<ItemListaPreco> GetAllByProduto(Guid idProduto)
-        {
-            List<ItemListaPreco> itens = new List<ItemListaPreco>();        
-
-            itens = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idProduto = '" + idProduto.ToString() + "'").ToList();
-        
-            return itens;
-        }
+        }       
 
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
-            List<ItemListaPreco> retorno = new List<ItemListaPreco>();         
+            List<Pedido> retorno = new List<Pedido>(); 
 
-            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 

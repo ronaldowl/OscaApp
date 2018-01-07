@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
 using OscaApp.framework;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OscaApp.Controllers
 {
@@ -17,14 +18,16 @@ namespace OscaApp.Controllers
     public class PedidoController : Controller
     {
         
-        private readonly EnderecoData enderecoData;
+        private readonly IPedidoData pedidoData;
+        private readonly IListaPrecoData listaprecoData;
         private ContextPage contexto;
 
 
         public PedidoController(ContexDataService db, IHttpContextAccessor httpContext)
         {
              
-            this.enderecoData = new EnderecoData(db);
+            this.pedidoData = new PedidoData(db);
+            this.listaprecoData = new ListaPrecoData(db);
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
 
         }
@@ -33,13 +36,51 @@ namespace OscaApp.Controllers
         public ViewResult FormCreatePedido()
         {
             PedidoViewModel modelo = new PedidoViewModel();
-            modelo.pedido = new Pedido();
-            modelo.contexto = contexto;
-            modelo.pedido.criadoEm = DateTime.Now;
-            modelo.pedido.criadoPorName = contexto.nomeUsuario;
 
+            try
+            {
+                modelo.contexto = contexto;
+                modelo.pedido.criadoEm = DateTime.Now;
+                modelo.pedido.criadoPorName = contexto.nomeUsuario;
+
+                //Prenche lista de preço para o contexto da página
+                List<SelectListItem> itens = new List<SelectListItem>();
+                itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
+                modelo.listaPrecos = itens;
+
+            }
+            catch (Exception ex)
+            {
+
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreatePedido-get", ex.Message);
+            }
+          
             return View(modelo);
         }
+
+        [HttpPost]
+        public IActionResult FormCreatePedido(PedidoViewModel entrada)
+        {
+            Pedido pedido = new Pedido();
+            try
+            {
+                if (PedidoRules.PedidoCreate(entrada, out pedido, contexto))
+                {
+                    pedidoData.Add(pedido);
+                    return RedirectToAction("FormUpdateItemListaPreco", new { id = pedido.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreatePedido-post", ex.Message);
+            }
+            return View();
+        }
+
+
+
 
         //public ViewResult GridCliente(string filtro, int Page)
         //{
@@ -150,6 +191,6 @@ namespace OscaApp.Controllers
         //    }
         //    return View();
         //}
-      
+
     }
 }
