@@ -72,3 +72,12 @@
     </div> 
 </div> 
  
+ <script type="text/javascript">
+    function SetName() {
+        if (window.opener != null && !window.opener.closed) {
+            var txtName = window.opener.document.getElementById("txtName");
+            txtName.value = document.getElementById("ddlNames").value;
+        }
+        window.close();
+    }
+</script>
