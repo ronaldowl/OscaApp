@@ -25,7 +25,7 @@ namespace OscaApp.Models
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valorDesconto { get; set; }
 
-        public int valorDescontoPercentual { get; set; }       
+        public decimal valorDescontoPercentual { get; set; }       
 
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
         public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }

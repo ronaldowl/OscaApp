@@ -83,34 +83,65 @@ namespace OscaApp.Controllers
             return View();
         }
 
+       [HttpGet]
+        public ViewResult FormUpdatePedido(string id)
+        {
+            PedidoViewModel modelo = new PedidoViewModel();
+
+            try           
+           {
+                Pedido retorno = new Pedido();
+          
+               if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = pedidoData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.pedido = retorno;
+
+                        //Preenche informações do grid de Endereço
+                       // modelo.enderecos = enderecoData.GetByCliente(modelo.cliente.id);
+
+                   }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1,4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-get", ex.Message);
+
+             }
+
+            return View(modelo);
+        }
 
 
+        public ViewResult GridPedido(string filtro, int Page)
+        {
+            try
+            {
+                IEnumerable<Pedido> retorno = pedidoData.GetAll(contexto.idOrganizacao);
 
-        //public ViewResult GridCliente(string filtro, int Page)
-        //{
-        //    try
-        //    {
-        //        IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
+                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigoPedido == filtro) select A;
 
-        //        //realiza busca por Nome, Código, Email e CPF
-        //        if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeCliente == filtro || A.cnpj_cpf == filtro || A.email == filtro) select A;
+                retorno = retorno.OrderBy(x => x.codigoPedido);
 
-        //        retorno = retorno.OrderBy(x => x.nomeCliente);
+                //Se não passar a número da página, caregar a primeira
+                if (Page == 0) Page = 1;
+                return View(retorno.ToPagedList<Pedido>(Page, 10));
 
-        //        //Se não passar a número da página, caregar a primeira
-        //        if (Page == 0) Page = 1;
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1,4, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
+            }
 
-        //        return View(retorno.ToPagedList<Cliente>(Page, 10));
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
-        //    }
-
-        //    return View();
-        //}
+            return View();
+        }
 
         //[HttpPost]
         //public IActionResult FormUpdateCliente(ClienteViewModel entrada)
@@ -133,40 +164,7 @@ namespace OscaApp.Controllers
 
         //    return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
         //}
-        //[HttpGet]
-        //public ViewResult FormUpdateCliente(string id)
-        //{
-        //    ClienteViewModel modelo = new ClienteViewModel();
-
-        //    try
-        //    {
-        //        Cliente retorno = new Cliente();
-        //        //Formulario com os dados do cliente
-        //        if (!String.IsNullOrEmpty(id))
-        //        {
-        //            //campo que sempre contém valor
-        //            retorno = clienteData.Get(new Guid(id), contexto.idOrganizacao);
-
-        //            if (retorno != null)
-        //            {
-        //                modelo.cliente = retorno;
-
-        //                //Preenche informações do grid de Endereço
-        //                modelo.enderecos = enderecoData.GetByCliente(modelo.cliente.id);
-
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-get", ex.Message);
-
-        //    }
-
-        //    return View(modelo);
-        //}
+      
 
         //[HttpPost]
         //public IActionResult FormCreatePedido(ClienteViewModel entrada)
