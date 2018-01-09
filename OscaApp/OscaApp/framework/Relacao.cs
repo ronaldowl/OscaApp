@@ -13,6 +13,7 @@ namespace OscaApp.framework.Models
         public String organizacao { get; set; }
         public Guid idOrganizacao { get; set; }
         public CustomEntityEnum.Entidade tipoObjeto { get; set; }
+        public CustomEnumStatus.Status status { get; set; }
 
 
         public Relacao(Guid _id, CustomEntityEnum.Entidade entityType)

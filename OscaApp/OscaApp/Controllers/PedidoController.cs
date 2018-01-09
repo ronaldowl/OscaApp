@@ -20,6 +20,7 @@ namespace OscaApp.Controllers
         
         private readonly IPedidoData pedidoData;
         private readonly IListaPrecoData listaprecoData;
+        private readonly SqlGenericData Sqlservice;
         private ContextPage contexto;
 
 
@@ -29,11 +30,11 @@ namespace OscaApp.Controllers
             this.pedidoData = new PedidoData(db);
             this.listaprecoData = new ListaPrecoData(db);
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-
+            this.Sqlservice = new SqlGenericData();
         }
 
         [HttpGet]
-        public ViewResult FormCreatePedido()
+        public ViewResult FormCreatePedido(string idCliente)
         {
             PedidoViewModel modelo = new PedidoViewModel();
 
@@ -42,6 +43,9 @@ namespace OscaApp.Controllers
                 modelo.contexto = contexto;
                 modelo.pedido.criadoEm = DateTime.Now;
                 modelo.pedido.criadoPorName = contexto.nomeUsuario;
+
+                //Se passar o id carrega o cliente
+                if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = Sqlservice.RetornaCliente(new Guid(idCliente));
 
                 //Prenche lista de preço para o contexto da página
                 List<SelectListItem> itens = new List<SelectListItem>();

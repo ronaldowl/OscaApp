@@ -21,8 +21,12 @@
                                             <label>
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
+
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Fechar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_pedido" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreatePedido", "Pedido", new {idCliente = Model.cliente.id })'"> <span>Novo Pedido</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>

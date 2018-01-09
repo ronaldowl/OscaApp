@@ -17,15 +17,13 @@ namespace OscaApp.RulesServices
                      
             if (modelo.idCliente  != null)
             {
-
                 //Gera código do Pedido
                 SqlGenericService sqlservice = new SqlGenericService();
-                
-
-                modelo.codigoPedido = sqlservice.RetornaNovaPosicao(4, contexto.idOrganizacao);
 
                 //Associa Cliente
-                modelo.idCliente = new Guid("C3C248CD-0104-47EE-6A76-08D52C9BF9AB");
+                modelo.idCliente = entrada.cliente.id;
+
+                modelo.codigoPedido = sqlservice.RetornaNovaPosicao(4, contexto.idOrganizacao);                              
 
                 //************ Objetos de controle de acesso ******************
                 modelo.criadoEm = DateTime.Now;

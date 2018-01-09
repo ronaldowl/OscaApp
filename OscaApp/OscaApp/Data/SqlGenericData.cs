@@ -61,9 +61,9 @@ namespace OscaApp.Data
             }
             return retorno;
         }
-        public ListaPreco RetornaCliente(Guid id)
+        public Relacao RetornaCliente(Guid id)
         {
-            ListaPreco retorno = new ListaPreco();
+            Relacao retorno = new Relacao();
             SqlDataReader dataReader;
             try
             {
@@ -75,7 +75,7 @@ namespace OscaApp.Data
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select O.id , o.nome ,  status from ListaPreco as O where O.id = '" + id.ToString() + "'",
+                        CommandText = "select O.id , o.nomeCliente ,  status from Cliente as O where O.id = '" + id.ToString() + "'",
                         CommandType = CommandType.Text
                     };
 
@@ -87,7 +87,7 @@ namespace OscaApp.Data
                         while (dataReader.Read())
                         {
                             retorno.id = new Guid(dataReader["id"].ToString());
-                            retorno.nome = dataReader["nome"].ToString();
+                            retorno.idName = dataReader["nomeCliente"].ToString();
                             retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
 
                         }
@@ -102,88 +102,7 @@ namespace OscaApp.Data
             }
             return retorno;
         }
-        public ListaPreco RetornaContato(Guid id)
-        {
-            ListaPreco retorno = new ListaPreco();
-            SqlDataReader dataReader;
-            try
-            {
-
-
-                using (SqlConnection Connection = new SqlConnection(conectService))
-                {
-
-                    var _Command = new SqlCommand()
-                    {
-                        Connection = Connection,
-                        CommandText = "select O.id , o.nome ,  status from ListaPreco as O where O.id = '" + id.ToString() + "'",
-                        CommandType = CommandType.Text
-                    };
-
-                    Connection.Open();
-                    dataReader = _Command.ExecuteReader();
-
-                    if (dataReader.HasRows)
-                    {
-                        while (dataReader.Read())
-                        {
-                            retorno.id = new Guid(dataReader["id"].ToString());
-                            retorno.nome = dataReader["nome"].ToString();
-                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
-
-                        }
-                    }
-                    Connection.Close();
-
-                };
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-            return retorno;
-        }
-        public ListaPreco RetornaProduto(Guid id)
-        {
-            ListaPreco retorno = new ListaPreco();
-            SqlDataReader dataReader;
-            try
-            {
-
-
-                using (SqlConnection Connection = new SqlConnection(conectService))
-                {
-
-                    var _Command = new SqlCommand()
-                    {
-                        Connection = Connection,
-                        CommandText = "select O.id , o.nome ,  status from ListaPreco as O where O.id = '" + id.ToString() + "'",
-                        CommandType = CommandType.Text
-                    };
-
-                    Connection.Open();
-                    dataReader = _Command.ExecuteReader();
-
-                    if (dataReader.HasRows)
-                    {
-                        while (dataReader.Read())
-                        {
-                            retorno.id = new Guid(dataReader["id"].ToString());
-                            retorno.nome = dataReader["nome"].ToString();
-                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
-
-                        }
-                    }
-                    Connection.Close();
-
-                };
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-            return retorno;
-        }
+        
 
 
     }

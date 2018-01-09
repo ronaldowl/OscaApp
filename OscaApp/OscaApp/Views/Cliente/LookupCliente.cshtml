@@ -3,13 +3,25 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 
+<script type="text/javascript">
+
+    //Função para tratamento do Lookup padrão do Cliente
+    function ConfigLookupCliente(id, name) {       
+               
+            var idCliente =  document.getElementById("osc_clienteId");
+            var idClienteName =  document.getElementById("osc_clienteIdName");
+            idCliente.value = id;
+            idClienteName.value = name;
+            $('#lookupCliente').modal('hide');          
+    }
+</script>
+
 
 
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-           
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>          
         </div>
         <div class="modal-body">
             <div class="card" id="osc_Lookup">
@@ -50,13 +62,12 @@
                                             <th>Cliente</th>
                                             <th>CNPJ/CPF</th>
                                             <th>Tipo de Pessoa</th>
-
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
-                                            <td>@item.codigo</td>
+                                        <tr  id="@item.id" value="@item.nomeCliente" onclick="ConfigLookupCliente('@item.id.ToString()','@item.nomeCliente.ToString()')" >
+                                            <td>@item.codigo</td>                                             
                                             <td>@item.nomeCliente</td>
                                             <td>@item.cnpj_cpf</td>
                                             <td>@item.tipoPessoa</td>
@@ -72,12 +83,4 @@
     </div> 
 </div> 
  
- <script type="text/javascript">
-    function SetName() {
-        if (window.opener != null && !window.opener.closed) {
-            var txtName = window.opener.document.getElementById("txtName");
-            txtName.value = document.getElementById("ddlNames").value;
-        }
-        window.close();
-    }
-</script>
+
