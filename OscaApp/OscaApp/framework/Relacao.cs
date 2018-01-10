@@ -32,9 +32,7 @@ namespace OscaApp.framework.Models
         {
         }
 
-        //*********************** Métodos de Parse de Objetos do Osca
-
-               
+        //*********************** Métodos de Parse de Objetos do Osca               
         public static List<Relacao> ConvertToRelacao(List<ListaPreco> itens)
         {          
             List<Relacao> lista = new List<Relacao>();         
@@ -44,6 +42,19 @@ namespace OscaApp.framework.Models
                 Relacao X = new Relacao();
                 X.id = item.id;
                 X.idName = item.nome;
+                lista.Add(X);
+            }
+            return lista;
+        }
+
+        public static List<Relacao> ConvertToRelacao(List<ProdutoPedido> itens)
+        {
+            List<Relacao> lista = new List<Relacao>();
+
+            foreach (var item in itens)
+            {
+                Relacao X = new Relacao();
+                X.id = item.id;                 
                 lista.Add(X);
             }
             return lista;

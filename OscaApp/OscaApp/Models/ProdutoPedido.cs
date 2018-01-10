@@ -15,7 +15,7 @@ namespace OscaApp.Models
 
         public decimal valor { get; set; }
         public decimal valorDescontoMoney { get; set; }
-        public decimal valorDescontoPercentual { get; set; }
+        public int valorDescontoPercentual { get; set; }
         public int quantidade { get; set; }
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
         

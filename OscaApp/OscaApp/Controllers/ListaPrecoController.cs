@@ -114,10 +114,7 @@ namespace OscaApp.Controllers
 
             return RedirectToAction("FormUpdateListaPreco", new { id = listapreco.id.ToString() });
         }
-
-
-
-
+        
         public ViewResult GridListaPreco(string filtro, int Page)
         {
             IEnumerable<ListaPreco> retorno = listaPrecoData.GetAll(contexto.idOrganizacao);

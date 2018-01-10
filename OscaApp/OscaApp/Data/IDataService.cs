@@ -54,6 +54,17 @@ namespace OscaApp.Data
 
     }
 
+    public interface IProdutoPedidoData
+    {
+        void Add(ProdutoPedido contato);
+        void Update(ProdutoPedido contato);
+        ProdutoPedido Get(Guid id);
+        List<ProdutoPedido> GetByPedidoId(Guid idPedido);
+        List<ProdutoPedido> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+
+    }
+
     public interface IContatoData
     {
         void Add(Contato contato);

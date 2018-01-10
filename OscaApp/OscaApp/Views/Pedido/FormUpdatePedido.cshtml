@@ -24,6 +24,9 @@
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridPedido", "Pedido" , null)'"> <span>Fechar</span></button>
                                             </label>
+                                            <label>
+                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-lg fa fa-print" value="Fechar" > <span>Imprimir Pedido</span></button>
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
@@ -198,82 +201,27 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <br />
-                    <div class="card card-success" id="osc_produtos">
-                        <div class="card-header card-success">
-                            <div class="card-title">
-                                <table>
-                                    <tr>
-                                        <td><h5>Produtos do Pedido:&nbsp;</h5></td>
-                                        <td>
-                                            <label>
-                                                <button id="osc_produtoPedido" type="button" class="btn btn-success btn-lg fa fa-plus-square" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Incluir</span></button>
-                                            </label>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Produto</th>
-                                        <th>Tipo de Desconto</th>
-                                        <th>QTD</th>
-                                        <th> Desconto </th>
-                                        <th> Desconto % </th>
+                    </div>    
+                    <div class="card-header">
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Produtos do Pedido: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-md-2">
+                                            <button id="osc_novoProduto" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="CarregaProdutoPedido()" > <span>Novo</span></button>
+                                        </div>
 
-                                        <th>Valor</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tr>
-                                    <td><i class="fa fa-1x fa-shopping-basket"></td>
-                                    <td>Procesador intel</td>
-                                    <td> Valor </td>
-                                    <td> 9 </td>
-                                    <td> R$ 5,00</td>
-                                    <td> 10,00 </td>
-                                    <td>R$ 800,50 </td>
-                                    <td>
-                                        <label>
-                                            <button id="osc_produtoPedidoEdit" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Detalhes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Editar</span></button>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label>
-                                            <button id="osc_produtoPedidoDelete" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
-                                        </label>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><i class="fa fa-1x fa-shopping-basket"></td>
-                                    <td>Procesador intel</td>
-                                    <td> Valor </td>
-                                    <td> 9 </td>
-                                    <td> R$ 5,00</td>
-                                    <td> 10,00 </td>
-                                    <td>R$ 800,50 </td>
-                                    <td>
-                                        <label>
-                                            <button id="osc_produtoPedidoEdit" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Detalhes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Editar</span></button>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <label>
-                                            <button id="osc_produtoPedidoDelete" type="button" class="btn btn-info btn-lg fa fa-1x fa-trash" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Remover</span></button>
-                                        </label>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-
                     </div>
-
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="/ProdutoPedido/GridProdutoPedido?idPedido=5C867B9A-E78F-45D4-96D0-08D5562271F6" ></iframe>
+                    </div>
                 </div>
             </form>
             <br />
@@ -344,6 +292,21 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="ModalProdutoPedido">
+</div>
+<script>
+    function CarregaProdutoPedido() {
+        $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?id=5c867b9a-e78f-45d4-96d0-08d5562271f6" , function () {
+            $("#ModalProdutoPedido").modal("show");
+        });
+    }
+</script>
+
+
+
+
+
 
 
 
