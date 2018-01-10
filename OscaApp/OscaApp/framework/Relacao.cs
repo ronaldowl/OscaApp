@@ -11,6 +11,7 @@ namespace OscaApp.framework.Models
         public Guid id { get; set; }
         public String idName { get; set; }
         public String organizacao { get; set; }
+        public String codigo { get; set; }
         public Guid idOrganizacao { get; set; }
         public CustomEntityEnum.Entidade tipoObjeto { get; set; }
         public CustomEnumStatus.Status status { get; set; }

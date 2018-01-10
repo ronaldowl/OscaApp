@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 
-namespace OscaApp.ViewModels
+namespace OscaApp.ViewModels.GridViewModels
 {
-    public class GridClienteViewModel
+    public class ClienteGridViewModel
     {
         public X.PagedList.PagedList<Cliente> Clientes { get; set; }
     }

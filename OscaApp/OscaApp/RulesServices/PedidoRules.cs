@@ -43,6 +43,7 @@ namespace OscaApp.RulesServices
         public static bool PedidoUpdate(PedidoViewModel entrada,out Pedido modelo)
         {
             modelo = new Pedido();
+            modelo.id = entrada.pedido.id;
 
             //************ Objetos de controle de acesso *******************
             modelo = entrada.pedido;

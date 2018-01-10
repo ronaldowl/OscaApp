@@ -36,8 +36,16 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("valor").IsModified               = true;
-                db.Entry(modelo).Property("idListaPreco").IsModified        = true;             
+                db.Entry(modelo).Property("anotacao").IsModified                = true;
+                db.Entry(modelo).Property("valorTotal").IsModified              = true;
+                db.Entry(modelo).Property("valorFrete").IsModified              = true;
+                db.Entry(modelo).Property("valorDesconto").IsModified           = true;
+                db.Entry(modelo).Property("valorDescontoPercentual").IsModified = true;
+                db.Entry(modelo).Property("tipoDesconto").IsModified            = true;
+                db.Entry(modelo).Property("condicaoPagamento").IsModified       = true;
+                db.Entry(modelo).Property("tipoPagamento").IsModified           = true;
+                db.Entry(modelo).Property("metodoEntrega").IsModified           = true;           
+                
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;

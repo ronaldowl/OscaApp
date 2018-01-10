@@ -15,6 +15,8 @@ namespace OscaApp.ViewModels
 
         public Relacao cliente { get; set; }
 
+        public Relacao listapreco { get; set; }
+
         public List<SelectListItem> listaPrecos { get; set; }
 
         public List<ProdutoPedido> produtosPedido { get; set; }
@@ -25,7 +27,7 @@ namespace OscaApp.ViewModels
 
             this.pedido = new Pedido();
             this.listaPrecos = new List<SelectListItem>();
-            
+
         }
     }
 }
