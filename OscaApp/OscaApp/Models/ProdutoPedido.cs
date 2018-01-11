@@ -1,6 +1,7 @@
 ﻿using OscaApp.framework.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +14,11 @@ namespace OscaApp.Models
         public Guid idItemListaPreco { get; set; }
         public Guid idProduto { get; set; }
 
+        [NotMapped]
+        public Guid idListaPreco { get; set; }
+
         public decimal valor { get; set; }
+        public decimal valorDesconto { get; set; }
         public decimal valorDescontoMoney { get; set; }
         public int valorDescontoPercentual { get; set; }
         public int quantidade { get; set; }

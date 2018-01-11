@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using OscaApp.framework.Models;
 using OscaApp.framework;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Data
 {
@@ -92,6 +93,15 @@ namespace OscaApp.Data
 
             return Relacao.ConvertToRelacao(retorno);
 
+        }
+
+        public List<LookupItemLista> GetAllByListaPreco(Guid idLista)
+        {            
+            List<ItemListaPreco> itens = new List<ItemListaPreco>();
+
+            itens =  db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idListaPreco = '" + idLista.ToString() + "'").ToList();
+            
+            return HelperAssociate.ConvertToLookupItemLista( itens);
         }
     }
 }

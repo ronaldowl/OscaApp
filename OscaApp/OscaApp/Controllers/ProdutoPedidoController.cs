@@ -32,14 +32,17 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult FormCreateProdutoPedido(string idProduto)
+        public ViewResult FormCreateProdutoPedido(string idPedido, string idListaPreco)
         {
             ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();
            
             try
             {
-                //modelo.contexto = contexto;             
-                //modelo.produto = produtoData.GetRelacao(new Guid(idProduto));
+                modelo.contexto = contexto;
+                modelo.produtoPedido = new ProdutoPedido();
+                modelo.produtoPedido.idPedido = new Guid(idPedido);
+                // modelo.produto = produtoData.GetRelacao(new Guid(idProduto));
+                modelo.produtoPedido.idListaPreco = new Guid(idListaPreco); 
               
                 //modelo.itemlistaPreco.criadoEm = DateTime.Now;
                 //modelo.itemlistaPreco.criadoPorName = contexto.nomeUsuario;     

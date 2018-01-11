@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OscaApp.Models;
 using OscaApp.framework.Models;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Data
 {
@@ -28,7 +29,8 @@ namespace OscaApp.Data
         void Add(ListaPreco contato);
         void Update(ListaPreco contato);
         ListaPreco Get(Guid id, Guid idOrg);
-        List<ListaPreco> GetAll(Guid idOrg);
+        List<ListaPreco> GetAll(Guid idOrg);       
+
         List<Relacao> GetAllRelacao(Guid idOrg);
 
     }
@@ -51,6 +53,7 @@ namespace OscaApp.Data
         ItemListaPreco Get(Guid id);
         List<ItemListaPreco> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
+        List<LookupItemLista> GetAllByListaPreco(Guid idLista);
 
     }
 

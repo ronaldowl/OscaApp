@@ -61,6 +61,51 @@ namespace OscaApp.Data
             }
             return retorno;
         }
+        public Produto RetornaProduto(Guid id)
+        {
+            Produto retorno = new Produto();
+            SqlDataReader dataReader;
+            try
+            {
+
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.id , o.nome ,  status, codigo, fabricante, valorCompra, quantidade, codigoFabricante from Produto as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.nome = dataReader["nome"].ToString();
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            retorno.codigo = dataReader["codigo"].ToString();
+                            retorno.fabricante = dataReader["fabricante"].ToString();
+                            retorno.valorCompra = Convert.ToDecimal(dataReader["valorCompra"]);
+                            retorno.quantidade = Convert.ToInt32(dataReader["quantidade"]);
+                            retorno.codigoFabricante = dataReader["codigoFabricante"].ToString();
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
         public Relacao RetornaRelacaoListaPreco(Guid id)
         {
             Relacao retorno = new Relacao();
@@ -137,8 +182,6 @@ namespace OscaApp.Data
             }
             return retorno;
         }
-        
-
 
     }
 }

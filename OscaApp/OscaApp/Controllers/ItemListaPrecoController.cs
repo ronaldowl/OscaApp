@@ -6,10 +6,12 @@ using OscaApp.framework;
 using OscaApp.Models;
 using OscaApp.RulesServices;
 using OscaApp.ViewModels;
+using OscaApp.ViewModels.GridViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace OscaApp.Controllers
 {
@@ -139,5 +141,20 @@ namespace OscaApp.Controllers
             }
             return View();
         }
+        
+        public ViewResult LookupProdutoPedido(string idListaPreco, int Page, string Filtro)
+        {
+            IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
+                       
+            //retorno = retorno.OrderBy(x => x.nome);
+
+            //Se não passar a número da página, caregar a primeira
+            if (Page == 0) Page = 1;
+
+            return View(modelo.ToPagedList<LookupItemLista>(Page, 10));
+             
+        }
+
+
     }
 }

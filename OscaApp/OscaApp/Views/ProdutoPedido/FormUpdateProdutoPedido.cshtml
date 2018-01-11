@@ -2,7 +2,6 @@
 @{
     Layout = "_LayoutFrame";
 }
-
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -15,7 +14,8 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
         </div>
         <div class="modal-body">
-            <form action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
+            <form action="FormUpdateProdutoPedido" method="post" id="FormUpdateProdutoPedido">
+                <input id="osc_id" asp-for="produtoPedido.id" type="hidden" class="form-control" value="@Model.produtoPedido.id" />
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title ">
@@ -44,13 +44,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produto.idName" class="form-control" type="text"     id="osc_produtoIdName"  required="required" >
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProdutoPedido()">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
-                                            <input asp-for="@Model.produto.id" class="form-control" type="hidden"   id="osc_produtoId"> 
+                                            <input asp-for="@Model.produtoPedido.quantidade" class="form-control" type="text" disabled="disabled" id="osc_produtoidName">
                                         </div>
                                     </div>
                                 </div>
@@ -63,15 +57,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Valor</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor" disabled="disabled">
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -85,16 +71,7 @@
                                             <option value="2">Percentual</option>
                                         </select>
                                     </div>
-                                </div>   
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Valor com Desconto</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valorDesconto" class="form-control" type="text" id="osc_valorDesconto" disabled="disabled" >
-                                        </div>
-                                    </div>
-                                </div>
+                                </div>                             
                             </div>
                             <div class="col-md3"   >
                                 <div class="form-group">
@@ -103,7 +80,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-calculator fa-1x"></span>
                                         </span>
-                                        <input id="osc_valorDescontoMoney" asp-for="@Model.produtoPedido.valorDescontoMoney" type="text" class="form-control" />
+                                        <input id="osc_valorDesconto" asp-for="@Model.produtoPedido.valorDescontoMoney" type="text" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -123,13 +100,3 @@
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="lookupProdutoPedido">
-</div>
-<script>
-    function CarregaLookupProdutoPedido() {
-        $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?id=" + @Model.produtoPedido.idListaPreco.ToString(), function () {
-            $("#lookupProdutoPedido").modal("show");
-        })
-    }
-</script>

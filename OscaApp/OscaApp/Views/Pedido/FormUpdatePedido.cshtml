@@ -169,9 +169,7 @@
                                         </span>
                                         <input id="osc_valorTotal" asp-for="@Model.pedido.valorTotal" type="text" class="form-control" disabled="disabled" />
                                     </div>
-                                </div>
-
-                               
+                                </div>                               
                             </div>                        
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -185,8 +183,6 @@
                                             <option value="2">Fechado</option>
                                             <option value="3">Aguardando Produto</option>
                                             <option value="4">Para Entrega</option>
-
-
                                         </select>
                                     </div>
                                 </div>
@@ -297,7 +293,7 @@
 </div>
 <script>
     function CarregaProdutoPedido() {
-        $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?id=5c867b9a-e78f-45d4-96d0-08d5562271f6" , function () {
+        $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?idPedido=" + '@Model.pedido.id' + "&idListaPreco=" +  '@Model.listapreco.id.ToString()' , function () {
             $("#ModalProdutoPedido").modal("show");
         });
     }
