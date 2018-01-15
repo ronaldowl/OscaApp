@@ -44,14 +44,10 @@ namespace OscaApp.Controllers
                 // modelo.produto = produtoData.GetRelacao(new Guid(idProduto));
                 modelo.produtoPedido.idListaPreco = new Guid(idListaPreco); 
               
-                //modelo.itemlistaPreco.criadoEm = DateTime.Now;
-                //modelo.itemlistaPreco.criadoPorName = contexto.nomeUsuario;     
+                modelo.produtoPedido.criadoEm = DateTime.Now;
+                modelo.produtoPedido.criadoPorName = contexto.nomeUsuario;    
                 
-                ////Prenche lista de preço para o contexto da página
-                //List<SelectListItem> itens = new List<SelectListItem>();
-                //itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
-                //modelo.listaPrecos = itens;
-
+          
             }
             catch (Exception ex)
             {
@@ -62,63 +58,63 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
-        //[HttpPost]
-        //public IActionResult FormCreateItemListaPreco(ItemListaPrecoViewModel entrada)
-        //{
-        //    ItemListaPreco itemlistaPreco = new ItemListaPreco();
-        //    try
-        //    {                
-        //            if (ItemListaPrecoRules.ItemListaPrecoCreate(entrada, out itemlistaPreco, contexto))
-        //            {
-        //                ItemlistaPrecoData.Add(itemlistaPreco);
-        //                return RedirectToAction("FormUpdateItemListaPreco", new { id = itemlistaPreco.id.ToString() });
-        //            }                
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1,13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateItemListaPreco-post", ex.Message);
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult FormCreateProdutoPedido(ProdutoPedidoViewModel entrada)
+        {
+            ProdutoPedido modelo = new ProdutoPedido();
+            try
+            {
+                if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
+                {
+                    produtoPedidoData.Add(modelo);
+                    return RedirectToAction("FormUpdateProdutoPedido", new { id = modelo.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateItemListaPreco-post", ex.Message);
+            }
+            return View();
+        }
 
-        //[HttpGet]
-        //public ViewResult FormUpdateItemListaPreco(string id)
-        //{
-        //    ItemListaPrecoViewModel modelo = new ItemListaPrecoViewModel();
+        [HttpGet]
+        public ViewResult FormCreateProdutoPedido(string id)
+        {
+            ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();
 
-        //    try
-        //    {
-        //        ItemListaPreco retorno = new ItemListaPreco();
-        //        modelo.contexto = this.contexto;
+            try
+            {
+                ProdutoPedido retorno = new ProdutoPedido();
+                modelo.contexto = this.contexto;
 
-        //        if (!String.IsNullOrEmpty(id))
-        //        {
-        //            //campo que sempre contém valor
-        //            retorno = ItemlistaPrecoData.Get(new Guid(id));
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = ItemlistaPrecoData.Get(new Guid(id));
 
-        //            if (retorno != null)
-        //            {
-        //                modelo.itemlistaPreco = retorno;
+                    if (retorno != null)
+                    {
+                        modelo.itemlistaPreco = retorno;
 
-        //                //Prenche lista de preço para o contexto da página
-        //                List<SelectListItem> itens = new List<SelectListItem>();
-        //                itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
-        //                modelo.listaPrecos = itens;
-        //                //Preenche produto
-        //                modelo.produto = produtoData.GetRelacao(modelo.itemlistaPreco.idProduto);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateItemListaPreco-get", ex.Message);
+                        //Prenche lista de preço para o contexto da página
+                        List<SelectListItem> itens = new List<SelectListItem>();
+                        itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
+                        modelo.listaPrecos = itens;
+                        //Preenche produto
+                        modelo.produto = produtoData.GetRelacao(modelo.itemlistaPreco.idProduto);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateItemListaPreco-get", ex.Message);
 
-        //    }
+            }
 
-        //    return View(modelo);
-        //}
+            return View(modelo);
+        }
 
         //[HttpPost]
         //public IActionResult FormUpdateItemListaPreco(ItemListaPrecoViewModel entrada)
