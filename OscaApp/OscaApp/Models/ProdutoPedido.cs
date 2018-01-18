@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace OscaApp.Models
 {
+    [Table("produtopedido")]
     public class ProdutoPedido : GenericEntity
     {
         public Guid idOrganizacao { get; set; }

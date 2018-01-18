@@ -144,7 +144,7 @@ namespace OscaApp.Controllers
         
         public ViewResult LookupProdutoPedido(string idListaPreco, int Page, string Filtro)
         {
-            IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
+            IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByListaPreco(new Guid("D07D0D73-CEB3-40E5-A2BD-08D5458C4CD0"));
                        
             //retorno = retorno.OrderBy(x => x.nome);
 

@@ -15,7 +15,9 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
         </div>
         <div class="modal-body">
-            <form action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
+            <form  asp-controller="ProdutoPedido"  asp-action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
+                <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido"> 
+                
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title ">
@@ -128,8 +130,10 @@
 </div>
 <script>
     function CarregaLookupProdutoPedido() {
-        $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?id=" + @Model.produtoPedido.idListaPreco.ToString(), function () {
+
+        $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?id=" + '@Model.produtoPedido.idListaPreco' + '&Page=0', function () {
             $("#lookupProdutoPedido").modal("show");
-        })
+        });
     }
+
 </script>

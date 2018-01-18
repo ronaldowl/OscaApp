@@ -17,6 +17,20 @@ namespace OscaApp.Data
         {
             this.db = dbContext;
         }
+
+        public void Delete(ProdutoPedido modelo)
+        {
+            try
+            {
+                db.ProdutosPedido.Remove(modelo);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         public void Add(ProdutoPedido modelo)
         {
             try

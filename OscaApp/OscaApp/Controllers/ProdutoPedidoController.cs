@@ -67,7 +67,7 @@ namespace OscaApp.Controllers
                 if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
                 {
                     produtoPedidoData.Add(modelo);
-                    return RedirectToAction("FormUpdateProdutoPedido", new { id = modelo.id.ToString() });
+                    return RedirectToAction("FormUpdatePedido","Pedido", new { id = modelo.idPedido.ToString()});
                 }
             }
             catch (Exception ex)
@@ -78,65 +78,28 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ViewResult FormCreateProdutoPedido(string id)
+
+        [HttpPost]
+        public IActionResult FormUpdateProdutoPedido(ProdutoPedidoViewModel entrada)
         {
-            ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();
+            ProdutoPedido modelo = new ProdutoPedido();
+            entrada.contexto = this.contexto;
 
             try
             {
-                ProdutoPedido retorno = new ProdutoPedido();
-                modelo.contexto = this.contexto;
-
-                if (!String.IsNullOrEmpty(id))
+                if (ProdutoPedidoRules.MontaProdutoPedidoUpdate(entrada, out modelo))
                 {
-                    //campo que sempre contém valor
-                    retorno = ItemlistaPrecoData.Get(new Guid(id));
-
-                    if (retorno != null)
-                    {
-                        modelo.itemlistaPreco = retorno;
-
-                        //Prenche lista de preço para o contexto da página
-                        List<SelectListItem> itens = new List<SelectListItem>();
-                        itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
-                        modelo.listaPrecos = itens;
-                        //Preenche produto
-                        modelo.produto = produtoData.GetRelacao(modelo.itemlistaPreco.idProduto);
-                    }
+                    produtoPedidoData.Update(modelo);
+                    return RedirectToAction("FormUpdateProdutoPedido", new { id = modelo.id.ToString() });
                 }
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateItemListaPreco-get", ex.Message);
-
+                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-post", ex.Message);
             }
-
-            return View(modelo);
+            return View();
         }
-
-        //[HttpPost]
-        //public IActionResult FormUpdateItemListaPreco(ItemListaPrecoViewModel entrada)
-        //{
-        //    ItemListaPreco itemlistaPreco = new ItemListaPreco();
-        //    entrada.contexto = this.contexto;
-
-        //    try
-        //    {
-        //        if (ItemListaPrecoRules.ItemListaPrecoUpdate(entrada, out itemlistaPreco))
-        //        {
-        //            ItemlistaPrecoData.Update(itemlistaPreco);
-        //            return RedirectToAction("FormUpdateItemListaPreco", new { id = itemlistaPreco.id.ToString() });
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateItemListaPreco-post", ex.Message);
-        //    }
-        //    return View();
-        //}
 
 
         public ViewResult GridProdutoPedido(string idPedido )
@@ -144,6 +107,15 @@ namespace OscaApp.Controllers
             IEnumerable<ProdutoPedido> retorno = produtoPedidoData.GetByPedidoId(new Guid(idPedido));                     
 
             return View(retorno.ToPagedList<ProdutoPedido>(1, 10));
+        }
+
+
+        public IActionResult DeleteProdutoPedido(string idProdutoPedido, string idPedido)
+        {
+            ProdutoPedido modelo = new ProdutoPedido();
+            modelo.id = new Guid(idProdutoPedido);
+            produtoPedidoData.Delete(modelo);
+            return RedirectToAction("GridProdutoPedido", new { idPedido = idPedido });
         }
     }
 }

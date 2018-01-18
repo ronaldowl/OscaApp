@@ -61,6 +61,7 @@ namespace OscaApp.Data
     {
         void Add(ProdutoPedido contato);
         void Update(ProdutoPedido contato);
+        void Delete(ProdutoPedido contato);
         ProdutoPedido Get(Guid id);
         List<ProdutoPedido> GetByPedidoId(Guid idPedido);
         List<ProdutoPedido> GetAll(Guid idOrg);

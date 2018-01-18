@@ -13,7 +13,8 @@ namespace OscaApp.RulesServices
         public static bool MontaProdutoPedidoCreate(ProdutoPedidoViewModel entrada,out ProdutoPedido modelo, ContextPage contexto )
         {
             modelo = new ProdutoPedido ();
-            modelo = entrada.produtoPedido;           
+            modelo = entrada.produtoPedido;
+            modelo.idProduto = entrada.produto.id;
 
             if (modelo.idProduto != null)
             {
