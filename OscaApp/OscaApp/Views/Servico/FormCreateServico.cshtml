@@ -1,0 +1,103 @@
+﻿@model OscaApp.ViewModels.ServicoViewModel
+<div id="contexto">
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+    @Html.HiddenFor(m => m.servico.id)
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10  offset-1">
+            <form action="FormCreateServico" method="post" id="osc_Mainform">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td><h3>Serviço:&nbsp;&nbsp;</h3></td>
+                                    <td>
+                                        <div id="osc_barrabotoes">
+                                            <label>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"><span>Salvar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridServico","Servico", null)'"><span>Fechar</span></button>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <!--col1-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Código</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_codigo" asp-for="@Model.servico.codigo" type="text" class="form-control" placeholder="Código"  disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nome do Serviço</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-at fa-1x"></i></span>
+                                            <input id="osc_nomeServico" asp-for="@Model.servico.nomeServico" placeholder="Nome" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                      
+                    </div>
+                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Criado Por</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-user fa-1x"></span>
+                                            </span>
+                                            <input id="osc_criadoPor" asp-for="@Model.servico.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Criado Em</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar fa-1x"></span>
+                                            </span>
+                                            <input id="osc_criadoEm" asp-for="@Model.servico.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Status</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-exclamation fa-1x"></span>
+                                            </span>
+                                            <input id="osc_status" asp-for="@Model.servico.status" type="text" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>

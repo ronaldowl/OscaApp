@@ -2,7 +2,6 @@
 using OscaApp.Data;
 using OscaApp.ViewModels;
 using Microsoft.AspNetCore.Http;
-using OSCA.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
 namespace OscaApp.Controllers

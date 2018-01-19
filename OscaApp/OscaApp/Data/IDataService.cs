@@ -16,6 +16,13 @@ namespace OscaApp.Data
         Fornecedor Get(Guid id, Guid idOrg);
         List<Fornecedor> GetAll(Guid idOrg);
     }
+    public interface IServicoData
+    {
+        void Add(Servico servico);
+        void Update(Servico servico);
+        Servico Get(Guid id, Guid idOrg);
+        List<Servico> GetAll(Guid idOrg);
+    }
     public interface IClienteData
     {
         void Add(Cliente cliente);

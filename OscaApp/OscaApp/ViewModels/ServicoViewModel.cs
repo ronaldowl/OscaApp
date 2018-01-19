@@ -1,12 +1,11 @@
-﻿
-using OscaApp.Data;
+﻿using OscaApp.Data;
 using OscaApp.Models;
 
-namespace OSCA.ViewModels
+namespace OscaApp.ViewModels
 {
     public class ServicoViewModel
     {
         public Servico servico { get; set; }
-        ContextPage contexto { get; set; }
+        public ContextPage contexto { get; set; }
     }
 }

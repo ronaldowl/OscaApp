@@ -20,6 +20,7 @@ namespace OscaApp.Data
         public DbSet<ItemListaPreco> ItemListaPrecos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ProdutoPedido> ProdutosPedido { get; set; }
+        public DbSet<Servico> Servicos { get; set; }
 
     }
 }
