@@ -49,7 +49,8 @@ namespace OscaApp.Controllers
             {
                 if (entrada.servico.nomeServico!=null)
                 {
-                  if  (ServicoRules.ServicoCreate(entrada, out modelo, contexto)) {                    
+                   
+                    if  (ServicoRules.ServicoCreate(entrada, out modelo, contexto)) {                    
                         servicoData.Add(modelo);
                         return RedirectToAction("FormUpdateServico", new { id = modelo.id.ToString() });
                   }
@@ -111,7 +112,11 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
 
+            // realiza busca por Nome, Código 
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeServico == filtro ) select A;
+            
             retorno = retorno.OrderBy(x => x.nomeServico);
+             
 
             if (Page == 0) Page = 1;
 

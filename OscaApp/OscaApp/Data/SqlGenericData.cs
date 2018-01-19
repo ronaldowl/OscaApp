@@ -105,7 +105,7 @@ namespace OscaApp.Data
                 throw;
             }
             return retorno;
-        }
+        }      
         public Relacao RetornaRelacaoListaPreco(Guid id)
         {
             Relacao retorno = new Relacao();
@@ -182,6 +182,41 @@ namespace OscaApp.Data
             }
             return retorno;
         }
+        public Relacao RetornaRelacaoPedidoPorProdutoPedido(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.idPedido ,  status from ProdutoPedido as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
 
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["idPedido"].ToString());
+                         
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
     }
 }

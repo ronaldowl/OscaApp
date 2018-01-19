@@ -11,7 +11,9 @@ namespace OscaApp.RulesServices
         {
             servico = new Servico();
             servico = entrada.servico;
-         
+            servico.codigo = AutoNumber.GeraCodigo(6, contexto.idOrganizacao);
+
+
             if (servico.nomeServico != null)
             {
                 //************ Objetos de controle de acesso ******************
