@@ -1,4 +1,5 @@
 ﻿using OscaApp.Data;
+using OscaApp.framework.Models;
 using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
@@ -18,6 +19,22 @@ namespace OscaApp.RulesServices
 
             if (modelo.idProduto != null)
             {
+                //*************Executa cálculo
+
+                if (modelo.tipoDesconto == CustomEnum.tipoDesconto.Money)
+                {                  
+                    modelo.total = modelo.valor * modelo.quantidade;
+                    modelo.valorDesconto = modelo.valorDescontoMoney;
+                    modelo.totalGeral = modelo.total - modelo.valorDesconto;
+                    
+                }
+                else {
+
+                    modelo.total = modelo.valor * modelo.quantidade;
+                    modelo.valorDesconto =  modelo.total -  modelo.valorDescontoPercentual / 100;
+                    modelo.totalGeral = modelo.total - modelo.valorDesconto;
+
+                }
 
                 ////************ Objetos de controle de acesso ***************
                 modelo.criadoEm = DateTime.Now;

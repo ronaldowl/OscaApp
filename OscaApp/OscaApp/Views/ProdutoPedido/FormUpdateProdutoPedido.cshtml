@@ -26,10 +26,7 @@
                                         <div id="osc_barrabotoes">
                                             <label>
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("FormUpdateProdutoPedido", "ProdutoPedido" , null)'"> <span>Fechar</span></button>
-                                            </label>
+                                            </label>                                     
                                         </div>
                                     </td>
                                 </tr>
@@ -38,13 +35,19 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-5 offset-1">
                                 <div class="form-group">
                                     <label class="control-label" style="color:red">Produto*</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.quantidade" class="form-control" type="text" disabled="disabled" id="osc_produtoidName">
+                                            <input asp-for="@Model.produto.idName" class="form-control" type="text" id="osc_produtoIdName"  disabled="disabled">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProdutoPedido()">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                            <input asp-for="@Model.produto.id" class="form-control" type="hidden" id="osc_produtoId">
                                         </div>
                                     </div>
                                 </div>
@@ -57,9 +60,17 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="control-label" style="color:red">Valor</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
+                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label>Tipo de Desconto</label>
                                     <div class="input-group">
@@ -71,16 +82,15 @@
                                             <option value="2">Percentual</option>
                                         </select>
                                     </div>
-                                </div>                             
-                            </div>
-                            <div class="col-md3"   >
+                                </div>
+
                                 <div class="form-group">
                                     <label>Valor Desconto</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-calculator fa-1x"></span>
                                         </span>
-                                        <input id="osc_valorDesconto" asp-for="@Model.produtoPedido.valorDescontoMoney" type="text" class="form-control" />
+                                        <input id="osc_valorDescontoMoney" asp-for="@Model.produtoPedido.valorDescontoMoney" type="text" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -92,7 +102,17 @@
                                         <input id="osc_valorDescontoPercentual" asp-for="@Model.produtoPedido.valorDescontoPercentual" type="text" class="form-control" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label" style="color:red">Valor com Desconto</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
+                                            <input asp-for="@Model.produtoPedido.valorDesconto" class="form-control" type="text" id="osc_valorDesconto" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

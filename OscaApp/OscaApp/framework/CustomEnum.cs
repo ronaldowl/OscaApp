@@ -129,6 +129,7 @@ namespace OscaApp.framework.Models
             ProdutoPedido = 16,
             ServicoOrdem = 17,
             ProdutoOrdem = 18,
+            Comunicado = 19,
             Organizacao = 1000
 
         }
