@@ -16,8 +16,10 @@
                                         <th>Código Produto</th>
                                         <th>Nome Produto</th>
                                         <th>Quantidade</th>
-                                        <th>Tipo Desconto</th>
+                                        
                                         <th>Valor</th>
+                                        <th>Valor Desconto</th>
+                                        <th>Total Geral</th>
                                         <th> </th>
                                         <th> </th>
                                     </tr>
@@ -25,11 +27,12 @@
                                 @foreach (var item in Model)
                                     {
                                     <tr>
-                                        <td>@item.status</td>
-                                        <td>@item.valor</td>
-                                        <td>@item.quantidade</td>
-                                        <td>@item.tipoDesconto</td>
-                                        <td>@item.valor</td>
+                                        <td>1010</td>
+                                        <td>TESTE</td>
+                                        <td>@item.quantidade</td>                                        
+                                        <td>@item.valor.ToString("N2")</td>
+                                        <td>@item.valorDesconto.ToString("N2")</td>
+                                        <td>@item.totalGeral.ToString("N2")</td>
                                         <td>
                                             <div class="form-group col-md-2">
                                                 <button id="osc_edit" type="button" class="btn btn-info btn-lg fa fa-edit" value="voltar" onclick="location.href='@Url.Action("FormUpdateProdutoPedido", "ProdutoPedido", new { idProdutoPedido = Model[0].id})'"> <span>Editar</span></button>

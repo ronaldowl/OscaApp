@@ -67,7 +67,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor" disabled="disabled"  step="any" >
+                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor"  >
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calculator fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.total" class="form-control" type="text" id="osc_total" disabled="disabled">
+                                            <input asp-for="@Model.produtoPedido.total" class="form-control" type="text" id="osc_total"  >
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calculator fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.totalGeral" class="form-control" type="text" id="osc_totalGeral" disabled="disabled">
+                                            <input asp-for="@Model.produtoPedido.totalGeral" class="form-control" type="text" id="osc_totalGeral"  >
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valorDesconto" class="form-control" type="text" id="osc_valorDesconto" disabled="disabled">
+                                            <input asp-for="@Model.produtoPedido.valorDesconto" class="form-control" type="text" id="osc_valorDesconto"  >
                                         </div>
                                     </div>
                                 </div>
@@ -150,5 +150,9 @@
             $("#lookupProdutoPedido").modal("show");
         });
     }
+
+    //Configura mascara de valores
+   // $("#osc_valor").maskMoney({ showSymbol: true, symbol: "", decimal: ",", thousands: "." });
+    //$("#osc_valor").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
 
 </script>

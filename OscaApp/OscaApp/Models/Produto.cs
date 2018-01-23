@@ -15,7 +15,7 @@ namespace OscaApp.Models
         public string descricao { get; set; }
 
 
-        [DisplayFormat (DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        [DisplayFormat (DataFormatString = "{0:D2}", ApplyFormatInEditMode = true)]
         public decimal valorCompra { get; set; }
 
         public int quantidade { get; set; }
