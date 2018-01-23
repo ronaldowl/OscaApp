@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using OscaApp.Models;
 using OscaApp.framework.Models;
-using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Data
 {
@@ -22,6 +21,13 @@ namespace OscaApp.Data
         void Update(Comunicado comunicado);
         Comunicado Get(Guid id, Guid idOrg);
         List<Comunicado> GetAll(Guid idOrg);
+    }
+    public interface IOrdemServicoData
+    {
+        void Add(OrdemServico ordemServico);
+        void Update(OrdemServico ordemServico);
+        OrdemServico Get(Guid id, Guid idOrg);
+        List<OrdemServico> GetAll(Guid idOrg);
     }
     public interface IServicoData
     {
@@ -43,11 +49,25 @@ namespace OscaApp.Data
         void Update(ListaPreco contato);
         ListaPreco Get(Guid id, Guid idOrg);
         List<ListaPreco> GetAll(Guid idOrg);       
-
         List<Relacao> GetAllRelacao(Guid idOrg);
 
     }
 
+    public interface IContasPagarData
+    {
+        void Add(ContasPagar contasPagar);
+        void Update(ContasPagar contasPagar);
+        ContasPagar Get(Guid id, Guid idOrg);
+        List<ContasPagar> GetAll(Guid idOrg);
+    }
+
+    public interface IContasReceberData
+    {
+        void Add(ContasReceber contasReceber);
+        void Update(ContasReceber contasReceber);
+        ContasReceber Get(Guid id, Guid idOrg);
+        List<ContasReceber> GetAll(Guid idOrg);
+    }
 
     public interface IPedidoData
     {

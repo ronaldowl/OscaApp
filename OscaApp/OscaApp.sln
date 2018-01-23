@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscaAdmin", "OscaAdmin\Osca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscaPortal", "OscaPortal\OscaPortal.csproj", "{C684E1CC-F004-402D-B164-A36EE71820EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OscaFramework", "OscaFramework\OscaFramework.csproj", "{C778001F-7D81-4FB0-9FFF-418D44147764}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscaFramework", "OscaFramework\OscaFramework.csproj", "{C778001F-7D81-4FB0-9FFF-418D44147764}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OscaAPI", "OscaAPI\OscaAPI.csproj", "{28A818DD-BDDB-43BD-83A8-40EFAFF54A5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C778001F-7D81-4FB0-9FFF-418D44147764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C778001F-7D81-4FB0-9FFF-418D44147764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C778001F-7D81-4FB0-9FFF-418D44147764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28A818DD-BDDB-43BD-83A8-40EFAFF54A5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28A818DD-BDDB-43BD-83A8-40EFAFF54A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28A818DD-BDDB-43BD-83A8-40EFAFF54A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28A818DD-BDDB-43BD-83A8-40EFAFF54A5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

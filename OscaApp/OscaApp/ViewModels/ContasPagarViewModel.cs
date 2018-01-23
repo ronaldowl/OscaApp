@@ -3,9 +3,9 @@ using OscaApp.Models;
 
 namespace OscaApp.ViewModels
 {
-    public class OrdemServicoViewModel
+    public class ContasPagarViewModel
     {
-       public OrdemServico ordemServico { get; set; }
+       public ContasPagar contasPagar { get; set; }
        public ContextPage contexto { get; set; }
     }
 }

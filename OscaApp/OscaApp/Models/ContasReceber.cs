@@ -4,17 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OscaApp.Models
 {
-    [Table("OrdemServico")]
-    public class OrdemServico : GenericEntity
+    [Table("ContasReceber")]
+    public class ContasReceber : GenericEntity
     {
         public String codigo { get; set; }
-        public DateTime dataEntrada { get; set; }
+        public String titulo { get; set; }
         public Guid idOrganizacao { get; set; }
 
-        public OrdemServico()
+        public ContasReceber()
         {
             this.status = CustomEnumStatus.Status.Ativo;
-            this.entityType = 5;
+            this.entityType = 21;
         }
     }
 }
