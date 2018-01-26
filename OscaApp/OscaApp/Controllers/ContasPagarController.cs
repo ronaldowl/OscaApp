@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OscaApp.Data;
+using OscaApp.framework;
 using OscaApp.Models;
 using OscaApp.RulesServices;
 using OscaApp.ViewModels;
@@ -53,7 +54,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 20, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateContasPagar-post", ex.Message);
             }
             return View();
         }
@@ -94,7 +96,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 20, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateContasPagar-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateContasPagar", new { id = modelo.id.ToString() });

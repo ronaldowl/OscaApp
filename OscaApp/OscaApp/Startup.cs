@@ -14,6 +14,8 @@ using OscaApp.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using OscaApp.framework;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace OscaApp
 {
@@ -28,7 +30,8 @@ namespace OscaApp
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {                            
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -49,6 +52,11 @@ namespace OscaApp
             //Serviço para acesso a metodos de conexao SQL no banco Manager
             services.AddSingleton<ISqlGenericManager, SqlGenericManager>();
 
+            services.AddMvc(config =>
+            {
+                config.ModelBinderProviders.Insert(0, new InvariantDecimalModelBinderProvider());
+            });
+
             services.AddMvc();
             // Adds a default in-memory implementation of IDistributedCache.
             services.AddDistributedMemoryCache();
@@ -58,7 +66,7 @@ namespace OscaApp
                 // Set a short timeout for easy testing.
                 options.IdleTimeout = TimeSpan.FromSeconds(100000000);
                 options.Cookie.HttpOnly = true;
-            });        
+            });
 
             //services.AddScoped<IContextPage, ContextPageServices>();
 
@@ -67,7 +75,7 @@ namespace OscaApp
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {          
+        {        
 
             if (env.IsDevelopment())
             {
@@ -79,6 +87,15 @@ namespace OscaApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            var supportedCultures = new[]{new CultureInfo("pt-BR")};
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("pt-BR"),             
+                SupportedCultures = supportedCultures,            
+                SupportedUICultures = supportedCultures
+            });
 
             app.UseStaticFiles();
             app.UseAuthentication();

@@ -73,7 +73,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateItemListaPreco-post", ex.Message);
+                log.GravaLog(1, 16, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateProdutoPedido-post", ex.Message);
             }
             return View();
         }
@@ -98,7 +98,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-post", ex.Message);
+                log.GravaLog(1, 16, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-post", ex.Message);
             }
             return View();
         }
@@ -110,9 +110,7 @@ namespace OscaApp.Controllers
 
             try
             {
-
-                modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));
-               
+                modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));              
             }
             catch (Exception ex)
             {
@@ -121,8 +119,6 @@ namespace OscaApp.Controllers
             }
             return View(modelo);
         }
-
-
 
         public ViewResult GridProdutoPedido(string idPedido )
         {

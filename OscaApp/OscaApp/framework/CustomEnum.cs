@@ -132,6 +132,7 @@ namespace OscaApp.framework.Models
             Comunicado = 19,
             ContasPagar = 20,
             ContasReceber = 21,
+            Recurso = 22,
             Organizacao = 1000
 
         }

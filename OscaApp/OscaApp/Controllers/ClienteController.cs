@@ -26,7 +26,6 @@ namespace OscaApp.Controllers
             this.clienteData = new ClienteData(db);
             this.enderecoData = new EnderecoData(db);
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-
         }
 
         public ViewResult GridCliente(string filtro, int Page)

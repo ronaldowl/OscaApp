@@ -15,9 +15,9 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
         </div>
         <div class="modal-body">
-            <form  asp-controller="ProdutoPedido"  asp-action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
-                <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido"> 
-                
+            <form asp-controller="ProdutoPedido" asp-action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
+                <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido">
+
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title ">
@@ -27,8 +27,8 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
-                                            </label>                                    
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
@@ -43,13 +43,13 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produto.idName" class="form-control" type="text"     id="osc_produtoIdName"  required="required" >
+                                            <input asp-for="@Model.produto.idName" class="form-control" type="text" id="osc_produtoIdName" required="required">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupProdutoPedido()">
                                                     <span class="fa fa-search"></span>
                                                 </button>
                                             </span>
-                                            <input asp-for="@Model.produto.id" class="form-control" type="hidden"   id="osc_produtoId"> 
+                                            <input asp-for="@Model.produto.id" class="form-control" type="hidden" id="osc_produtoId">
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.quantidade" class="form-control" type="text" id="osc_quantidade">
+                                            <input asp-for="@Model.produtoPedido.quantidade" class="form-control" type="text" id="osc_quantidade" value="1">
                                         </div>
                                     </div>
                                 </div>
@@ -67,16 +67,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor"  >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Total</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calculator fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.total" class="form-control" type="text" id="osc_total"  >
+                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor" onclick="Onchage_TipoDesconto()">
                                         </div>
                                     </div>
                                 </div>
@@ -88,20 +79,20 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.produtoPedido.tipoDesconto" class="form-control">
-                                            <option value="1" selected="">Valor</option>
-                                            <option value="2">Percentual</option>
+                                        <select id="osc_tipoDesconto" asp-for="@Model.produtoPedido.tipoDesconto" class="form-control" >
+                                            <option value="1" >Valor</option>
+                                            <option value="2" >Percentual</option>
                                         </select>
                                     </div>
-                                </div>   
-                               
+                                </div>
+
                                 <div class="form-group">
                                     <label>Valor Desconto</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <span class="fa fa-money fa-1x"></span>
                                         </span>
-                                        <input id="osc_valorDescontoMoney" asp-for="@Model.produtoPedido.valorDescontoMoney" type="number" class="form-control" />
+                                        <input id="osc_valorDescontoMoney" asp-for="@Model.produtoPedido.valorDescontoMoney" type="number" class="form-control" required="required" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -110,29 +101,12 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-calculator fa-1x"></span>
                                         </span>
-                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.produtoPedido.valorDescontoPercentual" type="text" class="form-control" />
+                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.produtoPedido.valorDescontoPercentual" type="text" class="form-control"  required="required"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Total Geral</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calculator fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.totalGeral" class="form-control" type="text" id="osc_totalGeral"  >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Valor com Desconto</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valorDesconto" class="form-control" type="text" id="osc_valorDesconto"  >
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
-                          
+
                         </div>
                     </div>
                 </div>
@@ -140,19 +114,15 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="lookupProdutoPedido">
 </div>
+<script src="~/lib/OscaJs/osc_produtoPedido.js" asp-append-version="true"></script>
+
 <script>
-    function CarregaLookupProdutoPedido() {
+function CarregaLookupProdutoPedido() {
 
-        $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?idListaPreco=" + '@Model.produtoPedido.idListaPreco' + '&Page=0' + '', function () {
-            $("#lookupProdutoPedido").modal("show");
-        });
+    $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?idListaPreco=" + '@Model.produtoPedido.idListaPreco' + '&Page=0' + '', function () {
+    $("#lookupProdutoPedido").modal("show");
+    });
     }
-
-    //Configura mascara de valores
-   // $("#osc_valor").maskMoney({ showSymbol: true, symbol: "", decimal: ",", thousands: "." });
-    //$("#osc_valor").inputmask("mask", { "mask": "999.999,99" }, { reverse: true });
-
 </script>

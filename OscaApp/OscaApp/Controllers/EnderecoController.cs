@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
+using OscaApp.framework;
 
 namespace OscaApp.Controllers
 {
@@ -61,7 +62,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 9, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateEndereco-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateEndereco", new { id = modelo.id.ToString() });
@@ -102,7 +104,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 9, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateEndereco-post", ex.Message);
             }
             return View();
         }

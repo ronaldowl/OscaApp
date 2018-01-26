@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using OscaApp.ViewModels;
 using OscaApp.RulesServices;
 using Microsoft.AspNetCore.Authorization;
+using OscaApp.framework;
 
 namespace OscaApp.Controllers
 {
@@ -48,7 +49,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 2, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateContato-post", ex.Message);
             }
             return View();
         }
@@ -82,7 +84,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 2, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateContato-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateContato", new { id = modelo.id.ToString() });
@@ -105,10 +108,8 @@ namespace OscaApp.Controllers
                     modelo.contato = retorno;                  
                 }
             }
-
             return View(modelo);
         }
-
 
         public ViewResult GridContato(string filtro, int Page)
         {

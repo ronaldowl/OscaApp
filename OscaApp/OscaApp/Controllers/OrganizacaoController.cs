@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using OscaApp.Models;
 using System;
 using OscaApp.RulesServices;
+using OscaApp.framework;
 
 namespace OscaApp.Controllers
 {
@@ -54,7 +55,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1000, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateOrganizacao-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateOrganizacao", null);

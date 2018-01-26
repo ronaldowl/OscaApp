@@ -19,13 +19,19 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value=""> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridPedido", "Pedido" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value=""> <span>Novo</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-lg fa fa-print" value="Fechar" > <span>Imprimir Pedido</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="" onclick="location.href='@Url.Action("GridPedido", "Pedido" , null)'"> <span>Fechar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_encerrar" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="location.href='@Url.Action("GridPedido", "Pedido" , null)'"> <span>Encerrar Pedido</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-lg fa fa-print" value="" > <span>Imprimir Pedido</span></button>
                                             </label>
                                         </div>
                                     </td>

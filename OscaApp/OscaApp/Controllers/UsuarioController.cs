@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using OscaApp.Data;
+using OscaApp.framework;
 using OscaApp.Models;
 using OscaApp.Models.AccountViewModels;
 using OscaApp.ViewModels;
@@ -51,7 +52,8 @@ namespace OscaApp.Controllers
             }
             catch (Exception ex)
             {
-                //TODO: Gravar exceção no LOG
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 10, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateUsuario-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateUsuario", new { id = user.Id.ToString() });

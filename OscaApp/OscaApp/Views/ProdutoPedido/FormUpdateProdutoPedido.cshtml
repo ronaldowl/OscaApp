@@ -25,7 +25,7 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvarFechar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value=""> <span>Salvar e Fechar"</span></button>
                                             </label>                                     
                                         </div>
                                     </td>
@@ -65,7 +65,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor" disabled="disabled">
+                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor">
                                         </div>
                                     </div>
                                 </div>
@@ -78,12 +78,11 @@
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
                                         <select id="osc_tipoDesconto" asp-for="@Model.produtoPedido.tipoDesconto" class="form-control">
-                                            <option value="1" selected="">Valor</option>
+                                            <option value="1">Valor</option>
                                             <option value="2">Percentual</option>
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label>Valor Desconto</label>
                                     <div class="input-group">
@@ -112,7 +111,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

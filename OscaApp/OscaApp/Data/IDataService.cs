@@ -61,6 +61,14 @@ namespace OscaApp.Data
         List<ContasPagar> GetAll(Guid idOrg);
     }
 
+    public interface IRecursoData
+    {
+        void Add(Recurso recurso);
+        void Update(Recurso recurso);
+        Recurso Get(Guid id, Guid idOrg);
+        List<Recurso> GetAll(Guid idOrg);
+    }
+
     public interface IContasReceberData
     {
         void Add(ContasReceber contasReceber);

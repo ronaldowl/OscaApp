@@ -18,8 +18,7 @@ namespace OscaApp.Models
 
         [NotMapped]
         public Guid idListaPreco { get; set; }
-
-        //[DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]
+                  
         public decimal valor { get; set; }
 
         //[DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = true)]

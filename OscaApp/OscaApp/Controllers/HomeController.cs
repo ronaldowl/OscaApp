@@ -13,25 +13,18 @@ namespace OscaApp.Controllers
 
         public IActionResult About()
         {           
-
             return View();
         }
 
         public IActionResult Contact()
-        {
-           
-
+        {  
             Cliente cl = new Models.Cliente();
-
             ViewData["Message"] = cl.id;
             return View();
         }
 
         public IActionResult Error()
         {
-
-           
-
             return View();
         }
     }
