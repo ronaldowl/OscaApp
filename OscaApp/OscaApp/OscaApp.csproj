@@ -74,6 +74,10 @@
     <None Include="Views\Usuario\GridUsuario.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\OscaFramework\OscaFramework.csproj" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="http://json.schemastore.org/appveyor" /></VisualStudio></ProjectExtensions>
 
 </Project>

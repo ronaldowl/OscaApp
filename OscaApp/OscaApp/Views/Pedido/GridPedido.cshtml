@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaApp.Models.Pedido>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.PedidoGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -47,16 +47,21 @@
                                         <tr>
                                             <th>Código Pedido</th>
                                             <th>Cliente</th>
-                                            <th>CNPJ/CPF</th>
-                                          
+                                            <th>CNPJ/CPF</th>     
+                                            <th>Telefone</th>                                            
+                                            <th>Total</th> 
+                                            <th>Status Pedido</th> 
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@Html.ActionLink(item.codigoPedido.ToString(), "FormUpdatePedido", new { id = item.id })</td>
-                                            <td></td>
-                                            <td></td>                                           
+                                            <td>@Html.ActionLink(item.pedido.codigoPedido.ToString(), "FormUpdatePedido", new { id = item.pedido.id })</td>
+                                            <td>@item.cliente.nomeCliente</td>
+                                            <td>@item.cliente.cnpj_cpf</td>   
+                                            <td>@item.cliente.telefone</td>  
+                                            <td>@item.pedido.valorTotal.ToString("N2")</td>
+                                            <td>@item.pedido.statusPedido</td>                                          
                                                                                     
                                         </tr>
                                     }

@@ -1,5 +1,6 @@
 ﻿using OscaApp.Data;
 using OscaApp.Models;
+using OscaApp.ViewModels.GridViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +25,22 @@ namespace OscaApp.framework
             }
             return retorno;
         }
+
+        public static List<PedidoGridViewModel> ConvertToGridPedido(List<Pedido> itens)
+        {
+            List<PedidoGridViewModel> retorno = new List<PedidoGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                PedidoGridViewModel X = new PedidoGridViewModel();
+                X.cliente = sqldata.RetornaCliente(item.idCliente);
+                X.pedido = item;
+
+                retorno.Add(X);
+            }
+            return retorno;
+        }
+
     }
 }

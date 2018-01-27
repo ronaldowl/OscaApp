@@ -130,7 +130,6 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<ProdutoPedido>(1, 10));
         }
 
-
         public IActionResult DeleteProdutoPedido(string idProdutoPedido, string idPedido)
         {
             ProdutoPedido modelo = new ProdutoPedido();

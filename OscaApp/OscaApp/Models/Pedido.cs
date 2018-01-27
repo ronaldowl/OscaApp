@@ -19,10 +19,10 @@ namespace OscaApp.Models
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valorTotal { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorFrete { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorDesconto { get; set; }
 
         public decimal valorDescontoPercentual { get; set; }       

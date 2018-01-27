@@ -1,4 +1,5 @@
 ﻿using OscaApp.Data;
+using OscaApp.framework.Models;
 using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
@@ -54,7 +55,32 @@ namespace OscaApp.RulesServices
 
             return true;
         }
+        public static void CalculoPedido(ref Pedido pedido, IProdutoPedidoData  ProdutosPedido)
+        {
+            List<ProdutoPedido> produtos = new List<ProdutoPedido>();
 
+            produtos = ProdutosPedido.GetByPedidoId(pedido.id);
+
+            decimal Total = 0;
+         
+            foreach (var item in produtos)
+            {
+                Total += item.totalGeral;
+            }
+
+            if (pedido.tipoDesconto == CustomEnum.tipoDesconto.Money)
+            {
+                Total = Total - pedido.valorDesconto;                 
+            }
+            else
+            {
+                Total = (Total / 100) * pedido.valorDescontoPercentual;                
+            }
+
+            pedido.valorTotal = Total;
+
+           
+        }
 
       
     }

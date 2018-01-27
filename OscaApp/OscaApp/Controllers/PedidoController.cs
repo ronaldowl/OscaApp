@@ -20,6 +20,7 @@ namespace OscaApp.Controllers
     {
         
         private readonly IPedidoData pedidoData;
+        private readonly IProdutoPedidoData produtoPedidoData;
         private readonly IListaPrecoData listaprecoData;
         private readonly SqlGenericData Sqlservice;
         private ContextPage contexto;
@@ -29,6 +30,7 @@ namespace OscaApp.Controllers
         {
              
             this.pedidoData = new PedidoData(db);
+            this.produtoPedidoData = new ProdutoPedidoData(db);
             this.listaprecoData = new ListaPrecoData(db);
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.Sqlservice = new SqlGenericData();
@@ -126,7 +128,9 @@ namespace OscaApp.Controllers
             {
                 if (PedidoRules.PedidoUpdate(entrada, out pedido ))
                 {
+                    PedidoRules.CalculoPedido(ref pedido, produtoPedidoData);
                     pedidoData.Update(pedido);
+                   
                     return RedirectToAction("FormUpdatePedido", new { id = pedido.id.ToString() });
                 }
             }
@@ -138,22 +142,17 @@ namespace OscaApp.Controllers
             return View();
         }
 
-
         public ViewResult GridPedido(string filtro, int Page)
         {
             try
             {                
-                IEnumerable <Pedido> retorno = pedidoData.GetAll(contexto.idOrganizacao);
+                IEnumerable <PedidoGridViewModel> retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao);
 
-               // IEnumerable<PedidoGridViewModel> retorno =
+                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.pedido.codigoPedido == filtro) select A;
 
-                //if (!String.IsNullOrEmpty(filtro)) retorno = from A in pedidos where (A.codigoPedido == filtro) select A;
-
-                //retorno. = retorno.OrderBy(x => x.codigoPedido);
-
-                //Se não passar a número da página, caregar a primeira
+                retorno = retorno.OrderBy(x => x.pedido.codigoPedido); 
                 if (Page == 0) Page = 1;
-                return View(retorno.ToPagedList<Pedido>(Page, 10));
+                return View(retorno.ToPagedList<PedidoGridViewModel>(Page, 10));
 
             }
             catch (Exception ex)
@@ -163,8 +162,7 @@ namespace OscaApp.Controllers
             }
 
             return View();
-        }
-        
+        }  
 
     }
 }

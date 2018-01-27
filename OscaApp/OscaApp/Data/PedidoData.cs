@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using OscaApp.framework.Models;
 using OscaApp.framework;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Data
 {
@@ -92,5 +93,15 @@ namespace OscaApp.Data
             return Relacao.ConvertToRelacao(retorno);
 
         }
+
+        public List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg)
+        {
+            List<Pedido> itens = new List<Pedido>();
+
+            itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+            return HelperAssociate.ConvertToGridPedido(itens);
+        }
+
     }
 }

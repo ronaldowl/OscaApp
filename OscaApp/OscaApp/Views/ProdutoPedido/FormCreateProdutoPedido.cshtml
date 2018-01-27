@@ -80,9 +80,9 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
-                                        <select asp-for="@Model.produtoPedido.tipoDesconto" id="osc_tipoDesconto" class="form-control" onchange="Onchage_TipoDesconto()">
-                                            <option value="1" >Valor</option>
-                                            <option value="2" >Percentual</option>
+                                        <select id="osc_tipoDesconto" asp-for="@Model.produtoPedido.tipoDesconto" class="form-control" onchange="Onchage_TipoDesconto()">
+                                            <option value="1">Valor</option>
+                                            <option value="2">Percentual</option>
                                         </select>
                                     </div>
                                 </div>
@@ -116,6 +116,7 @@
 <div class="modal fade" id="lookupProdutoPedido">
 </div>
 
+<script src="~/lib/OscaJs/osc_produtoPedido.js" asp-append-version="true"></script>
 
 <script>
     function CarregaLookupProdutoPedido() {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OscaApp.Models;
 using OscaApp.framework.Models;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Data
 {
@@ -84,6 +85,7 @@ namespace OscaApp.Data
         Pedido Get(Guid id);
         List<Pedido> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
+        List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg);
 
     }
 

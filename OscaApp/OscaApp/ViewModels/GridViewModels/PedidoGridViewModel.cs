@@ -10,10 +10,7 @@ namespace OscaApp.ViewModels.GridViewModels
 {
     public class PedidoGridViewModel
     {
-        // public X.PagedList.PagedList<Cliente> Clientes { get; set; }
-
-        public Pedido pedido { get; set; }
-        public ListaPreco listaPreco { get; set; }
+        public Pedido pedido { get; set; }      
         public Cliente cliente { get; set; }
     }
 }
