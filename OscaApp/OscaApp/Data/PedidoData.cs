@@ -45,13 +45,15 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("tipoDesconto").IsModified            = true;
                 db.Entry(modelo).Property("condicaoPagamento").IsModified       = true;
                 db.Entry(modelo).Property("tipoPagamento").IsModified           = true;
-                db.Entry(modelo).Property("metodoEntrega").IsModified           = true;           
-                
+                db.Entry(modelo).Property("metodoEntrega").IsModified           = true;
+                db.Entry(modelo).Property("statusPedido").IsModified            = true;
+
+
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
-            
-            
+               
+
                 db.SaveChanges(); 
             }
             catch (Exception ex)

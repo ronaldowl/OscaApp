@@ -17,14 +17,12 @@ namespace OscaApp.Controllers
 {
     [Authorize]
     public class PedidoController : Controller
-    {
-        
+    {        
         private readonly IPedidoData pedidoData;
         private readonly IProdutoPedidoData produtoPedidoData;
         private readonly IListaPrecoData listaprecoData;
         private readonly SqlGenericData Sqlservice;
         private ContextPage contexto;
-
 
         public PedidoController(ContexDataService db, IHttpContextAccessor httpContext)
         {
@@ -86,7 +84,7 @@ namespace OscaApp.Controllers
             return View();
         }
 
-       [HttpGet]
+        [HttpGet]
         public ViewResult FormUpdatePedido(string id)
         {
             PedidoViewModel modelo = new PedidoViewModel();
@@ -162,7 +160,58 @@ namespace OscaApp.Controllers
             }
 
             return View();
-        }  
+        }
 
+        [HttpPost]
+        public IActionResult FormStatusPedido(PedidoViewModel entrada)
+        {
+            Pedido pedido = new Pedido();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (PedidoRules.PedidoUpdate(entrada, out pedido))
+                {
+                     pedidoData.Update(pedido);
+
+                    return RedirectToAction("FormUpdatePedido", new { id = pedido.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-post", ex.Message);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ViewResult FormStatusPedido(string id)
+        {
+            PedidoViewModel modelo = new PedidoViewModel();
+            modelo.contexto = this.contexto;
+
+            try
+            {
+                Pedido retorno = new Pedido();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = pedidoData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.pedido = retorno;    
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
     }
 }
