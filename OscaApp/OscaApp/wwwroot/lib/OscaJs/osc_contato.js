@@ -1,4 +1,4 @@
-﻿//********************************* Biblioteca com funções da Tela de Cliente ***************
+﻿//********************************* Biblioteca com funções da Tela de Contato***************
 
 function ValidaCPF() {
 

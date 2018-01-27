@@ -13,29 +13,12 @@ namespace OscaApp.RulesServices
     {
         public static bool MontaProdutoPedidoCreate(ProdutoPedidoViewModel entrada, out ProdutoPedido modelo, ContextPage contexto)
         {
-            modelo = new ProdutoPedido();
+            modelo = new ProdutoPedido();         
             modelo = entrada.produtoPedido;
             modelo.idProduto = entrada.produto.id;
 
             if (modelo.idProduto != null)
-            {
-                //*************Executa cálculo
-
-                if (modelo.tipoDesconto == CustomEnum.tipoDesconto.Money)
-                {
-                    modelo.total = modelo.valor * modelo.quantidade;
-                    modelo.valorDesconto = modelo.valorDescontoMoney;
-                    modelo.totalGeral = modelo.total - modelo.valorDesconto;
-
-                }
-                else
-                {
-
-                    modelo.total = modelo.valor * modelo.quantidade;
-                    modelo.valorDesconto = (modelo.total / 100) * modelo.valorDescontoPercentual;
-                    modelo.totalGeral = modelo.total - modelo.valorDesconto;
-
-                }
+            {               
 
                 ////************ Objetos de controle de acesso ***************
                 modelo.criadoEm = DateTime.Now;
@@ -47,6 +30,9 @@ namespace OscaApp.RulesServices
                 modelo.idOrganizacao = contexto.idOrganizacao;
                 ////************ FIM Objetos de controle de acesso ***************
 
+                //************* Executa calculo ************
+                ProdutoPedidoRules.CalculaProdutoPedido(ref modelo);
+
                 return true;
             }
 
@@ -54,7 +40,8 @@ namespace OscaApp.RulesServices
         }
         public static bool MontaProdutoPedidoUpdate(ProdutoPedidoViewModel entrada, out ProdutoPedido modelo)
         {
-            modelo = new ProdutoPedido();
+            modelo = new ProdutoPedido();         
+          
 
             ////************ Objetos de controle de acesso ***************
             modelo = entrada.produtoPedido;
@@ -63,20 +50,27 @@ namespace OscaApp.RulesServices
             modelo.modificadoPorName = entrada.contexto.nomeUsuario;
             ////************ FIM Objetos de controle de acesso ***************
 
+            //************* Executa calculo ************
+            ProdutoPedidoRules.CalculaProdutoPedido(ref modelo);
+
             return true;
         }
 
-        public static void CalculaProdutoPedido(List<ProdutoPedido> itens)
+        public static  void   CalculaProdutoPedido(ref ProdutoPedido modelo)
         {
-            List<ItemProdutoLista> retorno = new List<ItemProdutoLista>();
-            SqlGenericData sqldata = new SqlGenericData();
-
-            foreach (var item in itens)
+                      
+            if (modelo.tipoDesconto == CustomEnum.tipoDesconto.Money)
             {
-
-
-
+                modelo.total = modelo.valor * modelo.quantidade;
+                modelo.valorDesconto = modelo.valorDescontoMoney;
+                modelo.totalGeral = modelo.total - modelo.valorDesconto;
             }
+            else
+            {
+                modelo.total = modelo.valor * modelo.quantidade;
+                modelo.valorDesconto = (modelo.total / 100) * modelo.valorDescontoPercentual;
+                modelo.totalGeral = modelo.total - modelo.valorDesconto;
+            }          
         }
     }
 }

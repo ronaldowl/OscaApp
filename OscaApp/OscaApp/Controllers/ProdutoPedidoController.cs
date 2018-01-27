@@ -106,11 +106,14 @@ namespace OscaApp.Controllers
         [HttpGet]
         public IActionResult FormUpdateProdutoPedido(string idProdutoPedido)
         {
-            ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();           
+            ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();
+            SqlGenericData sqlData = new SqlGenericData();
 
             try
             {
-                modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));              
+                modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));
+                modelo.produto = new framework.Models.Relacao();
+                modelo.produto = sqlData.RetornaRelacaoProduto(modelo.produtoPedido.idProduto);
             }
             catch (Exception ex)
             {

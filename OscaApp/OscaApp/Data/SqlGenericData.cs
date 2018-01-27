@@ -105,7 +105,46 @@ namespace OscaApp.Data
                 throw;
             }
             return retorno;
-        }      
+        }
+        public Relacao RetornaRelacaoProduto(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.id , o.nome ,  status, codigo, fabricante, valorCompra, quantidade, codigoFabricante from Produto as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idName = dataReader["nome"].ToString();
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());                      
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
         public Relacao RetornaRelacaoListaPreco(Guid id)
         {
             Relacao retorno = new Relacao();
