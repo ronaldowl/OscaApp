@@ -14,7 +14,7 @@ namespace OscaApp.Data
 
         public SqlGenericService()
         {
-            this.conectService = @"Server=tcp:oscadbservices.database.windows.net,1433;Initial Catalog=OscadbData;Persist Security Info=False;User ID=ronaldowl_admin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            this.conectService = @"Data Source=SQL5037.site4now.net;Initial Catalog=DB_A2B7EF_OSCADBDATA;User Id=DB_A2B7EF_OSCADBDATA_admin;Password=P@ssw0rd;";
 
         }
 
