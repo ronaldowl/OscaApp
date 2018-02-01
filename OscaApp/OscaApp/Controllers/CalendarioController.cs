@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OscaApp.Models;
+using OscaApp.RulesServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,9 @@ namespace OscaApp.Controllers
     public class CalendarioController : Controller
     {
 
-        public ViewResult Mes()
+        public ViewResult Mes(int Mes, int Ano)
         {
-            Calendario calen = new Calendario();
+            Calendario calen = CalendarioRules.PreencheMes(Mes, Ano);
 
             return View(calen);
         }

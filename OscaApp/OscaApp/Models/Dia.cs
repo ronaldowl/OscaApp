@@ -7,6 +7,9 @@ namespace OscaApp.Models
 {
     public class Dia
     {
-        List<OrdemServico> ordensServico { get; set; }
+        public List<OrdemServico> ordensServico { get; set; }
+        public int dia { get; set; }
+        public string nome { get; set; }
+
     }
 }

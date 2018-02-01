@@ -1,9 +1,6 @@
 ﻿@model OscaApp.Models.Calendario
 
-@{
-    Layout = "_LayoutFrame";
-}
-
+ 
 <div id="barrafiltro">
 
 </div>
@@ -12,7 +9,7 @@
         <td id="dia_1" style="width:100px">
             <table style="font-size:10px">
                 <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                    <td colspan="3"> 1 - @Model.dias[0]</td>
                 </tr>
                 <tr>
                     <td>

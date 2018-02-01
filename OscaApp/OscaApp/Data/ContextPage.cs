@@ -11,8 +11,7 @@ namespace OscaApp.Data
         public Guid idOrganizacao { get; set; }
         public Guid idUsuario { get; set; }
         public String nomeUsuario { get; set; }
-        public Guid id { get; set; }
-        public CustomEntityEnum.Entidade entityType { get; set; }
+     
 
         //Carrega todas as informações da sessão da pagina
         public ContextPage(string Email, string Org)
@@ -41,8 +40,7 @@ namespace OscaApp.Data
             this.idUsuario = RL.id;
             this.organizacao = RL.organizacao;
             this.nomeUsuario = RL.idName;
-            this.id = id;
-            this.entityType = Entidade;
+         
         }
     }
 }

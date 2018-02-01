@@ -7,6 +7,13 @@ namespace OscaApp.Models
 {
     public class Semana
     {
-      public  List<Dia> dias  { get;set; }
+        public Dia segunda  { get;set; }
+        public Dia terca { get; set; }
+        public Dia quarta { get; set; }
+        public Dia quinta { get; set; }
+        public Dia sexta { get; set; }
+        public Dia sabado { get; set; }
+        public Dia domingo { get; set; }
+
     }
 }

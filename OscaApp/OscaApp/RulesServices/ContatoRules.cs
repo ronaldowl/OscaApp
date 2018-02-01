@@ -9,7 +9,8 @@ namespace OscaApp.RulesServices
     {
         public static bool MontaContatoCreate(ContatoViewModel entrada,out Contato modelo, ContextPage contexto )
         {
-            modelo = new Contato ();                        
+            modelo = new Contato (); 
+            
            
             if (entrada.contexto.idOrganizacao != null)
             {
