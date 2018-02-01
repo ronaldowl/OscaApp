@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscaFramework", "OscaFramew
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OscaAdm", "OscaAdm\OscaAdm.csproj", "{F16D3563-B0BC-423D-A234-5B036AB99970}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OscaSite", "OscaSite\OscaSite.csproj", "{D9D3AD6A-0340-4170-8727-3520E68EA937}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F16D3563-B0BC-423D-A234-5B036AB99970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F16D3563-B0BC-423D-A234-5B036AB99970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F16D3563-B0BC-423D-A234-5B036AB99970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D3AD6A-0340-4170-8727-3520E68EA937}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D3AD6A-0340-4170-8727-3520E68EA937}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D3AD6A-0340-4170-8727-3520E68EA937}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D3AD6A-0340-4170-8727-3520E68EA937}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
