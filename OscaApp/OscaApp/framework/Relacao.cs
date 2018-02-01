@@ -12,6 +12,7 @@ namespace OscaApp.framework.Models
         public String idName { get; set; }
         public String organizacao { get; set; }
         public String codigo { get; set; }
+        public object value { get; set; }
         public Guid idOrganizacao { get; set; }
         public CustomEntityEnum.Entidade tipoObjeto { get; set; }
         public CustomEnumStatus.Status status { get; set; }
@@ -73,7 +74,7 @@ namespace OscaApp.framework.Models
             }
             return lista;
         }
-
+,
         public static List<Relacao> ConvertToRelacao(List<ItemListaPreco> itens)
         {
             List<Relacao> lista = new List<Relacao>();
