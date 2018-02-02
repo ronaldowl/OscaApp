@@ -74,7 +74,7 @@ namespace OscaApp.framework.Models
             }
             return lista;
         }
-,
+
         public static List<Relacao> ConvertToRelacao(List<ItemListaPreco> itens)
         {
             List<Relacao> lista = new List<Relacao>();

@@ -2,19 +2,27 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.IO;
 
 namespace OscaApp.Data
 {
     public   class SqlGenericService
     {
         public  string conectService { get; set; }
-        public   string conectManager { get; set; }
+        public IConfiguration Configuration { get; }
 
 
         public SqlGenericService()
         {
-            this.conectService = @"Data Source=SQL5037.site4now.net;Initial Catalog=DB_A2B7EF_OSCADBDATA;User Id=DB_A2B7EF_OSCADBDATA_admin;Password=P@ssw0rd;";
+            var builder = new ConfigurationBuilder()
+           .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+
+            this.Configuration = Configuration;
+            //this.conectStringManager = @"Data Source=SQL5037.site4now.net;Initial Catalog=DB_A2B7EF_OSCADBMANAGER;User Id=DB_A2B7EF_OSCADBMANAGER_admin;Password=P@ssw0rd;"; 
+            this.conectService = Configuration.GetConnectionString("databaseService");
 
         }
 

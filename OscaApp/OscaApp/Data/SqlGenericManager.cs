@@ -4,7 +4,8 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using OscaApp.Models;
-
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace OscaApp.Data
 {
@@ -13,9 +14,19 @@ namespace OscaApp.Data
 
         public string conectStringManager { get; set; }
 
-        public SqlGenericManager()
+        public IConfiguration Configuration { get; }
+
+        public SqlGenericManager( )
         {
-            this.conectStringManager = @"Data Source=SQL5037.site4now.net;Initial Catalog=DB_A2B7EF_OSCADBMANAGER;User Id=DB_A2B7EF_OSCADBMANAGER_admin;Password=P@ssw0rd;"; 
+            var builder = new ConfigurationBuilder()
+           .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+
+            this.Configuration = Configuration;
+            //this.conectStringManager = @"Data Source=SQL5037.site4now.net;Initial Catalog=DB_A2B7EF_OSCADBMANAGER;User Id=DB_A2B7EF_OSCADBMANAGER_admin;Password=P@ssw0rd;"; 
+            this.conectStringManager = Configuration.GetConnectionString("DefaultConnection");
         }
 
         public  Guid CriaOrganizacao(string org, string email)
@@ -174,29 +185,7 @@ namespace OscaApp.Data
             }
             return retorno;
         }     
-
-        //public static String RetornaSelectResult()
-        //{
-
-        //    using (var conn = new SqlConnection(connectionString))
-        //    using (var cmd = new SqlCommand("select * from Products", conn))
-        //    {
-        //        var dt = new DataTable();
-        //        using (var da = new SqlDataAdapter(cmd))
-        //        {
-        //            da.Fill(dt);
-        //        }
-        //    }
-
-        //    foreach (DataRow row in dt.Rows)
-        //    {
-        //        int productId = Convert.ToInt32(row[0]);
-        //        string productName = row["ProductName"].ToString();
-        //    }
-
-
-
-        //}
+           
 
     }
 }

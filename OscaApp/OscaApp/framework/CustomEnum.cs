@@ -113,7 +113,7 @@ namespace OscaApp.framework.Models
         {
             Cliente = 1,
             Contato = 2,
-            Agendamento = 3,
+            Atendimento = 3,
             Pedido = 4,
             OrdemServico = 5,
             Servico = 6,
@@ -127,7 +127,7 @@ namespace OscaApp.framework.Models
             Fornecedor = 14,
             Log = 15,          
             ProdutoPedido = 16,
-            ServicoOrdem = 17,
+            Profissional = 17,
             ProdutoOrdem = 18,
             Comunicado = 19,
             ContasPagar = 20,
