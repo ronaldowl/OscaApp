@@ -12,6 +12,8 @@ namespace OscaApp.RulesServices
        
         public static Calendario PreencheMes(int Mes, int Ano)
         {
+            
+
             Calendario retorno = new Calendario();
             CultureInfo culture = new CultureInfo("pt-BR");
             DateTimeFormatInfo dataFormat = culture.DateTimeFormat;
@@ -19,7 +21,7 @@ namespace OscaApp.RulesServices
             int qtdDiasMes = DateTime.DaysInMonth(Ano, Mes);
             retorno.ano = Ano;
             retorno.mes = Mes;
-            retorno.nomeMes = dataFormat.MonthNames[1];
+            retorno.nomeMes = dataFormat.MonthNames[Mes -1];
             retorno.qtdDias = qtdDiasMes;
 
             List<Dia> diasMEs = new List<Dia>();
@@ -65,7 +67,7 @@ namespace OscaApp.RulesServices
         {
             List<ItemCalendario> retorno = new List<ItemCalendario>();
 
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 4; i++)
             {
                 ItemCalendario item = new ItemCalendario();
                 item.inicio = DateTime.Now.Hour.ToString();

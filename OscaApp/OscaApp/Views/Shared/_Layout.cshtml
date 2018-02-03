@@ -10,14 +10,17 @@
 
     <style>
         .barraMain {
-            background: #0c0c0c;
-            background-color: #0C0C0A;
+            background: linear-gradient(to right bottom,#66dbff, #1c177f);
             height: 50px;
-            color: white;
+            color: black;
             padding-top: 5px;
         }
+        .footer {
+            background: linear-gradient(to right bottom, #1c177f,#66dbff);
+            height:30px;
+        }
         .osca {
-            margin-top: -3px;
+            margin-top:-3px;
             float: left;
             margin-left: 10px;
             font-weight: bold;
@@ -71,8 +74,8 @@
     @*<script src="~/lib/OscaJs/osc_global.js" asp-append-version="true"></script>*@
 
     @*@RenderSection("scripts", required: false)*@
-    <div style="margin-top:4%;">
-        <footer class="fixed-bottom" style="background-color:#0C0C0A;">
+    <div>
+        <footer class="fixed-bottom footer">
             @await Component.InvokeAsync("Footer");
         </footer>
     </div>
