@@ -113,6 +113,13 @@ namespace OscaApp.framework.Models
             Salario = 3,
             Outros = 4
         }
+
+        public enum tipoItemCaledario
+        {
+            Atendimento = 1,
+            OrdemServico = 2
+           
+        }
     }
 
     public class CustomEntityEnum

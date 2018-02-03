@@ -18,6 +18,7 @@ namespace OscaApp.Models
 
         public int mes { get; set; }
         public int ano { get; set; }
+        public int qtdDias { get; set; }
 
         public string nomeMes { get; set; }
 

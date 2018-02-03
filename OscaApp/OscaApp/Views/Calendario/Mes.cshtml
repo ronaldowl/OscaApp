@@ -1,59 +1,98 @@
 ﻿@model OscaApp.Models.Calendario
 
- 
-<div id="barrafiltro">
+
+<div id="barrafiltro" style="height:40px">
+    <table>
+        <tr>
+            <td style="width:500px">
+                <h3> Calendário de Serviço:</h3>
+
+            </td>
+            <td></td>
+            <td>
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label style="font-weight:bold; font-size:30px">Mês</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="fa fa-list-ul fa-1x"></span>
+                            </span>
+                            <select id="osc_mes" class="form-control" onchange="">
+                                <option value="1" selected="">Janeiro</option>
+                                <option value="2">Feverreiro</option>
+                                <option value="3">Março</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Maio</option>
+                                <option value="6">Junho</option>
+                                <option value="7">Julho</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight:bold; font-size:30px">Ano</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="fa fa-list-ul fa-1x"></span>
+                            </span>
+                            <select id="osc_ano" class="form-control">
+                                <option value="2018" selected="">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <button id="osc_filtro" type="button" class="btn btn-info btn-lg fa fa-exclamation-circle" value="filtro" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Aplicar</span></button>
+                        </label>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+
 
 </div>
 <table id="calendario" class="table table-bordered  ">
-    <tr id="semana_1" style="height:100px ">
+    <tr id="semana_1">
         <td id="dia_1" style="width:100px">
-            <table style="font-size:10px">
+            <table style="font-size:10px; width:100%">
                 <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - @Model.dias[0]</td>
-                </tr>
-                <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>10:00</td>
-                                <td>12:00</td>
-                                <td>Apometria</td>
-                            </tr>
-
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>10:00</td>
-                                <td>12:00</td>
-                                <td>Apometria</td>
-                            </tr>
-
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>10:00</td>
-                                <td>12:00</td>
-                                <td>Apometria</td>
-                            </tr>
-
-                        </table>
-                    </td>
+                    <td> 1 - @Model.dias[0].nome</td>
                 </tr>
 
+                @if (Model.dias.Count <= Model.qtdDias)
+                {
+                    @foreach (var item in Model.dias[0].itensCalendario)
+                {
+                        <tr>
+                            <td>
+                                <table style="width:100%">
+                                    <tr>
+                                        <td><i class="fa fa-1x fa-user"></i></td>
+                                        <td>@item.inicio</td>
+                                        <td>@item.fim</td>
+                                        <td>@item.titulo</td>
+                                    </tr>
+                                </table>
+                            </td>
+
+                        </tr>
+                    }
+                }
             </table>
         </td>
         <td id="dia_2" style="width:100px">
             <table style="font-size:10px">
                 <tr id="cabecalho_2" style="background-color:grey; color:white">
-                    <td colspan="3"> 2 - Segunda Feira</td>
+                    <td colspan="3"> 2 - @Model.dias[1].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -97,7 +136,7 @@
         <td id="dia_3" style="width:100px">
             <table style="font-size:10px">
                 <tr id="cabecalho_3" style="background-color:grey; color:white">
-                    <td colspan="3"> 3 - Segunda Feira</td>
+                    <td colspan="3"> 3 - @Model.dias[2].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -141,7 +180,7 @@
         <td id="dia_4" style="width:100px">
             <table style="font-size:10px">
                 <tr id="cabecalho_4" style="background-color:grey; color:white">
-                    <td colspan="3"> 4 - Segunda Feira</td>
+                    <td colspan="3"> 4 - @Model.dias[3].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -185,7 +224,7 @@
         <td id="dia_5" style="width:100px">
             <table style="font-size:10px">
                 <tr id="cabecalho_5" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                    <td colspan="3"> 5 - @Model.dias[4].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -229,7 +268,7 @@
         <td id="dia_6" style="width:100px">
             <table style="font-size:10px">
                 <tr id="cabecalho_6" style="background-color:grey; color:white">
-                    <td colspan="3"> 6 - Segunda Feira</td>
+                    <td colspan="3">  6 - @Model.dias[5].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -273,7 +312,7 @@
         <td id="dia_7" style="width:100px">
             <table style="font-size:10px">
                 <tr id="cabecalho_7" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                    <td colspan="3">  7 - @Model.dias[6].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -315,11 +354,11 @@
             </table>
         </td>
     </tr>
-    <tr id="semana_2"style="height:100px">
-        <td id="dia_1" style="width:100px">
+    <tr id="semana_2">
+        <td id="dia_8" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_8" style="background-color:grey; color:white">
+                    <td colspan="3">  8 - @Model.dias[7].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -360,10 +399,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_9" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_9" style="background-color:grey; color:white">
+                    <td colspan="3"> 9 - @Model.dias[8].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -404,10 +443,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_10" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_10" style="background-color:grey; color:white">
+                    <td colspan="3"> 10 - @Model.dias[9].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -448,10 +487,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_11" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_11" style="background-color:grey; color:white">
+                    <td colspan="3"> 11 - @Model.dias[10].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -492,10 +531,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_12" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_12" style="background-color:grey; color:white">
+                    <td colspan="3"> 12 - @Model.dias[11].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -536,10 +575,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_13" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_13" style="background-color:grey; color:white">
+                    <td colspan="3"> 13 - @Model.dias[12].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -580,10 +619,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_14" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_14" style="background-color:grey; color:white">
+                    <td colspan="3"> 14 - @Model.dias[13].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -625,11 +664,11 @@
             </table>
         </td>
     </tr>
-    <tr id="semana_3"style="height:100px">
-        <td id="dia_1" style="width:100px">
+    <tr id="semana_3">
+        <td id="dia_15" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_15" style="background-color:grey; color:white">
+                    <td colspan="3"> 15 - @Model.dias[14].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -670,10 +709,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_16" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_16" style="background-color:grey; color:white">
+                    <td colspan="3"> 16 - @Model.dias[15].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -714,10 +753,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_17" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_17" style="background-color:grey; color:white">
+                    <td colspan="3"> 17 - @Model.dias[16].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -758,10 +797,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_18" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_18" style="background-color:grey; color:white">
+                    <td colspan="3">18 - @Model.dias[17].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -802,10 +841,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_19" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_19" style="background-color:grey; color:white">
+                    <td colspan="3"> 19 - @Model.dias[18].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -846,10 +885,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_20" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_20" style="background-color:grey; color:white">
+                    <td colspan="3"> 20 - @Model.dias[19].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -890,10 +929,10 @@
 
             </table>
         </td>
-        <td id="dia_1" style="width:100px">
+        <td id="dia_21" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 1 - Segunda Feira</td>
+                <tr id="cabecalho_21" style="background-color:grey; color:white">
+                    <td colspan="3"> 21 - @Model.dias[20].nome</td>
                 </tr>
                 <tr>
                     <td>
@@ -933,13 +972,326 @@
                 </tr>
 
             </table>
-        </td>       
-       </tr>
-    <tr id="semana_4"style="height:100px">
+        </td>
+    </tr>
+    <tr id="semana_4">
+        <td id="dia_22" style="width:100px">
+            <table style="font-size:10px">
+                <tr id="cabecalho_22" style="background-color:grey; color:white">
+                    <td colspan="3"> 22 - @Model.dias[21].nome</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+        <td id="dia_23" style="width:100px">
+            <table style="font-size:10px">
+                <tr id="cabecalho_23" style="background-color:grey; color:white">
+                    <td colspan="3"> 23 - @Model.dias[22].nome</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+        <td id="dia_24" style="width:100px">
+            <table style="font-size:10px">
+                <tr id="cabecalho_24" style="background-color:grey; color:white">
+                    <td colspan="3"> 24 - @Model.dias[23].nome</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+        <td id="dia_25" style="width:100px">
+            <table style="font-size:10px">
+                <tr id="cabecalho_25" style="background-color:grey; color:white">
+                    <td colspan="3"> 25 - @Model.dias[24].nome</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+        <td id="dia_26" style="width:100px">
+            <table style="font-size:10px">
+                <tr id="cabecalho_26" style="background-color:grey; color:white">
+                    <td colspan="3"> 26 - @Model.dias[25].nome</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+        <td id="dia_27" style="width:100px">
+            <table style="font-size:10px">
+                <tr id="cabecalho_27" style="background-color:grey; color:white">
+                    <td colspan="3"> 27 - @Model.dias[26].nome</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+        <td id="dia_28" style="width:100px">
+            <table style="font-size:10px">
+                <tr id="cabecalho_28" style="background-color:grey; color:white">
+                    <td colspan="3"> 28 - @Model.dias[27].nome</td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>10:00</td>
+                                <td>12:00</td>
+                                <td>Apometria</td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </td>
+    </tr>
+    <tr id="semana_5">
         <td id="dia_29" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 29 - Segunda Feira</td>
+                <tr id="cabecalho_29" style="background-color:grey; color:white">
+                    <td colspan="3">
+                        29 - @if (@Model.dias.Count < Model.qtdDias)
+                        { @Model.dias[28].nome }
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -982,8 +1334,11 @@
         </td>
         <td id="dia_30" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 30 - Segunda Feira</td>
+                <tr id="cabecalho_30" style="background-color:grey; color:white">
+                    <td colspan="3">
+                        30 - @if (@Model.dias.Count < Model.qtdDias)
+                        { @Model.dias[29].nome }
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -1026,8 +1381,11 @@
         </td>
         <td id="dia_31" style="width:100px">
             <table style="font-size:10px">
-                <tr id="cabecalho_1" style="background-color:grey; color:white">
-                    <td colspan="3"> 31 - Segunda Feira</td>
+                <tr id="cabecalho_31" style="background-color:grey; color:white">
+                    <td colspan="3">
+                        31 - @if (@Model.dias.Count < Model.qtdDias)
+                        { @Model.dias[30].nome }
+                    </td>
                 </tr>
                 <tr>
                     <td>
@@ -1068,9 +1426,5 @@
 
             </table>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
     </tr>
 </table>

@@ -13,7 +13,16 @@ namespace OscaApp.Controllers
 
         public ViewResult Mes(int Mes, int Ano)
         {
-            Calendario calen = CalendarioRules.PreencheMes(Mes, Ano);
+            Calendario calen = new Calendario();
+
+            if (Mes > 0)
+            {
+                calen = CalendarioRules.PreencheMes(Mes, Ano);
+            }
+            else{
+
+                calen = CalendarioRules.PreencheMes(DateTime.Now.Month, DateTime.Now.Year );
+            }          
 
             return View(calen);
         }

@@ -13,27 +13,30 @@ namespace OscaApp.RulesServices
         public static Calendario PreencheMes(int Mes, int Ano)
         {
             Calendario retorno = new Calendario();
-            DateTimeFormatInfo dtfi = DateTimeFormatInfo.CurrentInfo;
+            CultureInfo culture = new CultureInfo("pt-BR");
+            DateTimeFormatInfo dataFormat = culture.DateTimeFormat;
 
-            int qtdDiasMes = DateTime.DaysInMonth(2018, 1);
+            int qtdDiasMes = DateTime.DaysInMonth(Ano, Mes);
             retorno.ano = Ano;
             retorno.mes = Mes;
-            retorno.nomeMes = dtfi.MonthNames[1];                     
-           
+            retorno.nomeMes = dataFormat.MonthNames[1];
+            retorno.qtdDias = qtdDiasMes;
+
             List<Dia> diasMEs = new List<Dia>();
 
             //Preenche todos o dias do Mes
-            for (int i = 1; i < qtdDiasMes; i++)
+            for (int i = 1; i <= qtdDiasMes; i++)
             {
+
+                DateTime dataRef = new DateTime(Ano, Mes, i);
                 Dia dia = new Dia();
                 dia.dia = i;
-                dia.nome = dtfi.DayNames[i];
-
+                dia.nome = dataFormat.GetDayName(dataRef.DayOfWeek);
+                dia.itensCalendario = PreencheItemCalendario(i,Mes,Ano);
                 diasMEs.Add(dia);
             }
+            retorno.dias = diasMEs;
 
-            retorno.dias = diasMEs;          
-                     
             return retorno;
         }
 
@@ -56,6 +59,25 @@ namespace OscaApp.RulesServices
             Dia retorno = new Dia();            
             
           return retorno;
+        }
+
+        public static List<ItemCalendario> PreencheItemCalendario(int dia, int Mes, int Ano)
+        {
+            List<ItemCalendario> retorno = new List<ItemCalendario>();
+
+            for (int i = 0; i < 8; i++)
+            {
+                ItemCalendario item = new ItemCalendario();
+                item.inicio = DateTime.Now.Hour.ToString();
+                item.fim = DateTime.Now.Hour.ToString();
+                item.titulo = "TESTE";
+                item.id = Guid.NewGuid().ToString();
+                item.tipo = framework.Models.CustomEnum.tipoItemCaledario.Atendimento;
+                retorno.Add(item);
+
+            }
+
+            return retorno;
         }
     }
 }
