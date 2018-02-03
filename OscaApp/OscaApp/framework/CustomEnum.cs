@@ -105,6 +105,14 @@ namespace OscaApp.framework.Models
             FedEx = 5,
             Correio = 6          
         }
+
+        public enum tipoConta
+        {
+            ContaCorrente = 1,
+            Poupanca = 2,
+            Salario = 3,
+            Outros = 4
+        }
     }
 
     public class CustomEntityEnum

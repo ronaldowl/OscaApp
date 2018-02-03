@@ -23,6 +23,13 @@ namespace OscaApp.Data
         Comunicado Get(Guid id, Guid idOrg);
         List<Comunicado> GetAll(Guid idOrg);
     }
+    public interface IProfissionalData
+    {
+        void Add(Profissional profissional);
+        void Update(Profissional profissional);
+        Profissional Get(Guid id, Guid idOrg);
+        List<Profissional> GetAll(Guid idOrg);
+    }
     public interface IOrdemServicoData
     {
         void Add(OrdemServico ordemServico);
