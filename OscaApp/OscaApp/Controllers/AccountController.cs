@@ -214,6 +214,8 @@ namespace OscaApp.Controllers
             return View();
         }
 
+       
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -266,6 +268,49 @@ namespace OscaApp.Controllers
             }
 
             // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult RegisterUser(string idOrganizacao)
+        {
+            RegisterViewModel modelo = new RegisterViewModel();
+            modelo.idOrganizacao = idOrganizacao;
+
+
+            return View(modelo);
+        }
+
+        [HttpPost]       
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterUser(RegisterViewModel model,  string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+               
+                SqlGenericManager _sqlManager = new SqlGenericManager();
+                SqlGenericService _sqlService = new SqlGenericService();               
+                            
+                //Passa informações da Org para o novo usuário
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = new Guid(model.idOrganizacao) };
+                          
+
+                //Cria o usuários
+                var result = await _userManager.CreateAsync(user, model.Password);
+             
+                if (result.Succeeded)
+                {                
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);                    
+            
+                    return RedirectToAction(nameof(UsuarioController.GridUsuario), "Usuario");
+                }
+                AddErrors(result);
+            }
+          
             return View(model);
         }
 
@@ -483,9 +528,9 @@ namespace OscaApp.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(PaineisController.PainelOperacional), "Paineis");
+                return RedirectToAction(nameof(AccountController.Login), "Account");
             }
-        }
+        }       
 
         #endregion
     }
