@@ -6,9 +6,9 @@
             <h5>Utilize este painel para gerenciar os serviços que sua empresa oferece</h5>
         </div>
     </div>
-    <br />
+    
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-md-4">
             <div class="card m-2">
                 <div class="card-body">
                     <i class="fa fa-2x fa-sort-amount-desc iconPanel" aria-hidden="true"></i>
@@ -16,44 +16,13 @@
                     Veja as informações de cadastro da sua Organização, valor da fatura e dados do administrador
                 </div>
             </div>
-        </div>
-        <div class="col-sm-5">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-bookmark iconPanel" aria-hidden="true"></i>
-                    <a href="#"><h4>Agendamento de Serviços</h4></a>
-                    Consulte, altere e cadastre novos usuários na sua Organização
+                    <i class="fa fa-2x fa-black-tie iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Recurso" asp-action="GridRecurso"><h4>Recursos</h4></a>
+                    Consulte, altere e cadastre novos Recurso da sua empresa, Ferramentas, Projetores, Carros e outros
                 </div>
             </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-calendar iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Calendario" asp-action="Mes"><h4>Calendário de Serviços</h4></a>
-                    Consulte, altere e cadastre novos usuários na sua Organização
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Servico" asp-action="GridServico"><h4>Serviços</h4></a>
-                    Consulte os Serviços que sua Organização fornece para os clientes
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-shopping-cart iconPanel" aria-hidden="true"></i>
-                    <a href="#"><h4>Produtos</h4></a>
-                    <p>Consulte as informações detalhadas de fluxo de caixa</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-5">
             <div class="card m-2">
                 <div class="card-body">
                     <i class="fa fa-2x fa-black-tie iconPanel" aria-hidden="true"></i>
@@ -62,8 +31,41 @@
                 </div>
             </div>
         </div>
-    </div>
-    <br /> <br />
+        <div class="col-md-4">
+            <div class="card m-2">
+                <div class="card-body">
+                    <i class="fa fa-2x fa-calendar-times-o iconPanel" aria-hidden="true"></i>
+                    <a href="#"><h4>Atendimento</h4></a>
+                    Consulte, altere e cadastre novas consultas para seus clientes
+                </div>
+            </div>
+            <div class="card m-2">
+                <div class="card-body">
+                    <i class="fa fa-2x fa-shopping-cart iconPanel" aria-hidden="true"></i>
+                    <a href="#"><h4>Produtos</h4></a>
+                    <p>Consulte as informações detalhadas de fluxo de caixa</p>
+                </div>
+            </div>
+            <div class="card m-2">
+                <div class="card-body">
+                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Servico" asp-action="GridServico"><h4>Serviços</h4></a>
+                    Consulte os Serviços que sua Organização fornece para os clientes
+                </div>
+            </div>
+       
+        </div>
+        <div class="col-md-4">
+            <div class="card m-2">
+                <div class="card-body">
+                    <i class="fa fa-2x fa-calendar iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Calendario" asp-action="Mes"><h4>Calendário de Serviços</h4></a>
+                    Consulte, altere e cadastre novos usuários na sua Organização
+                </div>
+            </div>           
+        </div>           
+       
+    </div>    
     <div class="row">
         <div style="background-color:darkgrey; width: 100%; height:20px; margin-top:2vh;"></div>
         <div class="col-md-3">

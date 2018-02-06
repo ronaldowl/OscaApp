@@ -11,7 +11,11 @@ namespace OscaApp.RulesServices
         {
             modelo = new Recurso();
             modelo = entrada.recurso;
-         
+
+            SqlGenericService sqlServic = new SqlGenericService();
+            modelo.codigo = sqlServic.RetornaNovaPosicao(22,contexto.idOrganizacao);
+            
+ 
             if (modelo.codigo != null)
             {
                 //************ Objetos de controle de acesso ******************

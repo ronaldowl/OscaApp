@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OSCA Serviços Online</title>
 
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery.maskMoney/src/jquery.maskMoney.js"></script>
+    <script src="~/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/OscaJs/osc_global.js"></script>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" /> 
     <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
 
@@ -65,14 +71,8 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>   
     
-    <script src="~/lib/jquery/dist/jquery.js"></script> 
-    <script src="~/lib/jquery.maskMoney/src/jquery.maskMoney.js"></script>
-    <script src="~/lib/popper.js/dist/umd/popper.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    @*<script src="~/lib/OscaJs/osc_global.js" asp-append-version="true"></script>*@
-
     @*@RenderSection("scripts", required: false)*@
     <div>
         <footer class="fixed-bottom footer">
