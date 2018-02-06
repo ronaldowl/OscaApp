@@ -18,25 +18,39 @@
   
  
     <style>
-        .navbar-fixed-top {
-            background: #0c0c0c;
+        .barraMain {
+            background: linear-gradient(to right bottom,#66dbff, #1c177f);
+            height: 50px;
+            color: black;
+            padding-top: 5px;
         }
 
-            .navbar-fixed-top a, .navbar-fixed-top .navbar-brand:hover, .btn, .btn:hover {
-                color: #fff;
-            }
+        .footer {
+            background: linear-gradient(to right bottom, #1c177f,#66dbff);
+            height: 30px;
+        }
 
-                .navbar-fixed-top a:hover, a:focus {
-                    color: #000;
-                }
+        .osca {
+            margin-top: -3px;
+            float: left;
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 30px;
+            color: white;
+        }
+
+            .osca:hover, .osca:focus, .osca:active {
+                color: aliceblue;
+                text-decoration: none;
+            }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-fixed-top">
+    <div class="barraMain navbar-fixed-top">
         <div class="container">
-            <div class="text-left">Oscas</div>
+            <div class="text-left"> </div>
         </div>
-    </nav>
+    </div>
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -137,16 +151,9 @@
         </div>
     </div>
     <footer>
-        <nav class="navbar fixed-bottom" style="background-color:#0C0C0A">
-            <div class="col-md8 offset-5">
-                <table>
-                    <tr>
-                        <td style="color:#FFF"><i class="fa  fa-2x fa-home "></i></td>
-                        <td style="color:#FFF"><h4>Osca Online Services 2017 </h4> </td>
-                    </tr>
-                </table>
-            </div>
-        </nav>
+        <div class="footer fixed-bottom" style="background-color:#0C0C0A">
+           
+        </div>
 
     </footer>
 </body>

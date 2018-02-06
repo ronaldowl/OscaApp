@@ -8,10 +8,10 @@ function OnLoad() {
     var statusForm = $("#osc_status").val(); 
 
     //Desabilita campos se o registro estiver INATIVO
-    desabilita_osc_MainFormUpdate_Cliente(statusForm);
+    desabilita_Cliente(statusForm);
 }
 
-function desabilita_osc_MainFormUpdate_Cliente(status) {
+function desabilita_Cliente(status) {
 
     if (status == "Inativo") {
 

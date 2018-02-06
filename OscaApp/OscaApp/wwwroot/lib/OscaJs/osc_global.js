@@ -3,7 +3,7 @@ function RecarregarGrid() {
     document.getElementById("grid").value = ""; 
 }
 
-function desabilita_osc_MainFormUpdate(status) {
+function desabilitaCampos(status) {
 
     if (status == "Inativo") {
 

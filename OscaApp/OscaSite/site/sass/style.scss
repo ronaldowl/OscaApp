@@ -5,7 +5,7 @@ $grid-gutter-width: 40px !default;
 $border-radius-base:  4px !default;
 $padding-base-vertical: 14px !default;
 
-$brand-primary: #00B906 !default;
+$brand-primary: #00bef9 !default;
 $brand-secondary: #3f95ea !default; 
 
 $brand-white: #fff;
@@ -1407,4 +1407,78 @@ h1, h2, h3, h4, h5, h6, figure {
 	.js & {
 		opacity: 0;
 	}
+}
+
+.pTransition{margin:5px 0 10px 0; color: $brand-primary; font-size: 18px;}
+
+.pFooter{
+	margin-bottom: 10px;
+}
+
+.hFooter{
+	margin: 0 0 10px 0;
+}
+
+.containerTransition{
+	 overflow: hidden;
+	  text-align: center;
+	}
+.cont{
+	display:flex;
+}
+.o{
+	display:inline;
+	 margin-bottom:10px;
+}
+
+.o>p{ width: 140px;
+	height: 90px;
+	margin:10px; 
+	padding:10px;
+	text-align: center;
+	border:2px solid $brand-primary;
+	color: $brand-white;
+	&:hover{
+		background:$brand-primary;
+		 transition: all .5s;
+	}
+}
+  @keyframes moveInRight{
+    0%{ transform: translateX(0);}
+    50%{ transform: translateX(-2300px);}
+    100%{ transform: translateX(0);}
+}
+.moveInRight{ 
+	animation: moveInRight 60s ease-in-out 1ms infinite;
+}
+
+.woow{
+	position: relative;
+	&:hover{
+		transform: translateY(-3px);
+		&:active{
+			transform:translateY(-1px);
+			&::after{
+				content: "";
+				display: inline-block;
+				height:100%;
+				width: 100%;
+				border-radius: 100px;
+				position: absolute;
+				top:0;
+				left:0;
+				z-index:-1;
+				background: $brand-primary;
+				transition: all .4s;
+				&:hover::after{
+					transform: scaleX(1.2) scaleY(1.6);   
+					opacity: 0; 
+				}
+			}
+		}
+	}
+}
+
+.plan-content{
+  text-align: left;
 }

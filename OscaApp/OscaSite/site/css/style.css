@@ -103,24 +103,6 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #fff;
 }
 
-.btn-success {
-  background: #5cb85c;
-  color: #fff;
-  border: 2px solid #5cb85c;
-}
-.btn-success:hover, .btn-success:focus, .btn-success:active {
-  background: #4cae4c !important;
-  border-color: #4cae4c !important;
-}
-.btn-success.btn-outline {
-  background: transparent;
-  color: #5cb85c;
-  border: 2px solid #5cb85c;
-}
-.btn-success.btn-outline:hover, .btn-success.btn-outline:focus, .btn-success.btn-outline:active {
-  background: #5cb85c;
-  color: #fff;
-}
 
 .btn-info {
   background: #5bc0de;
@@ -138,44 +120,6 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .btn-info.btn-outline:hover, .btn-info.btn-outline:focus, .btn-info.btn-outline:active {
   background: #5bc0de;
-  color: #fff;
-}
-
-.btn-warning {
-  background: #f0ad4e;
-  color: #fff;
-  border: 2px solid #f0ad4e;
-}
-.btn-warning:hover, .btn-warning:focus, .btn-warning:active {
-  background: #eea236 !important;
-  border-color: #eea236 !important;
-}
-.btn-warning.btn-outline {
-  background: transparent;
-  color: #f0ad4e;
-  border: 2px solid #f0ad4e;
-}
-.btn-warning.btn-outline:hover, .btn-warning.btn-outline:focus, .btn-warning.btn-outline:active {
-  background: #f0ad4e;
-  color: #fff;
-}
-
-.btn-danger {
-  background: #d9534f;
-  color: #fff;
-  border: 2px solid #d9534f;
-}
-.btn-danger:hover, .btn-danger:focus, .btn-danger:active {
-  background: #d43f3a !important;
-  border-color: #d43f3a !important;
-}
-.btn-danger.btn-outline {
-  background: transparent;
-  color: #d9534f;
-  border: 2px solid #d9534f;
-}
-.btn-danger.btn-outline:hover, .btn-danger.btn-outline:focus, .btn-danger.btn-outline:active {
-  background: #d9534f;
   color: #fff;
 }
 
@@ -356,7 +300,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 @media screen and (max-width: 768px) {
   #fh5co-header {
-    margin: 0px 0 0 0;
+    margin: 0 0 0 0;
   }
 }
 #fh5co-header .header-inner {
@@ -411,7 +355,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
 }
 #fh5co-header nav ul li a {
   color: rgba(255, 255, 255, 0.7);
@@ -565,9 +509,6 @@ h1, h2, h3, h4, h5, h6, figure {
   font-size: 20px;
   color: #fff;
 }
-#fh5co-hero .flexslider .slider-text > .slider-text-inner .fh5co-lead .icon-heart {
-  color: #d9534f;
-}
 
 #fh5co-why-us, .fh5co-services {
   padding: 7em 0;
@@ -604,56 +545,6 @@ h1, h2, h3, h4, h5, h6, figure {
   margin-bottom: 20px;
 }
 
-.fh5co-section-with-image {
-  position: relative;
-}
-.fh5co-section-with-image .fh5co-box {
-  padding: 50px;
-  background: rgba(255, 255, 255, 0.9);
-  position: absolute;
-  z-index: 1001;
-  width: 40%;
-  right: 10%;
-  top: 50%;
-}
-@media screen and (max-width: 992px) {
-  .fh5co-section-with-image .fh5co-box {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    margin-top: auto !important;
-  }
-}
-@media screen and (max-width: 480px) {
-  .fh5co-section-with-image .fh5co-box {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    padding: 15px;
-  }
-}
-.fh5co-section-with-image h2 {
-  font-size: 50px;
-  margin-bottom: 20px;
-}
-@media screen and (max-width: 768px) {
-  .fh5co-section-with-image h2 {
-    font-size: 32px;
-  }
-}
-.fh5co-section-with-image p {
-  font-size: 20px;
-}
-@media screen and (max-width: 768px) {
-  .fh5co-section-with-image p {
-    font-size: 16px;
-  }
-}
-.fh5co-section-with-image p:last-child {
-  margin-bottom: 0;
-}
 
 #fh5co-testimonial {
   background: #fff;
@@ -953,21 +844,15 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-blog {
-  padding: 7em 0;
+  padding: 0;
   position: relative;
   clear: both;
-  background: #f7f7f7;
-}
-@media screen and (max-width: 768px) {
-  #fh5co-blog {
-    padding: 3em 0;
-  }
 }
 #fh5co-blog .fh5co-entry {
   margin-bottom: 30px;
   float: left;
 }
-#fh5co-blog .fh5co-entry figure {
+.fh5co-entry figure {
   margin-bottom: 0px;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
@@ -1394,8 +1279,8 @@ h1, h2, h3, h4, h5, h6, figure {
 .pFooter{margin-bottom: 10px;}
 .hFooter{margin: 0 0 10px 0;}
 .containerTransition{ overflow: hidden; text-align: center; }
-.cont{display:flex;}
-.o{display:inline; margin-bottom:10px;}
+.cont{display:flex; margin-bottom:30px;}
+.o{display:inline;}
 
 .o>p{ width: 140px; height: 90px; margin:10px; padding:10px;text-align: center;border:2px solid #00BEF9; color: #fff;}
 .o>p:hover{background:#00BEF9; transition: all .5s}
@@ -1430,3 +1315,4 @@ h1, h2, h3, h4, h5, h6, figure {
 .plan-content{
   text-align: left;
 }
+.bg-temp{background: #272727;}
