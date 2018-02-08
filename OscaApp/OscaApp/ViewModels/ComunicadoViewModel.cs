@@ -2,6 +2,7 @@
 using OscaApp.framework.Models;
 using OscaApp.Data;
 using OscaApp.Models;
+using OscaFramework.Models;
 
 
 namespace OscaApp.ViewModels

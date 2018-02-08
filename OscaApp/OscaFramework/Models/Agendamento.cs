@@ -1,7 +1,7 @@
 ﻿using System;
-using OscaApp.framework.Models;
+ 
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
     public class Agendamento : GenericEntity
     {

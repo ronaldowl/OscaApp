@@ -1,4 +1,4 @@
-﻿
+﻿using OscaFramework.Models;
 using OscaApp.Models;
 using System;
 using System.Collections.Generic;

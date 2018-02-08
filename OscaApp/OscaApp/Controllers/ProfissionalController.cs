@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OscaApp.Data;
 using OscaApp.framework;
-using OscaApp.Models;
+using OscaFramework.Models;
+
 using OscaApp.RulesServices;
 using OscaApp.ViewModels;
 using System;

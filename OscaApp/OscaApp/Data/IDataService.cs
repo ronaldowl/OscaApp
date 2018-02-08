@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using OscaApp.Models;
 using OscaApp.framework.Models;
 using OscaApp.ViewModels.GridViewModels;
+using OscaFramework.Models;
 
 namespace OscaApp.Data
 {

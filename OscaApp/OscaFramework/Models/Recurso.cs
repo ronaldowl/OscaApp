@@ -1,17 +1,17 @@
 ﻿using System;
-using OscaApp.framework.Models;
+ 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
-    [Table("ContasPagar")]
-    public class ContasPagar : GenericEntity
+    [Table("Recurso")]
+    public class Recurso : GenericEntity
     {
         public String codigo { get; set; }
-        public String titulo { get; set; }
+        public String nome { get; set; }
         public Guid idOrganizacao { get; set; }
 
-        public ContasPagar()
+        public Recurso()
         {
             this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 20;

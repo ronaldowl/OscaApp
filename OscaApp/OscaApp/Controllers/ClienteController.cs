@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
 using OscaApp.framework;
+using OscaFramework.Models;
+
 
 namespace OscaApp.Controllers
 {

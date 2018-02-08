@@ -1,10 +1,10 @@
 ﻿using System;
-using OscaApp.framework.Models;
+ 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
     [Table("pedido")]
     public class Pedido : GenericEntity

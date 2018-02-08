@@ -1,7 +1,13 @@
 ﻿//********************************* Biblioteca com funções da Tela Produto do Pedido ***************
 
+function OnLoad()
+{
+    Onchage_TipoDesconto();
+
+}
+
 function Onchage_TipoDesconto() {
-    
+    debugger;
 
     var tipo = document.getElementById("osc_tipoDesconto");  
     var descontoValor = document.getElementById("osc_valorDescontoMoney");

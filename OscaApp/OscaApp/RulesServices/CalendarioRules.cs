@@ -4,6 +4,9 @@ using OscaApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using OscaFramework.Models;
+ 
+
 
 namespace OscaApp.RulesServices
 {
@@ -74,7 +77,7 @@ namespace OscaApp.RulesServices
                 item.fim = DateTime.Now.Hour.ToString();
                 item.titulo = "TESTE";
                 item.id = Guid.NewGuid().ToString();
-                item.tipo = framework.Models.CustomEnum.tipoItemCaledario.Atendimento;
+                item.tipo =  CustomEnum.tipoItemCaledario.Atendimento;
                 retorno.Add(item);
 
             }

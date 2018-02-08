@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
+using OscaFramework.Models;
+
 
 
 namespace OscaApp.Controllers
@@ -108,7 +110,7 @@ namespace OscaApp.Controllers
         {
             IEnumerable<OrdemServico> retorno = ordemServicoData.GetAll(contexto.idOrganizacao);
 
-            retorno = retorno.OrderBy(x => x.dataEntrada);
+            retorno = retorno.OrderBy(x => x.dataAgendada);
 
             if (Page == 0) Page = 1;
 

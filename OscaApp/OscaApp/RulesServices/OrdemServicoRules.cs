@@ -2,6 +2,7 @@
 using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
+using OscaFramework.Models;
 
 namespace OscaApp.RulesServices
 {

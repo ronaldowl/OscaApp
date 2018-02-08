@@ -1,4 +1,15 @@
 ﻿@model OscaApp.ViewModels.PedidoViewModel
+
+<script>
+       function CarregaLookupCliente() {
+           $("#lookupCliente").load("/Cliente/LookupCliente", function () {
+               $("#lookupCliente").modal("show");
+           })
+       }
+</script>
+
+
+
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -205,14 +216,7 @@
  
 <div class="modal fade" id="lookupCliente">
 </div> 
-    <script>
-        function CarregaLookupCliente()
-        {                         
-            $("#lookupCliente").load("/Cliente/LookupCliente", function () {
-                $("#lookupCliente").modal("show");
-            })  
-        }
-    </script>
+ 
 
  
 

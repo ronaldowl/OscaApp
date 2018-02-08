@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OscaApp.framework.Models
+namespace OscaFramework.Models
 {
    public abstract class   GenericEntity
     {

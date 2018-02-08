@@ -1,16 +1,16 @@
 ﻿
-using OscaApp.framework.Models;
+using OscaFramework.Models;
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using OscaApp.Models;
+ 
 using Microsoft.Extensions.Configuration;
 using System.IO;
-using OscaFramework.Models;
+ 
 
-namespace OscaApp.Data
+namespace OscaFramework.Data
 {
-    public   class SqlGenericManager : ISqlGenericManager
+    public   class SqlGenericManager  
      {
 
         public string conectStringManager { get; set; }

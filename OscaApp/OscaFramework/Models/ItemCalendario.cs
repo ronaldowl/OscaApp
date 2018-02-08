@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static OscaApp.framework.Models.CustomEnum;
+using static OscaFramework.Models.CustomEnum;
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
     public class ItemCalendario
     {

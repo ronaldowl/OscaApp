@@ -11,6 +11,8 @@ using OscaApp.ViewModels;
 using OscaApp.RulesServices;
 using Microsoft.AspNetCore.Authorization;
 using OscaApp.framework;
+using OscaFramework.Models;
+
 
 namespace OscaApp.Controllers
 {

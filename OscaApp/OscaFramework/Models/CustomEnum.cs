@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OscaApp.framework.Models
+namespace OscaFramework.Models
 {
      public class CustomEnumStatus
     {
@@ -119,6 +119,13 @@ namespace OscaApp.framework.Models
             Atendimento = 1,
             OrdemServico = 2
            
+        }
+
+        public enum tipoOrdemServico
+        {
+            Orcamento = 1,
+            OrdemServico = 2
+
         }
     }
 

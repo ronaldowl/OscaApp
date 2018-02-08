@@ -1,10 +1,21 @@
-﻿@model X.PagedList.PagedList<OscaApp.Models.ProdutoPedido>
+﻿@model X.PagedList.PagedList< OscaFramework.Models.ProdutoPedido>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 @{
     Layout = "_LayoutFrame";
 }
+
+<script>
+
+       function CarregaProdutoPedidoUpdate() {
+           $("#ModalProdutoPedido").load("/ProdutoPedido/FormUpdateProdutoPedido?idProdutoPedido=" + '@if (@Model.Count > 0) { @Model[0].id.ToString()}', function () {
+            $("#ModalProdutoPedido").modal("show");
+        });
+    }
+
+</script>
+
 <div class="card" id="osc_Grid">
     <div class="card-body">
         <div class="row">
@@ -43,7 +54,7 @@
                             <td>@item.totalGeral.ToString("N2")</td>
                             <td>
                                 <div class="form-group col-md-2">
-                                    <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar" onclick="location.href='@Url.Action("FormUpdateProdutoPedido", "ProdutoPedido", new { idProdutoPedido = Model[0].id})'"> <span>Editar</span></button>
+                                    <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="CarregaProdutoPedidoUpdate()"> <span>Editar</span></button>
                                 </div>
                             </td>
                             <td>
@@ -77,4 +88,6 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="ModalProdutoPedido">
 </div>

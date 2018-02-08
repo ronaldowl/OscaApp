@@ -2,6 +2,7 @@
 using OscaApp.framework.Models;
 using System;
 using System.Net.Http;
+using OscaFramework.Models;
 
 namespace OscaApp.Data
 {

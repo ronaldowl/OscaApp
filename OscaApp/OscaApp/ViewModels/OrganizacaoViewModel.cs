@@ -1,4 +1,4 @@
-﻿
+﻿using OscaFramework.Models;
 using OscaApp.Data;
 using OscaApp.Models;
 
@@ -11,7 +11,7 @@ namespace OscaApp.ViewModels
        
         public OrganizacaoViewModel()
         {
-            this.organizacao = new Models.Organizacao();
+            this.organizacao = new  Organizacao();
         }
     }
 

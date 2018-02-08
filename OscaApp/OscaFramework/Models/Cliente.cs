@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using OscaApp.framework.Models;
+ 
 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
- 
 
-namespace OscaApp.Models
+
+namespace OscaFramework.Models
 {
     [Table("cliente")]
     public class Cliente : GenericEntity

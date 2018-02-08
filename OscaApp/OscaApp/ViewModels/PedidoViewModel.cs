@@ -1,4 +1,4 @@
-﻿
+﻿using OscaFramework.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OscaApp.Data;
 using OscaApp.framework.Models;

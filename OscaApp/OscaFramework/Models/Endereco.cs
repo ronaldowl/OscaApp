@@ -1,8 +1,8 @@
 ﻿using System;
-using OscaApp.framework.Models;
+ 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
     [Table("Endereco")]
     public class Endereco : GenericEntity

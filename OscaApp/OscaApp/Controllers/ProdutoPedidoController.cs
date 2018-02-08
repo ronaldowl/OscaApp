@@ -11,6 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using OscaFramework.Models;
+ 
+
+
 
 namespace OscaApp.Controllers
 {
@@ -112,7 +116,7 @@ namespace OscaApp.Controllers
             try
             {
                 modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));
-                modelo.produto = new framework.Models.Relacao();
+                modelo.produto = new  Relacao();
                 modelo.produto = sqlData.RetornaRelacaoProduto(modelo.produtoPedido.idProduto);
             }
             catch (Exception ex)

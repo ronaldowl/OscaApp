@@ -1,9 +1,11 @@
-﻿
+﻿using OscaFramework.Models;
 using System;
 using System.Collections.Generic;
 using OscaApp.framework.Models;
 using OscaApp.Data;
 using OscaApp.Models;
+ 
+
 
 namespace OscaApp.ViewModels
 {
@@ -15,7 +17,7 @@ namespace OscaApp.ViewModels
 
         public ClienteViewModel()
         {
-            this.cliente = new Models.Cliente();
+            this.cliente = new  Cliente();
         }
     }
 }

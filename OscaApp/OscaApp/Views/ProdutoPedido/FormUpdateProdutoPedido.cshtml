@@ -2,6 +2,13 @@
 @{
     Layout = "_LayoutFrame";
 }
+
+<script src="~/lib/OscaJs/osc_produtoPedido.js">debugger;
+    //*** Executa regra no carregamento do Form
+    OnLoad();
+
+</script>
+
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -112,4 +119,5 @@
         </div>
     </div>
 </div>
-<script src="~/lib/OscaJs/osc_produtoPedido.js" asp-append-version="true"></script>
+
+ 

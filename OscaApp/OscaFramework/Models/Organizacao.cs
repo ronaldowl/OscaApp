@@ -1,14 +1,14 @@
-﻿using OscaApp.Data;
-using OscaApp.framework.Models;
+﻿ 
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
-using static OscaApp.framework.Models.CustomEnum;
+using OscaFramework.Data;
 
-namespace OscaApp.Models
+
+
+namespace OscaFramework.Models
 {
     [Table("organizacao")]
     public class Organizacao : GenericEntity

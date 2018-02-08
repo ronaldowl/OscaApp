@@ -1,4 +1,21 @@
 ﻿@model OscaApp.ViewModels.PedidoViewModel
+
+<script>
+    function CarregaProdutoPedido() {
+        $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?idPedido=" + '@Model.pedido.id' + "&idListaPreco=" +  '@Model.listapreco.id.ToString()' , function () {
+            $("#ModalProdutoPedido").modal("show");
+        });
+    }
+
+      function CarregaFormStatusPedido() {
+        $("#ModalStatusPedido").load("/Pedido/FormStatusPedido?id=" + '@Model.pedido.id' , function () {
+            $("#ModalStatusPedido").modal("show");
+        });
+    }
+
+
+</script>
+
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -304,21 +321,7 @@
 <div class="modal fade" id="ModalStatusPedido">
 </div>
 
-<script>
-    function CarregaProdutoPedido() {
-        $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?idPedido=" + '@Model.pedido.id' + "&idListaPreco=" +  '@Model.listapreco.id.ToString()' , function () {
-            $("#ModalProdutoPedido").modal("show");
-        });
-    }
 
-      function CarregaFormStatusPedido() {
-        $("#ModalStatusPedido").load("/Pedido/FormStatusPedido?id=" + '@Model.pedido.id' , function () {
-            $("#ModalStatusPedido").modal("show");
-        });
-    }
-
-
-</script>
 
 
 

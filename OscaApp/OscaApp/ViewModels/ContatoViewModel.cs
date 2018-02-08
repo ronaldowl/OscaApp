@@ -1,4 +1,4 @@
-﻿
+﻿using OscaFramework.Models;
 using System;
 using OscaApp.framework.Models;
 using OscaApp.Data;

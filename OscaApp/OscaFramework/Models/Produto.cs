@@ -1,9 +1,9 @@
 ﻿using System;
-using OscaApp.framework.Models;
+ 
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
     [Table("produto")]
     public class Produto : GenericEntity
@@ -14,8 +14,7 @@ namespace OscaApp.Models
         public string nome { get; set; }
         public string descricao { get; set; }
 
-
-        [DisplayFormat (DataFormatString = "{0:D2}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorCompra { get; set; }
 
         public int quantidade { get; set; }
@@ -23,6 +22,7 @@ namespace OscaApp.Models
         public decimal altura { get; set; }
         public decimal area { get; set; }
         public decimal peso { get; set; }
+
         public CustomEnum.FormaVendaProduto formaVendaProduto { get; set; }
         public Guid idOrganizacao { get; set; }
 

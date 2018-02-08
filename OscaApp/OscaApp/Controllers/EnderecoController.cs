@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
 using OscaApp.framework;
+using OscaFramework.Models;
+
 
 namespace OscaApp.Controllers
 {

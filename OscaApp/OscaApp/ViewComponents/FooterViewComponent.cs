@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static OscaApp.framework.Models.CustomEnum;
-using static OscaApp.framework.Models.CustomEnumStatus;
+ 
+using OscaFramework.Models;
 
 namespace OscaApp.ViewComponents
 {
@@ -36,7 +36,7 @@ namespace OscaApp.ViewComponents
             modelo.statusOrg = org.statusOrg;
 
             //consulta se a Organização esta ativa
-            if (org.statusOrg == StatusOrg.EmAvaliacao)
+            if (org.statusOrg == CustomEnumStatus.StatusOrg.EmAvaliacao)
             {
                 modelo.msgAvaliacao = " - Falta 20 dias de Avaliação";
             }           

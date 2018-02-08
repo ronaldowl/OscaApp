@@ -7,6 +7,8 @@ using OscaApp.Models;
 using System;
 using OscaApp.RulesServices;
 using OscaApp.framework;
+using OscaFramework.Models;
+
 
 namespace OscaApp.Controllers
 {

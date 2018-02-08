@@ -1,15 +1,19 @@
 ﻿using System;
-using OscaApp.framework.Models;
+ 
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
     [Table("OrdemServico")]
     public class OrdemServico : GenericEntity
     {
         public String codigo { get; set; }
-        public DateTime dataEntrada { get; set; }
+        public DateTime dataAgendada { get; set; }
         public Guid idOrganizacao { get; set; }
+        public Guid idCliente { get; set; }
+        public Guid idServico { get; set; }
+        public Guid idProfissional { get; set; }
+        public CustomEnum.tipoOrdemServico tipo { get; set; }
 
         public OrdemServico()
         {

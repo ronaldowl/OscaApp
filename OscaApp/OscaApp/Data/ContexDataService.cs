@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OscaApp.Models;
+using OscaFramework.Models;
 
 namespace OscaApp.Data
 {

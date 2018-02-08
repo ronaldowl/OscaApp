@@ -191,7 +191,6 @@
     <Content Include="site\images\slide_3.jpg" />
     <Content Include="site\index.html" />
     <Content Include="site\js\bootstrap.min.js" />
-    <Content Include="site\js\google_map.js" />
     <Content Include="site\js\index.html" />
     <Content Include="site\js\jquery.easing.1.3.js" />
     <Content Include="site\js\jquery.flexslider-min.js" />

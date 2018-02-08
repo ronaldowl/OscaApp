@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using OscaApp.framework.Models;
 using OscaApp.framework;
 using OscaApp.ViewModels.GridViewModels;
+using OscaFramework.Models;
 
 namespace OscaApp.Data
 {

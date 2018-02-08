@@ -4,6 +4,7 @@ using System.Linq;
 using OscaApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
+using OscaFramework.Models;
 
 namespace OscaApp.Data
 {
@@ -34,7 +35,9 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
                 db.Entry(modelo).Property("codigo").IsModified                   = true;
-                db.Entry(modelo).Property("dataEntrada").IsModified              = true;
+                db.Entry(modelo).Property("dataAgendada").IsModified              = true;
+
+
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;

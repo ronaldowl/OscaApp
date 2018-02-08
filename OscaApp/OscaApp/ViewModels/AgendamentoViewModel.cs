@@ -1,5 +1,7 @@
 ﻿using OscaApp.Models;
 using OscaApp.Data;
+using OscaFramework.Models;
+
 
 namespace OscaApp.ViewModels
 {

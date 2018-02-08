@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OscaApp.Models
+namespace OscaFramework.Models
 {
     public class Calendario 
     {

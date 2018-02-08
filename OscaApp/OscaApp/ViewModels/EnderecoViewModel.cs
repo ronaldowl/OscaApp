@@ -2,6 +2,7 @@
 using OscaApp.framework.Models;
 using OscaApp.Models;
 using OscaApp.Data;
+using OscaFramework.Models;
 
 namespace OscaApp.ViewModels
 {
@@ -13,7 +14,7 @@ namespace OscaApp.ViewModels
 
         public EnderecoViewModel()
         {
-            this.endereco = new Models.Endereco();
+            this.endereco = new  Endereco();
 
         }
     }

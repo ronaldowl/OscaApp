@@ -1,6 +1,7 @@
 ﻿using OscaApp.Data;
 using OscaApp.Models;
 using System.Collections.Generic;
+using OscaFramework.Models;
 
 namespace OscaApp.ViewModels
 {
@@ -12,7 +13,7 @@ namespace OscaApp.ViewModels
 
         public ProdutoViewModel()
         {
-            this.produto = new Models.Produto();
+            this.produto = new  Produto();
 
         }
     }

@@ -2,7 +2,12 @@
 @{
     Layout = "_LayoutFrame";
 }
- 
+<script src="~/lib/OscaJs/osc_produtoPedido.js">
+    debugger;
+    //*** Executa regra no carregamento do Form
+    OnLoad();
+</script>
+
 
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
@@ -29,7 +34,7 @@
                                         <div id="osc_barrabotoes">
                                             <label>
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
-                                            </label>                                       
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
@@ -101,7 +106,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-calculator fa-1x"></span>
                                         </span>
-                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.produtoPedido.valorDescontoPercentual" type="text" class="form-control"  required="required"/>
+                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.produtoPedido.valorDescontoPercentual" type="text" class="form-control" required="required" />
                                     </div>
                                 </div>
                             </div>
@@ -116,14 +121,13 @@
 <div class="modal fade" id="lookupProdutoPedido">
 </div>
 
-<script src="~/lib/OscaJs/osc_produtoPedido.js" asp-append-version="true"></script>
-
 <script>
-    function CarregaLookupProdutoPedido() {
+        function CarregaLookupProdutoPedido() {
 
-        $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?idListaPreco=" + '@Model.produtoPedido.idListaPreco' + '&Page=0' + '', function () {
+  $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?idListaPreco=" + '@Model.produtoPedido.idListaPreco' + '&Page=0' + '', function () {
     $("#lookupProdutoPedido").modal("show");
     });
-    }  
-        
+    }
+
 </script>
+

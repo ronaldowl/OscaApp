@@ -4,6 +4,8 @@ using OscaApp.Data;
 using OscaApp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using OscaFramework.Models;
+
 
 namespace OscaApp.Controllers
 {
@@ -18,7 +20,7 @@ namespace OscaApp.Controllers
 
         public IActionResult Contact()
         {  
-            Cliente cl = new Models.Cliente();
+            Cliente cl = new  Cliente();
             ViewData["Message"] = cl.id;
             return View();
         }

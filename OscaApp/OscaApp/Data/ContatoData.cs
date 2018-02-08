@@ -5,6 +5,7 @@ using OscaApp.Models;
 using OscaApp.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
+using OscaFramework.Models;
 
 namespace OscaApp.Data
 {
