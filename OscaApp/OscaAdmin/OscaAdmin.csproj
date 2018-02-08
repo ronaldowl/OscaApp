@@ -1,15 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup Label="Globals">
-    <SccProjectName>SAK</SccProjectName>
-    <SccProvider>SAK</SccProvider>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccLocalPath>SAK</SccLocalPath>
-  </PropertyGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <UserSecretsId>aspnet-OscaAdmin-81402768-9D6A-47DF-A5CC-B86F2D00A0A5</UserSecretsId>
+    <UserSecretsId>aspnet-OscaAdmin-CD66E5CD-45B5-4B99-AEDB-3803267A3357</UserSecretsId>
   </PropertyGroup>
 
 

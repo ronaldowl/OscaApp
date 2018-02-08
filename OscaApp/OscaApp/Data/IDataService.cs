@@ -162,7 +162,7 @@ namespace OscaApp.Data
 
         Guid CriaOrganizacao(string org, string email);
 
-        Relacao RetornaContextPage(string email,string org);
+        
     }
   
 }

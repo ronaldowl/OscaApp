@@ -18,7 +18,7 @@ namespace OscaApp.Data
         public ContextPage(string Email, string Org)
         {
             //Prenche informações do Contexto
-            SqlGenericManager sqlmanager = new SqlGenericManager();
+            SqlGenericService sqlmanager = new SqlGenericService();
 
             Relacao RL = sqlmanager.RetornaContextPage(Email, Org);
             RL.tipoObjeto = CustomEntityEnum.Entidade.Usuario;
@@ -32,9 +32,9 @@ namespace OscaApp.Data
         public ContextPage(string Email, string Org, Guid id, CustomEntityEnum.Entidade Entidade)
         {
             //Prenche informações do Contexto
-            SqlGenericManager sqlmanager = new SqlGenericManager();
+            SqlGenericService sqlservice = new SqlGenericService();
 
-            Relacao RL = sqlmanager.RetornaContextPage(Email, Org);
+            Relacao RL = sqlservice.RetornaContextPage(Email, Org);
             RL.tipoObjeto = CustomEntityEnum.Entidade.Usuario;
 
             this.idOrganizacao = RL.idOrganizacao;

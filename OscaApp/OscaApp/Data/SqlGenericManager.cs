@@ -141,52 +141,7 @@ namespace OscaApp.Data
             return retorno;
         }
 
-        public Relacao RetornaContextPage(string email, string org)
-        {
-
-            Relacao retorno = new Relacao();
-            try
-            {
-                SqlDataReader dataReader;              
-
-                using (SqlConnection Connection = new SqlConnection(conectStringManager))
-                {
-                    var _Command = new SqlCommand()
-                    {
-                        Connection = Connection,
-                        CommandText = "osc_RetornaContextoOrg",
-                        CommandType = CommandType.StoredProcedure                         
-                    };
-
-                    _Command.Parameters.AddWithValue("Org", org);
-                    _Command.Parameters.AddWithValue("Email", email);
-
-                    Connection.Open();
-                    dataReader = _Command.ExecuteReader();                   
-
-                    if (dataReader.HasRows)
-                    {
-                        while (dataReader.Read())
-                        {
-                            retorno.id = new Guid(dataReader["idUsuario"].ToString());
-                            retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
-                            retorno.idName = dataReader["nomeUsuario"].ToString();
-                            retorno.organizacao = dataReader["nomeOrganizacao"].ToString();
-                        }
-                    }
-
-                    //Fechando conexao após tratar o retorno
-                    Connection.Close();
-
-                };
-            }
-            catch (SqlException ex)
-            {
-               throw;
-            }
-            return retorno;
-        }     
-           
+         
 
     }
 }
