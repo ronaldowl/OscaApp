@@ -42,7 +42,6 @@
 
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
-    <Folder Include="Views\Atendimento\" />
   </ItemGroup>
 
   <ItemGroup>

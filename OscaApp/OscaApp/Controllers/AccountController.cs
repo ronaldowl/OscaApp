@@ -250,15 +250,7 @@ namespace OscaApp.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);      
 
                 if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
+                {                   
                     return RedirectToLocal(returnUrl);
                 }
                 AddErrors(result);
@@ -275,7 +267,6 @@ namespace OscaApp.Controllers
             RegisterViewModel modelo = new RegisterViewModel();
             modelo.idOrganizacao = idOrganizacao;
 
-
             return View(modelo);
         }
 
@@ -285,25 +276,18 @@ namespace OscaApp.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
-            {
-               
-                SqlGenericManager _sqlManager = new SqlGenericManager();
-                SqlGenericService _sqlService = new SqlGenericService();               
+            {           
+                SqlGenericManager _sqlManager = new SqlGenericManager();                          
                             
                 //Passa informações da Org para o novo usuário
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = new Guid(model.idOrganizacao) };
-                          
-
+                         
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
              
                 if (result.Succeeded)
-                {                
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);                    
-            
-                    return RedirectToAction(nameof(UsuarioController.GridUsuario), "Usuario");
+                {               
+                       return RedirectToAction(nameof(UsuarioController.GridUsuario), "Usuario");
                 }
                 AddErrors(result);
             }

@@ -8,16 +8,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OSCA Serviços Online</title>
-  
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/osc_global.css" />
-   
- 
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/osc_global.css" />
+
+    <script type="text/javaScript">
+        function BloqueiSpacoEmBranco(input) {
+            return input.replace(/^\s+|\s+$/g, "");
+            }
+    </script>
+
 </head>
 <body>
     <div class="container-fluid">
         <div class="card col-8 offset-2">
-            <div class="card-header">              
+            <div class="card-header">
                 <h4 class="text-center">Formulário de Cadastro de Ativação</h4>
             </div>
             <br />
@@ -32,7 +37,7 @@
                         <div class="form-group">
                             <label asp-for="organizacao.nomeLogin" class="col-md-4 control-label">Empresa</label>
                             <div class="col-md-6">
-                                <input asp-for="organizacao.nomeLogin" class="form-control" />
+                                <input asp-for="organizacao.nomeLogin" class="form-control" onkeyup="this.value = BloqueiSpacoEmBranco( this.value )"  />
                                 <span asp-validation-for="organizacao.nomeLogin" class="text-danger"></span>
                             </div>
                         </div>
@@ -64,7 +69,7 @@
                         </div>
                     </form>
                 </div>
-                </div>            
+            </div>
         </div>
     </div>
     <footer>

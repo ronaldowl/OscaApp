@@ -43,75 +43,68 @@
                     </div>
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-sort-amount-asc iconPanel" aria-hidden="true"></i>
+                            <i class="fa fa-2x fa-shopping-cart iconPanel" aria-hidden="true"></i>
+                            <a asp-controller="Produto" asp-action="GridProduto"><h4>Produtos</h4></a>
+                        </div>
+                        <div class="card-body">
+                            <p>Cadastre, consulte e edite produtos</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">                 
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <i class="fa fa-2x fa-archive iconPanel" aria-hidden="true"></i>
+                            <a asp-controller="Pedido" asp-action="FormCreatePedido"><h4>Pedido</h4></a>
+                        </div>
+                        <div class="card-body">
+                            <p>Cadastre, consulte e edite pedidos</p>
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <i class="fa fa-2x fa-calendar-times-o iconPanel" aria-hidden="true"></i>
+                            <a href="#"><h4>Atendimento</h4></a>
+                        </div>
+                        <div class="card-body">
+                            <p>Cadastre, consulte e edite os atendimentos de sua empresa</p>
+                        </div>
+                    </div>
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <i class="fa fa-2x fa-sort-amount-desc iconPanel" aria-hidden="true"></i>
                             <a asp-controller="OrdemServico" asp-action="GridOrdemServico"><h4>Ordem de Serviço</h4></a>
                         </div>
                         <div class="card-body">
-                            <p> Crie ordens de serviço para seus clientes</p>
+                            <p>Cadastre, consulte e edite ordens de serviço</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4">                 
                     <div class="card m-2">
-                        <div class="card-header">
-                            <i class="fa fa-2x fa-shopping-cart iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Produto" asp-action="GridProduto"><h4>Produtos</h4></a>
-                        </div>
                         <div class="card-body">
-                            <p>Cadastre, consulte e edite produtos</p>
+                            <i class="fa fa-2x fa-calendar iconPanel" aria-hidden="true"></i>
+                            <a asp-controller="Calendario" asp-action="Mes"><h4>Calendário de Serviços</h4></a>
+                            Consulte, altere e cadastre novos usuários na sua Organização
+                        </div>
+                    </div>  
+                    <div class="card m-2">
+                        <div class="card-body">
+                            <i class="fa fa-2x fa-black-tie iconPanel" aria-hidden="true"></i>
+                            <a asp-controller="Recurso" asp-action="GridRecurso"><h4>Recursos</h4></a>
+                            Consulte, altere e cadastre novos Recurso da sua empresa, Ferramentas, Projetores, Carros e outros
                         </div>
                     </div>
                     <div class="card m-2">
-                        <div class="card-header">
-                            <i class="fa fa-2x fa-archive iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Pedido" asp-action="FormCreatePedido"><h4>Pedido</h4></a>
-                        </div>
                         <div class="card-body">
-                            <p>Cadastre, consulte e edite pedidos</p>
-                        </div>
-                    </div>
-                    <div class="card m-2">
-                        <div class="card-header">
-                            <i class="fa fa-2x fa-book iconPanel" aria-hidden="true"></i>
-                            <a href="#"><h4>Agendamento</h4></a>
-                        </div>
-                        <div class="card-body">
-                            <p>Cadastre, consulte e edite os agendamentos de sua empresa</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card m-2">
-                        <div class="card-header">
-                            <i class="fa fa-2x fa-shopping-cart iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Produto" asp-action="GridProduto"><h4>Produtos</h4></a>
-                        </div>
-                        <div class="card-body">
-                            <p>Cadastre, consulte e edite produtos</p>
-                        </div>
-                    </div>
-                    <div class="card m-2">
-                        <div class="card-header">
-                            <i class="fa fa-2x fa-archive iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Pedido" asp-action="FormCreatePedido"><h4>Pedido</h4></a>
-                        </div>
-                        <div class="card-body">
-                            <p>Cadastre, consulte e edite pedidos</p>
-                        </div>
-                    </div>
-                    <div class="card m-2">
-                        <div class="card-header">
-                            <i class="fa fa-2x fa-book iconPanel" aria-hidden="true"></i>
-                            <a href="#"><h4>Agendamento</h4></a>
-                        </div>
-                        <div class="card-body">
-                            <p>Cadastre, consulte e edite os agendamentos de sua empresa</p>
+                            <i class="fa fa-2x fa-black-tie iconPanel" aria-hidden="true"></i>
+                            <a asp-controller="Profissional" asp-action="GridProfissional"><h4>Profissional</h4></a>
+                            Consulte, altere e cadastre novos usuários na sua Organização
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
     <div class="row">
         <div style="background-color:darkgrey; width: 100%; height:20px; margin-top:2vh;"></div>
@@ -144,12 +137,11 @@
             <div class="card m-2">
                 <div class="card-body">
                     <i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelServico"><h5>Configurações</h5></a>
+                    <a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h5>Configurações</h5></a>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 
