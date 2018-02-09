@@ -44,10 +44,10 @@ namespace OscaApp.Controllers
         public IActionResult FormCreateOrdemServico(OrdemServicoViewModel entrada)
         {
             OrdemServico modelo = new OrdemServico();
-
+          
             try
             {
-                if (entrada.ordemServico.codigo!=null)
+                if (entrada.ordemServico != null)
                 {
                   if  (OrdemServicoRules.OrdemServicoCreate(entrada, out modelo, contexto)) {
                         ordemServicoData.Add(modelo);

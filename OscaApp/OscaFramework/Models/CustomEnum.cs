@@ -22,12 +22,19 @@ namespace OscaFramework.Models
         }
 
         public enum StatusPedido
-        {
-                      
+        {                      
             EmAndamento = 1,
             Fechado = 2,
             AguardandoProduto = 3,
             ParaEntrega = 4
+        }
+
+        public enum StatusOrdemServico
+        {
+            EmAndamento = 1,
+            Fechado = 2,
+            AguardandoProduto = 3,
+            Cancelada = 4
         }
 
     }

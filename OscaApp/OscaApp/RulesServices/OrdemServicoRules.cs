@@ -12,9 +12,14 @@ namespace OscaApp.RulesServices
         {
             ordemServico = new OrdemServico();
             ordemServico = entrada.ordemServico;
+
+            SqlGenericService servico = new SqlGenericService();           
          
-            if (ordemServico.codigo != null)
+            if (ordemServico.idOrganizacao != null)
             {
+                ordemServico.codigo = servico.RetornaNovaPosicao(5, contexto.idOrganizacao);
+                ordemServico.statusOrdemServico = CustomEnumStatus.StatusOrdemServico.EmAndamento;
+
                 //************ Objetos de controle de acesso ******************
                 ordemServico.criadoEm = DateTime.Now;
                 ordemServico.criadoPor = contexto.idUsuario;

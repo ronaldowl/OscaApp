@@ -14,6 +14,8 @@ namespace OscaFramework.Models
         public Guid idServico { get; set; }
         public Guid idProfissional { get; set; }
         public CustomEnum.tipoOrdemServico tipo { get; set; }
+        public CustomEnumStatus.StatusOrdemServico statusOrdemServico { get; set; }
+
 
         public OrdemServico()
         {

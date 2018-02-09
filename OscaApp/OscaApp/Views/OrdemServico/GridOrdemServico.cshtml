@@ -50,14 +50,22 @@
                                     <thead>
                                         <tr>
                                             <th>Código</th>
+                                            <th>Cliente</th>
                                             <th>Data Agendada</th>
+                                            <th>Status Ordem Servico</th>
+                                            <th>Criado Por</th>
+
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateOrdemServico", new { id = item.id })</td>
+                                            <td>Cliente 1 </td>
                                             <td>@item.dataAgendada</td>
+                                            <td>@item.statusOrdemServico</td>
+                                            <td>@item.criadoPorName</td>
+
                                         </tr>
                                     }
                                 </table>
