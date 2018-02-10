@@ -26,7 +26,7 @@ namespace OscaApp.Controllers
         {
             this.sqlData = _sqlData;
             this.ordemServicoData = new OrdemServicoData(db);
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto =  new ContextPage().ExtractContext(httpContext);
         }
 
         [HttpGet]

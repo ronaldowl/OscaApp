@@ -12,7 +12,9 @@ namespace OscaApp.Data
         public Guid idOrganizacao { get; set; }
         public Guid idUsuario { get; set; }
         public String nomeUsuario { get; set; }
-     
+
+        //Construtor padrão
+        public ContextPage() { }
 
         //Carrega todas as informações da sessão da pagina
         public ContextPage(string Email, string Org)
@@ -42,6 +44,24 @@ namespace OscaApp.Data
             this.organizacao = RL.organizacao;
             this.nomeUsuario = RL.idName;
          
+        }
+
+
+        /// <summary>
+        /// Método para ser usado em todos Controllers como padrão de instanciar o contexto
+        /// </summary>
+        /// <param name="httpContext"></param>
+        /// <returns></returns>
+        public ContextPage ExtractContext(IHttpContextAccessor httpContext)
+        {
+            ContextPage retorno = new ContextPage();
+
+            retorno.idOrganizacao =  new Guid(httpContext.HttpContext.Session.GetString("idOrganizacao"));
+            retorno.idUsuario = new Guid(httpContext.HttpContext.Session.GetString("idUsuario"));
+            retorno.nomeUsuario =  httpContext.HttpContext.Session.GetString("nomeUsuario");
+            retorno.organizacao =  httpContext.HttpContext.Session.GetString("organizacao");
+
+            return retorno;
         }
     }
 }

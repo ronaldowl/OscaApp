@@ -70,12 +70,18 @@ namespace OscaApp.Controllers
                     _logger.LogInformation(1, "User logged in.");
                 //Preenche variaves de sessão
 
+
+
+                ////*********** TODO: Gerar Contexto para todos controller *******************
                 HttpContext.Session.SetString("email", model.Email);
                 HttpContext.Session.SetString("organizacao", model.empresa);
+                ContextPage contexto = new ContextPage(model.Email, model.empresa);
+                HttpContext.Session.SetString("idOrganizacao", contexto.idOrganizacao.ToString());
+                HttpContext.Session.SetString("idUsuario", contexto.idUsuario.ToString());
+                HttpContext.Session.SetString("nomeUsuario", contexto.nomeUsuario.ToString());
 
-                ////*********** TODO: Gera Contexto *******************
-                //ContextPage contexto = new ContextPage(model.Email, model.empresa);
-                //HttpContext.Items[IContextPage] = contexto;
+                //*****************************************************************************
+
 
 
                 return RedirectToAction("PainelOperacional", "Paineis", new { });
