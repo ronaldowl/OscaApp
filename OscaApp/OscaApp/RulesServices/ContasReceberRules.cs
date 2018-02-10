@@ -12,6 +12,7 @@ namespace OscaApp.RulesServices
         {
             contasReceber = new ContasReceber();
             contasReceber = entrada.contasReceber;
+            contasReceber.codigo = AutoNumber.GeraCodigo(21, contexto.idOrganizacao);
          
             if (contasReceber.codigo != null)
             {

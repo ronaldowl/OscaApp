@@ -16,6 +16,12 @@ namespace OscaApp.Data
         List<Banco> GetAll();
     }
 
+    public interface ICategoriaProfissionalData
+    {
+        CategoriaProfissional Get(Guid id, Guid idOrg);
+        List<CategoriaProfissional> GetAll();
+    }
+
     public interface IFornecedorData
     {
         void Add(Fornecedor fornecedor);
