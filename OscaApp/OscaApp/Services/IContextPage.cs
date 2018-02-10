@@ -8,6 +8,7 @@ namespace OscaApp.Services
 {
     public interface IContextPage
     {
-         ContextPage contexto { get;   }
+         ContextPage contexto { get; set; }
+         ContextPage RetornaContextoServices();
     }
 }

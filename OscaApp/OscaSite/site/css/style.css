@@ -545,7 +545,6 @@ h1, h2, h3, h4, h5, h6, figure {
   margin-bottom: 20px;
 }
 
-
 #fh5co-testimonial {
   background: #fff;
   padding: 7em 0;
@@ -604,10 +603,6 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #3b5998;
 }
 
-.twitter-color {
-  color: #55acee;
-}
-
 .fh5co-about,
 .fh5co-team,
 .fh5co-contact {
@@ -642,21 +637,6 @@ h1, h2, h3, h4, h5, h6, figure {
   color:#00bef9;
 }
 
-#map {
-  height: 500px;
-  width: 100%;
-}
-@media screen and (max-width: 768px) {
-  #map {
-    height: 400px;
-  }
-}
-@media screen and (max-width: 480px) {
-  #map {
-    height: 200px;
-  }
-}
-
 .fh5co-staff img {
   margin-bottom: 1em;
 }
@@ -677,13 +657,13 @@ h1, h2, h3, h4, h5, h6, figure {
 
 #fh5co-grid-products {
   background: #ecf1f5;
-  padding: 7em 0 0px 0;
+  padding: 4em 0 0px 0;
   float: left;
   width: 100%;
 }
 @media screen and (max-width: 768px) {
   #fh5co-grid-products {
-    padding: 3em 0 10px 0;
+    padding: 2em 0 10px 0;
   }
 }
 #fh5co-grid-products .v-align {
@@ -1282,8 +1262,9 @@ h1, h2, h3, h4, h5, h6, figure {
 .cont{display:flex; margin-bottom:30px;}
 .o{display:inline;}
 
-.o>p{ width: 140px; height: 90px; margin:10px; padding:10px;text-align: center;border:2px solid #00BEF9; color: #fff;}
+.o>p{width:140px; height:90px; margin:10px; padding:10px; text-align:center; border:2px solid #00BEF9; color:#fff;}
 .o>p:hover{background:#00BEF9; transition: all .5s}
+
   @keyframes moveInRight{
     0%{ transform: translateX(0);}
     50%{ transform: translateX(-2300px);}
@@ -1307,12 +1288,8 @@ h1, h2, h3, h4, h5, h6, figure {
     background: #00bef9;
     transition: all .4s;
 }
-.woow:hover::after{
-    transform: scaleX(1.2) scaleY(1.6);   
-    opacity: 0; 
-}
+.woow:hover::after{ transform: scaleX(1.2) scaleY(1.6);   opacity: 0; }
 
-.plan-content{
-  text-align: left;
-}
+.plan-content{text-align: left;}
+
 .bg-temp{background: #272727;}

@@ -164,5 +164,10 @@ namespace OscaApp.Data
 
         
     }
-  
+
+    public interface ISqlGenericData
+    {
+        
+    }
+
 }

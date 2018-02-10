@@ -52,6 +52,7 @@
                                             <th>Nome</th>
                                             <th>CPF</th>
                                             <th>E-mail</th>
+                                            <th>Sexo</th>
                                             <th>Telefone</th>
                                             <th>Celular</th>
 
@@ -63,6 +64,7 @@
                                             <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateContato", new { id = item.id })</td>
                                             <td>@item.cpf</td>
                                             <td>@item.email</td>
+                                            <td>@item.sexo</td>
                                             <td>@item.telefone</td>
                                             <td>@item.celular</td>
                                         </tr>

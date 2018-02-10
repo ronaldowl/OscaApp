@@ -13,9 +13,11 @@ using OscaApp.Models;
 using OscaApp.Services;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Http;
+ 
 using OscaApp.framework;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using OscaFramework.MicroServices;
 
 namespace OscaApp
 {
@@ -24,9 +26,11 @@ namespace OscaApp
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+             
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }  
+         
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -39,18 +43,24 @@ namespace OscaApp
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Add application services.
+            //// Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
             //*********Carrega informações do banco de dados
             services.AddDbContext<ContexDataService>(options => options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
             services.AddDbContext<ContexDataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             //*************************************************************
             //Serviço de configuração universal
             services.AddSingleton<IConfiguration>(_ => Configuration);
 
             //Serviço para acesso a metodos de conexao SQL no banco Manager
             services.AddSingleton<ISqlGenericManager, SqlGenericManager>();
+
+            //Serviço para acesso a metodos de conexão SQL no banco DATA
+            //Falta implementar em todos os controllers, apenas usado na Ordem de Servico
+            SqlGenericDataServices sqlData = new SqlGenericDataServices();
+            services.AddSingleton<SqlGenericDataServices>(_ => sqlData);
 
             services.AddMvc(config =>
             {
@@ -66,10 +76,10 @@ namespace OscaApp
                 // Set a short timeout for easy testing.
                 options.IdleTimeout = TimeSpan.FromSeconds(100000000);
                 options.Cookie.HttpOnly = true;
-            });
+            });                       
 
-            //services.AddScoped<IContextPage, ContextPageServices>();
-
+            //ContextPageServices teste = new ContextPageServices(email, org);        
+            //services.AddScoped<IContextPage>(A => teste);
 
         }
 

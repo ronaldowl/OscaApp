@@ -12,22 +12,22 @@ using OscaApp.RulesServices;
 using Microsoft.AspNetCore.Authorization;
 using OscaApp.framework;
 using OscaFramework.Models;
-
+using OscaApp.Services;
 
 namespace OscaApp.Controllers
 {
     [Authorize]
     public class ContatoController: Controller
     {
-        private readonly ContatoData contatoData;     
+        private readonly ContatoData contatoData;   
 
-        private ContextPage contexto;
+        private readonly ContextPage contexto;
+        
 
         public ContatoController(ContexDataService db, IHttpContextAccessor httpContext)
-        {
+        {            
             this.contatoData = new ContatoData(db);           
             this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace OscaApp.Controllers
         {
 
             Contato modelo = new Contato();
-            entrada.contexto = contexto;
+            entrada.contexto = contexto;         
 
             try
             {

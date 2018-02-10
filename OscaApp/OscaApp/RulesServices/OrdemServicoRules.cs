@@ -19,6 +19,7 @@ namespace OscaApp.RulesServices
             {
                 ordemServico.codigo = servico.RetornaNovaPosicao(5, contexto.idOrganizacao);
                 ordemServico.statusOrdemServico = CustomEnumStatus.StatusOrdemServico.EmAndamento;
+                ordemServico.idCliente = entrada.cliente.id;
 
                 //************ Objetos de controle de acesso ******************
                 ordemServico.criadoEm = DateTime.Now;

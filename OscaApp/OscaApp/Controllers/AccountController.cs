@@ -16,6 +16,7 @@ using OscaApp.Services;
  
 using Microsoft.AspNetCore.Http;
 using OscaApp.Data;
+using Newtonsoft.Json;
 
 namespace OscaApp.Controllers
 {
@@ -71,6 +72,11 @@ namespace OscaApp.Controllers
 
                 HttpContext.Session.SetString("email", model.Email);
                 HttpContext.Session.SetString("organizacao", model.empresa);
+
+                ////*********** TODO: Gera Contexto *******************
+                //ContextPage contexto = new ContextPage(model.Email, model.empresa);
+                //HttpContext.Items[IContextPage] = contexto;
+
 
                 return RedirectToAction("PainelOperacional", "Paineis", new { });
 
@@ -511,7 +517,9 @@ namespace OscaApp.Controllers
             {
                 return RedirectToAction(nameof(AccountController.Login), "Account");
             }
-        }       
+        }
+
+      
 
         #endregion
     }

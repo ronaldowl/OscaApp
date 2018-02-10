@@ -2,6 +2,7 @@
 using OscaApp.framework.Models;
 using OscaApp.Models;
 using OscaFramework.Models;
+using System.Collections.Generic;
 
 namespace OscaApp.ViewModels
 {
@@ -10,8 +11,9 @@ namespace OscaApp.ViewModels
        public OrdemServico ordemServico { get; set; }
        public ContextPage contexto { get; set; }
        public Relacao cliente { get; set; }
-       public Relacao servico { get; set; }
-       public Relacao profissional { get; set; }
+       public List<Relacao> servicos { get; set; }
+       public List<Relacao> produtos { get; set; }
+       public List<Relacao> profissionais { get; set; }
 
     }
 }
