@@ -27,7 +27,8 @@ namespace OscaApp.Controllers
         public FornecedorController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.fornecedorData = new FornecedorData(db);
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
 
         }
 

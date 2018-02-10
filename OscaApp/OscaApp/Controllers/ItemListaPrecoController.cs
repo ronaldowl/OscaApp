@@ -31,7 +31,8 @@ namespace OscaApp.Controllers
             this.listaprecoData = new ListaPrecoData(db);
             this.ItemlistaPrecoData = new ItemListaPrecoData(db);
 
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         [HttpGet]

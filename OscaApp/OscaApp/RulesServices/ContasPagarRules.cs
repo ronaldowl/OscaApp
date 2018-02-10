@@ -12,6 +12,7 @@ namespace OscaApp.RulesServices
         {
             contasPagar = new ContasPagar();
             contasPagar = entrada.contasPagar;
+            contasPagar.codigo = AutoNumber.GeraCodigo(20, contexto.idOrganizacao);
          
             if (contasPagar.codigo != null)
             {

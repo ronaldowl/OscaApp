@@ -16,7 +16,8 @@ namespace OscaApp.Controllers
 
         public AtendimentoController(ContexDataService db, IHttpContextAccessor httpContext)
         {        
-            contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            // contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         [HttpGet]

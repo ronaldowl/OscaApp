@@ -19,8 +19,9 @@ namespace OscaApp.Controllers
         private LogOsca logOscaData;
 
         public LogOscaController(IHttpContextAccessor httpContext)
-        {         
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+        {
+            //this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
             this.logOscaData = new LogOsca();
         }
 

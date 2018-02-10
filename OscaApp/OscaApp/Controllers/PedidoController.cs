@@ -32,7 +32,8 @@ namespace OscaApp.Controllers
             this.pedidoData = new PedidoData(db);
             this.produtoPedidoData = new ProdutoPedidoData(db);
             this.listaprecoData = new ListaPrecoData(db);
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
             this.Sqlservice = new SqlGenericData();
         }
 

@@ -25,7 +25,8 @@ namespace OscaApp.Controllers
         public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.contasReceberData = new ContasReceberData(db);
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         [HttpGet]

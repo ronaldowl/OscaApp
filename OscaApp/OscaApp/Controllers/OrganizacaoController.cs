@@ -22,8 +22,9 @@ namespace OscaApp.Controllers
 
         public OrganizacaoController(ContexDataManager db, IHttpContextAccessor httpContext)
         {
-            this.organizacaoData = new OrganizacaoData(db);          
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.organizacaoData = new OrganizacaoData(db);
+            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
         [HttpGet]
         public ViewResult FormUpdateOrganizacao()

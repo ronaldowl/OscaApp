@@ -24,7 +24,8 @@ namespace OscaApp.Controllers
         public ContasPagarController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.contasPagarData = new ContasPagarData(db);
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         [HttpGet]
@@ -46,7 +47,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.contasPagar.codigo!=null)
+                if (entrada.contasPagar.idOrganizacao != null)
                 {
                   if  (ContasPagarRules.ContasPagarCreate(entrada, out modelo, contexto)) {
                         contasPagarData.Add(modelo);

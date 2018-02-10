@@ -25,7 +25,8 @@ namespace OscaApp.Controllers
         public ComunicadoController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.comunicadoData = new ComunicadoData(db);
-            this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         [HttpGet]
