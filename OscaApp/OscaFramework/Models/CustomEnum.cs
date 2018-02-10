@@ -162,6 +162,7 @@ namespace OscaFramework.Models
             ContasPagar = 20,
             ContasReceber = 21,
             Recurso = 22,
+            Banco = 23,
             Organizacao = 1000
 
         }

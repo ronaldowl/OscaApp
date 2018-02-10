@@ -11,6 +11,7 @@ namespace OscaApp.Data
         {
 
         }
+        public DbSet<Banco> Bancos { get; set; }
         public DbSet<Cliente> Fornecedor  { get; set; }       
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Comunicado> Comunicados { get; set; }

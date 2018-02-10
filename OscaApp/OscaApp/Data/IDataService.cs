@@ -10,6 +10,12 @@ namespace OscaApp.Data
 
     //TODO: Criar uma inteface para cada objeto gravado no banco
 
+    public interface IBancoData
+    {
+        Banco Get(Guid id, Guid idOrg);
+        List<Banco> GetAll();
+    }
+
     public interface IFornecedorData
     {
         void Add(Fornecedor fornecedor);
