@@ -11,9 +11,16 @@ namespace OscaApp.ViewModels
        public OrdemServico ordemServico { get; set; }
        public ContextPage contexto { get; set; }
        public Relacao cliente { get; set; }
+       public Relacao categoriaManutencao { get; set; }
+
        public List<Relacao> servicos { get; set; }
        public List<Relacao> produtos { get; set; }
        public List<Relacao> profissionais { get; set; }
+
+        public OrdemServicoViewModel()
+        {
+            this.ordemServico = new OrdemServico();
+        }
 
     }
 }

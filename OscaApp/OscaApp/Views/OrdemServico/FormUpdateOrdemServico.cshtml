@@ -18,14 +18,14 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-9 offset-1">
-            <form action="FormCreateOrdemServico" method="post" id="osc_Mainform">
+        <div class="col-md-10 offset-1">
+            <form action="FormUpdateOrdemServico" method="post" id="osc_Mainform">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
                             <table>
                                 <tr>
-                                    <td><h3> Crie Ordem de Servico:&nbsp;&nbsp;</h3></td>
+                                    <td><h3>Ordem de Servico:&nbsp;&nbsp;</h3></td>
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
@@ -34,6 +34,10 @@
                                             &nbsp;
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridOrdemServico","OrdemServico", null)'"><span>Fechar</span></button>
+                                            </label>
+                                            &nbsp;
+                                            <label>
+                                                <button id="osc_impressao" type="button" class="btn btn-info btn-lg fa fa-remove"><span>Imprimir</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -60,7 +64,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-1x"></span>
                                         </span>
-                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
+                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" disabled="disabled">
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
                                                 <span class="fa fa-search"></span>
@@ -88,7 +92,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                            <select id="osc_horaInicio" for=" " class="form-control">
+                                            <select id="osc_horaInicio" asp-for="@Model.ordemServico.horaInicio" class="form-control">
                                                 <option value="1" selected="">01:00</option>
                                                 <option value="2">01:30</option>
                                                 <option value="3">02:00</option>
@@ -146,7 +150,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                            <select id="osc_horaFim" for=" " class="form-control">
+                                            <select id="osc_horaFim" asp-for="@Model.ordemServico.horaFim" class="form-control">
                                                 <option value="1">01:00</option>
                                                 <option value="2">01:30</option>
                                                 <option value="3">02:00</option>
@@ -196,6 +200,55 @@
                                                 <option value="47">00:00</option>
                                             </select>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="background-color:gray ; height:10px"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Problema relatado</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_problema" asp-for="@Model.ordemServico.problema" class="form-control" rows="3" cols="25" placeholder="descreva o problema"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Diagnóstico</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_diagnostico" asp-for="@Model.ordemServico.diagnostico" class="form-control" rows="3" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Laudo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_laudo" asp-for="@Model.ordemServico.laudo" class="form-control" rows="3" cols="25"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Observações gerais</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_observava" asp-for="@Model.ordemServico.observacao" class="form-control" rows="3" cols="25"></textarea>
                                     </div>
                                 </div>
                             </div>

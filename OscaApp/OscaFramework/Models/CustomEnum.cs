@@ -134,6 +134,14 @@ namespace OscaFramework.Models
             OrdemServico = 2
 
         }
+
+        public enum hora
+        {
+            UmaHora = 1,
+            DuasHoras = 2,
+            TresHoras = 3
+
+        }
     }
 
     public class CustomEntityEnum

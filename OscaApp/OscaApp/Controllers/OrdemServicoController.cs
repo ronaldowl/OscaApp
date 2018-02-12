@@ -67,20 +67,17 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormUpdateOrdemServico(string id)
         {
-            OrdemServicoViewModel modelo = new OrdemServicoViewModel();
-            modelo.ordemServico = new OrdemServico();
-            modelo.ordemServico.id = new Guid(id);
-
-            OrdemServico retorno = new OrdemServico();
+            OrdemServicoViewModel modelo = new OrdemServicoViewModel();  
+            modelo.ordemServico.id = new Guid(id);           
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = ordemServicoData.Get(modelo.ordemServico.id, contexto.idOrganizacao);
+                modelo.ordemServico = ordemServicoData.Get(modelo.ordemServico.id, contexto.idOrganizacao);
+                modelo.contexto = this.contexto;
 
-                if (retorno != null)
-                {                    
-                    modelo.ordemServico = retorno;
-                    modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
+                if (modelo.ordemServico != null)
+                {                       
+                    modelo.cliente = sqlData.RetornaRelacaoCliente(modelo.ordemServico.idCliente);
                 }
             }
             return View(modelo);

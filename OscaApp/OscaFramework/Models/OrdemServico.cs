@@ -13,7 +13,21 @@ namespace OscaFramework.Models
         public DateTime dataAgendada { get; set; }
         public Guid idOrganizacao { get; set; }
         public Guid idCliente { get; set; }
-       
+        public Guid idCategoriaManutencao { get; set; }
+        public string problema { get; set; }
+        public string diagnostico { get; set; }
+        public string laudo { get; set; }
+        public string observacao { get; set; }
+
+        public string marca { get; set; }
+        public string modelo { get; set; }
+        public string cor { get; set; }
+        public string numeroSerie { get; set; }
+
+
+
+
+
         public CustomEnum.tipoOrdemServico tipo { get; set; }
         public CustomEnumStatus.StatusOrdemServico statusOrdemServico { get; set; }
         

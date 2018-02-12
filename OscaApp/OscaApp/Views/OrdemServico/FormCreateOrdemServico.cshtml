@@ -5,7 +5,7 @@
         $("#lookupCliente").load("/Cliente/LookupCliente", function () {
             $("#lookupCliente").modal("show");
         })
-    }  
+    }
 </script>
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
@@ -16,7 +16,7 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-9 offset-1">
+        <div class="col-md-10 offset-1">
             <form action="FormCreateOrdemServico" method="post" id="osc_Mainform">
                 <div class="card">
                     <div class="card-header">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row">                     
+                        <div class="row">
                             <div class="col-md-4 ">
                                 <div class="form-group">
                                     <label>Código</label>
@@ -65,8 +65,8 @@
                                         </span>
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                     </div>
-                                </div>                            
-                             
+                                </div>
+
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -197,6 +197,103 @@
                                 </div>
                             </div>
                         </div>
+                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white"> Especificação Ténica</span></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Marca</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_marca" asp-for="@Model.ordemServico.marca" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Cor</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_cor" asp-for="@Model.ordemServico.cor" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Modelo</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_modelo" asp-for="@Model.ordemServico.modelo" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 ">
+                                <div class="form-group">
+                                    <label>Número de Série</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_numeroSerie" asp-for="@Model.ordemServico.numeroSerie" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Problema relatado</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_problema" asp-for="@Model.ordemServico.problema" class="form-control" rows="3" cols="25" placeholder="descreva o problema"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Diagnóstico</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_diagnostico" asp-for="@Model.ordemServico.diagnostico" class="form-control" rows="3" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Laudo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_laudo" asp-for="@Model.ordemServico.laudo" class="form-control" rows="3" cols="25"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Observações gerais</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_observava" asp-for="@Model.ordemServico.observacao" class="form-control" rows="3" cols="25"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -234,7 +331,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                
+                    </div>
                 </div>
             </form>
         </div>
