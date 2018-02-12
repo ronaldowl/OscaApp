@@ -22,6 +22,8 @@
             padding-top: 5px;
         }
         .footer {
+            position:fixed;
+            bottom:0; left:0; right:0;
             background: linear-gradient(to right bottom, #1c177f,#66dbff);
             height:30px;
         }
@@ -75,7 +77,7 @@
     
     @*@RenderSection("scripts", required: false)*@
     <div>
-        <footer class="fixed-bottom footer">
+        <footer class="footer">
             @await Component.InvokeAsync("Footer");
         </footer>
     </div>
