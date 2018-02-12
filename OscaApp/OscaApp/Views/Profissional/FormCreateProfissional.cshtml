@@ -152,45 +152,45 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Criado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </span>
+                                        <input id="osc_criadoPor" asp-for="@Model.profissional.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Criado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-1x"></span>
+                                        </span>
+                                        <input id="osc_criadoEm" asp-for="@Model.profissional.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-exclamation fa-1x"></span>
+                                        </span>
+                                        <input id="osc_status" asp-for="@Model.profissional.status" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Criado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-user"></span>
-                                </span>
-                                <input id="osc_criadoPor" asp-for="@Model.profissional.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Criado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-1x"></span>
-                                </span>
-                                <input id="osc_criadoEm" asp-for="@Model.profissional.criadoEm" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Status</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-exclamation fa-1x"></span>
-                                </span>
-                                <input id="osc_status" asp-for="@Model.profissional.status" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
