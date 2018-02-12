@@ -13,8 +13,7 @@ namespace OscaApp.ViewModels
         public Profissional profissional { get; set; }
         public ContextPage contexto { get; set; }
         public Relacao banco { get; set; }
-
-
+        public Relacao usuario { get; set; }
 
         public ProfissionalViewModel()
         {

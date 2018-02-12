@@ -27,7 +27,7 @@ namespace OscaApp.Data
 
         }
 
-        public  void InicializaOrg(string idOrg, string nomeLogin)
+        public  void InicializaOrg(string idOrg, string nomeLogin, string nomeUsuario)
         {           
             try
             {
@@ -43,8 +43,8 @@ namespace OscaApp.Data
 
                     _Command.Parameters.AddWithValue("idOrg", idOrg);
                     _Command.Parameters.AddWithValue("loginName", nomeLogin);
-
-
+                    _Command.Parameters.AddWithValue("nomeUsuario", nomeUsuario);                   
+                    
                     Connection.Open();
                     _Command.ExecuteScalar();
                     Connection.Close();

@@ -80,6 +80,8 @@ namespace OscaApp.Controllers
 
                 modelo.banco = sqlData.RetornaRelacaoBanco(retorno.idBanco);
 
+                if (retorno.idUsuario != null) modelo.usuario = sqlData.RetornaRelacaoUsuario(retorno.idUsuario);
+
                 if (retorno != null)
                 {
                     modelo.profissional = retorno;

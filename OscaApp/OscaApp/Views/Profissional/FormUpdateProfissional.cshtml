@@ -80,8 +80,8 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user fa-1x"></span>
                                         </span>
-                                        <input id="osc_IdUsuarioName" for=" " type="text" class="form-control" disabled="disabled">
-                                        <input id="osc_IdUsuario" for=" " type="hidden" class="form-control" />
+                                        <input id="osc_IdUsuarioName" asp-for="@Model.usuario.idName " type="text" class="form-control" disabled="disabled">
+                                        <input id="osc_IdUsuario" asp-for="@Model.usuario.id " type="hidden" class="form-control" />
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info"  >
                                                 <span class="fa fa-search"></span>

@@ -256,7 +256,7 @@ namespace OscaApp.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = idOrg };
 
                 //Inicializa valores padrões
-                _sqlService.InicializaOrg(idOrg.ToString(), model.organizacao.nomeLogin);
+                _sqlService.InicializaOrg(idOrg.ToString(), model.organizacao.nomeLogin, model.Email);
                 
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);      
