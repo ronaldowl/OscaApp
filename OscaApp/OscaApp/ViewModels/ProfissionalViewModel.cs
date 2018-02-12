@@ -10,7 +10,18 @@ namespace OscaApp.ViewModels
 {
     public class ProfissionalViewModel : ViewModelBase
     {
-        public Profissional profissional { get; set; }                
+        public Profissional profissional { get; set; }
         public ContextPage contexto { get; set; }
+        public Relacao banco { get; set; }
+
+
+
+        public ProfissionalViewModel()
+        {
+
+            this.banco = new Relacao();
+
+        }
     }
+
 }

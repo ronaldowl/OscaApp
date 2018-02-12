@@ -17,6 +17,7 @@ namespace OscaApp.RulesServices
             SqlGenericService sqlservice = new SqlGenericService();
 
             profissional.codigo = sqlservice.RetornaNovaPosicao(17, contexto.idOrganizacao);
+            profissional.idBanco = entrada.banco.id;
          
             if (profissional.nomeProfissional != null)
             {
@@ -37,9 +38,11 @@ namespace OscaApp.RulesServices
         public static bool ProfissionalUpdate(ProfissionalViewModel entrada,out Profissional profissional)
         {
             profissional = new Profissional();
+            profissional = entrada.profissional;
+            profissional.idBanco = entrada.banco.id;         
 
             //************ Objetos de controle de acesso *******************
-            profissional = entrada.profissional;
+          
             profissional.modificadoEm = DateTime.Now;
             profissional.modificadoPor = entrada.contexto.idUsuario;
             profissional.modificadoPorName = entrada.contexto.nomeUsuario;

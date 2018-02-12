@@ -17,6 +17,7 @@ namespace OscaFramework.Models
         public Boolean comissionado { get; set; }
         public int percentualComissao { get; set; }
         public Guid idOrganizacao { get; set; }
+        public Guid idBanco { get; set; }
 
         public CustomEnum.tipoConta tipoConta { get; set; }
 
