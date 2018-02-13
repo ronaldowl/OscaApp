@@ -17,6 +17,9 @@ namespace OscaApp.ViewModels
        public List<Relacao> produtos { get; set; }
        public List<Relacao> profissionais { get; set; }
 
+
+
+
         public OrdemServicoViewModel()
         {
             this.ordemServico = new OrdemServico();
