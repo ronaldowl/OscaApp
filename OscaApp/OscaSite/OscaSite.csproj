@@ -67,13 +67,36 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.eot" />
-    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
-    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.woff" />
-    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
-    <Content Include="site\fonts\icomoon\icomoon.eot" />
-    <Content Include="site\fonts\icomoon\icomoon.ttf" />
-    <Content Include="site\fonts\icomoon\icomoon.woff" />
+    <Content Include="site\about.html" />
+    <Content Include="site\contact.html" />
+    <Content Include="site\css\animate.css" />
+    <Content Include="site\css\bootstrap.css" />
+    <Content Include="site\css\flexslider.css" />
+    <Content Include="site\css\icomoon.css" />
+    <Content Include="site\css\index.html" />
+    <Content Include="site\css\style.css" />
+    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="site\fonts\bootstrap\index.html" />
+    <Content Include="site\fonts\icomoon\icomoon.svg" />
+    <Content Include="site\fonts\icomoon\index.html" />
+    <Content Include="site\fonts\index.html" />
+    <Content Include="site\images\code.png" />
+    <Content Include="site\images\connect.png" />
+    <Content Include="site\images\ft1-min.jpeg" />
+    <Content Include="site\images\ft2-min.jpeg" />
+    <Content Include="site\images\ft3-min.jpeg" />
+    <Content Include="site\images\ft4-min.jpeg" />
+    <Content Include="site\images\ft5-min.jpg" />
+    <Content Include="site\images\ft6-min.jpg" />
+    <Content Include="site\images\ft7-min.jpeg" />
+    <Content Include="site\images\loader.gif" />
+    <Content Include="site\images\loc.png" />
+    <Content Include="site\images\logo.png" />
+    <Content Include="site\images\medal.png" />
+    <Content Include="site\images\OSCA1.PNG" />
+    <Content Include="site\images\saving.png" />
+    <Content Include="site\images\support.png" />
+    <Content Include="site\images\tools.png" />
     <Content Include="site\sass\bootstrap.scss" />
     <Content Include="site\sass\bootstrap\mixins\_alerts.scss" />
     <Content Include="site\sass\bootstrap\mixins\_background-variant.scss" />
@@ -149,6 +172,13 @@
     <Content Include="site\sass\_bootstrap-compass.scss" />
     <Content Include="site\sass\_bootstrap-mincer.scss" />
     <Content Include="site\sass\_bootstrap-sprockets.scss" />
+    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="site\fonts\icomoon\icomoon.eot" />
+    <Content Include="site\fonts\icomoon\icomoon.ttf" />
+    <Content Include="site\fonts\icomoon\icomoon.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -157,38 +187,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="site\about.html" />
-    <Content Include="site\contact.html" />
-    <Content Include="site\css\animate.css" />
-    <Content Include="site\css\bootstrap.css" />
-    <Content Include="site\css\flexslider.css" />
-    <Content Include="site\css\icomoon.css" />
-    <Content Include="site\css\index.html" />
-    <Content Include="site\css\style.css" />
-    <Content Include="site\fonts\bootstrap\glyphicons-halflings-regular.svg" />
-    <Content Include="site\fonts\bootstrap\index.html" />
-    <Content Include="site\fonts\icomoon\icomoon.svg" />
-    <Content Include="site\fonts\icomoon\index.html" />
-    <Content Include="site\fonts\index.html" />
-    <Content Include="site\images\18.svg" />
-    <Content Include="site\images\27.svg" />
-    <Content Include="site\images\30.svg" />
-    <Content Include="site\images\7.svg" />
-    <Content Include="site\images\8.svg" />
-    <Content Include="site\images\9.svg" />
-    <Content Include="site\images\image_1.jpg" />
-    <Content Include="site\images\image_2.jpg" />
-    <Content Include="site\images\image_3.jpg" />
-    <Content Include="site\images\image_4.jpg" />
-    <Content Include="site\images\index.html" />
-    <Content Include="site\images\loader.gif" />
-    <Content Include="site\images\loc.png" />
-    <Content Include="site\images\person2.jpg" />
-    <Content Include="site\images\person3.jpg" />
-    <Content Include="site\images\person4.jpg" />
-    <Content Include="site\images\slide_1.jpg" />
-    <Content Include="site\images\slide_2.jpg" />
-    <Content Include="site\images\slide_3.jpg" />
     <Content Include="site\index.html" />
     <Content Include="site\js\bootstrap.min.js" />
     <Content Include="site\js\index.html" />
@@ -201,11 +199,9 @@
     <Content Include="site\js\respond.min.js" />
     <Content Include="site\pricing.html" />
     <Content Include="site\products.html" />
-    <Content Include="site\README.txt" />
     <Content Include="site\sass\bootstrap\index.html" />
     <Content Include="site\sass\bootstrap\mixins\index.html" />
     <Content Include="site\sass\index.html" />
-    <Content Include="site\services.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
