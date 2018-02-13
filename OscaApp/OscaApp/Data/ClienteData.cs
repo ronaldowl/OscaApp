@@ -52,6 +52,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("email").IsModified              = true;
                 db.Entry(modelo).Property("anotacao").IsModified           = true;
                 db.Entry(modelo).Property("razaoSocial").IsModified        = true;
+                db.Entry(modelo).Property("idContato").IsModified          = true;
                 db.Entry(modelo).Property("sexo").IsModified               = true;
                 db.Entry(modelo).Property("tipoPessoa").IsModified         = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified      = true;

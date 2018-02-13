@@ -15,6 +15,7 @@ namespace OscaApp.RulesServices
             if (entrada.contexto.idOrganizacao != null)
             {
                 modelo = entrada.cliente;
+                modelo.idContato = entrada.contato.id;
                 modelo.codigo = AutoNumber.GeraCodigo(1, contexto.idOrganizacao);
 
                 ////************ Objetos de controle de acesso ***************
@@ -34,15 +35,15 @@ namespace OscaApp.RulesServices
             
             return false;
         }
-        public static bool MontaClienteUpdate(ClienteViewModel entrada,out Cliente modelo)
+        public static bool MontaClienteUpdate(ClienteViewModel entrada,out Cliente modelo, ContextPage contexto)
         {
             modelo = new Cliente();
-
-            ////************ Objetos de controle de acesso ***************
             modelo = entrada.cliente;
+            modelo.idContato = entrada.contato.id;
+            ////************ Objetos de controle de acesso ***************
             modelo.modificadoEm         = DateTime.Now;
-            modelo.modificadoPor        = entrada.contexto.idUsuario;
-            modelo.modificadoPorName    = entrada.contexto.nomeUsuario;
+            modelo.modificadoPor        = contexto.idUsuario;
+            modelo.modificadoPorName    = contexto.nomeUsuario;
             ////************ FIM Objetos de controle de acesso ***************
 
             return true;           

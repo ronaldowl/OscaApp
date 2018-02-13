@@ -11,7 +11,7 @@ using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
 using OscaApp.framework;
 using OscaFramework.Models;
-
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {
@@ -20,15 +20,17 @@ namespace OscaApp.Controllers
     {
         private readonly ClienteData clienteData;
         private readonly EnderecoData enderecoData;
+        private readonly SqlGenericDataServices sqlData;
         private ContextPage contexto;
 
 
-        public ClienteController(ContexDataService db, IHttpContextAccessor httpContext)
+        public ClienteController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericDataServices _sqlData)
         {
             this.clienteData = new ClienteData(db);
             this.enderecoData = new EnderecoData(db);
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.sqlData = _sqlData;
         }
 
         public ViewResult GridCliente(string filtro, int Page)
@@ -88,10 +90,9 @@ namespace OscaApp.Controllers
         public IActionResult FormUpdateCliente(ClienteViewModel entrada)
         {
             Cliente modelo = new Cliente();
-            entrada.contexto = this.contexto;
             try
             {
-                if (ClienteRules.MontaClienteUpdate(entrada, out modelo))
+                if (ClienteRules.MontaClienteUpdate(entrada, out modelo, this.contexto))
                 {
                     clienteData.Update(modelo);
                     return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
@@ -119,13 +120,13 @@ namespace OscaApp.Controllers
                     //campo que sempre contém valor
                     retorno = clienteData.Get(new Guid(id), contexto.idOrganizacao);
 
+                    modelo.contato = sqlData.RetornaRelacaoContato(retorno.idContato);
                     if (retorno != null)
                     {
                         modelo.cliente = retorno;
 
                         //Preenche informações do grid de Endereço
-                        modelo.enderecos = enderecoData.GetByCliente(modelo.cliente.id);
-
+                        modelo.enderecos = enderecoData.GetByCliente(new Guid (id));
                     }
                 }
 

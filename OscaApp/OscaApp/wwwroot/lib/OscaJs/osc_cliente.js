@@ -2,7 +2,6 @@
 
 function OnLoad() {
     //********* Executa regra do Onload do Form **********************
-    debugger;     
 
     // PARA HABILITAR OS CAMPOS DO FORMULÁRIO, MUDAR O true PARA false
     var statusForm = $("#osc_status").val(); 

@@ -6,10 +6,17 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
     @Html.HiddenFor(m => m.cliente.id)
 </div>
+<script>
+    function CarregaLookup() {
+        $("#lookupContato").load("/Contato/LookupContato", function () {
+            $("#lookupContato").modal("show");
+        })
+    }
+</script>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 offset-1">
-             
+
             <form action="FormCreateCliente" method="post" id="FormCreateCliente">
                 <div class="card " id="osc_MainForm">
                     <div class="card-header">
@@ -80,6 +87,21 @@
                                             <span class="fa fa-briefcase fa-1x"></span>
                                         </span>
                                         <input id="osc_razaosocial" asp-for="@Model.cliente.razaoSocial" type="text" class="form-control" placeholder="Razão Social" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Contato Principal: </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user-o fa-1x"></span>
+                                        </span>
+                                        <input id="osc_IdContatoName" asp-for="@Model.contato.idName" type="text" class="form-control">
+                                        <span class="input-group-btn ">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookup()">
+                                                <span class="fa fa-search"></span>
+                                            </button>
+                                        </span>
+                                        <input id="osc_ContatoId" asp-for="@Model.contato.id" type="hidden" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -177,11 +199,11 @@
                     </div>
                 </div>
             </form>
-            
+
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="lookupContato"></div>
 <script src="~/lib/OscaJs/osc_cliente.js" asp-append-version="true"></script>
 <script>
     //Executa regras de carregamento do Form
