@@ -42,7 +42,7 @@
                             <div class="col-md-11">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr><th></th>
                                             <th>Código</th>
                                             <th>Nome</th>
                                             <th>Site</th>
@@ -51,6 +51,7 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
+                                            <td><i class="fa fa-1x fa-university"></i></td>
                                             <td>@item.codigo</td>
                                             <td>@item.nome</td>
                                             <td>@item.site</td>

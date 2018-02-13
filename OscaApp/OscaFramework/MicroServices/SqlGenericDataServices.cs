@@ -23,7 +23,6 @@ namespace OscaFramework.MicroServices
             this.Configuration = Configuration; 
             this.conectService = Configuration.GetConnectionString("databaseService");
         }
-
         public ListaPreco RetornaListaPreco(Guid id)
         {
             ListaPreco retorno = new ListaPreco();

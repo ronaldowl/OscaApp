@@ -46,22 +46,31 @@ namespace OscaApp
             //// Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            //*********Carrega informações do banco de dados
+            //*********Carrega informações do banco de dados via ENTITY_FRAMEWORD
             services.AddDbContext<ContexDataService>(options => options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
             services.AddDbContext<ContexDataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //********* FIMCarrega informações do banco de dados via ENTITY_FRAMEWORD
 
             //*************************************************************
+            //TODO: Verificar usuabilidade desse componente de parâmetros
             //Serviço de configuração universal
-            services.AddSingleton<IConfiguration>(_ => Configuration);
+            //services.AddSingleton<IConfiguration>(_ => Configuration);
 
             //Serviço para acesso a metodos de conexao SQL no banco Manager
             services.AddSingleton<ISqlGenericManager, SqlGenericManager>();
 
+            //*********************** Serviços para acesso a dados vi ADO *******************
             //Serviço para acesso a metodos de conexão SQL no banco DATA
-            //Falta implementar em todos os controllers, apenas usado na Ordem de Servico
+            //TODO:Falta implementar em todos os controllers, apenas usado na Ordem de Servico
             SqlGenericDataServices sqlData = new SqlGenericDataServices();
             services.AddSingleton<SqlGenericDataServices>(_ => sqlData);
 
+            //Serviço para retornar dados que são comuns a todas empresas
+            //TODO:Falta implementar em todaas chamadas, sendo usado apenas na Ordem de serviço
+            SqlGenericServices sqlServices = new SqlGenericServices();
+            services.AddSingleton<SqlGenericServices>(_ => sqlServices);
+
+            //*********************** FIM Serviços para acesso a dados vi ADO *******************
             services.AddMvc(config =>
             {
                 config.ModelBinderProviders.Insert(0, new InvariantDecimalModelBinderProvider());

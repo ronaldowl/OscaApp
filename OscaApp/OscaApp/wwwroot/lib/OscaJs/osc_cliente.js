@@ -11,6 +11,13 @@ function OnLoad() {
     desabilita_Cliente(statusForm);
 }
 
+function OnChangeTipoPessoa()
+{
+    alert('Implementar regra aqui');
+
+    LimpaCNPJ_CPF();
+}
+
 function desabilita_Cliente(status) {
 
     if (status == "Inativo") {
