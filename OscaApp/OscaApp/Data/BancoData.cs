@@ -29,7 +29,7 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
-        public List<Banco> GetAll( )
+        public List<Banco> GetAll()
         {
             List<Banco> retorno = new List<Banco>();
             retorno = db.Bancos.FromSql("SELECT * FROM Banco").ToList();

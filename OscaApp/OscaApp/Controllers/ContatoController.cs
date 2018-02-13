@@ -128,5 +128,17 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Contato>(Page, 10));
         }
+
+
+        public ViewResult LookupContato(string filtro, int Page)
+        {
+            IEnumerable<Contato> retorno = contatoData.GetAll(contexto.idOrganizacao);
+
+            retorno = retorno.OrderBy(x => x.nome);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Contato>(Page, 10));
+        }
     }
 }

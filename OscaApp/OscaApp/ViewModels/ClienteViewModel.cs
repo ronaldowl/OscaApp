@@ -14,10 +14,12 @@ namespace OscaApp.ViewModels
         public Cliente cliente { get; set; }                
         public List<Endereco> enderecos { get; set; }
         public ContextPage contexto { get; set; }
-
+        public Relacao contato { get; set;
+        }
         public ClienteViewModel()
         {
             this.cliente = new  Cliente();
+            this.contato = new Relacao();
         }
     }
 }

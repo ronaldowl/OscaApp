@@ -40,7 +40,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("numeroConta").IsModified              = true;
                 db.Entry(modelo).Property("agencia").IsModified                  = true;
                 db.Entry(modelo).Property("comissionado").IsModified             = true;
-                db.Entry(modelo).Property("idBanco").IsModified = true;
+                db.Entry(modelo).Property("idBanco").IsModified                  = true;
 
                 db.Entry(modelo).Property("percentualComissao").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;

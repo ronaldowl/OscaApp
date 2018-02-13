@@ -24,6 +24,8 @@ namespace OscaFramework.Models
         public String anotacao { get; set; }
         public CustomEnum.Sexo sexo { get; set; }
         public Guid idOrganizacao { get; set; }
+        public Guid idContato { get; set; }
+
 
         public Cliente() {
             this.status = CustomEnumStatus.Status.Ativo;
