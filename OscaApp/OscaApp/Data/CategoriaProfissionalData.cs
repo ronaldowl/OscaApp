@@ -17,6 +17,9 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
 
+   
+
+
         public CategoriaProfissional Get(Guid id, Guid idOrg)
         {
             List<CategoriaProfissional> retorno = new List<CategoriaProfissional>();

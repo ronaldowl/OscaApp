@@ -6,9 +6,18 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
     @Html.HiddenFor(m => m.profissional.id)
 </div>
+
+<script>
+    function CarregaLookup() {
+        $("#lookupBanco").load("/Banco/LookupBanco", function () {
+            $("#lookupBanco").modal("show");
+        })
+    }
+</script>
+
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10 offset-1">
             <form action="FormUpdateProfissional" method="post" id="FormUpdateProfissional">
                 <div class="card  " id="osc_MainForm">
                     <div class="card-header">
@@ -65,6 +74,22 @@
                                         <input id="osc_nome" asp-for="@Model.profissional.nomeProfissional" type="text" class="form-control" required="required" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Usuário: </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user fa-1x"></span>
+                                        </span>
+                                        <input id="osc_IdUsuarioName" asp-for="@Model.usuario.idName " type="text" class="form-control" disabled="disabled">
+                                        <input id="osc_IdUsuario" asp-for="@Model.usuario.id " type="hidden" class="form-control" />
+                                        <span class="input-group-btn ">
+                                            <button type="button" class="btn btn-info">
+                                                <span class="fa fa-search"></span>
+                                            </button>
+                                        </span>
+
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -79,6 +104,22 @@
                                             <option value="3">Salário</option>
                                             <option value="4">Outros</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Banco: </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user-o fa-1x"></span>
+                                        </span>
+                                        <input id="osc_IdBancoName" asp-for="@Model.banco.idName" type="text" class="form-control">
+                                        <input id="osc_BancoId" asp-for="@Model.banco.id" type="hidden" class="form-control" />
+                                        <span class="input-group-btn ">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookup()">
+                                                <span class="fa fa-search"></span>
+                                            </button>
+                                        </span>
+
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -99,7 +140,7 @@
                                         <input id="osc_NumConta" asp-for="@Model.profissional.numeroConta" type="text" class="form-control" placeholder="número da conta" />
                                     </div>
                                 </div>
-                             
+
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -126,68 +167,68 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </span>
+                                        <input id="osc_criadoPor" asp-for="@Model.profissional.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-1x"></span>
+                                        </span>
+                                        <input id="osc_criadoEm" asp-for="@Model.profissional.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </span>
+                                        <input id="osc_modificadoPor" asp-for="@Model.profissional.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-1x"></span>
+                                        </span>
+                                        <input id="osc_modificadoEm" asp-for="@Model.profissional.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Status</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-exclamation fa-1x"></span>
+                                        </span>
+                                        <input id="osc_status" asp-for="@Model.profissional.status" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
-            <br />   <br />   
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Criado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-user"></span>
-                                </span>
-                                <input id="osc_criadoPor" asp-for="@Model.profissional.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label">Criado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-1x"></span>
-                                </span>
-                                <input id="osc_criadoEm" asp-for="@Model.profissional.criadoEm" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Modificado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-user"></span>
-                                </span>
-                                <input id="osc_modificadoPor" asp-for="@Model.profissional.modificadoPorName" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label">Modificado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-1x"></span>
-                                </span>
-                                <input id="osc_modificadoEm" asp-for="@Model.profissional.modificadoEm" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label">Status</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-exclamation fa-1x"></span>
-                                </span>
-                                <input id="osc_status" asp-for="@Model.profissional.status" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="lookupBanco"></div> 

@@ -9,7 +9,9 @@ namespace OscaFramework.Models
     [Table("Profissional")]
     public class Profissional : GenericEntity
     {
-    
+       
+        public Guid idUsuario { get; set; }
+
         public String codigo { get; set; }
         public String nomeProfissional { get; set; }
         public String numeroConta { get; set; }
@@ -17,6 +19,7 @@ namespace OscaFramework.Models
         public Boolean comissionado { get; set; }
         public int percentualComissao { get; set; }
         public Guid idOrganizacao { get; set; }
+        public Guid idBanco { get; set; }
 
         public CustomEnum.tipoConta tipoConta { get; set; }
 

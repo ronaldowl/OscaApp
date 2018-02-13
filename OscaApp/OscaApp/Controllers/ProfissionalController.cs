@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
-
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {
@@ -20,12 +20,14 @@ namespace OscaApp.Controllers
     {
         private readonly IProfissionalData profissionalData;
         private ContextPage contexto;
+        private readonly SqlGenericDataServices sqlData;
 
-        public ProfissionalController(ContexDataService db, IHttpContextAccessor httpContext)
+        public ProfissionalController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericDataServices _sqlData)
         {
             this.profissionalData = new ProfissionalData(db);
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.sqlData = _sqlData;
         }
 
         [HttpGet]
@@ -76,6 +78,10 @@ namespace OscaApp.Controllers
             {
                 retorno = profissionalData.Get(modelo.profissional.id, contexto.idOrganizacao);
 
+                modelo.banco = sqlData.RetornaRelacaoBanco(retorno.idBanco);
+
+                if (retorno.idUsuario != null) modelo.usuario = sqlData.RetornaRelacaoUsuario(retorno.idUsuario);
+
                 if (retorno != null)
                 {
                     modelo.profissional = retorno;
@@ -89,6 +95,7 @@ namespace OscaApp.Controllers
         {
             Profissional modelo = new Profissional();
             entrada.contexto = this.contexto;
+        
             try
             {
                 if (ProfissionalRules.ProfissionalUpdate(entrada, out modelo))

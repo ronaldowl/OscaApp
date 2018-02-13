@@ -39,5 +39,15 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Banco>(Page, 10));
         }
+        public ViewResult LookupBanco(string filtro, int Page)
+        {
+            IEnumerable<Banco> retorno = bancoData.GetAll();
+
+            retorno = retorno.OrderBy(x => x.nome);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Banco>(Page, 10));
+        }
     }
 }

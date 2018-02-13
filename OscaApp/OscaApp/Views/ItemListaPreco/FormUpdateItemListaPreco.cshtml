@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">                                   
+                                <div class="form-group">
                                     <label class="control-label">Lista de Preço</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
@@ -52,7 +52,7 @@
                                             <select asp-items="@Model.listaPrecos" asp-for="@Model.itemlistaPreco.idListaPreco"></select>
                                         </div>
                                     </div>
-                                </div>                              
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label">Valor de Venda</label>
                                     <div class="inputGroupContainer">
@@ -61,79 +61,73 @@
                                             <input asp-for="@Model.itemlistaPreco.valor" class="form-control" type="text">
                                         </div>
                                     </div>
-                                </div>                               
+                                </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </span>
+                                        <input id="osc_criadoPor" asp-for="@Model.itemlistaPreco.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-1x"></span>
+                                        </span>
+                                        <input id="osc_criadoEm" asp-for="@Model.itemlistaPreco.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </span>
+                                        <input id="osc_modificadoPor" asp-for="@Model.itemlistaPreco.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-1x"></span>
+                                        </span>
+                                        <input id="osc_modificadoEm" asp-for="@Model.itemlistaPreco.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label">Status</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-exclamation fa-1x"></span>
+                                        </span>
+                                        <input id="osc_status" asp-for="@Model.itemlistaPreco.status" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </form>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br /><br />
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Criado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-user"></span>
-                                </span>
-                                <input id="osc_criadoPor" asp-for="@Model.itemlistaPreco.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label">Criado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-1x"></span>
-                                </span>
-                                <input id="osc_criadoEm" asp-for="@Model.itemlistaPreco.criadoEm" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Modificado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-user"></span>
-                                </span>
-                                <input id="osc_modificadoPor" asp-for="@Model.itemlistaPreco.modificadoPorName" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label">Modificado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-1x"></span>
-                                </span>
-                                <input id="osc_modificadoEm" asp-for="@Model.itemlistaPreco.modificadoEm" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label">Status</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-exclamation fa-1x"></span>
-                                </span>
-                                <input id="osc_status" asp-for="@Model.itemlistaPreco.status" type="text" class="form-control" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                </div>          
-
-            </div>
+            
         </div>
     </div>
 </div>
