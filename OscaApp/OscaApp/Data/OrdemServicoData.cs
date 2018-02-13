@@ -82,5 +82,12 @@ namespace OscaApp.Data
             return retorno;
 
         }
+        public List<OrdemServico> GetAllByIdCliente(Guid idCliente)
+        {
+            List<OrdemServico> retorno = new List<OrdemServico>();
+            retorno = db.OrdensServico.FromSql("SELECT * FROM OrdemServico where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            return retorno;
+
+        }
     }
 }

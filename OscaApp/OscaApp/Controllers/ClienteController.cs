@@ -20,6 +20,12 @@ namespace OscaApp.Controllers
     {
         private readonly ClienteData clienteData;
         private readonly EnderecoData enderecoData;
+        private readonly OrdemServicoData ordemServicoData;
+        private readonly PedidoData pedidoData;
+        //private readonly AtendimentoData atendimentoData;
+
+
+
         private readonly SqlGenericDataServices sqlData;
         private ContextPage contexto;
 
@@ -28,7 +34,9 @@ namespace OscaApp.Controllers
         {
             this.clienteData = new ClienteData(db);
             this.enderecoData = new EnderecoData(db);
-            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.pedidoData = new PedidoData(db);
+             
+            this.ordemServicoData = new OrdemServicoData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.sqlData = _sqlData;
         }
@@ -127,6 +135,10 @@ namespace OscaApp.Controllers
 
                         //Preenche informações do grid de Endereço
                         modelo.enderecos = enderecoData.GetByCliente(new Guid (id));
+                        //Preenche informações do grid de Ordem de Servico
+                        modelo.ordensServico = ordemServicoData.GetAllByIdCliente(new Guid(id));
+
+
                     }
                 }
 

@@ -19,11 +19,7 @@ namespace OscaApp.Data
             this.db = dbContext;        
         }
         public void Add(Cliente cliente)
-        {
-            // try { 
-           // List<Cliente> retorno =  new List<Cliente>(); ;
-          //  retorno = db.Fornecedor.FromSql("SELECT * FROM Cliente where  cnpj_cpf = '" + cliente.cnpj_cpf.ToString() + "'").ToList();
-         //   if (retorno == null) {
+        {        
                 try
                 {
                     db.Fornecedor.Add(cliente);                
@@ -34,12 +30,7 @@ namespace OscaApp.Data
                     throw;
                 }
             }
-         //  }
-        //  catch(Exception ex)
-       //  {
-      //       throw;
-     //   }
-    //  }
+     
         public void Update(Cliente modelo)
         {
             try

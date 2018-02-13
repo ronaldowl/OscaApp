@@ -48,7 +48,7 @@
                             <div class="col-md-11">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr><th></th>
                                             <th>Código</th>
                                             <th>Cliente</th>
                                             <th>Data Agendada</th>
@@ -59,7 +59,7 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr><td><i class="fa fa-file-text-o"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateOrdemServico", new { id = item.id })</td>
                                             <td>Cliente 1 </td>
                                             <td>@item.dataAgendada</td>
