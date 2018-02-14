@@ -82,6 +82,8 @@ namespace OscaApp.Controllers
                 if (modelo.ordemServico != null)
                 {                       
                     modelo.cliente = sqlData.RetornaRelacaoCliente(modelo.ordemServico.idCliente);
+
+                    if(modelo.ordemServico.idCategoriaManutencao != null) modelo.categoriaManutencao = sqlData.RetornaRelacaoCategoriaManutencao(modelo.ordemServico.idCategoriaManutencao);
                 }
             }
             return View(modelo);
@@ -97,7 +99,7 @@ namespace OscaApp.Controllers
                 if (OrdemServicoRules.OrdemServicoUpdate(entrada, out modelo))
                 {
                     ordemServicoData.Update(modelo);
-                    return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
+                    return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });
                 }
             }
             catch (Exception ex)

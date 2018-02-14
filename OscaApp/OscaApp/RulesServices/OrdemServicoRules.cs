@@ -20,6 +20,7 @@ namespace OscaApp.RulesServices
                 ordemServico.codigo = servico.RetornaNovaPosicao(5, contexto.idOrganizacao);
                 ordemServico.statusOrdemServico = CustomEnumStatus.StatusOrdemServico.EmAndamento;
                 ordemServico.idCliente = entrada.cliente.id;
+                ordemServico.idCategoriaManutencao = entrada.categoriaManutencao.id;
 
                 //************ Objetos de controle de acesso ******************
                 ordemServico.criadoEm = DateTime.Now;
@@ -38,9 +39,10 @@ namespace OscaApp.RulesServices
         public static bool OrdemServicoUpdate(OrdemServicoViewModel entrada, out OrdemServico ordemServico)
         {
             ordemServico = new OrdemServico();
+            ordemServico = entrada.ordemServico;
+            ordemServico.idCategoriaManutencao = entrada.categoriaManutencao.id; 
 
             //************ Objetos de controle de acesso *******************
-            ordemServico = entrada.ordemServico;
             ordemServico.modificadoEm = DateTime.Now;
             ordemServico.modificadoPor = entrada.contexto.idUsuario;
             ordemServico.modificadoPorName = entrada.contexto.nomeUsuario;

@@ -131,7 +131,7 @@ namespace OscaFramework.Models
         public enum tipoOrdemServico
         {
             Orcamento = 1,
-            OrdemServico = 2
+            Execucao = 2
 
         }
 

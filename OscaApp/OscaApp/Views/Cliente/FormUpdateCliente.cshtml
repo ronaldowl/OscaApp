@@ -249,10 +249,13 @@
                                 <td>
                                     <div id="barra_acoes_endereco">
                                         <label>
-                                            <button id="osc_endereco" type="button" class="btn btn-info btn-lg fa fa-1x fa-plus" value="Novo Endereço" onclick="location.href='@Url.Action("FormCreateEndereco", "Endereco", new { idCliente = @Model.cliente.id, NomeCliente = @Model.cliente.nomeCliente })'"> <span>Novo</span></button>
+                                            <button id="osc_verEndereco" data-toggle="collapse" data-target="#conteudoEndereco" class="btn btn-info btn-sm fa fa-1x fa-plus"> <span>Exp</span></button>
+                                        </label>&nbsp;
+                                        <label>
+                                            <button id="osc_endereco" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Novo Endereço" onclick="location.href='@Url.Action("FormCreateEndereco", "Endereco", new { idCliente = @Model.cliente.id, NomeCliente = @Model.cliente.nomeCliente })'"> <span>Novo</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_gridEndereco" type="button" class="btn btn-info btn-lg fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridEndereco", "Endereco", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.enderecos.Count
+                                            <button id="osc_gridEndereco" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridEndereco", "Endereco", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.enderecos.Count
                                         </label>
                                     </div>
                                 </td>
@@ -260,7 +263,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="conteudoEndereco">
                     <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
@@ -291,14 +294,17 @@
                     <div class="card-title">
                         <table>
                             <tr>
-                                <td style="width:150px"><h5>Ordem Servico:&nbsp;</h5></td>
+                                <td style="width:150px"><h5>Ordens Servico:&nbsp;</h5></td>
                                 <td>
                                     <div id="barra_acoes_ordemSevico">
                                         <label>
-                                            <button id="osc_ordemservico" type="button" class="btn btn-info btn-lg fa fa-1x fa-plus" value="Nova OS" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
+                                            <button id="osc_verOrdemServico" data-toggle="collapse" data-target="#conteudoOrdemServico" class="btn btn-info btn-sm fa fa-1x fa-plus"> <span>Exp</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_gridordemservico" type="button" class="btn btn-info btn-lg fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridOrdemServico", "OrdemServico", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.enderecos.Count
+                                            <button id="osc_ordemservico" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova OS" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_gridordemservico" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridOrdemServico", "OrdemServico", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.ordensServico.Count
                                         </label>
                                     </div>
                                 </td>
@@ -306,12 +312,12 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="conteudoOrdemServico">
                     <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Data Atemdimento</th>
+                                <th>Data Atendimento</th>
                                 <th>Status</th>
                                 <th>Tipo</th>
                             </tr>
@@ -331,7 +337,7 @@
                     </table>
                 </div>
             </div>
-            <div class="card card-success" id="osc_formAtendimento">
+            @*<div class="card card-success" id="osc_formAtendimento">
                 <div class="card-header card-success">
                     <div class="card-title">
                         <table>
@@ -340,10 +346,13 @@
                                 <td>
                                     <div id="barra_acoes_atendimento">
                                         <label>
-                                            <button id="osc_atendimento" type="button" class="btn btn-info btn-lg fa fa-1x fa-plus" value="Nova OS" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
+                                            <button id="osc_verAtendimento" data-toggle="collapse" data-target="#conteudoAtendimento" class="btn btn-info btn-sm fa fa-1x fa-plus"> <span>Exp</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_gridAtendimento" type="button" class="btn btn-info btn-lg fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.enderecos.Count
+                                            <button id="osc_atendimento" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova OS" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_gridAtendimento" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.atendimentos.Count
                                         </label>
                                     </div>
                                 </td>
@@ -351,7 +360,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="conteudoAtendimento">
                     <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
@@ -375,20 +384,23 @@
                         }
                     </table>
                 </div>
-            </div>
+            </div>*@
             <div class="card card-success" id="osc_formPedido">
-                <div class="card-header card-success">
+                <div class="card-header card-success " >
                     <div class="card-title">
                         <table>
                             <tr>
-                                <td style="width:150px"><h5>Pedido:&nbsp;</h5></td>
+                                <td style="width:150px"><h5>Pedidos:&nbsp;</h5></td>
                                 <td>
                                     <div id="barra_acoes_pedido">
                                         <label>
-                                            <button id="osc_pedido" type="button" class="btn btn-info btn-lg fa fa-1x fa-plus" value="Nova OS" onclick="location.href='@Url.Action("FormCreatePedido", "Pedido", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
+                                            <button id="osc_verPedido" data-toggle="collapse" data-target="#conteudoPedido" class="btn btn-info btn-sm fa fa-1x fa-plus" > <span>Exp</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_gridpedido" type="button" class="btn btn-info btn-lg fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridPedido", "Pedido", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.enderecos.Count
+                                            <button id="osc_pedido" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova OS" onclick="location.href='@Url.Action("FormCreatePedido", "Pedido", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_gridpedido" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridPedido", "Pedido", new {idCliente = @Model.cliente.id })'">Ver mais</button> Total:@Model.pedidos.Count
                                         </label>
                                     </div>
                                 </td>
@@ -396,25 +408,25 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body collapse" id="conteudoPedido">
                     <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
                                 <th>Código</th>
-                                <th>Data Atendimento</th>
-                                <th>Serviço</th>
+                                <th>Data criação</th>  
+                                <th>Pagamento</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
                         @{int contadorP = 0;}
-                        @foreach (var item in Model.enderecos)
+                        @foreach (var item in Model.pedidos)
                         {
                             @if (contadorP == 5) { break; }
                             <tr>
-                                <td>@Html.ActionLink(item.logradouro.ToString(), "FormUpdateAtendimento", "Atendimento", new { id = item.id })</td>
-                                <td>@item.numero</td>
-                                <td>@item.cep</td>
-                                <td>@item.TipoEndereco</td>
+                                <td>@Html.ActionLink(item.codigoPedido.ToString(), "FormUpdatePedido", "Pedido", new { idcliente = item.id })</td>
+                                <td>@item.criadoEm</td>
+                                <td>@item.tipoPagamento</td>
+                                <td>@item.statusPedido</td>                              
                             </tr>
                             contadorP++;
                         }
@@ -424,7 +436,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="lookupContato"></div>
+<div class="modal fade modal-sm" id="lookupContato"></div>
 <script src="~/lib/OscaJs/osc_cliente.js"></script>
 <script>
     //Executa regras de carregamento do Form

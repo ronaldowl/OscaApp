@@ -48,6 +48,12 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("idCategoriaManutencao").IsModified = true;
                 db.Entry(modelo).Property("observacao").IsModified = true;
 
+                db.Entry(modelo).Property("tipo").IsModified = true;
+                db.Entry(modelo).Property("placa").IsModified = true;
+                db.Entry(modelo).Property("valorDesconto").IsModified = true;
+                db.Entry(modelo).Property("valorDescontoPercentual").IsModified = true;
+                db.Entry(modelo).Property("tipoDesconto").IsModified = true;
+
 
 
 

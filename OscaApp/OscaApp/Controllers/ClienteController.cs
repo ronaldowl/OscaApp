@@ -137,6 +137,11 @@ namespace OscaApp.Controllers
                         modelo.enderecos = enderecoData.GetByCliente(new Guid (id));
                         //Preenche informações do grid de Ordem de Servico
                         modelo.ordensServico = ordemServicoData.GetAllByIdCliente(new Guid(id));
+                     
+                        //Preenche informações do grid de Pedido
+                        modelo.pedidos = pedidoData.GetAllByIdCliente(new Guid(id));
+
+
 
 
                     }

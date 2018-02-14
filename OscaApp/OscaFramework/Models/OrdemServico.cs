@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OscaFramework.Models
@@ -11,6 +12,8 @@ namespace OscaFramework.Models
         public int horaInicio { get; set; }
         public int horaFim { get; set; }
         public DateTime dataAgendada { get; set; }
+        public DateTime dataFechamento { get; set; }
+
         public Guid idOrganizacao { get; set; }
         public Guid idCliente { get; set; }
         public Guid idCategoriaManutencao { get; set; }
@@ -23,10 +26,18 @@ namespace OscaFramework.Models
         public string modelo { get; set; }
         public string cor { get; set; }
         public string numeroSerie { get; set; }
+        public string placa { get; set; }
 
 
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        public decimal valorTotal { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal valorDesconto { get; set; }
 
+        public decimal valorDescontoPercentual { get; set; }
+
+        public CustomEnum.tipoDesconto tipoDesconto { get; set; }
 
         public CustomEnum.tipoOrdemServico tipo { get; set; }
         public CustomEnumStatus.StatusOrdemServico statusOrdemServico { get; set; }

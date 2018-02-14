@@ -106,5 +106,13 @@ namespace OscaApp.Data
             return HelperAssociate.ConvertToGridPedido(itens);
         }
 
+        public List<Pedido> GetAllByIdCliente(Guid idCliente)
+        {
+            List<Pedido> retorno = new List<Pedido>();
+            retorno = db.Pedidos.FromSql("SELECT * FROM Pedido where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            return retorno;
+
+        }
+
     }
 }

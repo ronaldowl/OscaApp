@@ -71,7 +71,69 @@
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                     </div>
                                 </div>
-
+                                <div class="form-group">
+                                    <label>Tipo </label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-1x"></span>
+                                        </span>
+                                        <select id="osc_tipo" asp-for="@Model.ordemServico.tipo" class="form-control" required="required">
+                                            <option value="1" selected="">Orçamento</option>
+                                            <option value="2">Execução</option>
+                                        </select>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label>Status Ordem Servico</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" type="text" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">                               
+                              
+                                <div class="form-group">
+                                    <label>Tipo de Desconto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-1x"></span>
+                                        </span>
+                                        <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control">
+                                            <option value="1" selected="">Valor</option>
+                                            <option value="2">Percentual</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Valor Desconto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calculator fa-1x"></span>
+                                        </span>
+                                        <input id="osc_valorDesconto" asp-for="@Model.ordemServico.valorDesconto" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>% Desconto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calculator fa-1x"></span>
+                                        </span>
+                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.ordemServico.valorDescontoPercentual" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Valor Total</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calculator fa-1x"></span>
+                                        </span>
+                                        <input id="osc_valorTotal" asp-for="@Model.ordemServico.valorTotal" type="text" class="form-control" disabled="disabled"/>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -83,8 +145,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Hora Inicio</label>
                                     <div class="inputGroupContainer">
@@ -200,6 +260,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Data de Fechamento</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-1x"></i></span>
+                                            <input id="osc_dataFechamento" asp-for="@Model.ordemServico.dataFechamento" class="form-control" type="text" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white"> Especificação Ténica</span></div>
@@ -261,10 +330,17 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Placa</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-car fa-1x"></i></span>
+                                            <input id="osc_placa" asp-for="@Model.ordemServico.placa" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-
                         <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white"> Informações Gerais</span></div>
                         <div class="row">
                             <div class="col-md-6">
