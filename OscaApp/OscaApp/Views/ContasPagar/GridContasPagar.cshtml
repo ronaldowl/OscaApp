@@ -49,13 +49,15 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Código</th>
                                             <th>Título</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasPagar", "ContasPagar", new {id = item.id })'">
+                                            <td><i class="fa fa-envelope-o"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasPagar", new { id = item.id })</td>
                                             <td>@item.titulo</td>
                                         </tr>

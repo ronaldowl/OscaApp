@@ -10,8 +10,7 @@ namespace OscaFramework.Models
     {
 
         //Propriedades locais
-
-        public Cliente cliente { get; set; }
+         
         public String nome { get; set; }
         public String telefone { get; set; }
         public String celular { get; set; }

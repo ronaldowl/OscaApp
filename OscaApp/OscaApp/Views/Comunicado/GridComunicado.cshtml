@@ -49,6 +49,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Título</th>
                                             <th>Início</th>
                                             <th>Fim</th>
@@ -56,7 +57,8 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateComunicado", "Comunicado", new {id = item.id })'">
+                                            <td><i class="fa fa-comments-o"></i></td>
                                             <td>@Html.ActionLink(item.titulo.ToString(), "FormUpdateComunicado", new { id = item.id })</td>
                                             <td>@item.dataInicio</td>
                                             <td>@item.dataFim</td>

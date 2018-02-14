@@ -11,7 +11,7 @@
         <div class="col-md-4">
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-sort-amount-desc iconPanel" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-file-text-o iconPanel" aria-hidden="true"></i>
                     <a asp-controller="OrdemServico" asp-action="GridOrdemServico"><h4>Ordem de Serviço</h4></a>
                     </div>
                 <div class="card-body">
@@ -20,21 +20,20 @@
             </div>
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-black-tie iconPanel" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-desktop iconPanel" aria-hidden="true"></i>
                     <a asp-controller="Recurso" asp-action="GridRecurso"><h4>Recursos</h4></a>
                 </div>
                 <div class="card-body">
-                    <p>Consulte, altere e cadastre novos Recurso da sua empresa, Ferramentas, Projetores, Carros e outros</p>
+                    <p>Consulte, altere e cadastre os recursos da sua empresa, como ferramentas, projetores, Carros e outros.</p>
                 </div>
             </div>
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-black-tie iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Profissional" asp-action="GridProfissional"><h4>Profissional</h4></a>
+                    <i class="fa fa-2x fa-user-o  iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Profissional" asp-action="GridProfissional"><h4>Profissionais</h4></a>
                 </div>
                 <div class="card-body">
-                    <p>
-                        Consulte, altere e cadastre novos usuários na sua Organização</p>
+                    <p>Consulte, cadastre e altere os colaboradores da sua empresa</p>
                 </div>
             </div>
         </div>
@@ -51,7 +50,7 @@
             </div>
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-shopping-cart iconPanel" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-cubes iconPanel" aria-hidden="true"></i>
                     <a href="#"><h4>Produtos</h4></a>
                 </div>
                 <div class="card-body">
@@ -60,7 +59,7 @@
             </div>
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa fa-shield iconPanel" aria-hidden="true"></i>
                     <a asp-controller="Servico" asp-action="GridServico"><h4>Serviços</h4></a>
                     </div>
                     <div class="card-body">
@@ -82,14 +81,6 @@
     </div>   
     <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
         <div style="background-color:darkgrey; width: 100%; height:20px;"></div>
-        <div class="col-md-3">
-            <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a>
-                </div>
-            </div>
-        </div>
         <div class="col-sm-3">
             <div class="card m-2">
                 <div class="card-body">
@@ -101,19 +92,26 @@
         <div class="col-sm-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-life-ring iconPanel" aria-hidden="true"></i>
+                    <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
                     <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-md-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-life-ring iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a>
+                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card m-2">
+                <div class="card-body">
+                    <i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Paineis" asp-action="PainelConfiguracoes"><p style="font-size:19.8px; margin:0;">Configurações</p></a>
                 </div>
             </div>
         </div>
     </div>   
 </div>
-

@@ -56,12 +56,11 @@
                                             <th>Sexo</th>
                                             <th>Telefone</th>
                                             <th>Celular</th>
-
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateContato", "Contato", new {id = item.id })'">
                                             <td><i class="fa fa-id-card-o"></i></td>
                                             <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateContato", new { id = item.id })</td>
                                             <td>@item.cpf</td>

@@ -43,12 +43,14 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Nome</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
                                         <tr>
+                                            <td><i class="fa fa-folder-o"></i></td>
                                             <td>@item.nome</td>
                                         </tr>
                                     }

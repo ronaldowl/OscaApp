@@ -45,6 +45,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Código Pedido</th>
                                             <th>Cliente</th>
                                             <th>CNPJ/CPF</th>     
@@ -55,14 +56,15 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.pedido.id" onclick="location.href='@Url.Action("FormUpdatePedido", "Pedido", new {id = item.pedido.id })'">
+                                            <td><i class="fa fa-file-powerpoint-o"></i></td>
                                             <td>@Html.ActionLink(item.pedido.codigoPedido.ToString(), "FormUpdatePedido", new { id = item.pedido.id })</td>
                                             <td>@item.cliente.nomeCliente</td>
-                                            <td>@item.cliente.cnpj_cpf</td>   
-                                            <td>@item.cliente.telefone</td>  
+                                            <td>@item.cliente.cnpj_cpf</td>
+                                            <td>@item.cliente.telefone</td>
                                             <td>@item.pedido.valorTotal.ToString("N2")</td>
-                                            <td>@item.pedido.statusPedido</td>                                          
-                                                                                    
+                                            <td>@item.pedido.statusPedido</td>
+
                                         </tr>
                                     }
                                 </table>

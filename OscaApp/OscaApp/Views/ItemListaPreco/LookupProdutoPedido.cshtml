@@ -55,6 +55,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Produto</th>
                                             <th>Código Produto</th>
                                             <th>Fabricante</th>
@@ -64,7 +65,8 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr  id="@item.produto.id" value="@item.produto.nome" onclick="ConfigLookupProdutoPedido('@item.produto.id','@item.produto.nome','@item.itemlistaPreco.valor.ToString("N2")')" >
-                                           <td>@item.produto.nome</td>
+                                          <td><i class="fa fa-list-ul"></i></td> 
+                                            <td>@item.produto.nome</td>
                                             <td>@item.produto.codigo</td> 
                                             <td>@item.produto.fabricante</td> 
                                             <td>@item.itemlistaPreco.valor.ToString("N2")</td>                                                                      

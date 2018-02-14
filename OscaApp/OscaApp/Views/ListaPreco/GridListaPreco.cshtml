@@ -47,6 +47,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Nome da Lista</th>
                                             <th>Padrão?</th>
                                             <th>Data Inicio Validade</th>
@@ -58,13 +59,14 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateListaPreco", "ListaPreco", new {id = item.id })'">
+                                            <td><i class="fa fa-list-alt"></i></td>
                                             <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateListaPreco", new { id = item.id })</td>
                                             <td>@item.padrao</td>
-                                            <td>@item.dataValidade</td>     
-                                            <td>@item.fimValidade</td>    
-                                            <td>@item.criadoPorName</td>   
-                                            <td>@item.criadoEm</td>     
+                                            <td>@item.dataValidade</td>
+                                            <td>@item.fimValidade</td>
+                                            <td>@item.criadoPorName</td>
+                                            <td>@item.criadoEm</td>
                                         </tr>
                                     }
                                 </table>

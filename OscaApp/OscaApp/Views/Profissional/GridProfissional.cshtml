@@ -48,6 +48,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
+                                            <th></th>
                                             <th>Código</th>
                                             <th>Profissional</th>
                                             <th>Nº Conta</th>
@@ -58,7 +59,8 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateProfissional", "Profissional", new {id = item.id })'">
+                                            <td><i class="fa fa-black-tie"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProfissional", new { id = item.id })</td>
                                             <td>@item.nomeProfissional</td>
                                             <td>@item.numeroConta</td>

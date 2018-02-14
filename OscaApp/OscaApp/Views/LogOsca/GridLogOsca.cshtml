@@ -45,7 +45,9 @@
                             <div class="col-md-11">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                        <tr><th>Código de Erro</th>
+                                        <tr>
+                                           <th></th>
+                                            <th>Código de Erro</th>
                                         <th>ID</th>
                                             <th>ID do usuário</th>
                                             <th>Evento</th>
@@ -55,10 +57,10 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormViewLogOsca", "LogOsca", new {id = item.id })'">
+                                            <td><i class="fa fa-info-circle"></i></td>
                                             <td>@Html.ActionLink(item.codigoErro.ToString(), "FormViewLogOsca", new { id = item.id })</td>
-                                            
-                                            <td>     @item.id</td>
+                                            <td>@item.id</td>
                                             <td>@item.idUsuario</td>
                                             <td>@item.evento</td>
                                             <td>@item.codigoEntidade</td>

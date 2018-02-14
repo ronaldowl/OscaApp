@@ -55,7 +55,8 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateRecurso", "Recurso", new {id = item.id })'">
+                                            <td><i class="fa fa-desktop"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateRecurso", new { id = item.id })</td>
                                             <td>@item.nome</td>
                                         </tr>
