@@ -53,9 +53,9 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("valorDesconto").IsModified = true;
                 db.Entry(modelo).Property("valorDescontoPercentual").IsModified = true;
                 db.Entry(modelo).Property("tipoDesconto").IsModified = true;
-
-
-
+                db.Entry(modelo).Property("condicaoPagamento").IsModified = true;
+                db.Entry(modelo).Property("tipoPagamento").IsModified = true;
+                
 
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;

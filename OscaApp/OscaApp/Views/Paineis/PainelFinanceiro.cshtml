@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 ">
-            <h1> Painel Financeiro</h1>
+            <h3> Painel Financeiro</h3>
             <h5>
                 Utilize este painel para gerenciar as informações de fluxo de caixa
             </h5>
@@ -10,7 +10,29 @@
     </div>
     <br /><br />
     <div class="row">
-
+        <div class="col-md-4">
+            <div class="card m-2">
+                <div class="card-header">
+                    <i class="fa fa-2x fa-users iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Cliente" asp-action="GridCliente"><h4>Cliente</h4></a>
+                </div>
+                <div class="card-body">
+                    <p>Consulte e cadastre novos Clientes da usa empresa</p>
+                </div>
+            </div>
+            <div class="card m-2">
+                <div class="card-header">
+                    <i class="fa fa-2x fa-file-o iconPanel" aria-hidden="true"></i>
+                    <a href="#"><h4>Relatórios</h4></a>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Consulte as informações detalhadas de fluxo de caixa
+                    </p>
+                </div>
+            </div> 
+       
+        </div>
         <div class="col-md-4">
             <div class="card m-2">
                 <div class="card-header">
@@ -18,9 +40,17 @@
                     <a asp-controller="ContasPagar" asp-action="GridContasPagar"><h4>Contas a Pagar</h4></a>
                 </div>
                 <div class="card-body">
-                    <p>Veja as informações de cadastro da sua Organização, valor da fatura e dados do administrador</p>
+                    <p> Consulte e lance os valores das suas faturas e dados de fornecedores</p>
                 </div>
-
+            </div>
+            <div class="card m-2">
+                <div class="card-header">
+                    <i class="fa fa-2x fa-battery-full iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Fornecedor" asp-action="GridFornecedor"><h4>Fornecedores</h4></a>
+                </div>
+                <div class="card-body">
+                    <p> Consulte e cadastre novos fornecedoree de produtos e serviços</p>
+                </div>
             </div>
         </div>
         <div class="col-md-4">
@@ -35,19 +65,8 @@
 
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card m-2">
-                <div class="card-header">
-                    <i class="fa fa-2x fa-file-o iconPanel" aria-hidden="true"></i>
-                    <a href="#"><h4>Relatórios</h4></a>
-                </div>
-                <div class="card-body">
-                    <p>
-                        Consulte as informações detalhadas de fluxo de caixa</p>
-                </div>
-            </div>
-        </div>
     </div>
+    <br />
     <br /><br /><br /><br /><br /><br /><br />
     <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
         <div style="background-color:darkgrey; width: 100%; height:20px;"></div>

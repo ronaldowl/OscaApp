@@ -1,18 +1,18 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.Contato>
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Servico>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-@{
-    Layout = "_LayoutFrame";
-}
 
 <script type="text/javascript">
+
+    //Função para tratamento do Lookup padrão do Cliente
     function ConfigLookup(id, name) {
-        var idObjeto = document.getElementById("osc_ContatoId");
-        var idName = document.getElementById("osc_IdContatoName");
+
+        var idObjeto = document.getElementById("osc_IdServico");
+        var idObjetoName = document.getElementById("osc_IdNameServico");
         idObjeto.value = id;
-        idName.value = name;
-        $('#lookupContato').modal('hide');
+        idObjetoName.value = name;
+        $('#lookupServico').modal('hide');
     }
 </script>
 
@@ -22,16 +22,20 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
         </div>
         <div class="modal-body">
-            <div class="card" id="osc_Grid">
+            <div class="card" id="osc_Lookup">
                 <div class="card-header">
                     <div class="card-title">
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold">Lista de Contatos: &nbsp;&nbsp;</h5>
+                                    <h5 style="font-weight:bold">Lista de Serviços: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
                                     <form class="form-inline">
+                                        <div class="form-group col-md-2">
+                                            <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateServico", "Servico", null)'"> <span>Novo</span></button>
+                                        </div>
+
                                         <div class="form-group  col-md-4">
                                             <div class="input-group">
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
@@ -44,7 +48,10 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>                                  
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Painel de Serviço</span></button>
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
@@ -56,24 +63,26 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Nome</th>
-                                            <th>Email</th>
-                                            <th>Telefone</th>
+                                            <th></th>
+                                            <th>Código</th>
+                                            <th>Servico</th>
+                                            <th>Criado Por</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
-    {
-                                <tr id="@item.id" value="@item.nome" onclick= "ConfigLookup('@item.id.ToString()','@item.nome.ToString()')">
-                                    <td>@item.nome</td>
-                                    <td>@item.email</td>
-                                    <td>@item.telefone</td>
-                                </tr>
-}
+                                    {
+                                        <tr id="@item.id" value="@item.nomeServico" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()')">
+                                            <td><i class="fa fa-shield"></i></td>
+                                            <td>@item.codigo.ToString()</td>
+                                            <td>@item.nomeServico</td>
+                                            <td>@item.criadoPorName</td>
+                                        </tr>
+                                    }
                                 </table>
                                 <div>
                                     <table>
                                         <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("LookupContato", "Contato", new { page }))</td>
+                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServico", "Servico", new { page }))</td>
                                             <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
                                         </tr>
                                     </table>
@@ -86,3 +95,7 @@
         </div>
     </div>
 </div>
+
+
+
+<script src="~/js/osc_global.js" asp-append-version="true"></script>

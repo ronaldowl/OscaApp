@@ -13,6 +13,12 @@
         })
     }
 
+       function CarregaServicoOrdem() {
+           $("#modalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?idOrdem=" + '@Model.ordemServico.id'  , function () {
+               $("#modalServicoOrdem").modal("show");
+        });
+    }
+
 </script>
 
 <div id="contexto">
@@ -54,7 +60,7 @@
                     <div class="card-body">
                         <input id="osc_id" asp-for="ordemServico.id" type="hidden" class="form-control" value="@Model.ordemServico.id" />
                         <div class="row">
-                            <div class="col-md-4 ">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Código</label>
                                     <div class="inputGroupContainer">
@@ -91,18 +97,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Status Ordem Servico</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                            <input id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" type="text" disabled="disabled">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
 
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tipo de Desconto</label>
                                     <div class="input-group">
@@ -133,6 +130,35 @@
                                         <input id="osc_valorDescontoPercentual" asp-for="@Model.ordemServico.valorDescontoPercentual" type="text" class="form-control" />
                                     </div>
                                 </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Tipo de Pagamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-1x"></span>
+                                        </span>
+                                        <select id="osc_tipoPagamento" asp-for="@Model.ordemServico.tipoPagamento" class="form-control">
+                                            <option value="1" selected="">Dinheiro</option>
+                                            <option value="2">Cartão</option>
+                                            <option value="3">Cheque</option>
+                                            <option value="4">Depósito</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Condição de Pagamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-1x"></span>
+                                        </span>
+                                        <select id="osc_codicaoPagamento" asp-for="@Model.ordemServico.condicaoPagamento" class="form-control">
+                                            <option value="1" selected="">A Vista</option>
+                                            <option value="2">Parcelado</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label>Valor Total</label>
                                     <div class="input-group">
@@ -142,8 +168,17 @@
                                         <input id="osc_valorTotal" asp-for="@Model.ordemServico.valorTotal" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Status Ordem Servico</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" type="text" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Data agendada</label>
                                     <div class="inputGroupContainer">
@@ -279,7 +314,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white"> Especificação Ténica</span></div>
+                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; Especificação Ténica</span></div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -349,7 +384,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white"> Informações Gerais</span></div>
+                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;  Informações Gerais</span></div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -372,6 +407,29 @@
                                         <textarea id="osc_diagnostico" asp-for="@Model.ordemServico.diagnostico" class="form-control" rows="3" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;   </span></div>
+                        <div class="row" id="gridServico">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <h5 style="font-weight:bold">Serviços : &nbsp;&nbsp;</h5>
+                                            </td>
+                                            <td>
+                                                <div class="form-group col-md-2">
+                                                    <button id="osc_novoServico" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Adicionar</span></button>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?idOrdem="></iframe>
                             </div>
                         </div>
                         <div class="row">
@@ -468,5 +526,7 @@
 <div class="modal fade" id="lookupCliente">
 </div>
 <div class="modal fade" id="lookupCategoriaManutencao">
+</div>
+<div class="modal fade" id="modalServicoOrdem">
 </div>
 

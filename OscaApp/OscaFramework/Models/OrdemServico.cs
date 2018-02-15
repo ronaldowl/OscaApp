@@ -38,7 +38,8 @@ namespace OscaFramework.Models
         public decimal valorDescontoPercentual { get; set; }
 
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
-
+        public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }
+        public CustomEnum.tipoPagamento tipoPagamento { get; set; }
         public CustomEnum.tipoOrdemServico tipo { get; set; }
         public CustomEnumStatus.StatusOrdemServico statusOrdemServico { get; set; }
         

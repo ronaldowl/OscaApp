@@ -128,5 +128,18 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Servico>(Page, 10));
         }
+        public ViewResult LookupServico(string filtro, int Page)
+        {
+            IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
+
+            // realiza busca por Nome, Código 
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeServico == filtro) select A;
+
+            retorno = retorno.OrderBy(x => x.nomeServico);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Servico>(Page, 10));
+        }
     }
 }
