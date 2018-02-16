@@ -7,16 +7,18 @@ using OscaFramework.Models;
 using OscaApp.ViewModels;
 using OscaApp.Data;
 using Microsoft.AspNetCore.Http;
+using OscaApp.RulesServices;
 
 namespace OscaApp.Controllers
 {
     public class AtendimentoController : Controller
     {
         private ContextPage contexto;
+        public AtendimentoData atendimentoData;
 
         public AtendimentoController(ContexDataService db, IHttpContextAccessor httpContext)
-        {        
-            // contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+        {
+            this.atendimentoData = new AtendimentoData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
@@ -34,19 +36,23 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
-        //[HttpPost]
-        //public ViewResult FormCreateAtendimento()
-        //{
-        //    AtendimentoViewModel modelo = new AtendimentoViewModel();
-        //    modelo.contexto = contexto;
-        //    modelo.atendimento = new Atendimento();
-        //    modelo.atendimento.status = CustomEnumStatus.Status.Ativo;
+        [HttpPost]
+        public ViewResult FormCreateAtendimento(AtendimentoViewModel entrada)
+        {
+            Atendimento  modelo = new Atendimento ();
 
-        //    modelo.atendimento.criadoEm = DateTime.Now;
-        //    modelo.atendimento.criadoPorName = contexto.nomeUsuario;
+            if(entrada != null)
+            {
 
-        //    return View(modelo);
-        //}
+               if( AtendimentoRules.AtendimentoCreate(entrada,out modelo, this.contexto))
+                {
+                    //Se retorna true grava no banco
+                    atendimentoData.Add(modelo);
+                }
+            }                
+
+            return View(modelo);
+        }
 
     }
 }

@@ -22,8 +22,7 @@ namespace OscaApp.Controllers
     {
 
         private readonly IServicoOrdemData servicoOrdemData;
-        private readonly IServicoData servicoData;
-        private readonly IItemListaPrecoData ItemlistaPrecoData;
+        private readonly IServicoData servicoData; 
         private ContextPage contexto;
 
         public ServicoOrdemController(ContexDataService db, IHttpContextAccessor httpContext)
@@ -58,25 +57,29 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
-        //[HttpPost]
-        //public IActionResult FormCreateProdutoPedido(ProdutoPedidoViewModel entrada)
-        //{
-        //    ProdutoPedido modelo = new ProdutoPedido();
-        //    try
-        //    {
-        //        if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
-        //        {
-        //            produtoPedidoData.Add(modelo);
-        //            return RedirectToAction("FormUpdatePedido","Pedido", new { id = modelo.idPedido.ToString()});
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1, 16, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateProdutoPedido-post", ex.Message);
-        //    }
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult FormCreateServicoOrdem(ServicoOrdemViewModel entrada)
+        {
+            ServicoOrdem modelo = new ServicoOrdem();
+            try
+            {
+                if (ServicoOrdemRules.ServicoOrdemCreate(entrada, out modelo, contexto))
+                {
+                    SqlGenericData sqlData = new SqlGenericData();
+
+
+                    servicoOrdemData.Add(modelo);
+                    return RedirectToAction("FormUpdateOrdemServico", new { idOrdem = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(modelo.id).id });
+
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 16, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateServicoOrdem-post", ex.Message);
+            }
+            return View();
+        }
 
 
         //[HttpPost]
@@ -103,32 +106,32 @@ namespace OscaApp.Controllers
         //    return View();
         //}
 
-        //[HttpGet]
-        //public IActionResult FormUpdateProdutoPedido(string idProdutoPedido)
-        //{
-        //    ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();
-        //    SqlGenericData sqlData = new SqlGenericData();
+        [HttpGet]
+        public IActionResult FormUpdateServicoOrdem(string idServicoOrdem)
+        {
+            ServicoOrdemViewModel modelo = new ServicoOrdemViewModel();
+            SqlGenericData sqlData = new SqlGenericData();
 
-        //    try
-        //    {
-        //        modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));
-        //        modelo.produto = new  Relacao();
-        //        modelo.produto = sqlData.RetornaRelacaoProduto(modelo.produtoPedido.idProduto);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-get", ex.Message);
-        //    }
-        //    return View(modelo);
-        //}
+            try
+            {
+                modelo.servicoOrdem = servicoOrdemData.Get(new Guid(idServicoOrdem));
+                modelo.servico = new Relacao();
+                modelo.servico = sqlData.RetornaRelacaoServico(modelo.servico.id);
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
 
-        //public ViewResult GridProdutoPedido(string idPedido )
-        //{
-        //    IEnumerable<ProdutoPedido> retorno = produtoPedidoData.GetByPedidoId(new Guid(idPedido));                     
+        public ViewResult GridServicoOrdem(string idOrdem)
+        {
+            IEnumerable<ServicoOrdem> retorno = servicoOrdemData.GetByServicoOrdemId(new Guid(idOrdem));
 
-        //    return View(retorno.ToPagedList<ProdutoPedido>(1, 10));
-        //}
+            return View(retorno.ToPagedList<ServicoOrdem>(1, 10));
+        }
 
         //public IActionResult DeleteProdutoPedido(string idProdutoPedido, string idPedido)
         //{

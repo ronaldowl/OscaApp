@@ -34,19 +34,14 @@ namespace OscaApp
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {                            
-
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+        {            
 
             //// Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
             //*********Carrega informações do banco de dados via ENTITY_FRAMEWORD
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
             services.AddDbContext<ContexDataService>(options => options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
             services.AddDbContext<ContexDataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //********* FIMCarrega informações do banco de dados via ENTITY_FRAMEWORD
@@ -69,7 +64,6 @@ namespace OscaApp
             //TODO:Falta implementar em todaas chamadas, sendo usado apenas na Ordem de serviço
             SqlGenericServices sqlServices = new SqlGenericServices();
             services.AddSingleton<SqlGenericServices>(_ => sqlServices);
-
             //*********************** FIM Serviços para acesso a dados vi ADO *******************
             services.AddMvc(config =>
             {

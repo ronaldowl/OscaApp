@@ -1,14 +1,14 @@
 {
   "name": "bootstrap",
   "homepage": "https://github.com/twbs/bootstrap",
-  "version": "4.0.0-beta.2",
-  "_release": "4.0.0-beta.2",
+  "version": "4.0.0-beta.3",
+  "_release": "4.0.0-beta.3",
   "_resolution": {
     "type": "version",
-    "tag": "v4.0.0-beta.2",
-    "commit": "fc94de5b8b5b329a298eeeb76174b146ff17af2d"
+    "tag": "v4.0.0-beta.3",
+    "commit": "ced70da441d487efb8589acbff445d6b5fa68bb9"
   },
   "_source": "https://github.com/twbs/bootstrap.git",
-  "_target": "4.0.0-beta.2",
+  "_target": "4.0.0-beta.3",
   "_originalSource": "bootstrap"
 }

@@ -71,7 +71,15 @@ namespace OscaApp.Data
         ListaPreco Get(Guid id, Guid idOrg);
         List<ListaPreco> GetAll(Guid idOrg);       
         List<Relacao> GetAllRelacao(Guid idOrg);
+    }
 
+    public interface IAtendimentoData
+    {
+        void Add(Atendimento atendimento);
+        void Update(Atendimento atendimento);
+        Atendimento Get(Guid id);
+        List<Atendimento> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
     }
 
     public interface IContasPagarData
@@ -137,7 +145,7 @@ namespace OscaApp.Data
         void Update(ServicoOrdem contato);
         void Delete(ServicoOrdem contato);
         ServicoOrdem Get(Guid id);
-        List<ServicoOrdem> GetByOrdemServicoId(Guid idPedido);
+        List<ServicoOrdem> GetByServicoOrdemId(Guid idPedido);
         List<ServicoOrdem> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
 
