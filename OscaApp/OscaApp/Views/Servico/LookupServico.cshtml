@@ -6,17 +6,17 @@
 <script type="text/javascript">
 
     //Função para tratamento do Lookup padrão do Cliente
-    function ConfigLookup(id, name, valor, forma) {
+    function ConfigLookup(id, name, valor) {
+        debugger;
 
         var idObjeto = document.getElementById("osc_IdServico");
         var idObjetoName = document.getElementById("osc_IdNameServico");
-        var idObjetoValor = document.getElementById("osc_valor");
-        var idObjetoForma = document.getElementById("osc_forma");
+        var idObjetoValor = document.getElementById("osc_valor");       
 
         idObjeto.value = id;
         idObjetoName.value = name;
         idObjetoValor.value = valor;
-        idObjetoForma.value = forma;
+     
         $('#lookupServico').modal('hide');
     }
 </script>
@@ -53,10 +53,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Painel de Serviço</span></button>
-                                        </div>
+                                        </div>                                         
                                     </form>
                                 </td>
                             </tr>
@@ -78,12 +75,12 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" value="@item.nomeServico" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()','@item.valor.ToString()', '@item.formaVendaServico.ToString()')">
+                                        <tr id="@item.id" value="@item.nomeServico" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()','@item.valor.ToString()')">
                                             <td><i class="fa fa-shield"></i></td>
                                             <td>@item.codigo.ToString()</td>
                                             <td>@item.nomeServico</td>
                                             <td>@item.formaVendaServico</td>
-                                            <td>@item.valor</td>
+                                            <td>@item.valor.ToString("N2")</td>
                                         </tr>
                                     }
                                 </table>

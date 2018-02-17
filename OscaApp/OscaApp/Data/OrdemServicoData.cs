@@ -69,12 +69,12 @@ namespace OscaApp.Data
             }
 
         }
-        public OrdemServico Get(Guid id, Guid idOrg)
+        public OrdemServico Get(Guid id)
         {
             List<OrdemServico> retorno = new List<OrdemServico>();
             try
             {
-                retorno = db.OrdensServico.FromSql("SELECT * FROM OrdemServico WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.OrdensServico.FromSql("SELECT * FROM OrdemServico WHERE  id = '" + id.ToString() + "'" ).ToList();
             }
             catch (SqlException ex)
             {

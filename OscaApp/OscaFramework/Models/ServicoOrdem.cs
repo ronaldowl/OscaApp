@@ -34,7 +34,7 @@ namespace OscaFramework.Models
 
         public int quantidade { get; set; }
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
-        public CustomEnum.FormaVendaProduto formaVendaServico { get; set; }
+      
 
         // Ctors
         public ServicoOrdem()

@@ -131,12 +131,12 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<ServicoOrdem>(1, 10));
         }
 
-        //public IActionResult DeleteProdutoPedido(string idProdutoPedido, string idPedido)
-        //{
-        //    ProdutoPedido modelo = new ProdutoPedido();
-        //    modelo.id = new Guid(idProdutoPedido);
-        //    produtoPedidoData.Delete(modelo);
-        //    return RedirectToAction("GridProdutoPedido", new { idPedido = idPedido });
-        //}
+        public IActionResult DeleteServicoOrdem(string id, string idOrdem)
+        {
+            ServicoOrdem modelo = new ServicoOrdem();
+            modelo.id = new Guid(id);
+            servicoOrdemData.Delete(modelo);
+            return RedirectToAction("GridServicoOrdem", new { id = idOrdem });
+        }
     }
 }

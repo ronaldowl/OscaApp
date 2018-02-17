@@ -47,8 +47,8 @@ namespace OscaApp.Data
     {
         void Add(OrdemServico ordemServico);
         void Update(OrdemServico ordemServico);
-        OrdemServico Get(Guid id, Guid idOrg);
-        List<OrdemServico> GetAll(Guid idOrg);
+        OrdemServico Get(Guid id );
+        List<OrdemServico> GetAll(Guid id);
     }
     public interface IServicoData
     {

@@ -411,6 +411,30 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Laudo</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_laudo" asp-for="@Model.ordemServico.laudo" class="form-control" rows="3" cols="25"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Observações gerais</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_observava" asp-for="@Model.ordemServico.observacao" class="form-control" rows="3" cols="25"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;   </span></div>
                         <div class="card">
                             <div class="card-header">
@@ -441,30 +465,7 @@
                                 </div>
                             </div>
                         </div>                       
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Laudo</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-1x"></span>
-                                        </span>
-                                        <textarea id="osc_laudo" asp-for="@Model.ordemServico.laudo" class="form-control" rows="3" cols="25"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Observações gerais</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-1x"></span>
-                                        </span>
-                                        <textarea id="osc_observava" asp-for="@Model.ordemServico.observacao" class="form-control" rows="3" cols="25"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            
                     </div>
                     <div class="card-footer">
                         <div class="row">

@@ -34,10 +34,9 @@ namespace OscaApp.Controllers
         {
             OrdemServicoViewModel modelo = new OrdemServicoViewModel();
 
-            //Se passar o id carrega o cliente
+            //Se passar o id carrega o regitro relacionado, usado sempre em telas com lookup
             if (!String.IsNullOrEmpty(id)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(id));
-            
-            
+                        
             modelo.contexto = contexto;
             modelo.ordemServico.criadoEm = DateTime.Now;
             modelo.ordemServico.criadoPorName = contexto.nomeUsuario;
@@ -49,12 +48,12 @@ namespace OscaApp.Controllers
         public IActionResult FormCreateOrdemServico(OrdemServicoViewModel entrada)
         {
             OrdemServico modelo = new OrdemServico();
-          
+            entrada.contexto = this.contexto;
             try
             {
                 if (entrada.ordemServico != null)
                 {
-                  if  (OrdemServicoRules.OrdemServicoCreate(entrada, out modelo, contexto)) {
+                  if  (OrdemServicoRules.OrdemServicoCreate(entrada, out modelo)) {
                         ordemServicoData.Add(modelo);
                         return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });
                   }
@@ -76,7 +75,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                modelo.ordemServico = ordemServicoData.Get(modelo.ordemServico.id, contexto.idOrganizacao);
+                modelo.ordemServico = ordemServicoData.Get(modelo.ordemServico.id );
                 modelo.contexto = this.contexto;
 
                 if (modelo.ordemServico != null)
@@ -120,6 +119,34 @@ namespace OscaApp.Controllers
             if (Page == 0) Page = 1;
 
             return View(retorno.ToPagedList<OrdemServico>(Page, 10));
+        }
+
+        [HttpGet]
+        public ViewResult FormStatusOrdemServico(string id)
+        {
+            OrdemServicoViewModel modelo = new OrdemServicoViewModel();
+            modelo.contexto = this.contexto;
+            try
+            {
+                OrdemServico retorno = new OrdemServico();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = ordemServicoData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.ordemServico = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+            }
+            return View(modelo);
         }
     }
 }

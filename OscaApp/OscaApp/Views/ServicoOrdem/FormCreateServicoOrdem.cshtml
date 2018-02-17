@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" />
                         <div class="row">
-                            <div class="col-md-3 ">
+                            <div class="col-md-5 offset-1">
                                 <div class="form-group">
                                     <label class="control-label" style="color:red">Servico*</label>
                                     <div class="inputGroupContainer">
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-5">
                                 <div class="form-group">
                                     <label>Tipo de Desconto</label>
                                     <div class="input-group">
@@ -102,25 +102,7 @@
                                         <input id="osc_valorDescontoPercentual" asp-for="@Model.servicoOrdem.valorDescontoPercentual" type="text" class="form-control" required="required" />
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Forma de Venda</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
-                                        </span>
-                                        <select id="osc_formavenda" asp-for="@Model.servicoOrdem.formaVendaServico" class="form-control" required="required">
-                                            <option value="1">Unidade</option>
-                                            <option value="2">Peso</option>
-                                            <option value="3" selected="">Hora</option>
-                                            <option value="4">Taxa</option>
-                                            <option value="5">Aluguel</option>
-                                        </select>
-                                    </div>
-                                </div>
-                               
-                            </div>
+                            </div>                        
                         </div>
                     </div>
                 </div>
@@ -128,10 +110,8 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="lookupServico">
 </div>
-
 <script>
     OnLoad_ServicoOrdem();
     function CarregaLookupServico() {
@@ -146,8 +126,7 @@
 
     }
 
-    function Onchage_ServicoOrdemTipoDesconto() {
-        debugger;
+    function Onchage_ServicoOrdemTipoDesconto() {         
 
         var tipo = document.getElementById("osc_tipoDesconto");
         var descontoValor = document.getElementById("osc_valorDescontoMoney");
@@ -170,6 +149,5 @@
 
         }
     }
-
 
 </script>

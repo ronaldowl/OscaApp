@@ -94,7 +94,6 @@ namespace OscaApp.Data
             return retorno;
 
         }
-
         public List<ServicoOrdem> GetByServicoOrdemId(Guid idOrdemServico)
         {
             List<ServicoOrdem> retorno = new List<ServicoOrdem>();
@@ -102,7 +101,6 @@ namespace OscaApp.Data
             return retorno;
 
         }
-
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
             List<ServicoOrdem> retorno = new List<ServicoOrdem>();
@@ -113,5 +111,6 @@ namespace OscaApp.Data
             return Relacao.ConvertToRelacao(retorno);
 
         }
+       
     }
 }
