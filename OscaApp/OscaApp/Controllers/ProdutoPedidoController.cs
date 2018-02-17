@@ -83,6 +83,25 @@ namespace OscaApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult FormUpdateProdutoPedido(string idProdutoPedido)
+        {
+            ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();
+            SqlGenericData sqlData = new SqlGenericData();
+
+            try
+            {
+                modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));
+                modelo.produto = new Relacao();
+                modelo.produto = sqlData.RetornaRelacaoProduto(modelo.produtoPedido.idProduto);
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
 
         [HttpPost]
         public IActionResult FormUpdateProdutoPedido(ProdutoPedidoViewModel entrada)
@@ -106,26 +125,6 @@ namespace OscaApp.Controllers
                 log.GravaLog(1, 16, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-post", ex.Message);
             }
             return View();
-        }
-
-        [HttpGet]
-        public IActionResult FormUpdateProdutoPedido(string idProdutoPedido)
-        {
-            ProdutoPedidoViewModel modelo = new ProdutoPedidoViewModel();
-            SqlGenericData sqlData = new SqlGenericData();
-
-            try
-            {
-                modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));
-                modelo.produto = new  Relacao();
-                modelo.produto = sqlData.RetornaRelacaoProduto(modelo.produtoPedido.idProduto);
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-get", ex.Message);
-            }
-            return View(modelo);
         }
 
         public ViewResult GridProdutoPedido(string idPedido )

@@ -34,56 +34,6 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
-    
-        [HttpPost]
-        public IActionResult FormUpdateProduto(ProdutoViewModel entrada)
-        {
-            Produto modelo = new Produto();
-            entrada.contexto = this.contexto;
-
-            try
-            {
-                if (ProdutoRules.MontaProdutoUpdate(entrada, out modelo))
-                {
-                    produtoData.Update(modelo);
-                    return RedirectToAction("FormUpdateProduto", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1, 7, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProduto-post", ex.Message);
-            }
-
-            return RedirectToAction("FormUpdateProduto", new { id = modelo.id.ToString() });
-        }
-
-        [HttpGet]
-        public ViewResult FormUpdateProduto(string id)
-        {
-            ProdutoViewModel modelo = new ProdutoViewModel();
-            modelo.produto = new Produto();
-            modelo.produto.id = new Guid(id);
-
-            Produto retorno = new Produto();
- 
-            if (!String.IsNullOrEmpty(id))
-            {
-             
-                retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
-                modelo.itensListaPreco = new List<ItemProdutoLista>();
-                modelo.itensListaPreco = ProdutoRules.RetornaItemListaProduto(itemListaPrecoData.GetAllByProduto(modelo.produto.id));
-                          
-
-                if (retorno != null)
-                {
-                    modelo.produto = retorno;                   
-                }
-            }
-
-            return View(modelo);
-        }
-
         [HttpGet]
         public ViewResult FormCreateProduto()
         {
@@ -121,6 +71,55 @@ namespace OscaApp.Controllers
                 log.GravaLog(1, 7, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateProduto-post", ex.Message);
             }
             return View();
+        }
+
+        [HttpGet]
+        public ViewResult FormUpdateProduto(string id)
+        {
+            ProdutoViewModel modelo = new ProdutoViewModel();
+            modelo.produto = new Produto();
+            modelo.produto.id = new Guid(id);
+
+            Produto retorno = new Produto();
+
+            if (!String.IsNullOrEmpty(id))
+            {
+
+                retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
+                modelo.itensListaPreco = new List<ItemProdutoLista>();
+                modelo.itensListaPreco = ProdutoRules.RetornaItemListaProduto(itemListaPrecoData.GetAllByProduto(modelo.produto.id));
+
+
+                if (retorno != null)
+                {
+                    modelo.produto = retorno;
+                }
+            }
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormUpdateProduto(ProdutoViewModel entrada)
+        {
+            Produto modelo = new Produto();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (ProdutoRules.MontaProdutoUpdate(entrada, out modelo))
+                {
+                    produtoData.Update(modelo);
+                    return RedirectToAction("FormUpdateProduto", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 7, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProduto-post", ex.Message);
+            }
+
+            return RedirectToAction("FormUpdateProduto", new { id = modelo.id.ToString() });
         }
 
         public ViewResult GridProduto(string filtro, int Page)

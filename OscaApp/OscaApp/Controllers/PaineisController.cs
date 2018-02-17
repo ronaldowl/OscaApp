@@ -26,6 +26,7 @@ namespace OscaApp.Controllers
         {          
             return View();
         }
+
         public ViewResult PainelGerenciamento()
         {          
             return View();
@@ -35,18 +36,22 @@ namespace OscaApp.Controllers
         {          
             return View();
         }
+
         public ViewResult PainelCadastro()
         {       
             return View();
         }
+
         public ViewResult PainelVendas()
         {           
             return View();
         }
+
         public ViewResult PainelServico()
         {       
             return View();
         }
+
         public ViewResult PainelFinanceiro()
         {           
             return View();

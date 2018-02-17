@@ -36,6 +36,37 @@ namespace OscaApp.Controllers
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult FormCreateUsuario(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> FormCreateUsuario(RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = contexto.idOrganizacao };
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToLocal(returnUrl);
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         [HttpPost]
         public IActionResult FormUpdateUsuario(UsuarioViewModel entrada)
         {
@@ -60,42 +91,11 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateUsuario", new { id = user.Id.ToString() });
         }
 
-
         public ViewResult GridUsuario()
         {
             return View(usuarioData.GetAll(contexto.idOrganizacao));
         }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult FormCreateUsuario(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> FormCreateUsuario(RegisterViewModel model, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-              
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = contexto.idOrganizacao };
-                var result = await _userManager.CreateAsync(user, model.Password);
-
-                if (result.Succeeded)
-                {                 
-                    return RedirectToLocal(returnUrl);
-                }
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+       
         private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -107,6 +107,7 @@ namespace OscaApp.Controllers
                 return RedirectToAction(nameof(UsuarioController.GridUsuario), "Usuario");
             }
         }
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

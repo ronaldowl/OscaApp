@@ -79,6 +79,28 @@ namespace OscaApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult FormUpdateServicoOrdem(string id)
+        {
+            ServicoOrdemViewModel modelo = new ServicoOrdemViewModel();
+            SqlGenericData sqlData = new SqlGenericData();
+
+            try
+            {
+                modelo.servicoOrdem = servicoOrdemData.Get(new Guid(id));
+                modelo.servico = new Relacao();
+                modelo.ordemServico = new Relacao();
+                modelo.ordemServico = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(new Guid(id));
+
+                modelo.servico = sqlData.RetornaRelacaoServico(modelo.servicoOrdem.idServico);
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
 
         [HttpPost]
         public IActionResult FormUpdateServicoOrdem(ServicoOrdemViewModel entrada)
@@ -99,29 +121,6 @@ namespace OscaApp.Controllers
                 log.GravaLog(1, 16, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-post", ex.Message);
             }
             return View();
-        }
-
-        [HttpGet]
-        public IActionResult FormUpdateServicoOrdem(string id)
-        {
-            ServicoOrdemViewModel modelo = new ServicoOrdemViewModel();
-            SqlGenericData sqlData = new SqlGenericData();
-
-            try
-            {
-                modelo.servicoOrdem = servicoOrdemData.Get(new Guid(id));
-                modelo.servico = new Relacao();
-                modelo.ordemServico = new Relacao();
-                modelo.ordemServico = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(new Guid(id));
-                
-                modelo.servico = sqlData.RetornaRelacaoServico(modelo.servicoOrdem.idServico);
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateProdutoPedido-get", ex.Message);
-            }
-            return View(modelo);
         }
 
         public ViewResult GridServicoOrdem(string id)

@@ -121,8 +121,6 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
-
-
         [HttpPost]
         public IActionResult FormUpdateItemListaPreco(ItemListaPrecoViewModel entrada)
         {
@@ -157,7 +155,6 @@ namespace OscaApp.Controllers
             return View(modelo.ToPagedList<LookupItemLista>(Page, 10));
              
         }
-
 
     }
 }

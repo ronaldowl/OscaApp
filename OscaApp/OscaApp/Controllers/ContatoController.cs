@@ -31,6 +31,18 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
+        [HttpGet]
+        public ViewResult FormCreateContato()
+        {
+            ContatoViewModel modelo = new ContatoViewModel();
+            modelo.contato = new Contato();
+            modelo.contexto = contexto;
+            modelo.contato.criadoEm = DateTime.Now;
+            modelo.contato.criadoPorName = contexto.nomeUsuario;
+
+            return View(modelo);
+        }
+
         [HttpPost]
         public IActionResult FormCreateContato(ContatoViewModel entrada)
         {
@@ -57,15 +69,24 @@ namespace OscaApp.Controllers
             }
             return View();
         }
+
         [HttpGet]
-        public ViewResult FormCreateContato()
+        public ViewResult FormUpdateContato(string id)
         {
             ContatoViewModel modelo = new ContatoViewModel();
-            modelo.contato = new Contato();
-            modelo.contexto = contexto;
-            modelo.contato.criadoEm = DateTime.Now;
-            modelo.contato.criadoPorName = contexto.nomeUsuario;
 
+            Contato retorno = new Contato();
+            //Formulario com os dados do cliente
+            if (!String.IsNullOrEmpty(id))
+            {
+                //campo que sempre contém valor
+                retorno = contatoData.Get(new Guid(id), contexto.idOrganizacao);
+
+                if (retorno != null)
+                {
+                    modelo.contato = retorno;
+                }
+            }
             return View(modelo);
         }
 
@@ -94,26 +115,6 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateContato", new { id = modelo.id.ToString() });
         }
 
-        [HttpGet]
-        public ViewResult FormUpdateContato(string id)
-        {
-            ContatoViewModel modelo = new ContatoViewModel();
-
-            Contato retorno = new Contato();
-            //Formulario com os dados do cliente
-            if (!String.IsNullOrEmpty(id))
-            {
-                //campo que sempre contém valor
-                retorno = contatoData.Get(new Guid(id), contexto.idOrganizacao);
-
-                if (retorno != null)
-                {
-                    modelo.contato = retorno;                  
-                }
-            }
-            return View(modelo);
-        }
-
         public ViewResult GridContato(string filtro, int Page)
         {
             IEnumerable<Contato> retorno = contatoData.GetAll(contexto.idOrganizacao);
@@ -128,7 +129,6 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Contato>(Page, 10));
         }
-
 
         public ViewResult LookupContato(string filtro, int Page)
         {

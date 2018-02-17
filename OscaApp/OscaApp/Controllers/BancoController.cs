@@ -39,6 +39,7 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Banco>(Page, 10));
         }
+
         public ViewResult LookupBanco(string filtro, int Page)
         {
             IEnumerable<Banco> retorno = bancoData.GetAll();
@@ -49,5 +50,6 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Banco>(Page, 10));
         }
+
     }
 }

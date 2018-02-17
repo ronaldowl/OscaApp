@@ -37,6 +37,7 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<CategoriaManutencao>(Page, 10));
         }
+
         public ViewResult LookupCategoriaManutencao(string filtro, int Page)
         {
             IEnumerable<CategoriaManutencao> retorno = sqlServices.RetornaCategoriaManutencao();
