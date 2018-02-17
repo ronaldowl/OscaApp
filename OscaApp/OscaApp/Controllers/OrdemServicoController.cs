@@ -30,14 +30,14 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult FormCreateOrdemServico(string idCliente)
+        public ViewResult FormCreateOrdemServico(string id)
         {
             OrdemServicoViewModel modelo = new OrdemServicoViewModel();
 
             //Se passar o id carrega o cliente
-            if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));
+            if (!String.IsNullOrEmpty(id)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(id));
             
-            modelo.ordemServico = new OrdemServico();
+            
             modelo.contexto = contexto;
             modelo.ordemServico.criadoEm = DateTime.Now;
             modelo.ordemServico.criadoPorName = contexto.nomeUsuario;

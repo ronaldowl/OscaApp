@@ -1,5 +1,4 @@
-﻿ 
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,8 +32,9 @@ namespace OscaFramework.Models
 
         public int valorDescontoPercentual { get; set; }
 
-        public int hora { get; set; }
+        public int quantidade { get; set; }
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
-        
+        public CustomEnum.FormaVendaProduto formaVendaServico { get; set; }
+
     }
 }

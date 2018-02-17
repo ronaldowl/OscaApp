@@ -6,12 +6,17 @@
 <script type="text/javascript">
 
     //Função para tratamento do Lookup padrão do Cliente
-    function ConfigLookup(id, name) {
+    function ConfigLookup(id, name, valor, forma) {
 
         var idObjeto = document.getElementById("osc_IdServico");
         var idObjetoName = document.getElementById("osc_IdNameServico");
+        var idObjetoValor = document.getElementById("osc_valor");
+        var idObjetoForma = document.getElementById("osc_forma");
+
         idObjeto.value = id;
         idObjetoName.value = name;
+        idObjetoValor.value = valor;
+        idObjetoForma.value = forma;
         $('#lookupServico').modal('hide');
     }
 </script>
@@ -66,16 +71,19 @@
                                             <th></th>
                                             <th>Código</th>
                                             <th>Servico</th>
-                                            <th>Criado Por</th>
+                                            <th>Forma</th>
+                                            <th>Valor</th>
+                                             
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" value="@item.nomeServico" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()')">
+                                        <tr id="@item.id" value="@item.nomeServico" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()','@item.valor.ToString()', '@item.formaVendaServico.ToString()')">
                                             <td><i class="fa fa-shield"></i></td>
                                             <td>@item.codigo.ToString()</td>
                                             <td>@item.nomeServico</td>
-                                            <td>@item.criadoPorName</td>
+                                            <td>@item.formaVendaServico</td>
+                                            <td>@item.valor</td>
                                         </tr>
                                     }
                                 </table>

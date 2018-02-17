@@ -8,19 +8,15 @@
 
 <script>
 
-       function CarregaProdutoPedidoUpdate() {
-           $("#ModalProdutoPedido").load("/ProdutoPedido/FormUpdateProdutoPedido?idProdutoPedido=" + '@if (@Model.Count > 0) { @Model[0].id.ToString()}', function () {
-            $("#ModalProdutoPedido").modal("show");
+    function CarregaUpdateServicoOrdem() {
+        $("#ModalServicoOrdem").load("/ServicoOrdem/FormUpdateServicoOrdem?id=" + '@if (@Model.Count > 0) { @Model[0].id.ToString()}', function () {
+            $("#ModalServicoOrdem").modal("show");
         });
     }
-
 </script>
 
-<div class="card" id="osc_Grid">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-11">
-                <table class="table table-hover table-striped">
+<div id="osc_Grid">              
+                <table class="table table-hover table-striped table-responsive-md">
                     <thead>
                         <tr>
                             <th>Código Produto</th>
@@ -41,25 +37,24 @@
                     }
                     @foreach (var item in Model)
                     {
-                        qtd      += item.hora;
+                        qtd      += item.quantidade;
                         desconto += item.valorDesconto;
                         total += item.totalGeral;
-
-                        <tr>
+                        <tr style="height:10px">
                             <td>1010</td>
                             <td>TESTE</td>
-                            <td>@item.hora</td>
+                            <td>@item.quantidade</td>
                             <td>@item.valor.ToString("N2")</td>
                             <td>@item.valorDesconto.ToString("N2")</td>
                             <td>@item.totalGeral.ToString("N2")</td>
                             <td>
                                 <div class="form-group col-md-2">
-                                    <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar" onclick="CarregaProdutoPedidoUpdate()"> <span>Editar</span></button>
+                                    <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar" onclick="CarregaUpdateServicoOrdem()"> <span>Editar</span></button>
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group col-md-2">
-                                    <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteProdutoPedido", "ProdutoPedido", new { idServicoOrdem = Model[0].id, idOrdem = Model[0].id })'"> <span>Remover</span></button>
+                                    <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteServicoOrdem", "ServicoOrdem", new { id = Model[0].id, idOrdem = Model[0].id })'"> <span>Remover</span></button>
                                 </div>
                             </td>
                         </tr>
@@ -85,9 +80,6 @@
                         </tr>
                     </table>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="ModalProdutoPedido">
+ </div>    
+<div class="modal fade" id="ModalServicoOrdem">
 </div>

@@ -35,6 +35,9 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
                 db.Entry(modelo).Property("codigo").IsModified                   = true;
+                db.Entry(modelo).Property("formaVendaServico").IsModified = true;
+                db.Entry(modelo).Property("valor").IsModified = true;
+                db.Entry(modelo).Property("descricao").IsModified = true;
                 db.Entry(modelo).Property("nomeServico").IsModified              = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;

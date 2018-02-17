@@ -2,13 +2,8 @@
 @{
     Layout = "_LayoutFrame";
 }
-@*<script src="~/lib/OscaJs/osc_produtoPedido.js">
-    debugger;
-    //*** Executa regra no carregamento do Form
-    OnLoad();
-</script>*@
 
-
+ 
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -21,7 +16,7 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
         </div>
         <div class="modal-body">
-            <form asp-controller="ServicoOrdem" asp-action="FormCreateServicoOrdem" method="post" id="FormCreateProdutoPedido">             
+            <form asp-controller="ServicoOrdem" asp-action="FormUpdateServicoOrdem" method="post" id="FormUpdateServicoOrdem">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title ">
@@ -40,11 +35,10 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id"/>
+                        <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" />
                         <input type="hidden" asp-for="@Model.servicoOrdem.id" value="@Model.servicoOrdem.id" />
-                       
                         <div class="row">
-                            <div class="col-md-5 offset-1">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label" style="color:red">Servico*</label>
                                     <div class="inputGroupContainer">
@@ -56,7 +50,7 @@
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupServico()">
                                                     <span class="fa fa-search"></span>
                                                 </button>
-                                            </span>                                        
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +59,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.servicoOrdem.hora" class="form-control" type="text" id="osc_hora" value="1">
+                                            <input asp-for="@Model.servicoOrdem.quantidade" class="form-control" type="text" id="osc_hora">
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +73,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tipo de Desconto</label>
                                     <div class="input-group">
@@ -111,6 +105,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Forma de Venda</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-asterisk fa-1x"></span>
+                                        </span>
+                                        <select id="osc_formavenda" asp-for="@Model.servicoOrdem.formaVendaServico" class="form-control" required="required">
+                                            <option value="1">Unidade</option>
+                                            <option value="2">Peso</option>
+                                            <option value="3" selected="">Hora</option>
+                                            <option value="4">Taxa</option>
+                                            <option value="5">Aluguel</option>
+                                        </select>
+                                    </div>
+                                </div>
+                           
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,12 +135,45 @@
 </div>
 
 <script>
-        function CarregaLookupServico() {
 
-  $("#lookupServico").load("/servico/LookupServico", function () {
-    $("#lookupServico").modal("show");
-    });
+    OnLoad_ServicoOrdem();
+
+
+    function CarregaLookupServico() {
+
+        $("#lookupServico").load("/servico/LookupServico", function () {
+            $("#lookupServico").modal("show");
+        });
+    }
+
+
+    function OnLoad_ServicoOrdem() {
+        Onchage_ServicoOrdemTipoDesconto();
+
+    }
+
+    function Onchage_ServicoOrdemTipoDesconto() {
+        debugger;
+
+        var tipo = document.getElementById("osc_tipoDesconto");
+        var descontoValor = document.getElementById("osc_valorDescontoMoney");
+        var descontoPercentual = document.getElementById("osc_valorDescontoPercentual");
+
+        if (tipo.value == 1) {
+
+            $("#osc_valorDescontoPercentual").prop('disabled', true);
+            $("#osc_valorDescontoMoney").prop('disabled', false);
+            descontoPercentual.value = "0";
+        }
+
+        if (tipo.value == 2) {
+
+            $("#osc_valorDescontoPercentual").prop('disabled', false);
+            $("#osc_valorDescontoMoney").prop('disabled', true);
+            descontoValor.value = "0";
+
+
+        }
     }
 
 </script>
-

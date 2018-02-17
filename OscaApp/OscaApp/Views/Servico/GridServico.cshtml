@@ -50,6 +50,8 @@
                                             <th></th>
                                             <th>Código</th>
                                             <th>Servico</th>
+                                            <th>Forma de Venda</th>
+                                            <th>Valor</th>
                                             <th>Criado Por</th>
                                         </tr>
                                     </thead>
@@ -59,6 +61,8 @@
                                             <td><i class="fa fa-shield"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateServico", new { id = item.id })</td>
                                             <td>@item.nomeServico</td>
+                                            <td>@item.formaVendaServico</td>
+                                            <td>@item.valor.ToString("N2")</td>
                                             <td>@item.criadoPorName</td>
                                         </tr>
                                     }

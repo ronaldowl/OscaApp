@@ -23,6 +23,8 @@ namespace OscaApp.ViewModels
         public OrdemServicoViewModel()
         {
             this.ordemServico = new OrdemServico();
+            this.ordemServico.statusOrdemServico = CustomEnumStatus.StatusOrdemServico.EmAndamento;
+             
         }
 
     }

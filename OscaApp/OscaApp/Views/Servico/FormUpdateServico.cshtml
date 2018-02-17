@@ -42,7 +42,6 @@
                             </table>
                         </div>
                     </div>
-
                     <div class="card-body">
                         <div class="row">
                             <input id="osc_id" asp-for="servico.id" type="hidden" class="form-control" value="@Model.servico.id" />
@@ -52,8 +51,23 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                            <input id="osc_codigo" asp-for="@Model.servico.codigo" type="text" class="form-control" placeholder="Código" disabled="disabled"/>
+                                            <input id="osc_codigo" asp-for="@Model.servico.codigo" type="text" class="form-control" placeholder="Código" disabled="disabled" />
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Forma de Venda</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-asterisk fa-1x"></span>
+                                        </span>
+                                        <select id="osc_formavenda" asp-for="@Model.servico.formaVendaServico" class="form-control" required="required">
+                                            <option value="1">Unidade</option>
+                                            <option value="2">Peso</option>
+                                            <option value="3" selected="">Hora</option>
+                                            <option value="4">Taxa</option>
+                                            <option value="5">Aluguel</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -67,10 +81,31 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Valor</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-money fa-1x"></span>
+                                        </span>
+                                        <input id="osc_valor" asp-for="@Model.servico.valor" type="text" class="form-control" placeholder="Valor do serviço" />
+                                    </div>
+                                </div>
+                              
                             </div>
                         </div>
-                        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                    </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>
+                                    </span>
+                                    <textarea id="osc_descricao" asp-for="@Model.servico.descricao" class="form-control" rows="8" cols="90" placeholder="digite uma anotação"></textarea>
+                                </div>
+                            </div>
+                        </div>                     
+                            
+                        </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-3">

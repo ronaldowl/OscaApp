@@ -207,7 +207,7 @@ namespace OscaApp.Data
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select id, codigo, nome, status from servico as O where O.id = '" + id.ToString() + "'",
+                        CommandText = "select id, codigo, nomeServico, status from servico as O where O.id = '" + id.ToString() + "'",
                         CommandType = CommandType.Text
                     };
 
@@ -220,7 +220,7 @@ namespace OscaApp.Data
                         {
                             retorno.id = new Guid(dataReader["id"].ToString());
                             retorno.codigo = dataReader["codigo"].ToString();
-                            retorno.idName = dataReader["nome"].ToString();
+                            retorno.idName = dataReader["nomeServico"].ToString();
                             retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
                         }
                     }
@@ -356,7 +356,7 @@ namespace OscaApp.Data
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select O.idOrdem ,  status from ServicoOrdem as O where O.id = '" + id.ToString() + "'",
+                        CommandText = "select O.idOrdemServico ,  status from ServicoOrdem as O where O.id = '" + id.ToString() + "'",
                         CommandType = CommandType.Text
                     };
 
@@ -367,7 +367,7 @@ namespace OscaApp.Data
                     {
                         while (dataReader.Read())
                         {
-                            retorno.id = new Guid(dataReader["idOrdem"].ToString());
+                            retorno.id = new Guid(dataReader["idOrdemServico"].ToString());
 
                         }
                     }

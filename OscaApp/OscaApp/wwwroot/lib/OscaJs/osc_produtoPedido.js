@@ -1,12 +1,12 @@
 ﻿//********************************* Biblioteca com funções da Tela Produto do Pedido ***************
 
-function OnLoad()
+function OnLoad_ProdutoPedido()
 {
-    Onchage_TipoDesconto();
+    Onchage_ProdutoPedidoTipoDesconto();
 
 }
 
-function Onchage_TipoDesconto() {
+function Onchage_ProdutoPedidoTipoDesconto() {
     debugger;
 
     var tipo = document.getElementById("osc_tipoDesconto");  

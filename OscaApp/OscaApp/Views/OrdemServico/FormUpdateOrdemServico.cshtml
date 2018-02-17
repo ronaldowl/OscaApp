@@ -14,12 +14,14 @@
     }
 
        function CarregaServicoOrdem() {
-           $("#modalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?idOrdem=" + '@Model.ordemServico.id'  , function () {
+           $("#modalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?id=" + '@Model.ordemServico.id'  , function () {
                $("#modalServicoOrdem").modal("show");
         });
     }
 
 </script>
+
+
 
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
@@ -410,7 +412,7 @@
                             </div>
                         </div>
                         <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;   </span></div>
-                        <div class="row" id="gridServico">
+                        <div class="card">
                             <div class="card-header">
                                 <div class="card-title">
                                     <table>
@@ -421,17 +423,24 @@
                                             <td>
                                                 <div class="form-group col-md-2">
                                                     <button id="osc_novoServico" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Adicionar</span></button>
-                                                </div>
+                                                </div>                                            
 
+                                            </td>
+                                            <td>
+                                                @*<div class="form-group col-md-2">
+                                                    <button id="osc_expandir" data-toggle="collapse" data-target="#gridServicoOrdem" class="btn btn-sm btn-info  fa fa-plus-square-o" value="Novo"> <span>Expandir</span></button>
+                                                </div>*@
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?idOrdem=@Model.ordemServico.id"></iframe>
+                            <div class="card-body  " id="gridServicoOrdem">
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id"></iframe>
+                                </div>
                             </div>
-                        </div>
+                        </div>                       
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -456,7 +465,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="card-footer">
                         <div class="row">
