@@ -62,7 +62,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.cliente.nomeCliente != null)
+                if (entrada.cliente != null)
                 {
                     if (ClienteRules.MontaClienteCreate(entrada, out modelo, contexto))
                     {
@@ -70,6 +70,11 @@ namespace OscaApp.Controllers
 
                         return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
                     }
+                }
+                else {
+
+                    //Apresenta mensagem para o usuário
+                    return RedirectToAction("ContexError", "CustomError", new {entityType = 1 });
                 }
             }
             catch (Exception ex)
@@ -196,7 +201,7 @@ namespace OscaApp.Controllers
             }
 
             return View();
-        },
+        }
         
         
   
