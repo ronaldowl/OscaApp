@@ -19,7 +19,6 @@ namespace OscaApp.Controllers
     [Authorize]
     public class EnderecoController : Controller
     {
-     
         private readonly IEnderecoData enderecoData;
         private ContextPage contexto;
 
@@ -32,64 +31,34 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
 
         }
-
-        public ViewResult GridEndereco(int Page, string idCliente)
-        {
-            IEnumerable<Endereco> retorno = enderecoData.GetAllByIdClinte(new Guid(idCliente));    
         
-            retorno = retorno.OrderBy(x => x.logradouro);
-      
-            if (Page == 0) Page = 1;
-
-            return View(retorno.ToPagedList<Endereco>(Page, 10));
-        }
-
-
-
-
-        [HttpPost]
-        public IActionResult FormUpdateEndereco(EnderecoViewModel entrada)
+        [HttpGet]
+        public ViewResult FormCreateEndereco(string idCliente, string NomeCliente)
         {
-            Endereco modelo = new Endereco();
-            entrada.contexto = contexto;
-
+            EnderecoViewModel modelo = new EnderecoViewModel();
+            modelo.endereco = new Endereco();
             try
             {
-                if (EnderecoRules.MontaEnderecoUpdate(entrada, out modelo))
-                {
-                   
-                    enderecoData.Update(modelo);
-                    return RedirectToAction("FormUpdateEndereco", new { id = modelo.id.ToString() });
-                }
+            
+            modelo.contexto = contexto;          
+            modelo.endereco.idCliente = new Guid(idCliente);
+            modelo.endereco.idClienteName = NomeCliente;      
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1, 9, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateEndereco-post", ex.Message);
+
+                throw;
             }
 
-            return RedirectToAction("FormUpdateEndereco", new { id = modelo.id.ToString() });
-        }
-
-        [HttpGet]
-        public ViewResult FormUpdateEndereco(string id)
-        {
-            EnderecoViewModel modelo = new EnderecoViewModel();           
-
-
-            if (!String.IsNullOrEmpty(id))
-            {
-                modelo.endereco = enderecoData.Get(new Guid(id));
-            }
-                return View(modelo);
+            return View(modelo);
         }
 
         [HttpPost]
         public IActionResult FormCreateEndereco(EnderecoViewModel entrada, string idCliente, string idClienteName)
         {
-            Endereco modelo = new Endereco();                
-                    
+            Endereco modelo = new Endereco();
+
             try
             {
                 if (entrada.endereco.logradouro != null)
@@ -114,25 +83,52 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult FormCreateEndereco(string idCliente, string NomeCliente)
+        public ViewResult FormUpdateEndereco(string id)
         {
             EnderecoViewModel modelo = new EnderecoViewModel();
-            modelo.endereco = new Endereco();
+
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                modelo.endereco = enderecoData.Get(new Guid(id));
+            }
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormUpdateEndereco(EnderecoViewModel entrada)
+        {
+            Endereco modelo = new Endereco();
+            entrada.contexto = contexto;
+
             try
             {
-            
-            modelo.contexto = contexto;          
-            modelo.endereco.idCliente = new Guid(idCliente);
-            modelo.endereco.idClienteName = NomeCliente;      
+                if (EnderecoRules.MontaEnderecoUpdate(entrada, out modelo))
+                {
+
+                    enderecoData.Update(modelo);
+                    return RedirectToAction("FormUpdateEndereco", new { id = modelo.id.ToString() });
+                }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 9, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateEndereco-post", ex.Message);
             }
 
-            return View(modelo);
+            return RedirectToAction("FormUpdateEndereco", new { id = modelo.id.ToString() });
+        }
+
+        public ViewResult GridEndereco(int Page, string idCliente)
+        {
+            IEnumerable<Endereco> retorno = enderecoData.GetAllByIdClinte(new Guid(idCliente));
+
+            retorno = retorno.OrderBy(x => x.logradouro);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Endereco>(Page, 10));
         }
     }
 }

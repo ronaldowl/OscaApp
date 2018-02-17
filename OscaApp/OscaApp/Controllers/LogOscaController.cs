@@ -14,7 +14,6 @@ namespace OscaApp.Controllers
     [Authorize]
     public class LogOscaController : Controller
     {
-    
         private ContextPage contexto;
         private LogOsca logOscaData;
 
@@ -23,6 +22,16 @@ namespace OscaApp.Controllers
             //this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.logOscaData = new LogOsca();
+        }
+
+        public ViewResult GridLogOsca(int filtro)
+        {
+
+            IEnumerable<LogOsca> modelo = logOscaData.getAll(contexto.idOrganizacao);
+
+            if (filtro > 0) modelo = from A in modelo where (A.codigoErro == filtro) select A;
+
+            return View(modelo.ToList());
         }
 
         [HttpGet]
@@ -37,15 +46,6 @@ namespace OscaApp.Controllers
 
             return View(modelo);
         }
-
-        public ViewResult GridLogOsca(int filtro)
-        {
-
-            IEnumerable<LogOsca> modelo = logOscaData.getAll(contexto.idOrganizacao);
-
-           if(filtro > 0) modelo =  from A in modelo where ( A.codigoErro == filtro) select A;
-
-            return View(modelo.ToList());
-        }
+        
     }
 }

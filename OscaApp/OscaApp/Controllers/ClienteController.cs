@@ -41,6 +41,111 @@ namespace OscaApp.Controllers
             this.sqlData = _sqlData;
         }
 
+        [HttpGet]
+        public ViewResult FormCreateCliente()
+        {
+            ClienteViewModel modelo = new ClienteViewModel();
+            modelo.cliente = new Cliente();
+            modelo.contexto = contexto;
+            modelo.cliente.criadoEm = DateTime.Now;
+            modelo.cliente.criadoPorName = contexto.nomeUsuario;
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormCreateCliente(ClienteViewModel entrada)
+        {
+
+            Cliente modelo = new Cliente();
+            entrada.contexto = contexto;
+
+            try
+            {
+                if (entrada.cliente.nomeCliente != null)
+                {
+                    if (ClienteRules.MontaClienteCreate(entrada, out modelo, contexto))
+                    {
+                        clienteData.Add(modelo);
+
+                        return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateCliente", ex.Message);
+
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ViewResult FormUpdateCliente(string id)
+        {
+            ClienteViewModel modelo = new ClienteViewModel();
+
+            try
+            {
+                Cliente retorno = new Cliente();
+                //Formulario com os dados do cliente
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = clienteData.Get(new Guid(id), contexto.idOrganizacao);
+
+                    modelo.contato = sqlData.RetornaRelacaoContato(retorno.idContato);
+                    if (retorno != null)
+                    {
+                        modelo.cliente = retorno;
+
+                        //Preenche informações do grid de Endereço
+                        modelo.enderecos = enderecoData.GetByCliente(new Guid(id));
+                        //Preenche informações do grid de Ordem de Servico
+                        modelo.ordensServico = ordemServicoData.GetAllByIdCliente(new Guid(id));
+
+                        //Preenche informações do grid de Pedido
+                        modelo.pedidos = pedidoData.GetAllByIdCliente(new Guid(id));
+
+
+
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-get", ex.Message);
+
+            }
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormUpdateCliente(ClienteViewModel entrada)
+        {
+            Cliente modelo = new Cliente();
+            try
+            {
+                if (ClienteRules.MontaClienteUpdate(entrada, out modelo, this.contexto))
+                {
+                    clienteData.Update(modelo);
+                    return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-post", ex.Message);
+            }
+
+            return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
+        }
+
         public ViewResult GridCliente(string filtro, int Page)
         {
             try
@@ -91,110 +196,11 @@ namespace OscaApp.Controllers
             }
 
             return View();
-        }
-
-
-        [HttpPost]
-        public IActionResult FormUpdateCliente(ClienteViewModel entrada)
-        {
-            Cliente modelo = new Cliente();
-            try
-            {
-                if (ClienteRules.MontaClienteUpdate(entrada, out modelo, this.contexto))
-                {
-                    clienteData.Update(modelo);
-                    return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-post", ex.Message);
-            }
-
-            return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
-        }
-        [HttpGet]
-        public ViewResult FormUpdateCliente(string id)
-        {
-            ClienteViewModel modelo = new ClienteViewModel();
-
-            try
-            {
-                Cliente retorno = new Cliente();
-                //Formulario com os dados do cliente
-                if (!String.IsNullOrEmpty(id))
-                {
-                    //campo que sempre contém valor
-                    retorno = clienteData.Get(new Guid(id), contexto.idOrganizacao);
-
-                    modelo.contato = sqlData.RetornaRelacaoContato(retorno.idContato);
-                    if (retorno != null)
-                    {
-                        modelo.cliente = retorno;
-
-                        //Preenche informações do grid de Endereço
-                        modelo.enderecos = enderecoData.GetByCliente(new Guid (id));
-                        //Preenche informações do grid de Ordem de Servico
-                        modelo.ordensServico = ordemServicoData.GetAllByIdCliente(new Guid(id));
-                     
-                        //Preenche informações do grid de Pedido
-                        modelo.pedidos = pedidoData.GetAllByIdCliente(new Guid(id));
-
-
-
-
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-get", ex.Message);
-
-            }
-
-            return View(modelo);
-        }
-
-        [HttpPost]
-        public IActionResult FormCreateCliente(ClienteViewModel entrada)
-        {
-
-            Cliente modelo = new Cliente();
-            entrada.contexto = contexto;
-
-            try
-            {
-                if (entrada.cliente.nomeCliente != null)
-                {
-                    if (ClienteRules.MontaClienteCreate(entrada, out modelo, contexto))
-                    {
-                        clienteData.Add(modelo);
-
-                        return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateCliente", ex.Message);
-
-            }
-            return View();
-        }
-        [HttpGet]
-        public ViewResult FormCreateCliente()
-        {
-            ClienteViewModel modelo = new ClienteViewModel();
-            modelo.cliente = new Cliente();
-            modelo.contexto = contexto;
-            modelo.cliente.criadoEm = DateTime.Now;
-            modelo.cliente.criadoPorName = contexto.nomeUsuario;
-
-            return View(modelo);
-        }
+        },
+        
+        
+  
+   
+     
     }
 }

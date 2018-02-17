@@ -128,6 +128,7 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Servico>(Page, 10));
         }
+
         public ViewResult LookupServico(string filtro, int Page)
         {
             IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
