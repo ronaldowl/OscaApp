@@ -54,6 +54,8 @@ namespace OscaFramework.Models
             this.statusOrg = org.statusOrg;
             this.dataExpiracao = org.dataExpiracao;
             this.id = org.id;
+            this.status = CustomEnumStatus.Status.Ativo;
+            this.entityType = 1000;
         }
 
         //Contrutor padrão

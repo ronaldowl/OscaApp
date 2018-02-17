@@ -36,5 +36,12 @@ namespace OscaFramework.Models
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
         public CustomEnum.FormaVendaProduto formaVendaServico { get; set; }
 
+        // Ctors
+        public ServicoOrdem()
+        {
+            this.status = CustomEnumStatus.Status.Ativo;
+            this.entityType =    26;
+        } // end of ctor padrão
+
     }
 }

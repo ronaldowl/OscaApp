@@ -11,6 +11,8 @@ namespace OscaFramework.Models
     [Table("produtopedido")]
     public class ProdutoPedido : GenericEntity
     {
+
+        // Properties
         public Guid idOrganizacao { get; set; }
         public Guid idPedido { get; set; }
         public Guid idItemListaPreco { get; set; }
@@ -38,6 +40,13 @@ namespace OscaFramework.Models
 
         public int quantidade { get; set; }
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
-        
-    }
-}
+
+        //Ctors
+        public ProdutoPedido()
+        {
+            this.status = CustomEnumStatus.Status.Ativo;
+            this.entityType = 16;
+        } // end of ctor
+
+    } // end of class ProdutoPedido
+} // end of namespace

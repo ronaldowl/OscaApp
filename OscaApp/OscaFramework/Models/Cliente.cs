@@ -27,7 +27,8 @@ namespace OscaFramework.Models
         public Guid idContato { get; set; }
 
 
-        public Cliente() {
+        public Cliente()
+        {
             this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 1;
         }

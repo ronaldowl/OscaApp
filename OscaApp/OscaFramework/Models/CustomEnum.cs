@@ -171,6 +171,9 @@ namespace OscaFramework.Models
             ContasReceber = 21,
             Recurso = 22,
             Banco = 23,
+            Agendamento = 24,
+            ItemProdutoLista =25,
+            ServicoOrdem = 26,
             Organizacao = 1000
 
         }

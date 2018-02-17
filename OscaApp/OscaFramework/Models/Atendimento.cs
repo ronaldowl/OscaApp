@@ -10,8 +10,12 @@ namespace OscaFramework.Models
     {
         public Guid idOrganizacao { get; set; }
         public string codigo { get; set; }
-        public DateTime dataAtendimento  { get; set; }    
-        
+        public DateTime dataAtendimento { get; set; }
 
+        public Atendimento()
+        {
+            this.entityType = 3;
+            this.status = CustomEnumStatus.Status.Ativo;
+        } // ctor padrão
     }
 }
