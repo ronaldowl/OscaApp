@@ -52,7 +52,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.contato.nome != null)
+                if (entrada.contato != null)
                 {
                     if (ContatoRules.MontaContatoCreate(entrada, out modelo, contexto))
                     {

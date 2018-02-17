@@ -69,10 +69,13 @@ namespace OscaApp.Controllers
             ProdutoPedido modelo = new ProdutoPedido();
             try
             {
-                if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
+                if (entrada.produtoPedido != null)
                 {
-                    produtoPedidoData.Add(modelo);
-                    return RedirectToAction("FormUpdatePedido","Pedido", new { id = modelo.idPedido.ToString()});
+                    if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
+                    {
+                        produtoPedidoData.Add(modelo);
+                        return RedirectToAction("FormUpdatePedido", "Pedido", new { id = modelo.idPedido.ToString() });
+                    }
                 }
             }
             catch (Exception ex)

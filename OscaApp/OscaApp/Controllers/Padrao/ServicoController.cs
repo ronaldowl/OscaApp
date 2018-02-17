@@ -51,9 +51,8 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.servico.nomeServico!=null)
+                if (entrada.servico != null)
                 {
-                   
                     if  (ServicoRules.ServicoCreate(entrada, out modelo, contexto)) {                    
                         servicoData.Add(modelo);
                         return RedirectToAction("FormUpdateServico", new { id = modelo.id.ToString() });

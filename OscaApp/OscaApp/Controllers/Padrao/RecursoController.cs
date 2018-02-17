@@ -47,12 +47,14 @@ namespace OscaApp.Controllers
 
             try
             {
-               
-                  if  (RecursoRules.RecursoCreate(entrada, out modelo, contexto)) {
+                if (entrada.recurso != null)
+                {
+                    if (RecursoRules.RecursoCreate(entrada, out modelo, contexto))
+                    {
                         modeloData.Add(modelo);
                         return RedirectToAction("FormUpdateRecurso", new { id = modelo.id.ToString() });
-                  }
-                
+                    }
+                }
             }
             catch (Exception ex)
             {

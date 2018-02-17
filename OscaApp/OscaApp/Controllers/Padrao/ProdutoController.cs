@@ -55,7 +55,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.produto.nome != null)
+                if (entrada.produto != null)
                 {
                     if (ProdutoRules.MontaProdutoCreate(entrada, out prod, contexto))
                     {

@@ -47,7 +47,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.contasPagar.idOrganizacao != null)
+                if (entrada.contasPagar != null)
                 {
                   if  (ContasPagarRules.ContasPagarCreate(entrada, out modelo, contexto)) {
                         contasPagarData.Add(modelo);

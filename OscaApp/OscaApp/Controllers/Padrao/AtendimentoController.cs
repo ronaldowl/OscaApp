@@ -41,7 +41,7 @@ namespace OscaApp.Controllers
         {
             Atendimento  modelo = new Atendimento ();
 
-            if(entrada != null)
+            if(entrada.atendimento != null)
             {
 
                if( AtendimentoRules.AtendimentoCreate(entrada,out modelo, this.contexto))

@@ -61,7 +61,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.endereco.logradouro != null)
+                if (entrada.endereco != null)
                 {
                     if (EnderecoRules.MontaEnderecoCreate(entrada, out modelo, contexto))
                     {

@@ -51,7 +51,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.Fornecedor.nomeFornecedor!=null)
+                if (entrada.Fornecedor !=null)
                 {
                   if  (FornecedorRules.FornecedorCreate(entrada, out modelo, contexto)) {                    
                         fornecedorData.Add(modelo);

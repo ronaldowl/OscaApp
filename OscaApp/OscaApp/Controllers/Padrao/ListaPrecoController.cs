@@ -52,7 +52,7 @@ namespace OscaApp.Controllers
             ListaPreco listaPreco = new ListaPreco();
             try
             {
-                if (entrada.listaPreco.nome != null)
+                if (entrada.listaPreco != null)
                 {
                     if (ListaPrecoRules.ListaPrecoCreate(entrada, out listaPreco, contexto))
                     {

@@ -48,7 +48,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.comunicado.titulo!=null)
+                if (entrada.comunicado != null)
                 {
                   if  (ComunicadoRules.ComunicadoCreate(entrada, out modelo, contexto)) {
                         comunicadoData.Add(modelo);

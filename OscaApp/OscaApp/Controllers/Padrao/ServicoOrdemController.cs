@@ -63,12 +63,15 @@ namespace OscaApp.Controllers
             ServicoOrdem modelo = new ServicoOrdem();
             try
             {
-                if (ServicoOrdemRules.ServicoOrdemCreate(entrada, out modelo, contexto))
+                if (entrada.servicoOrdem != null)
                 {
-                    SqlGenericData sqlData = new SqlGenericData();
-                    servicoOrdemData.Add(modelo);
-                    return RedirectToAction("FormUpdateOrdemServico", "OrdemServico", new { id = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(modelo.id).id });
+                    if (ServicoOrdemRules.ServicoOrdemCreate(entrada, out modelo, contexto))
+                    {
+                        SqlGenericData sqlData = new SqlGenericData();
+                        servicoOrdemData.Add(modelo);
+                        return RedirectToAction("FormUpdateOrdemServico", "OrdemServico", new { id = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(modelo.id).id });
 
+                    }
                 }
             }
             catch (Exception ex)
