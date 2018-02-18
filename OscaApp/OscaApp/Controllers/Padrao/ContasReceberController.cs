@@ -48,7 +48,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.contasReceber.idOrganizacao != null)
+                if (entrada.contasReceber != null)
                 {
                   if  (ContasReceberRules.ContasReceberCreate(entrada, out modelo, contexto)) {
                         contasReceberData.Add(modelo);

@@ -39,15 +39,15 @@ namespace OscaApp.Controllers
         public ViewResult FormCreateItemListaPreco(string idProduto)
         {
             ItemListaPrecoViewModel modelo = new ItemListaPrecoViewModel();
-           
+
             try
             {
-                modelo.contexto = contexto;             
+                modelo.contexto = contexto;
                 modelo.produto = produtoData.GetRelacao(new Guid(idProduto));
-              
+
                 modelo.itemlistaPreco.criadoEm = DateTime.Now;
-                modelo.itemlistaPreco.criadoPorName = contexto.nomeUsuario;     
-                
+                modelo.itemlistaPreco.criadoPorName = contexto.nomeUsuario;
+
                 //Prenche lista de preço para o contexto da página
                 List<SelectListItem> itens = new List<SelectListItem>();
                 itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
@@ -57,7 +57,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateItemListaPreco-get", ex.Message);
+                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateItemListaPreco-get", ex.Message);
             }
 
             return View(modelo);
@@ -68,17 +68,20 @@ namespace OscaApp.Controllers
         {
             ItemListaPreco itemlistaPreco = new ItemListaPreco();
             try
-            {                
+            {
+                if (entrada.itemlistaPreco != null)
+                {
                     if (ItemListaPrecoRules.ItemListaPrecoCreate(entrada, out itemlistaPreco, contexto))
                     {
                         ItemlistaPrecoData.Add(itemlistaPreco);
                         return RedirectToAction("FormUpdateItemListaPreco", new { id = itemlistaPreco.id.ToString() });
-                    }                
+                    }
+                }
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateItemListaPreco-post", ex.Message);
+                log.GravaLog(1, 13, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateItemListaPreco-post", ex.Message);
             }
             return View();
         }
@@ -92,7 +95,7 @@ namespace OscaApp.Controllers
             {
                 ItemListaPreco retorno = new ItemListaPreco();
                 modelo.contexto = this.contexto;
-              
+
                 if (!String.IsNullOrEmpty(id))
                 {
                     //campo que sempre contém valor
@@ -142,7 +145,7 @@ namespace OscaApp.Controllers
             }
             return View();
         }
-        
+
         public ViewResult LookupProdutoPedido(string idListaPreco, int Page, string Filtro)
         {
             IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
@@ -153,7 +156,7 @@ namespace OscaApp.Controllers
             if (Page == 0) Page = 1;
 
             return View(modelo.ToPagedList<LookupItemLista>(Page, 10));
-             
+
         }
 
     }

@@ -49,7 +49,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.profissional.nomeProfissional!=null)
+                if (entrada.profissional !=null)
                 {
                   if  (ProfissionalRules.ProfissionalCreate(entrada, out modelo, contexto)) {
                         profissionalData.Add(modelo);

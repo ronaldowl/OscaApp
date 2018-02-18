@@ -72,7 +72,7 @@ namespace OscaApp.Controllers
                 if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
                 {
                     produtoPedidoData.Add(modelo);
-                    return RedirectToAction("GridProdutoPedido","ProdutoPedido", new { idPedido = modelo.idPedido.ToString()});
+                    return RedirectToAction("FormUpdatePedido","Pedido", new { id = modelo.idPedido.ToString()});
                 }
             }
             catch (Exception ex)

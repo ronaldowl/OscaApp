@@ -49,12 +49,14 @@ namespace OscaApp.Controllers
             entrada.contexto = this.contexto;
             try
             {
-                if (OrganizacaoRules.MontaOrganizacaoUpdate(entrada, out modelo))
+                if (entrada.organizacao != null)
                 {
-                    organizacaoData.Update(modelo);
-                    return RedirectToAction("FormUpdateOrganizacao",null);
+                    if (OrganizacaoRules.MontaOrganizacaoUpdate(entrada, out modelo))
+                    {
+                        organizacaoData.Update(modelo);
+                        return RedirectToAction("FormUpdateOrganizacao", null);
+                    }
                 }
-
             }
             catch (Exception ex)
             {

@@ -73,10 +73,13 @@ namespace OscaApp.Controllers
             Pedido pedido = new Pedido();
             try
             {
-                if (PedidoRules.PedidoCreate(entrada, out pedido, contexto))
+                if (entrada.pedido != null)
                 {
-                    pedidoData.Add(pedido);
-                    return RedirectToAction("FormUpdatePedido", new { id = pedido.id.ToString() });
+                    if (PedidoRules.PedidoCreate(entrada, out pedido, contexto))
+                    {
+                        pedidoData.Add(pedido);
+                        return RedirectToAction("FormUpdatePedido", new { id = pedido.id.ToString() });
+                    }
                 }
             }
             catch (Exception ex)
