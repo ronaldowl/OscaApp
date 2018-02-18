@@ -48,6 +48,18 @@ namespace OscaApp.RulesServices
             ordemServico.modificadoPorName = entrada.contexto.nomeUsuario;
             //************ FIM Objetos de controle de acesso ***************
             return true;
-        }       
+        }
+        public static bool OrdemServicoUpdateStatus(OrdemServicoViewModel entrada, out OrdemServico ordemServico)
+        {
+            ordemServico = new OrdemServico();
+            ordemServico = entrada.ordemServico;           
+
+            //************ Objetos de controle de acesso para Update*******************
+            ordemServico.modificadoEm = DateTime.Now;
+            ordemServico.modificadoPor = entrada.contexto.idUsuario;
+            ordemServico.modificadoPorName = entrada.contexto.nomeUsuario;
+            //************ FIM Objetos de controle de acesso ***************
+            return true;
+        }
     }
 }

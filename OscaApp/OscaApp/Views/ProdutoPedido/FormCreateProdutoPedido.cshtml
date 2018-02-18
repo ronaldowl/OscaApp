@@ -2,12 +2,15 @@
 @{
     Layout = "_LayoutFrame";
 }
-<script src="~/lib/OscaJs/osc_produtoPedido.js">
-    debugger;
-    //*** Executa regra no carregamento do Form
-    OnLoad();
-</script>
+<script>
+      function CarregaLookupProdutoPedido() {
 
+          $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?idListaPreco=" + '@Model.produtoPedido.idListaPreco' + '&Page=0' + '', function () {
+            $("#lookupProdutoPedido").modal("show");
+            });
+         }
+
+</script>
 
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
@@ -73,7 +76,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor" onclick="Onchage_TipoDesconto()">
+                                            <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor">
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +88,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.produtoPedido.tipoDesconto" class="form-control" onchange="Onchage_TipoDesconto()">
+                                        <select id="osc_tipoDesconto" asp-for="@Model.produtoPedido.tipoDesconto" class="form-control" onchange="Onchage_ProdutoPedidoTipoDesconto();">
                                             <option value="1">Valor</option>
                                             <option value="2">Percentual</option>
                                         </select>
@@ -117,17 +120,11 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="lookupProdutoPedido">
 </div>
-
+<script src="~/lib/OscaJs/osc_produtoPedido.js"></script>
 <script>
-        function CarregaLookupProdutoPedido() {
-
-  $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?idListaPreco=" + '@Model.produtoPedido.idListaPreco' + '&Page=0' + '', function () {
-    $("#lookupProdutoPedido").modal("show");
-    });
-    }
-
+    debugger;
+    OnLoad_ProdutoPedido();     
 </script>
 

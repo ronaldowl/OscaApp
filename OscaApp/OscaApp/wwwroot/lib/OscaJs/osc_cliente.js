@@ -12,7 +12,7 @@ function OnLoad() {
 
 function OnChangeTipoPessoa()
 {
-    alert('Implementar regra aqui');
+    //alert('Implementar regra aqui');
 
     LimpaCNPJ_CPF();
 }

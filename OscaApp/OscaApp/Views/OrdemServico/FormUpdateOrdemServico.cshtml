@@ -13,9 +13,15 @@
         })
     }
 
-       function CarregaServicoOrdem() {
-           $("#modalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?id=" + '@Model.ordemServico.id'  , function () {
+    function CarregaServicoOrdem() {
+        $("#modalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?id=" + '@Model.ordemServico.id'  , function () {
                $("#modalServicoOrdem").modal("show");
+        });
+    }
+
+    function CarregaFormStatusOrdemServico() {
+        $("#ModalStatusOrdem").load("/OrdemServico/FormStatusOrdemServico?id=" + '@Model.ordemServico.id' , function () {
+            $("#ModalStatusOrdem").modal("show");
         });
     }
 
@@ -43,15 +49,25 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"><span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value=""> <span>Salvar</span></button>
                                             </label>
-                                            &nbsp;
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridOrdemServico","OrdemServico", null)'"><span>Fechar</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico" , null)'"> <span>Novo</span></button>
                                             </label>
-                                            &nbsp;
                                             <label>
-                                                <button id="osc_impressao" type="button" class="btn btn-info btn-lg fa fa-remove"><span>Imprimir</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="" onclick="location.href='@Url.Action("GridOrdemServico", "OrdemServico" , null)'"> <span>Fechar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_calcular" type="submit" class="btn btn-info btn-lg fa fa-calculator" value=""> <span>Calcular Pedido</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_encerrar" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusOrdemServico()"> <span>Encerrar OS</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusOrdemServico()"> <span>Reabrir</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-lg fa fa-print" value=""> <span>Imprimir OS</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -80,7 +96,7 @@
                                         </span>
                                         <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
                                         <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="botaoLookupCliente">
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
@@ -175,7 +191,12 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                            <input id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" type="text" disabled="disabled">
+                                            <select id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" disabled="disabled">
+                                                <option value="1">Em Andamento</option>
+                                                <option value="2">Fechado</option>
+                                                <option value="3">Aguardando Produto</option>
+                                                <option value="4">Cancelado</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -327,7 +348,7 @@
                                         </span>
                                         <input id="osc_IdNameCategoriaManutencao" asp-for="@Model.categoriaManutencao.idName" type="text" class="form-control" required="required">
                                         <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCategoriaManutencao()">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCategoriaManutencao()" id="botaoLookupCategoriaManutencao">
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
@@ -447,13 +468,13 @@
                                             <td>
                                                 <div class="form-group col-md-2">
                                                     <button id="osc_novoServico" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Adicionar</span></button>
-                                                </div>                                            
+                                                </div>
 
                                             </td>
                                             <td>
                                                 @*<div class="form-group col-md-2">
-                                                    <button id="osc_expandir" data-toggle="collapse" data-target="#gridServicoOrdem" class="btn btn-sm btn-info  fa fa-plus-square-o" value="Novo"> <span>Expandir</span></button>
-                                                </div>*@
+                                                        <button id="osc_expandir" data-toggle="collapse" data-target="#gridServicoOrdem" class="btn btn-sm btn-info  fa fa-plus-square-o" value="Novo"> <span>Expandir</span></button>
+                                                    </div>*@
                                             </td>
                                         </tr>
                                     </table>
@@ -464,8 +485,8 @@
                                     <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id"></iframe>
                                 </div>
                             </div>
-                        </div>                       
-            
+                        </div>
+
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -526,7 +547,7 @@
                             </div>
                         </div>
 
-                    </div>                  
+                    </div>
                 </div>
             </form>
         </div>
@@ -538,4 +559,9 @@
 </div>
 <div class="modal fade" id="modalServicoOrdem">
 </div>
+<div class="modal fade" id="ModalStatusOrdem">
+</div>
+<script src="~/lib/OscaJs/osc_ordemServico.js"></script>
+<script>OnLoad_OrdemServico();</script>
+
 

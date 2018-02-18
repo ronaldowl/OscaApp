@@ -2,6 +2,10 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-11 offset-1">
@@ -28,10 +32,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelCadastro", "Paineis", null)'"> <span>Painel Cadastro</span></button>
-                                        </div>
+                                        </div>                                       
                                     </form>
                                 </td>
                             </tr>

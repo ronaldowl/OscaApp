@@ -1,33 +1,26 @@
-//********************************* Biblioteca com funções da Tela de Pedido ***************
-
-function OnLoad() {
-    //********* Executa regra do Onload do Form **********************
-    debugger;
-
-    // PARA HABILITAR OS CAMPOS DO FORMULÁRIO, MUDAR O true PARA false
-    var statusForm = $("#osc_statusPedido").val();
-
-    //Desabilita campos se o registro estiver INATIVO
+ 
+function OnLoad_Pedido() {
+    
+    var statusForm = $("#osc_statusPedido").val(); 
     desabilita_Pedido(statusForm);
 }
 
-
 function desabilita_Pedido(status) {
-
-    if (status == "Inativo") {
+    
+    //Fechado ou cancelado
+    if (status == 2 || status == 5) {
 
         //Desabilita todos campos do Form
-        $("input,select, textarea").prop("disabled", true);
+        $("input,select, textarea, iframe").prop("disabled", true);
 
         //Esconde botoes
-        $("#osc_salvar").hide(true);
-        $("#osc_status_inativa").hide(true);
-        $("#osc_endereco").hide(true);
-
+        $("#osc_salvar").hide(true);      
+        $("#osc_calcular").hide(true);       
+        $("#osc_encerrar").hide(true);    
+    
+                   
     } else {
-
-        $("#osc_status_Ativar").hide(true);
-
+        //Apresenta botoes
+        $("#osc_reabrir").hide(false); 
     }
-
 }

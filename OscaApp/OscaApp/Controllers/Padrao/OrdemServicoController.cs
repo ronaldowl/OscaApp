@@ -148,5 +148,30 @@ namespace OscaApp.Controllers
             }
             return View(modelo);
         }
+
+        [HttpPost]
+        public IActionResult FormStatusOrdemServico(OrdemServicoViewModel entrada)
+        {
+            OrdemServico modelo = new OrdemServico();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (OrdemServicoRules.OrdemServicoUpdateStatus(entrada, out modelo))
+                {
+                    ordemServicoData.Update(modelo);
+
+                    return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-post", ex.Message);
+            }
+            return View();
+        }
+
+
     }
 }

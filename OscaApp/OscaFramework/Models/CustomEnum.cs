@@ -26,7 +26,8 @@ namespace OscaFramework.Models
             EmAndamento = 1,
             Fechado = 2,
             AguardandoProduto = 3,
-            ParaEntrega = 4
+            ParaEntrega = 4,
+            Cancelado = 5
         }
 
         public enum StatusOrdemServico
@@ -34,7 +35,8 @@ namespace OscaFramework.Models
             EmAndamento = 1,
             Fechado = 2,
             AguardandoProduto = 3,
-            Cancelada = 4
+            ParaEntrega = 4,
+            Cancelado = 5
         }
 
     }
