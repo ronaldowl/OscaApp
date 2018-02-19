@@ -1,15 +1,11 @@
-﻿@model X.PagedList.PagedList< OscaFramework.Models.ProdutoPedido>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.ProdutoPedidoGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 @{
     Layout = "_LayoutFrame";
 }
-<div id="contexto">
-    <input type="hidden" value="@if (Model.Count > 0) {@Model[0].idPedido}" id="idPedido" />
-    <input type="hidden" value="@if (Model.Count > 0) { @Model[0].idListaPreco}" id="idListaPreco" />
-</div>
-
+ 
 <script>
     function CarregaProdutoPedido() {
         $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?idPedido=" + idPedido + "&idListaPreco=" + idListaPreco, function () {
@@ -68,28 +64,28 @@
                         }
                     @foreach (var item in Model)
                     {
-                        qtd      += item.quantidade;
-                        total += item.total;
-                        desconto += item.valorDesconto;
-                        totalGeral += item.totalGeral;
+                        qtd      += item.produtoPedido.quantidade;
+                        total += item.produtoPedido.total;
+                        desconto += item.produtoPedido.valorDesconto;
+                        totalGeral += item.produtoPedido.totalGeral;
 
 
                         <tr>
-                            <td>1010</td>
-                            <td>TESTE</td>
-                            <td>@item.quantidade</td>                                        
-                            <td>@item.valor.ToString("N2")</td>
-                            <td>@item.total.ToString("N2")</td>
-                            <td>@item.valorDesconto.ToString("N2")</td>
-                            <td>@item.totalGeral.ToString("N2")</td>
+                            <td>@item.produto.codigo</td>
+                            <td>@item.produto.nome</td>
+                            <td>@item.produtoPedido.quantidade</td>                                        
+                            <td>@item.produtoPedido.valor.ToString("N2")</td>
+                            <td>@item.produtoPedido.total.ToString("N2")</td>
+                            <td>@item.produtoPedido.valorDesconto.ToString("N2")</td>
+                            <td>@item.produtoPedido.totalGeral.ToString("N2")</td>
                             <td>
                                 <div class="form-group col-md-2">
-                                    <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="CarregaProdutoPedidoUpdate('@item.id')"> <span>Editar</span></button>
+                                    <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="CarregaProdutoPedidoUpdate('@item.produtoPedido.id')"> <span>Editar</span></button>
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group col-md-2">
-                                    <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteProdutoPedido", "ProdutoPedido", new { idProdutoPedido = Model[0].id, idPedido = Model[0].idPedido })'"> <span>Remover</span></button>
+                                    <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteProdutoPedido", "ProdutoPedido", new { idProdutoPedido = Model[0].produtoPedido.id, idPedido = Model[0].produtoPedido.idPedido })'"> <span>Remover</span></button>
                                 </div>
                             </td>
                         </tr>

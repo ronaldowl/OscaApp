@@ -12,9 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using OscaFramework.Models;
- 
-
-
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
@@ -72,7 +70,7 @@ namespace OscaApp.Controllers
                 if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
                 {
                     produtoPedidoData.Add(modelo);
-                    return RedirectToAction("FormUpdatePedido","Pedido", new { id = modelo.idPedido.ToString()});
+                    return RedirectToAction("GridProdutoPedido", "ProdutoPedido", new { idPedido = modelo.idPedido.ToString()});
                 }
             }
             catch (Exception ex)
@@ -129,9 +127,9 @@ namespace OscaApp.Controllers
 
         public ViewResult GridProdutoPedido(string idPedido )
         {
-            IEnumerable<ProdutoPedido> retorno = produtoPedidoData.GetByPedidoId(new Guid(idPedido));                     
+            IEnumerable<ProdutoPedidoGridViewModel> retorno = produtoPedidoData.GetAllGridViewModel(new Guid(idPedido));                     
 
-            return View(retorno.ToPagedList<ProdutoPedido>(1, 10));
+            return View(retorno.ToPagedList<ProdutoPedidoGridViewModel>(1, 10));
         }
 
         public IActionResult DeleteProdutoPedido(string idProdutoPedido, string idPedido)

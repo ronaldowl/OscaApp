@@ -137,6 +137,7 @@ namespace OscaApp.Data
         List<ProdutoPedido> GetByPedidoId(Guid idPedido);
         List<ProdutoPedido> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
+        List<ProdutoPedidoGridViewModel> GetAllGridViewModel(Guid idPedido);
     }
 
     public interface IServicoOrdemData
