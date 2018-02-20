@@ -149,9 +149,22 @@ namespace OscaApp.Data
         List<ServicoOrdem> GetByServicoOrdemId(Guid idPedido);
         List<ServicoOrdem> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
+        List<ServicoOrdemGridViewModel> GetAllGridViewModel(Guid idServico);
 
     }
 
+    public interface IProdutoOrdemData
+    {
+        void Add(ProdutoOrdem contato);
+        void Update(ProdutoOrdem contato);
+        void Delete(ProdutoOrdem contato);
+        ProdutoOrdem Get(Guid id);
+        List<ProdutoOrdem> GetByServicoOrdemId(Guid idOrdem);
+        List<ProdutoOrdem> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+        List<ProdutoOrdemGridViewModel> GetAllGridViewModel(Guid idProduto);
+
+    }
 
     public interface IContatoData
     {

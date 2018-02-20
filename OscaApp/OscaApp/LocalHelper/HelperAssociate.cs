@@ -26,7 +26,6 @@ namespace OscaApp.framework
             }
             return retorno;
         }
-
         public static List<PedidoGridViewModel> ConvertToGridPedido(List<Pedido> itens)
         {
             List<PedidoGridViewModel> retorno = new List<PedidoGridViewModel>();
@@ -42,7 +41,6 @@ namespace OscaApp.framework
             }
             return retorno;
         }
-
         public static List<ProdutoPedidoGridViewModel> ConvertToGridProdutoPedido(List<ProdutoPedido> itens)
         {
             List<ProdutoPedidoGridViewModel> retorno = new List<ProdutoPedidoGridViewModel>();
@@ -57,6 +55,33 @@ namespace OscaApp.framework
             }
             return retorno;
         }
+        public static List<ServicoOrdemGridViewModel> ConvertToGridServicoOrdem(List<ServicoOrdem> itens)
+        {
+            List<ServicoOrdemGridViewModel> retorno = new List<ServicoOrdemGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
 
+            foreach (var item in itens)
+            {
+                ServicoOrdemGridViewModel X = new ServicoOrdemGridViewModel();
+                X.servico = sqldata.RetornaServico(item.idServico);
+                X.servicoOrdem = item;
+                retorno.Add(X);
+            }
+            return retorno;
+        }
+        public static List<ProdutoOrdemGridViewModel> ConvertToGridProdutoOrdem(List<ProdutoOrdem> itens)
+        {
+            List<ProdutoOrdemGridViewModel> retorno = new List<ProdutoOrdemGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                ProdutoOrdemGridViewModel X = new ProdutoOrdemGridViewModel();
+                X.produto = sqldata.RetornaProduto(item.idProduto);
+                X.produtoOrdem = item;
+                retorno.Add(X);
+            }
+            return retorno;
+        }
     }
 }

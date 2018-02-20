@@ -1,10 +1,10 @@
-﻿//********************************* Biblioteca com funções da Tela Produto do Pedido ***************
+﻿//********************************* Biblioteca com funções da Tela Produto da Ordem ***************
 
-function OnLoad_ServicoOrdem() {
+function OnLoad_ProdutoOrdem() {
     Onchage_ServicoOrdemTipoDesconto();
 }
 
-function Onchage_ServicoOrdemTipoDesconto() {
+function Onchage_ProdutoOrdemTipoDesconto() {
    
     var tipo = document.getElementById("osc_tipoDesconto");
     var descontoValor = document.getElementById("osc_valorDescontoMoney");

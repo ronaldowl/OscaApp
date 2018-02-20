@@ -12,9 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using OscaFramework.Models;
- 
-
-
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
@@ -69,7 +67,7 @@ namespace OscaApp.Controllers
                     {
                         SqlGenericData sqlData = new SqlGenericData();
                         servicoOrdemData.Add(modelo);
-                        return RedirectToAction("FormUpdateOrdemServico", "OrdemServico", new { id = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(modelo.id).id });
+                        return RedirectToAction("GridServicoOrdem", "ServicoOrdem", new { id = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(modelo.id).id });
 
                     }
                 }
@@ -128,9 +126,9 @@ namespace OscaApp.Controllers
 
         public ViewResult GridServicoOrdem(string id)
         {
-            IEnumerable<ServicoOrdem> retorno = servicoOrdemData.GetByServicoOrdemId(new Guid(id));
+            IEnumerable<ServicoOrdemGridViewModel> retorno = servicoOrdemData.GetAllGridViewModel(new Guid(id));
 
-            return View(retorno.ToPagedList<ServicoOrdem>(1, 10));
+            return View(retorno.ToPagedList<ServicoOrdemGridViewModel>(1, 10));
         }
 
         public IActionResult DeleteServicoOrdem(string id, string idOrdem)

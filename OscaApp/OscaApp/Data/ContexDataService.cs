@@ -30,6 +30,7 @@ namespace OscaApp.Data
         public DbSet<OrdemServico> OrdensServico { get; set; }
         public DbSet<Recurso> Recursos { get; set; }
         public DbSet<ServicoOrdem> ServicosOrdem { get; set; }
+        public DbSet<ProdutoOrdem> ProdutosOrdem { get; set; }
         public DbSet<Atendimento> Atendimentos { get; set; }
     }
 }

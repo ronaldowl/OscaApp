@@ -3,6 +3,7 @@ using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
+using System.Collections.Generic;
 
 namespace OscaApp.RulesServices
 {
@@ -61,5 +62,32 @@ namespace OscaApp.RulesServices
             //************ FIM Objetos de controle de acesso ***************
             return true;
         }
+        public static void CalculoOrdem(ref OrdemServico ordem, IServicoOrdemData ServicosOrdem)
+        {
+            List<ServicoOrdem> ordens = new List<ServicoOrdem>();
+
+            ordens = ServicosOrdem.GetByServicoOrdemId(ordem.id);
+
+            decimal Total = 0;
+
+            foreach (var item in ordens)
+            {
+                Total += item.totalGeral;
+            }
+
+            if (ordem.tipoDesconto == CustomEnum.tipoDesconto.Money)
+            {
+                Total = Total - ordem.valorDesconto;
+            }
+            else
+            {
+                Total = (Total / 100) * ordem.valorDescontoPercentual;
+            }
+
+            ordem.valorTotal = Total;
+
+
+        }
+
     }
 }

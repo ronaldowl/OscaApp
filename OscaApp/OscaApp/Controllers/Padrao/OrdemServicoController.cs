@@ -19,6 +19,7 @@ namespace OscaApp.Controllers
     public class OrdemServicoController : Controller
     {
         private readonly IOrdemServicoData ordemServicoData;
+        private readonly IServicoOrdemData servicoOrdemData;
         private ContextPage contexto;
         private readonly SqlGenericDataServices sqlData;         
 
@@ -26,6 +27,8 @@ namespace OscaApp.Controllers
         {
             this.sqlData = _sqlData;
             this.ordemServicoData = new OrdemServicoData(db);
+            this.servicoOrdemData = new ServicoOrdemData(db);
+
             this.contexto =  new ContextPage().ExtractContext(httpContext);
         }
 
@@ -75,6 +78,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
+
                 modelo.ordemServico = ordemServicoData.Get(modelo.ordemServico.id );
                 modelo.contexto = this.contexto;
 
@@ -97,6 +101,7 @@ namespace OscaApp.Controllers
             {
                 if (OrdemServicoRules.OrdemServicoUpdate(entrada, out modelo))
                 {
+                    OrdemServicoRules.CalculoOrdem(ref modelo, servicoOrdemData);
                     ordemServicoData.Update(modelo);
                     return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });
                 }

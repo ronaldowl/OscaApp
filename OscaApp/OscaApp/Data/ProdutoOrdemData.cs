@@ -12,20 +12,20 @@ using OscaApp.framework;
 
 namespace OscaApp.Data
 {
-    public class ServicoOrdemData : IServicoOrdemData
+    public class ProdutoOrdemData : IProdutoOrdemData
     {
         private ContexDataService db;
 
-        public ServicoOrdemData(ContexDataService dbContext)
+        public ProdutoOrdemData(ContexDataService dbContext)
         {
             this.db = dbContext;
         }
 
-        public void Delete(ServicoOrdem modelo)
+        public void Delete(ProdutoOrdem modelo)
         {
             try
             {
-                db.ServicosOrdem.Remove(modelo);
+                db.ProdutosOrdem.Remove(modelo);
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -34,11 +34,11 @@ namespace OscaApp.Data
             }
 
         }
-        public void Add(ServicoOrdem modelo)
+        public void Add(ProdutoOrdem modelo)
         {
             try
             {
-                db.ServicosOrdem.Add(modelo);
+                db.ProdutosOrdem.Add(modelo);
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -47,7 +47,7 @@ namespace OscaApp.Data
             }
 
         }
-        public void Update(ServicoOrdem modelo)
+        public void Update(ProdutoOrdem modelo)
         {
             try
             {
@@ -74,12 +74,12 @@ namespace OscaApp.Data
             }
 
         }
-        public ServicoOrdem Get(Guid id)
+        public ProdutoOrdem Get(Guid id)
         {
-            List<ServicoOrdem> retorno = new List<ServicoOrdem>();
+            List<ProdutoOrdem> retorno = new List<ProdutoOrdem>();
             try
             {
-                retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem where  id = '" + id.ToString() + "'").ToList();
+                retorno = db.ProdutosOrdem.FromSql("SELECT * FROM ProdutoOrdem where  id = '" + id.ToString() + "'").ToList();
             }
             catch (SqlException ex)
             {
@@ -89,37 +89,37 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
-        public List<ServicoOrdem> GetAll(Guid idOrg)
+        public List<ProdutoOrdem> GetAll(Guid idOrg)
         {
-            List<ServicoOrdem> retorno = new List<ServicoOrdem>();
-            retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            List<ProdutoOrdem> retorno = new List<ProdutoOrdem>();
+            retorno = db.ProdutosOrdem.FromSql("SELECT * FROM ProdutoOrdem  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return retorno;
 
         }
-        public List<ServicoOrdem> GetByServicoOrdemId(Guid idOrdemServico)
+        public List<ProdutoOrdem> GetByServicoOrdemId(Guid idOrdemServico)
         {
-            List<ServicoOrdem> retorno = new List<ServicoOrdem>();
-            retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrdemServico = '" + idOrdemServico.ToString() + "'").ToList();
+            List<ProdutoOrdem> retorno = new List<ProdutoOrdem>();
+            retorno = db.ProdutosOrdem.FromSql("SELECT * FROM ProdutoOrdem  where  idOrdemServico = '" + idOrdemServico.ToString() + "'").ToList();
             return retorno;
 
         }
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
-            List<ServicoOrdem> retorno = new List<ServicoOrdem>();
+            List<ProdutoOrdem> retorno = new List<ProdutoOrdem>();
             List<Relacao> lista = new List<Relacao>();
 
-            retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = db.ProdutosOrdem.FromSql("SELECT * FROM ProdutoOrdem  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 
         }
-        public List<ServicoOrdemGridViewModel> GetAllGridViewModel(Guid idOrdem)
+        public List<ProdutoOrdemGridViewModel> GetAllGridViewModel(Guid idOrdem)
         {
-            List<ServicoOrdem> itens = new List<ServicoOrdem>();
+            List<ProdutoOrdem> itens = new List<ProdutoOrdem>();
 
-            itens = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrdemServico = '" + idOrdem.ToString() + "'").ToList();
+            itens = db.ProdutosOrdem.FromSql("SELECT * FROM ProdutoOrdem  where  idOrdemServico = '" + idOrdem.ToString() + "'").ToList();
 
-            return HelperAssociate.ConvertToGridServicoOrdem(itens);
+            return HelperAssociate.ConvertToGridProdutoOrdem(itens);
         }
 
     }

@@ -85,7 +85,7 @@
                             </td>
                             <td>
                                 <div class="form-group col-md-2">
-                                    <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteProdutoPedido", "ProdutoPedido", new { idProdutoPedido = Model[0].produtoPedido.id, idPedido = Model[0].produtoPedido.idPedido })'"> <span>Remover</span></button>
+                                    <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteProdutoPedido", "ProdutoPedido", new { idProdutoPedido = item.produtoPedido.id, idPedido = item.produtoPedido.idPedido })'"> <span>Remover</span></button>
                                 </div>
                             </td>
                         </tr>

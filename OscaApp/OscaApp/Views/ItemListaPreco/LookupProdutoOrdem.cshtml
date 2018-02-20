@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.Servico>
+﻿@model X.PagedList.PagedList<OscaFramework.Models.LookupItemLista>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -9,15 +9,14 @@
 
 
 <script type="text/javascript">
-
-    //Função para tratamento do Lookup padrão do Cliente
+ 
     function ConfigLookup(id, name, valor) {
     
         $("#osc_valor").val(valor);
-        $("#osc_IdNameServico").val(name);
-        $("#osc_IdServico").val(id);               
+        $("#osc_IdNameProduto").val(name);
+        $("#osc_IdProduto").val(id);               
      
-        $('#lookupServico').modal('hide');
+        $('#lookupProduto').modal('hide');
     }
 </script>
 
@@ -33,12 +32,12 @@
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold">Lista de Serviços: &nbsp;&nbsp;</h5>
+                                    <h5 style="font-weight:bold">Lista de Produtos: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
                                     <form class="form-inline">
                                         <div class="form-group col-md-2">
-                                            <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateServico", "Servico", null)'"> <span>Novo</span></button>
+                                            <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
                                         </div>
 
                                         <div class="form-group  col-md-4">
@@ -67,7 +66,7 @@
                                         <tr>
                                             <th></th>
                                             <th>Código</th>
-                                            <th>Servico</th>
+                                            <th>Produto</th>
                                             <th>Forma</th>
                                             <th>Valor</th>
                                              
@@ -75,10 +74,10 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" value="@item.nomeServico" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()','@item.valor.ToString("N2")')">
+                                        <tr id="@item.id" value="@item.nome" onclick="ConfigLookup('@item.id.ToString()','@item.nome.ToString()','@item.valor.ToString("N2")')">
                                             <td><i class="fa fa-shield"></i></td>
                                             <td>@item.codigo.ToString()</td>
-                                            <td>@item.nomeServico</td>
+                                            <td>@item.nome</td>
                                             <td>@item.formaVendaServico</td>
                                             <td>@item.valor.ToString("N2")</td>
                                         </tr>
@@ -87,7 +86,7 @@
                                 <div>
                                     <table>
                                         <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServico", "Servico", new { page }))</td>
+                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridProduto", "Produto", new { page }))</td>
                                             <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
                                         </tr>
                                     </table>

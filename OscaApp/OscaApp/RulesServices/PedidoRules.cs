@@ -82,7 +82,6 @@ namespace OscaApp.RulesServices
 
            
         }
-
-      
+              
     }
 }
