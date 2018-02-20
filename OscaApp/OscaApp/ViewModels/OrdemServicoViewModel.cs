@@ -1,4 +1,5 @@
-﻿using OscaApp.Data;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using OscaApp.Data;
 using OscaApp.framework.Models;
 using OscaApp.Models;
 using OscaFramework.Models;
@@ -16,6 +17,8 @@ namespace OscaApp.ViewModels
        public List<Relacao> servicos { get; set; }
        public List<Relacao> produtos { get; set; }
        public List<Relacao> profissionais { get; set; }
+       public Relacao listaPreco { get; set; }
+       public List<SelectListItem> listasPreco { get; set; }
 
 
 

@@ -14,6 +14,7 @@ namespace OscaApp.ViewModels
         public ProdutoOrdem produtoOrdem { get; set; }
         public Relacao produto { get; set; }
         public Relacao ordemServico { get; set; }
+        public Relacao listaPreco { get; set; }
         public ContextPage contexto { get; set; }
 
         public ProdutoOrdemViewModel()
@@ -21,6 +22,7 @@ namespace OscaApp.ViewModels
             this.ordemServico = new Relacao();
             this.produto = new Relacao();
             this.produtoOrdem = new ProdutoOrdem();
+            this.listaPreco = new Relacao();
 
         }
     }

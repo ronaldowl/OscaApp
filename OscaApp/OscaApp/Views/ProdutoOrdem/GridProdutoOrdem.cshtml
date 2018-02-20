@@ -9,7 +9,7 @@
 <script>
 
     function CarregaProdutoOrdem() {
-        $("#ModalProdutoOrdem").load("/ProdutoOrdem/FormCreateProdutoOrdem?id=" + idOrdemServico, function () {
+        $("#ModalProdutoOrdem").load("/ProdutoOrdem/FormCreateProdutoOrdem?id=" + idOrdemServico + "&idListaPreco=" + idListaPreco, function () {
             $("#ModalProdutoOrdem").modal("show");
         });
     }
@@ -117,6 +117,8 @@
 <script>
    
     var idOrdemServico = window.parent.document.getElementById('osc_id').value;
+    var idListaPreco = window.parent.document.getElementById('osc_idListaPreco').value;
+
     var statusOrdemServico = window.parent.document.getElementById('osc_statusOrdemServico').value;
 
     if (statusOrdemServico == 2 || statusOrdemServico == 5) $("input,select, textarea, button").prop("disabled", true);

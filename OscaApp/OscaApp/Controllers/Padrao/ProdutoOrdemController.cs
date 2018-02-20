@@ -31,7 +31,7 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult FormCreateProdutoOrdem(string id )
+        public ViewResult FormCreateProdutoOrdem(string id,string idListaPreco )
         {
             ProdutoOrdemViewModel modelo = new ProdutoOrdemViewModel();
            
@@ -39,8 +39,9 @@ namespace OscaApp.Controllers
             {
                 modelo.contexto = contexto;
                 modelo.produtoOrdem = new ProdutoOrdem();
-                modelo.ordemServico.id = new Guid(id);                  
-              
+                modelo.ordemServico.id = new Guid(id);
+                modelo.listaPreco = new Relacao();
+                modelo.listaPreco.id = new Guid(idListaPreco);              
                 modelo.produtoOrdem.criadoEm = DateTime.Now;
                 modelo.produtoOrdem.criadoPorName = contexto.nomeUsuario;    
                 

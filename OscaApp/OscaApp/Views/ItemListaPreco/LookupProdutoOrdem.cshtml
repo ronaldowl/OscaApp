@@ -21,14 +21,8 @@
 </script>
 
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-        </div>
-        <div class="modal-body">
-            <div class="card" id="osc_Lookup">
-                <div class="card-header">
-                    <div class="card-title">
+    <div class="modal-content">    
+        <div class="modal-body">            
                         <table>
                             <tr>
                                 <td>
@@ -37,7 +31,7 @@
                                 <td>
                                     <form class="form-inline">
                                         <div class="form-group col-md-2">
-                                            <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
+                                            <button id="osc_novo" type="button" class="btn btn-sm btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
                                         </div>
 
                                         <div class="form-group  col-md-4">
@@ -74,12 +68,12 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" value="@item.nome" onclick="ConfigLookup('@item.id.ToString()','@item.nome.ToString()','@item.valor.ToString("N2")')">
+                                        <tr id="@item.produto.id" value="@item.produto.nome" onclick="ConfigLookup('@item.produto.id.ToString()','@item.produto.nome.ToString()','@item.itemlistaPreco.valor.ToString("N2")')">
                                             <td><i class="fa fa-shield"></i></td>
-                                            <td>@item.codigo.ToString()</td>
-                                            <td>@item.nome</td>
-                                            <td>@item.formaVendaServico</td>
-                                            <td>@item.valor.ToString("N2")</td>
+                                            <td>@item.produto.codigo.ToString()</td>
+                                            <td>@item.produto.nome</td>
+                                            <td>@item.produto.formaVendaProduto</td>
+                                            <td>@item.itemlistaPreco.valor.ToString("N2")</td>
                                         </tr>
                                     }
                                 </table>
@@ -96,10 +90,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
 
 
 <script src="~/js/osc_global.js" asp-append-version="true"></script>

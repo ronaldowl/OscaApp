@@ -17,7 +17,9 @@ namespace OscaApp.RulesServices
             modelo = entrada.produtoOrdem;
             modelo.idProduto = entrada.produto.id;
             modelo.idOrdemServico = entrada.ordemServico.id;
-            modelo.status = CustomEnumStatus.Status.Ativo;      
+            modelo.idListaPreco = entrada.listaPreco.id;
+            modelo.status = CustomEnumStatus.Status.Ativo;  
+            
                      
             if (modelo.idOrganizacao != null)
             {
@@ -44,6 +46,7 @@ namespace OscaApp.RulesServices
             modelo = new ProdutoOrdem();
             modelo = entrada.produtoOrdem;
             modelo.idProduto = entrada.produto.id;
+            modelo.idListaPreco = entrada.listaPreco.id;
 
             //************ Objetos de controle de acesso *******************           
             modelo.modificadoEm = DateTime.Now;

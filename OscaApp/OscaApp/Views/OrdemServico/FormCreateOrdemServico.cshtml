@@ -116,7 +116,15 @@
                                         <input id="osc_valorDescontoPercentual" asp-for="@Model.ordemServico.valorDescontoPercentual" type="text" class="form-control" />
                                     </div>
                                 </div>
-                             
+                                <div class="form-group">
+                                    <label class="control-label">Lista de Preço</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <select asp-items="@Model.listasPreco" asp-for="@Model.ordemServico.idListaPreco" id="osc_listaPreco" required="required"></select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">

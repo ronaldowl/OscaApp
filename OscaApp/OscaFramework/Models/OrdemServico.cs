@@ -17,6 +17,8 @@ namespace OscaFramework.Models
         public Guid idOrganizacao { get; set; }
         public Guid idCliente { get; set; }
         public Guid idCategoriaManutencao { get; set; }
+        public Guid idListaPreco { get; set; }
+
         public string problema { get; set; }
         public string diagnostico { get; set; }
         public string laudo { get; set; }

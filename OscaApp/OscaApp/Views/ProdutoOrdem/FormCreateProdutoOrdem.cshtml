@@ -6,7 +6,7 @@
 
     function CarregaLookupProduto() {
 
-        $("#lookupProduto").load("/itemListaPreco/LookupProdutoOrdem", function () {
+        $("#lookupProduto").load("/itemListaPreco/LookupProdutoOrdem?idListaPreco=" + idListaPreco, function () {
             $("#lookupProduto").modal("show");
         });
     }
@@ -21,10 +21,7 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
 </div>
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-        </div>
+    <div class="modal-content">       
         <div class="modal-body">
             <form asp-controller="ProdutoOrdem" asp-action="FormCreateProdutoOrdem" method="post" id="FormCreateProdutoOrdem">
                 <div class="card" id="osc_MainForm">
@@ -45,7 +42,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" />
+                        <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" id="osc_idOrdemServico"/>
+                        <input type="hidden" asp-for="@Model.listaPreco.id" value="@Model.listaPreco.id" id="osc_idListaPreco"/>
+
                         <div class="row">
                             <div class="col-md-5 offset-1">
                                 <div class="form-group">

@@ -1,7 +1,7 @@
 ﻿//********************************* Biblioteca com funções da Tela Produto da Ordem ***************
 
 function OnLoad_ProdutoOrdem() {
-    Onchage_ServicoOrdemTipoDesconto();
+    Onchage_ProdutoOrdemTipoDesconto();
 }
 
 function Onchage_ProdutoOrdemTipoDesconto() {

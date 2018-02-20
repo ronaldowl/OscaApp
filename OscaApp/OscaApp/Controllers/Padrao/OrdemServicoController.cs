@@ -12,6 +12,7 @@ using System.Linq;
 using X.PagedList;
 using OscaFramework.Models;
 using OscaFramework.MicroServices;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OscaApp.Controllers
 {
@@ -21,13 +22,15 @@ namespace OscaApp.Controllers
         private readonly IOrdemServicoData ordemServicoData;
         private readonly IServicoOrdemData servicoOrdemData;
         private ContextPage contexto;
-        private readonly SqlGenericDataServices sqlData;         
+        private readonly SqlGenericDataServices sqlData;
+        private readonly IListaPrecoData listaprecoData;
 
         public OrdemServicoController(SqlGenericDataServices _sqlData, ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.sqlData = _sqlData;
             this.ordemServicoData = new OrdemServicoData(db);
             this.servicoOrdemData = new ServicoOrdemData(db);
+            this.listaprecoData = new ListaPrecoData(db);
 
             this.contexto =  new ContextPage().ExtractContext(httpContext);
         }
@@ -43,6 +46,11 @@ namespace OscaApp.Controllers
             modelo.contexto = contexto;
             modelo.ordemServico.criadoEm = DateTime.Now;
             modelo.ordemServico.criadoPorName = contexto.nomeUsuario;
+
+            //Prenche lista de preço para o contexto da página
+            List<SelectListItem> itens = new List<SelectListItem>();
+            itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
+            modelo.listasPreco = itens;
 
             return View(modelo);
         }
@@ -85,8 +93,8 @@ namespace OscaApp.Controllers
                 if (modelo.ordemServico != null)
                 {                       
                     modelo.cliente = sqlData.RetornaRelacaoCliente(modelo.ordemServico.idCliente);
-
-                    if(modelo.ordemServico.idCategoriaManutencao != null) modelo.categoriaManutencao = sqlData.RetornaRelacaoCategoriaManutencao(modelo.ordemServico.idCategoriaManutencao);
+                    modelo.listaPreco = sqlData.RetornaRelacaoListaPreco(modelo.ordemServico.idListaPreco);
+                    if (modelo.ordemServico.idCategoriaManutencao != null) modelo.categoriaManutencao = sqlData.RetornaRelacaoCategoriaManutencao(modelo.ordemServico.idCategoriaManutencao);
                 }
             }
             return View(modelo);

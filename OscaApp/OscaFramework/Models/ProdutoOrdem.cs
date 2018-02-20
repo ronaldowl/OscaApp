@@ -13,7 +13,7 @@ namespace OscaFramework.Models
         public Guid idOrganizacao { get; set; }
         public Guid idOrdemServico { get; set; }        
         public Guid idProduto { get; set; }
-       
+        public Guid idListaPreco { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valor { get; set; }

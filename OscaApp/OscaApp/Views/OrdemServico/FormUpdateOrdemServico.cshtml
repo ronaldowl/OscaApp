@@ -142,7 +142,17 @@
                                         <input id="osc_valorDescontoPercentual" asp-for="@Model.ordemServico.valorDescontoPercentual" type="text" class="form-control" />
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label">Lista de Preço</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_idNameListaPreco" asp-for="@Model.listaPreco.idName" type="text" class="form-control" disabled="disabled" />
+                                            <input id="osc_idListaPreco" asp-for="@Model.listaPreco.idName" type="hidden" class="form-control" value="@Model.listaPreco.id" />
 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -452,11 +462,11 @@
                         </div>
                         <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;   </span></div>
                         <div  >
-                            <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id" height="550" width="1370" ></iframe>
+                            <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id" height="500"  width="1223" ></iframe>
                         </div>
                         <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;   </span></div>
                         <div>
-                            <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="550" width="1370"></iframe>
+                            <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="500" width="1223"></iframe>
                         </div>
                     </div>
                     <div class="card-footer">

@@ -20,10 +20,7 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
 </div>
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-        </div>
+    <div class="modal-content">       
         <div class="modal-body">
             <form asp-controller="ServicoOrdem" asp-action="FormUpdateServicoOrdem" method="post" id="FormUpdateServicoOrdem">
                 <div class="card" id="osc_MainForm">
