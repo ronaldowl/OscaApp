@@ -1,0 +1,32 @@
+﻿
+.normalize td {
+    text-align: center;
+    padding: 10px 0 0 0 !important;
+}
+.normalize th{text-align:center;}
+
+.bt{
+    margin-top:6px !important;
+}
+
+.total td {
+    background-color: gray;
+    padding: 2px 0 5px 0 !important;
+    color: white;
+    font-size: 20px;
+}
+.paginacao{
+    padding:0 !important;
+    text-align:center;
+    margin:0;
+}
+.paginacao span:first-child{
+    margin-left:10px;
+}
+.paginacao span{
+    margin-left: 2px;
+}
+
+.tableNoMargin{
+    margin-bottom:0;
+}

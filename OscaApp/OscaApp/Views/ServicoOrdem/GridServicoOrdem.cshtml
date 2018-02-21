@@ -3,8 +3,10 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 @{
+   
     Layout = "_LayoutFrame";
 }
+<link rel="stylesheet" href="~/lib/OscaCss/style.css">
 
 <script>
 
@@ -22,7 +24,7 @@
     }
 </script>
 
-<div class="card" id="osc_Grid">
+<div class="card normalize" id="osc_Grid">
     
             <table>
                 <tr>
@@ -31,23 +33,21 @@
                     </td>
                     <td>
                         <div class="form-group col-md-2">
-                            <button id="osc_novoServicoOrdem" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Novo</span></button>
+                            <button id="osc_novoServicoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Novo</span></button>
                         </div>
                     </td>
                 </tr>
-            </table>
-     
-    
-                <table class="table table-hover table-striped table-responsive-md">
+            </table>     
+                <table class="table table-hover table-striped table-responsive-md tableNoMargin">
                     <thead>
                         <tr>
-                            <th>Código Servico</th>
-                            <th>Nome Servico</th>
+                            <th>Código</th>
+                            <th>Serviço</th>
                             <th>Qtd/Horas</th>
                             <th>Valor</th>
                             <th>Total</th>
                             <th>Desconto</th>
-                            <th>Total</th>
+                            <th>Final</th>
                             <th> </th>
                             <th> </th>
                         </tr>
@@ -86,8 +86,8 @@
                             </td>
                         </tr>
                     }
-                    <tfoot id="osc_tableFooterProdutoPedido">
-                        <tr style="background-color:gray; color:white ; font-size:20px">
+                    <tfoot id="osc_tableFooterProdutoPedido" class="total">
+                        <tr>
                             <td></td>
                             <td></td>
                             <td>@qtd</td>
@@ -100,7 +100,7 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div>
+                <div class="paginacao">
                     <table>
                         <tr>
                             <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServicoOrdem", "ServicoOrdem", new { page }))</td>

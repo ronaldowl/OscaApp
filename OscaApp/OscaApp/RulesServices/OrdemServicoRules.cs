@@ -62,18 +62,29 @@ namespace OscaApp.RulesServices
             //************ FIM Objetos de controle de acesso ***************
             return true;
         }
-        public static void CalculoOrdem(ref OrdemServico ordem, IServicoOrdemData ServicosOrdem)
+        public static void CalculoOrdem(ref OrdemServico ordem, IServicoOrdemData ServicosOrdem, IProdutoOrdemData ProdutosOrdem)
         {
             List<ServicoOrdem> ordens = new List<ServicoOrdem>();
+            List<ProdutoOrdem> produtos = new List<ProdutoOrdem>();
 
             ordens = ServicosOrdem.GetByServicoOrdemId(ordem.id);
+            produtos = ProdutosOrdem.GetByProdutoOrdemId(ordem.id);
 
+            decimal TotalS = 0;
+            decimal TotalP = 0;
             decimal Total = 0;
 
             foreach (var item in ordens)
             {
-                Total += item.totalGeral;
+                TotalS += item.totalGeral;
             }
+
+            foreach (var item in produtos)
+            {
+                TotalP += item.totalGeral;
+            }
+
+            Total = TotalP + TotalS;
 
             if (ordem.tipoDesconto == CustomEnum.tipoDesconto.Money)
             {

@@ -97,7 +97,7 @@ namespace OscaApp.Data
             return retorno;
 
         }
-        public List<ProdutoOrdem> GetByServicoOrdemId(Guid idOrdemServico)
+        public List<ProdutoOrdem> GetByProdutoOrdemId(Guid idOrdemServico)
         {
             List<ProdutoOrdem> retorno = new List<ProdutoOrdem>();
             retorno = db.ProdutosOrdem.FromSql("SELECT * FROM ProdutoOrdem  where  idOrdemServico = '" + idOrdemServico.ToString() + "'").ToList();

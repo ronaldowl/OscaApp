@@ -53,6 +53,7 @@
                                             <th>Cliente</th>
                                             <th>Data Agendada</th>
                                             <th>Status Ordem Servico</th>
+                                            <th>Valor</th>
                                             <th>Criado Por</th>
 
                                         </tr>
@@ -65,6 +66,8 @@
                                             <td>Cliente 1 </td>
                                             <td>@item.dataAgendada</td>
                                             <td>@item.statusOrdemServico</td>
+                                            <td>@item.valorTotal.ToString("N2")</td>
+
                                             <td>@item.criadoPorName</td>
 
                                         </tr>

@@ -159,7 +159,7 @@ namespace OscaApp.Data
         void Update(ProdutoOrdem contato);
         void Delete(ProdutoOrdem contato);
         ProdutoOrdem Get(Guid id);
-        List<ProdutoOrdem> GetByServicoOrdemId(Guid idOrdem);
+        List<ProdutoOrdem> GetByProdutoOrdemId(Guid idOrdem);
         List<ProdutoOrdem> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
         List<ProdutoOrdemGridViewModel> GetAllGridViewModel(Guid idProduto);

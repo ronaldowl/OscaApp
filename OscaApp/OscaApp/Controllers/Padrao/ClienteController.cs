@@ -112,10 +112,7 @@ namespace OscaApp.Controllers
 
                         //Preenche informações do grid de Pedido
                         modelo.pedidos = pedidoData.GetAllByIdCliente(new Guid(id));
-
-
-
-
+                        
                     }
                 }
 

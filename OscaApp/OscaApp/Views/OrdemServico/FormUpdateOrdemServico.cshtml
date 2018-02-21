@@ -118,8 +118,8 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control">
-                                            <option value="1" selected="">Valor</option>
+                                        <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control" value="@Model.ordemServico.tipoDesconto">
+                                            <option value="1" >Valor</option>
                                             <option value="2">Percentual</option>
                                         </select>
                                     </div>

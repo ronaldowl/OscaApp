@@ -5,7 +5,7 @@
 @{
     Layout = "_LayoutFrame";
 }
-
+<link rel="stylesheet" href="~/lib/OscaCss/style.css">
 <script>
 
     function CarregaProdutoOrdem() {
@@ -22,7 +22,7 @@
     }
 </script>
 
-<div class="card" id="osc_Grid">
+<div class="card normalize" id="osc_Grid">
     
             <table>
                 <tr>
@@ -31,19 +31,19 @@
                     </td>
                     <td>
                         <div class="form-group col-md-2">
-                            <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem()"> <span>Novo</span></button>
+                            <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem()"> <span>Novo</span></button>
                         </div>
                     </td>
                 </tr>
             </table>
      
     
-                <table class="table table-hover table-striped table-responsive-md">
+                <table class="table table-hover table-striped table-responsive-md tableNoMargin">
                     <thead>
                         <tr>
                             <th>Código Produto</th>
                             <th>Nome Produto</th>
-                            <th>Qtd/Horas</th>
+                            <th>Qtd</th>
                             <th>Valor</th>
                             <th>Total</th>
                             <th>Desconto</th>
@@ -86,7 +86,7 @@
                             </td>
                         </tr>
                     }
-                    <tfoot id="osc_tableFooterProdutoOrdem">
+                    <tfoot id="osc_tableFooterProdutoOrdem" class="total">
                         <tr style="background-color:gray; color:white ; font-size:20px">
                             <td></td>
                             <td></td>
@@ -100,7 +100,7 @@
                         </tr>
                     </tfoot>
                 </table>
-                <div>
+                <div class="paginacao">
                     <table>
                         <tr>
                             <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridProdutoOrdem", "ProdutoOrdem", new { page }))</td>
