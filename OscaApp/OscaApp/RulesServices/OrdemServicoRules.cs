@@ -86,16 +86,18 @@ namespace OscaApp.RulesServices
 
             Total = TotalP + TotalS;
 
+            decimal totalPercentual = 0;
+
             if (ordem.tipoDesconto == CustomEnum.tipoDesconto.Money)
             {
                 Total = Total - ordem.valorDesconto;
             }
             else
             {
-                Total = (Total / 100) * ordem.valorDescontoPercentual;
+                totalPercentual = (Total / 100) * ordem.valorDescontoPercentual;
             }
 
-            ordem.valorTotal = Total;
+            ordem.valorTotal = Total - totalPercentual;
 
 
         }

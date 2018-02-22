@@ -69,16 +69,19 @@ namespace OscaApp.RulesServices
                 Total += item.totalGeral;
             }
 
+            decimal totalPercentual = 0;
+
             if (pedido.tipoDesconto == CustomEnum.tipoDesconto.Money)
             {
                 Total = Total - pedido.valorDesconto;                 
             }
             else
             {
-                Total = (Total / 100) * pedido.valorDescontoPercentual;                
+                totalPercentual = (Total / 100) * pedido.valorDescontoPercentual;                
             }
 
-            pedido.valorTotal = Total;
+            pedido.valorTotal = Total - totalPercentual;
+            pedido.valorTotal += pedido.valorFrete;
 
            
         }

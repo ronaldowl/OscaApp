@@ -175,8 +175,9 @@ namespace OscaApp.Controllers
             {
                 if (OrdemServicoRules.OrdemServicoUpdateStatus(entrada, out modelo))
                 {
+                    //ordemServicoData.Update(modelo);
                     OrdemServicoRules.CalculoOrdem(ref modelo, servicoOrdemData, produtoOrdemData);
-                    ordemServicoData.Update(modelo);
+                    ordemServicoData.UpdateStatus(modelo);
 
                     return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });
                 }

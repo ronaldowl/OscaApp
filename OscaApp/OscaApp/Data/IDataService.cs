@@ -47,6 +47,7 @@ namespace OscaApp.Data
     {
         void Add(OrdemServico ordemServico);
         void Update(OrdemServico ordemServico);
+        void UpdateStatus(OrdemServico ordemServico);
         OrdemServico Get(Guid id );
         List<OrdemServico> GetAll(Guid id);
     }
@@ -125,6 +126,8 @@ namespace OscaApp.Data
         List<ItemListaPreco> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
         List<LookupItemLista> GetAllByListaPreco(Guid idLista);
+        List<LookupItemLista> GetAllByIdProduto(Guid idProduto);
+
 
     }
 

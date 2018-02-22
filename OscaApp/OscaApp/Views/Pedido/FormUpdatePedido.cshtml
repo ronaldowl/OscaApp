@@ -41,9 +41,7 @@
                                             <label>
                                                 <button id="osc_calcular" type="submit" class="btn btn-info btn-lg fa fa-calculator" value="" > <span>Calcular Pedido</span></button>
                                             </label>
-                                            <label>
-                                                <button id="osc_encerrar" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusPedido()"> <span>Encerrar Pedido</span></button>
-                                            </label>
+                                       
                                             <label>
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusPedido()" > <span>Reabrir</span></button>
                                             </label>
@@ -162,7 +160,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.pedido.tipoDesconto" class="form-control">
+                                        <select id="osc_tipoDesconto" asp-for="@Model.pedido.tipoDesconto" class="form-control" onchange="Onchage_PedidoTipoDesconto();">
                                             <option value="1" selected="">Valor</option>
                                             <option value="2">Percentual</option>
                                         </select>
@@ -203,7 +201,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-exclamation fa-1x"></span>
                                         </span>
-                                        <select id="osc_statusPedido" asp-for="@Model.pedido.statusPedido" class="form-control" disabled="disabled">
+                                        <select id="osc_statusPedido" asp-for="@Model.pedido.statusPedido" class="form-control"  style="background-color:aquamarine">
                                             <option value="1">Em Andamento</option>
                                             <option value="2">Fechado</option>
                                             <option value="3">Aguardando Produto</option>

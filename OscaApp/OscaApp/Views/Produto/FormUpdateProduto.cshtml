@@ -19,23 +19,21 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg btn-sm fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridProduto", "Produto" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridProduto", "Produto" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_inativa" type="button" class="btn btn-info btn-lg fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
+                                                <button id="osc_status_inativa" type="button" class="btn btn-info btn-lg btn-sm fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_Ativar" type="button" class="btn btn-info btn-lg fa fa-check-circle-o fa-1x" value="Ativar"> <span>Ativar</span></button>
+                                                <button id="osc_status_Ativar" type="button" class="btn btn-info btn-lg  btn-sm fa fa-check-circle-o fa-1x" value="Ativar"> <span>Ativar</span></button>
                                             </label>
-                                            <label>
-                                                <button id="osc_endereco" type="button" class="btn btn-info btn-lg fa fa-1x fa-product-hunt" value="" onclick="location.href='@Url.Action("FormCreateItemListaPreco", "ItemListaPreco", new { idProduto = @Model.produto.id})'"> <span>Novo Item Lista</span></button>
-                                            </label>
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -243,10 +241,10 @@
                                 <td>
                                     <div id="barra_acoes_itemProdutoLista">
                                         <label>
-                                            <button id="osc_itenProdutoLista" type="button" class="btn btn-info btn-lg fa fa-1x fa-plus" value="Novo Endereço" onclick="location.href=''"> <span>Novo</span></button>
+                                            <button id="osc_itemProdutoLista" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-plus" value="Novo Endereço" onclick="location.href='@Url.Action("FormCreateItemListaPreco", "ItemListaPreco", new { idProduto = @Model.produto.id})'"> <span>Novo</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_gridEndereco" type="button" class="btn btn-info btn-lg fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='">Ver mais</button> Total:@Model.itensListaPreco.Count
+                                            <button id="osc_gridItemListaPreco" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridItemListaPreco", "ItemListaPreco", new {idProduto = @Model.produto.id })'" >Ver mais</button> Total:@Model.itensListaPreco.Count
                                         </label>
                                     </div>
                                 </td>

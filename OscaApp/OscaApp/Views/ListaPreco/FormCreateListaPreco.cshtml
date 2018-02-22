@@ -1,4 +1,6 @@
-﻿@model OscaApp.ViewModels.ListaPrecoViewModel
+﻿@model OscaApp.ViewModels.ListaPrecoViewModel 
+     
+
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -56,7 +58,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" type="date" required="required">
+                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" type="datetime"  >
                                         </div>
                                     </div>
                                 </div>

@@ -54,9 +54,7 @@
                                             <label>
                                                 <button id="osc_calcular" type="submit" class="btn btn-info btn-lg fa fa-calculator" value=""> <span>Calcular OS</span></button>
                                             </label>
-                                            <label>
-                                                <button id="osc_encerrar" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusOrdemServico()"> <span>Encerrar OS</span></button>
-                                            </label>
+                                           
                                             <label>
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusOrdemServico()"> <span>Reabrir</span></button>
                                             </label>
@@ -118,7 +116,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control" value="@Model.ordemServico.tipoDesconto">
+                                        <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control" value="@Model.ordemServico.tipoDesconto" onchange="Onchage_OrdemServicoTipoDesconto();">
                                             <option value="1" >Valor</option>
                                             <option value="2">Percentual</option>
                                         </select>
@@ -195,7 +193,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                            <select id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" disabled="disabled">
+                                            <select id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" style="background-color:aquamarine" >
                                                 <option value="1">Em Andamento</option>
                                                 <option value="2">Fechado</option>
                                                 <option value="3">Aguardando Produto</option>
