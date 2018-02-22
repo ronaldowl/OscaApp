@@ -11,5 +11,6 @@ namespace OscaFramework.Models
     {       
         public ItemListaPreco itemlistaPreco { get; set; }
         public Produto produto { get; set; }
+        public ListaPreco listapreco { get; set; }
     }
 }

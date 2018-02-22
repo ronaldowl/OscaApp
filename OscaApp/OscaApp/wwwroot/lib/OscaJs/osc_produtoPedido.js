@@ -6,8 +6,7 @@ function OnLoad_ProdutoPedido()
 }
 
 function Onchage_ProdutoPedidoTipoDesconto() {
-    debugger;
-
+    
     var tipo = document.getElementById("osc_tipoDesconto");  
     var descontoValor = document.getElementById("osc_valorDescontoMoney");
     var descontoPercentual = document.getElementById("osc_valorDescontoPercentual");     

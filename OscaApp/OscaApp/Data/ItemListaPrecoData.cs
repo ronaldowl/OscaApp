@@ -76,7 +76,6 @@ namespace OscaApp.Data
             return retorno;
 
         }
-
         public List<ItemListaPreco> GetAllByProduto(Guid idProduto)
         {
             List<ItemListaPreco> itens = new List<ItemListaPreco>();        
@@ -84,11 +83,7 @@ namespace OscaApp.Data
             itens = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idProduto = '" + idProduto.ToString() + "'").ToList();
         
             return itens;
-        }
-
-       
-
-
+        }      
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
             List<ItemListaPreco> retorno = new List<ItemListaPreco>();         
@@ -98,7 +93,6 @@ namespace OscaApp.Data
             return Relacao.ConvertToRelacao(retorno);
 
         }
-
         public List<LookupItemLista> GetAllByListaPreco(Guid idLista)
         {            
             List<ItemListaPreco> itens = new List<ItemListaPreco>();

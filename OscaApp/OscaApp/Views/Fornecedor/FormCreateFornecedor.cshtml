@@ -35,7 +35,16 @@
                 <div class="card-body">
                     <div class="row">
                         <!--col1-->
-                        <div class="col-md-4">                         
+                        <div class="col-md-4">  
+                            <div class="form-group">
+                                <label>Código</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                        <input id="osc_codigo" asp-for="@Model.Fornecedor.codigo" class="form-control" type="text" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>Nome do Fornecedor</label>
                                 <div class="inputGroupContainer">

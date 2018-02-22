@@ -268,7 +268,7 @@
                             @if (contador == 5) { break; }
                             <tr>
                                 <td><a class="fa fa-2x fa-shopping-basket" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })'"></a></td>
-                                <td>@Html.ActionLink(item.nomeListaPreco, "FormUpdateListaPreco", "ListaPreco", new { id = item.idListaPreco })</td>
+                                <td>@Html.ActionLink(item.nomeListaPreco, "FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })</td>
                                 <td>R$ @item.valorVenda</td>
                                 <td>@item.dataCriacao</td>
                             </tr>

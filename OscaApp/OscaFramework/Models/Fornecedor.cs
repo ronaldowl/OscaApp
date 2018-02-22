@@ -9,7 +9,7 @@ namespace OscaFramework.Models
     [Table("Fornecedor")]
     public class Fornecedor : GenericEntity
     {
-    
+        public String codigo { get; set; }
         public String nomeFornecedor { get; set; }
         public String cnpj { get; set; }
         public String nomeVendedor { get; set; }

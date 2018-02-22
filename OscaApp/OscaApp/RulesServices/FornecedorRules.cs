@@ -3,6 +3,8 @@ using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
+using OscaApp.framework; 
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -15,6 +17,8 @@ namespace OscaApp.RulesServices
          
             if (fornecedor.nomeFornecedor != null)
             {
+                fornecedor.codigo =  AutoNumber.GeraCodigo(14,contexto.idOrganizacao);
+
                 //************ Objetos de controle de acesso ******************
                 fornecedor.criadoEm = DateTime.Now;
                 fornecedor.criadoPor = contexto.idUsuario;

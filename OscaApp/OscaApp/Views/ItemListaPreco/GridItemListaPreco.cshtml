@@ -8,7 +8,6 @@
 
 </script>
 
-
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
@@ -53,6 +52,7 @@
                                             <th>Produto</th>
                                             <th>Código Produto</th>
                                             <th>Fabricante</th>
+                                            <th>Lista de Preço</th>
                                             <th>Valor Venda</th>                                         
                                         </tr>
                                     </thead>
@@ -63,6 +63,7 @@
                                             <td>@item.produto.nome</td>
                                             <td>@item.produto.codigo</td> 
                                             <td>@item.produto.fabricante</td> 
+                                            <td>@item.listapreco.nome</td> 
                                             <td>@item.itemlistaPreco.valor.ToString("N2")</td>                                                                      
                                         </tr>
                                     }

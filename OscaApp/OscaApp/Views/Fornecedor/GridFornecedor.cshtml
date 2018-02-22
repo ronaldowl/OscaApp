@@ -46,7 +46,7 @@
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
-                                          
+                                            <th>Código</th>
                                             <th>Nome do Fornecedor</th>
                                             <th>CNPJ</th>
                                             <th>Nome do Vendedor</th>
@@ -58,8 +58,8 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
-                                            <td>@Html.ActionLink(item.nomeFornecedor.ToString(), "FormUpdateFornecedor", new { id = item.id })</td>
-                                          
+                                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateFornecedor", new { id = item.id })</td>
+                                            <td>@item.nomeFornecedor</td>                                          
                                             <td>@item.cnpj</td>
                                             <td>@item.nomeVendedor</td>
                                             <td>@item.telefone</td>

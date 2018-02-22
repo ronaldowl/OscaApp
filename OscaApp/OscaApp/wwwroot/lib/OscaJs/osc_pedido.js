@@ -31,7 +31,7 @@ function desabilita_Pedido(status) {
 }
 
 function Onchage_PedidoTipoDesconto() {
-    debugger;
+    
 
     var tipo = document.getElementById("osc_tipoDesconto");
     var descontoValor = document.getElementById("osc_valorDesconto");

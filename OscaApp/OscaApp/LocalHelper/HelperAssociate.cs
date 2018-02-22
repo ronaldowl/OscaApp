@@ -9,6 +9,9 @@ using OscaFramework.Models;
 
 namespace OscaApp.framework
 {
+    /// <summary>
+    /// Class especializada em retornar itens para Grid e Lookp que apresentam dados de duas ou mais tabelas
+    /// </summary>
     public static class HelperAssociate
     {
         public static List<LookupItemLista> ConvertToLookupItemLista(List<ItemListaPreco> itens)
@@ -20,6 +23,7 @@ namespace OscaApp.framework
             {
                 LookupItemLista X = new LookupItemLista();
                 X.produto = sqldata.RetornaProduto(item.idProduto);
+                X.listapreco = sqldata.RetornaListaPreco(item.idListaPreco);
                 X.itemlistaPreco = item;
 
                 retorno.Add(X);
