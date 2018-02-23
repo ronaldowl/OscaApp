@@ -39,23 +39,77 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                            <input id="osc_codigo" asp-for="@Model.contasPagar.codigo" class="form-control" type="text" disabled="disabled">
+                                            <input id="osc_codigo" asp-for="@Model.contasPagar.codigo" class="form-control" type="text" disabled="disabled" >
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 offset-1">
                                 <div class="form-group">
                                     <label>Título</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                            <input id="osc_codigo" asp-for="@Model.contasPagar.titulo" class="form-control" type="text">
+                                            <input id="osc_codigo" asp-for="@Model.contasPagar.titulo" class="form-control" type="text" required="required">
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label" style="color:red">Valor *</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
+                                            <input asp-for="@Model.contasPagar.valor" class="form-control" type="text" id="osc_valor" required="required">
+                                        </div>
+                                    </div>
+                                </div>   
+                                <div class="form-group">
+                                    <label class="control-label" style="color:red">Data Pagamento *</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
+                                            <input asp-for="@Model.contasPagar.dataPagamento" class="form-control" type="date" id="osc_dataPagamento" required="required">
+                                        </div>
+                                    </div>
+                                </div> 
+                                                                 
                             </div>
-                        </div>
+                            <div class="col-md-4  ">                              
+                                <div class="form-group">
+                                    <label>Tipo de Lançamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-1x"></span>
+                                        </span>
+                                        <select id="osc_tipoLancamento" asp-for="@Model.contasPagar.tipoLancamento" class="form-control">
+                                            <option value="0">Manual</option>
+                                            <option value="1">Automático</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Origem</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-1x"></span>
+                                        </span>
+                                        <select id="osc_origemContaPagar" asp-for="@Model.contasPagar.origemContaPagar" class="form-control">
+                                            <option value="0">Fornecedor</option>
+                                            <option value="1">Despesas</option>
+                                            <option value="2">Outros</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Anotação</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-1x"></span>
+                                        </span>
+                                        <textarea id="osc_anotacao" asp-for="@Model.contasPagar.anotacao" class="form-control" rows="5" cols="40" placeholder="digite uma anotação"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>                       
                     </div>
                     <div class="card-footer">
                         <div class="row">

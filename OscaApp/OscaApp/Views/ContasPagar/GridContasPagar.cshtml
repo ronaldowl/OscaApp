@@ -17,26 +17,24 @@
                                 <td>
                                     <form class="form-inline">
                                         <div class="form-group col-md-2">
-                                            <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasPagar", "ContasPagar", null)'"> <span>Novo</span></button>
+                                            <button id="osc_novo" type="button" class="btn btn-sm btn-lg btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasPagar", "ContasPagar", null)'"> <span>Novo</span></button>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_importar" type="button" class="btn btn-info  fa fa-download" value="Importar"> <span>Importar</span></button>
-                                        </div>
+
                                         <div class="form-group  col-md-4">
                                             <div class="input-group">
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
                                                 <span class="input-group-btn ">
-                                                    <button type="submit" class="btn btn-info">
+                                                    <button type="submit" class="btn btn-info btn-sm btn-lg ">
                                                         <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelFinanceiro", "Paineis", null)'"> <span>Painel Financeiro</span></button>
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg btn-sm fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelFinanceiro", "Paineis", null)'"> <span>Painel Financeiro</span></button>
                                         </div>
                                     </form>
                                 </td>
@@ -52,32 +50,44 @@
                                             <th></th>
                                             <th>Código</th>
                                             <th>Título</th>
+                                            <th>Tipo Lançamento</th>
+                                            <th>Origem</th>
+                                            <th>Data de Pagamento</th>
+                                            <th>Valor</th>
+                                            <th>Status Conta</th>
+
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasPagar", "ContasPagar", new {id = item.id })'">
+                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasPagar", "ContasPagar", new { id = item.id })'">
                                             <td><i class="fa fa-envelope-o"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasPagar", new { id = item.id })</td>
                                             <td>@item.titulo</td>
-                                        </tr>
+                                            <td>@item.tipoLancamento</td>
+                                            <td>@item.origemContaPagar</td>
+                                            <td>@item.dataPagamento</td>
+                                            <td>R$@item.valor.ToString("N2")</td>
+                                             <td>@item.statusContaPagar</td>
+                                           
+                                        </tr >
                                     }
-                                </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasPagar", "ContasPagar", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                        </table>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasPagar", "ContasPagar", new { page }))</td>
+                                    <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 <script src="~/js/osc_cliente.js" asp-append-version="true"></script>
 <script src="~/js/osc_global.js" asp-append-version="true"></script>

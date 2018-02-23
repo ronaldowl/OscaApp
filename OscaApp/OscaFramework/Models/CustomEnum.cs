@@ -38,11 +38,47 @@ namespace OscaFramework.Models
             ParaEntrega = 4,
             Cancelado = 5
         }
+        public enum StatusContaReceber
+        {
+            agendado = 0,
+            recebido = 1,
+            cancelado = 2,
+            atrasado = 3
+        }
+        public enum StatusContaPagar
+        {
+            agendado = 0,
+            pago = 1,
+            cancelado = 2,
+            atrasado = 3
+        }
 
     }
 
     public class CustomEnum
     {
+        public enum TipoLancamento
+        {
+            manual = 0,
+            automatico = 1            
+        }
+
+        public enum OrigemContaReceber
+        {
+            Pedido = 0,
+            Atendimento = 1,
+            OrdemServico = 2,
+            Outros = 3,
+            Manual = 100
+        }
+
+        public enum OrigemContaPagar
+        {
+            Fornecedor = 0,
+            DespesaEmpresa = 1,
+            Outros = 2             
+        }
+
         public enum Sexo
         {
             masculino = 1,
