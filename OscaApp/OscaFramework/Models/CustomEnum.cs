@@ -67,9 +67,8 @@ namespace OscaFramework.Models
         {
             Pedido = 0,
             Atendimento = 1,
-            OrdemServico = 2,
-            Outros = 3,
-            Manual = 100
+            OrdemServico = 2,           
+            Outros = 100
         }
 
         public enum OrigemContaPagar

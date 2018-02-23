@@ -75,7 +75,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = contasReceberData.Get(modelo.contasReceber.id, contexto.idOrganizacao);
+                retorno = contasReceberData.Get(modelo.contasReceber.id);
 
                 if (retorno != null)
                 {
@@ -95,7 +95,7 @@ namespace OscaApp.Controllers
                 if (ContasReceberRules.ContasReceberUpdate(entrada, out modelo))
                 {
                     contasReceberData.Update(modelo);
-                    return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
+                    return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString()});
                 }
             }
             catch (Exception ex)
@@ -116,5 +116,58 @@ namespace OscaApp.Controllers
             if (Page == 0) Page = 1;
               return View(retorno.ToPagedList<ContasReceber>(Page, 10));
         }
+
+        [HttpGet]
+        public ViewResult FormStatusContasReceber(string id)
+        {
+            ContasReceberViewModel modelo = new ContasReceberViewModel();
+            modelo.contexto = this.contexto;
+            try
+            {
+                ContasReceber retorno = new ContasReceber();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = contasReceberData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.contasReceber = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-get", ex.Message);
+            }
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormStatusContasReceber(ContasReceberViewModel entrada)
+        {
+            ContasReceber modelo = new ContasReceber();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (ContasReceberRules.ContasReceberUpdate(entrada, out modelo))
+                {
+
+                    contasReceberData.UpdateStatus(modelo);
+
+                    return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-post", ex.Message);
+            }
+            return View();
+        }
+
     }
 }

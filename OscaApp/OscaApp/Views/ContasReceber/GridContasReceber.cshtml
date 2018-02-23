@@ -52,6 +52,12 @@
                                             <th></th>
                                             <th>Código</th>
                                             <th>Título</th>
+                                            <th>Origem</th>
+                                            <th>Tipo Lancamento</th>
+                                            <th>Data</th>
+                                            <th>Valor</th>
+                                            <th>Status Recebimento</th>
+
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
@@ -60,6 +66,12 @@
                                             <td><i class="fa fa-envelope-open-o"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
                                             <td>@item.titulo</td>
+                                            <td>@item.origemContaReceber</td>
+                                            <td>@item.tipoLancamento</td>
+                                            <td>@item.dataPagamento</td>
+                                            <td>R$@item.valor.ToString("N2")</td>
+                                            <td>@item.statusContaReceber</td>
+
                                         </tr>
                                     }
                                 </table>

@@ -74,7 +74,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = contasPagarData.Get(modelo.contasPagar.id, contexto.idOrganizacao);
+                retorno = contasPagarData.Get(modelo.contasPagar.id);
 
                 if (retorno != null)
                 {
@@ -116,5 +116,59 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<ContasPagar>(Page, 10));
         }
+
+        [HttpGet]
+        public ViewResult FormStatusContasPagar(string id)
+        {
+            ContasPagarViewModel modelo = new ContasPagarViewModel();
+            modelo.contexto = this.contexto;
+            try
+            {
+                ContasPagar retorno = new ContasPagar();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = contasPagarData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.contasPagar = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormStatusContasPagar(ContasPagarViewModel entrada)
+        {
+            ContasPagar modelo = new ContasPagar();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (ContasPagarRules.ContasPagarUpdate(entrada, out modelo))
+                {
+
+                    contasPagarData.UpdateStatus(modelo);
+
+                    return RedirectToAction("FormUpdateContasPagar", new { id = modelo.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasPagar-post", ex.Message);
+            }
+            return View();
+        }
+
+
     }
 }

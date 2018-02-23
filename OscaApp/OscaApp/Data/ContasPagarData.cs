@@ -41,6 +41,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("origemContaPagar").IsModified = true;
                 db.Entry(modelo).Property("dataPagamento").IsModified = true;
                 db.Entry(modelo).Property("statusContaPagar").IsModified = true;
+                db.Entry(modelo).Property("numeroReferencia").IsModified = true;                                
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
@@ -53,12 +54,31 @@ namespace OscaApp.Data
             }
 
         }
-        public ContasPagar Get(Guid id, Guid idOrg)
+        public void UpdateStatus(ContasPagar modelo)
+        {
+            try
+            {
+                db.Attach(modelo);
+           
+                db.Entry(modelo).Property("statusContaPagar").IsModified = true;
+                db.Entry(modelo).Property("modificadoPor").IsModified = true;
+                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+                db.Entry(modelo).Property("modificadoEm").IsModified = true;
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        public ContasPagar Get(Guid id)
         {
             List<ContasPagar> retorno = new List<ContasPagar>();
             try
             {
-                retorno = db.ContasP.FromSql("SELECT * FROM ContasPagar WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.ContasP.FromSql("SELECT * FROM ContasPagar WHERE  id = '" + id.ToString() +  "'").ToList();
             }
             catch (SqlException ex)
             {

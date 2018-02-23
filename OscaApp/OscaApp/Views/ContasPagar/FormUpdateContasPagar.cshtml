@@ -1,4 +1,16 @@
 ﻿@model OscaApp.ViewModels.ContasPagarViewModel
+
+<script>
+   
+
+    function CarregaFormStatus() {
+        $("#ModalStatus").load("/ContasPagar/FormStatusContasPagar?id=" + '@Model.contasPagar.id' , function () {
+            $("#ModalStatus").modal("show");
+        });
+    }
+
+</script>
+
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -20,19 +32,19 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg btn-sm fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridContasPagar", "ContasPagar" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridContasPagar", "ContasPagar" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasPagar", "ContasPagar", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasPagar", "ContasPagar", null)'"> <span>Novo</span></button>
                                             </label>                                           
                                             <label>
-                                                <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-check-circle-o fa-1x" value="Reabrir"> <span>Reabrir</span></button>
+                                                <button id="osc_reabrir" type="button" class="btn btn-info btn-lg btn-sm fa fa-close" value="" onclick="CarregaFormStatus();"> <span>Reabrir</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_Deletar" type="button" class="btn btn-info btn-lg fa fa-times-circle-o fa-1x" value="Deletar"> <span>Deletar</span></button>
+                                                <button id="osc_status_Deletar" type="button" class="btn btn-info btn-sm btn-lg fa fa-times-circle-o fa-1x" value="Deletar"> <span>Deletar</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -42,7 +54,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4 offset-1">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Código</label>
                                     <div class="inputGroupContainer">
@@ -81,7 +93,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tipo de Lançamento</label>
                                     <div class="input-group">
@@ -117,7 +129,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Número de Ref</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_numeroReferencia" asp-for="@Model.contasPagar.numeroReferencia" class="form-control" type="text"/>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label>Status Conta</label>
                                     <div class="input-group">
@@ -198,6 +219,8 @@
             </form>
         </div>
     </div>
+</div>
+<div class="modal fade" id="ModalStatus">
 </div>
 <script src="~/lib/OscaJs/osc_contaPagar.js"></script>
 <script>OnLoad_ContaPagar();</script>

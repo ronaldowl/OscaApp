@@ -1,11 +1,11 @@
-function OnLoad_ContaPagar() {
+function OnLoad_ContaReceber() {
     debugger;
      
-    var status = document.getElementById("osc_statusContaPagar").value; 
-    desabilitaCampos_ContaPagar(status)
+    var status = document.getElementById("osc_statusContaReceber").value; 
+    desabilitaCampos_ContaReceber(status)
 }
 
-function desabilitaCampos_ContaPagar(status) {
+function desabilitaCampos_ContaReceber(status) {
 
     if (status == 1 || status == 2 ) {
 

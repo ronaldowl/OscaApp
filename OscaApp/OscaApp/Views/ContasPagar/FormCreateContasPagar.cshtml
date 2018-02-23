@@ -33,7 +33,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4 offset-1">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Código</label>
                                     <div class="inputGroupContainer">
@@ -72,7 +72,7 @@
                                 </div> 
                                                                  
                             </div>
-                            <div class="col-md-4  ">                              
+                            <div class="col-md-3">                              
                                 <div class="form-group">
                                     <label>Tipo de Lançamento</label>
                                     <div class="input-group">
@@ -108,7 +108,17 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Número de Ref</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_numeroReferencia" asp-for="@Model.contasPagar.numeroReferencia" class="form-control" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>                       
                     </div>
                     <div class="card-footer">

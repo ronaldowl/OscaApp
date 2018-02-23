@@ -34,8 +34,14 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("codigo").IsModified                   = true;
-                db.Entry(modelo).Property("titulo").IsModified                   = true;
+                db.Entry(modelo).Property("titulo").IsModified = true;
+                db.Entry(modelo).Property("valor").IsModified = true;
+                db.Entry(modelo).Property("anotacao").IsModified = true;
+                db.Entry(modelo).Property("tipoLancamento").IsModified = true;
+                db.Entry(modelo).Property("origemContaReceber").IsModified = true;
+                db.Entry(modelo).Property("dataPagamento").IsModified = true;
+                db.Entry(modelo).Property("statusContaReceber").IsModified = true;
+                db.Entry(modelo).Property("numeroReferencia").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
@@ -48,12 +54,31 @@ namespace OscaApp.Data
             }
 
         }
-        public ContasReceber Get(Guid id, Guid idOrg)
+        public void UpdateStatus(ContasReceber modelo)
+        {
+            try
+            {
+                db.Attach(modelo);
+
+                db.Entry(modelo).Property("statusContaReceber").IsModified = true;
+                db.Entry(modelo).Property("modificadoPor").IsModified = true;
+                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+                db.Entry(modelo).Property("modificadoEm").IsModified = true;
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        public ContasReceber Get(Guid id)
         {
             List<ContasReceber> retorno = new List<ContasReceber>();
             try
             {
-                retorno = db.ContasR.FromSql("SELECT * FROM ContasReceber WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.ContasR.FromSql("SELECT * FROM ContasReceber WHERE  id = '" + id.ToString() + "'").ToList();
             }
             catch (SqlException ex)
             {

@@ -87,7 +87,8 @@ namespace OscaApp.Data
     {
         void Add(ContasPagar contasPagar);
         void Update(ContasPagar contasPagar);
-        ContasPagar Get(Guid id, Guid idOrg);
+        void UpdateStatus(ContasPagar contasPagar);
+        ContasPagar Get(Guid id );
         List<ContasPagar> GetAll(Guid idOrg);
     }
 
@@ -103,7 +104,9 @@ namespace OscaApp.Data
     {
         void Add(ContasReceber contasReceber);
         void Update(ContasReceber contasReceber);
-        ContasReceber Get(Guid id, Guid idOrg);
+        void UpdateStatus(ContasReceber contasReceber);
+
+        ContasReceber Get(Guid id );
         List<ContasReceber> GetAll(Guid idOrg);
     }
 
