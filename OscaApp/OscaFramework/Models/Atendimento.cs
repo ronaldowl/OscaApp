@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using static OscaFramework.Models.CustomEnumStatus;
@@ -18,8 +19,11 @@ namespace OscaFramework.Models
         public string diagnostico { get; set; }
         public string laudo { get; set; }
         public string observacao { get; set; }
-                
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dataAgendada { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dataFechamento { get; set; }
         
         public int horaInicio { get; set; }

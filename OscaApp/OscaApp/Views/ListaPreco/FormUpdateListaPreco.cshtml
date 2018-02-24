@@ -47,7 +47,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" type="date" required="required">
+                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" id="osc_dataValidade" type="text" required="required"  >
                                         </div>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" type="datetime" >
+                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" id="osc_fimValidade" type="text"  >
                                         </div>
                                     </div>
                                 </div>
@@ -69,6 +69,9 @@
                                         </div>
                                     </div>
                                 </div>
+                         
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Descrição</label>
                                     <div class="input-group">
@@ -147,3 +150,5 @@
         </div>
     </div>
 </div>
+<script src="~/lib/OscaJs/osc_listaPreco.js"></script>
+<script>OnLoad_ListaPreco();</script>
