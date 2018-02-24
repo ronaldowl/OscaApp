@@ -7,7 +7,7 @@
     @Html.HiddenFor(m => m.contexto.idUsuario)
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
 </div>
-<div class="container-fluid">
+<div class="container-fluid"><br /><br />
     <div class="row">
         <div class="col-md-10 offset-1">
             <form action="FormCreateListaPreco" method="post" id="FormCreateListaPreco">
@@ -49,7 +49,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" type="date" required="required">
+                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" id="osc_dataValidade" type="text" required="required" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" type="datetime"  >
+                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" id="osc_fimValidade" type="text" value=""  >
                                         </div>
                                     </div>
                                 </div>
@@ -71,6 +71,9 @@
                                         </div>
                                     </div>
                                 </div>
+                              
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Descrição</label>
                                     <div class="input-group">
@@ -149,3 +152,5 @@
         </div>
     </div>
 </div>
+<script src="~/lib/OscaJs/osc_listaPreco.js"></script>
+<script>OnLoad_ListaPreco();</script>

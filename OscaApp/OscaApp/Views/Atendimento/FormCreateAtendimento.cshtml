@@ -94,7 +94,7 @@
                                         <div class="inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
-                                                <input id="osc_dataInicio" asp-for="@Model.atendimento.dataAgendada" class="form-control" type="text">
+                                                <input id="osc_dataInicio" asp-for="@Model.atendimento.dataAgendada" class="form-control" type="text" value="">
                                             </div>
                                         </div>
                                     </div>
@@ -345,3 +345,4 @@
 </div>
 <div class="modal fade" id="lookupServico">
 </div>
+<script>OnLoad_Atendimento();</script>
