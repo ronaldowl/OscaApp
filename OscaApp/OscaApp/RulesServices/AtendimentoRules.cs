@@ -17,8 +17,16 @@ namespace OscaApp.RulesServices
             modelo = entrada.atendimento;
             modelo.status = CustomEnumStatus.Status.Ativo;
             modelo.codigo = AutoNumber.GeraCodigo(3, contexto.idOrganizacao);
+            modelo.idCliente = entrada.cliente.id;
+                        
+            if (entrada.servico != null) modelo.idServico = entrada.servico.id;
 
-         
+            if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);
+            if (entrada.horaFim != null) modelo.horaFim = Convert.ToInt32(entrada.horaFim.horaDia);
+
+
+
+
             if (modelo.codigo != null)
             {
                 //************ Objetos de controle de acesso ******************
@@ -36,18 +44,22 @@ namespace OscaApp.RulesServices
             
             return false;
         }
-        ////public static bool AtendimentoUpdate(AtendimentoViewModel entrada,out Atendimento atendimento)
-        //{
-        //    listapreco = new ListaPreco();
+        public static bool AtendimentoUpdate(AtendimentoViewModel entrada,out Atendimento modelo)
+        {
+            modelo = new Atendimento();
 
-        //    //************ Objetos de controle de acesso *******************
-        //    listapreco = entrada.listaPreco;
-        //    listapreco.modificadoEm = DateTime.Now;
-        //    listapreco.modificadoPor = entrada.contexto.idUsuario;
-        //    listapreco.modificadoPorName = entrada.contexto.nomeUsuario;
-        //    //************ FIM Objetos de controle de acesso ***************
+            if (entrada.servico != null) modelo.idServico = entrada.servico.id;
+            if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);
+            if (entrada.horaFim != null) modelo.horaFim = Convert.ToInt32(entrada.horaFim.horaDia);
+            
+            //************ Objetos de controle de acesso *******************
 
-        //    return true;
-        //}       
-    }
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = entrada.contexto.idUsuario;
+            modelo.modificadoPorName = entrada.contexto.nomeUsuario;
+            //************ FIM Objetos de controle de acesso ***************
+
+            return true;
+        }
+}
 }

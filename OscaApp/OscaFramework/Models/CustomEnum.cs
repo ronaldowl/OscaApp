@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +38,13 @@ namespace OscaFramework.Models
             AguardandoProduto = 3,
             ParaEntrega = 4,
             Cancelado = 5
+        }
+        public enum StatusAtendimento
+        {
+            agendado = 0,
+            atendido = 1,
+            cancelado = 2,
+            atrasado = 3
         }
         public enum StatusContaReceber
         {
@@ -177,6 +185,64 @@ namespace OscaFramework.Models
             UmaHora = 1,
             DuasHoras = 2,
             TresHoras = 3
+
+        }  
+
+        public enum itemHora
+        {
+                                                 [Description("01:00")]
+                                                 umHora =  1,   
+                                                 [Description("01:30")]
+                                                 umHoraMeia =  2,   
+                                                 [Description("02:00")]
+                                                 duasHoras = 3,    
+                                                 [Description("02:30")]
+                                                 duasHorasMeia =  4,    
+                                                 tresHoras =  5,    
+                                                 tresHorasMeia =  6,    
+                                                 quatroHoras =  7,    
+                                                 quatrosMeia =  8,    
+                                                 cincoHoras =  9,    
+                                                 cincoHorasMeia =  10,   
+                                                 seisHoras =  11,   
+                                                 seisHorasMeia =  12,   
+                                                 seteHoras =  13,   
+                                                 seteHorasMeia =  14  
+                                                 //08:00 =  15,  
+                                                 //08:30 =  16,   
+                                                 //09:00 =  17,   
+                                                 //09:30 =  18,   
+                                                 //10:00 =  19,   
+                                                 //10:30 =  20,   
+                                                 //11:00 =  21,  
+                                                 //11:30 =  22,   
+                                                 //12:00 =  23,   
+                                                 //12:30 =  24,   
+                                                 //13:00 =  25,   
+                                                 //13:30 =  26,   
+                                                 //14:00 =  27,   
+                                                 //14:30 =  28,   
+                                                 //15:00 =  29,   
+                                                 //15:30 =  30,   
+                                                 //16:00 =  31,   
+                                                 //16:30 =  32,   
+                                                 //17:00 =  33,   
+                                                 //17:30 =  34,   
+                                                 //18:00 =  35,   
+                                                 //18:30 =  36,   
+                                                 //19:00 =  37,   
+                                                 //19:30 =  38,   
+                                                 //20:00 =  39,   
+                                                 //20:30 =  40,   
+                                                 //21:00 =  41,   
+                                                 //21:30 =  42,   
+                                                 //22:00 =  43,   
+                                                 //22:30 =  44,   
+                                                 //23:00 =  45,   
+                                                 //23:30 =  46,   
+                                                 //00:00 =  47  
+
+
 
         }
     }
