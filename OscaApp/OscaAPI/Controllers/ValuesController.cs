@@ -3,12 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OscaFramework.MicroServices;
+using OscaFramework.Models;
 
 namespace OscaAPI.Controllers
 {
-    [Route("api/[controller]")]
+   
     public class ValuesController : Controller
     {
+        private readonly SqlGenericDataServices sqlData;
+        private readonly SqlGenericServices sqlServices;
+
+         
+
+
+        public ValuesController(SqlGenericDataServices _sqlData, SqlGenericServices _sqlServices)
+        {
+            this.sqlData = _sqlData;
+            this.sqlServices = _sqlServices;
+
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -23,10 +38,19 @@ namespace OscaAPI.Controllers
             return "value";
         }
 
-        // POST api/values
+        /// <summary>
+        /// Método Genérico para configurar o Status de todas as Entidades
+        /// </summary>
+        /// <param name="value"></param>
+        [Route("api/SetStatus")]
         [HttpPost]
-        public void Post([FromBody]string value)
+        public JsonResult SetStatus([FromBody]Relacao relacao)
         {
+            Relacao x = new Relacao();
+
+            if (sqlServices.SetStates(x))  return Json(true);
+
+            return Json(false);
         }
 
         // PUT api/values/5

@@ -103,9 +103,7 @@ namespace OscaFramework.MicroServices
                 throw;
             }
             return retorno;
-        }
-
-
+        }        
         public Relacao RetornaRelacaoContato(Guid id)
         {
             Relacao retorno = new Relacao();
@@ -146,8 +144,6 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
-
-
         public Produto RetornaProduto(Guid id)
         {
             Produto retorno = new Produto();

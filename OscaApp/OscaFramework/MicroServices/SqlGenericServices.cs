@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 
-namespace OscaApp.Data
+namespace OscaFramework.MicroServices
 {
     public   class SqlGenericServices
     {
@@ -170,5 +170,43 @@ namespace OscaApp.Data
             }
             return retorno;
         }
+
+
+        //********** Atualiza valores nas tabelas diretamente *********
+        public bool SetStates(Relacao Registro)
+        {
+
+             
+            try
+            {
+                SqlDataReader dataReader;
+
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_RetornaContextoOrg"
+                       
+                    };
+
+                
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+               
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+
     }
 }
