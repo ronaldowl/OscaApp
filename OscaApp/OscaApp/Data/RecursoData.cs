@@ -33,7 +33,6 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("codigo").IsModified                   = true;
                 db.Entry(modelo).Property("nome").IsModified                     = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;

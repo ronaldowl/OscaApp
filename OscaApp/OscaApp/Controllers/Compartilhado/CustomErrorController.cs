@@ -8,19 +8,19 @@ using OscaApp.ViewModels;
 using OscaApp.Data;
 using Microsoft.AspNetCore.Http;
 using OscaApp.RulesServices;
-using OscaFramework.Log;
+ 
 
 namespace OscaApp.Controllers
 {
     public class CustomErrorController : Controller
     {  
-        [HttpGet]
-        public ViewResult ContextError()
-        {
-            CustomError   modelo = new CustomError();                        
+    //    [HttpGet]
+    //    public ViewResult ContextError()
+    //    {
+    //        //CustomError   modelo = new CustomError();                        
             
-            return View(modelo);
-        }
+    //        //return View(modelo);
+    //    }
         
 
     }

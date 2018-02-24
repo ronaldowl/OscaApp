@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList< OscaFramework.Models.Recurso>
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Recurso>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -18,9 +18,6 @@
                                     <form class="form-inline">
                                         <div class="form-group col-md-2">
                                             <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateRecurso", "Recurso", null)'"> <span>Novo</span></button>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_importar" type="button" class="btn btn-info  fa fa-download" value="Importar"> <span>Importar</span></button>
                                         </div>
                                         <div class="form-group  col-md-4">
                                             <div class="input-group">
@@ -46,7 +43,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-11">
-                                <table class="table table-hover table-striped">
+                                <table class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Código</th>
@@ -75,6 +72,51 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
+    <div class="col-md-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

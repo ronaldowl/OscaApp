@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <button id="osc_back_PainelCadastro" type="button" class="btn btn-info btn-lg btn-sm  fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelCadastro", "Paineis", null)'"> <span>Painél Cadastro</span></button>
-                                        </div>&nbsp; &nbsp; 
+                                        </div>&nbsp; &nbsp;
                                         <div class="form-group col-md-2">
                                             <button id="osc_back_Produto" type="button" class="btn btn-info btn-lg btn-sm  fa fa-cubes" value="voltar" onclick="location.href='@Url.Action("GridProduto", "Produto", null)'"><span>Produtos</span></button>
                                         </div>
@@ -46,7 +46,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-11">
-                                <table class="table table-hover table-striped">
+                                <table class="table table-hover table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -84,6 +84,51 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
+    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
+        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
+        <div class="col-md-3">
+            <div class="card m-2">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
