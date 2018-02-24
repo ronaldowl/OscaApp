@@ -67,8 +67,8 @@ namespace OscaApp.Data
     }
     public interface IListaPrecoData
     {
-        void Add(ListaPreco contato);
-        void Update(ListaPreco contato);
+        void Add(ListaPreco listaPreco);
+        void Update(ListaPreco listaPreco);
         ListaPreco Get(Guid id, Guid idOrg);
         List<ListaPreco> GetAll(Guid idOrg);       
         List<Relacao> GetAllRelacao(Guid idOrg);
@@ -112,8 +112,8 @@ namespace OscaApp.Data
 
     public interface IPedidoData
     {
-        void Add(Pedido contato);
-        void Update(Pedido contato);
+        void Add(Pedido pedido);
+        void Update(Pedido pedido);
         Pedido Get(Guid id);
         List<Pedido> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
@@ -123,8 +123,8 @@ namespace OscaApp.Data
 
     public interface IItemListaPrecoData
     {
-        void Add(ItemListaPreco contato);
-        void Update(ItemListaPreco contato);
+        void Add(ItemListaPreco itemListaPreco);
+        void Update(ItemListaPreco itemListaPreco);
         ItemListaPreco Get(Guid id);
         List<ItemListaPreco> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
@@ -136,9 +136,9 @@ namespace OscaApp.Data
 
     public interface IProdutoPedidoData
     {
-        void Add(ProdutoPedido contato);
-        void Update(ProdutoPedido contato);
-        void Delete(ProdutoPedido contato);
+        void Add(ProdutoPedido produtoPedido);
+        void Update(ProdutoPedido produtoPedido);
+        void Delete(ProdutoPedido produtoPedido);
         ProdutoPedido Get(Guid id);
         List<ProdutoPedido> GetByPedidoId(Guid idPedido);
         List<ProdutoPedido> GetAll(Guid idOrg);
@@ -148,9 +148,9 @@ namespace OscaApp.Data
 
     public interface IServicoOrdemData
     {
-        void Add(ServicoOrdem contato);
-        void Update(ServicoOrdem contato);
-        void Delete(ServicoOrdem contato);
+        void Add(ServicoOrdem servicoOrdem);
+        void Update(ServicoOrdem servicoOrdem);
+        void Delete(ServicoOrdem servicoOrdem);
         ServicoOrdem Get(Guid id);
         List<ServicoOrdem> GetByServicoOrdemId(Guid idPedido);
         List<ServicoOrdem> GetAll(Guid idOrg);
@@ -161,9 +161,9 @@ namespace OscaApp.Data
 
     public interface IProdutoOrdemData
     {
-        void Add(ProdutoOrdem contato);
-        void Update(ProdutoOrdem contato);
-        void Delete(ProdutoOrdem contato);
+        void Add(ProdutoOrdem produtoOrdem);
+        void Update(ProdutoOrdem produtoOrdem);
+        void Delete(ProdutoOrdem produtoOrdem);
         ProdutoOrdem Get(Guid id);
         List<ProdutoOrdem> GetByProdutoOrdemId(Guid idOrdem);
         List<ProdutoOrdem> GetAll(Guid idOrg);
@@ -208,6 +208,7 @@ namespace OscaApp.Data
     {
         String RetornaNovaPosicao(int Entidade, Guid idOrganizacao);    
     }
+
     public interface ISqlGenericManager
     {
         bool ExisteOrganizacao(string org, out Guid id);
