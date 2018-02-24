@@ -11,6 +11,7 @@ using OscaApp.RulesServices;
 using OscaApp.framework;
 using OscaFramework.MicroServices;
 using X.PagedList;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
@@ -77,7 +78,10 @@ namespace OscaApp.Controllers
 
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
                     modelo.servico = sqlData.RetornaRelacaoServico(retorno.idServico);
-
+                    modelo.horaInicio = new ItemHoraDia();
+                    modelo.horaInicio.horaDia = (CustomEnum.itemHora)retorno.horaInicio;
+                    modelo.horaFim = new ItemHoraDia();
+                    modelo.horaFim.horaDia = (CustomEnum.itemHora)retorno.horaFim;
 
                     if (retorno != null)
                     {
@@ -120,17 +124,15 @@ namespace OscaApp.Controllers
 
         public ViewResult GridAtendimento(string filtro, int Page)
         {
-            IEnumerable<Atendimento> retorno = atendimentoData.GetAll(contexto.idOrganizacao);
+            IEnumerable<AtendimentoGridViewModel> retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao);
+                   
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.atendimento.codigo == filtro  ) select A;
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro  ) select A;
-
-            retorno = retorno.OrderBy(x => x.codigo);
-
+          
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Atendimento>(Page, 10));
+            return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
         }
     }
 }

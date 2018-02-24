@@ -47,8 +47,10 @@ namespace OscaApp.RulesServices
         public static bool AtendimentoUpdate(AtendimentoViewModel entrada,out Atendimento modelo)
         {
             modelo = new Atendimento();
+            modelo = entrada.atendimento;
 
             if (entrada.servico != null) modelo.idServico = entrada.servico.id;
+            if (entrada.cliente != null) modelo.idCliente = entrada.cliente.id;
             if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);
             if (entrada.horaFim != null) modelo.horaFim = Convert.ToInt32(entrada.horaFim.horaDia);
             
