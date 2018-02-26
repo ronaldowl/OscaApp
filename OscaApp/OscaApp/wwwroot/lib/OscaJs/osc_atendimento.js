@@ -41,3 +41,24 @@ function ConfigCalendario() {
 
 }
 
+function ValidaHora(hora)
+{
+    
+    var inicio = $("#osc_horaInicio").val();
+    var fim = $("#osc_horaFim").val();
+
+    if (fim <= inicio)
+    { 
+
+        alert("O horário do fim não pode ser maior ou igual ao horárido do inicio!");
+
+        if (hora == 1) {
+            $("#osc_horaInicio").val("15");
+        }
+        if (hora == 2) {
+            $("#osc_horaFim").val("17");
+        }
+
+    }
+
+}
