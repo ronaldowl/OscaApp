@@ -25,17 +25,14 @@ namespace OscaApp.Controllers
         public ViewResult Mes(int Mes, int Ano)
         {
             Calendario calen = new Calendario();
-
-            List<Atendimento> lista = sqlServices.RetornaAtendimentosMes(Mes.ToString(), Ano.ToString());
-
+          
             if (Mes > 0)
             {
-
-               calen = CalendarioRules.PreencheMes(Mes, Ano);
+               calen = CalendarioRules.PreencheMes(Mes, Ano, sqlServices);
             }
             else{
 
-                calen = CalendarioRules.PreencheMes(DateTime.Now.Month, DateTime.Now.Year );
+                calen = CalendarioRules.PreencheMes(DateTime.Now.Month, DateTime.Now.Year, sqlServices);
             }          
 
             return View(calen);
@@ -46,7 +43,7 @@ namespace OscaApp.Controllers
         {
             Calendario calen = new Calendario();
          
-            calen = CalendarioRules.PreencheMes(entrada.mes, entrada.ano);          
+            calen = CalendarioRules.PreencheMes(entrada.mes, entrada.ano, sqlServices);          
            
             return View(calen);
         }

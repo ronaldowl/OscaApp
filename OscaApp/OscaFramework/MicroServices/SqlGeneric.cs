@@ -128,7 +128,7 @@ namespace OscaFramework.MicroServices
             return retorno;
         }
 
-        public List<Atendimento> RetornaAtendimentosMes(string ano, string mes)
+        public List<Atendimento> RetornaAtendimentosMes( string mes, string ano)
         {
             SqlDataReader dataReader;
             List<Atendimento> retorno = new List<Atendimento>();
@@ -143,10 +143,8 @@ namespace OscaFramework.MicroServices
                         CommandText = "osc_RetornaAtendimentosMes",
                         CommandType = CommandType.StoredProcedure
                     };
-
-                    _Command.Parameters.AddWithValue("ano", ano);
                     _Command.Parameters.AddWithValue("mes", mes);
-
+                    _Command.Parameters.AddWithValue("ano", ano);                    
                     Connection.Open();
                     dataReader = _Command.ExecuteReader();
 
@@ -160,11 +158,11 @@ namespace OscaFramework.MicroServices
                             item.codigo = dataReader["codigo"].ToString();
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
-                            item.idCliente = new Guid(dataReader["idServico"].ToString());
+                            item.idServico = new Guid(dataReader["idServico"].ToString());
                             item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
                             item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
                             item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());
-
+                            retorno.Add(item);
                         }
                     }
                     Connection.Close();
