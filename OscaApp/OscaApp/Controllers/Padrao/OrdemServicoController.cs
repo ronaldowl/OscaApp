@@ -24,10 +24,10 @@ namespace OscaApp.Controllers
         private readonly IProdutoOrdemData produtoOrdemData;
 
         private ContextPage contexto;
-        private readonly SqlGenericDataServices sqlData;
+        private readonly SqlGenericData sqlData;
         private readonly IListaPrecoData listaprecoData;
 
-        public OrdemServicoController(SqlGenericDataServices _sqlData, ContexDataService db, IHttpContextAccessor httpContext)
+        public OrdemServicoController(SqlGenericData _sqlData, ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.sqlData = _sqlData;
             this.ordemServicoData = new OrdemServicoData(db);

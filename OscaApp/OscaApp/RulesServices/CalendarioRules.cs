@@ -70,15 +70,9 @@ namespace OscaApp.RulesServices
         {
             List<ItemCalendario> retorno = new List<ItemCalendario>();
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 47; i++)
             {
-                ItemCalendario item = new ItemCalendario();
-                item.inicio = DateTime.Now.Hour.ToString();
-                item.fim = DateTime.Now.Hour.ToString();
-                item.titulo = "TESTE";
-                item.id = Guid.NewGuid().ToString();
-                item.tipo =  CustomEnum.tipoItemCaledario.Atendimento;
-                retorno.Add(item);
+                ItemCalendario item = new ItemCalendario();            
 
             }
 

@@ -4,6 +4,7 @@ using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
 using System.Collections.Generic;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -14,7 +15,7 @@ namespace OscaApp.RulesServices
             ordemServico = new OrdemServico();
             ordemServico = entrada.ordemServico;
 
-            SqlGenericService servico = new SqlGenericService();           
+            SqlGeneric servico = new SqlGeneric();           
          
             if (ordemServico.idOrganizacao != null)
             {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OscaFramework.Models;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -20,7 +21,7 @@ namespace OscaApp.RulesServices
             if (modelo.idCliente  != null)
             {
                 //Gera código do Pedido
-                SqlGenericService sqlservice = new SqlGenericService();
+                SqlGeneric sqlservice = new SqlGeneric();
 
                 //Associa Cliente
                 modelo.idCliente = entrada.cliente.id;

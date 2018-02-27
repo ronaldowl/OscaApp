@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OscaFramework.Models;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.framework
 {

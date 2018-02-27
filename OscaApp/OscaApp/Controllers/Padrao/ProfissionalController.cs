@@ -20,9 +20,9 @@ namespace OscaApp.Controllers
     {
         private readonly IProfissionalData profissionalData;
         private ContextPage contexto;
-        private readonly SqlGenericDataServices sqlData;
+        private readonly SqlGenericData sqlData;
 
-        public ProfissionalController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericDataServices _sqlData)
+        public ProfissionalController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
             this.profissionalData = new ProfissionalData(db);
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));

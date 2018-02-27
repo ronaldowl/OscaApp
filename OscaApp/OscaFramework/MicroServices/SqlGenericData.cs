@@ -7,12 +7,12 @@ using System.IO;
 
 namespace OscaFramework.MicroServices
 {
-    public   class SqlGenericDataServices
+   public   class SqlGenericData
     {
         public  string conectService { get; set; }
         public IConfiguration Configuration { get; }
 
-        public SqlGenericDataServices()
+        public SqlGenericData()
         {
             var builder = new ConfigurationBuilder()
           .SetBasePath(Directory.GetCurrentDirectory())
@@ -22,6 +22,49 @@ namespace OscaFramework.MicroServices
 
             this.Configuration = Configuration; 
             this.conectService = Configuration.GetConnectionString("databaseService");
+        }
+        public Servico RetornaServico(Guid id)
+        {
+            Servico retorno = new Servico();
+            SqlDataReader dataReader;
+            try
+            {
+
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.id , o.nomeServico ,  status, codigo, valor from Servico as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.nomeServico = dataReader["nomeServico"].ToString();
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            retorno.codigo = dataReader["codigo"].ToString();
+                            retorno.valor = Convert.ToDecimal(dataReader["valor"]);
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
         }
         public ListaPreco RetornaListaPreco(Guid id)
         {
@@ -52,86 +95,6 @@ namespace OscaFramework.MicroServices
                             retorno.nome = dataReader["nome"].ToString();                        
                             retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
                           
-                        }
-                    }
-                    Connection.Close();
-
-                };
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-            return retorno;
-        }
-        public Relacao RetornaRelacaoBanco(Guid id)
-        {
-            Relacao retorno = new Relacao();
-            SqlDataReader dataReader;
-            try
-            {
-
-
-                using (SqlConnection Connection = new SqlConnection(conectService))
-                {
-
-                    var _Command = new SqlCommand()
-                    {
-                        Connection = Connection,
-                        CommandText = "select * from banco where id = '" + id.ToString() + "'",
-                        CommandType = CommandType.Text
-                    };
-
-                    Connection.Open();
-                    dataReader = _Command.ExecuteReader();
-
-                    if (dataReader.HasRows)
-                    {
-                        while (dataReader.Read())
-                        {
-                            retorno.id = new Guid(dataReader["id"].ToString());
-                            retorno.idName = dataReader["nome"].ToString();         
-
-                        }
-                    }
-                    Connection.Close();
-
-                };
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-            return retorno;
-        }        
-        public Relacao RetornaRelacaoContato(Guid id)
-        {
-            Relacao retorno = new Relacao();
-            SqlDataReader dataReader;
-            try
-            {
-
-
-                using (SqlConnection Connection = new SqlConnection(conectService))
-                {
-
-                    var _Command = new SqlCommand()
-                    {
-                        Connection = Connection,
-                        CommandText = "select * from contato where id = '" + id.ToString() + "'",
-                        CommandType = CommandType.Text
-                    };
-
-                    Connection.Open();
-                    dataReader = _Command.ExecuteReader();
-
-                    if (dataReader.HasRows)
-                    {
-                        while (dataReader.Read())
-                        {
-                            retorno.id = new Guid(dataReader["id"].ToString());
-                            retorno.idName = dataReader["nome"].ToString();
-
                         }
                     }
                     Connection.Close();
@@ -230,6 +193,86 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
+        public Relacao RetornaRelacaoBanco(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select * from banco where id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idName = dataReader["nome"].ToString();         
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }        
+        public Relacao RetornaRelacaoContato(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select * from contato where id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idName = dataReader["nome"].ToString();
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }      
         public Relacao RetornaRelacaoProduto(Guid id)
         {
             Relacao retorno = new Relacao();
@@ -496,6 +539,80 @@ namespace OscaFramework.MicroServices
                 throw;
             }
             return retorno;
+        }            
+        public Relacao RetornaRelacaoOrdemServicoPorIDServicoOrdem(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.idOrdemServico ,  status from ServicoOrdem as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["idOrdemServico"].ToString());
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
         }
+        public Relacao RetornaRelacaoOrdemServicoPorIDProdutoOrdem(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.idOrdemServico ,  status from produtoOrdem as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["idOrdemServico"].ToString());
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
+
     }
 }

@@ -3,6 +3,7 @@ using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -13,7 +14,7 @@ namespace OscaApp.RulesServices
             modelo = new Recurso();
             modelo = entrada.recurso;
 
-            SqlGenericService sqlServic = new SqlGenericService();
+            SqlGeneric sqlServic = new SqlGeneric();
             modelo.codigo = sqlServic.RetornaNovaPosicao(22,contexto.idOrganizacao);
             
  

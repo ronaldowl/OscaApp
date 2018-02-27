@@ -19,9 +19,9 @@ namespace OscaApp.Controllers
     {
         private ContextPage contexto;
         public AtendimentoData atendimentoData;
-        private readonly SqlGenericDataServices sqlData;
+        private readonly SqlGenericData sqlData;
 
-        public AtendimentoController(ContexDataService db, IHttpContextAccessor httpContext,  SqlGenericDataServices _sqlData)
+        public AtendimentoController(ContexDataService db, IHttpContextAccessor httpContext,  SqlGenericData _sqlData)
         {
             this.atendimentoData = new AtendimentoData(db);
             this.sqlData = _sqlData;
@@ -128,6 +128,7 @@ namespace OscaApp.Controllers
                    
             if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.atendimento.codigo == filtro  ) select A;
 
+            retorno = retorno.OrderByDescending(A => A.atendimento.dataAgendada);
           
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;

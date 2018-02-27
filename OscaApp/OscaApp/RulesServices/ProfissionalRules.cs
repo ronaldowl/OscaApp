@@ -3,7 +3,7 @@ using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
-
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -14,7 +14,7 @@ namespace OscaApp.RulesServices
             profissional = new Profissional();
             profissional = entrada.profissional;
 
-            SqlGenericService sqlservice = new SqlGenericService();
+            SqlGeneric sqlservice = new SqlGeneric();
 
             profissional.codigo = sqlservice.RetornaNovaPosicao(17, contexto.idOrganizacao);
             profissional.idBanco = entrada.banco.id;
