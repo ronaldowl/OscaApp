@@ -56,14 +56,14 @@
                             <button id="osc_filtro" type="submit" class="btn btn-info btn-lg fa fa-exclamation-circle" value="filtro"> <span>Aplicar</span></button>
                         </div>
                     </div>
-                </div>               
-                <div class="col-2 form-group">                    
-                    <label style="font-weight:bold; font-size:25px">&nbsp;Legenda:<span style="font-size:20px; color:blue">Agendado, </span><span style="font-size:20px; color:red">Cancelado</span "> &nbsp;&nbsp;<button id="osc_painelServico" style="font-size:20px;" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Voltar</span></button></label>   
-                   
-                    </div>                    
+                </div>
+                <div class="col-2 form-group">
+                    <label style="font-weight:bold; font-size:25px">&nbsp;Legenda:<span style="font-size:20px; color:blue">Agendado, </span><span style="font-size:20px; color:red">Cancelado</span> &nbsp;&nbsp;<button id="osc_painelServico" style="font-size:20px;" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Voltar</span></button></label>
+
+                </div>
             </div>
         </div>
-    </div>         
+    </div>
     <br />
     <div class="row">
         <table id="calendario" class="table table-bordered  ">
@@ -75,24 +75,24 @@
                         </tr>
 
                         @if (Model.dias.Count <= Model.qtdDias)
-                    {
-                        @foreach (var item in Model.dias[0].itensCalendario)
+                        {
+                            @foreach (var item in Model.dias[0].itensCalendario)
                 {
-                        <tr>
-                            <td>
-                                <table style="width:100%">
-                                    <tr>
-                                        <td><i class="fa fa-1x fa-user"></i></td>
-                                        <td>@item.inicio</td>
-                                        <td>@item.fim</td>
-                                        <td>@item.titulo</td>
-                                    </tr>
-                                </table>
-                            </td>
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr>
+                                                <td><i class="fa fa-1x fa-user"></i></td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
+                                                <td>@item.titulo</td>
+                                            </tr>
+                                        </table>
+                                    </td>
 
-                        </tr>
+                                </tr>
+                            }
                         }
-                    }
                     </table>
                 </td>
                 <td id="dia_2" style="width:100px">
@@ -1297,7 +1297,7 @@
                             <td colspan="3">
                                 <h6>
                                     29 - @if (@Model.dias.Count < Model.qtdDias)
-                                { @Model.dias[28].nome }
+                                    { @Model.dias[28].nome }
                                 </h6>
                             </td>
                         </tr>
@@ -1346,7 +1346,7 @@
                             <td colspan="3">
                                 <h6>
                                     30 - @if (@Model.dias.Count < Model.qtdDias)
-    { @Model.dias[29].nome }
+                                    { @Model.dias[29].nome }
                                 </h6>
                             </td>
                         </tr>
@@ -1395,7 +1395,7 @@
                             <td colspan="3">
                                 <h6>
                                     31 - @if (@Model.dias.Count < Model.qtdDias)
-    { @Model.dias[30].nome }
+                                    { @Model.dias[30].nome }
                                 </h6>
                             </td>
                         </tr>

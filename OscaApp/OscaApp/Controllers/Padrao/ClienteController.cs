@@ -26,11 +26,11 @@ namespace OscaApp.Controllers
 
 
 
-        private readonly SqlGenericDataServices sqlData;
+        private readonly SqlGenericData sqlData;
         private ContextPage contexto;
 
 
-        public ClienteController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericDataServices _sqlData)
+        public ClienteController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
             this.clienteData = new ClienteData(db);
             this.enderecoData = new EnderecoData(db);

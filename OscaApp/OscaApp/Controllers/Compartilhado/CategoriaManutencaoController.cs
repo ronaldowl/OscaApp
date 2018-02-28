@@ -18,10 +18,10 @@ namespace OscaApp.Controllers
     [Authorize]
     public class CategoriaManutencaoController : Controller
     {
-        private readonly SqlGenericServices sqlServices;
+        private readonly SqlGeneric sqlServices;
         
 
-        public CategoriaManutencaoController(SqlGenericServices _sqlServices)
+        public CategoriaManutencaoController(SqlGeneric _sqlServices)
         {
             this.sqlServices = _sqlServices;            
         }

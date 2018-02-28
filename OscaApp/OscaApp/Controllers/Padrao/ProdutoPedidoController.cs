@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using X.PagedList;
 using OscaFramework.Models;
 using OscaApp.ViewModels.GridViewModels;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {

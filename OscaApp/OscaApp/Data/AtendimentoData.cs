@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using OscaApp.framework.Models;
 using OscaFramework.Models;
+using OscaApp.ViewModels.GridViewModels;
+using OscaApp.framework;
 
 namespace OscaApp.Data
 {
@@ -36,12 +38,17 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("nome").IsModified                = true;
-                db.Entry(modelo).Property("descricao").IsModified           = true;
-                db.Entry(modelo).Property("dataValidade").IsModified        = true;
-                db.Entry(modelo).Property("fimValidade").IsModified = true;
+                db.Entry(modelo).Property("dataAgendada").IsModified             = true;
+                db.Entry(modelo).Property("idCliente").IsModified        = true;
+                db.Entry(modelo).Property("idServico").IsModified        = true;             
+                db.Entry(modelo).Property("problema").IsModified = true;
+                db.Entry(modelo).Property("diagnostico").IsModified = true;
+                db.Entry(modelo).Property("laudo").IsModified = true;
+                db.Entry(modelo).Property("observacao").IsModified = true;
+                db.Entry(modelo).Property("horaInicio").IsModified = true;
+                db.Entry(modelo).Property("horaFim").IsModified = true;
+                db.Entry(modelo).Property("statusAtendimento").IsModified = true;               
                 
-                db.Entry(modelo).Property("padrao").IsModified              = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
@@ -78,7 +85,6 @@ namespace OscaApp.Data
             return retorno;
 
         }
-
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
            List<Relacao> retorno = new List<Relacao>();
@@ -89,6 +95,14 @@ namespace OscaApp.Data
             //return Relacao.ConvertToRelacao(retorno);
             return retorno;
 
+        }
+        public List<AtendimentoGridViewModel> GetAllGridViewModel(Guid idOrg)
+        {
+            List<Atendimento> itens = new List<Atendimento>();
+
+            itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+            return HelperAssociate.ConvertToGridAtendimento(itens);
         }
     }
 }

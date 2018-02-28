@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OscaFramework.Models;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.framework
 {
@@ -83,6 +84,27 @@ namespace OscaApp.framework
                 ProdutoOrdemGridViewModel X = new ProdutoOrdemGridViewModel();
                 X.produto = sqldata.RetornaProduto(item.idProduto);
                 X.produtoOrdem = item;
+                retorno.Add(X);
+            }
+            return retorno;
+        }
+        public static List<AtendimentoGridViewModel> ConvertToGridAtendimento(List<Atendimento> itens)
+        {
+            List<AtendimentoGridViewModel> retorno = new List<AtendimentoGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                AtendimentoGridViewModel X = new AtendimentoGridViewModel();
+                X.atendimento = item;
+                X.cliente = sqldata.RetornaCliente(item.idCliente);
+                X.servico = sqldata.RetornaServico(item.idServico);                
+                X.horaInicio = new ItemHoraDia();
+                X.horaInicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
+                X.horaFim = new ItemHoraDia();
+                X.horaFim.horaDia = (CustomEnum.itemHora)item.horaFim;
+                X.horaFim.HoraFormatada = ((CustomEnum.itemHora)item.horaFim).ToString();
+
                 retorno.Add(X);
             }
             return retorno;

@@ -17,6 +17,8 @@ using OscaApp.Services;
 using Microsoft.AspNetCore.Http;
 using OscaApp.Data;
 using Newtonsoft.Json;
+using OscaFramework.Data;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {
@@ -238,7 +240,7 @@ namespace OscaApp.Controllers
             {
                 Guid idOrg = new Guid();
                 SqlGenericManager _sqlManager = new SqlGenericManager();
-                SqlGenericService _sqlService = new SqlGenericService();
+                SqlGeneric _sqlService = new SqlGeneric();
 
 
                 //Se for a primeira Organização criar no banco

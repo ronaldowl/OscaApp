@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta lang="pt-br" />
-
+    <meta charset="iso-8859-1" />
+    <meta lang="pt-br" />   
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OSCA Serviços Online</title>
 
+    <title>@ViewData["Title"] - OSCAS Serviços Online</title>
+    <script type="text/javascript" src="*.js" charset="utf-8"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script> 
     <script src="~/lib/jquery-ui/jquery-ui.js"></script>
 
@@ -51,7 +51,7 @@
 </head>
 <body>
     <div id="barra_main" class="col-md-12 barraMain sticky-top">
-        <a asp-controller="Paineis" asp-action="PainelHome" class="osca"><i class="fa fa-1x fa-home" aria-hidden="true"></i> OSCA</a>
+        <a asp-controller="Paineis" asp-action="PainelHome" class="osca"><i class="fa fa-1x fa-home" aria-hidden="true"></i>OSCAS</a>
         <div style="float:right;">@await Html.PartialAsync("_LoginPartial") </div>
     </div>
     <div class="container-fluid body-content" style="margin-bottom:5vh;">

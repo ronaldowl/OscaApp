@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.Atendimento>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.AtendimentoGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -48,15 +48,26 @@
                                         <tr>
                                             <th></th>
                                             <th>Código</th>
-                                            <th>Status</th>
+                                            <th>Cliente</th>
+                                            <th>Serviço</th>
+                                            <th>Data Agendada</th>
+                                            <th>Hora Início</th>
+                                            <th>Hora Fim</th>
+                                            <th>Status do Atendimento</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                        <tr id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
                                             <td><i class="fa fa-calendar-times-o"></i></td>
-                                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateAtendimento", new { id = item.id })</td>
-                                            <td>@item.statusAtendimento</td>
+                                            <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
+                                            <td>@item.cliente.nomeCliente</td>
+                                            <td>@item.servico.nomeServico</td>
+                                            <td>@item.atendimento.dataAgendada.ToShortDateString()</td>
+                                            <td>@item.horaInicio.horaDia</td>
+                                            <td>@item.horaFim.horaDia</td>
+                                            <td>@item.atendimento.statusAtendimento</td>
+
                                         </tr>
                                     }
                                 </table>

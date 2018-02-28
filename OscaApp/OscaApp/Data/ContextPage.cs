@@ -3,6 +3,7 @@ using OscaApp.framework.Models;
 using System;
 using System.Net.Http;
 using OscaFramework.Models;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Data
 {
@@ -20,7 +21,7 @@ namespace OscaApp.Data
         public ContextPage(string Email, string Org)
         {
             //Prenche informações do Contexto
-            SqlGenericService sqlmanager = new SqlGenericService();
+            SqlGeneric sqlmanager = new SqlGeneric();
 
             Relacao RL = sqlmanager.RetornaContextPage(Email, Org);
             RL.tipoObjeto = CustomEntityEnum.Entidade.Usuario;
@@ -34,7 +35,7 @@ namespace OscaApp.Data
         public ContextPage(string Email, string Org, Guid id, CustomEntityEnum.Entidade Entidade)
         {
             //Prenche informações do Contexto
-            SqlGenericService sqlservice = new SqlGenericService();
+            SqlGeneric sqlservice = new SqlGeneric();
 
             Relacao RL = sqlservice.RetornaContextPage(Email, Org);
             RL.tipoObjeto = CustomEntityEnum.Entidade.Usuario;

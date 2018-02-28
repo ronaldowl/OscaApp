@@ -5,8 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using OscaFramework.Data;
-
-
+using OscaFramework.MicroServices;
 
 namespace OscaFramework.Models
 {

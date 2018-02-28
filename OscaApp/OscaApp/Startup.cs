@@ -18,6 +18,7 @@ using OscaApp.framework;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using OscaFramework.MicroServices;
+using OscaFramework.Data;
 
 namespace OscaApp
 {
@@ -45,26 +46,20 @@ namespace OscaApp
             services.AddDbContext<ContexDataService>(options => options.UseSqlServer(Configuration.GetConnectionString("databaseService")));
             services.AddDbContext<ContexDataManager>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //********* FIMCarrega informações do banco de dados via ENTITY_FRAMEWORD
-
-            //*************************************************************
-            //TODO: Verificar usuabilidade desse componente de parâmetros
-            //Serviço de configuração universal
-            //services.AddSingleton<IConfiguration>(_ => Configuration);
-
-            //Serviço para acesso a metodos de conexao SQL no banco Manager
-            services.AddSingleton<ISqlGenericManager, SqlGenericManager>();
+                    
 
             //*********************** Serviços para acesso a dados vi ADO *******************
-            //Serviço para acesso a metodos de conexão SQL no banco DATA
-            //TODO:Falta implementar em todos os controllers, apenas usado na Ordem de Servico
-            SqlGenericDataServices sqlData = new SqlGenericDataServices();
-            services.AddSingleton<SqlGenericDataServices>(_ => sqlData);
-
-            //Serviço para retornar dados que são comuns a todas empresas
-            //TODO:Falta implementar em todaas chamadas, sendo usado apenas na Ordem de serviço
-            SqlGenericServices sqlServices = new SqlGenericServices();
-            services.AddSingleton<SqlGenericServices>(_ => sqlServices);
+            //Serviço para acesso a metodos de conexao SQL no banco Manager
+            services.AddSingleton<SqlGenericManager,  SqlGenericManager>();
+            //Serviço para acesso a metodos de conexão SQL no banco DATA      
+            SqlGenericData sqlData = new SqlGenericData();
+            services.AddSingleton<SqlGenericData>(_ => sqlData);
+            //Serviço para retornar dados que são comuns a todas empresas        
+            SqlGeneric sqlServices = new SqlGeneric();
+            services.AddSingleton<SqlGeneric>(_ => sqlServices);
             //*********************** FIM Serviços para acesso a dados vi ADO *******************
+
+
             services.AddMvc(config =>
             {
                 config.ModelBinderProviders.Insert(0, new InvariantDecimalModelBinderProvider());
@@ -80,9 +75,7 @@ namespace OscaApp
                 options.IdleTimeout = TimeSpan.FromSeconds(100000000);
                 options.Cookie.HttpOnly = true;
             });                       
-
-            //ContextPageServices teste = new ContextPageServices(email, org);        
-            //services.AddScoped<IContextPage>(A => teste);
+ 
 
         }
 

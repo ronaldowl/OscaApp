@@ -1,6 +1,4 @@
-﻿using OscaApp.Data;
-using OscaApp.Models;
-using OscaApp.ViewModels;
+﻿using OscaFramework.MicroServices;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,7 +11,7 @@ namespace OscaApp.RulesServices
     public static class CalendarioRules
     {
        
-        public static Calendario PreencheMes(int Mes, int Ano)
+        public static Calendario PreencheMes(int Mes, int Ano, SqlGeneric sqlServices)
         {
             
 
@@ -28,6 +26,7 @@ namespace OscaApp.RulesServices
             retorno.qtdDias = qtdDiasMes;
 
             List<Dia> diasMEs = new List<Dia>();
+            List<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosMes(Mes.ToString(), Ano.ToString());
 
             //Preenche todos o dias do Mes
             for (int i = 1; i <= qtdDiasMes; i++)
@@ -37,49 +36,33 @@ namespace OscaApp.RulesServices
                 Dia dia = new Dia();
                 dia.dia = i;
                 dia.nome = dataFormat.GetDayName(dataRef.DayOfWeek);
-                dia.itensCalendario = PreencheItemCalendario(i,Mes,Ano);
+                dia.itensCalendario = PreencheItemCalendario(i, Atendimentos);
                 diasMEs.Add(dia);
             }
             retorno.dias = diasMEs;
 
             return retorno;
-        }
+        }      
+               
 
-        public static Semana PreencheSemana(int semana, int Mes, int Ano)
-        {
-            Semana retorno = new Semana();
-            //DayOfWeek.
-            //DateTimeFormatInfo dtfi = DateTimeFormatInfo.CurrentInfo;
-
-            //retorno.domingo = new Dia();
-            //retorno.domingo.dia = dtfi.FirstDayOfWeek;
-
-
-            return retorno;
-        }
-
-
-        public static Dia PreencheDia(int dia, int Mes, int Ano)
-        {
-            Dia retorno = new Dia();            
-            
-          return retorno;
-        }
-
-        public static List<ItemCalendario> PreencheItemCalendario(int dia, int Mes, int Ano)
+        public static List<ItemCalendario> PreencheItemCalendario(int dia, List<Atendimento>  atendimentos)
         {
             List<ItemCalendario> retorno = new List<ItemCalendario>();
 
-            for (int i = 0; i < 4; i++)
+            foreach (var item in atendimentos)
             {
-                ItemCalendario item = new ItemCalendario();
-                item.inicio = DateTime.Now.Hour.ToString();
-                item.fim = DateTime.Now.Hour.ToString();
-                item.titulo = "TESTE";
-                item.id = Guid.NewGuid().ToString();
-                item.tipo =  CustomEnum.tipoItemCaledario.Atendimento;
-                retorno.Add(item);
-
+                if(item.dataAgendada.Day == dia)
+                {
+                    ItemCalendario atendimento = new ItemCalendario();
+                    atendimento.id = item.id.ToString();
+                    atendimento.titulo = item.codigo;
+                    atendimento.inicio = new ItemHoraDia();
+                    atendimento.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
+                    atendimento.fim = new ItemHoraDia();
+                    atendimento.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
+                    atendimento.fim.HoraFormatada = ((CustomEnum.itemHora)item.horaFim).ToString();
+                    retorno.Add(atendimento);
+                }
             }
 
             return retorno;

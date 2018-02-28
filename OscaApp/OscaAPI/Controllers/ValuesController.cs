@@ -5,19 +5,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OscaFramework.MicroServices;
 using OscaFramework.Models;
+using OscaFramework.Data;
 
 namespace OscaAPI.Controllers
 {
    
     public class ValuesController : Controller
     {
-        private readonly SqlGenericDataServices sqlData;
-        private readonly SqlGenericServices sqlServices;
+        private readonly SqlGenericData sqlData;
+        private readonly SqlGeneric sqlServices;
 
          
 
 
-        public ValuesController(SqlGenericDataServices _sqlData, SqlGenericServices _sqlServices)
+        public ValuesController(SqlGenericData _sqlData, SqlGeneric _sqlServices)
         {
             this.sqlData = _sqlData;
             this.sqlServices = _sqlServices;
@@ -48,7 +49,7 @@ namespace OscaAPI.Controllers
         {
             Relacao x = new Relacao();
 
-            if (sqlServices.SetStates(x))  return Json(true);
+            //if (sqlServices.SetStates(x))  return Json(true);
 
             return Json(false);
         }

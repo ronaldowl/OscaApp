@@ -1,6 +1,6 @@
 ﻿function OnLoad_ListaPreco()
 {
-    debugger;
+ 
 
 //Configura calendario
     ConfigCalendario();

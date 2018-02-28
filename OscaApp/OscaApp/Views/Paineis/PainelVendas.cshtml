@@ -1,8 +1,7 @@
 ﻿<div class="container">
     <div class="row">
         <div class="col-md-8">
-            <h3> Painel Vendas</h3>
-            <h5>Gerencie informações relevantes às vendas</h5>
+            <h3> Painel Vendas</h3>          
         </div>
     </div>
     <br />
@@ -30,6 +29,17 @@
         <div class="col-md-4">    
             <div class="card m-2">
                 <div class="card-header">
+                    <i class="fa fa-2x fa-calendar-times-o iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Atendimento" asp-action="GridAtendimento"><h4>Atendimentos</h4></a>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Consulte, altere e cadastre novas consultas para seus clientes
+                    </p>
+                </div>
+            </div>
+            <div class="card m-2">
+                <div class="card-header">
                     <i class="fa fa-2x fa-list-alt iconPanel" aria-hidden="true"></i>
                     <a asp-controller="ListaPreco" asp-action="GridListaPreco"><h4>Lista de Preço</h4></a>
                 </div>
@@ -39,15 +49,7 @@
                     </p>
                 </div>
             </div>
-            <div class="card m-2">
-                <div class="card-header">
-                    <i class="fa fa-2x fa-cubes iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Produto" asp-action="GridProduto"><h4>Produtos</h4></a>
-                </div>
-                <div class="card-body">
-                    <p>Consulte e cadastre novos Produtos</p>
-                </div>
-            </div>
+        
         </div>       
         <div class="col-md-4">
             <div class="card m-2">
@@ -58,8 +60,16 @@
                 <div class="card-body">
                     <p> Crie novos pedidos e gerencie pedidos existentes.</p>
                 </div>
-            </div>          
-        
+            </div>     
+            <div class="card m-2">
+                <div class="card-header">
+                    <i class="fa fa-2x fa-cubes iconPanel" aria-hidden="true"></i>
+                    <a asp-controller="Produto" asp-action="GridProduto"><h4>Produtos</h4></a>
+                </div>
+                <div class="card-body">
+                    <p>Consulte e cadastre novos Produtos</p>
+                </div>
+            </div>        
         </div>                          
     </div>
     <br />

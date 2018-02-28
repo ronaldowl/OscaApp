@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OscaFramework.MicroServices;
+using System;
 
 namespace OscaApp.Data
 {
@@ -12,7 +13,7 @@ namespace OscaApp.Data
         public static string GeraCodigo(int Entidade, Guid idOrganizacao)
         {
             //TODO: Implemenar o Gerador de código para sistema OFFline
-            SqlGenericService sqlGeneric = new SqlGenericService();
+            SqlGeneric sqlGeneric = new SqlGeneric();
             string codigoRetorno = sqlGeneric.RetornaNovaPosicao(Entidade, idOrganizacao);
 
             return codigoRetorno;

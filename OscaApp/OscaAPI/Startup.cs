@@ -28,13 +28,13 @@ namespace OscaAPI
             //*********************** Serviços para acesso a dados vi ADO *******************
             //Serviço para acesso a metodos de conexão SQL no banco DATA
             //TODO:Falta implementar em todos os controllers, apenas usado na Ordem de Servico
-            SqlGenericDataServices sqlData = new SqlGenericDataServices();
-            services.AddSingleton<SqlGenericDataServices>(_ => sqlData);
+            SqlGenericData sqlData = new SqlGenericData();
+            services.AddSingleton<SqlGenericData>(_ => sqlData);
 
             //Serviço para retornar dados que são comuns a todas empresas
             //TODO:Falta implementar em todaas chamadas, sendo usado apenas na Ordem de serviço
-            SqlGenericServices sqlServices = new SqlGenericServices();
-            services.AddSingleton<SqlGenericServices>(_ => sqlServices);
+            SqlGeneric sqlServices = new SqlGeneric();
+            services.AddSingleton<SqlGeneric>(_ => sqlServices);
             //*********************** FIM Serviços para acesso a dados vi ADO *******************
 
             services.AddMvc();
