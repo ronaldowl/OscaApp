@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using OscaFramework.Models;
- 
-
+using OscaFramework.Helper;
 
 namespace OscaApp.RulesServices
 {
@@ -56,11 +55,16 @@ namespace OscaApp.RulesServices
                     ItemCalendario atendimento = new ItemCalendario();
                     atendimento.id = item.id.ToString();
                     atendimento.titulo = item.codigo;
+                    atendimento.statusAtendimento = item.statusAtendimento;
+                    
                     atendimento.inicio = new ItemHoraDia();
                     atendimento.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
+                    atendimento.inicio.HoraFormatada = HelperCalendario.RetornaHoraFormatda(item.horaInicio);
+
                     atendimento.fim = new ItemHoraDia();
                     atendimento.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
-                    atendimento.fim.HoraFormatada = ((CustomEnum.itemHora)item.horaFim).ToString();
+                    atendimento.fim.HoraFormatada = HelperCalendario.RetornaHoraFormatda(item.horaFim);
+
                     retorno.Add(atendimento);
                 }
             }

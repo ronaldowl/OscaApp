@@ -13,6 +13,7 @@ namespace OscaFramework.Models
         public ItemHoraDia fim    { get; set; }
         public string titulo   { get; set; }
         public tipoItemCaledario tipo { get; set; }
+        public CustomEnumStatus.StatusAtendimento statusAtendimento { get; set; }
 
 
     }
