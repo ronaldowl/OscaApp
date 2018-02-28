@@ -22,7 +22,7 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult Mes(int Mes, int Ano)
+        public ViewResult MesAtendimento(int Mes, int Ano)
         {
             Calendario calen = new Calendario();
           
@@ -39,7 +39,7 @@ namespace OscaApp.Controllers
         }
 
         [HttpPost]
-        public ViewResult Mes(Calendario entrada)
+        public ViewResult MesAtendimento(Calendario entrada)
         {
             Calendario calen = new Calendario();
          

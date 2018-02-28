@@ -6,11 +6,8 @@
         <div class="col-11 ">
             <div class="form-inline ">
                 <div class="col-2 form-group">
-                    <label style="font-weight:bold; font-size:30px">Mês: </label>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span class="fa fa-list-ul fa-1x"></span>
-                        </span>
+                    <label style="font-weight:bold; font-size:20px">Mês: </label>
+                    <div class="input-group">                       
                         <select id="osc_mes" class="form-control" asp-for="@Model.mes">
                             <option value="1" selected="">Janeiro</option>
                             <option value="2">Feverreiro</option>
@@ -28,11 +25,8 @@
                     </div>
                 </div>
                 <div class="col-2 form-group">
-                    <label style="font-weight:bold; font-size:30px">&nbsp;Ano:&nbsp; </label>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span class="fa fa-list-ul fa-1x"></span>
-                        </span>
+                    <label style="font-weight:bold; font-size:20px">&nbsp;Ano:&nbsp; </label>
+                    <div class="input-group">                      
                         <select id="osc_ano" class="form-control" asp-for="@Model.ano">
                             <option value="2018" selected="">2018</option>
                             <option value="2019">2019</option>
@@ -42,26 +36,21 @@
                     </div>
                 </div>
                 <div class="col-5 form-group">
-                    <label style="font-weight:bold; font-size:30px">&nbsp;Profissional:&nbsp; </label>
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span class="fa fa-list-ul fa-1x"></span>
-                        </span>
-                        <select id="osc_ano" class="form-control" asp-for="@Model.ano">
+                    <label style="font-weight:bold; font-size:20px">&nbsp;Profissional:&nbsp; </label>
+                    <div class="input-group">                      
+                        <select id="osc_ano" class="form-control btn-sm" asp-for="@Model.ano">
                             <option value="2018" selected="">Ronaldo Bernardo</option>
                             <option value="2019">2019</option>
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                         </select>
                         <div class="input-group">
-                            <button id="osc_filtro" type="submit" class="btn btn-info btn-lg fa fa-exclamation-circle" value="filtro"> <span>Aplicar</span></button>
+                            <button id="osc_filtro" type="submit" class="btn btn-info btn-sm fa fa-exclamation-circle" value="filtro"> <span>Aplicar</span></button>
+                            &nbsp;<button id="osc_painelServico" style="font-size:20px;" type="button" class="btn btn-info btn-sm fa fa-backward" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Voltar</span></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-2 form-group">
-                    <label style="font-weight:bold; font-size:25px">&nbsp;Legenda:<span style="font-size:20px; color:aqua">Agendado, </span><span style="font-size:20px; color:orangered">Cancelado</span> &nbsp;&nbsp;<button id="osc_painelServico" style="font-size:20px;" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Voltar</span></button></label>
-
-                </div>
+               
             </div>
         </div>
     </div>
@@ -686,43 +675,37 @@
                         <tr id="cabecalho_17" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 17 - @Model.dias[16].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[16].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_18" style="width:100px">
@@ -730,43 +713,37 @@
                         <tr id="cabecalho_18" style="background-color:grey; color:white">
                             <td colspan="3"><h6>18 - @Model.dias[17].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[17].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_19" style="width:100px">
@@ -774,43 +751,37 @@
                         <tr id="cabecalho_19" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 19 - @Model.dias[18].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[18].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_20" style="width:100px">
@@ -818,43 +789,37 @@
                         <tr id="cabecalho_20" style="background-color:grey; color:white">
                             <td colspan="3"><h6>  20 - @Model.dias[19].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[19].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_21" style="width:100px">
@@ -862,43 +827,37 @@
                         <tr id="cabecalho_21" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 21 - @Model.dias[20].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[20].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
             </tr>
@@ -908,43 +867,37 @@
                         <tr id="cabecalho_22" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 22 - @Model.dias[21].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[21].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_23" style="width:100px">
@@ -952,43 +905,37 @@
                         <tr id="cabecalho_23" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 23 - @Model.dias[22].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[22].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_24" style="width:100px">
@@ -996,43 +943,37 @@
                         <tr id="cabecalho_24" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 24 - @Model.dias[23].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[23].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_25" style="width:100px">
@@ -1040,43 +981,37 @@
                         <tr id="cabecalho_25" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 25 - @Model.dias[24].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[24].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_26" style="width:100px">
@@ -1084,43 +1019,37 @@
                         <tr id="cabecalho_26" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 26 - @Model.dias[25].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[25].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_27" style="width:100px">
@@ -1128,43 +1057,37 @@
                         <tr id="cabecalho_27" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 27 - @Model.dias[26].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[26].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_28" style="width:100px">
@@ -1172,43 +1095,37 @@
                         <tr id="cabecalho_28" style="background-color:grey; color:white">
                             <td colspan="3"><h6> 28 - @Model.dias[27].nome </h6></td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count <= Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[27].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
             </tr>
@@ -1223,43 +1140,37 @@
                                 </h6>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count < Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[28].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_30" style="width:100px">
@@ -1272,43 +1183,37 @@
                                 </h6>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count < Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[29].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
                 <td id="dia_31" style="width:100px">
@@ -1321,46 +1226,44 @@
                                 </h6>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                        @if (Model.dias.Count < Model.qtdDias)
+                        {
+                            @foreach (var item in Model.dias[30].itensCalendario)
+                            {
+                                <tr>
+                                    <td>
+                                        <table style="width:100%">
+                                            <tr style="height:9px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                                {
+                                                    <td class="bg-primary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                                {
+                                                    <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
+                                                @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.cancelado)
+                                                {
+                                                    <td class="bg-danger"><i class=" fa fa-1x fa-user-circle-o"></i></td>
+                                                }
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
+                                                <td style="width:20px">@item.titulo</td>
+                                                <td>@item.inicio.HoraFormatada</td>
+                                                <td>@item.fim.HoraFormatada</td>
 
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <table>
-                                    <tr>
-                                        <td>10:00</td>
-                                        <td>12:00</td>
-                                        <td>Apometria</td>
-                                    </tr>
-
-                                </table>
-                            </td>
-                        </tr>
-
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            }
+                        }
                     </table>
                 </td>
             </tr>
         </table>
+    </div>
+    <div class="row" id="legenda">
+        <label style="font-weight:bold; font-size:25px">&nbsp;Legenda:<span style="font-size:20px;" class="bg-primary">Agendado, </span><span style="font-size:20px;" class="bg-danger">Cancelado</span> <span style="font-size:20px;" class="bg-info">Atendido</span></label>
+
     </div>
 </form>
