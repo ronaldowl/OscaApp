@@ -33,6 +33,7 @@ namespace OscaApp.RulesServices
             }                
             return false;
         }
+
         public static bool RecursoUpdate(RecursoViewModel entrada, out Recurso modelo)
         {
             modelo = new Recurso();
