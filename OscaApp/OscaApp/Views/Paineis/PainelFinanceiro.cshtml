@@ -1,103 +1,160 @@
-﻿
+﻿<!-- END OF CONTAINER -->
 <div class="container">
     <div class="row">
         <div class="col-md-8 ">
-            <h3> Painel Financeiro</h3>       
+            <h3> Painel Financeiro</h3>
         </div>
     </div>
     <br /><br />
+    <!-- ROW -->
     <div class="row">
         <div class="col-md-4">
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-users iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Cliente" asp-action="GridCliente"><h4>Cliente</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-users iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Cliente" asp-action="GridCliente"><h4>Cliente</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p>Consulte e cadastre novos Clientes da usa empresa</p>
                 </div>
             </div>
+            <!-- CARD -->
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-file-o iconPanel" aria-hidden="true"></i>
-                    <a href="#"><h4>Relatórios</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-file-o iconPanel" aria-hidden="true"></i></td>
+                            <td><a href="#"><h4>Relatórios</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p>
                         Consulte as informações detalhadas de fluxo de caixa
                     </p>
                 </div>
-            </div> 
-       
+            </div>
+            <!-- CARD -->
         </div>
         <div class="col-md-4">
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-envelope-o iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="ContasPagar" asp-action="GridContasPagar"><h4>Contas a Pagar</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-envelope-o iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="ContasPagar" asp-action="GridContasPagar"><h4>Contas a Pagar</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p> Consulte e lance os valores das suas faturas e dados de fornecedores</p>
                 </div>
             </div>
+            <!-- CARD -->
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-battery-full iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Fornecedor" asp-action="GridFornecedor"><h4>Fornecedores</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-battery-full iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Fornecedor" asp-action="GridFornecedor"><h4>Fornecedores</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p> Consulte e cadastre novos fornecedoree de produtos e serviços</p>
                 </div>
             </div>
+            <!-- CARD -->
         </div>
         <div class="col-md-4">
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-envelope-open-o iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="ContasReceber" asp-action="GridContasReceber"><h4>Contas a Receber</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-envelope-open-o iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="ContasReceber" asp-action="GridContasReceber"><h4>Contas a Receber</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p>Consulte, altere e cadastre novos usuários na sua Organização</p>
                 </div>
-
             </div>
+            <!-- CARD -->
         </div>
     </div>
+    <!-- ROW -->
     <br />
     <br /><br /><br /><br /><br /><br /><br />
+    <!-- END OF NAVIGATION BAR -->
     <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
         <div style="background-color:darkgrey; width: 100%; height:20px;"></div>
+        <!-- NAVIGATION BAR OPERACIONAL -->
         <div class="col-md-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
+        <!-- NAVIGATION BAR OPERACIONAL -->
+        <!-- NAVIGATION BAR VENDAS-->
         <div class="col-sm-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
+        <!-- NAVIGATION BAR VENDAS-->
+        <!-- NAVIGATION BAR SERVIÇOS -->
         <div class="col-sm-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
+        <!-- NAVIGATION BAR SERVIÇOS -->
+        <!-- NAVIGATION BAR CONFIGURAÇÕES -->
         <div class="col-md-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelConfiguracoes"><p style="font-size:19.8px; margin:0;">Configurações</p></a>
+                    <table>
+                        <tr>
+                            <td> <i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><p style="font-size:19.8px; margin:0;">Configurações</p></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-    </div> 
+        <!-- NAVIGATION BAR CONFIGURAÇÕES -->
+    </div>
+    <!-- END OF NAVIGATION BAR -->
 </div>
+<!-- END OF CONTAINER -->
