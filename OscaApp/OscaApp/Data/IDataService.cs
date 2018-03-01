@@ -16,6 +16,14 @@ namespace OscaApp.Data
         List<Banco> GetAll();
     }
 
+    public interface IIncidenteData
+    {
+        void Add(Incidente incidente);
+        void Update(Incidente incidente);
+        Incidente Get(Guid id, Guid idOrganizacao);
+        List<Incidente> GetAll(Guid idOrg);
+    }
+
     public interface ICategoriaProfissionalData
     {
         CategoriaProfissional Get(Guid id, Guid idOrg);
@@ -222,5 +230,5 @@ namespace OscaApp.Data
     {
         
     }
-
+    
 }
