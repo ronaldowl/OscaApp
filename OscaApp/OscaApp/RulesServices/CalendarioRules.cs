@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using OscaFramework.Models;
 using OscaFramework.Helper;
+using OscaApp.framework;
+using OscaApp.Data;
 
 namespace OscaApp.RulesServices
 {
     public static class CalendarioRules
     {
        
-        public static Calendario PreencheMes(int Mes, int Ano, SqlGeneric sqlServices)
+        public static Calendario PreencheMes(int Mes, int Ano, SqlGeneric sqlServices, ContextPage contexto, string idProfissional)
         {
             
 
@@ -25,7 +27,7 @@ namespace OscaApp.RulesServices
             retorno.qtdDias = qtdDiasMes;
 
             List<Dia> diasMEs = new List<Dia>();
-            List<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosMes(Mes.ToString(), Ano.ToString());
+            List<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosMes(Mes.ToString(), Ano.ToString(), idProfissional, contexto.idOrganizacao.ToString());
 
             //Preenche todos o dias do Mes
             for (int i = 1; i <= qtdDiasMes; i++)
@@ -39,6 +41,9 @@ namespace OscaApp.RulesServices
                 diasMEs.Add(dia);
             }
             retorno.dias = diasMEs;
+
+            SqlGenericData sqlData = new SqlGenericData();
+            retorno.profissionais = HelperAttributes.PreencheDropDownList(sqlData.RetornaRelacaoProfissional( contexto.idOrganizacao));
 
             return retorno;
         }      

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using OscaApp.ViewModels;
 using OscaFramework.Models;
 using OscaApp.Data;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -15,7 +16,7 @@ namespace OscaApp.RulesServices
             modelo = new Incidente();
             modelo = entrada.Incidente;
 
-            SqlGenericService sqlService = new SqlGenericService();
+            SqlGeneric sqlService = new SqlGeneric();
             modelo.Codigo = sqlService.RetornaNovaPosicao(11, contexto.idOrganizacao);
 
             if (modelo.Codigo != null)

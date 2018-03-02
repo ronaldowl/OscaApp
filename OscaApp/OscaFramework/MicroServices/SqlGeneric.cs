@@ -128,7 +128,7 @@ namespace OscaFramework.MicroServices
             return retorno;
         }
 
-        public List<Atendimento> RetornaAtendimentosMes( string mes, string ano)
+        public List<Atendimento> RetornaAtendimentosMes( string mes, string ano, string idProfissional, string idOrg)
         {
             SqlDataReader dataReader;
             List<Atendimento> retorno = new List<Atendimento>();
@@ -144,7 +144,10 @@ namespace OscaFramework.MicroServices
                         CommandType = CommandType.StoredProcedure
                     };
                     _Command.Parameters.AddWithValue("mes", mes);
-                    _Command.Parameters.AddWithValue("ano", ano);                    
+                    _Command.Parameters.AddWithValue("ano", ano);
+                    _Command.Parameters.AddWithValue("idProfissional", idProfissional);   
+                    _Command.Parameters.AddWithValue("idOrg", idOrg);
+
                     Connection.Open();
                     dataReader = _Command.ExecuteReader();
 
@@ -216,6 +219,46 @@ namespace OscaFramework.MicroServices
                 throw;
             }
             return retorno;
+        }
+        public string RetornaidProfissionalPorIdUsuario(string IdUser)
+        {
+             string idProfissional = String.Empty;
+            try
+            {
+                SqlDataReader dataReader;
+
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select id from Profissional where idUsuario = '" + IdUser + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+
+                            idProfissional = new Guid(dataReader["id"].ToString()).ToString();
+                            break;
+                        }
+                    }
+
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
+
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return idProfissional;
         }
         //********** Atualiza valores nas tabelas diretamente *********
         public bool SetStates(Relacao Registro)

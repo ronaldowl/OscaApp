@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,8 +14,10 @@ namespace OscaFramework.Models
         public Semana semana3 { get; set; }
         public Semana semana4 { get; set; }
         public Semana semana5 { get; set; }
-
         public List<Dia> dias { get; set; }
+        public List<SelectListItem> profissionais { get; set; }
+        public string idProfissional { get; set; }
+
 
         public int mes { get; set; }
         public int ano { get; set; }
