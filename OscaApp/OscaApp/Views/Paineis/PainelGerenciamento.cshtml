@@ -1,80 +1,127 @@
-﻿
+﻿<!-- END OF CONTAINER -->
 <div class="container">
     <div class="row">
         <div class="col-md-8 ">
-            <h3> Painel de Gerenciamento</h3>         
+            <h3> Painel de Gerenciamento</h3>
         </div>
     </div>
     <br />
+    <!-- ROW -->
     <div class="row">
         <div class="col-md-4">
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-briefcase iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Organizacao" asp-action="FormUpdateOrganizacao"><h4>Organização</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-briefcase iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Organizacao" asp-action="FormUpdateOrganizacao"><h4>Organização</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p>Veja as informações de cadastro da sua Organização, valor da fatura e dados do administrador</p>
                 </div>
             </div>
+            <!-- CARD -->
         </div>
         <div class="col-md-4">
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-user-circle iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Usuario" asp-action="GridUsuario"><h4>Usuários</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-user-circle iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Usuario" asp-action="GridUsuario"><h4>Usuários</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p>Consulte, altere e cadastre novos usuários na sua Organização</p>
                 </div>
             </div>
+            <!-- CARD -->
         </div>
         <div class="col-md-4">
+            <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
-                    <i class="fa fa-2x fa-asterisk iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Manage" asp-action="ChangePassword"><h4>Trocar Senha</h4></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-asterisk iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Manage" asp-action="ChangePassword"><h4>Trocar Senha</h4></a></td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="card-body">
                     <p>Troque a senha do seu usuário</p>
                 </div>
             </div>
+            <!-- CARD -->
         </div>
     </div>
+    <!-- ROW -->
     <br /><br /><br /><br /><br />
+    <!-- END OF NAVIGATION BAR -->
     <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
         <div style="background-color:darkgrey; width: 100%; height:20px;"></div>
         <div class="col-sm-3">
+            <!-- NAVIGATION BAR FINANCEIRO -->
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelFinanceiro"><h5>Financeiro</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h5>Financeiro</h5></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <!-- NAVIGATION BAR FINANCEIRO -->
         </div>
         <div class="col-sm-3">
+            <!-- NAVIGATION BAR VENDAS-->
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <!-- NAVIGATION BAR VENDAS-->
         </div>
         <div class="col-sm-3">
+            <!-- NAVIGATION BAR SERVIÇOS -->
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <!-- NAVIGATION BAR SERVIÇOS -->
         </div>
         <div class="col-md-3">
+            <!-- NAVIGATION BAR OPERACIONAL -->
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <!-- NAVIGATION BAR OPERACIONAL -->
         </div>
-    </div>    
+    </div>
+    <!-- END OF NAVIGATION BAR -->
 </div>
+<!-- END OF CONTAINER -->

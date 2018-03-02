@@ -297,3 +297,6 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+OscaApp/OscaApp/Views/Paineis/PainelOperacional.cshtml
+OscaApp/OscaApp/Views/Paineis/PainelServico.cshtml
+OscaApp/OscaApp/Views/Paineis/PainelServico.cshtml
