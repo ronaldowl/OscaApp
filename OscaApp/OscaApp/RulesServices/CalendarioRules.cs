@@ -110,7 +110,7 @@ namespace OscaApp.RulesServices
             
 
 
-            retorno.dias = diasMEs;            
+           // retorno = diasMEs;            
            
             return retorno;
         }
