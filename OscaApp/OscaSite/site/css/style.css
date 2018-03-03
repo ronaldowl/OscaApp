@@ -204,9 +204,7 @@ h1, h2, h3, h4, h5, h6, figure {
   -ms-border-radius: 7px;
   border-radius: 7px;
 }
-.fh5co-social li a:hover {
-  color:#00bef9;
-}
+
 .fh5co-social li a:hover, .fh5co-social li a:active, .fh5co-social li a:focus {
   outline: none;
   text-decoration: none;
@@ -511,15 +509,15 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-why-us, .fh5co-services {
-  padding: 7em 0;
+  padding: 4em 0;
 }
 @media screen and (max-width: 768px) {
   #fh5co-why-us, .fh5co-services {
-    padding: 3em 0;
+    padding: 2em 0;
   }
 }
 #fh5co-why-us .item-block, .fh5co-services .item-block {
-  margin-bottom: 7em;
+  margin-bottom: 4em;
   float: left;
 }
 #fh5co-why-us .item-block .icon, .fh5co-services .item-block .icon {
