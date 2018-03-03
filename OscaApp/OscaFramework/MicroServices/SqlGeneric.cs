@@ -178,6 +178,56 @@ namespace OscaFramework.MicroServices
             return retorno;
         }
 
+        public List<Atendimento> RetornaAtendimentosDia(string  data, string idProfissional, string idOrg)
+        {
+            SqlDataReader dataReader;
+            List<Atendimento> retorno = new List<Atendimento>();
+            try
+            {
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_RetornaAtendimentosDia",
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    _Command.Parameters.AddWithValue("dia", data);                   
+                    _Command.Parameters.AddWithValue("idProfissional", idProfissional);
+                    _Command.Parameters.AddWithValue("idOrg", idOrg);
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Atendimento item = new Atendimento();
+
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.codigo = dataReader["codigo"].ToString();
+                            item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
+                            item.idCliente = new Guid(dataReader["idCliente"].ToString());
+                            item.idServico = new Guid(dataReader["idServico"].ToString());
+                            item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
+                            item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
+                            item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());
+                            retorno.Add(item);
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
+
         //*********** Retorna dados das tabelas auxiliares **********************
         public List<CategoriaManutencao> RetornaCategoriaManutencao()
         {

@@ -55,19 +55,12 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult Dia(int dia, int Ano)
+        public ViewResult Dia(int dia, int mes,int Ano, string idProfissional)
         {
             Dia day = new Dia();
             day.itensCalendario = new List<ItemCalendario>();
 
-            for (int i = 0; i < 48; i++)
-            {
-                ItemCalendario item = new ItemCalendario();
-                item.titulo = "livre";
-               
-
-                day.itensCalendario.Add(item);
-            }
+            CalendarioRules.PreencheDia(dia, mes, Ano, sqlServices, contexto, idProfissional);
 
             return View(day);
         }

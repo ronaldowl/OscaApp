@@ -36,7 +36,7 @@ namespace OscaApp.RulesServices
                 DateTime dataRef = new DateTime(Ano, Mes, i);
                 Dia dia = new Dia();
                 dia.dia = i;
-                dia.nome = dataFormat.GetDayName(dataRef.DayOfWeek);
+                //dia.nome = dataFormat.GetDayName(dataRef.DayOfWeek);
                 dia.itensCalendario = PreencheItemCalendario(i, Atendimentos);
                 diasMEs.Add(dia);
             }
@@ -74,6 +74,44 @@ namespace OscaApp.RulesServices
                 }
             }
 
+            return retorno;
+        }
+
+        public static Dia PreencheDia(int dia, int Mes, int Ano, SqlGeneric sqlServices, ContextPage contexto, string idProfissional)
+        {
+            string data = Ano + "-" + Mes + "- " + dia;
+
+            Dia retorno = new Dia();
+            CultureInfo culture = new CultureInfo("pt-BR");
+            DateTimeFormatInfo dataFormat = culture.DateTimeFormat;
+
+            int qtdDiasMes = DateTime.DaysInMonth(Ano, Mes);
+            /// retorno.ano = Ano;
+            // retorno.mes = Mes;
+            retorno.nomeDia = dataFormat.AbbreviatedDayNames[Mes - 1];            
+
+            List<Dia> diasMEs = new List<Dia>();
+            List<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosDia(data , idProfissional, contexto.idOrganizacao.ToString());
+
+            //Preenche todos os itens do Dia
+
+            for (int posicao = 0; posicao < 48; posicao++)
+            {
+                foreach (var item in Atendimentos)
+                {
+                    //se for igual cria um item e adicion
+                    if(item.horaInicio == posicao)
+                    {
+                        
+
+                    }
+                }
+            }
+            
+
+
+            retorno.dias = diasMEs;            
+           
             return retorno;
         }
     }
