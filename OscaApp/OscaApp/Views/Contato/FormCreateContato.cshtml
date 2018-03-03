@@ -40,7 +40,7 @@
                                     <label class="control-label">Nome</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-user-o fa-2x"></i></span> &nbsp;
                                             <input id="osc_nome" asp-for="@Model.contato.nome" placeholder="Nome" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@
                                     <label class="control-label">Sexo</label>
                                     <div class="selectContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list-ul fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-list-ul fa-2x"></i></span>&nbsp;
                                             <select id="osc_sexo" asp-for="@Model.contato.sexo" class="form-control">
                                                 <option value="1" selected="">Masculino</option>
                                                 <option value="2">Feminino</option>
@@ -62,7 +62,7 @@
                                     <label class="control-label">CPF</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-user-o fa-2x"></i></span>&nbsp;
                                             <input id="osc_cpf" asp-for="@Model.contato.cpf" type="text" class="form-control" placeholder="CPF" onchange="ValidaCPF()" />
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                     <label class="control-label">Email</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-2x"></i></span>&nbsp;
                                             <input id="osc_email" asp-for="@Model.contato.email" placeholder="Email" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -82,7 +82,7 @@
                                     <label>Telefone</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-phone fa-1x"></span>
+                                            <span class="fa fa-phone fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_telefone" asp-for="@Model.contato.telefone" type="text" class="form-control" placeholder="Telefone " maxlength="15" pattern="[0-9]+$" />
                                     </div>
@@ -91,7 +91,7 @@
                                     <label class="control-label">Celular</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-mobile-phone fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-mobile-phone fa-2x"></i></span>&nbsp;
                                             <input id="osc_celular" asp-for="@Model.contato.celular" placeholder="Celular" maxlength="15" pattern="[0-9]+$" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                     <label class="control-label">Logradouro</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
                                             <input id="osc_logradouro" asp-for="@Model.contato.logradouro" placeholder="Logradouro" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -110,7 +110,7 @@
                                     <label class="control-label">Bairro</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
                                             <input id="osc_bairro" asp-for="@Model.contato.bairro" placeholder="Bairro" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -122,7 +122,7 @@
                                     <label class="control-label">CEP</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
                                             <input id="osc_cep" asp-for="@Model.contato.cep" placeholder="apenas números" class="form-control" type="text" pattern="[0-9]+$" maxlength="8">
                                         </div>
                                     </div>
@@ -131,7 +131,7 @@
                                     <label class="control-label">Cidade</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
                                             <input id="osc_cidade" asp-for="@Model.contato.cidade" placeholder="Cidade" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -140,7 +140,7 @@
                                     <label class="control-label">Estado</label>
                                     <div class="selectContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list-ul fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-list-ul fa-2x"></i></span>&nbsp;
                                             <select id="osc_estado" asp-for="@Model.contato.estado" class="form-control selectpicker">
                                                 <option value="1"> Acre </option>
                                                 <option value="2"> Alagoas </option>
@@ -177,7 +177,7 @@
                                     <label class="control-label">Número</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
                                             <input id="osc_numero" asp-for="@Model.contato.numero" placeholder="Número" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -191,7 +191,7 @@
                                     <label class="control-label">Complemento</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
                                             <input id="osc_complemento" asp-for="@Model.contato.complemento" placeholder="Complemento" class="form-control" type="text">
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@
                                     <label>Criado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user fa-1x"></span>
+                                            <span class="fa fa-user fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_criadoPor" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -217,7 +217,7 @@
                                     <label>Criado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
+                                            <span class="fa fa-calendar fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_criadoEm" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -228,7 +228,7 @@
                                     <label>Status</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-exclamation fa-1x"></span>
+                                            <span class="fa fa-exclamation fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_status" for="" type="text" class="form-control" disabled="disabled" value="Ativo" />
                                     </div>
