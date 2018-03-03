@@ -5,7 +5,7 @@
     @Html.HiddenFor(m => m.contexto.idUsuario)
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
     @Html.HiddenFor(m => m.cliente.id)
-</div>
+</div>  
 <script>
     function CarregaLookup() {
         $("#lookupContato").load("/Contato/LookupContato", function () {
@@ -45,8 +45,8 @@
                                     <label>Código</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-asterisk fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_codigo" asp-for="@Model.cliente.codigo" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -54,8 +54,8 @@
                                     <label>Nome Cliente*</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-user-o fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_nome" asp-for="@Model.cliente.nomeCliente" type="text" class="form-control" required="required" />
                                     </div>
                                 </div>
@@ -63,8 +63,8 @@
                                     <label>Tipo Pessoa</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </span> &nbsp;
                                         <select id="osc_tipopessoa" class="form-control" required="required" onchange="OnChangeTipoPessoa();">
                                             <option value="1" selected="">Fisica</option>
                                             <option value="2">Juridica</option>
@@ -75,8 +75,8 @@
                                     <label>CPF/CNPJ</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-user-o fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_cnpj_cpf" asp-for="@Model.cliente.cnpj_cpf" type="text" class="form-control" placeholder="CPF ou CNPJ" onchange="ValidaCNPJ_CPF()" />
                                     </div>
                                 </div>
@@ -84,8 +84,8 @@
                                     <label>Razão Social</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-briefcase fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-briefcase fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_razaosocial" asp-for="@Model.cliente.razaoSocial" type="text" class="form-control" placeholder="Razão Social" />
                                     </div>
                                 </div>
@@ -93,8 +93,8 @@
                                     <label>Contato Principal: </label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-user-o fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_IdContatoName" asp-for="@Model.contato.idName" type="text" class="form-control">
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookup()">
@@ -110,8 +110,8 @@
                                     <label>Email</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-envelope-o fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-envelope-o fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_email" asp-for="@Model.cliente.email" type="email" class="form-control" placeholder="Email" />
                                     </div>
                                 </div>
@@ -119,8 +119,8 @@
                                     <label>Sexo</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </span> &nbsp;
                                         <select id="osc_sexo" asp-for="@Model.cliente.sexo" class="form-control">
                                             <option value="1" selected="">Masculino</option>
                                             <option value="2">Feminino</option>
@@ -132,8 +132,8 @@
                                     <label>Telefone</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-phone fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-phone fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_telefone" asp-for="@Model.cliente.telefone" type="text" class="form-control" placeholder="000000000" maxlength="15" pattern="[0-9]+$" />
                                     </div>
                                 </div>
@@ -141,8 +141,8 @@
                                     <label>Celular</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-mobile-phone fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-mobile-phone fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_celular" asp-for="@Model.cliente.celular" type="text" class="form-control" placeholder="000000000" maxlength="15" pattern="[0-9]+$" />
                                     </div>
                                 </div>
@@ -152,8 +152,8 @@
                                     <label>Anotação</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-comment-o fa-2x"></span>
+                                        </span> &nbsp;
                                         <textarea id="osc_anotacao" asp-for="@Model.cliente.anotacao" class="form-control" rows="15" cols="40" placeholder="digite uma anotação"></textarea>
                                     </div>
                                 </div>
@@ -167,8 +167,8 @@
                                     <label>Criado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
-                                        </span>
+                                            <span class="fa fa-user fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_criadoPor" asp-for="@Model.cliente.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -178,8 +178,8 @@
                                     <label>Criado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-calendar fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_criadoEm" asp-for="@Model.cliente.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -189,8 +189,8 @@
                                     <label>Status</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-exclamation fa-1x"></span>
-                                        </span>
+                                            <span class="fa fa-exclamation fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_status" asp-for="@Model.cliente.status" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
