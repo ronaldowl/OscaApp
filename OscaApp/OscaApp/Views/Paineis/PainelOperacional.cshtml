@@ -1,14 +1,10 @@
-﻿@model OscaApp.ViewModels.PainelOperacionalViewModel
-
-@{
-    ViewData["Title"] = "Painel Operacional";
-}
+﻿ 
 <div class="container">
     <div class="row">
         <div class="col-md-8 ">
             <table>
                 <tr>
-                    <td><h2> Painel Operacional</h2></td>               
+                    <td><h3> Painel Operacional</h3></td>
                 </tr>
             </table>
         </div>
@@ -19,8 +15,13 @@
                 <div class="col-md-4">
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-users iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Cliente" asp-action="GridCliente"><h4>Clientes</h4></a>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-users iconPanel" aria-hidden="true"></i></td>
+
+                                    <td><a asp-controller="Cliente" asp-action="GridCliente"><h4>Clientes</h4></a></td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="card-body">
                             <p> Cadastre, consulte, edite, os clientes e registros associados da sua empresa</p>
@@ -28,8 +29,12 @@
                     </div>
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-id-card-o iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Contato" asp-action="GridContato"><h4>Contatos</h4></a>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-id-card-o iconPanel" aria-hidden="true"></i></td>
+                                    <td><a asp-controller="Contato" asp-action="GridContato"><h4>Contatos</h4></a></td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="card-body">
                             <p> Cadastre, consulte e edite contatos que se relacionam com sua empresa</p>
@@ -37,19 +42,30 @@
                     </div>
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-cubes iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Produto" asp-action="GridProduto"><h4>Produtos</h4></a>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-cubes iconPanel" aria-hidden="true"></i></td>
+                                    <td>
+                                        <a asp-controller="Produto" asp-action="GridProduto"><h4>Produtos</h4></a>
+                                    </td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="card-body">
                             <p>Cadastre, consulte e edite produtos que são usados para emitir pedidos</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">                 
+                <div class="col-md-4">
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-file-powerpoint-o iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Pedido" asp-action="GridPedido"><h4>Pedidos</h4></a>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-file-powerpoint-o iconPanel" aria-hidden="true"></i></td>
+
+                                    <td><a asp-controller="Pedido" asp-action="GridPedido"><h4>Pedidos</h4></a></td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="card-body">
                             <p>Cadastre, consulte e edite pedidos de vendas da sua empresa</p>
@@ -57,8 +73,13 @@
                     </div>
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-calendar-times-o iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Atendimento" asp-action="GridAtendimento"><h4>Atendimentos</h4></a>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-calendar-times-o iconPanel" aria-hidden="true"></i></td>
+
+                                    <td><a asp-controller="Atendimento" asp-action="GridAtendimento"><h4>Atendimentos</h4></a></td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="card-body">
                             <p>Cadastre, consulte e edite os atendimentos de sua empresa</p>
@@ -66,38 +87,61 @@
                     </div>
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-file-text-o iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="OrdemServico" asp-action="GridOrdemServico"><h4>Ordens de Serviço</h4></a>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-file-text-o iconPanel" aria-hidden="true"></i></td>
+
+                                    <td>  <a asp-controller="OrdemServico" asp-action="GridOrdemServico"><h4>Ordens de Serviço</h4></a></td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="card-body">
                             <p>Cadastre, consulte e edite ordens de serviço da sua empresa</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">                 
+                <div class="col-md-4">
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-calendar iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Calendario" asp-action="Mes"><h4>Calendário de Serviço</h4></a>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-calendar iconPanel" aria-hidden="true"></i></td>
+
+                                    <td><a asp-controller="Calendario" asp-action="Mes"><h4>Calendário de Serviço</h4></a></td>
+                                </tr>
+                            </table>
+
                         </div>
                         <div class="card-body">
                             <p>Consulte os agendamento de Atendimentos do Mês por Profissional </p>
                         </div>
-                    </div>  
+                    </div>
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-desktop iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Recurso" asp-action="GridRecurso"><h4>Recursos</h4></a>
-                            </div>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-tasks iconPanel" aria-hidden="true"></i></td>
+
+                                    <td><a asp-controller="Recurso" asp-action="GridRecurso"><h4>Atividades</h4></a></td>
+                                </tr>
+                            </table>
+
+                        </div>
                         <div class="card-body">
-                            <p>Cadastre, consulte e edite ferramentas e outros equipamentos</p>
+                            <p>Cadastre, consulte as suas tarefas do dia dia </p>
                         </div>
                     </div>
                     <div class="card m-2">
                         <div class="card-header">
-                            <i class="fa fa-2x fa-user-o  iconPanel" aria-hidden="true"></i>
-                            <a asp-controller="Profissional" asp-action="GridProfissional"><h4>Profissionais</h4></a>
-                            </div>
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-user-o  iconPanel" aria-hidden="true"></i></td>
+
+                                    <td><a asp-controller="Profissional" asp-action="GridProfissional"><h4>Profissionais</h4></a></td>
+                                </tr>
+                            </table>
+
+                        </div>
                         <div class="card-body">
                             <p>Consulte, cadastre e altere os colaboradores da sua empresa</p>
                         </div>
@@ -108,45 +152,59 @@
     </div>
     <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
         <div style="background-color:darkgrey; width: 100%; height:20px;"></div>
-      
+
         <div class="col-sm-3">
             <div class="card m-2">
                 <div class="card-body">
                     <table>
                         <tr>
-                        <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+                            <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
 
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h5>Financeiro</h5></a></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h5>Financeiro</h5></a></td>
                         </tr>
                     </table>
-                    
-                    
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a>
+                    <table>
+                        <tr>
+                            <td>
+                                <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                            </td>
+                            <td>
+                                <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
             <div class="card m-2">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelConfiguracoes"><p style="font-size:19.8px; margin:0;">Configurações</p></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><p style="font-size:19.8px; margin:0;">Configurações</p></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 </div>

@@ -53,5 +53,23 @@ namespace OscaApp.Controllers
            
             return View(calen);
         }
+
+        [HttpGet]
+        public ViewResult Dia(int dia, int Ano)
+        {
+            Dia day = new Dia();
+            day.itensCalendario = new List<ItemCalendario>();
+
+            for (int i = 0; i < 48; i++)
+            {
+                ItemCalendario item = new ItemCalendario();
+                item.titulo = "livre";
+               
+
+                day.itensCalendario.Add(item);
+            }
+
+            return View(day);
+        }
     }
 }
