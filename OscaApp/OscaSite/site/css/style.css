@@ -1265,7 +1265,7 @@ h1, h2, h3, h4, h5, h6, figure {
 
   @keyframes moveInRight{
     0%{ transform: translateX(0);}
-    50%{ transform: translateX(-2300px);}
+    50%{ transform: translateX(-2600px);}
     100%{ transform: translateX(0);}
 }
 .moveInRight{ animation: moveInRight 60s ease-in-out 1ms infinite;}
