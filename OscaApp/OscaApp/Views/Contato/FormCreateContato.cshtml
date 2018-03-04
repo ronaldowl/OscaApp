@@ -1,4 +1,5 @@
-﻿@model OscaApp.ViewModels.ContatoViewModel
+﻿
+@model OscaApp.ViewModels.ContatoViewModel
 
 <div id="contexto">
 
@@ -208,7 +209,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user fa-2x"></span>&nbsp;
                                         </span>
-                                        <input id="osc_criadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                        <input id="osc_criadoPor" for="@Model.contato.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                             </div>
@@ -219,7 +220,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-calendar fa-2x"></span>&nbsp;
                                         </span>
-                                        <input id="osc_criadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                        <input id="osc_criadoEm" for="@Model.contato.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                             </div>

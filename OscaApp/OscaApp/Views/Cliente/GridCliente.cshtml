@@ -18,9 +18,6 @@
                                         <div class="form-group col-md-2">
                                             <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_importar" type="button" class="btn btn-info  fa fa-download" value="Importar"> <span>Importar</span></button>
-                                        </div>
                                         <div class="form-group  col-md-4">
                                             <div class="input-group">
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
