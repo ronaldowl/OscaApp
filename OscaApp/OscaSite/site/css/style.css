@@ -922,7 +922,7 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 #fh5co-footer h2, #fh5co-footer h3, #fh5co-footer h4 {
-  color: #fff;
+  color: #fff !important;
 }
 #fh5co-footer h3 {
   text-transform: uppercase;
@@ -934,7 +934,7 @@ h1, h2, h3, h4, h5, h6, figure {
   padding-bottom: 10px;
 }
 #fh5co-footer .btn {
-  color: #fff;
+  color: #fff !important;
 }
 #fh5co-footer .float {
   float: left;
@@ -950,7 +950,7 @@ h1, h2, h3, h4, h5, h6, figure {
   list-style: none;
 }
 #fh5co-footer ul li a {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5)!important;
   text-decoration: none !important;
 }
 #fh5co-footer ul li a:hover {
