@@ -19,7 +19,7 @@ namespace OscaApp.RulesServices
             modelo.codigo = AutoNumber.GeraCodigo(3, contexto.idOrganizacao);
             modelo.idCliente = entrada.cliente.id;
                         
-            if (entrada.servico != null) modelo.idServico = entrada.servico.id;
+            if (entrada.servico != null) modelo.idReferencia = entrada.servico.id;
 
             if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);
             if (entrada.horaFim != null) modelo.horaFim = Convert.ToInt32(entrada.horaFim.horaDia);
@@ -49,7 +49,7 @@ namespace OscaApp.RulesServices
             modelo = new Atendimento();
             modelo = entrada.atendimento;
 
-            if (entrada.servico != null) modelo.idServico = entrada.servico.id;
+            if (entrada.servico != null) modelo.idReferencia = entrada.servico.id;
             if (entrada.cliente != null) modelo.idCliente = entrada.cliente.id;
             if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);
             if (entrada.horaFim != null) modelo.horaFim = Convert.ToInt32(entrada.horaFim.horaDia);

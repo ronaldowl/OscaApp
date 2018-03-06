@@ -34,10 +34,7 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-
-                db.Entry(modelo).Property("dataAgendada").IsModified                = true;
-                db.Entry(modelo).Property("horaInicio").IsModified                  = true;
-                db.Entry(modelo).Property("horaFim").IsModified                     = true;
+                 
                 db.Entry(modelo).Property("laudo").IsModified = true;
                 db.Entry(modelo).Property("problema").IsModified = true;
                 db.Entry(modelo).Property("diagnostico").IsModified = true;

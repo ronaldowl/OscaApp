@@ -98,7 +98,7 @@ namespace OscaApp.framework
                 AtendimentoGridViewModel X = new AtendimentoGridViewModel();
                 X.atendimento = item;
                 X.cliente = sqldata.RetornaCliente(item.idCliente);
-                X.servico = sqldata.RetornaServico(item.idServico);                
+                X.servico = sqldata.RetornaServico(item.idReferencia);                
                 X.horaInicio = new ItemHoraDia();
                 X.horaInicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
                 X.horaFim = new ItemHoraDia();

@@ -130,7 +130,7 @@ namespace OscaApp.Controllers
         {
             IEnumerable<OrdemServico> retorno = ordemServicoData.GetAll(contexto.idOrganizacao);
 
-            retorno = retorno.OrderBy(x => x.dataAgendada);
+            retorno = retorno.OrderBy(x => x.codigo);
 
             if (Page == 0) Page = 1;
 

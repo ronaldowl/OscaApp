@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using static OscaFramework.Models.CustomEnum;
 using static OscaFramework.Models.CustomEnumStatus;
 
 namespace OscaFramework.Models
@@ -11,10 +12,11 @@ namespace OscaFramework.Models
     public class Atendimento : GenericEntity
     {
         public Guid idOrganizacao { get; set; }
-        public Guid idCliente { get; set; }
-        public Guid idServico { get; set; }
+        public Guid idCliente { get; set; }        
+        public Guid idReferencia { get; set; }
 
         public string codigo { get; set; }
+        public string titulo { get; set; }
         public string problema { get; set; }
         public string diagnostico { get; set; }
         public string laudo { get; set; }
@@ -30,7 +32,9 @@ namespace OscaFramework.Models
         public int horaFim { get; set; }
 
 
-        public StatusAtendimento statusAtendimento { get; set; } 
+        public StatusAtendimento statusAtendimento { get; set; }
+        public TipoReferencia tipoReferencia { get; set; }
+
 
         public Atendimento()
         {

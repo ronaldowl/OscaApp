@@ -47,8 +47,13 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("observacao").IsModified = true;
                 db.Entry(modelo).Property("horaInicio").IsModified = true;
                 db.Entry(modelo).Property("horaFim").IsModified = true;
-                db.Entry(modelo).Property("statusAtendimento").IsModified = true;               
-                
+                db.Entry(modelo).Property("statusAtendimento").IsModified = true;
+
+                db.Entry(modelo).Property("titulo").IsModified = true;
+                db.Entry(modelo).Property("tipoReferencia").IsModified = true;
+                db.Entry(modelo).Property("idReferencia").IsModified = true;
+                 
+
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;

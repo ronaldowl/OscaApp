@@ -77,7 +77,7 @@ namespace OscaApp.Controllers
                     retorno = atendimentoData.Get(new Guid(id));
 
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
-                    modelo.servico = sqlData.RetornaRelacaoServico(retorno.idServico);
+                    modelo.servico = sqlData.RetornaRelacaoServico(retorno.idReferencia);
                     modelo.horaInicio = new ItemHoraDia();
                     modelo.horaInicio.horaDia = (CustomEnum.itemHora)retorno.horaInicio;
                     modelo.horaFim = new ItemHoraDia();

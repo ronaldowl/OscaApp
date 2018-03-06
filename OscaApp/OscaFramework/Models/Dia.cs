@@ -9,7 +9,7 @@ namespace OscaFramework.Models
     {
         public List<ItemCalendario> itensCalendario { get; set; }
         public int dia { get; set; }
-        public string nomeDia { get; set; }
+        public string nome { get; set; }
 
     }
 }
