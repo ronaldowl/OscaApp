@@ -10,6 +10,8 @@ namespace OscaApp.ViewModels
         public  Atendimento atendimento { get; set; }
         public  Relacao cliente { get; set; }
         public  Relacao servico { get; set; }
+        public  Relacao os { get; set; }
+
         public ItemHoraDia horaInicio { get; set; }
         public ItemHoraDia horaFim { get; set; }
         public ContextPage contexto { get; set; }

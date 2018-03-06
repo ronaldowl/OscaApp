@@ -135,5 +135,6 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
         }
+
     }
 }
