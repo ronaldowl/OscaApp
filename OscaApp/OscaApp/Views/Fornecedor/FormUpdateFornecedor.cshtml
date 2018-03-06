@@ -52,7 +52,7 @@
                                 <label>Código</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
                                         <input id="osc_codigo" asp-for="@Model.Fornecedor.codigo" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@
                                 <label>Nome do Fornecedor</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-user-o fa-2x"></i></span>&nbsp;
                                         <input id="osc_nomefornecedor" asp-for="@Model.Fornecedor.nomeFornecedor" placeholder="Nome" class="form-control" type="text">
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                 <label>CNPJ</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-user-o fa-2x"></i></span>&nbsp;
                                         <input id="osc_cpf" asp-for="@Model.Fornecedor.cnpj" type="text" class="form-control" placeholder="CPF" onchange="ValidaCPF()" />
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                 <label>Email</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-1x"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-2x"></i></span>&nbsp;
                                         <input id="osc_email" asp-for="@Model.Fornecedor.email" placeholder="Email" class="form-control" type="text">
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                 <label>Nome do Vendedor</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-user-o fa-1x"></i></span>
+                                        <span class="input-group-addon"><i class="fa fa-user-o fa-2x"></i></span>&nbsp;
                                         <input id="osc_nomeVendedor" asp-for="@Model.Fornecedor.nomeVendedor" placeholder="Nome" class="form-control" type="text">
                                     </div>
                                 </div>
@@ -100,9 +100,9 @@
                                 <label>Telefone</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-phone fa-1x"></span>
+                                        <span class="fa fa-phone fa-2x"></span>&nbsp;
                                     </span>
-                                    <input id="osc_telefone" asp-for="@Model.Fornecedor.telefone" type="text" class="form-control" placeholder="" maxlength="15" pattern="[0-9]+$" />
+                                    <input id="osc_telefone" asp-for="@Model.Fornecedor.telefone" type="text" class="form-control" placeholder="(XX) - 000000000" maxlength="15" pattern="[0-9]+$" />
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@
                                 <label>Anotação</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-comment-o fa-1x"></span>
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
                                     </span>
                                     <textarea id="osc_anotacao" asp-for="@Model.Fornecedor.anotacao" class="form-control" rows="9" cols="25" placeholder="digite uma anotação"></textarea>
                                 </div>
@@ -128,7 +128,7 @@
                                 <label class="control-label">Criado Por</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-user"></span>
+                                        <span class="fa fa-user fa-2x"></span> &nbsp;
                                     </span>
                                     <input id="osc_criadoPor" asp-for="@Model.Fornecedor.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -139,7 +139,7 @@
                                 <label class="control-label">Criado Em</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-calendar fa-1x"></span>
+                                        <span class="fa fa-calendar fa-2x"></span>&nbsp;
                                     </span>
                                     <input id="osc_criadoEm" asp-for="@Model.Fornecedor.criadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -150,7 +150,7 @@
                                 <label class="control-label">Modificado Por</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-user"></span>
+                                        <span class="fa fa-user fa-2x"></span>&nbsp;
                                     </span>
                                     <input id="osc_modificadoPor" asp-for="@Model.Fornecedor.modificadoPorName" type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -161,7 +161,7 @@
                                 <label class="control-label">Modificado Em</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-calendar fa-1x"></span>
+                                        <span class="fa fa-calendar fa-2x"></span>&nbsp;
                                     </span>
                                     <input id="osc_modificadoEm" asp-for="@Model.Fornecedor.modificadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -172,7 +172,7 @@
                                 <label class="control-label">Status</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-exclamation fa-1x"></span>
+                                        <span class="fa fa-exclamation fa-2x"></span>&nbsp;
                                     </span>
                                     <input id="osc_status" asp-for="@Model.Fornecedor.status" type="text" class="form-control" disabled="disabled" />
                                 </div>

@@ -37,7 +37,7 @@
                                     <label class="control-label" style="color:red">Produto*</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
                                             <input asp-for="@Model.produto.idName" class="form-control" type="text" disabled="disabled" id="osc_produtoidName">
                                             <input asp-for="@Model.itemlistaPreco.idProduto" class="form-control" type="hidden" value="@Model.produto.id" id="osc_produtoid">
                                         </div>
@@ -47,7 +47,7 @@
                                     <label class="control-label">Lista de Preço</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
                                             <select asp-items="@Model.listaPrecos" asp-for="@Model.itemlistaPreco.idListaPreco" id="osc_listaPreco"></select>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                     <label class="control-label">Valor de Venda</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
                                             <input asp-for="@Model.itemlistaPreco.valor" class="form-control" type="text" id="osc_valor">
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                     <label class="control-label">Criado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
+                                            <span class="fa fa-user fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_criadoPor" asp-for="@Model.itemlistaPreco.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -82,7 +82,7 @@
                                     <label class="control-label">Criado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
+                                            <span class="fa fa-calendar fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_criadoEm" asp-for="@Model.itemlistaPreco.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -93,7 +93,7 @@
                                     <label class="control-label">Status</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-exclamation fa-1x"></span>
+                                            <span class="fa fa-exclamation fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_status" asp-for="@Model.itemlistaPreco.status" type="text" class="form-control" disabled="disabled" />
                                     </div>

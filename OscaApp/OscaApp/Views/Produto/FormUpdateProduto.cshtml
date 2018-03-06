@@ -49,7 +49,7 @@
                                     <label>Código</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_codigo" asp-for="@Model.produto.codigo" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -58,7 +58,7 @@
                                     <label>Nome*</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_nome" asp-for="@Model.produto.nome" type="text" class="form-control" required="required" />
                                     </div>
@@ -67,7 +67,7 @@
                                     <label>Forma de Venda</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <select id="osc_formavenda" asp-for="@Model.produto.formaVendaProduto" class="form-control" required="required">
                                             <option value="1" selected="">Unidade</option>
@@ -82,7 +82,7 @@
                                     <label>Quantidade</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_quantidade" asp-for="@Model.produto.quantidade" type="text" class="form-control" placeholder="Quantidade" />
                                     </div>
@@ -91,7 +91,7 @@
                                     <label>Valor de Compra</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-money fa-1x"></span>
+                                            <span class="fa fa-money fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_razaosocial" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" asp-format="" />
 
@@ -103,7 +103,7 @@
                                     <label>Largura</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_largura" asp-for="@Model.produto.largura" type="text" class="form-control" placeholder="Largura" pattern="[0-9]+$" />
                                     </div>
@@ -112,7 +112,7 @@
                                     <label>Altura</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_altura" asp-for="@Model.produto.altura" type="text" class="form-control" placeholder="Altura" pattern="[0-9]+$" />
                                     </div>
@@ -122,7 +122,7 @@
                                     <label>Peso</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_peso" asp-for="@Model.produto.peso" type="text" class="form-control" placeholder="Peso" maxlength="15" pattern="[0-9]+$" />
                                     </div>
@@ -131,7 +131,7 @@
                                     <label>Area</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_area" asp-for="@Model.produto.area" type="text" class="form-control" placeholder="Area" maxlength="15" pattern="[0-9]+$" />
                                     </div>
@@ -143,7 +143,7 @@
                                     <label>Código do Fabricante</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_codigoFabricante" asp-for="@Model.produto.codigoFabricante" type="text" class="form-control" />
                                     </div>
@@ -152,7 +152,7 @@
                                     <label>Fabricante</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_fabricante" asp-for="@Model.produto.fabricante" type="text" class="form-control" placeholder="Fabrincante" />
                                     </div>
@@ -161,7 +161,7 @@
                                     <label>Descrição</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-1x"></span>
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                         </span>
                                         <textarea id="osc_descricao" asp-for="@Model.produto.descricao" class="form-control" rows="7" cols="40" placeholder="digite uma descrição do Produto"></textarea>
                                     </div>
@@ -176,7 +176,7 @@
                                     <label class="control-label">Criado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
+                                            <span class="fa fa-user fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_criadoPor" asp-for="@Model.produto.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -187,7 +187,7 @@
                                     <label class="control-label">Criado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
+                                            <span class="fa fa-calendar fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_criadoEm" asp-for="@Model.produto.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -198,7 +198,7 @@
                                     <label class="control-label">Modificado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
+                                            <span class="fa fa-user fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_modificadoPor" asp-for="@Model.produto.modificadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -209,7 +209,7 @@
                                     <label class="control-label">Modificado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
+                                            <span class="fa fa-calendar fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_modificadoEm" asp-for="@Model.produto.modificadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -220,7 +220,7 @@
                                     <label class="control-label">Status</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-exclamation fa-1x"></span>
+                                            <span class="fa fa-exclamation fa-2x"></span>&nbsp;
                                         </span>
                                         <input id="osc_status" asp-for="@Model.produto.status" type="text" class="form-control" disabled="disabled" />
                                     </div>

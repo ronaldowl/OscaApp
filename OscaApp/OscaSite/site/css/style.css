@@ -204,9 +204,7 @@ h1, h2, h3, h4, h5, h6, figure {
   -ms-border-radius: 7px;
   border-radius: 7px;
 }
-.fh5co-social li a:hover {
-  color:#00bef9;
-}
+
 .fh5co-social li a:hover, .fh5co-social li a:active, .fh5co-social li a:focus {
   outline: none;
   text-decoration: none;
@@ -511,15 +509,15 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #fh5co-why-us, .fh5co-services {
-  padding: 7em 0;
+  padding: 4em 0;
 }
 @media screen and (max-width: 768px) {
   #fh5co-why-us, .fh5co-services {
-    padding: 3em 0;
+    padding: 2em 0;
   }
 }
 #fh5co-why-us .item-block, .fh5co-services .item-block {
-  margin-bottom: 7em;
+  margin-bottom: 4em;
   float: left;
 }
 #fh5co-why-us .item-block .icon, .fh5co-services .item-block .icon {
@@ -924,7 +922,7 @@ h1, h2, h3, h4, h5, h6, figure {
   }
 }
 #fh5co-footer h2, #fh5co-footer h3, #fh5co-footer h4 {
-  color: #fff;
+  color: #fff !important;
 }
 #fh5co-footer h3 {
   text-transform: uppercase;
@@ -936,7 +934,7 @@ h1, h2, h3, h4, h5, h6, figure {
   padding-bottom: 10px;
 }
 #fh5co-footer .btn {
-  color: #fff;
+  color: #fff !important;
 }
 #fh5co-footer .float {
   float: left;
@@ -952,7 +950,7 @@ h1, h2, h3, h4, h5, h6, figure {
   list-style: none;
 }
 #fh5co-footer ul li a {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5)!important;
   text-decoration: none !important;
 }
 #fh5co-footer ul li a:hover {
@@ -1267,7 +1265,7 @@ h1, h2, h3, h4, h5, h6, figure {
 
   @keyframes moveInRight{
     0%{ transform: translateX(0);}
-    50%{ transform: translateX(-2300px);}
+    50%{ transform: translateX(-2600px);}
     100%{ transform: translateX(0);}
 }
 .moveInRight{ animation: moveInRight 60s ease-in-out 1ms infinite;}
