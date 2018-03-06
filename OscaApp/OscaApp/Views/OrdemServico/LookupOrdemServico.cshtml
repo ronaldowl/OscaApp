@@ -73,7 +73,7 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateOrdemServico", "OrdemServico", new {id = item.id })'">
+                                        <tr id="@item.id" value="@item.codigo" onclick="ConfigLookup('@item.id.ToString()','@item.codigo')">
                                             <td><i class="fa fa-file-text-o"></i></td>
                                             <td>@item.codigo.ToString() </td>
                                             <td>Cliente 1 </td>

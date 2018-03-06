@@ -47,9 +47,20 @@ namespace OscaApp.RulesServices
             modelo = new Atendimento();
             modelo = entrada.atendimento;
 
-            if (entrada.servico != null) modelo.idReferencia = entrada.servico.id;
             if (entrada.cliente != null) modelo.idCliente = entrada.cliente.id;
-            if (entrada.os != null) modelo.idReferencia = entrada.os.id;
+
+            if (entrada.atendimento.tipoReferencia == CustomEnum.TipoReferencia.servico)
+            {
+                if (entrada.servico != null) modelo.idReferencia = entrada.servico.id;
+
+            }
+
+            if (entrada.atendimento.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico)
+            {
+                if (entrada.os != null) modelo.idReferencia = entrada.os.id;
+              
+            }
+          
 
             if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);
             if (entrada.horaFim != null) modelo.horaFim = Convert.ToInt32(entrada.horaFim.horaDia);

@@ -39,8 +39,7 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
                 db.Entry(modelo).Property("dataAgendada").IsModified             = true;
-                db.Entry(modelo).Property("idCliente").IsModified        = true;
-                db.Entry(modelo).Property("idServico").IsModified        = true;             
+                db.Entry(modelo).Property("idCliente").IsModified        = true;                    
                 db.Entry(modelo).Property("problema").IsModified = true;
                 db.Entry(modelo).Property("diagnostico").IsModified = true;
                 db.Entry(modelo).Property("laudo").IsModified = true;
