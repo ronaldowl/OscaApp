@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-8 offset-1">
+        <div class="col-4 offset-1" id="osc_ocupado">
             <div class="card">
                 <div class="card-header">
                     <center> <label style="font-size:12px;font-weight:bold">Segunda Feira dia 1 de Fevereiro de 2018</label></center>
@@ -11,14 +11,24 @@
                     <table style="font-size:10px;width:100%;" class="table table-hover">
 
                         @foreach (var item in Model.itensCalendario)
-                        {
-                            @if(item.titulo == "livre")
-                              {
-                                <tr id="1" style="height:20px" class="border border-dark bg-success" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"><td><i class="fa fa-2x fa-cog"></i></td><td><span class=""></span></td><td><span class=""></span></td><td><td><span class=""></span></td> <td><span>00:01</span></td><td><span>00:02</span></td></tr>
+                        {                            
+                           <tr id="1" style="height:20px" class="border border-dark " onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"><td><i class="fa fa-2x fa-cog"></i></td><td><span class=""></span></td><td><span class="">@item.titulo</span></td><td><td><span class=""></span></td> <td><span>@item.inicio.HoraFormatada</span></td><td><span>00:02</span></td></tr>
+                         }
+                    </table>
+                </div>
+            </div>
+        </div>>
+        <div class="col-4 offset-1"  id="osc_livre">
+            <div class="card">
+                <div class="card-header">
+                    <center> <label style="font-size:12px;font-weight:bold">Segunda Feira dia 1 de Fevereiro de 2018</label></center>
+                </div>
+                <div class="card-body">
+                    <table style="font-size:10px;width:100%;" class="table table-hover">
 
-                        }else{
-                            <tr id="1" style="height:20px" class="border border-dark bg-info" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'"><td><i class="fa fa-2x fa-cog"></i> </td><td><span class="">ATD-10000</span></td><td><span class="">DEV MAIS</span></td><td><td><span class="">Apometria</span></td> <td><span>00:01</span></td><td><span>00:02</span></td></tr>
-                             }
+                        @foreach (var item in Model.itensCalendarioVazios)
+                        {
+                            <tr id="1" style="height:20px" class="border border-dark bg-success" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"><td><i class="fa fa-2x fa-cog"></i></td><td><span class=""></span></td><td><span class="">@item.titulo</span></td><td><td><span class=""></span></td> <td><span>@item.inicio.HoraFormatada</span></td><td><span>00:02</span></td></tr>
                         }
                     </table>
                 </div>

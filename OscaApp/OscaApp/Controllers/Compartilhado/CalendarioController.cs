@@ -57,10 +57,12 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult Dia(int dia, int mes,int Ano, string idProfissional)
         {
-            Dia day = new Dia();
-            day.itensCalendario = new List<ItemCalendario>();
+            dia = 23;
+            mes = 2;
+            Ano = 2018;
+            idProfissional = "4FCE1A00-1496-415D-76FE-08D57246C8AB";
 
-            CalendarioRules.PreencheDia(dia, mes, Ano, sqlServices, contexto, idProfissional);
+            Dia day = CalendarioRules.PreencheDia(dia, mes, Ano, sqlServices, contexto, idProfissional);
 
             return View(day);
         }

@@ -12,6 +12,9 @@ namespace OscaFramework.Models
         public Guid id { get; set; }
 
         public CustomEnum.itemHora horaDia { get; set; }
-        public string HoraFormatada { get; set; }
+        public string HoraFormatada
+        {
+             get; set; 
+        }
     }
 }

@@ -36,7 +36,7 @@ namespace OscaApp.RulesServices
                 DateTime dataRef = new DateTime(Ano, Mes, i);
                 Dia dia = new Dia();
                 dia.dia = i;
-                //dia.nome = dataFormat.GetDayName(dataRef.DayOfWeek);
+                dia.nomeDia = dataFormat.GetDayName(dataRef.DayOfWeek);
                 dia.itensCalendario = PreencheItemCalendario(i, Atendimentos);
                 diasMEs.Add(dia);
             }
@@ -83,35 +83,52 @@ namespace OscaApp.RulesServices
 
             Dia retorno = new Dia();
             CultureInfo culture = new CultureInfo("pt-BR");
-            DateTimeFormatInfo dataFormat = culture.DateTimeFormat;
+            DateTimeFormatInfo dataFormat = culture.DateTimeFormat;           
+             //retorno.nomeDia = dataFormat.AbbreviatedDayNames[dia - 1];            
 
-            int qtdDiasMes = DateTime.DaysInMonth(Ano, Mes);
-            /// retorno.ano = Ano;
-            // retorno.mes = Mes;
-            retorno.nomeDia = dataFormat.AbbreviatedDayNames[Mes - 1];            
-
-            List<Dia> diasMEs = new List<Dia>();
+            
             List<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosDia(data , idProfissional, contexto.idOrganizacao.ToString());
+            List<ItemCalendario> ocupado = new List<ItemCalendario>();
+            List<ItemCalendario> livre = new List<ItemCalendario>();
 
-            //Preenche todos os itens do Dia
 
-            for (int posicao = 0; posicao < 48; posicao++)
-            {
+
+            //Preenche horarios Ocupados
+            foreach (var item in Atendimentos)
+                {
+                    ItemCalendario hoc = new ItemCalendario();
+                    hoc.id = item.id.ToString();
+                    hoc.inicio = new ItemHoraDia();
+                    hoc.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
+                    hoc.fim = new ItemHoraDia();
+                    hoc.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
+                    hoc.titulo = item.titulo;
+                    ocupado.Add(hoc);
+                }
+
+                //Preenche horarios vazio
+                for (int i = 0; i < 48; i++)
+                {
                 foreach (var item in Atendimentos)
                 {
-                    //se for igual cria um item e adicion
-                    if(item.horaInicio == posicao)
+                    if (item.horaInicio != i)
                     {
+                        ItemCalendario hoc = new ItemCalendario();
                         
-
+                        hoc.inicio = new ItemHoraDia();
+                        hoc.inicio.horaDia = (CustomEnum.itemHora)i;
+                        hoc.fim = new ItemHoraDia();
+                        
+                        hoc.titulo = "LIVRE";
+                        livre.Add(hoc);
                     }
                 }
+
             }
             
-
-
-           // retorno = diasMEs;            
-           
+            retorno.itensCalendario = ocupado;
+            retorno.itensCalendarioVazios = livre;             
+            
             return retorno;
         }
     }
