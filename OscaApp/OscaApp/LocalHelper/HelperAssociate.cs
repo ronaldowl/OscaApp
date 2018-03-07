@@ -31,6 +31,23 @@ namespace OscaApp.framework
             }
             return retorno;
         }
+        public static List<OrdemServicoGridViewModel> ConvertToGridOrdemServico(List<OrdemServico> itens)
+        {
+            List<OrdemServicoGridViewModel> retorno = new List<OrdemServicoGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                OrdemServicoGridViewModel X = new OrdemServicoGridViewModel();
+                X.cliente = sqldata.RetornaRelacaoCliente(item.idCliente);
+                X.ordemServico = item;
+                X.profissional = sqldata.RetornaRelacaoProfissional(item.idProfissional);
+
+                retorno.Add(X);
+            }
+            return retorno;
+        }
+
         public static List<PedidoGridViewModel> ConvertToGridPedido(List<Pedido> itens)
         {
             List<PedidoGridViewModel> retorno = new List<PedidoGridViewModel>();

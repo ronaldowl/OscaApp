@@ -123,5 +123,16 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Profissional>(Page, 10));
         }
+
+        public ViewResult LookupProfissional(string filtro, int Page)
+        {
+            IEnumerable<Profissional> retorno = profissionalData.GetAll(contexto.idOrganizacao);
+
+            retorno = retorno.OrderBy(x => x.nomeProfissional);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Profissional>(Page, 5));
+        }
     }
 }

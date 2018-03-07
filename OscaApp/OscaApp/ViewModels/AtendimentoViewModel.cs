@@ -11,6 +11,7 @@ namespace OscaApp.ViewModels
         public  Relacao cliente { get; set; }
         public  Relacao servico { get; set; }
         public  Relacao os { get; set; }
+        public  Relacao profissional { get; set; }
 
         public ItemHoraDia horaInicio { get; set; }
         public ItemHoraDia horaFim { get; set; }

@@ -49,6 +49,8 @@ namespace OscaApp.RulesServices
 
             if (entrada.cliente != null) modelo.idCliente = entrada.cliente.id;
 
+            if (entrada.profissional != null) modelo.idProfissional = entrada.profissional.id;
+            
             if (entrada.atendimento.tipoReferencia == CustomEnum.TipoReferencia.servico)
             {
                 if (entrada.servico != null) modelo.idReferencia = entrada.servico.id;

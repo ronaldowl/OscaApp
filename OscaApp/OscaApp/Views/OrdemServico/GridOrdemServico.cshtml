@@ -1,11 +1,11 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.OrdemServico>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.OrdemServicoGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-11 offset-1">
-            <br />
+            <br />            
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
@@ -19,7 +19,7 @@
                                         <div class="form-group col-md-2">
                                             <button id="osc_novo" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico", null)'"> <span>Novo</span></button>
                                         </div>
-                                        <div class="form-group  col-md-4">
+                                        <div class="form-group  col-md-5">
                                             <div class="input-group">
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
                                                 <span class="input-group-btn ">
@@ -31,10 +31,7 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Painel de Serviços</span></button>
-                                        </div>
+                                        </div>                                       
                                     </form>
                                 </td>
                             </tr>
@@ -43,31 +40,30 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-11">
-                                <table class="table table-hover table-striped table-bordered">
+                                <table class="table table-hover table-striped table-bordered table-sm">
                                     <thead>
                                         <tr>
                                             <th></th>
                                             <th>Código</th>
                                             <th>Cliente</th>
-                                           
+                                            <th>Profissional </th>
+                                            <th>Tipo OS</th>
                                             <th>Status Ordem Servico</th>
                                             <th>Valor</th>
                                             <th>Criado Por</th>
-
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateOrdemServico", "OrdemServico", new {id = item.id })'">
+                                        <tr id="@item.ordemServico.id" onclick="location.href='@Url.Action("FormUpdateOrdemServico", "OrdemServico", new {id = item.ordemServico.id })'">
                                             <td><i class="fa fa-file-text-o"></i></td>
-                                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateOrdemServico", new { id = item.id })</td>
-                                            <td>Cliente 1 </td>
-                                             
-                                            <td>@item.statusOrdemServico</td>
-                                            <td>@item.valorTotal.ToString("N2")</td>
-
-                                            <td>@item.criadoPorName</td>
-
+                                            <td>@Html.ActionLink(item.ordemServico.codigo.ToString(), "FormUpdateOrdemServico", new { id = item.ordemServico.id })</td>
+                                            <td>@item.cliente.idName</td>
+                                            <td>@item.profissional.idName</td>
+                                            <td>@item.ordemServico.tipo</td>
+                                            <td>@item.ordemServico.statusOrdemServico</td>
+                                            <td>R$@item.ordemServico.valorTotal.ToString("N2")</td>
+                                            <td>@item.ordemServico.criadoPorName</td>
                                         </tr>
                                     }
                                 </table>

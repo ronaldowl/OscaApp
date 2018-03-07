@@ -237,7 +237,7 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
-        public List<Relacao> RetornaRelacaoProfissional(Guid idOrganizacao)
+        public List<Relacao> RetornaTodasRelacaoProfissional(Guid idOrganizacao)
         {
             List<Relacao> retorno = new List<Relacao>();
             SqlDataReader dataReader;
@@ -264,6 +264,43 @@ namespace OscaFramework.MicroServices
                             item.id = new Guid(dataReader["id"].ToString());
                             item.idName = dataReader["nomeProfissional"].ToString();
                             retorno.Add(item);
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+        public Relacao RetornaRelacaoProfissional(Guid id)
+        {
+             Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select id,nomeProfissional from Profissional where id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idName = dataReader["nomeProfissional"].ToString();                             
                         }
                     }
                     Connection.Close();

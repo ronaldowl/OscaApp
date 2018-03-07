@@ -77,6 +77,7 @@ namespace OscaApp.Controllers
                     retorno = atendimentoData.Get(new Guid(id));
 
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
+                    modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
 
                     if(retorno.tipoReferencia == CustomEnum.TipoReferencia.servico)modelo.servico = sqlData.RetornaRelacaoServico(retorno.idReferencia);
 

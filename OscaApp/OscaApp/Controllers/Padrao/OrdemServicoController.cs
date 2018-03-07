@@ -13,6 +13,7 @@ using X.PagedList;
 using OscaFramework.Models;
 using OscaFramework.MicroServices;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
@@ -94,10 +95,12 @@ namespace OscaApp.Controllers
                 modelo.contexto = this.contexto;
 
                 if (modelo.ordemServico != null)
-                {                       
+                {                   
                     modelo.cliente = sqlData.RetornaRelacaoCliente(modelo.ordemServico.idCliente);
                     modelo.listaPreco = sqlData.RetornaRelacaoListaPreco(modelo.ordemServico.idListaPreco);
                     if (modelo.ordemServico.idCategoriaManutencao != null) modelo.categoriaManutencao = sqlData.RetornaRelacaoCategoriaManutencao(modelo.ordemServico.idCategoriaManutencao);
+                    if(modelo.ordemServico.idProfissional != null) modelo.profissional = sqlData.RetornaRelacaoProfissional(modelo.ordemServico.idProfissional);
+
                 }
             }
             return View(modelo);
@@ -128,13 +131,13 @@ namespace OscaApp.Controllers
 
         public ViewResult GridOrdemServico(string filtro, int Page)
         {
-            IEnumerable<OrdemServico> retorno = ordemServicoData.GetAll(contexto.idOrganizacao);
+            IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
 
-            retorno = retorno.OrderBy(x => x.codigo);
+            retorno = retorno.OrderBy(x => x.ordemServico.codigo);
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<OrdemServico>(Page, 10));
+            return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 10));
         }
 
         public ViewResult LookupOrdemServico(string filtro, int Page)

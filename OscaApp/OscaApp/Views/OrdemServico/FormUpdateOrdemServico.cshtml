@@ -19,6 +19,13 @@
         });
     }
 
+    function CarregaLookupProfissional() {
+
+        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
+            $("#lookupProfissional").modal("show");
+        });
+    }
+
 </script>
 
 
@@ -105,6 +112,21 @@
                                             <option value="1" selected="">Orçamento</option>
                                             <option value="2">Execução</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Profissional</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional">
+                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -414,6 +436,8 @@
 <div class="modal fade" id="lookupCategoriaManutencao">
 </div>
 <div class="modal fade" id="ModalStatusOrdem">
+</div>
+<div class="modal fade" id="lookupProfissional">
 </div>
 <script src="~/lib/OscaJs/osc_ordemServico.js"></script>
 <script>OnLoad_OrdemServico();</script>

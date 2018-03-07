@@ -20,6 +20,13 @@
         });
     }
 
+    function CarregaLookupProfissional() {
+
+        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
+            $("#lookupProfissional").modal("show");
+        });
+    }
+
        function CarregaFormStatus() {
         $("#ModalStatus").load("/Atendimento/FormStatusAtendimento?id=" + '@Model.atendimento.id' , function () {
             $("#ModalStatus").modal("show");
@@ -105,7 +112,7 @@
                                 </div>
                            
                             </div>
-                            <div class="col-md-3">                                
+                            <div class="col-md-2">                                
                                     <div class="form-group">
                                         <label>Data agendada</label>
                                         <div class="inputGroupContainer">
@@ -277,26 +284,43 @@
                                 </div>
                               
                             </div>  
-                            <div class="form-group">
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label>Data de Fechamento</label>
+                                    <label class="control-label">Profissional</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
-                                            <input id="osc_dataFechamento" asp-for="@Model.atendimento.dataFechamento" class="form-control" type="text" disabled="disabled">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional">
+                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
-                                <label>Status Atendimento</label>
-                                <div class="inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                        <select id="osc_statusAtendimento" asp-for="@Model.atendimento.statusAtendimento" class="form-control" style="background-color:aquamarine">
-                                            <option value="0">Agendado</option>
-                                            <option value="1">Atendido</option>
-                                            <option value="2">Cancelado</option>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Data de Fechamento</label>
+                                        <div class="inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
+                                                <input id="osc_dataFechamento" asp-for="@Model.atendimento.dataFechamento" class="form-control" type="text" disabled="disabled">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label>Status Atendimento</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                            <select id="osc_statusAtendimento" asp-for="@Model.atendimento.statusAtendimento" class="form-control" style="background-color:aquamarine">
+                                                <option value="0">Agendado</option>
+                                                <option value="1">Atendido</option>
+                                                <option value="2">Cancelado</option>
 
-                                        </select>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -423,6 +447,8 @@
 <div class="modal fade" id="lookupServico">
 </div>
 <div class="modal fade" id="lookupOS">
+</div>
+<div class="modal fade" id="lookupProfissional">
 </div>
 <div class="modal fade" id="ModalStatus">
 </div>
