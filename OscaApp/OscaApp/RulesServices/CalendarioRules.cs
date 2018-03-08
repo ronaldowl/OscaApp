@@ -11,10 +11,10 @@ namespace OscaApp.RulesServices
 {
     public static class CalendarioRules
     {
-       
+
         public static Calendario PreencheMes(int Mes, int Ano, SqlGeneric sqlServices, ContextPage contexto, string idProfissional)
         {
-            
+
 
             Calendario retorno = new Calendario();
             CultureInfo culture = new CultureInfo("pt-BR");
@@ -23,7 +23,7 @@ namespace OscaApp.RulesServices
             int qtdDiasMes = DateTime.DaysInMonth(Ano, Mes);
             retorno.ano = Ano;
             retorno.mes = Mes;
-            retorno.nomeMes = dataFormat.MonthNames[Mes -1];
+            retorno.nomeMes = dataFormat.MonthNames[Mes - 1];
             retorno.qtdDias = qtdDiasMes;
 
             List<Dia> diasMEs = new List<Dia>();
@@ -43,25 +43,25 @@ namespace OscaApp.RulesServices
             retorno.dias = diasMEs;
 
             SqlGenericData sqlData = new SqlGenericData();
-            retorno.profissionais = HelperAttributes.PreencheDropDownList(sqlData.RetornaTodasRelacaoProfissional( contexto.idOrganizacao));
+            retorno.profissionais = HelperAttributes.PreencheDropDownList(sqlData.RetornaTodasRelacaoProfissional(contexto.idOrganizacao));
 
             return retorno;
-        }      
-               
+        }
 
-        public static List<ItemCalendario> PreencheItemCalendario(int dia, List<Atendimento>  atendimentos)
+
+        public static List<ItemCalendario> PreencheItemCalendario(int dia, List<Atendimento> atendimentos)
         {
             List<ItemCalendario> retorno = new List<ItemCalendario>();
 
             foreach (var item in atendimentos)
             {
-                if(item.dataAgendada.Day == dia)
+                if (item.dataAgendada.Day == dia)
                 {
                     ItemCalendario atendimento = new ItemCalendario();
                     atendimento.id = item.id.ToString();
                     atendimento.titulo = item.codigo;
                     atendimento.statusAtendimento = item.statusAtendimento;
-                    
+
                     atendimento.inicio = new ItemHoraDia();
                     atendimento.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
                     atendimento.inicio.HoraFormatada = HelperCalendario.RetornaHoraFormatda(item.horaInicio);
@@ -83,52 +83,55 @@ namespace OscaApp.RulesServices
 
             Dia retorno = new Dia();
             CultureInfo culture = new CultureInfo("pt-BR");
-            DateTimeFormatInfo dataFormat = culture.DateTimeFormat;           
-             //retorno.nomeDia = dataFormat.AbbreviatedDayNames[dia - 1];            
-
-            
-            List<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosDia(data , idProfissional, contexto.idOrganizacao.ToString());
-            List<ItemCalendario> ocupado = new List<ItemCalendario>();
-            List<ItemCalendario> livre = new List<ItemCalendario>();
+            DateTimeFormatInfo dataFormat = culture.DateTimeFormat;
+            //retorno.nomeDia = dataFormat.AbbreviatedDayNames[dia - 1];            
 
 
+            IEnumerable<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosDia(data, idProfissional, contexto.idOrganizacao.ToString());
+           
+            List<ItemCalendario> lancamentos = new List<ItemCalendario>();
+            int horarios = 15; 
 
-            //Preenche horarios Ocupados
-            foreach (var item in Atendimentos)
-                {
-                    ItemCalendario hoc = new ItemCalendario();
-                    hoc.id = item.id.ToString();
-                    hoc.inicio = new ItemHoraDia();
-                    hoc.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
-                    hoc.fim = new ItemHoraDia();
-                    hoc.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
-                    hoc.titulo = item.titulo;
-                    ocupado.Add(hoc);
-                }
-
-                //Preenche horarios vazio
-                for (int i = 0; i < 48; i++)
-                {
+            ////Preenche horarios vazio
+            //while ( horarios < 48 )
+            //{
                 foreach (var item in Atendimentos)
                 {
-                    if (item.horaInicio != i)
-                    {
+                    //if (item.horaInicio == horarios)
+                    //{
                         ItemCalendario hoc = new ItemCalendario();
-                        
+                        hoc.id = item.id.ToString();
                         hoc.inicio = new ItemHoraDia();
-                        hoc.inicio.horaDia = (CustomEnum.itemHora)i;
+                        hoc.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
                         hoc.fim = new ItemHoraDia();
-                        
-                        hoc.titulo = "LIVRE";
-                        livre.Add(hoc);
-                    }
-                }
+                        hoc.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
+                        hoc.titulo = item.titulo;
+                        lancamentos.Add(hoc);
 
+                        horarios = Convert.ToInt32(hoc.fim.horaDia) + 1;
+                       // break;
+                //    }
+                //    else
+                //    {
+                       
+                //            ItemCalendario hoc = new ItemCalendario();
+
+                //            hoc.inicio = new ItemHoraDia();
+                //            hoc.inicio.horaDia = (CustomEnum.itemHora)horarios;
+                //            hoc.fim = new ItemHoraDia();
+
+                //            hoc.titulo = "LIVRE";
+                //            lancamentos.Add(hoc);
+                //        break;
+                        
+                //    }
+                //}
+                //horarios++;
             }
-            
-            retorno.itensCalendario = ocupado;
-            retorno.itensCalendarioVazios = livre;             
-            
+
+            retorno.itensCalendario = lancamentos;
+
+
             return retorno;
         }
     }

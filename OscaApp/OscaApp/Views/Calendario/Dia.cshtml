@@ -1,24 +1,48 @@
 ﻿@model OscaFramework.Models.Dia
+@using OscaFramework.Helper;
 
 <div class="container">
     <div class="row">
-        <div class="col-4 offset-1" id="osc_ocupado">
+        <div class="col-md-8 offset-1" id="osc_ocupado">
             <div class="card">
                 <div class="card-header">
                     <center> <label style="font-size:12px;font-weight:bold">Segunda Feira dia 1 de Fevereiro de 2018</label></center>
                 </div>
                 <div class="card-body">
-                    <table style="font-size:10px;width:100%;" class="table table-hover">
+                    <table style="font-size:12px;width:100%; font-weight:bold;" class="table table-hover  ">
 
                         @foreach (var item in Model.itensCalendario)
-                        {                            
-                           <tr id="1" style="height:20px" class="border border-dark " onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"><td><i class="fa fa-2x fa-cog"></i></td><td><span class=""></span></td><td><span class="">@item.titulo</span></td><td><td><span class=""></span></td> <td><span>@item.inicio.HoraFormatada</span></td><td><span>00:02</span></td></tr>
-                         }
-                    </table>
-                </div>
-            </div>
-        </div>>
-        <div class="col-4 offset-1"  id="osc_livre">
+                        {
+                            @if (item.titulo != "LIVRE")
+                            {
+                                <tr id="1" style="height:20px" class="border border-dark" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new { id = item.id.ToString() })'">
+                                <td><i class="fa fa-2x fa-user-md"></i></td>
+                                <td><span class="">1010</span></td>
+                                <td><span class="">Nome Cliente</span></td>
+                                <td><span class="">@item.titulo</span></td> 
+                                <td><span class="">REIKE</span></td>  
+                                <td><span>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.inicio.horaDia)) </span></td >
+                                <td><span> @HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.fim.horaDia))</span ></td >
+                                </tr >
+                            }
+                            else
+                            {
+                              <tr id="1" style="height:20px" class="border border-dark  bg-success" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'">
+                              <td><i class="fa fa-2x fa-user-plus"></i></td>  
+                              <td><span class="">1010</span></td>   
+                              <td><span class="">Nome Cliente</span></td>                                 
+                              <td><span>@item.titulo</span></td> 
+                              <td><span class="">Apometria</span></td> 
+                              <td><span>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.inicio.horaDia))</span></td>
+                              <td><span>00:00</span></td>
+                              </tr>
+                            }
+                        }
+                    </table >
+                </div >
+            </div >
+        </div>
+        @*<div class="col-4 offset-1"  id="osc_livre">
             <div class="card">
                 <div class="card-header">
                     <center> <label style="font-size:12px;font-weight:bold">Segunda Feira dia 1 de Fevereiro de 2018</label></center>
@@ -33,7 +57,7 @@
                     </table>
                 </div>
             </div>
-        </div>>
+        </div>>*@
         <div class="col-1 " >
             <div class="input-group">
                 &nbsp;<button id="osc_voltar" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
