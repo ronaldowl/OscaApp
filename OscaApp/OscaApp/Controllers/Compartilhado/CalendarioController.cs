@@ -39,30 +39,26 @@ namespace OscaApp.Controllers
             else{
 
                 calen = CalendarioRules.PreencheMes(DateTime.Now.Month, DateTime.Now.Year, sqlServices, this.contexto, idProfissional);
-            }          
-
+            }
+            calen.idProfissional =  idProfissional;
             return View(calen);
         }
 
         [HttpPost]
         public ViewResult Mes(Calendario entrada)
         {
-            Calendario calen = new Calendario();
+            Calendario calen = new Calendario();            
          
-            calen = CalendarioRules.PreencheMes(entrada.mes, entrada.ano, sqlServices, contexto,entrada.idProfissional );          
-           
+            calen = CalendarioRules.PreencheMes(entrada.mes, entrada.ano, sqlServices, contexto,entrada.idProfissional );
+            calen.idProfissional = entrada.idProfissional;
+
             return View(calen);
         }
 
         [HttpGet]
-        public ViewResult Dia(int dia, int mes,int Ano, string idProfissional)
-        {
-            dia = 23;
-            mes = 2;
-            Ano = 2018;
-            idProfissional = "4FCE1A00-1496-415D-76FE-08D57246C8AB";
-
-            Dia day = CalendarioRules.PreencheDia(dia, mes, Ano, sqlServices, contexto, idProfissional);
+        public ViewResult Dia(int Ano, int mes, int dia, string idProfissional)
+        {      
+            Dia day = CalendarioRules.PreencheDia(Ano,mes,dia, sqlServices, contexto, idProfissional);
 
             return View(day);
         }

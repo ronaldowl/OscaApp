@@ -77,56 +77,55 @@ namespace OscaApp.RulesServices
             return retorno;
         }
 
-        public static Dia PreencheDia(int dia, int Mes, int Ano, SqlGeneric sqlServices, ContextPage contexto, string idProfissional)
+        public static Dia PreencheDia( int Ano,  int Mes, int dia, SqlGeneric sqlServices, ContextPage contexto, string idProfissional)
         {
             string data = Ano + "-" + Mes + "- " + dia;
 
             Dia retorno = new Dia();
             CultureInfo culture = new CultureInfo("pt-BR");
+            DateTime dataRef = new DateTime(Ano, Mes, dia);
             DateTimeFormatInfo dataFormat = culture.DateTimeFormat;
-            //retorno.nomeDia = dataFormat.AbbreviatedDayNames[dia - 1];            
+            retorno.nomeDia = dataFormat.GetDayName(dataRef.DayOfWeek);
+            retorno.dia = dia;
+            retorno.ano = Ano;
+            retorno.nomeMes = dataFormat.MonthNames[Mes - 1];
 
-
+            SqlGenericData sqldata = new SqlGenericData();
             IEnumerable<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosDia(data, idProfissional, contexto.idOrganizacao.ToString());
            
             List<ItemCalendario> lancamentos = new List<ItemCalendario>();
-            int horarios = 15; 
+          
 
-            ////Preenche horarios vazio
-            //while ( horarios < 48 )
-            //{
                 foreach (var item in Atendimentos)
                 {
-                    //if (item.horaInicio == horarios)
-                    //{
+                  
                         ItemCalendario hoc = new ItemCalendario();
                         hoc.id = item.id.ToString();
+                        hoc.codigo = item.codigo;
                         hoc.inicio = new ItemHoraDia();
                         hoc.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
                         hoc.fim = new ItemHoraDia();
                         hoc.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
                         hoc.titulo = item.titulo;
-                        lancamentos.Add(hoc);
+                        hoc.cliente = sqldata.RetornaRelacaoCliente(item.idCliente).idName;
+                        hoc.tipo = item.tipoReferencia.ToString();
 
-                        horarios = Convert.ToInt32(hoc.fim.horaDia) + 1;
-                       // break;
-                //    }
-                //    else
-                //    {
-                       
-                //            ItemCalendario hoc = new ItemCalendario();
+                        if (item.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico)
+                        {
+                            hoc.referencia = sqldata.RetornaRelacaoOrdemServico(item.idReferencia).codigo;
+                        }
+                        if (item.tipoReferencia == CustomEnum.TipoReferencia.servico)
+                        {
+                            hoc.referencia = sqldata.RetornaRelacaoServico(item.idReferencia).codigo;
+                        } 
 
-                //            hoc.inicio = new ItemHoraDia();
-                //            hoc.inicio.horaDia = (CustomEnum.itemHora)horarios;
-                //            hoc.fim = new ItemHoraDia();
+                        if (item.tipoReferencia == CustomEnum.TipoReferencia.semReferencia)
+                        {
+                            hoc.referencia = "";
+                        }
 
-                //            hoc.titulo = "LIVRE";
-                //            lancamentos.Add(hoc);
-                //        break;
-                        
-                //    }
-                //}
-                //horarios++;
+                        lancamentos.Add(hoc);                      
+             
             }
 
             retorno.itensCalendario = lancamentos;
