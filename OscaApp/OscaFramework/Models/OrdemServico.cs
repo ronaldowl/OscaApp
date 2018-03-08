@@ -9,15 +9,15 @@ namespace OscaFramework.Models
     public class OrdemServico : GenericEntity
     {
         public String codigo { get; set; }
-        public int horaInicio { get; set; }
-        public int horaFim { get; set; }
-        public DateTime dataAgendada { get; set; }
+   
         public DateTime dataFechamento { get; set; }
 
         public Guid idOrganizacao { get; set; }
         public Guid idCliente { get; set; }
         public Guid idCategoriaManutencao { get; set; }
         public Guid idListaPreco { get; set; }
+        public Guid idProfissional { get; set; }
+
 
         public string problema { get; set; }
         public string diagnostico { get; set; }

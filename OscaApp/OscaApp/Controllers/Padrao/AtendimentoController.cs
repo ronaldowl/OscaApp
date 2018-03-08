@@ -77,7 +77,12 @@ namespace OscaApp.Controllers
                     retorno = atendimentoData.Get(new Guid(id));
 
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
-                    modelo.servico = sqlData.RetornaRelacaoServico(retorno.idServico);
+                    modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
+
+                    if(retorno.tipoReferencia == CustomEnum.TipoReferencia.servico)modelo.servico = sqlData.RetornaRelacaoServico(retorno.idReferencia);
+
+                    if (retorno.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico) modelo.os = sqlData.RetornaRelacaoOrdemServico(retorno.idReferencia);
+                    
                     modelo.horaInicio = new ItemHoraDia();
                     modelo.horaInicio.horaDia = (CustomEnum.itemHora)retorno.horaInicio;
                     modelo.horaFim = new ItemHoraDia();
@@ -135,5 +140,6 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
         }
+
     }
 }

@@ -161,7 +161,7 @@ namespace OscaFramework.MicroServices
                             item.codigo = dataReader["codigo"].ToString();
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
-                            item.idServico = new Guid(dataReader["idServico"].ToString());
+                            item.idReferencia = new Guid(dataReader["idReferencia"].ToString());
                             item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
                             item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
                             item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());
@@ -210,7 +210,7 @@ namespace OscaFramework.MicroServices
                             item.codigo = dataReader["codigo"].ToString();
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
-                            item.idServico = new Guid(dataReader["idServico"].ToString());
+                            item.idReferencia = new Guid(dataReader["idReferencia"].ToString());
                             item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
                             item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
                             item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());

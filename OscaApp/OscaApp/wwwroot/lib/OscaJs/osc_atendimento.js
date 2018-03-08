@@ -1,6 +1,7 @@
 function OnLoad_Atendimento() {
     
     ConfigCalendario();
+    OnChangeTipoReferencia();
      
     var status = document.getElementById("osc_statusAtendimento").value; 
     desabilitaCampos_Atendimento(status)
@@ -61,4 +62,45 @@ function ValidaHora(hora)
 
     }
 
+}
+
+function OnChangeTipoReferencia()
+{
+    var tipo = $("#osc_tipoReferencia").val();   
+
+    if (tipo == 0) {      
+
+        $("#osc_IdNameOs").val("");
+        $("#osc_IdNameOs").prop("disabled", true);
+        $("#osc_botaoBuscaOS").hide();
+
+        $("#osc_IdNameServico").val("");
+        $("#osc_IdNameServico").prop("disabled", true);
+        $("#osc_botaoBuscaServico").hide();
+    }
+
+    
+    if (tipo == 1)
+    {
+        $("#osc_IdNameOs").val("");
+        $("#osc_IdOs").val("");
+        $("#osc_IdNameOs").prop("disabled", true);
+        $("#osc_botaoBuscaOS").hide();
+
+        //habilita
+        $("#osc_IdNameServico").prop("disabled", false);
+        $("#osc_botaoBuscaServico").show();
+    }
+
+    if (tipo == 2)
+    {              
+        $("#osc_IdNameServico").val("");
+        $("#osc_IdServico").val("");
+        $("#osc_IdNameServico").prop("disabled", true);
+        $("#osc_botaoBuscaServico").hide();
+
+        //habilita
+        $("#osc_IdNameOs").prop("disabled", false);
+        $("#osc_botaoBuscaOS").show();
+    }
 }

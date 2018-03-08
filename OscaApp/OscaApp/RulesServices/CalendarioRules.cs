@@ -43,7 +43,7 @@ namespace OscaApp.RulesServices
             retorno.dias = diasMEs;
 
             SqlGenericData sqlData = new SqlGenericData();
-            retorno.profissionais = HelperAttributes.PreencheDropDownList(sqlData.RetornaRelacaoProfissional( contexto.idOrganizacao));
+            retorno.profissionais = HelperAttributes.PreencheDropDownList(sqlData.RetornaTodasRelacaoProfissional( contexto.idOrganizacao));
 
             return retorno;
         }      

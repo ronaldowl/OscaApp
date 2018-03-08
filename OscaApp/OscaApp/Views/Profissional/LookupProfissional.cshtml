@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.Banco>
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Profissional>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -6,22 +6,20 @@
     Layout = "_LayoutFrame";
 }
 
+
 <script type="text/javascript">
+
     //Função para tratamento do Lookup padrão do Cliente
     function ConfigLookup(id, name) {
-        var idObjeto = document.getElementById("osc_BancoId");
-        var idName = document.getElementById("osc_IdBancoName");
-        idObjeto.value = id;
-        idName.value = name;
-        $('#lookupBanco').modal('hide');
+
+        $("#osc_IdNameProfissional").val(name);
+        $("#osc_IdProfissional").val(id);
+        $('#lookupProfissional').modal('hide');
     }
 </script>
 
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-        </div>
         <div class="modal-body">
             <div class="card" id="osc_Grid">
                 <div class="card-header">
@@ -29,7 +27,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold">Lista de Bancos: &nbsp;&nbsp;</h5>
+                                    <h5 style="font-weight:bold">Lista de Profissionais: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
                                     <form class="form-inline">
@@ -43,9 +41,12 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <label>
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>                                     
+                                        </label> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                                        <label>
+                                            <button type="button" class="close btn btn-info btn-lg" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                                        </label>
                                     </form>
                                 </td>
                             </tr>
@@ -54,29 +55,27 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-11">
-                                <table class="table table-hover table-striped table-sm">
+                                <table class="table table-hover table-striped table-bordered table-sm">
                                     <thead>
                                         <tr>
                                             <th></th>
                                             <th>Código</th>
-                                            <th>Nome</th>
-                                            <th>Site</th>
+                                            <th>Profissional</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" value="@item.nome" onclick="ConfigLookup('@item.id.ToString()','@item.nome.ToString()')">
-                                            <td><i class="fa fa-1x fa-university"></i></td>
-                                            <td>@item.codigo</td>
-                                            <td>@item.nome</td>
-                                            <td>@item.site</td>
+                                        <tr id="@item.id" value="@item.codigo" onclick="ConfigLookup('@item.id.ToString()','@item.codigo')">
+                                            <td><i class="fa fa-black-tie"></i></td>
+                                            <td>@item.codigo.ToString()</td>
+                                            <td>@item.nomeProfissional</td>
                                         </tr>
-                                    }
+                                     }
                                 </table>
                                 <div>
                                     <table>
                                         <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("LookupBanco", "Banco", new { page }))</td>
+                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridProfissional", "Profissional", new { page }))</td>
                                             <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
                                         </tr>
                                     </table>
@@ -89,3 +88,4 @@
         </div>
     </div>
 </div>
+

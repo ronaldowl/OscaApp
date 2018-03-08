@@ -58,6 +58,7 @@ namespace OscaApp.Data
         void UpdateStatus(OrdemServico ordemServico);
         OrdemServico Get(Guid id );
         List<OrdemServico> GetAll(Guid id);
+        List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg);
     }
     public interface IServicoData
     {

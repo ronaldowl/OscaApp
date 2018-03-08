@@ -19,6 +19,13 @@
         });
     }
 
+    function CarregaLookupProfissional() {
+
+        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
+            $("#lookupProfissional").modal("show");
+        });
+    }
+
 </script>
 
 
@@ -105,6 +112,21 @@
                                             <option value="1" selected="">Orçamento</option>
                                             <option value="2">Execução</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Profissional</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional">
+                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -204,130 +226,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Data agendada</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input id="osc_dataInicio" asp-for="@Model.ordemServico.dataAgendada" class="form-control" type="date">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Hora Inicio</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <select id="osc_horaInicio" asp-for="@Model.ordemServico.horaInicio" class="form-control">
-                                                <option value="1" selected="">01:00</option>
-                                                <option value="2">01:30</option>
-                                                <option value="3">02:00</option>
-                                                <option value="4">02:30</option>
-                                                <option value="5">03:00</option>
-                                                <option value="6">03:30</option>
-                                                <option value="7">04:00</option>
-                                                <option value="8">04:30</option>
-                                                <option value="9">05:00</option>
-                                                <option value="10">05:30</option>
-                                                <option value="11">06:00</option>
-                                                <option value="12">06:30</option>
-                                                <option value="13">07:00</option>
-                                                <option value="14">07:30</option>
-                                                <option value="15" selected="">08:00</option>
-                                                <option value="16">08:30</option>
-                                                <option value="17">09:00</option>
-                                                <option value="18">09:30</option>
-                                                <option value="19">10:00</option>
-                                                <option value="20">10:30</option>
-                                                <option value="21">11:00</option>
-                                                <option value="22">11:30</option>
-                                                <option value="23">12:00</option>
-                                                <option value="24">12:30</option>
-                                                <option value="25">13:00</option>
-                                                <option value="26">13:30</option>
-                                                <option value="27">14:00</option>
-                                                <option value="28">14:30</option>
-                                                <option value="29">15:00</option>
-                                                <option value="30">15:30</option>
-                                                <option value="31">16:00</option>
-                                                <option value="32">16:30</option>
-                                                <option value="33">17:00</option>
-                                                <option value="34">17:30</option>
-                                                <option value="35">18:00</option>
-                                                <option value="36">18:30</option>
-                                                <option value="37">19:00</option>
-                                                <option value="38">19:30</option>
-                                                <option value="39">20:00</option>
-                                                <option value="40">20:30</option>
-                                                <option value="41">21:00</option>
-                                                <option value="42">21:30</option>
-                                                <option value="43">22:00</option>
-                                                <option value="44">22:30</option>
-                                                <option value="45">23:00</option>
-                                                <option value="46">23:30</option>
-                                                <option value="47">00:00</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Hora Fim</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <select id="osc_horaFim" asp-for="@Model.ordemServico.horaFim" class="form-control">
-                                                <option value="1">01:00</option>
-                                                <option value="2">01:30</option>
-                                                <option value="3">02:00</option>
-                                                <option value="4">02:30</option>
-                                                <option value="5">03:00</option>
-                                                <option value="6">03:30</option>
-                                                <option value="7">04:00</option>
-                                                <option value="8">04:30</option>
-                                                <option value="9">05:00</option>
-                                                <option value="10">05:30</option>
-                                                <option value="11">06:00</option>
-                                                <option value="12">06:30</option>
-                                                <option value="13">07:00</option>
-                                                <option value="14">07:30</option>
-                                                <option value="15" selected="">08:00</option>
-                                                <option value="16">08:30</option>
-                                                <option value="17">09:00</option>
-                                                <option value="18">09:30</option>
-                                                <option value="19">10:00</option>
-                                                <option value="20">10:30</option>
-                                                <option value="21">11:00</option>
-                                                <option value="22">11:30</option>
-                                                <option value="23">12:00</option>
-                                                <option value="24">12:30</option>
-                                                <option value="25">13:00</option>
-                                                <option value="26">13:30</option>
-                                                <option value="27">14:00</option>
-                                                <option value="28">14:30</option>
-                                                <option value="29">15:00</option>
-                                                <option value="30">15:30</option>
-                                                <option value="31">16:00</option>
-                                                <option value="32">16:30</option>
-                                                <option value="33">17:00</option>
-                                                <option value="34">17:30</option>
-                                                <option value="35">18:00</option>
-                                                <option value="36">18:30</option>
-                                                <option value="37">19:00</option>
-                                                <option value="38">19:30</option>
-                                                <option value="39">20:00</option>
-                                                <option value="40">20:30</option>
-                                                <option value="41">21:00</option>
-                                                <option value="42">21:30</option>
-                                                <option value="43">22:00</option>
-                                                <option value="44">22:30</option>
-                                                <option value="45">23:00</option>
-                                                <option value="46">23:30</option>
-                                                <option value="47">00:00</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                        
                                 <div class="form-group">
                                     <label>Data de Fechamento</label>
                                     <div class="inputGroupContainer">
@@ -537,6 +436,8 @@
 <div class="modal fade" id="lookupCategoriaManutencao">
 </div>
 <div class="modal fade" id="ModalStatusOrdem">
+</div>
+<div class="modal fade" id="lookupProfissional">
 </div>
 <script src="~/lib/OscaJs/osc_ordemServico.js"></script>
 <script>OnLoad_OrdemServico();</script>
