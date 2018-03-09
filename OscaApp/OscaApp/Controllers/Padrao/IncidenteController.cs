@@ -9,6 +9,7 @@ using OscaFramework.Models;
 using OscaApp.ViewModels;
 using OscaApp.RulesServices;
 using OscaFramework.MicroServices;
+using X.PagedList;
 
 namespace OscaApp.Controllers.Padrao
 {
@@ -66,12 +67,15 @@ namespace OscaApp.Controllers.Padrao
             IncidenteViewModel modelo = new IncidenteViewModel();
             modelo.Incidente = new Incidente();
             modelo.Incidente.id = new Guid(id);
+            //modelo.Incidente.modificadoPorName = contexto.nomeUsuario;
+            //modelo.Incidente.modificadoEm = DateTime.Now;
 
             Incidente retorno = new Incidente();
 
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = modeloData.Get(modelo.Incidente.id, contexto.idOrganizacao);
+                modelo.Incidente = retorno;
             } // end of if
             return View(modelo);
         } // end of FormUpdateIncidente
@@ -95,6 +99,17 @@ namespace OscaApp.Controllers.Padrao
             } // end of catch
             return RedirectToAction("FormUpdateIncidente", new { id = modelo.id.ToString() });
         } // end of method FormUpdateIncidente
+
+        public ViewResult GridIncidente(string filtro, int Page)
+        {
+            IEnumerable<Incidente> retorno = modeloData.GetAll(contexto.idOrganizacao);
+
+            retorno = retorno.OrderBy(x => x.Codigo);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Incidente>(Page, 10));
+        }
 
     } // end of class IncidenteController
 } // end of namespace OscaApp.Controllers.Padrao

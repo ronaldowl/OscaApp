@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9 offset-1">
-            <form action="FormUpdateRecurso" method="post">
+            <form action="FormUpdateIncidente" method="post">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title">
@@ -22,10 +22,10 @@
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridRecurso", "Recurso" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridIncidente", "Incidente" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateRecurso", "Recurso", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateIncidente", "Incidente", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_status_inativa" type="button" class="btn btn-info btn-lg fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
