@@ -31,13 +31,17 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormCreateAtendimento(string id)
         {
+            SqlGeneric sqlServices = new SqlGeneric();
+           
+
             AtendimentoViewModel modelo = new AtendimentoViewModel();
             modelo.contexto = contexto;
             modelo.atendimento = new Atendimento();
             modelo.atendimento.status = CustomEnumStatus.Status.Ativo;
 
             modelo.atendimento.criadoEm = DateTime.Now;
-            modelo.atendimento.criadoPorName = contexto.nomeUsuario;       
+            modelo.atendimento.criadoPorName = contexto.nomeUsuario;
+            modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString())));
             
             return View(modelo);
         }

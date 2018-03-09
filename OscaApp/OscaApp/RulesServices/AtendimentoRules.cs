@@ -20,6 +20,10 @@ namespace OscaApp.RulesServices
             modelo.idCliente = entrada.cliente.id;
                         
             if (entrada.servico != null) modelo.idReferencia = entrada.servico.id;
+
+            if (entrada.profissional != null) modelo.idProfissional = entrada.profissional.id;
+
+
             if (entrada.os != null) modelo.idReferencia = entrada.os.id;
 
             if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);

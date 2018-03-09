@@ -13,6 +13,12 @@
             $("#lookupServico").modal("show");
         });
     }
+    function CarregaLookupProfissional() {
+
+        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
+            $("#lookupProfissional").modal("show");
+        });
+    }
 </script>
 
 <div id="contexto">
@@ -207,8 +213,24 @@
                                             </div>
                                         </div>
                                     </div>                         
-                            </div>                                               
-                        </div>
+                            </div>    
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Profissional</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required">
+                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; </span></div>
                                   
@@ -280,6 +302,8 @@
 <div class="modal fade" id="lookupCliente">
 </div>
 <div class="modal fade" id="lookupServico">
+</div>
+<div class="modal fade" id="lookupProfissional">
 </div>
 <script src="~/lib/OscaJs/osc_atendimento.js"></script>
  
