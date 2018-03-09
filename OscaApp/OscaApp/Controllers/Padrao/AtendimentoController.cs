@@ -145,5 +145,58 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
         }
 
+     
+        [HttpGet]
+        public ViewResult FormStatusAtendimento(string id)
+        {
+            AtendimentoViewModel modelo = new AtendimentoViewModel();
+            modelo.contexto = this.contexto;
+
+            try
+            {
+                Atendimento retorno = new Atendimento();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = atendimentoData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.atendimento = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormStatusAtendimento(AtendimentoViewModel entrada)
+        {
+            Atendimento modelo = new Atendimento();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (AtendimentoRules.AtendimentoUpdate(entrada, out modelo))
+                {
+                    atendimentoData.UpdateStatus(modelo);
+
+                    return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-post", ex.Message);
+            }
+            return View();
+        }
+
     }
 }

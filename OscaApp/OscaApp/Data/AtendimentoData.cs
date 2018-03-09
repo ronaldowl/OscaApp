@@ -67,6 +67,26 @@ namespace OscaApp.Data
             }
 
         }
+        public void UpdateStatus(Atendimento modelo)
+        {
+            try
+            {
+                db.Attach(modelo);
+                db.Entry(modelo).Property("statusAtendimento").IsModified = true;               
+                
+                db.Entry(modelo).Property("modificadoPor").IsModified = true;
+                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+                db.Entry(modelo).Property("modificadoEm").IsModified = true;
+
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         public Atendimento Get(Guid id)
         {
             List<Atendimento> retorno = new List<Atendimento>();
