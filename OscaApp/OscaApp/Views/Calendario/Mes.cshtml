@@ -5,14 +5,14 @@
         <div class="row" id="barrafiltro">
             <div class="card-header">
                 <div class="form-group form-inline">
-                    <label style="font-weight:bold; font-size:20px">Mês: </label>
+                    &nbsp;&nbsp;<label style="font-weight:bold; font-size:20px">Mês:&nbsp; </label>
                     <div class="input-group">
                         <select id="osc_mes" class="form-control" asp-for="@Model.mes">
                             <option value="1" selected="">Janeiro</option>
-                            <option value="2">Feverreiro</option>
+                            <option value="2">Fevereiro</option>
                             <option value="3">Março</option>
                             <option value="4">Abril</option>
-                            <option value="5">Maio</option>
+                            <option value="5">Maio</option>                            
                             <option value="6">Junho</option>
                             <option value="7">Julho</option>
                             <option value="8">Agosto</option>
@@ -22,7 +22,8 @@
                             <option value="12">Dezembro</option>
                         </select>
                     </div>
-                    <label style="font-weight:bold; font-size:20px">&nbsp;Ano:&nbsp; </label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label style="font-weight:bold; font-size:20px">Ano:&nbsp; </label>
                     <div class="input-group">
                         <select id="osc_ano" class="form-control" asp-for="@Model.ano">
                             <option value="2018" selected="">2018</option>
@@ -31,28 +32,29 @@
                             <option value="2021">2021</option>
                         </select>
                     </div>
-                    <label style="font-weight:bold; font-size:20px">&nbsp;Profissional:&nbsp; </label>
+                    &nbsp;&nbsp;&nbsp;
+                    <label style="font-weight:bold; font-size:20px">Profissional:&nbsp; </label>
                     <div class="input-group">
-                        <select asp-items="@Model.profissionais" asp-for="@Model.idProfissional" id="osc_profissionais" required="required"></select>
-                        &nbsp;
+                        <select asp-items="@Model.profissionais" asp-for="@Model.idProfissional" id="osc_profissionais" required="required" class="form-control"></select>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <div class="input-group">
-                            <button id="osc_filtro" type="submit" class="btn btn-info btn-sm fa fa-exclamation-circle" value="filtro"> <span>Aplicar</span></button>
-                            &nbsp;<button id="osc_novo" style="font-size:20px;" type="button" class="btn btn-info btn-sm fa fa-calendar-times-o" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"> <span>Novo</span></button>
+                            <button id="osc_filtro" type="submit" style="font-size:20px;" class="btn btn-info btn-sm fa fa-exclamation-circle" value="filtro"> <span>Aplicar</span></button>
+                            &nbsp;&nbsp;
+                            <button id="osc_novo" style="font-size:20px;" type="button" class="btn btn-info btn-sm fa fa-calendar-times-o" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"> <span>Novo</span></button>
                         </div>
                         <div class="input-group">
-                            &nbsp;<button id="osc_voltar" style="font-size:20px;" type="button" class="btn btn-info btn-sm fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
+                            &nbsp;&nbsp;
+                            <button id="osc_voltar" style="font-size:20px;" type="button" class="btn btn-info btn-sm fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-        <div class="row" style="background-color:darkgrey; width: 96%; height:10px;"></div>
+        <div class="row" style="background-color:darkgrey; width: 96%; height:10px; margin-bottom:5px;"></div>
         <div class="row">
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 1, idProfissional = Model.idProfissional })'">  <center> <label style="font-size:12px;font-weight:bold">1 - @Model.dias[0].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 1, idProfissional = Model.idProfissional })'">  <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">1 - @Model.dias[0].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -84,8 +86,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 2, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">2 - @Model.dias[1].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 2, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">2 - @Model.dias[1].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -117,8 +119,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 3, idProfissional = Model.idProfissional })'">     <center> <label style="font-size:12px;font-weight:bold">3 - @Model.dias[2].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 3, idProfissional = Model.idProfissional })'">     <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">3 - @Model.dias[2].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -150,8 +152,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 4, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">4 - @Model.dias[3].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 4, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">4 - @Model.dias[3].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -182,8 +184,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 5, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">5 - @Model.dias[4].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 5, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">5 - @Model.dias[4].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -215,8 +217,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 6, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">6 - @Model.dias[5].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 6, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">6 - @Model.dias[5].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -248,8 +250,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 7, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">7 - @Model.dias[6].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 7, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">7 - @Model.dias[6].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -283,8 +285,8 @@
         </div><br />
         <div class="row">
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 8, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">8 - @Model.dias[7].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 8, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">8 - @Model.dias[7].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -316,8 +318,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 9, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">9 - @Model.dias[8].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 9, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">9 - @Model.dias[8].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -349,8 +351,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 10, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">10 - @Model.dias[9].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 10, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">10 - @Model.dias[9].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -382,8 +384,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 11, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">11 - @Model.dias[10].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 11, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">11 - @Model.dias[10].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -415,8 +417,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 12, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">12 - @Model.dias[11].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important; margin:0!important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 12, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:11.6px;font-weight:bold">12 - @Model.dias[11].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -448,8 +450,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 13, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">13 - @Model.dias[12].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 13, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">13 - @Model.dias[12].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -481,8 +483,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 14, idProfissional = Model.idProfissional })'">  <center> <label style="font-size:12px;font-weight:bold">14 - @Model.dias[13].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 14, idProfissional = Model.idProfissional })'">  <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">14 - @Model.dias[13].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -516,8 +518,8 @@
         </div><br />
         <div class="row">
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 15, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">15 - @Model.dias[14].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 15, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">15 - @Model.dias[14].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -549,8 +551,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 16, idProfissional = Model.idProfissional })'">  <center> <label style="font-size:12px;font-weight:bold">16 - @Model.dias[15].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 16, idProfissional = Model.idProfissional })'">  <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">16 - @Model.dias[15].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -582,8 +584,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 17, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">17 - @Model.dias[16].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 17, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">17 - @Model.dias[16].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -614,8 +616,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 18, idProfissional = Model.idProfissional })'">  <center> <label style="font-size:12px;font-weight:bold">18 - @Model.dias[17].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 18, idProfissional = Model.idProfissional })'">  <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">18 - @Model.dias[17].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -647,8 +649,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 19, idProfissional = Model.idProfissional })'">  <center> <label style="font-size:12px;font-weight:bold">19 - @Model.dias[18].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 19, idProfissional = Model.idProfissional })'">  <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:11.6px;font-weight:bold">19 - @Model.dias[18].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -680,8 +682,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 20, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">20 - @Model.dias[19].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 20, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">20 - @Model.dias[19].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -713,8 +715,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 21, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">21 - @Model.dias[20].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 21, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">21 - @Model.dias[20].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -748,8 +750,8 @@
         </div><br />
         <div class="row">
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 22, idProfissional = Model.idProfissional })'">  <center> <label style="font-size:12px;font-weight:bold">22 - @Model.dias[21].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 22, idProfissional = Model.idProfissional })'">  <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">22 - @Model.dias[21].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -781,8 +783,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 23, idProfissional = Model.idProfissional })'">  <center> <label style="font-size:12px;font-weight:bold">23 - @Model.dias[22].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 23, idProfissional = Model.idProfissional })'">  <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">23 - @Model.dias[22].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -814,8 +816,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 24, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">24 - @Model.dias[23].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 24, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">24 - @Model.dias[23].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -847,8 +849,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 25, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">25 - @Model.dias[24].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 25, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">25 - @Model.dias[24].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -880,8 +882,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 26, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">26 - @Model.dias[25].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 26, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:11.6px;font-weight:bold">26 - @Model.dias[25].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -912,8 +914,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 27, idProfissional = Model.idProfissional })'">   <center> <label style="font-size:12px;font-weight:bold">27 - @Model.dias[26].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 27, idProfissional = Model.idProfissional })'">   <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">27 - @Model.dias[26].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -945,8 +947,8 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
-                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 28, idProfissional = Model.idProfissional })'">    <center> <label style="font-size:12px;font-weight:bold">28 - @Model.dias[27].nomeDia</label></center></a>
+                <div class="card-header" style="padding:0 !important;">
+                    <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 28, idProfissional = Model.idProfissional })'">    <center> <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">28 - @Model.dias[27].nomeDia</label></center></a>
                 </div>
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
@@ -980,10 +982,10 @@
         </div><br />
         <div class="row">
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
+                <div class="card-header" style="padding:0 !important;">
                     <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 29, idProfissional = Model.idProfissional })'">
                         <center>
-                            <label style="font-size:12px;font-weight:bold">
+                            <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">
                                 29 - @if (Model.dias.Count > 28)
                                 {@Model.dias[28].nomeDia}
                             </label>
@@ -1020,10 +1022,10 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
+                <div class="card-header" style="padding:0 !important;">
                     <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 30, idProfissional = Model.idProfissional })'">
                         <center>
-                            <label style="font-size:12px;font-weight:bold">
+                            <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">
                                 30 - @if (Model.dias.Count > 29)
                                 { @Model.dias[29].nomeDia}
                             </label>
@@ -1060,10 +1062,10 @@
                 </div>
             </div>&nbsp;&nbsp;
             <div class="card" style="width: 9rem;">
-                <div class="card-header">
+                <div class="card-header" style="padding:0 !important;">
                     <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 31, idProfissional = Model.idProfissional })'">
                         <center>
-                            <label style="font-size:12px;font-weight:bold">
+                            <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">
                                 31 - @if (Model.dias.Count > 30)
                                 { @Model.dias[30].nomeDia}
                             </label>
@@ -1102,7 +1104,7 @@
 
         </div>
         <div class="row" id="legenda">
-            <label style="font-weight:bold; font-size:25px">&nbsp;Legenda:<span style="font-size:20px;" class="bg-info">Agendado, </span><span style="font-size:20px;" class="bg-secondary">Atendido</span></label>
+            <label style="font-weight:bold; font-size:25px">&nbsp;Legenda: <span style="font-size:20px;" class="bg-info">Agendado</span>, <span style="font-size:20px;" class="bg-secondary">Atendido</span></label>
 
         </div>
     </form>

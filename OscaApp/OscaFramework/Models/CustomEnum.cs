@@ -292,6 +292,7 @@ namespace OscaFramework.Models
             Agendamento = 24,
             ItemProdutoLista =25,
             ServicoOrdem = 26,
+            Atividade = 27,
             Organizacao = 1000
 
         }
