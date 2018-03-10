@@ -30,3 +30,6 @@
 .tableNoMargin{
     margin-bottom:0;
 }
+.clicky{
+    cursor:pointer !important;
+}

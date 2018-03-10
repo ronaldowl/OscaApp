@@ -69,7 +69,7 @@ namespace OscaApp.Controllers
                     {
                         SqlGenericData sqlData = new SqlGenericData();
                         produtoOrdemData.Add(modelo);
-                        return RedirectToAction("GridProdutoOrdem", "ProdutoOrdem", new { id = sqlData.RetornaRelacaoOrdemServicoPorIDProdutoOrdem(modelo.id).id });
+                        return RedirectToAction("FormUpdateOrdemServico", "OrdemServico", new { id = sqlData.RetornaRelacaoOrdemServicoPorIDProdutoOrdem(modelo.id).id });
 
                     }
                 }
@@ -114,8 +114,9 @@ namespace OscaApp.Controllers
             {
                 if (ProdutoOrdemRules.ProdutoOrdemUpdate(entrada, out modelo, this.contexto))
                 {
-                    produtoOrdemData.Update(modelo);                    
-                    return RedirectToAction("GridProdutoOrdem", "ProdutoOrdem", new { id = entrada.ordemServico.id });
+                    produtoOrdemData.Update(modelo);
+                    return RedirectToAction("FormUpdateOrdemServico", " OrdemServico", new { id =  modelo.idOrdemServico });
+
                 }
             }
             catch (Exception ex)

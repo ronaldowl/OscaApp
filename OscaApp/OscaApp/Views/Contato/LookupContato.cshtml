@@ -14,7 +14,7 @@
         var idName = document.getElementById("osc_IdContatoName");
         idObjeto.value = id;
         idName.value = name;
-        $('#lookupContato').modal('hide');
+        $('.close').click(); 
     }
     function CarregaGrid() {
 
@@ -31,6 +31,8 @@
         });
 
     }
+  
+
 </script>
 
 <div class="modal-dialog modal-lg">
@@ -51,7 +53,7 @@
                                     <form class="form-inline">
                                         <div class="form-group  col-md-5">
                                             <div class="input-group">
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid", onkeydown = " CarregaGridFiltro();" })
                                                 <span class="input-group-btn ">
                                                     <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
                                                         <span class="fa fa-search"></span>

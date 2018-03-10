@@ -22,7 +22,7 @@ namespace OscaApp.Controllers
         private readonly EnderecoData enderecoData;
         private readonly OrdemServicoData ordemServicoData;
         private readonly PedidoData pedidoData;
-        //private readonly AtendimentoData atendimentoData;
+        private readonly AtendimentoData atendimentoData;
 
 
 
@@ -35,6 +35,7 @@ namespace OscaApp.Controllers
             this.clienteData = new ClienteData(db);
             this.enderecoData = new EnderecoData(db);
             this.pedidoData = new PedidoData(db);
+            this.atendimentoData = new AtendimentoData(db);
              
             this.ordemServicoData = new OrdemServicoData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
@@ -112,7 +113,9 @@ namespace OscaApp.Controllers
 
                         //Preenche informações do grid de Pedido
                         modelo.pedidos = pedidoData.GetAllByIdCliente(new Guid(id));
-                        
+
+                        //Preenche informações do grid de Atendiemento
+                        modelo.atendimentos = atendimentoData.GetAllByIdCliente(new Guid(id));
                     }
                 }
 
