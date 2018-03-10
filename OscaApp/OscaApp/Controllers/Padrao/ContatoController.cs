@@ -130,15 +130,23 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<Contato>(Page, 10));
         }
 
-        public ViewResult LookupContato(string filtro, int Page)
+        public ActionResult GridLookupContato(string filtro, int Page)
         {
             IEnumerable<Contato> retorno = contatoData.GetAll(contexto.idOrganizacao);
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.email == filtro || A.nome == filtro) select A;
 
             retorno = retorno.OrderBy(x => x.nome);
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Contato>(Page, 10));
+            return PartialView(retorno.ToPagedList<Contato>(Page, 10));
+        }
+        public ViewResult LookupContato(string filtro, int Page)
+        {         
+
+            return View( );
         }
     }
 }

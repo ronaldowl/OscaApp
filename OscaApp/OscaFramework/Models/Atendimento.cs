@@ -36,6 +36,8 @@ namespace OscaFramework.Models
         public StatusAtendimento statusAtendimento { get; set; }
         public TipoReferencia tipoReferencia { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        public decimal valor { get; set; }
 
         public Atendimento()
         {

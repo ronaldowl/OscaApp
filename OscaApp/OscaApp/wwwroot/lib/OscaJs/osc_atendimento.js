@@ -1,4 +1,5 @@
 function OnLoad_Atendimento() {
+  
     
     ConfigCalendario();
     OnChangeTipoReferencia();
@@ -8,20 +9,26 @@ function OnLoad_Atendimento() {
 }
 
 function desabilitaCampos_Atendimento(status) {
-
+  
     if (status == 1 || status == 2 ) {
 
         //Desabilita todos campos do Form
         $("input,select, textarea").prop("disabled", true);
 
+        $("#osc_buscaCliente").hide();
+        $("#osc_botaoBuscaProfissional").hide();
+        $("#osc_botaoBuscaOS").hide();
+        $("#osc_botaoBuscaServico").hide();
+
+
         //Esconde botoes
-        $("#osc_salvar").hide(true);    
+        $("#osc_salvar").hide();    
 
     } else {
 
         //Desabilita botões
         //Esconde botoes
-        $("#osc_reabrir").hide(true);  
+        $("#osc_reabrir").hide();  
 
     }
 }
@@ -51,7 +58,7 @@ function ValidaHora(hora)
     if (fim <= inicio)
     { 
 
-        alert("O horário do fim não pode ser maior ou igual ao horárido do inicio!");
+        alert("O horário do fim não pode ser maior ou igual ao horario do inicio!");
 
         if (hora == 1) {
             $("#osc_horaInicio").val("15");
@@ -77,6 +84,9 @@ function OnChangeTipoReferencia()
         $("#osc_IdNameServico").val("");
         $("#osc_IdNameServico").prop("disabled", true);
         $("#osc_botaoBuscaServico").hide();
+        $("#osc_valor").val("0,00");
+        $("#osc_valor").prop("disabled", true);
+
     }
 
     
@@ -90,6 +100,8 @@ function OnChangeTipoReferencia()
         //habilita
         $("#osc_IdNameServico").prop("disabled", false);
         $("#osc_botaoBuscaServico").show();
+        $("#osc_valor").prop("disabled", false);
+
     }
 
     if (tipo == 2)
@@ -102,5 +114,6 @@ function OnChangeTipoReferencia()
         //habilita
         $("#osc_IdNameOs").prop("disabled", false);
         $("#osc_botaoBuscaOS").show();
+        $("#osc_valor").prop("disabled", false);
     }
 }

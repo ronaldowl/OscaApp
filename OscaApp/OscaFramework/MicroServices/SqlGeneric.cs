@@ -214,6 +214,9 @@ namespace OscaFramework.MicroServices
                             item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
                             item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
                             item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());
+                            item.titulo = dataReader["titulo"].ToString();
+                            item.tipoReferencia = (CustomEnum.TipoReferencia)Convert.ToInt32(dataReader["tipoReferencia"].ToString());
+
                             retorno.Add(item);
                         }
                     }

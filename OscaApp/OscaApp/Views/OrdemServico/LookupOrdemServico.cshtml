@@ -10,10 +10,12 @@
 <script type="text/javascript">
 
     //Função para tratamento do Lookup padrão do Cliente
-    function ConfigLookup(id, name ) {
+    function ConfigLookup(id, name, valor ) {
  
         $("#osc_IdNameOs").val(name);
         $("#osc_IdOs").val(id);
+        $("#osc_valor").val(valor);
+
 
         $('#lookupOS').modal('hide');
     }
@@ -72,7 +74,7 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" value="@item.codigo" onclick="ConfigLookup('@item.id.ToString()','@item.codigo')">
+                                        <tr id="@item.id" value="@item.codigo" onclick="ConfigLookup('@item.id.ToString()','@item.codigo','@item.valorTotal.ToString("N2")')">
                                             <td><i class="fa fa-file-text-o"></i></td>
                                             <td>@item.codigo.ToString() </td>
                                             <td>Cliente 1 </td>
