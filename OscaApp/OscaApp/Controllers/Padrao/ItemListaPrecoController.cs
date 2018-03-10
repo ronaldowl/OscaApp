@@ -175,14 +175,23 @@ namespace OscaApp.Controllers
 
         public ViewResult LookupProdutoOrdem(string idListaPreco, int Page, string Filtro)
         {
+            
+            return View( );
+
+        }
+        public PartialViewResult GridLookupProdutoOrdem(string idListaPreco, int Page, string Filtro)
+        {
             IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(Filtro)) modelo = from A in modelo where (A.produto.codigo == Filtro || A.produto.nome == Filtro) select A;
 
             modelo = modelo.OrderBy(x => x.produto.nome);
 
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return View(modelo.ToPagedList<LookupItemLista>(Page, 10));
+            return PartialView(modelo.ToPagedList<LookupItemLista>(Page, 10));
 
         }
 

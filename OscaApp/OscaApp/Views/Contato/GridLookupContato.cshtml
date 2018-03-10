@@ -18,13 +18,13 @@
                 </tr>
             </thead>
             @foreach (var item in Model)
-                                    {
-                <tr id="@item.id" value="@item.nome" onclick="ConfigLookup('@item.id.ToString()','@item.nome.ToString()')">
+            {
+                <tr id="@item.id" value="@item.nome" onclick="ConfigLookup('@item.id.ToString()','@item.nome.ToString()') " data-dismiss="modal">
                     <td>@item.nome</td>
                     <td>@item.email</td>
                     <td>@item.telefone</td>
                 </tr>
-                                    }
+            }
         </table>
         <div>
             <table>

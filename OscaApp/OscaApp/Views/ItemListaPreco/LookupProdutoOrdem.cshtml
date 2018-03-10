@@ -14,9 +14,24 @@
     
         $("#osc_valor").val(valor);
         $("#osc_IdNameProduto").val(name);
-        $("#osc_IdProduto").val(id);               
-     
-        $('#lookupProduto').modal('hide');
+        $("#osc_IdProduto").val(id);              
+            
+        $('#lookupProduto').on('hidden', function () { $(this).empty(); });
+    }
+    function CarregaGrid() {
+
+        $.ajax("/itemListaPreco/GridLookupProdutoOrdem?idListaPreco=" + idListaPreco).done(function (data) {
+            $("#GridProdutoOrdem").html(data);
+        });
+    }
+    function CarregaGridFiltro() {
+
+        var filtro = $("#grid").val();
+
+        $.ajax("/itemListaPreco/GridLookupProdutoOrdem?filtro=" + filtro + "&idListaPreco=" + idListaPreco).done(function (data) {
+            $("#GridProdutoOrdem").html(data);
+        });
+
     }
 </script>
 
@@ -29,20 +44,21 @@
                                     <h5 style="font-weight:bold">Lista de Produtos: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
-                                    <form class="form-inline">                                    
+                                    <form class="form-inline">                                   
 
                                         <div class="form-group  col-md-4">
                                             <div class="input-group">
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid", onkeydown = " CarregaGridFiltro();" })
                                                 <span class="input-group-btn ">
-                                                    <button type="submit" class="btn btn-info">
+                                                    <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
                                                         <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>
                                             </div>
                                         </div>
                                         <label>
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-lg  fa fa-remove" value="Limpar" onclick="CarregaGrid()"> <span>Limpar</span></button>
+
                                         </label>   
                                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                                
@@ -55,43 +71,13 @@
                         </table>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Código</th>
-                                            <th>Produto</th>
-                                            <th>Forma</th>
-                                            <th>Valor</th>
-                                             
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr id="@item.produto.id" value="@item.produto.nome" onclick="ConfigLookup('@item.produto.id.ToString()','@item.produto.nome.ToString()','@item.itemlistaPreco.valor.ToString("N2")')">
-                                            <td><i class="fa fa-shield"></i></td>
-                                            <td>@item.produto.codigo.ToString()</td>
-                                            <td>@item.produto.nome</td>
-                                            <td>@item.produto.formaVendaProduto</td>
-                                            <td>@item.itemlistaPreco.valor.ToString("N2")</td>
-                                        </tr>
-                                    }
-                                </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridProduto", "Produto", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                  <div id="GridProdutoOrdem">
+
+                  </div>
                     </div>
                 </div>
             </div>
-
-
-<script src="~/js/osc_global.js" asp-append-version="true"></script>
+ 
+<script>
+    CarregaGrid();
+</script>
