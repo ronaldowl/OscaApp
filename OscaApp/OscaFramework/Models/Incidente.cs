@@ -18,16 +18,12 @@ namespace OscaFramework.Models
         } // end of ctor padrão
 
         // PROPERTIES
-        [Column("codigo")]
-        public string Codigo { get; set; }
+        public string codigo { get; set; }
+        
+        public string titulo { get; set; }
 
-        [Column("titulo")]
-        public string Titulo { get; set; }
-
-        [Column("descricao")]
-        public string Descricao { get; set; }
-
-        [Column("idOrganizacao")]
+        public string descricao { get; set; }
+        
         public Guid idOrganizacao { get; set; }
 
 
