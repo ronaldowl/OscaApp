@@ -202,10 +202,36 @@ namespace OscaApp.Controllers
 
             return View();
         }
-        
-        
-  
-   
-     
+
+        public ViewResult GridLookupCliente(string filtro, int Page)
+        {
+            try
+            {
+                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
+
+                //realiza busca por Nome, Código, Email e CPF
+                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeCliente == filtro || A.cnpj_cpf == filtro || A.email == filtro) select A;
+
+                retorno = retorno.OrderBy(x => x.nomeCliente);
+
+                //Se não passar a número da página, caregar a primeira
+                if (Page == 0) Page = 1;
+
+                return View(retorno.ToPagedList<Cliente>(Page, 5));
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
+            }
+
+            return View();
+        }
+
+
+
+
+
     }
 }
