@@ -50,15 +50,19 @@
                                             <th></th>
                                             <th>Código</th>
                                             <th>Título</th>
+                                            <th>Criado Por</th>
+                                            <th>Criado Em</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateIncidente", "Incidente", new {id = item.id })'">
-                                            <td><i class="fa fa-desktop"></i></td>
-                                            <td>@Html.ActionLink(item.Codigo.ToString(), "FormUpdateIncidente", new { id = item.id })</td>
-                                            <td>@item.Titulo</td>
-                                        </tr>
+                                    <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateIncidente", "Incidente", new {id = item.id })'">
+                                        <td><i class="fa fa-desktop"></i></td>
+                                        <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateIncidente", new { id = item.id })</td>
+                                        <td>@item.titulo</td>
+                                        <td>@item.criadoPorName</td>
+                                        <td>@item.criadoEm</td>
+                                    </tr>
                                     }
                                 </table>
                                 <div>

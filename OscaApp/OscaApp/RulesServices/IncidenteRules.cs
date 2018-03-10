@@ -17,9 +17,9 @@ namespace OscaApp.RulesServices
             modelo = entrada.Incidente;
 
             SqlGeneric sqlService = new SqlGeneric();
-            modelo.Codigo = sqlService.RetornaNovaPosicao(11, contexto.idOrganizacao);
+            modelo.codigo = sqlService.RetornaNovaPosicao(11, contexto.idOrganizacao);
 
-            if (modelo.Codigo != null)
+            if (modelo.codigo != null)
             {
                 //************ Objetos de controle de acesso ******************
                 modelo.criadoEm = DateTime.Now;
@@ -41,9 +41,8 @@ namespace OscaApp.RulesServices
         public static bool IncidenteUpdate(IncidenteViewModel entrada, out Incidente modelo)
         {
             modelo = new Incidente();
-
-            //************ Objetos de controle de acesso *******************
             modelo = entrada.Incidente;
+            //************ Objetos de controle de acesso *******************
             modelo.modificadoEm = DateTime.Now;
             modelo.modificadoPor = entrada.Contexto.idUsuario;
             modelo.modificadoPorName = entrada.Contexto.nomeUsuario;
