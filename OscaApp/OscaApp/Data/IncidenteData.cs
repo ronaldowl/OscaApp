@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using OscaFramework.Models;
 using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+
 namespace OscaApp.Data
 {
     public class IncidenteData : IIncidenteData
@@ -34,20 +36,20 @@ namespace OscaApp.Data
         public Incidente Get(Guid id, Guid idOrganizacao)
         {
             List<Incidente> retorno = new List<Incidente>();
-            //try
-            //{
-            //    retorno = db.Recursos.FromSql("SELECT * FROM Recurso WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            //}
-            //catch (SqlException ex)
-            //{
-            //}
+            try
+            {
+                retorno = db.Incidente.FromSql("SELECT * FROM Incidente WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrganizacao.ToString() + "'").ToList();
+            }
+            catch (SqlException ex)
+            {
+            }
             return retorno[0];
         }
 
         public List<Incidente> GetAll(Guid idOrg)
         {
             List<Incidente> retorno = new List<Incidente>();
-            //retorno = db.Incidente.FromSql("SELECT * FROM Incidente WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = db.Incidente.FromSql("SELECT * FROM Incidente WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return retorno;
         }
 
@@ -56,11 +58,12 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("descricao").IsModified = true;
-                db.Entry(modelo).Property("titulo").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
+
+                db.Entry(modelo).Property("descricao").IsModified = true;
+                db.Entry(modelo).Property("titulo").IsModified = true;
 
                 db.SaveChanges();
             } // end of try

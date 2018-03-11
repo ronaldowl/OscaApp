@@ -42,7 +42,8 @@ namespace OscaApp.RulesServices
         {
             ordemServico = new OrdemServico();
             ordemServico = entrada.ordemServico;
-            ordemServico.idCategoriaManutencao = entrada.categoriaManutencao.id; 
+            ordemServico.idCategoriaManutencao = entrada.categoriaManutencao.id;
+            ordemServico.idProfissional = entrada.profissional.id;
 
             //************ Objetos de controle de acesso para Update*******************
             ordemServico.modificadoEm = DateTime.Now;

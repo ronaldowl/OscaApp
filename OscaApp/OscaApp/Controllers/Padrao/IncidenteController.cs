@@ -9,18 +9,19 @@ using OscaFramework.Models;
 using OscaApp.ViewModels;
 using OscaApp.RulesServices;
 using OscaFramework.MicroServices;
+using X.PagedList;
 
 namespace OscaApp.Controllers.Padrao
 {
     public class IncidenteController : Controller
     {
-        private readonly IIncidenteData modeloData;
+        private readonly IIncidenteData IncidenteData;
         private ContextPage contexto;
 
         public IncidenteController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.contexto = new ContextPage().ExtractContext(httpContext);
-            this.modeloData = new IncidenteData(db);
+            this.IncidenteData = new IncidenteData(db);
         } // end of ctor
 
         // Form create get
@@ -45,7 +46,7 @@ namespace OscaApp.Controllers.Padrao
                 {
                     if (IncidenteRules.IncidenteCreate(entrada, out modelo, contexto))
                     {
-                        modeloData.Add(modelo);
+                        IncidenteData.Add(modelo);
                         return RedirectToAction("FormUpdateIncidente", new { id = modelo.id.ToString() });
                     } // end of if 2
                 } // end of if 1
@@ -66,12 +67,15 @@ namespace OscaApp.Controllers.Padrao
             IncidenteViewModel modelo = new IncidenteViewModel();
             modelo.Incidente = new Incidente();
             modelo.Incidente.id = new Guid(id);
+            modelo.Incidente.modificadoPorName = contexto.nomeUsuario;
+            modelo.Incidente.modificadoEm = DateTime.Now;
 
             Incidente retorno = new Incidente();
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = modeloData.Get(modelo.Incidente.id, contexto.idOrganizacao);
+                retorno = IncidenteData.Get(modelo.Incidente.id, contexto.idOrganizacao);
+                modelo.Incidente = retorno;
             } // end of if
             return View(modelo);
         } // end of FormUpdateIncidente
@@ -85,7 +89,7 @@ namespace OscaApp.Controllers.Padrao
             {
                 if (IncidenteRules.IncidenteUpdate(entrada, out modelo))
                 {
-                    modeloData.Update(modelo);
+                    IncidenteData.Update(modelo);
                     return RedirectToAction("FormUpdateIncidente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 } // end of if
             } // end of try
@@ -95,6 +99,20 @@ namespace OscaApp.Controllers.Padrao
             } // end of catch
             return RedirectToAction("FormUpdateIncidente", new { id = modelo.id.ToString() });
         } // end of method FormUpdateIncidente
+
+        public ViewResult GridIncidente(string filtro, int Page)
+        {
+            IEnumerable<Incidente> retorno = IncidenteData.GetAll(contexto.idOrganizacao);
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro.ToUpper()) select A;
+
+            retorno = retorno.OrderByDescending(x => x.codigo);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Incidente>(Page, 2));
+        }
 
     } // end of class IncidenteController
 } // end of namespace OscaApp.Controllers.Padrao

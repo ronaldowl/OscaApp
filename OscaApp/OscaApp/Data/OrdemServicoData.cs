@@ -5,6 +5,8 @@ using OscaApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using OscaFramework.Models;
+using OscaApp.ViewModels.GridViewModels;
+using OscaApp.framework;
 
 namespace OscaApp.Data
 {
@@ -34,10 +36,7 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-
-                db.Entry(modelo).Property("dataAgendada").IsModified                = true;
-                db.Entry(modelo).Property("horaInicio").IsModified                  = true;
-                db.Entry(modelo).Property("horaFim").IsModified                     = true;
+                 
                 db.Entry(modelo).Property("laudo").IsModified = true;
                 db.Entry(modelo).Property("problema").IsModified = true;
                 db.Entry(modelo).Property("diagnostico").IsModified = true;
@@ -47,6 +46,8 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("numeroSerie").IsModified = true;
                 db.Entry(modelo).Property("idCategoriaManutencao").IsModified = true;
                 db.Entry(modelo).Property("observacao").IsModified = true;
+                db.Entry(modelo).Property("idProfissional").IsModified = true;
+
 
                 db.Entry(modelo).Property("tipo").IsModified = true;
                 db.Entry(modelo).Property("placa").IsModified = true;
@@ -108,6 +109,13 @@ namespace OscaApp.Data
             return retorno;
 
         }
+        public List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg)
+        {
+            List<OrdemServico > retorno = new List<OrdemServico >();
+            retorno = db.OrdensServico.FromSql("SELECT * FROM OrdemServico WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            return HelperAssociate.ConvertToGridOrdemServico(retorno);
+        }        
+
         public List<OrdemServico> GetAllByIdCliente(Guid idCliente)
         {
             List<OrdemServico> retorno = new List<OrdemServico>();

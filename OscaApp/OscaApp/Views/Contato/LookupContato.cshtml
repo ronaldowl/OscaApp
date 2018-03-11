@@ -5,15 +5,34 @@
 @{
     Layout = "_LayoutFrame";
 }
-
 <script type="text/javascript">
+
     function ConfigLookup(id, name) {
+        
+        //debugger;
         var idObjeto = document.getElementById("osc_ContatoId");
         var idName = document.getElementById("osc_IdContatoName");
         idObjeto.value = id;
         idName.value = name;
-        $('#lookupContato').modal('hide');
+        $('.close').click(); 
     }
+    function CarregaGrid() {
+
+        $.ajax("/Contato/GridLookupContato").done(function (data) {
+            $("#GridContato").html(data);
+        });
+    }
+    function CarregaGridFiltro() {
+
+        var filtro = $("#grid").val();
+
+        $.ajax("/Contato/GridLookupContato?filtro=" + filtro).done(function (data) {
+            $("#GridContato").html(data);
+        });
+
+    }
+  
+
 </script>
 
 <div class="modal-dialog modal-lg">
@@ -30,59 +49,38 @@
                                 <td>
                                     <h5 style="font-weight:bold">Lista de Contatos: &nbsp;&nbsp;</h5>
                                 </td>
-                                <td>
+                                <td >
                                     <form class="form-inline">
-                                        <div class="form-group  col-md-4">
+                                        <div class="form-group  col-md-5">
                                             <div class="input-group">
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid", onkeydown = " CarregaGridFiltro();" })
                                                 <span class="input-group-btn ">
-                                                    <button type="submit" class="btn  btn-info">
+                                                    <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
                                                         <span class="fa fa-search"></span>
                                                     </button>
                                                 </span>
                                             </div>
                                         </div>
                                         <div class="form-group col-md-2">
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>                                  
+                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-lg  fa fa-remove" value="Limpar" onclick="CarregaGrid()"> <span>Limpar</span></button>
+                                        </div>
                                     </form>
                                 </td>
                             </tr>
                         </table>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nome</th>
-                                            <th>Email</th>
-                                            <th>Telefone</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-    {
-                                <tr id="@item.id" value="@item.nome" onclick= "ConfigLookup('@item.id.ToString()','@item.nome.ToString()')">
-                                    <td>@item.nome</td>
-                                    <td>@item.email</td>
-                                    <td>@item.telefone</td>
-                                </tr>
-}
-                                </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("LookupContato", "Contato", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-body" >
+                        <div id="GridContato">
+
+                        </div>                      
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    CarregaGrid();
+</script>

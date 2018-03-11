@@ -64,6 +64,12 @@ namespace OscaFramework.Models
 
     public class CustomEnum
     {
+        public enum TipoReferencia
+        {
+            semReferencia = 0,
+            servico = 1,
+            OrdemServico = 2
+        }
         public enum TipoLancamento
         {
             manual = 0,
@@ -286,6 +292,7 @@ namespace OscaFramework.Models
             Agendamento = 24,
             ItemProdutoLista =25,
             ServicoOrdem = 26,
+            Atividade = 27,
             Organizacao = 1000
 
         }

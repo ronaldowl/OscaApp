@@ -31,13 +31,17 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormCreateAtendimento(string id)
         {
+            SqlGeneric sqlServices = new SqlGeneric();
+           
+
             AtendimentoViewModel modelo = new AtendimentoViewModel();
             modelo.contexto = contexto;
             modelo.atendimento = new Atendimento();
             modelo.atendimento.status = CustomEnumStatus.Status.Ativo;
 
             modelo.atendimento.criadoEm = DateTime.Now;
-            modelo.atendimento.criadoPorName = contexto.nomeUsuario;       
+            modelo.atendimento.criadoPorName = contexto.nomeUsuario;
+            modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString())));
             
             return View(modelo);
         }
@@ -77,7 +81,12 @@ namespace OscaApp.Controllers
                     retorno = atendimentoData.Get(new Guid(id));
 
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
-                    modelo.servico = sqlData.RetornaRelacaoServico(retorno.idServico);
+                    modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
+
+                    if(retorno.tipoReferencia == CustomEnum.TipoReferencia.servico)modelo.servico = sqlData.RetornaRelacaoServico(retorno.idReferencia);
+
+                    if (retorno.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico) modelo.os = sqlData.RetornaRelacaoOrdemServico(retorno.idReferencia);
+                    
                     modelo.horaInicio = new ItemHoraDia();
                     modelo.horaInicio.horaDia = (CustomEnum.itemHora)retorno.horaInicio;
                     modelo.horaFim = new ItemHoraDia();
@@ -135,5 +144,59 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
         }
+
+     
+        [HttpGet]
+        public ViewResult FormStatusAtendimento(string id)
+        {
+            AtendimentoViewModel modelo = new AtendimentoViewModel();
+            modelo.contexto = this.contexto;
+
+            try
+            {
+                Atendimento retorno = new Atendimento();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = atendimentoData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.atendimento = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public IActionResult FormStatusAtendimento(AtendimentoViewModel entrada)
+        {
+            Atendimento modelo = new Atendimento();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (AtendimentoRules.AtendimentoUpdate(entrada, out modelo))
+                {
+                    atendimentoData.UpdateStatus(modelo);
+
+                    return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-post", ex.Message);
+            }
+            return View();
+        }
+
     }
 }

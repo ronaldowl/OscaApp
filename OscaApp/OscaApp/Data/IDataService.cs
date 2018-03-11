@@ -10,6 +10,14 @@ namespace OscaApp.Data
 
     //TODO: Criar uma inteface para cada objeto gravado no banco
 
+    public interface IAtividadeData
+    {
+        void Add(Atividade atividade);
+        void Update(Atividade atividade);
+        Atividade Get(Guid id, Guid idOrg);
+        List<Atividade> GetAll(Guid idOrg);
+    }
+
     public interface IBancoData
     {
         Banco Get(Guid id, Guid idOrg);
@@ -58,6 +66,7 @@ namespace OscaApp.Data
         void UpdateStatus(OrdemServico ordemServico);
         OrdemServico Get(Guid id );
         List<OrdemServico> GetAll(Guid id);
+        List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg);
     }
     public interface IServicoData
     {

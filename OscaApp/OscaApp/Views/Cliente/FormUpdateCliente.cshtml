@@ -26,23 +26,23 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
 
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-lg fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_inativa" type="button" class="btn btn-info btn-lg fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
+                                                <button id="osc_status_inativa" type="button" class="btn btn-info btn-sm fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_Ativar" type="button" class="btn btn-info btn-lg fa fa-check-circle-o fa-1x" value="Ativar"> <span>Ativar</span></button>
+                                                <button id="osc_status_Ativar" type="button" class="btn btn-info btn-sm fa fa-check-circle-o fa-1x" value="Ativar"> <span>Ativar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_Deletar" type="button" class="btn btn-info btn-lg fa fa-times-circle-o fa-1x" value="Deletar"> <span>Excluir</span></button>
+                                                <button id="osc_status_Deletar" type="button" class="btn btn-info btn-sm fa fa-times-circle-o fa-1x" value="Deletar"> <span>Excluir</span></button>
                                             </label>
 
                                         </div>
@@ -71,7 +71,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-2x"></span>
                                         </span>&nbsp;
-                                        <input id="osc_nome" asp-for="@Model.cliente.nomeCliente" type="text" class="form-control" />
+                                        <input id="osc_nome" asp-for="@Model.cliente.nomeCliente" type="text" class="form-control" required="required"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -92,7 +92,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-2x"></span>
                                         </span> &nbsp;
-                                        <input id="osc_cnpj_cpf" asp-for="@Model.cliente.cnpj_cpf" type="text" class="form-control" placeholder="CPF ou CNPJ" onchange="ValidaCNPJ_CPF()" />
+                                        <input id="osc_cnpj_cpf" asp-for="@Model.cliente.cnpj_cpf" type="text" class="form-control" placeholder="..." onchange="ValidaCNPJ_CPF()" />
                                     </div>
                                 </div>
 
@@ -104,7 +104,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-briefcase fa-2x"></span>
                                         </span> &nbsp;
-                                        <input id="osc_razaosocial" asp-for="@Model.cliente.razaoSocial" type="text" class="form-control" placeholder="Razão Social" />
+                                        <input id="osc_razaosocial" asp-for="@Model.cliente.razaoSocial" type="text" class="form-control" placeholder="..." />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -113,7 +113,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-2x"></span>
                                         </span> &nbsp;
-                                        <input id="osc_IdContatoName" asp-for="@Model.contato.idName" type="text" class="form-control">
+                                        <input id="osc_IdContatoName" asp-for="@Model.contato.idName" type="text" class="form-control" placeholder="...">
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookup()">
                                                 <span class="fa fa-search"></span>
@@ -141,7 +141,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-phone fa-2x"></span>
                                         </span> &nbsp;
-                                        <input id="osc_telefone" asp-for="@Model.cliente.telefone" type="text" class="form-control" maxlength="15" pattern="[0-9]+$" />
+                                        <input id="osc_telefone" asp-for="@Model.cliente.telefone" type="text" class="form-control" maxlength="15"  placeholder="..." />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -150,7 +150,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-mobile-phone fa-2x"></span>
                                         </span> &nbsp;
-                                        <input id="osc_celular" asp-for="@Model.cliente.celular" type="text" class="form-control" maxlength="15" pattern="[0-9]+$" />
+                                        <input id="osc_celular" asp-for="@Model.cliente.celular" type="text" class="form-control" maxlength="15"  placeholder="..." />
                                     </div>
                                 </div>
                             </div>
@@ -170,7 +170,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-comment-o fa-2x"></span>
                                         </span> &nbsp;
-                                        <textarea id="osc_anotacao" asp-for="@Model.cliente.anotacao" class="form-control" rows="9" cols="25" placeholder="digite uma anotação"></textarea>
+                                        <textarea id="osc_anotacao" asp-for="@Model.cliente.anotacao" class="form-control" rows="9" cols="25" placeholder="..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -317,8 +317,7 @@
                     <table class="table table-hover table-responsive">
                         <thead>
                             <tr>
-                                <th>Código</th>
-                                <th>Data Atendimento</th>
+                                <th>Código</th>                                
                                 <th>Status</th>
                                 <th>Tipo</th>
                             </tr>
@@ -329,7 +328,6 @@
                             @if (contadorS == 5) { break; }
                             <tr>
                                 <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateOrdemServico", "OrdemServico", new { idCliente = item.id })</td>
-                                <td>@item.dataAgendada</td>
                                 <td>@item.statusOrdemServico</td>
                                 <td>@item.tipo</td>
                             </tr>
@@ -338,7 +336,7 @@
                     </table>
                 </div>
             </div>
-            @*<div class="card card-success" id="osc_formAtendimento">
+            <div class="card card-success" id="osc_formAtendimento">
                 <div class="card-header card-success">
                     <div class="card-title">
                         <table>
@@ -367,25 +365,25 @@
                             <tr>
                                 <th>Código</th>
                                 <th>Data Atendimento</th>
-                                <th>Serviço</th>
-                                <th>Status</th>
+                                <th>Inicio</th>
+                                <th>Fim</th>
                             </tr>
                         </thead>
                         @{int contadorA = 0;}
-                        @foreach (var item in Model.enderecos)
+                        @foreach (var item in Model.atendimentos)
                         {
                             @if (contadorA == 5) { break; }
                             <tr>
-                                <td>@Html.ActionLink(item.logradouro.ToString(), "FormUpdateAtendimento", "Atendimento", new { id = item.id })</td>
-                                <td>@item.numero</td>
-                                <td>@item.cep</td>
-                                <td>@item.TipoEndereco</td>
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateAtendimento", "Atendimento", new { id = item.id })</td>
+                                <td>@item.dataAgendada</td>
+                                <td>@item.horaInicio</td>
+                                <td>@item.horaFim</td>
                             </tr>
                             contadorA++;
                         }
                     </table>
                 </div>
-            </div>*@
+            </div>
             <div class="card card-success" id="osc_formPedido">
                 <div class="card-header card-success " >
                     <div class="card-title">
@@ -437,7 +435,9 @@
         </div>
     </div>
 </div>
-<div class="modal fade modal-lg" id="lookupContato"></div>
+<div class="modal fade modal-lg" id="lookupContato">
+
+</div>
 <script src="~/lib/OscaJs/osc_cliente.js"></script>
 <script>
     //Executa regras de carregamento do Form

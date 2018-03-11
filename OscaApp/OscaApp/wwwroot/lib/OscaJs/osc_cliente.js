@@ -25,13 +25,13 @@ function desabilita_Cliente(status) {
         $("input,select, textarea").prop("disabled", true);
 
         //Esconde botoes
-        $("#osc_salvar").hide(true);
-        $("#osc_status_inativa").hide(true);
-        $("#osc_endereco").hide(true);
+        $("#osc_salvar").hide();
+        $("#osc_status_inativa").hide();
+        $("#osc_endereco").hide();
 
     } else {
 
-        $("#osc_status_Ativar").hide(true);
+        $("#osc_status_Ativar").hide();
 
     }
 
