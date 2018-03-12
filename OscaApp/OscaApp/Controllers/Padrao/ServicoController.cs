@@ -129,6 +129,12 @@ namespace OscaApp.Controllers
         }
 
         public ViewResult LookupServico(string filtro, int Page)
+        {          
+
+            return View( );
+        }
+
+        public ViewResult GridLookupServico(string filtro, int Page)
         {
             IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
 

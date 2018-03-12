@@ -1,0 +1,40 @@
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.OrdemServicoGridViewModel>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+<div class="row">
+    <div class="col-md-11">
+        <table class="table table-hover table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Código</th>
+                    <th>Cliente</th>
+                    <th>Profissional </th>
+                    <th>Tipo OS</th>               
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+                                    {
+                <tr id="@item.ordemServico.id" onclick="ConfigLookup('@item.ordemServico.id.ToString()','@item.ordemServico.codigo.ToString()','@item.ordemServico.valorTotal.ToString("N2")') " data-dism data-dismiss="modal">
+                    <td><i class="fa fa-file-text-o"></i></td>
+                    <td>@item.ordemServico.codigo</td>
+                    <td>@item.cliente.idName</td>
+                    <td>@item.profissional.idName</td>
+                    <td>@item.ordemServico.tipo</td>
+                </tr>
+                                    }
+        </table>
+        <div>
+            <table>
+                <tr>
+                    <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridOrdemServico", "OrdemServico", new { page }))</td>
+                    <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -251,9 +251,9 @@
                                             <span class="fa fa-list-ul fa-2x"></span>
                                         </span> &nbsp;
                                         <select asp-for="@Model.atendimento.tipoReferencia" id="osc_tipoReferencia" class="form-control" required="required" onchange="OnChangeTipoReferencia('@Model.atendimento.tipoReferencia.ToString()');">
-                                            <option value="0" selected="selected">Agendado</option>
-                                            <option value="1">Atendido</option>
-                                            <option value="2">Cancelado</option>
+                                            <option value="0" selected="selected">Nenhum</option>
+                                            <option value="1">Serviço</option>
+                                            <option value="2">OS</option>
                                         </select>
                                     </div>
                                 </div>

@@ -18,7 +18,7 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeProfissional.ToString()') " data-dismiss="modal">>
+                                        <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeProfissional.ToString()') " data-dismiss="modal">
                                             <td><i class="fa fa-black-tie"></i></td>
                                             <td>@item.codigo </td>
                                             <td>@item.nomeProfissional</td>                                           
@@ -36,5 +36,4 @@
                             </div>
                         </div>
                      
-@*<script src="~/js/osc_cliente.js" asp-append-version="true"></script>
-    <script src="~/js/osc_global.js" asp-append-version="true"></script>*@
+

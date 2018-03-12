@@ -140,6 +140,20 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 10));
         }
 
+        public ViewResult GridLookupOrdemServico(string filtro, int Page)
+        {
+            IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.ordemServico.codigo == filtro || A.cliente.idName == filtro ) select A;
+
+            retorno = retorno.OrderBy(x => x.ordemServico.codigo);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 10));
+        }
+
         public ViewResult LookupOrdemServico(string filtro, int Page)
         {
             IEnumerable<OrdemServico> retorno = ordemServicoData.GetAll(contexto.idOrganizacao);

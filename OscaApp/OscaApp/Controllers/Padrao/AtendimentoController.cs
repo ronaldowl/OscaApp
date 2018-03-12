@@ -41,8 +41,11 @@ namespace OscaApp.Controllers
 
             modelo.atendimento.criadoEm = DateTime.Now;
             modelo.atendimento.criadoPorName = contexto.nomeUsuario;
-            modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString())));
-            
+            try
+            {
+                modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString())));
+            }
+            catch (Exception) { }
             return View(modelo);
         }
 
