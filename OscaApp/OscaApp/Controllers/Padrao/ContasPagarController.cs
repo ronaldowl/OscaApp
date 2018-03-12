@@ -49,10 +49,11 @@ namespace OscaApp.Controllers
             {
                 if (entrada.contasPagar != null)
                 {
-                  if  (ContasPagarRules.ContasPagarCreate(entrada, out modelo, contexto)) {
+                    if (ContasPagarRules.ContasPagarCreate(entrada, out modelo, contexto))
+                    {
                         contasPagarData.Add(modelo);
                         return RedirectToAction("FormUpdateContasPagar", new { id = modelo.id.ToString() });
-                  }
+                    }
                 }
             }
             catch (Exception ex)
@@ -71,7 +72,7 @@ namespace OscaApp.Controllers
             modelo.contasPagar.id = new Guid(id);
 
             ContasPagar retorno = new ContasPagar();
-       
+
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = contasPagarData.Get(modelo.contasPagar.id);
@@ -109,6 +110,12 @@ namespace OscaApp.Controllers
         public ViewResult GridContasPagar(string filtro, int Page)
         {
             IEnumerable<ContasPagar> retorno = contasPagarData.GetAll(contexto.idOrganizacao);
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
+                                                         where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+                                       A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) )
+                                                         select A;
 
             retorno = retorno.OrderBy(x => x.codigo);
 

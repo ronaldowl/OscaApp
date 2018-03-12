@@ -51,12 +51,13 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (entrada.Fornecedor !=null)
+                if (entrada.Fornecedor != null)
                 {
-                  if  (FornecedorRules.FornecedorCreate(entrada, out modelo, contexto)) {                    
+                    if (FornecedorRules.FornecedorCreate(entrada, out modelo, contexto))
+                    {
                         fornecedorData.Add(modelo);
                         return RedirectToAction("FormUpdateFornecedor", new { id = modelo.id.ToString() });
-                  }
+                    }
                 }
             }
             catch (Exception ex)
@@ -75,7 +76,7 @@ namespace OscaApp.Controllers
             modelo.Fornecedor.id = new Guid(id);
 
             Fornecedor retorno = new Fornecedor();
-       
+
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = fornecedorData.Get(modelo.Fornecedor.id, contexto.idOrganizacao);
@@ -107,7 +108,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 14, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-post",ex.Message);
+                log.GravaLog(1, 14, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateFornecedor", new { id = modelo.id.ToString() });
@@ -116,6 +117,17 @@ namespace OscaApp.Controllers
         public ViewResult GridFornecedor(string filtro, int Page)
         {
             IEnumerable<Fornecedor> retorno = fornecedorData.GetAll(contexto.idOrganizacao);
+
+            ////realiza busca por Nome, Código, Email e CPF
+            //if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+            //                                             A.nomeFornecedor.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+            //                                             A.nomeVendedor.Equals(filtro, StringComparison.InvariantCultureIgnoreCase )) select A;
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
+                                                         where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+                                       A.nomeFornecedor.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+                                       A.nomeVendedor == filtro)
+                                                         select A;
 
             retorno = retorno.OrderBy(x => x.nomeFornecedor);
 

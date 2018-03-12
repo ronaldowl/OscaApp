@@ -133,6 +133,12 @@ namespace OscaApp.Controllers
         {
             IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
 
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.ordemServico.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || 
+                                                         A.cliente.idName.Equals(filtro,StringComparison.InvariantCultureIgnoreCase) ||
+                                                         A.ordemServico.tipo.ToString().Equals(filtro, StringComparison.InvariantCultureIgnoreCase)
+                                                         ) select A;
+
             retorno = retorno.OrderBy(x => x.ordemServico.codigo);
 
             if (Page == 0) Page = 1;

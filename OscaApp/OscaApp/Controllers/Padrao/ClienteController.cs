@@ -158,7 +158,11 @@ namespace OscaApp.Controllers
                 IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
 
                 //realiza busca por Nome, Código, Email e CPF
-                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeCliente == filtro || A.cnpj_cpf == filtro || A.email == filtro) select A;
+                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || 
+                                                             A.nomeCliente.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || 
+                                                             A.cnpj_cpf == filtro || A.email == filtro) select A;
+
+                
 
                 retorno = retorno.OrderBy(x => x.nomeCliente);
 

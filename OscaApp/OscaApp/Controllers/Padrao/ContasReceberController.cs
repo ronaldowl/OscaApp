@@ -111,6 +111,12 @@ namespace OscaApp.Controllers
         {
             IEnumerable<ContasReceber> retorno = contasReceberData.GetAll(contexto.idOrganizacao);
 
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
+                                                         where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+                                       A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                                         select A;
+
             retorno = retorno.OrderBy(x => x.codigo);
 
             if (Page == 0) Page = 1;

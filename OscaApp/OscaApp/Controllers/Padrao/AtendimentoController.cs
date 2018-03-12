@@ -135,7 +135,7 @@ namespace OscaApp.Controllers
         {
             IEnumerable<AtendimentoGridViewModel> retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao);
                    
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.atendimento.codigo == filtro  ) select A;
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.atendimento.codigo.Equals(filtro,StringComparison.InvariantCultureIgnoreCase) || A.atendimento.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase)  ) select A;
 
             retorno = retorno.OrderByDescending(A => A.atendimento.dataAgendada);
           

@@ -105,7 +105,8 @@ namespace OscaApp.Controllers.Padrao
             IEnumerable<Incidente> retorno = IncidenteData.GetAll(contexto.idOrganizacao);
 
             //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro.ToUpper()) select A;
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+                                                         A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase)) select A;
 
             retorno = retorno.OrderByDescending(x => x.codigo);
 

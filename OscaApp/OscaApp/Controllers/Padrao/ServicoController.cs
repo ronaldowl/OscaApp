@@ -118,7 +118,8 @@ namespace OscaApp.Controllers
             IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
 
             // realiza busca por Nome, Código 
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeServico == filtro ) select A;
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
+                                                         A.nomeServico.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ) select A;
             
             retorno = retorno.OrderBy(x => x.nomeServico);
              

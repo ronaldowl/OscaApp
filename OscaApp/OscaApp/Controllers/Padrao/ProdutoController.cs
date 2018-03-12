@@ -127,7 +127,10 @@ namespace OscaApp.Controllers
             IEnumerable<Produto> retorno = produtoData.GetAll(contexto.idOrganizacao);
 
            
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nome == filtro || A.codigo == filtro || A.codigoFabricante == filtro) select A;
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals( filtro, StringComparison.InvariantCultureIgnoreCase) ||
+                                                         A.nome.Equals(filtro,StringComparison.InvariantCultureIgnoreCase)
+                                                         || A.codigo == filtro || A.fabricante == filtro
+                                                         ) select A;
 
             retorno = retorno.OrderBy(x => x.nome);
 
