@@ -15,91 +15,76 @@
     
         $("#osc_valor").val(valor);
         $("#osc_IdNameServico").val(name);
-        $("#osc_IdServico").val(id);               
-     
-        $('#lookupServico').modal('hide');
+        $("#osc_IdServico").val(id);   
     }
+    function CarregaGrid() {
+        $("#grid").val(""); 
+
+        $.ajax("/Servico/GridLookupServico").done(function (data) {
+            $("#GridServico").html(data);
+        });
+    }
+    function CarregaGridFiltro() {
+
+        var filtro = $("#grid").val();
+
+        $.ajax("/Servico/GridLookupServico?filtro=" + filtro).done(function (data) {
+            $("#GridServico").html(data);
+        });
+
+    } 
 </script>
 
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">      
+    <div class="modal-content">    
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+        </div>
         <div class="modal-body">
-            <div class="card" id="osc_Lookup">
-                <div class="card-header">
-                    <div class="card-title">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5 style="font-weight:bold">Lista de Serviços: &nbsp;&nbsp;</h5>
-                                </td>
-                                <td>
-                                    <form class="form-inline">                                     
-
-                                        <div class="form-group  col-md-4">
-                                            <div class="input-group">
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                                <span class="input-group-btn ">
-                                                    <button type="submit" class="btn btn-info">
-                                                        <span class="fa fa-search"></span>
-                                                    </button>
-                                                </span>
+            <form>
+                <div class="card" id="osc_Lookup">
+                    <div class="card-header">                       
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Lista de Serviços: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <div class="form-group  col-md-5">
+                                                <div class="input-group">
+                                                    @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                    <span class="input-group-btn ">
+                                                        <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
+                                                            <span class="fa fa-search"></span>
+                                                        </button>
+                                                    </span>
+                                                </div>
                                             </div>
+                                            <div class="form-group col-md-2">
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-lg  fa fa-remove" value="Limpar" onclick="CarregaGrid()"> <span>Limpar</span></button>
+                                            </div>
+
                                         </div>
-                                        <label>
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </label>  
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                      
-                                        <label>
-                                            <button type="button" class="close btn btn-info btn-lg" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-                                        </label>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Código</th>
-                                            <th>Servico</th>
-                                            <th>Forma</th>
-                                            <th>Valor</th>
-                                             
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr id="@item.id" value="@item.nomeServico" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()','@item.valor.ToString("N2")')">
-                                            <td><i class="fa fa-shield"></i></td>
-                                            <td>@item.codigo.ToString()</td>
-                                            <td>@item.nomeServico</td>
-                                            <td>@item.formaVendaServico</td>
-                                            <td>@item.valor.ToString("N2")</td>
-                                        </tr>
-                                    }
-                                </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServico", "Servico", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="osc_valorLookup" required="required" value="" hidden="hidden"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            <div id="GridServico">
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
-
-
-
-<script src="~/js/osc_global.js" asp-append-version="true"></script>
+<script>
+    CarregaGrid();
+</script>

@@ -17,6 +17,7 @@
         $('.close').click(); 
     }
     function CarregaGrid() {
+        $("#grid").val(""); 
 
         $.ajax("/Contato/GridLookupContato").done(function (data) {
             $("#GridContato").html(data);
@@ -41,41 +42,46 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
         </div>
         <div class="modal-body">
-            <div class="card" id="osc_Grid">
-                <div class="card-header">
-                    <div class="card-title">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5 style="font-weight:bold">Lista de Contatos: &nbsp;&nbsp;</h5>
-                                </td>
-                                <td >
-                                    <form class="form-inline">
-                                        <div class="form-group  col-md-5">
-                                            <div class="input-group">
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid", onkeydown = " CarregaGridFiltro();" })
-                                                <span class="input-group-btn ">
-                                                    <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
-                                                        <span class="fa fa-search"></span>
-                                                    </button>
-                                                </span>
+            <form>
+                <div class="card" id="osc_Grid">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Lista de Contatos: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <div class="form-group  col-md-5">
+                                                <div class="input-group">
+                                                    @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid", onkeydown = " CarregaGridFiltro();" })
+                                                    <span class="input-group-btn ">
+                                                        <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
+                                                            <span class="fa fa-search"></span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-lg  fa fa-remove" value="Limpar" onclick="CarregaGrid()"> <span>Limpar</span></button>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-lg  fa fa-remove" value="Limpar" onclick="CarregaGrid()"> <span>Limpar</span></button>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="card-body" >
-                        <div id="GridContato">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="osc_valorLookup" required="required" value="" hidden="hidden"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            <div id="GridContato">
 
-                        </div>                      
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

@@ -140,5 +140,19 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Profissional>(Page, 5));
         }
+
+        public ViewResult GridLookupProfissional(string filtro, int Page)
+        {
+            IEnumerable<Profissional> retorno = profissionalData.GetAll(contexto.idOrganizacao);
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro.ToUpper() || A.nomeProfissional.ToUpper() == filtro.ToUpper() ) select A;
+
+
+            retorno = retorno.OrderBy(x => x.nomeProfissional);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Profissional>(Page, 5));
+        }
     }
 }

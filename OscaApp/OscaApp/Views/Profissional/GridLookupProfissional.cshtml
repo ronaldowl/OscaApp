@@ -1,0 +1,39 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Profissional>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+ 
+                        <div class="row">
+                            <div class="col-md-11">
+                                <table class="table table-hover table-striped table-bordered table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Código</th>
+                                            <th>Profissional</th>                                            
+                                        </tr>
+                                    </thead>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeProfissional.ToString()') " data-dismiss="modal">
+                                            <td><i class="fa fa-black-tie"></i></td>
+                                            <td>@item.codigo </td>
+                                            <td>@item.nomeProfissional</td>                                           
+                                        </tr>
+                                    }
+                                </table>
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridProfissional", "Profissional", new { page }))</td>
+                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     
+
