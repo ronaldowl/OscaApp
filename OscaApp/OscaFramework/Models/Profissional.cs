@@ -11,9 +11,8 @@ namespace OscaFramework.Models
     {
        
         public Guid idUsuario { get; set; }
-
-        public String codigo { get; set; }
         public String nomeProfissional { get; set; }
+        public String codigo { get; set; }     
         public String numeroConta { get; set; }
         public String agencia { get; set; }
         public Boolean comissionado { get; set; }

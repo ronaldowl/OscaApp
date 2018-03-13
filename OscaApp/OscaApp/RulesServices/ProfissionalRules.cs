@@ -18,8 +18,11 @@ namespace OscaApp.RulesServices
 
             profissional.codigo = sqlservice.RetornaNovaPosicao(17, contexto.idOrganizacao);
             profissional.idBanco = entrada.banco.id;
-         
-            if (profissional.nomeProfissional != null)
+            profissional.idUsuario = entrada.usuario.id;
+            profissional.nomeProfissional = entrada.usuario.idName;
+
+
+            if (profissional.idUsuario != null)
             {
                 //************ Objetos de controle de acesso ******************
                 profissional.criadoEm = DateTime.Now;
@@ -39,10 +42,12 @@ namespace OscaApp.RulesServices
         {
             profissional = new Profissional();
             profissional = entrada.profissional;
-            profissional.idBanco = entrada.banco.id;         
+            profissional.idBanco = entrada.banco.id;
+            profissional.idUsuario = entrada.usuario.id;
+            profissional.nomeProfissional = entrada.usuario.idName;
 
             //************ Objetos de controle de acesso *******************
-          
+
             profissional.modificadoEm = DateTime.Now;
             profissional.modificadoPor = entrada.contexto.idUsuario;
             profissional.modificadoPorName = entrada.contexto.nomeUsuario;

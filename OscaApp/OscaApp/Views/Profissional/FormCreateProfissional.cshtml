@@ -12,6 +12,11 @@
             $("#lookupBanco").modal("show");
         })
     }
+    function CarregaLookupUsuario() {
+        $("#lookupUsuario").load("/Usuario/LookupUsuario", function () {
+            $("#lookupUsuario").modal("show");
+        })
+    }
 </script>
 
 <div class="container-fluid">
@@ -51,29 +56,20 @@
                                         <input id="osc_codigo" asp-for="@Model.profissional.codigo" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
+                              
                                 <div class="form-group">
-                                    <label>Nome*</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_nome" asp-for="@Model.profissional.nomeProfissional" type="text" class="form-control" required="required" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Usuário: </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_IdUsuarioName" for=" " type="text" class="form-control" disabled="disabled">
-                                        <input id="osc_IdUsuario" for=" " type="hidden" class="form-control" />
-                                        <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info">
-                                                <span class="fa fa-search"></span>
-                                            </button>
-                                        </span>
-
+                                    <label class="control-label">Usuário Associado</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.usuario.idName" class="form-control" type="text" id="osc_IdNameUsuario" required="required">
+                                            <input asp-for="@Model.usuario.id" class="form-control" type="hidden" id="osc_IdUsuario">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupUsuario()" id="osc_botaoBusca">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -195,3 +191,4 @@
     </div>
 </div>
 <div class="modal fade" id="lookupBanco"></div> 
+<div class="modal fade" id="lookupUsuario"></div> 

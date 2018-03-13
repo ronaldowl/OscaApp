@@ -36,11 +36,14 @@ namespace OscaApp.Data
                 db.Attach(modelo);
 
                 db.Entry(modelo).Property("tipoConta").IsModified = true;
-                db.Entry(modelo).Property("nomeProfissional").IsModified         = true;
+             
                 db.Entry(modelo).Property("numeroConta").IsModified              = true;
                 db.Entry(modelo).Property("agencia").IsModified                  = true;
                 db.Entry(modelo).Property("comissionado").IsModified             = true;
                 db.Entry(modelo).Property("idBanco").IsModified                  = true;
+                db.Entry(modelo).Property("idUsuario").IsModified = true;
+                db.Entry(modelo).Property("nomeProfissional").IsModified = true;
+
 
                 db.Entry(modelo).Property("percentualComissao").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;

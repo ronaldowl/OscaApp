@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace OscaApp.Controllers
 {
@@ -91,11 +92,38 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateUsuario", new { id = user.Id.ToString() });
         }
 
-        public ViewResult GridUsuario()
+        public ViewResult GridUsuario(string filtro, int Page)
         {
-            return View(usuarioData.GetAll(contexto.idOrganizacao));
+            IEnumerable<ApplicationUser> retorno = usuarioData.GetAll(contexto.idOrganizacao);
+
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.UserName.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || A.Email.Equals(filtro, StringComparison.InvariantCultureIgnoreCase)) select A;
+
+            retorno = retorno.OrderByDescending(A => A.UserName);
+
+            //Se não passar a número da página, caregar a primeira
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<ApplicationUser>(Page, 10));
         }
-       
+
+        public ViewResult GridLookupUsuario(string filtro, int Page)
+        {
+            IEnumerable<ApplicationUser> retorno = usuarioData.GetAll(contexto.idOrganizacao);
+
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.UserName.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || A.Email.Equals(filtro, StringComparison.InvariantCultureIgnoreCase)) select A;
+
+            retorno = retorno.OrderByDescending(A => A.UserName);
+
+            //Se não passar a número da página, caregar a primeira
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<ApplicationUser>(Page, 10));
+        }
+        public ViewResult LookupUsuario()
+        {
+            return View();
+        }
+
         private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))

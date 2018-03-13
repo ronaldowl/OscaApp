@@ -33,6 +33,10 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Banco> retorno = bancoData.GetAll();
 
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nome == filtro ) select A;
+
+
             retorno = retorno.OrderBy(x => x.nome);
 
             if (Page == 0) Page = 1;
@@ -40,9 +44,16 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<Banco>(Page, 10));
         }
 
-        public ViewResult LookupBanco(string filtro, int Page)
+        public ViewResult LookupBanco( )
+        {
+            return View( );
+        }
+
+        public ViewResult GridLookupBanco(string filtro, int Page)
         {
             IEnumerable<Banco> retorno = bancoData.GetAll();
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nome == filtro) select A;
 
             retorno = retorno.OrderBy(x => x.nome);
 
@@ -50,6 +61,5 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Banco>(Page, 10));
         }
-
     }
 }

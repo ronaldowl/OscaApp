@@ -1,0 +1,35 @@
+﻿@model X.PagedList.PagedList<OscaApp.Models.ApplicationUser>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+
+@{
+    Layout = "_LayoutFrame";
+}
+
+<div class="row">
+    <div class="col-md-11">
+
+        <table class="table table-hover table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    
+
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr id="@item.Id" onclick="ConfigLookup('@item.Id.ToString()','@item.UserName.ToString()') " data data-dismiss="modal">
+
+                    <td><i class="fa fa-user-circle"></i></td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>                   
+                </tr>
+            }
+        </table>
+    </div>
+</div>

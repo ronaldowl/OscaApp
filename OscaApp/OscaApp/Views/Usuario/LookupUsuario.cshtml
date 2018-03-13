@@ -1,52 +1,54 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.Banco>
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Servico>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+
 @{
     Layout = "_LayoutFrame";
 }
 
+
 <script type="text/javascript">
+
     //Função para tratamento do Lookup padrão do Cliente
     function ConfigLookup(id, name) {
-        var idObjeto = document.getElementById("osc_BancoId");
-        var idName = document.getElementById("osc_IdBancoName");
-        idObjeto.value = id;
-        idName.value = name;
-        $('#lookupBanco').modal('hide');
+    
+        $("#osc_IdNameUsuario").val(name);
+        $("#osc_IdUsuario").val(id);
+        
     }
     function CarregaGrid() {
-        $("#grid").val("");
-        $.ajax("/Banco/GridLookupBanco").done(function (data) {
-            $("#GridBanco").html(data);
+        $("#grid").val(""); 
+
+        $.ajax("/Usuario/GridLookupUsuario").done(function (data) {
+            $("#GridUsuario").html(data);
         });
     }
     function CarregaGridFiltro() {
 
         var filtro = $("#grid").val();
 
-        $.ajax("/Banco/GridLookupBanco?filtro=" + filtro).done(function (data) {
-            $("#GridBanco").html(data);
+        $.ajax("/Usuario/GridLookupUsuario?filtro=" + filtro).done(function (data) {
+            $("#GridUsuario").html(data);
         });
 
     } 
 </script>
 
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">
+    <div class="modal-content">    
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
         </div>
         <div class="modal-body">
             <form>
-                <div class="card" id="osc_Grid">
-                    <div class="card-header">
-
+                <div class="card" id="osc_Lookup">
+                    <div class="card-header">                       
                         <div class="card-title">
                             <table>
                                 <tr>
                                     <td>
-                                        <h5 style="font-weight:bold">Lista de Bancos: &nbsp;&nbsp;</h5>
+                                        <h5 style="font-weight:bold">Lista de Usuarios: &nbsp;&nbsp;</h5>
                                     </td>
                                     <td>
                                         <div class="form-inline">
@@ -63,6 +65,7 @@
                                             <div class="form-group col-md-2">
                                                 <button id="osc_recarregar" type="button" class="btn btn-info btn-lg  fa fa-remove" value="Limpar" onclick="CarregaGrid()"> <span>Limpar</span></button>
                                             </div>
+
                                         </div>
                                     </td>
                                 </tr>
@@ -72,7 +75,7 @@
                             </table>
                         </div>
                         <div class="card-body">
-                            <div id="GridBanco">
+                            <div id="GridUsuario">
 
                             </div>
                         </div>
