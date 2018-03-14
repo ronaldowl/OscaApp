@@ -9,35 +9,32 @@
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5 style="font-weight:bold">Categorias de Manutenção: &nbsp;&nbsp;</h5>
-                                </td>
-                                <td>
-                                    <form class="form-inline">
-
-                                        <div class="form-group  col-md-4">
-                                            <div class="input-group">
+                        <form class="form-inline">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Categorias de manutenção: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span>
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                                <span class="input-group-btn ">
-                                                    <button type="submit" class="btn btn-info">
-                                                        <span class="fa fa-search"></span>
-                                                    </button>
-                                                </span>
-                                            </div>
+                                            </span>
+                                            <button type="submit" class="btn btn-info fa fa-search"></button>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                            </label>&nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("Painelcadastro", "Paineis", null)'"> <span>Painel de Cadastro</span></button>
+                                            </label>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("Painelcadastro", "Paineis", null)'"> <span>Painel de Cadastro</span></button>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
+                </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-11">

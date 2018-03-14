@@ -9,40 +9,37 @@
             <div class="card  " id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5 style="font-weight:bold">Lista de Usuários: &nbsp;&nbsp;</h5>
-                                </td>
-                                <td>
-                                    <form class="form-inline">
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_novo" type="button" class="btn btn-info  glyphicon glyphicon-plus" value="Novo" onclick="location.href='@Url.Action("RegisterUser", "Account", new {idOrganizacao = @Model[0].idOrganizacao })'"> <span>Novo</span></button>
-                                        </div>
-                                        <div class="form-group  col-md-4">
-                                            <div class="input-group">
+                        <form class="form-inline">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Lista de Usuários: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <label>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("RegisterUser", "Account", new {idOrganizacao = @Model[0].idOrganizacao }))'"> <span>Novo</span></button>
+                                            </label>
+                                            &nbsp;&nbsp;
+                                            <span>
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                                <span class="input-group-btn ">
-                                                    <button type="submit" class="btn btn-info">
-                                                        <span class="fa fa-search"></span>
-                                                    </button>
-                                                </span>
-                                            </div>
+                                            </span>
+                                            <button type="submit" class="btn btn-info fa fa-search"></button>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                            </label>&nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelGerenciamento", "Paineis", null)'"> <span>Painel Gerenciamento</span></button>
+                                            </label>
                                         </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelGerenciamento", "Paineis", null)'"> <span>Painél Gerenciamento</span></button>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
                 </div>
                 <div class="card-body">
-
                     <table class="table table-hover table-striped table-bordered">
                         <thead>
                             <tr>

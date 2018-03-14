@@ -3,45 +3,36 @@
      Layout = "_LayoutFrame";
 }
 
-<script type="text/javascript">
-
-
-</script>
-
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5 style="font-weight:bold">Produtos: &nbsp;&nbsp;</h5>
-                                </td>
-                                <td>
-                                    <form class="form-inline">
-                                        <div class="form-group  col-md-5">
-                                            <div class="input-group">
+                        <form class="form-inline">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Produtos: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            &nbsp;&nbsp;
+                                            <span>
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                                <span class="input-group-btn ">
-                                                    <button type="submit" class="btn btn-info">
-                                                        <span class="fa fa-search"></span>
-                                                    </button>
-                                                </span>
-                                            </div>
+                                            </span>
+                                            <button type="submit" class="btn btn-info fa fa-search"></button>
+                                            &nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                            </label>&nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = @Model[0].produto.id })'"> <span>Fechar</span></button>
+                                            </label>
                                         </div>
-                                        <label>
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </label>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                      
-                                        <label>
-                                            <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = @Model[0].produto.id })'"> <span>Fechar</span></button>
-                                        </label>
-                                    </form>
-                                </td>
-                            </tr>
-                        </table>
-                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
                     </div>
+                </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-11">
