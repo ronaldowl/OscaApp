@@ -71,7 +71,7 @@ namespace OscaApp.Controllers
                 if (ProdutoPedidoRules.MontaProdutoPedidoCreate(entrada, out modelo, contexto))
                 {
                     produtoPedidoData.Add(modelo);
-                    return RedirectToAction("GridProdutoPedido", "ProdutoPedido", new { idPedido = modelo.idPedido.ToString()});
+                    return RedirectToAction("FormUpdatePedido", "Pedido", new { id = modelo.idPedido.ToString()});
                 }
             }
             catch (Exception ex)
@@ -115,7 +115,7 @@ namespace OscaApp.Controllers
                     produtoPedidoData.Update(modelo);
                     SqlGenericData sqlData = new SqlGenericData();
 
-                    return RedirectToAction("GridProdutoPedido", new { idPedido = sqlData.RetornaRelacaoPedidoPorProdutoPedido(modelo.id).id });
+                    return RedirectToAction("FormUpdatePedido", "Pedido", new { id = entrada.produtoPedido.idPedido.ToString() });
                 }
             }
             catch (Exception ex)

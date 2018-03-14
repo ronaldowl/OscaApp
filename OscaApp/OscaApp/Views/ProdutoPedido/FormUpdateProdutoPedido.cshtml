@@ -20,31 +20,30 @@
 </div>
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-        </div>
         <div class="modal-body">
-            <form action="FormUpdateProdutoPedido" method="post" id="FormUpdateProdutoPedido">
-                <input id="osc_idProdutoPedido" asp-for="produtoPedido.id" type="hidden" class="form-control" value="@Model.produtoPedido.id" />
+            <form asp-controller="ProdutoPedido" asp-action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
+                <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido">
+
                 <div class="card" id="osc_MainForm">
-                    <div class="card-header">
-                        <div class="card-title ">
-                            <table>
-                                <tr>
-                                    <td><h3>Produto do Pedido: &nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_salvarFechar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value=""> <span>Salvar e Fechar"</span></button>
-                                            </label>     
-                                            <label>
-                                                <button id="osc_Fechar" type="button" class="btn btn-info btn-sm fa fa-floppy-o" onclick="location.href='@Url.Action("GridProdutoPedido", "ProdutoPedido" , new { idPedido =  @Model.produtoPedido.idPedido})'"> <span>Fechar"</span></button>
-                                            </label>  
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                    <div class="">
+                        <table>
+                            <tr>
+                                <td><h5>Produto do Pedido: &nbsp;&nbsp;</h5></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
+                                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -54,13 +53,8 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produto.idName" class="form-control" type="text" id="osc_produtoIdName"  disabled="disabled">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info" >
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
-                                            <input asp-for="@Model.produto.id" class="form-control" type="hidden" id="osc_produtoId">
+                                            <input asp-for="@Model.produto.idName" class="form-control" type="text" id="osc_IdNameProduto" required="required" disabled="disabled">
+                                            <input asp-for="@Model.produto.id" class="form-control" type="hidden" id="osc_IdProduto">
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +63,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoPedido.quantidade" class="form-control" type="text" id="osc_quantidade">
+                                            <input asp-for="@Model.produtoPedido.quantidade" class="form-control" type="text" id="osc_quantidade" value="1">
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +71,7 @@
                                     <label class="control-label" style="color:red">Valor</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
                                             <input asp-for="@Model.produtoPedido.valor" class="form-control" type="text" id="osc_valor">
                                         </div>
                                     </div>
@@ -100,9 +94,9 @@
                                     <label>Valor Desconto</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calculator fa-1x"></span>
+                                            <span class="fa fa-money fa-1x"></span>
                                         </span>
-                                        <input id="osc_valorDescontoMoney" asp-for="@Model.produtoPedido.valorDescontoMoney" type="text" class="form-control" />
+                                        <input id="osc_valorDescontoMoney" asp-for="@Model.produtoPedido.valorDescontoMoney" type="text" class="form-control" required="required" />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -111,19 +105,19 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-calculator fa-1x"></span>
                                         </span>
-                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.produtoPedido.valorDescontoPercentual" type="text" class="form-control" />
+                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.produtoPedido.valorDescontoPercentual" type="text" class="form-control" required="required" />
                                     </div>
-                                </div>                             
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+           
             </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="lookupProdutoPedido">
-</div>
+
 <script src="~/lib/OscaJs/osc_produtoPedido.js"></script>
 <script>
     debugger;

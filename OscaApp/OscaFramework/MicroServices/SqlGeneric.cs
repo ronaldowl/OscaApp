@@ -22,7 +22,43 @@ namespace OscaFramework.MicroServices
             this.Configuration = Configuration;            
             this.conectService = Configuration.GetConnectionString("databaseService");
         }
-        public  void InicializaOrg(string idOrg, string nomeLogin, string nomeUsuario)
+        public Boolean ConsultaUsuarioEmpresa(string nomeEmpresa, string nomeLogin)
+        {
+            bool sucesso = false;
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    object retorno = null;
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_ConsultaUsuarioEmpresa",
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    _Command.Parameters.AddWithValue("nomeEmpresa", nomeEmpresa);
+                    _Command.Parameters.AddWithValue("loginName", nomeLogin);
+                   
+                    Connection.Open();
+                    retorno =  _Command.ExecuteScalar();
+
+                    if (retorno != null) sucesso = true;
+
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return sucesso;
+
+        }
+
+        public void InicializaOrg(string idOrg, string nomeLogin, string nomeUsuario)
         {           
             try
             {

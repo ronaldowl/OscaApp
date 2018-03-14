@@ -11,10 +11,10 @@
         $("#osc_IdNameProduto").val(name);
         $("#osc_IdProduto").val(id);
 
-        $('#lookupProduto').on('hidden', function () { $(this).empty(); });
+        //$('#lookupProduto').on('hidden', function () { $(this).empty(); });
     }
     function CarregaGrid() {
-
+        $("#grid").val("");
         $.ajax("/itemListaPreco/GridLookupProdutoOrdem?idListaPreco=" + '@Model.listaPreco.id').done(function (data) {
             $("#GridProdutoOrdem").html(data);
         });

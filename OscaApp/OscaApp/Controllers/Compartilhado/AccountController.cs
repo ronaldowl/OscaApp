@@ -63,33 +63,34 @@ namespace OscaApp.Controllers
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-        
+
+            //Executa validação se o usuário pertence a empresa
+            SqlGeneric sqlgeneric = new SqlGeneric();
+
+            if (sqlgeneric.ConsultaUsuarioEmpresa(model.empresa, model.Email))
+            {
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation(1, "User logged in.");
-                //Preenche variaves de sessão
+                    _logger.LogInformation(1, "User logged in.");                 
 
+                    ////***********Gerar Contexto para todos controller *******************
+                    HttpContext.Session.SetString("email", model.Email);
+                    HttpContext.Session.SetString("organizacao", model.empresa);
+                    ContextPage contexto = new ContextPage(model.Email, model.empresa);
+                    HttpContext.Session.SetString("idOrganizacao", contexto.idOrganizacao.ToString());
+                    HttpContext.Session.SetString("idUsuario", contexto.idUsuario.ToString());
+                    HttpContext.Session.SetString("nomeUsuario", contexto.nomeUsuario.ToString());
 
-
-                ////*********** TODO: Gerar Contexto para todos controller *******************
-                HttpContext.Session.SetString("email", model.Email);
-                HttpContext.Session.SetString("organizacao", model.empresa);
-                ContextPage contexto = new ContextPage(model.Email, model.empresa);
-                HttpContext.Session.SetString("idOrganizacao", contexto.idOrganizacao.ToString());
-                HttpContext.Session.SetString("idUsuario", contexto.idUsuario.ToString());
-                HttpContext.Session.SetString("nomeUsuario", contexto.nomeUsuario.ToString());
-
-                //*****************************************************************************
-
-
-
-                return RedirectToAction("PainelOperacional", "Paineis", new { });
+                    //*****************************************************************************
+                    
+                    return RedirectToAction("PainelOperacional", "Paineis", new { });
 
                 }
-               
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning(2, "User account locked out.");
@@ -99,7 +100,13 @@ namespace OscaApp.Controllers
                 {
                     ModelState.AddModelError(string.Empty, "Tentativa inválida de login.");
                     return View(model);
-                }           
+                }
+            }else
+            {
+
+                ModelState.AddModelError(string.Empty, "Esse usuário não pertence a essa empresa");
+                return View(model);
+            }
       
         }
 
@@ -256,12 +263,13 @@ namespace OscaApp.Controllers
 
                 //Passa informações da Org para o novo usuário
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = idOrg };
+                              
+                //Cria o usuários
+                var result = await _userManager.CreateAsync(user, model.Password);
 
                 //Inicializa valores padrões
                 _sqlService.InicializaOrg(idOrg.ToString(), model.organizacao.nomeLogin, model.Email);
-                
-                //Cria o usuários
-                var result = await _userManager.CreateAsync(user, model.Password);      
+
 
                 if (result.Succeeded)
                 {                   

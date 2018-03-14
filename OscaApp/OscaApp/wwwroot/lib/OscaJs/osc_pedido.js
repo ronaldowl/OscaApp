@@ -17,13 +17,16 @@ function desabilita_Pedido(status) {
         $("input,select, textarea, iframe").prop("disabled", true);
 
         //Esconde botoes
-        $("#osc_salvar").hide(true);      
-        $("#osc_calcular").hide(true);      
+        $("#osc_salvar").hide();      
+        $("#osc_calcular").hide();
+        $("#osc_novoProduto").hide();
+
+        
         
                    
     } else {
         //Apresenta botoes
-        $("#osc_reabrir").hide(false); 
+        $("#osc_reabrir").hide(); 
 
         //Regra para tratamento dos campos de desconto
         Onchage_PedidoTipoDesconto();

@@ -7,36 +7,18 @@
 }
  
 <script>
-    function CarregaProdutoPedido() {
-        $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?idPedido=" + idPedido + "&idListaPreco=" + idListaPreco, function () {
-            $("#ModalProdutoPedido").modal("show");
-            });
-        }
+ 
+    function CarregaProdutoPedidoUpdate(id) {
 
-       function CarregaProdutoPedidoUpdate(id) {
-           $("#ModalProdutoPedido").load("/ProdutoPedido/FormUpdateProdutoPedido?idProdutoPedido=" + id, function () {
-            $("#ModalProdutoPedido").modal("show");
-        });
+        $('#ModalProdutoPedido', parent.document).load("/ProdutoPedido/FormUpdateProdutoPedido?idProdutoPedido=" + id, function () {
+
+            $('#ModalProdutoPedido', parent.document).modal("show");
+        });                
     }
 
 </script>
 <div class="card" id="osc_Grid">
-    <div class="card-header">
-        <div class="card-title">
-            <table>
-                <tr>
-                    <td>
-                        <h5 style="font-weight:bold">Produtos do Pedido: &nbsp;&nbsp;</h5>
-                    </td>
-                    <td>
-                        <div class="form-group col-md-2">
-                            <button id="osc_novoProduto" type="button" class="btn btn-info  fa fa-plus" value="Novo" onclick="CarregaProdutoPedido()"> <span>Novo</span></button>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+   
     <div class="card-body">        
         <div class="row">
             <div class="col-md-11">
@@ -116,8 +98,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="ModalProdutoPedido">
-</div>
+
 <script> 
     //Preenche variaves do contexto pai para criar um novo Produto do Pedido
     var idListaPreco = window.parent.document.getElementById('osc_idListaPreco').value;
