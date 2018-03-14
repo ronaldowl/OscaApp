@@ -9,7 +9,6 @@
 
 <script type="text/javascript">
 
-    //Função para tratamento do Lookup padrão do Cliente
     function ConfigLookup(id, name, valor ) {
  
         $("#osc_IdNameOs").val(name);
@@ -24,9 +23,7 @@
         });
     }
     function CarregaGridFiltro() {
-
         var filtro = $("#grid").val();
-
         $.ajax("/OrdemServico/GridLookupOrdemServico?filtro=" + filtro).done(function (data) {
             $("#GridOrdemServico").html(data);
         });
@@ -51,7 +48,7 @@
                                     </td>
                                     <td>
                                         <div class="form-inline">
-                                            <div class="form-group  col-md-5">
+                                            <div class="form-group  col-md-7">
                                                 <div class="input-group">
                                                     @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
                                                     <span class="input-group-btn ">

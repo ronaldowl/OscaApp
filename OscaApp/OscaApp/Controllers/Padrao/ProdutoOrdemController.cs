@@ -115,7 +115,7 @@ namespace OscaApp.Controllers
                 if (ProdutoOrdemRules.ProdutoOrdemUpdate(entrada, out modelo, this.contexto))
                 {
                     produtoOrdemData.Update(modelo);
-                    return RedirectToAction("FormUpdateOrdemServico", " OrdemServico", new { id =  modelo.idOrdemServico });
+                    return RedirectToAction("FormUpdateOrdemServico", "OrdemServico", new { id = entrada.ordemServico.id });
 
                 }
             }

@@ -2,15 +2,38 @@
 @{
     Layout = "_LayoutFrame";
 }
-
 <script>
+
     function CarregaLookupProduto() {
 
         $("#lookupProduto").load("/itemListaPreco/LookupProdutoOrdem?idListaPreco=" + idListaPreco, function () {
             $("#lookupProduto").modal("show");
         });
-    } 
+    }
 
+    function ConfigLookup(id, name, valor) {
+
+        $("#osc_valor").val(valor);
+        $("#osc_IdNameProduto").val(name);
+        $("#osc_IdProduto").val(id);
+
+        $('#lookupProduto').on('hidden', function () { $(this).empty(); });
+    }
+    function CarregaGrid() {
+
+        $.ajax("/itemListaPreco/GridLookupProdutoOrdem?idListaPreco=" + '@Model.listaPreco.id').done(function (data) {
+            $("#GridProdutoOrdem").html(data);
+        });
+    }
+    function CarregaGridFiltro() {
+
+        var filtro = $("#grid").val();
+
+        $.ajax("/itemListaPreco/GridLookupProdutoOrdem?filtro=" + filtro + '&idListaPreco=@Model.listaPreco.id').done(function (data) {
+            $("#GridProdutoOrdem").html(data);
+        });
+
+    }
 </script>
 
 <div id="contexto">
@@ -21,35 +44,36 @@
 </div>
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
-   
         <div class="modal-body">
             <form asp-controller="ProdutoOrdem" asp-action="FormUpdateProdutoOrdem" method="post" id="FormUpdateProdutoOrdem">
+                <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" id="osc_idOrdemServico" />
+                <input type="hidden" asp-for="@Model.produtoOrdem.id" value="@Model.produtoOrdem.id" id="osc_idProdutoOrdem" />
+                <input type="hidden" asp-for="@Model.listaPreco.id" value="@Model.listaPreco.id" id="osc_idListaPreco" />
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
-                        <div class="card-title ">
-                            <table>
-                                <tr>
-                                    <td><h3>Produto da Ordem: &nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
-                                            </label>
-                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                            <label>
-                                                <button type="button" class="close btn btn-info btn-lg" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+                        <table>
+                            <tr>
+                                <td><h3>Produto da Ordem: &nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
+                                        </label>
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <label>
+                                            <button type="button" class="close btn btn-info btn-sm" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
+
                     <div class="card-body">
-                        <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" id="osc_idOrdemServico"/>
-                        <input type="hidden" asp-for="@Model.produtoOrdem.id" value="@Model.produtoOrdem.id" id="osc_idProdutoOrdem"/>
-                        <input type="hidden" asp-for="@Model.listaPreco.id" value="@Model.listaPreco.id" id="osc_idListaPreco"/>
+                        <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" id="osc_idOrdemServico" />
+                        <input type="hidden" asp-for="@Model.listaPreco.id" value="@Model.listaPreco.id" id="osc_idListaPreco" />
+
                         <div class="row">
                             <div class="col-md-5 offset-1">
                                 <div class="form-group">
@@ -57,13 +81,8 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produto.idName" class="form-control" type="text" id="osc_IdNameProduto" required="required">
+                                            <input asp-for="@Model.produto.idName" class="form-control" type="text" id="osc_IdNameProduto" disabled="disabled">
                                             <input asp-for="@Model.produto.id" class="form-control" type="hidden" id="osc_IdProduto">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info" onclick="CarregaLookupServico()">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +91,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoOrdem.quantidade" class="form-control" type="text" id="osc_quantidade"  >
+                                            <input asp-for="@Model.produtoOrdem.quantidade" class="form-control" type="text" id="osc_quantidade" value="1">
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +100,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
-                                            <input asp-for="@Model.produtoOrdem.valor" class="form-control" type="text" id="osc_valor"  >
+                                            <input asp-for="@Model.produtoOrdem.valor" class="form-control" type="text" id="osc_valor">
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +112,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-1x"></span>
                                         </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.produtoOrdem.tipoDesconto" class="form-control" onchange="Onchage_ProdutoOrdemTipoDesconto();">
+                                        <select id="osc_tipoDesconto" asp-for="@Model.produtoOrdem.tipoDesconto" class="form-control" onclick="Onchage_ProdutoOrdemTipoDesconto();">
                                             <option value="1">Valor</option>
                                             <option value="2">Percentual</option>
                                         </select>
@@ -120,15 +139,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>              
             </form>
         </div>
     </div>
 </div>
-<div class="modal fade" id="lookupProduto">
-</div>
+
 <script src="~/lib/OscaJs/osc_produtoOrdem.js"></script>
 <script>
-    debugger;
-    OnLoad_ProdutoOrdem();
+   
+    CarregaGrid();
 </script>

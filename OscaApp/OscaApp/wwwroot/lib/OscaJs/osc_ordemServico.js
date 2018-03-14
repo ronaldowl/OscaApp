@@ -17,16 +17,19 @@ function desabilita_OrdemServico(status) {
         $("input,select, textarea").prop("disabled", true);
 
         //Esconde botoes
-        $("#osc_salvar").hide(true);      
-        $("#osc_calcular").hide(true);
-        $("#osc_novoServico").hide(true);
-        
-        $("#botaoLookupCliente").hide(true);  
-        $("#botaoLookupCategoriaManutencao").hide(true);                    
+        $("#osc_salvar").hide();      
+        $("#osc_calcular").hide();
+        $("#osc_novoServicoOrdem").hide(); 
+        $("#osc_novoProdutoOrdem").hide();      
+
+                        
+        $("#osc_botaoBuscaProfissional").hide(); 
+        $("#botaoLookupCliente").hide();  
+        $("#botaoLookupCategoriaManutencao").hide();                    
 
     } else {
         //Apresenta botoes
-        $("#osc_reabrir").hide(false); 
+        $("#osc_reabrir").show(); 
 
         //Executa regra para tratamento dos campos de desconto
         Onchage_OrdemServicoTipoDesconto();
@@ -34,8 +37,7 @@ function desabilita_OrdemServico(status) {
 
 }
 
-function Onchage_OrdemServicoTipoDesconto() {
-    debugger;
+function Onchage_OrdemServicoTipoDesconto() {    
 
     var tipo = document.getElementById("osc_tipoDesconto");
     var descontoValor = document.getElementById("osc_valorDesconto");

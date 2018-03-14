@@ -2,42 +2,25 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-@{
-   
+@{   
     Layout = "_LayoutFrame";
 }
-<link rel="stylesheet" href="~/lib/OscaCss/style.css">
-
 <script>
-
-    function CarregaServicoOrdem() {
-        $("#ModalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?id=" + idOrdemServico, function () {
-            $("#ModalServicoOrdem").modal("show");
-        });
-    }
 
 
     function CarregaUpdateServicoOrdem(id) {
-        $("#ModalServicoOrdem").load("/ServicoOrdem/FormUpdateServicoOrdem?id=" + id , function () {
-            $("#ModalServicoOrdem").modal("show");
+        debugger;
+        $('#ModalServicoOrdem', parent.document).load("/ServicoOrdem/FormUpdateServicoOrdem?id=" + id, function () {
+
+            $('#ModalServicoOrdem', parent.document).modal("show");
         });
     }
 </script>
 
-<div class="card normalize" id="osc_Grid">
-    
-            <table>
-                <tr>
-                    <td>
-                        <h5 style="font-weight:bold">&nbsp;&nbsp;Servico da Ordem: &nbsp;&nbsp;</h5>
-                    </td>
-                    <td>
-                        <div class="form-group col-md-2">
-                            <button id="osc_novoServicoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Novo</span></button>
-                        </div>
-                    </td>
-                </tr>
-            </table>     
+<link rel="stylesheet" href="~/lib/OscaCss/style.css"> 
+
+<div class="card normalize" id="osc_Grid">   
+           
                 <table class="table table-hover table-striped table-responsive-md tableNoMargin table-bordered table-sm">
                     <thead>
                         <tr>
@@ -45,11 +28,10 @@
                             <th>Serviço</th>
                             <th>Qtd/Horas</th>
                             <th>Valor</th>
-                            <th>Total</th>
+                            <th>Total Resumido</th>
                             <th>Desconto</th>
-                            <th>Final</th>
-                            <th> </th>
-                            <th> </th>
+                            <th>Total</th>
+                           
                         </tr>
                     </thead>
                     @{
@@ -71,7 +53,6 @@
                             <td>@item.servicoOrdem.quantidade</td>
                             <td>@item.servicoOrdem.valor.ToString("N2")</td>
                             <td>@item.servicoOrdem.total.ToString("N2")</td>
-
                             <td>@item.servicoOrdem.valorDesconto.ToString("N2")</td>
                             <td>@item.servicoOrdem.totalGeral.ToString("N2")</td>
                             <td>
@@ -109,10 +90,6 @@
                     </table>
                 </div>
             </div>
- 
-
-<div class="modal fade" id="ModalServicoOrdem">
-</div>
  
 <script>
    

@@ -1,4 +1,5 @@
 ﻿@model OscaApp.ViewModels.ClienteViewModel
+
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -239,6 +240,7 @@
                     <!-- FOOTER -->
                 </div>
             </form>
+           
         </div>
         <div class="col-md-4">
             <div class="card card-success" id="osc_formEndereco">
@@ -435,8 +437,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade modal-lg" id="lookupContato">
-
+<div class="modal fade" id="lookupContato">
 </div>
 <script src="~/lib/OscaJs/osc_cliente.js"></script>
 <script>

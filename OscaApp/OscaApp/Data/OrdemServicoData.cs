@@ -47,7 +47,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("idCategoriaManutencao").IsModified = true;
                 db.Entry(modelo).Property("observacao").IsModified = true;
                 db.Entry(modelo).Property("idProfissional").IsModified = true;
-
+                db.Entry(modelo).Property("idCliente").IsModified = true;
 
                 db.Entry(modelo).Property("tipo").IsModified = true;
                 db.Entry(modelo).Property("placa").IsModified = true;

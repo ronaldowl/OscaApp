@@ -14,7 +14,7 @@
         $("#lookupCategoriaManutencao").load("/CategoriaManutencao/LookupCategoriaManutencao", function () {
             $("#lookupCategoriaManutencao").modal("show");
         })
-    }  
+    }
 
     function CarregaFormStatusOrdemServico() {
         $("#ModalStatusOrdem").load("/OrdemServico/FormStatusOrdemServico?id=" + '@Model.ordemServico.id' , function () {
@@ -40,6 +40,18 @@
     function CarregaUpdateProdutoOrdem(id) {
         $("#ModalProdutoOrdem").load("/ProdutoOrdem/FormUpdateProdutoOrdem?id=" + id, function () {
             $("#ModalProdutoOrdem").modal("show");
+        });
+    }
+    function CarregaServicoOrdem() {
+        $("#ModalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?id=" +  '@Model.ordemServico.id', function () {
+            $("#ModalServicoOrdem").modal("show");
+        });
+    }
+
+
+    function CarregaUpdateServicoOrdem(id) {
+        $("#ModalServicoOrdem").load("/ServicoOrdem/FormUpdateServicoOrdem?id=" + id, function () {
+            $("#ModalServicoOrdem").modal("show");
         });
     }
 
@@ -373,13 +385,26 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>                     
+                        <div class="card-header">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">&nbsp;&nbsp;Serviço da Ordem: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-md-2">
+                                            <button id="osc_novoServicoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Novo</span></button>
+                                        </div>                                       
+                                    </td>
+                                 
+                                </tr>
+                            </table>
                         </div>
-                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;   </span></div>
-                        <div  >
-                            <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id" height="500"  width="1223" ></iframe>
-                        </div>
-                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;   </span></div>
-                        <div>
+                        <div id="MainGridServico">
+                            <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id" height="300"  width="1223" ></iframe>
+                        </div>                      
+                        <div class="card-header">
                             <table>
                                 <tr>
                                     <td>
@@ -387,12 +412,14 @@
                                     </td>
                                     <td>
                                         <div class="form-group col-md-2">
-                                            <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem();"> <span>Novo</span></button>
+                                            <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem()"> <span>Novo</span></button>
                                         </div>
                                     </td>
                                 </tr>
                             </table>
-                            <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="500" width="1223"></iframe>
+                        </div>
+                        <div>                         
+                            <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="300" width="1223"></iframe>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -468,10 +495,16 @@
 </div>
 <div class="modal fade" id="lookupProfissional">
 </div>
+<div class="modal fade" id="ModalServicoOrdem">
+</div>
 <div class="modal fade" id="ModalProdutoOrdem">
 </div>
 
 <script src="~/lib/OscaJs/osc_ordemServico.js"></script>
-<script>OnLoad_OrdemServico();</script>
+
+<script>
+    OnLoad_OrdemServico();
+    // Onchage_ProdutoOrdemTipoDesconto();
+</script>
 
 

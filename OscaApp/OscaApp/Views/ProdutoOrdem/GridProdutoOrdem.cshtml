@@ -6,20 +6,98 @@
     Layout = "_LayoutFrame";
 }
 <link rel="stylesheet" href="~/lib/OscaCss/style.css">
-<script>
+<script>  
 
- 
+    function CarregaUpdateProdutoOrdem(id) {
+        debugger;
+        $('#ModalProdutoOrdem', parent.document).load("/ProdutoOrdem/FormUpdateProdutoOrdem?id=" + id, function () {             
+       
+          $('#ModalProdutoOrdem', parent.document).modal("show");
+        });
+    }
 </script>
 
+<div class="card normalize" id="osc_Grid"> 
+
+    <table class="table table-hover table-striped table-responsive-md tableNoMargin table-bordered">
+        <thead>
+            <tr>
+                <th>Código Produto</th>
+                <th>Nome Produto</th>
+                <th>Qtd</th>
+                <th>Valor</th>
+                <th>Total Resumido</th>
+                <th>Desconto</th>
+                <th>Total</th>
+                
+            </tr>
+        </thead>
+        @{
+            int qtd = 0;
+            decimal desconto = 0;
+            decimal total = 0;
+            decimal totalGeral = 0;
+
+        }
+        @foreach (var item in Model)
+        {
+            qtd += item.produtoOrdem.quantidade;
+            desconto += item.produtoOrdem.valorDesconto;
+            total += item.produtoOrdem.total;
+            totalGeral += item.produtoOrdem.totalGeral;
+            <tr style="height:10px">
+                <td>@item.produto.codigo</td>
+                <td>@item.produto.nome</td>
+                <td>@item.produtoOrdem.quantidade</td>
+                <td>@item.produtoOrdem.valor.ToString("N2")</td>
+                <td>@item.produtoOrdem.total.ToString("N2")</td>
+
+                <td>@item.produtoOrdem.valorDesconto.ToString("N2")</td>
+                <td>@item.produtoOrdem.totalGeral.ToString("N2")</td>
+                <td>
+                    <div class="form-group col-md-2">
+                        <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar" onclick="CarregaUpdateProdutoOrdem('@item.produtoOrdem.id')"> <span>Editar</span></button>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group col-md-2">
+                        <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteProdutoOrdem", "ProdutoOrdem", new { id = item.produtoOrdem.id, idOrdem = item.produtoOrdem.idOrdemServico })'"> <span>Remover</span></button>
+                    </div>
+                </td>
+            </tr>
+        }
+        <tfoot id="osc_tableFooterProdutoOrdem" class="total">
+            <tr style="background-color:gray; color:white ; font-size:20px">
+                <td></td>
+                <td></td>
+                <td>@qtd</td>
+                <td></td>
+                <td>R$@total.ToString("N2")</td>
+                <td>R$@desconto.ToString("N2")</td>
+                <td>R$@totalGeral.ToString("N2")</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="paginacao">
+        <table>
+            <tr>
+                <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridProdutoOrdem", "ProdutoOrdem", new { page }))</td>
+                <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+            </tr>
+        </table>
+    </div>
+</div>
 
 <script>
-   
-    //var idOrdemServico = window.parent.document.getElementById('osc_id').value;
-    //var idListaPreco = window.parent.document.getElementById('osc_idListaPreco').value;
+
+    var idOrdemServico = window.parent.document.getElementById('osc_id').value;
+    var idListaPreco = window.parent.document.getElementById('osc_idListaPreco').value;
 
     var statusOrdemServico = window.parent.document.getElementById('osc_statusOrdemServico').value;
 
     if (statusOrdemServico == 2 || statusOrdemServico == 5) $("input,select, textarea, button").prop("disabled", true);
-    
+
 </script>
 
