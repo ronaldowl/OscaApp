@@ -1,48 +1,70 @@
 ﻿@model OscaApp.Data.ContextPage
-<div class="container">
+ 
     <div class="row">
         <div class="col-md-8">
             <h3><i class="fa fa-smile-o fa-1x"></i> @Model.nomeUsuario seja bem vindo ao OSCA!</h3>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 offset-9">
-           
+        <div class="col-md-3" id="comunicados">
+        </div>
+        <div class="col-md-3" id="atendimentos">           
+        </div>       
+        <div class="col-md-3" id="tarefas">          
+        </div>
+        <div class="col-md-3" id="clientes">      
         </div>
     </div>
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
-        <div style="background-color:darkgrey; width: 100%; height:20px;"></div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelFinanceiro"><h5>Financeiro</h5></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a>
-                </div>
-            </div>
-        </div>
+    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
+        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
         <div class="col-md-3">
             <div class="card m-2">
-                <div class="card-body">
-                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a>
-                </div>
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                    </tr>
+                </table>
             </div>
         </div>
-    </div> 
-</div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-2">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+ 
+<script>
+    CarregaComunicados();
+    function CarregaComunicados() {         
+        $.ajax("/Comunicado/QuadroComunicadoResumido").done(function (data) {
+            $("#comunicados").html(data);
+        });
+    }
+</script>

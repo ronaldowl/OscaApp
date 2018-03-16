@@ -1,0 +1,41 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Comunicado>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+ 
+            <div class="card" id="osc_Grid">
+                <div class="card-header">
+                    <div class="card-title">
+                        <center><h4> Quadro de Avisos </h4></center>
+                    </div>
+                </div>
+                <div class="card-body">                    
+                        <div  >
+                            <table class="table table-hover table-striped table-bordered">
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><center><label style="font-weight:bold">@item.titulo</label></center> 
+                                             
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                            <div>
+                                <table>
+                                    <tr>                                        
+                                        <td><h6> Total:@Model.TotalItemCount</h6></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                     
+                </div>
+            </div>
+  
+ 
+ 

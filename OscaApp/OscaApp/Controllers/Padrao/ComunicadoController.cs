@@ -122,5 +122,36 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Comunicado>(Page, 10));
         }
+
+        public ViewResult QuadroComunicado(string filtro, int Page)
+        {
+            IEnumerable<Comunicado> retorno = comunicadoData.GetAll(contexto.idOrganizacao);
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
+                                                         where (A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                                         select A;
+
+            retorno = retorno.OrderBy(x => x.dataInicio);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Comunicado>(Page, 10));
+        }
+        public ViewResult QuadroComunicadoResumido(string filtro, int Page)
+        {
+            IEnumerable<Comunicado> retorno = comunicadoData.GetAll(contexto.idOrganizacao);
+
+            //realiza busca por Nome, Código, Email e CPF
+            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
+                                                         where (A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                                         select A;
+
+            retorno = retorno.OrderBy(x => x.dataInicio);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Comunicado>(Page, 10));
+        }
     }
 }

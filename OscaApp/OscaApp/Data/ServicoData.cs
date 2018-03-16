@@ -34,7 +34,7 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("codigo").IsModified                   = true;
+               
                 db.Entry(modelo).Property("formaVendaServico").IsModified = true;
                 db.Entry(modelo).Property("valor").IsModified = true;
                 db.Entry(modelo).Property("descricao").IsModified = true;
