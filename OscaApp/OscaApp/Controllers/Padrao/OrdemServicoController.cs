@@ -50,6 +50,7 @@ namespace OscaApp.Controllers
             modelo.contexto = contexto;
             modelo.ordemServico.criadoEm = DateTime.Now;
             modelo.ordemServico.criadoPorName = contexto.nomeUsuario;
+  
 
             //Prenche lista de preço para o contexto da página
             List<SelectListItem> itens = new List<SelectListItem>();
@@ -160,15 +161,13 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 10));
         }
 
-        public ViewResult LookupOrdemServico(string filtro, int Page)
+        public ViewResult LookupOrdemServico()
         {
             IEnumerable<OrdemServico> retorno = ordemServicoData.GetAll(contexto.idOrganizacao);
 
-            retorno = retorno.OrderBy(x => x.codigo);
+            retorno = retorno.OrderBy(x => x.codigo); 
 
-            if (Page == 0) Page = 1;
-
-            return View(retorno.ToPagedList<OrdemServico>(Page, 10));
+            return View(retorno.ToPagedList<OrdemServico>(1,10));
         }
 
         [HttpGet]

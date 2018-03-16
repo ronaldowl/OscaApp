@@ -114,12 +114,12 @@ namespace OscaApp.RulesServices
                         {
                             hoc.referencia = sqldata.RetornaRelacaoOrdemServico(item.idReferencia).codigo;
                         }
-                        if (item.tipoReferencia == CustomEnum.TipoReferencia.servico)
+                        if (item.tipoReferencia == CustomEnum.TipoReferencia.Servico)
                         {
                             hoc.referencia = sqldata.RetornaRelacaoServico(item.idReferencia).codigo;
                         } 
 
-                        if (item.tipoReferencia == CustomEnum.TipoReferencia.semReferencia)
+                        if (item.tipoReferencia == CustomEnum.TipoReferencia.Atendimento)
                         {
                             hoc.referencia = "";
                         }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OscaFramework.Models;
+using X.PagedList;
 
 namespace OscaApp.ViewModels
 {
@@ -16,6 +17,7 @@ namespace OscaApp.ViewModels
         public Relacao ordemServico { get; set; }
         public Relacao listaPreco { get; set; }
         public ContextPage contexto { get; set; }
+        public IPagedList<LookupItemLista> produtos { get; set; }
 
         public ProdutoOrdemViewModel()
         {

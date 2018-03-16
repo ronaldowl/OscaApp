@@ -130,15 +130,13 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<Profissional>(Page, 10));
         }
 
-        public ViewResult LookupProfissional(string filtro, int Page)
+        public ViewResult LookupProfissional( )
         {
             IEnumerable<Profissional> retorno = profissionalData.GetAll(contexto.idOrganizacao);
 
-            retorno = retorno.OrderBy(x => x.nomeProfissional);
+            retorno = retorno.OrderBy(x => x.nomeProfissional);           
 
-            if (Page == 0) Page = 1;
-
-            return View(retorno.ToPagedList<Profissional>(Page, 5));
+            return View(retorno.ToPagedList<Profissional>(1, 10));
         }
 
         public ViewResult GridLookupProfissional(string filtro, int Page)
@@ -152,7 +150,7 @@ namespace OscaApp.Controllers
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Profissional>(Page, 5));
+            return View(retorno.ToPagedList<Profissional>(Page, 10));
         }
     }
 }

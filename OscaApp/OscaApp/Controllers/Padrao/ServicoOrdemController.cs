@@ -43,9 +43,13 @@ namespace OscaApp.Controllers
                 modelo.ordemServico.id = new Guid(id);                  
               
                 modelo.servicoOrdem.criadoEm = DateTime.Now;
-                modelo.servicoOrdem.criadoPorName = contexto.nomeUsuario;    
-                
-          
+                modelo.servicoOrdem.criadoPorName = contexto.nomeUsuario;
+
+                IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
+
+                modelo.servicos = retorno.ToPagedList<Servico>(1, 5);
+
+
             }
             catch (Exception ex)
             {

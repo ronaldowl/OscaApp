@@ -31,6 +31,13 @@
         });
 
     }
+    function CarregaGridPagina(Page) {        
+
+        $.ajax("/Cliente/GridLookupCliente?Page=" + Page).done(function (data) {
+            $("#GridCliente").html(data);
+        });
+
+    }
 
 </script>
 
@@ -76,6 +83,14 @@
                             <div id="GridCliente">
 
                             </div>
+                            <div id="paginacao">
+                                <table>
+                                    <tr>
+                                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridLookupCliente", "Cliente", new { page }))<span>Total de Clientes:@Model.TotalItemCount</span></td>
+                                       
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,5 +100,11 @@
 </div> 
  <script>
      CarregaGrid();
+     $('#paginacao').on('click', 'a', function (e) {
+
+         e.preventDefault();
+         CarregaGridPagina(this.text);
+
+     }); 
 </script>
 

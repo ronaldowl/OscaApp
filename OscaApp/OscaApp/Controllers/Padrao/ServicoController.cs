@@ -129,10 +129,12 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<Servico>(Page, 10));
         }
 
-        public ViewResult LookupServico(string filtro, int Page)
-        {          
+        public ViewResult LookupServico( )
+        {
+            IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
+            retorno = retorno.OrderBy(x => x.nomeServico);
 
-            return View( );
+            return View(retorno.ToPagedList<Servico>(1, 10));
         }
 
         public ViewResult GridLookupServico(string filtro, int Page)
@@ -146,7 +148,7 @@ namespace OscaApp.Controllers
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Servico>(Page, 10));
+            return View(retorno.ToPagedList<Servico>(Page, 5));
         }
 
         public ViewResult GridLookupServicoOrdem(string filtro, int Page)
@@ -160,7 +162,7 @@ namespace OscaApp.Controllers
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Servico>(Page, 10));
+            return View(retorno.ToPagedList<Servico>(Page, 5));
         }
     }
 }

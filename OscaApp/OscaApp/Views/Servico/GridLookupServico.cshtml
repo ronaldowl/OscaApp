@@ -6,37 +6,27 @@
     Layout = "_LayoutFrame";
 }
 
-<div class="row">
-    <div class="col-md-11">
-        <table class="table table-hover table-striped table-bordered table-sm">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Código</th>
-                    <th>Servico</th>
-                    <th>Forma de Venda</th>
-                    <th>Valor</th>
-                    
-                </tr>
-            </thead>
-            @foreach (var item in Model)
-                                    {
-                <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()', '@item.valor.ToString("N2")') " data data-dismiss="modal">
-                    <td><i class="fa fa-shield"></i></td>
-                    <td>@item.codigo.ToString()</td>
-                    <td>@item.nomeServico</td>
-                    <td>@item.formaVendaServico</td>
-                    <td>@item.valor.ToString("N2")</td>
-                </tr>
-                                    }
-        </table>
-        <div>
-            <table>
-                <tr>
-                    <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServico", "Servico", new { page }))</td>
-                    <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-</div>
+
+<table class="table table-hover table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Código</th>
+            <th>Servico</th>
+            <th>Forma de Venda</th>
+            <th>Valor</th>
+
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeServico.ToString()', '@item.valor.ToString("N2")') " data data-dismiss="modal">
+            <td><i class="fa fa-shield"></i></td>
+            <td>@item.codigo.ToString()</td>
+            <td>@item.nomeServico</td>
+            <td>@item.formaVendaServico</td>
+            <td>@item.valor.ToString("N2")</td>
+        </tr>
+    }
+</table>
+

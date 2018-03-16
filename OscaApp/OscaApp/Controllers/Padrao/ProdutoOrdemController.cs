@@ -23,11 +23,13 @@ namespace OscaApp.Controllers
         private readonly IProdutoOrdemData produtoOrdemData;
         private readonly IProdutoData produtoData; 
         private ContextPage contexto;
+        private readonly IItemListaPrecoData ItemlistaPrecoData;
 
         public ProdutoOrdemController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.produtoData = new ProdutoData(db);
-            this.produtoOrdemData = new ProdutoOrdemData(db);     
+            this.produtoOrdemData = new ProdutoOrdemData(db);
+            this.ItemlistaPrecoData = new ItemListaPrecoData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
@@ -44,9 +46,12 @@ namespace OscaApp.Controllers
                 modelo.listaPreco = new Relacao();
                 modelo.listaPreco.id = new Guid(idListaPreco);              
                 modelo.produtoOrdem.criadoEm = DateTime.Now;
-                modelo.produtoOrdem.criadoPorName = contexto.nomeUsuario;    
-                
-          
+                modelo.produtoOrdem.criadoPorName = contexto.nomeUsuario;
+
+                IEnumerable<LookupItemLista> produtos = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
+
+                modelo.produtos = produtos.ToPagedList<LookupItemLista>(1, 5);
+
             }
             catch (Exception ex)
             {
@@ -128,6 +133,13 @@ namespace OscaApp.Controllers
         }
 
         public ViewResult GridProdutoOrdem(string id)
+        {
+            IEnumerable<ProdutoOrdemGridViewModel> retorno = produtoOrdemData.GetAllGridViewModel(new Guid(id));
+
+            return View(retorno.ToPagedList<ProdutoOrdemGridViewModel>(1, 10));
+        }
+
+        public ViewResult GridLooupProdutoOrdem(string id)
         {
             IEnumerable<ProdutoOrdemGridViewModel> retorno = produtoOrdemData.GetAllGridViewModel(new Guid(id));
 

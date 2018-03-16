@@ -9,15 +9,15 @@
 
 <script type="text/javascript">
 
-    //Função para tratamento do Lookup padrão  
+    //Função para tratamento do Lookup padrão
     function ConfigLookup(id, name) {
 
         $("#osc_IdNameProfissional").val(name);
-        $("#osc_IdProfissional").val(id);     
-                
+        $("#osc_IdProfissional").val(id);
+
     }
     function CarregaGrid() {
-        $("#grid").val(""); 
+        $("#grid").val("");
         $.ajax("/Profissional/GridLookupProfissional").done(function (data) {
             $("#GridProfissional").html(data);
         });
@@ -30,7 +30,13 @@
             $("#GridProfissional").html(data);
         });
 
-    } 
+    }
+    function CarregaGridPagina(Page) {
+
+        $.ajax("/Profissional/GridLookupProfissional?Page=" + Page).done(function (data) {
+            $("#GridProfissional").html(data);
+        });
+    }
 
 </script>
 
@@ -43,7 +49,6 @@
             <form>
                 <div class="card" id="osc_Grid">
                     <div class="card-header">
-                      
                         <div class="card-title">
                             <table>
                                 <tr>
@@ -75,7 +80,14 @@
                         </div>
                         <div class="card-body">
                             <div id="GridProfissional">
+                            </div>
+                            <div id="paginacao">
+                                <table>
+                                    <tr>
+                                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridLookupProfissional", "Profissional", new { page })) Total de Profissionais @Model.TotalItemCount</td>
 
+                                    </tr>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -87,4 +99,11 @@
 
 <script>
     CarregaGrid();
+
+    $('#paginacao').on('click', 'a', function (e) {
+
+        e.preventDefault();
+        CarregaGridPagina(this.text);
+
+    });
 </script>

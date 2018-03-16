@@ -178,7 +178,7 @@ namespace OscaApp.Controllers
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return PartialView(modelo.ToPagedList<LookupItemLista>(Page, 10));
+            return PartialView(modelo.ToPagedList<LookupItemLista>(Page, 5));
 
         }
         public ViewResult LookupProdutoPedido(string idListaPreco, int Page, string Filtro)

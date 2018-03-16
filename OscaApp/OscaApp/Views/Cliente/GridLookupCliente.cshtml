@@ -6,38 +6,28 @@
     Layout = "_LayoutFrame";
 }
 
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-bordered table-sm">
-                                    <thead>
-                                        <tr><th></th>
-                                            <th>Código</th>
-                                            <th>Cliente</th>
-                                            <th>CNPJ/CPF</th>
-                                            <th>Tipo de Pessoa</th>
-                                           
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr  id="@item.id"  onclick="ConfigLookup('@item.id.ToString()','@item.nomeCliente.ToString()') " data-dismiss="modal">
-                                            <td><i class="fa  fa-users"></i></td>
-                                            <td>@item.codigo.ToString()</td>
-                                            <td>@item.nomeCliente</td>
-                                            <td>@item.cnpj_cpf</td>
-                                            <td>@item.tipoPessoa</td>
-                                           
-                                        </tr>
-                                    }
-                                </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridCliente", "Cliente", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                   
+
+<table class="table table-hover table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Código</th>
+            <th>Cliente</th>
+            <th>CNPJ/CPF</th>
+            <th>Tipo de Pessoa</th>
+
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeCliente.ToString()') " data-dismiss="modal">
+            <td><i class="fa  fa-users"></i></td>
+            <td>@item.codigo.ToString()</td>
+            <td>@item.nomeCliente</td>
+            <td>@item.cnpj_cpf</td>
+            <td>@item.tipoPessoa</td>
+
+        </tr>
+    }
+</table>
+

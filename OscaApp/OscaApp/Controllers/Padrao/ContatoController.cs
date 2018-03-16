@@ -143,10 +143,11 @@ namespace OscaApp.Controllers
 
             return PartialView(retorno.ToPagedList<Contato>(Page, 10));
         }
-        public ViewResult LookupContato(string filtro, int Page)
-        {         
+        public ViewResult LookupContato()
+        {
+            IEnumerable<Contato> retorno = contatoData.GetAll(contexto.idOrganizacao); 
 
-            return View( );
+            return View(retorno.ToPagedList<Contato>(1,10));
         }
     }
 }

@@ -50,25 +50,22 @@
                 <input type="hidden" asp-for="@Model.produtoOrdem.id" value="@Model.produtoOrdem.id" id="osc_idProdutoOrdem" />
                 <input type="hidden" asp-for="@Model.listaPreco.id" value="@Model.listaPreco.id" id="osc_idListaPreco" />
                 <div class="card" id="osc_MainForm">
-                    <div class="card-header">
-                        <table>
-                            <tr>
-                                <td><h3>Produto da Ordem: &nbsp;&nbsp;</h3></td>
-                                <td>
-                                    <div id="osc_barrabotoes">
-                                        <label>
-                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
-                                        </label>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <label>
-                                            <button type="button" class="close btn btn-info btn-sm" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+
+                    <table>
+                        <tr>
+                            <td><h3>Produto da Ordem: &nbsp;&nbsp;</h3></td>
+                            <td>
+                                <div id="osc_barrabotoes">
+                                    <label>
+                                        <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
+                                    </label>&nbsp;
+                                    <label>
+                                        <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value"" data-dismiss="modal"> <span>Fechar</span></button>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
 
                     <div class="card-body">
                         <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" id="osc_idOrdemServico" />
@@ -139,7 +136,7 @@
                             </div>
                         </div>
                     </div>
-                </div>              
+                </div>
             </form>
         </div>
     </div>
@@ -147,6 +144,6 @@
 
 <script src="~/lib/OscaJs/osc_produtoOrdem.js"></script>
 <script>
-   
+
     CarregaGrid();
 </script>

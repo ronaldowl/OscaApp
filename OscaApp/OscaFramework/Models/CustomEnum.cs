@@ -66,8 +66,8 @@ namespace OscaFramework.Models
     {
         public enum TipoReferencia
         {
-            semReferencia = 0,
-            servico = 1,
+            Atendimento = 0,
+            Servico = 1,
             OrdemServico = 2
         }
         public enum TipoLancamento

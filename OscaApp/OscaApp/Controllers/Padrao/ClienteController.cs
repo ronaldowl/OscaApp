@@ -181,21 +181,13 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        public ViewResult LookupCliente(string filtro, int Page)
+        public ViewResult LookupCliente()
         {
             try
             {
                 IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
-
-                //realiza busca por Nome, Código, Email e CPF
-                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeCliente == filtro || A.cnpj_cpf == filtro || A.email == filtro) select A;
-
-                retorno = retorno.OrderBy(x => x.nomeCliente);
-
-                //Se não passar a número da página, caregar a primeira
-                if (Page == 0) Page = 1;
-
-                return View(retorno.ToPagedList<Cliente>(Page, 5));
+              
+                return View(retorno.ToPagedList<Cliente>(1, 10));
 
             }
             catch (Exception ex)
@@ -221,7 +213,7 @@ namespace OscaApp.Controllers
                 //Se não passar a número da página, caregar a primeira
                 if (Page == 0) Page = 1;
 
-                return View(retorno.ToPagedList<Cliente>(Page, 5));
+                return View(retorno.ToPagedList<Cliente>(Page, 10));
 
             }
             catch (Exception ex)

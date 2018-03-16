@@ -32,6 +32,15 @@
         });
 
     }
+    function CarregaGridPagina(page) {
+
+       // var filtro = $("#grid").val();
+
+        $.ajax("/Contato/GridLookupContato?page=" + page).done(function (data) {
+            $("#GridContato").html(data);
+        });
+
+    }
 
 
 </script>
@@ -79,6 +88,14 @@
                             <div id="GridContato">
 
                             </div>
+                            <div id="paginacao">
+                                <table >
+                                    <tr>
+                                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridLookupContato", "Contato", new { page })) <span>Total de Contatos:@Model.TotalItemCount  </span></td>
+                                       
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,8 +103,13 @@
         </div>
     </div>
 </div>
-
-
 <script>
     CarregaGrid();
+
+    $('#paginacao').on('click', 'a', function (e) {        
+
+            e.preventDefault();  
+            CarregaGridPagina(this.text);      
+       
+    }); 
 </script>

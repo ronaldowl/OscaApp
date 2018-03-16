@@ -1,4 +1,6 @@
 ﻿@model OscaApp.ViewModels.ServicoOrdemViewModel
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 @{
     Layout = "_LayoutFrame";
 }
@@ -26,6 +28,13 @@
             $("#GridServico").html(data);
         });
 
+     }
+    function CarregaGridPagina(page) {       
+
+        $.ajax("/Servico/GridLookupServicoOrdem?Page=" + page).done(function (data) {
+            $("#GridServico").html(data);
+        });
+
     }
 </script>
 
@@ -42,9 +51,8 @@
        
         <div class="modal-body">
             <form asp-controller="ServicoOrdem" asp-action="FormCreateServicoOrdem" method="post" id="FormCreateProdutoPedido">
-                <div class="card" id="osc_MainForm">
-                    <div class="card-header">
-                        <div class="card-title ">
+                <div class="card" id="osc_MainForm">                    
+                       
                             <table>
                                 <tr>
                                     <td><h5>Serviço da Ordem: &nbsp;&nbsp;</h5></td>
@@ -52,18 +60,16 @@
                                         <div id="osc_barrabotoes">
                                             <label>
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
-                                            </label>
-                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                            </label>&nbsp;
                                             <label>
-                                                <button type="button" class="close btn btn-info btn-sm" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
-                                            </label>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value"" data-dismiss="modal"> <span>Fechar</span></button>
+                                            </label>                                          
                                         </div>
                                     </td>
                                 </tr>
                             </table>
-                        </div>
-                    </div>
+                        
+                    
                     <div class="card-body">
                         <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" />
                         <div class="row">
@@ -160,6 +166,14 @@
                     </table>
                     <div id="GridServico">
                     </div>
+                    <div id="paginacao">
+                        <table>
+                            <tr>
+                                <td style="width:75%">@Html.PagedListPager((IPagedList)Model.servicos, page => Url.Action("GridLookupServicoOrdem", "Servico", new { page })) Total:@Model.servicos.TotalItemCount</td>
+
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </form>
         </div>
@@ -168,4 +182,10 @@
 <script src="~/lib/OscaJs/osc_servicoOrdem.js"></script>
 <script>
     CarregaGrid();
+    $('#paginacao').on('click', 'a', function (e) {
+
+        e.preventDefault();
+        CarregaGridPagina(this.text);
+
+    });
 </script>
