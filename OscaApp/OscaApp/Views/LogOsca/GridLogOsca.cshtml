@@ -1,8 +1,8 @@
-﻿@model  List<OscaApp.framework.LogOsca>
+﻿@model List<OscaApp.framework.LogOsca>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-11 offset-1">
+        <div class="col-md-10 offset-1">
             <br />
             <div class="card" id="osc_Grid">
                 <div class="card-header">
@@ -42,80 +42,90 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-bordered table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Código de Erro</th>
-                                            <th>ID</th>
-                                            <th>ID do usuário</th>
-                                            <th>Evento</th>
-                                            <th>Código da entidade</th>
-                                            <th>Data de criação</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormViewLogOsca", "LogOsca", new {id = item.id })'">
-                                            <td><i class="fa fa-info-circle"></i></td>
-                                            <td>@Html.ActionLink(item.codigoErro.ToString(), "FormViewLogOsca", new { id = item.id })</td>
-                                            <td>@item.id</td>
-                                            <td>@item.idUsuario</td>
-                                            <td>@item.evento</td>
-                                            <td>@item.codigoEntidade</td>
-                                            <td>@item.dataCriacao</td>
-                                        </tr>
-                                    }
-                                </table>
-
-                            </div>
+                            <table class="table table-hover table-striped table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Código de Erro</th>
+                                        <th>ID</th>
+                                        <th>ID do usuário</th>
+                                        <th>Evento</th>
+                                        <th>Código da entidade</th>
+                                        <th>Data de criação</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item.id" onclick="location.href='@Url.Action("FormViewLogOsca", "LogOsca", new {id = item.id })'">
+                                        <td><i class="fa fa-info-circle"></i></td>
+                                        <td>@Html.ActionLink(item.codigoErro.ToString(), "FormViewLogOsca", new { id = item.id })</td>
+                                        <td>@item.id</td>
+                                        <td>@item.idUsuario</td>
+                                        <td>@item.evento</td>
+                                        <td>@item.codigoEntidade</td>
+                                        <td>@item.dataCriacao</td>
+                                    </tr>
+                                }
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
-        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+</div>
+<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:20px; padding:10px 0 0 0; background:#fff;">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
-        <div class="col-md-3">
-            <div class="card m-2">
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
                 <table>
                     <tr>
-                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                        <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+
                         <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
                     </tr>
                 </table>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
                 <table>
                     <tr>
-                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                        <td>
+                            <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a>
+                        </td>
                     </tr>
                 </table>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
                 <table>
                     <tr>
-                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                        <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
                         <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
                     </tr>
                 </table>
             </div>

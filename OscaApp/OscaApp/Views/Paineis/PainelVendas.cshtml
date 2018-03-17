@@ -5,7 +5,7 @@
             <h3> Painel Vendas</h3>
         </div>
     </div>
-     
+
     <!-- ROW -->
     <div class="row">
         <div class="col-md-4">
@@ -129,65 +129,61 @@
     <br />
     <br />
     <!-- END OF NAVIGATION BAR -->
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
-        <div style="background-color:darkgrey; width: 100%; height:20px;"></div>
-        <!-- NAVIGATION BAR OPERACIONAL -->
-        <div class="col-md-3">
-            <div class="card m-2">
-                <div class="card-body">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- NAVIGATION BAR OPERACIONAL -->
+    <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
         <div class="col-sm-3">
-            <!-- NAVIGATION BAR FINANCEIRO -->
-            <div class="card m-2">
+            <div class="card m-1">
                 <div class="card-body">
                     <table>
                         <tr>
                             <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h5>Financeiro</h5></a></td>
+
+                            <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <!-- NAVIGATION BAR FINANCEIRO -->
         </div>
         <div class="col-sm-3">
-            <!-- NAVIGATION BAR SERVIÇOS -->
-            <div class="card m-2">
+            <div class="card m-1">
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td>
+                                <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                            </td>
+                            <td>
+                                <a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-1">
                 <div class="card-body">
                     <table>
                         <tr>
                             <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <!-- NAVIGATION BAR SERVIÇOS -->
         </div>
         <div class="col-md-3">
-            <!-- NAVIGATION BAR CONFIGURAÇÕES-->
-            <div class="card m-2">
+            <div class="card m-1">
                 <div class="card-body">
                     <table>
                         <tr>
                             <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><p style="font-size:19.8px; margin:0;">Configurações</p></a></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <!-- NAVIGATION BAR CONFIGURAÇÕES-->
         </div>
     </div>
-    <!-- END OF NAVIGATION BAR -->
 </div>
-<!-- END OF CONTAINER -->

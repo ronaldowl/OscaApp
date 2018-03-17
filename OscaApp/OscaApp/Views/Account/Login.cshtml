@@ -12,11 +12,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>  - OSCAS Serviços Online</title>
- 
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/osc_global.css" />
-  
- 
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/osc_global.css" />
+
+
     <style>
         .barraMain {
             background: linear-gradient(to right bottom,#66dbff, #1c177f);
@@ -43,6 +44,21 @@
                 color: aliceblue;
                 text-decoration: none;
             }
+
+            a {
+                text-decoration: none !important;
+            }
+            .fa-facebook-official{
+                color:#1a13ad;
+            }
+            .fa-youtube{
+                color:#ff0000;
+            }
+        .alert-personalized {
+            color: black;
+            background: #f7f7f7;
+            box-shadow: 6px 7px 7px -3px rgba(150,150,150,1);
+        }
     </style>
 </head>
 <body>
@@ -107,65 +123,47 @@
                         </form>
                     </section>
                 </div>
-                <div class="col-md-5 offset-2">
+                <div class="col-md-4 offset-2">
                     <section class="alert alert-warning text-justify">
                         <h5>Próximas manutenções!</h5>
                         <div>
-                            <p class="">
-                                <ul>
-                                    <li>07 de Abril de 2018 as 19:00</li>
-                                    <li>05 de Maio de 2018  as 19:00</li>
-                                    <li>02 de Junho de 2018 as 19:00</li>
-                                </ul>
-                            </p>
+                            <ul>
+                                <li>07 de Abril de 2018 as 19:00</li>
+                                <li>05 de Maio de 2018  as 19:00</li>
+                                <li>02 de Junho de 2018 as 19:00</li>
+                            </ul>
                         </div>
                     </section>
-                    <section>
+                    <section class="alert alert-personalized text-justify">
                         <h5>Melhorias para 7 de Maio</h5>
-                        <div>
-                            <p>
-                                <ul>
-                                    <li>Integração com os Correios</li>                                    
-                                    <li>Alerta via SMS</li>        
-                                
-                                </ul>
-                            </p>
-                        </div>
+                        <ul>
+                            <li>Integração com os Correios</li>
+                            <li>Alerta via SMS</li>
+
+                        </ul>
                     </section>
-                    <section>
+                    <section class="alert alert-personalized text-justify">
                         <h5><a href="http://www.intranet.oscas.com.br">Portal do Cliente</a></h5>
-                        <div>
-                            <p>
-                                <ul>
-                                    <li>Treinamento em Vídeo</li>
-                                    <li>FAQ</li>                                    
-                                    <li>Documentação</li>
-                                    <li>Entre em contato</li>
-                                </ul>
-                            </p>
-                        </div>
+                        <ul>
+                            <li>Treinamento em Vídeo</li>
+                            <li>FAQ</li>
+                            <li>Documentação</li>
+                        </ul>
                     </section>
-                    <section>
-                        <h5><a href="http://www.oscas.com.br">www.oscas.com.br</a></h5>
-                        <div>
-                            <p>
-                                <ul>
-                                    <li>Produto</li>
-                                    <li>Planos</li>                                     
-                                    <li>Entre em contato</li>
-                                </ul>
-                            </p>
-                        </div>
+                    <section class="alert alert-personalized text-justify">
+                        <h5>Redes sociais</h5>                   
+                            <p>Site: <a href="http://www.oscas.com.br" target="_blank">www.oscas.com.br</a></p>
+                            <div class="col-md-6 offset-md-4">
+                                <a href="https://www.facebook.com/OscasServicosOnline/" target="_blank" class="lin"><i class="fa fa-2x fa-youtube"></i></a>
+                                &nbsp;&nbsp;
+                                <a href="https://www.youtube.com/channel/UCanh_FSlWdpoaxTrLiKoYKw" target="_blank"><i class="fa fa-2x fa-facebook-official"></i></a>
+                            </div>
                     </section>
                 </div>
-            </div>
+                </div>
         </div>
-    </div>
-    <footer>
-        <div class="footer fixed-bottom" style="background-color:#0C0C0A">
-           
-        </div>
-
+    </div><br />
+    <footer class="footer fixed-bottom">
     </footer>
 </body>
 </html>
