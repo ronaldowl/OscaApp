@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <div class="row">
                         <!--col1-->
-                        <div class="col-md-4">  
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Código</label>
                                 <div class="inputGroupContainer">
@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                   
+                        </div>
                         <!--col2-->
                         <div class="col-md-4">
                             <div class="form-group">
@@ -92,7 +92,7 @@
                                     </span>
                                     <input id="osc_telefone" asp-for="@Model.Fornecedor.telefone" type="text" class="form-control" placeholder="(XX) - 000000000" maxlength="15" pattern="[0-9]+$" />
                                 </div>
-                            </div>                        
+                            </div>
                         </div>
                         <!--col3-->
                         <div class="col-md-4">
@@ -109,44 +109,54 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Criado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-user fa-2x"></span>&nbsp;
-                                </span>
-                                <input id="osc_criadoPor" asp-for="@Model.Fornecedor.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.Fornecedor.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Criado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-2x"></span>&nbsp;
-                                </span>
-                                <input id="osc_criadoEm" asp-for="@Model.Fornecedor.criadoEm" type="text" class="form-control" disabled="disabled" />
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.Fornecedor.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Status</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-exclamation fa-2x"></span>&nbsp;
-                                </span>
-                                <input id="osc_status" asp-for="@Model.Fornecedor.status" type="text" class="form-control" disabled="disabled" />
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </form>
-            
+            </form>           
         </div>
     </div>
 </div>

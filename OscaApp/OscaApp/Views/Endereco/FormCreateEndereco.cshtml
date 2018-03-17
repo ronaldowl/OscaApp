@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10  offset-1">
-    
+
             <form asp-action="FormCreateEndereco" asp-route-idCliente="@Model.endereco.idCliente" asp-route-idClienteName="@Model.endereco.idClienteName" method="post">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
@@ -174,39 +174,48 @@
             <br /><br /><br />
             <!-- footer -->
             <div class="card-footer">
-
                 <div class="row">
-
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Criado Por</label>
+                            <label class="control-label">Criado Por</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="fa fa-user fa-2x"></span>&nbsp;
-                                </span>
-                                <input id="osc_criadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                    <span class="fa fa-2x fa-user"></span>
+                                </span> &nbsp;
+                                <input id="osc_criadoPor" asp-for="@Model.endereco.criadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Criado Em</label>
+                            <label class="control-label">Criado Em</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-2x"></span> &nbsp;
-                                </span>
-                                <input id="osc_criadoEm" for"" type="text" class="form-control" disabled="disabled" />
+                                    <span class="fa fa-calendar fa-2x"></span>
+                                </span> &nbsp;
+                                <input id="osc_criadoEm" asp-for="@Model.endereco.criadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label>Status</label>
+                            <label class="control-label">Modificado Por</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="fa fa-exclamation fa-2x"></span>&nbsp;
-                                </span>
-                                <input id="osc_status" asp-for="@Model.endereco.status" type="text" class="form-control" disabled="disabled" />
+                                    <span class="fa fa-2x fa-user"></span>
+                                </span> &nbsp;
+                                <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Modificado Em</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar fa-2x"></span>
+                                </span> &nbsp;
+                                <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>

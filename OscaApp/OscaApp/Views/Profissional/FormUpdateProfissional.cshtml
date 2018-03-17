@@ -70,13 +70,13 @@
                                         <input id="osc_codigo" asp-for="@Model.profissional.codigo" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
-                              
+
                                 <div class="form-group">
                                     <label class="control-label">Usuário Associado</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.usuario.idName" class="form-control" type="text" id="osc_IdNameUsuario" >
+                                            <input asp-for="@Model.usuario.idName" class="form-control" type="text" id="osc_IdNameUsuario">
                                             <input asp-for="@Model.usuario.id" class="form-control" type="hidden" id="osc_IdUsuario">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupUsuario()" id="osc_botaoBusca">
@@ -170,19 +170,19 @@
                                     <label class="control-label">Criado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user fa-2x"></span>&nbsp;
-                                        </span>
+                                            <span class="fa fa-2x fa-user"></span>
+                                        </span> &nbsp;
                                         <input id="osc_criadoPor" asp-for="@Model.profissional.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Criado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>&nbsp;
-                                        </span>
+                                            <span class="fa fa-calendar fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_criadoEm" asp-for="@Model.profissional.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -192,31 +192,20 @@
                                     <label class="control-label">Modificado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_modificadoPor" asp-for="@Model.profissional.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                            <span class="fa fa-2x fa-user"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_modificadoPor" asp-for="@Model.profissional.modificadoPor" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Modificado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>&nbsp;
-                                        </span>
+                                            <span class="fa fa-calendar fa-2x"></span>
+                                        </span> &nbsp;
                                         <input id="osc_modificadoEm" asp-for="@Model.profissional.modificadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label class="control-label">Status</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-exclamation fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_status" asp-for="@Model.profissional.status" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                             </div>

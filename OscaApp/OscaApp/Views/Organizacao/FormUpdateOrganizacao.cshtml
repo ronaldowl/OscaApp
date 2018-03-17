@@ -23,15 +23,15 @@
                         <div class="card-title">
                             <table>
                                 <tr>
-                                    <td><h3 >Atualização da Organização:&nbsp;&nbsp;</h3></td>
+                                    <td><h3>Atualização da Organização:&nbsp;&nbsp;</h3></td>
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o fa-1x" value="Salvar"> <span>Salvar</span></button>
-                                            </label>                                           
+                                            </label>
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-close fa-1x" value="Fechar" onclick="location.href='@Url.Action("PainelGerenciamento", "Paineis", null)'"><span>Fechar</span></button>
-                                            </label>                                         
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
@@ -71,8 +71,8 @@
                                         </span>
                                         <input id="osc_quantidadeUsuario" asp-for="@Model.organizacao.quantidadeUsuario" type="text" class="form-control" />
                                     </div>
-                                </div>                           
-                               
+                                </div>
+
                             </div>
                             <!--col2-->
                             <div class="col-md-4">
@@ -103,10 +103,10 @@
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-lock"></span>
                                         </span>
-                                        <input id="osc_dataPagamento" asp-for="@Model.organizacao.dataPagamento" type="text" class="form-control"  disabled="disabled"/>
+                                        <input id="osc_dataPagamento" asp-for="@Model.organizacao.dataPagamento" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
-                                                            
+
                             </div>
                             <!--col3-->
                             <div class="col-md-4">
@@ -125,10 +125,10 @@
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-lock"></span>
                                         </span>
-                                        <input id="osc_dataExpiracao" asp-for="@Model.organizacao.dataExpiracao" type="text" class="form-control" disabled="disabled"/>
+                                        <input id="osc_dataExpiracao" asp-for="@Model.organizacao.dataExpiracao" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
-                              
+
                                 <div class="form-group">
                                     <label>Anotação</label>
                                     <div class="input-group">
@@ -146,7 +146,7 @@
 
                 <div class="card  " id="osc_ContatoForm">
                     <div class="card-header">
-                        <div class="card-title TituloCard" >informações do Administrador da Organização</div>
+                        <div class="card-title TituloCard">informações do Administrador da Organização</div>
                     </div>
                     <div class="card-body">
                         <br />
@@ -323,36 +323,47 @@
             </form>
             <div class="card-footer">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label>Modificado Por</label>
+                            <label class="control-label">Criado Por</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="fa fa-user"></span>
-                                </span>
-                                <input id="osc_modificadoPor" asp-for="@Model.organizacao.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    <span class="fa fa-2x fa-user"></span>
+                                </span> &nbsp;
+                                <input id="osc_criadoPor" asp-for="@Model.organizacao.criadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label>Modificado Em</label>
+                            <label class="control-label">Criado Em</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="fa fa-calendar"></span>
-                                </span>
-                                <input id="osc_criadoEm" asp-for="@Model.organizacao.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                    <span class="fa fa-calendar fa-2x"></span>
+                                </span> &nbsp;
+                                <input id="osc_criadoEm" asp-for="@Model.organizacao.criadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label>Status</label>
+                            <label class="control-label">Modificado Por</label>
                             <div class="input-group">
                                 <span class="input-group-addon">
-                                    <span class="fa fa-exclamation"></span>
-                                </span>
-                                <input id="osc_status" asp-for="@Model.organizacao.statusOrg" type="text" class="form-control" disabled="disabled" />
+                                    <span class="fa fa-2x fa-user"></span>
+                                </span> &nbsp;
+                                <input id="osc_modificadoPor" asp-for="@Model.organizacao.modificadoPor" type="text" class="form-control" disabled="disabled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Modificado Em</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="fa fa-calendar fa-2x"></span>
+                                </span> &nbsp;
+                                <input id="osc_modificadoEm" asp-for="@Model.organizacao.modificadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
@@ -403,5 +414,3 @@
         </div>
     </div>
 </div>
-
-
