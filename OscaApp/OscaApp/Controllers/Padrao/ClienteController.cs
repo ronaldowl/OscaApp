@@ -82,7 +82,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateCliente", ex.Message);
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateCliente-post", ex.Message);
 
             }
             return View();
@@ -161,17 +161,9 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (
-                                        u.nomeCliente.StartsWith(filtro)
-                                        ) ||
-                                        (
-                                        u.codigo.StartsWith(filtro)
-                                        ) ||
-                                        (
-                                        u.codigo.StartsWith(filtro)
-                                        ) ||
-                                        u.cnpj_cpf.StartsWith(filtro)
-                              select u;
+                              where (u.nomeCliente.Any(A => u.nomeCliente.Contains(filtro))) ||                                 
+                                    (u.codigo.StartsWith(filtro))
+                                    select u;
 
                 }
                 retorno = retorno.OrderBy(x => x.nomeCliente);
@@ -214,19 +206,13 @@ namespace OscaApp.Controllers
             {
                 IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
 
+
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (
-                                    u.nomeCliente.StartsWith(filtro)
-                                    ) ||
-                                    (
-                                    u.codigo.StartsWith(filtro)
-                                    ) ||
-                                    (
-                                    u.codigo.StartsWith(filtro)
-                                    ) ||
-                                    u.cnpj_cpf.StartsWith(filtro)
+                              where (u.nomeCliente.Contains(filtro.ToUpper())) ||
+                                    (u.nomeCliente.Contains(filtro.ToLower())) ||
+                                    (u.codigo.StartsWith(filtro))
                               select u;
 
                 }
