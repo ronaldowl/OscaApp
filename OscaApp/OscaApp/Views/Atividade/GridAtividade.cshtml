@@ -53,7 +53,7 @@
                                         <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.id })'">
                                             <td><i class="fa fa-file-archive-o"></i></td>
                                             <td>@Html.ActionLink(item.assunto, "FormUpdateAtividade", new { id = item.id })</td>
-                                            <td>@item.dataAlvo</td>
+                                            <td>@item.dataAlvo.ToShortDateString()</td>
                                             <td>@item.tipo</td>
                                         </tr>
                                     }

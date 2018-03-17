@@ -60,7 +60,7 @@
                                         <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateIncidente", new { id = item.id })</td>
                                         <td>@item.titulo</td>
                                         <td>@item.criadoPorName</td>
-                                        <td>@item.criadoEm</td>
+                                        <td>@item.criadoEm.ToShortDateString()</td>
                                     </tr>
                                     }
                                 </table>
