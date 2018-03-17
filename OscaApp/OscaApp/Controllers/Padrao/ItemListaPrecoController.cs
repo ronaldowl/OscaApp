@@ -150,6 +150,16 @@ namespace OscaApp.Controllers
         {
             IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByIdProduto(new Guid(idProduto));
 
+            if (!String.IsNullOrEmpty(Filtro))
+            {
+                modelo = from u in modelo
+                         where
+                            (u.produto.codigo.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
+                            || (u.produto.nome.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
+
+
             modelo = modelo.OrderBy(x => x.produto.nome);
 
             //Se não passar a número da página, caregar a primeira
@@ -174,8 +184,8 @@ namespace OscaApp.Controllers
             {
                 retorno = from u in retorno
                           where
-                            (u.produto.codigo.StartsWith(Filtro))
-                            || (u.produto.nome.StartsWith(Filtro))
+                            (u.produto.codigo.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
+                            || (u.produto.nome.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
             retorno = retorno.OrderBy(x => x.produto.nome);
@@ -201,8 +211,8 @@ namespace OscaApp.Controllers
             {
                 retorno = from u in retorno
                           where
-                            (u.produto.codigo.StartsWith(Filtro))
-                            || (u.produto.nome.StartsWith(Filtro))
+                            (u.produto.codigo.StartsWith(Filtro,StringComparison.InvariantCultureIgnoreCase))
+                            || (u.produto.nome.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
             retorno = retorno.OrderBy(x => x.produto.nome);

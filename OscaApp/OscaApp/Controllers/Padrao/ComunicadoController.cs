@@ -110,10 +110,11 @@ namespace OscaApp.Controllers
         public ViewResult GridComunicado(string filtro, int Page)
         {
             IEnumerable<Comunicado> retorno = comunicadoData.GetAll(contexto.idOrganizacao);
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
-                                                         where (A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
-                                                         select A;
+
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno where u.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) select u;
+            }
 
             retorno = retorno.OrderBy(x => x.dataInicio);
 

@@ -117,11 +117,13 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Profissional> retorno = profissionalData.GetAll(contexto.idOrganizacao);
 
-
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.nomeProfissional.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-                                                         A.codigo.Equals( filtro, StringComparison.InvariantCultureIgnoreCase)
-                                                         ) select A;
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                (u.nomeProfissional.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
 
             retorno = retorno.OrderBy(x => x.nomeProfissional);
 
@@ -142,9 +144,14 @@ namespace OscaApp.Controllers
         public ViewResult GridLookupProfissional(string filtro, int Page)
         {
             IEnumerable<Profissional> retorno = profissionalData.GetAll(contexto.idOrganizacao);
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro.ToUpper() || A.nomeProfissional.ToUpper() == filtro.ToUpper() ) select A;
 
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                (u.nomeProfissional.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
 
             retorno = retorno.OrderBy(x => x.nomeProfissional);
 

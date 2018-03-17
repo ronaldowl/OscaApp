@@ -155,8 +155,8 @@ namespace OscaApp.Controllers
             {
                 retorno = from u in retorno
                           where
-                            (u.atendimento.titulo.StartsWith(filtro))
-                            || (u.atendimento.codigo.StartsWith(filtro))                           
+                            (u.atendimento.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                            || (u.atendimento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))                           
                           select u;
             }
             retorno = retorno.OrderByDescending(A => A.atendimento.dataAgendada);

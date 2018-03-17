@@ -114,9 +114,8 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno where
-                  ( u.titulo.StartsWith(filtro))
-                ||( u.numeroReferencia.StartsWith(filtro))
-                || (u.codigo.StartsWith(filtro)) select u;
+                  ( u.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))              
+                || (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) select u;
             }
 
             retorno = retorno.OrderByDescending(x => x.dataPagamento);

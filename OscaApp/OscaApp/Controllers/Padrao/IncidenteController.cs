@@ -112,8 +112,8 @@ namespace OscaApp.Controllers.Padrao
             {
                 retorno = from u in retorno
                           where
-                            (u.codigo.StartsWith(filtro))
-                            || (u.titulo.StartsWith(filtro))                       
+                            (u.codigo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))
+                            || (u.titulo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))                       
                           select u;
             }
             retorno = retorno.OrderByDescending(x => x.codigo);

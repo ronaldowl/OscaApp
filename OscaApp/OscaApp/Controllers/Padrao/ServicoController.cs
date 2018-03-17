@@ -117,10 +117,13 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
 
-            // realiza busca por Nome, Código 
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-                                                         A.nomeServico.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ) select A;
-            
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                (u.nomeServico.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
             retorno = retorno.OrderBy(x => x.nomeServico);
              
 
@@ -141,9 +144,13 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
 
-            // realiza busca por Nome, Código 
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeServico == filtro) select A;
-
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                (u.nomeServico.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
             retorno = retorno.OrderBy(x => x.nomeServico);
 
             if (Page == 0) Page = 1;
@@ -155,9 +162,13 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Servico> retorno = servicoData.GetAll(contexto.idOrganizacao);
 
-            // realiza busca por Nome, Código 
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeServico == filtro) select A;
-
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                (u.nomeServico.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
             retorno = retorno.OrderBy(x => x.nomeServico);
 
             if (Page == 0) Page = 1;
