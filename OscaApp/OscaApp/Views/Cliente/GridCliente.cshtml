@@ -4,7 +4,7 @@
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-11 offset-1">
+        <div class="col-md-10 offset-1">
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
@@ -37,9 +37,8 @@
                     </div>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-bordered table-sm">
+                        <div class="row">  
+                             <table class="table table-hover table-striped table-bordered table-sm">
                                     <thead>
                                         <tr><th></th>
                                             <th>Código</th>
@@ -76,55 +75,61 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                   
+                </div>
+            </div>
+        </div>
+    <br /><br /><br /><br /> <br /><br /><br /><br />  
+    <div class="col-md-10 offset-1" style="position:sticky;bottom:20px; padding:10px 0 0 0; background:#fff;">
+        <div class="row">
+            <div style="background-color:darkgrey; width:100%; height:10px;"></div>
+
+            <div class="col-sm-3">
+                <div class="card m-1">
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                                <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card m-1">
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                                <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card m-1">
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                                <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="card m-1">
+                    <div class="card-body">
+                        <table>
+                            <tr>
+                                <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                                <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br /><br /><br /><br /> <br /><br /><br /><br />  
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
-        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
-
-        <div class="col-md-3" >
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                    </tr>
-                </table>
-            </div>
-            </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
-                    </tr>
-                </table>
-            </div></div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
-                    </tr>
-                </table>
-            </div>
-            </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
-                    </tr>
-                </table>            
-             </div>
-        </div>       
-    </div>  
-

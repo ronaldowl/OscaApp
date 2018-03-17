@@ -8,7 +8,7 @@
             </h5>
         </div>
     </div>
-    
+
     <div class="row">
 
         <div class="col-sm-5">
@@ -38,40 +38,61 @@
             </div>
         </div>
     </div>
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;">
-        <div style="background-color:darkgrey; width: 100%; height:20px;"></div>
+    <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
         <div class="col-sm-3">
-            <div class="card m-2">
+            <div class="card m-1">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelFinanceiro"><h5>Financeiro</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+
+                            <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="card m-2">
+            <div class="card m-1">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelVendas"><h5>Vendas</h5></a>
+                    <table>
+                        <tr>
+                            <td>
+                                <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                            </td>
+                            <td>
+                                <a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="card m-2">
+            <div class="card m-1">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelServico"><h5>Serviços</h5></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card m-2">
+            <div class="card m-1">
                 <div class="card-body">
-                    <i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i>
-                    <a asp-controller="Paineis" asp-action="PainelOperacional"><p style="font-size:19.8px; margin:0;">Operacional</p></a>
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 </div>
-

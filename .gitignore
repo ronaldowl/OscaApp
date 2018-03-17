@@ -300,3 +300,9 @@ __pycache__/
 OscaApp/OscaApp/Views/Paineis/PainelOperacional.cshtml
 OscaApp/OscaApp/Views/Paineis/PainelServico.cshtml
 OscaApp/OscaApp/Views/Paineis/PainelServico.cshtml
+OscaApp/OscaApp/Views/Atividade/GridAtividade.cshtml
+OscaApp/OscaApp/Views/Atividade/GridAtividade.cshtml
+OscaApp/OscaApp/Views/Comunicado/GridComunicado.cshtml
+OscaApp/OscaApp/Views/ContasPagar/GridContasPagar.cshtml
+OscaApp/OscaApp/Views/ContasReceber/GridContasReceber.cshtml
+OscaApp/OscaApp/Views/ListaPreco/GridListaPreco.cshtml
