@@ -205,7 +205,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+                log.GravaLog(1, 5, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusOrdemServico-get", ex.Message);
             }
             return View(modelo);
         }

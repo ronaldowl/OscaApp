@@ -56,8 +56,8 @@
                                     <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateComunicado", "Comunicado", new {id = item.id })'">
                                         <td><i class="fa fa-comments-o"></i></td>
                                         <td>@Html.ActionLink(item.titulo.ToString(), "FormUpdateComunicado", new { id = item.id })</td>
-                                        <td>@item.dataInicio</td>
-                                        <td>@item.dataFim</td>
+                                        <td>@item.dataInicio.ToShortDateString()</td>
+                                        <td>@item.dataFim.ToShortDateString()</td>
                                     </tr>
                                 }
                             </table>

@@ -64,10 +64,10 @@
                                             <td><i class="fa fa-list-alt"></i></td>
                                             <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateListaPreco", new { id = item.id })</td>
                                             <td>@item.padrao</td>
-                                            <td>@item.dataValidade</td>
-                                            <td>@item.fimValidade</td>
+                                            <td>@item.dataValidade.ToShortDateString()</td>
+                                            <td>@item.fimValidade.ToShortDateString()</td>
                                             <td>@item.criadoPorName</td>
-                                            <td>@item.criadoEm</td>
+                                            <td>@item.criadoEm.ToShortDateString()</td>
                                         </tr>
                                     }
                                 </table>
