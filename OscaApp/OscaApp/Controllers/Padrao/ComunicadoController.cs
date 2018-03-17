@@ -110,7 +110,6 @@ namespace OscaApp.Controllers
         public ViewResult GridComunicado(string filtro, int Page)
         {
             IEnumerable<Comunicado> retorno = comunicadoData.GetAll(contexto.idOrganizacao);
-
             //realiza busca por Nome, Código, Email e CPF
             if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
                                                          where (A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
@@ -127,10 +126,8 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Comunicado> retorno = comunicadoData.GetAll(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
-                                                         where (A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
-                                                         select A;
+            
+             retorno = from A in retorno where (A.dataInicio <= DateTime.Now && A.dataFim >= DateTime.Now)select A;
 
             retorno = retorno.OrderBy(x => x.dataInicio);
 
@@ -138,14 +135,13 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Comunicado>(Page, 10));
         }
+
         public ViewResult QuadroComunicadoResumido(string filtro, int Page)
         {
             IEnumerable<Comunicado> retorno = comunicadoData.GetAll(contexto.idOrganizacao);
 
             //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
-                                                         where (A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
-                                                         select A;
+            retorno = from A in retorno where (A.dataInicio <= DateTime.Now && A.dataFim >= DateTime.Now)select A;
 
             retorno = retorno.OrderBy(x => x.dataInicio);
 
