@@ -152,12 +152,19 @@ namespace OscaApp.Controllers
             {                
                 IEnumerable <PedidoGridViewModel> retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao);
 
-                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.pedido.codigoPedido.Equals( filtro,StringComparison.InvariantCultureIgnoreCase) ||
-                                                             A.cliente.nomeCliente.Equals(filtro,StringComparison.InvariantCultureIgnoreCase) ||
-                                                             A.cliente.cnpj_cpf.Equals(filtro, StringComparison.InvariantCultureIgnoreCase)
-                                                             ) select A;
+                if (!String.IsNullOrEmpty(filtro))
+                {
+                    retorno = from u in retorno
+                              where
+                                    (u.cliente.codigo.StartsWith(filtro)) ||
+                                    (u.pedido.codigoPedido.StartsWith(filtro)) ||
+                                    (u.cliente.nomeCliente.StartsWith(filtro))
+
+                              select u;
+                }
 
                 retorno = retorno.OrderBy(x => x.pedido.codigoPedido); 
+
                 if (Page == 0) Page = 1;
                 return View(retorno.ToPagedList<PedidoGridViewModel>(Page, 10));
 

@@ -111,6 +111,10 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Atividade> retorno = atividadeData.GetAll(contexto.idOrganizacao);
 
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno where  u.assunto.StartsWith(filtro)  select u;
+            }
             retorno = retorno.OrderBy(x => x.dataAlvo);
 
             if (Page == 0) Page = 1;

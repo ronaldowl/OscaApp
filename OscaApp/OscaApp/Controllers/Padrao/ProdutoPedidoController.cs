@@ -30,6 +30,7 @@ namespace OscaApp.Controllers
             this.produtoData = new ProdutoData(db);
             this.produtoPedidoData = new ProdutoPedidoData(db);
             this.ItemlistaPrecoData = new ItemListaPrecoData(db);
+        
 
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.contexto = new ContextPage().ExtractContext(httpContext);
@@ -45,13 +46,15 @@ namespace OscaApp.Controllers
                 modelo.contexto = contexto;
                 modelo.produtoPedido = new ProdutoPedido();
                 modelo.produtoPedido.idPedido = new Guid(idPedido);
-                // modelo.produto = produtoData.GetRelacao(new Guid(idProduto));
-                modelo.produtoPedido.idListaPreco = new Guid(idListaPreco); 
-              
+            
+                modelo.produtoPedido.idListaPreco = new Guid(idListaPreco);               
                 modelo.produtoPedido.criadoEm = DateTime.Now;
-                modelo.produtoPedido.criadoPorName = contexto.nomeUsuario;    
-                
-          
+                modelo.produtoPedido.criadoPorName = contexto.nomeUsuario;
+                IEnumerable<LookupItemLista> produtos = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
+
+                modelo.produtos = produtos.ToPagedList<LookupItemLista>(1, 5);
+
+
             }
             catch (Exception ex)
             {

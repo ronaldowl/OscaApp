@@ -1,4 +1,6 @@
 ﻿@model OscaApp.ViewModels.ProdutoPedidoViewModel
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 @{
     Layout = "_LayoutFrame";
 }
@@ -33,6 +35,13 @@
             $("#GridProdutoPedido").html(data);
         });
 
+     }
+      function CarregaGridPagina(page) {
+
+        $.ajax("/itemListaPreco/GridLookupProdutoPedido?Page=" + page + '&idListaPreco=@Model.produtoPedido.idListaPreco').done(function (data) {
+            $("#GridProdutoPedido").html(data);
+        });
+
     }
 </script>
 
@@ -43,7 +52,7 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
 </div>
 <div class="modal-dialog modal-lg">
-    <div class="modal-content">       
+    <div class="modal-content">
         <div class="modal-body">
             <form asp-controller="ProdutoPedido" asp-action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
                 <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido">
@@ -57,13 +66,10 @@
                                     <div id="osc_barrabotoes">
                                         <label>
                                             <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
-                                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                                        </label>&nbsp;
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value"" data-dismiss="modal"> <span>Fechar</span></button>
+                                        </label>
                                     </div>
                                 </td>
                             </tr>
@@ -160,18 +166,34 @@
                                 </div>
                             </td>
                         </tr>
+                        
                     </table>
                     <div id="GridProdutoPedido">
+                    </div>
+                    <div id="paginacao">
+                        <table>
+                            <tr>
+                                <td style="width:75%">@Html.PagedListPager((IPagedList)Model.produtos, page => Url.Action("GridProduto", "Produto", new { page })) Total:@Model.produtos.TotalItemCount</td>
+
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
- 
+
 <script src="~/lib/OscaJs/osc_produtoPedido.js"></script>
-<script>   
-    OnLoad_ProdutoPedido();
-    CarregaGrid();    
+<script>
+
+    //OnLoad_ProdutoPedido();
+    CarregaGrid();
+    $('#paginacao').on('click', 'a', function (e) {
+
+        e.preventDefault();
+        CarregaGridPagina(this.text);
+
+    });
 </script>
 

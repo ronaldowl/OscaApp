@@ -168,17 +168,22 @@ namespace OscaApp.Controllers
         }
         public PartialViewResult GridLookupProdutoOrdem(string idListaPreco, int Page, string Filtro)
         {
-            IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
+            IEnumerable<LookupItemLista> retorno = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(Filtro)) modelo = from A in modelo where (A.produto.codigo == Filtro || A.produto.nome == Filtro) select A;
-
-            modelo = modelo.OrderBy(x => x.produto.nome);
-
+            if (!String.IsNullOrEmpty(Filtro))
+            {
+                retorno = from u in retorno
+                          where
+                            (u.produto.codigo.StartsWith(Filtro))
+                            || (u.produto.nome.StartsWith(Filtro))
+                          select u;
+            }
+            retorno = retorno.OrderBy(x => x.produto.nome);
+  
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return PartialView(modelo.ToPagedList<LookupItemLista>(Page, 5));
+            return PartialView(retorno.ToPagedList<LookupItemLista>(Page, 5));
 
         }
         public ViewResult LookupProdutoPedido(string idListaPreco, int Page, string Filtro)
@@ -189,17 +194,23 @@ namespace OscaApp.Controllers
         }
         public PartialViewResult GridLookupProdutoPedido(string idListaPreco, int Page, string Filtro)
         {
-            IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
+            IEnumerable<LookupItemLista> retorno = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(Filtro)) modelo = from A in modelo where (A.produto.codigo == Filtro || A.produto.nome == Filtro) select A;
 
-            modelo = modelo.OrderBy(x => x.produto.nome);
+            if (!String.IsNullOrEmpty(Filtro))
+            {
+                retorno = from u in retorno
+                          where
+                            (u.produto.codigo.StartsWith(Filtro))
+                            || (u.produto.nome.StartsWith(Filtro))
+                          select u;
+            }
+            retorno = retorno.OrderBy(x => x.produto.nome);
 
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return PartialView(modelo.ToPagedList<LookupItemLista>(Page, 10));
+            return PartialView(retorno.ToPagedList<LookupItemLista>(Page, 5));
 
         }
     }

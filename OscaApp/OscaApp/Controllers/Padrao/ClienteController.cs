@@ -36,7 +36,7 @@ namespace OscaApp.Controllers
             this.enderecoData = new EnderecoData(db);
             this.pedidoData = new PedidoData(db);
             this.atendimentoData = new AtendimentoData(db);
-             
+
             this.ordemServicoData = new OrdemServicoData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.sqlData = _sqlData;
@@ -72,10 +72,11 @@ namespace OscaApp.Controllers
                         return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
                     }
                 }
-                else {
+                else
+                {
 
                     //Apresenta mensagem para o usuário
-                    return RedirectToAction("ContexError", "CustomError", new {entityType = 1 });
+                    return RedirectToAction("ContexError", "CustomError", new { entityType = 1 });
                 }
             }
             catch (Exception ex)
@@ -157,16 +158,24 @@ namespace OscaApp.Controllers
             {
                 IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
 
-                //realiza busca por Nome, Código, Email e CPF
-                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || 
-                                                             A.nomeCliente.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || 
-                                                             A.cnpj_cpf == filtro || A.email == filtro) select A;
+                if (!String.IsNullOrEmpty(filtro))
+                {
+                    retorno = from u in retorno
+                              where (
+                                        u.nomeCliente.StartsWith(filtro)
+                                        ) ||
+                                        (
+                                        u.codigo.StartsWith(filtro)
+                                        ) ||
+                                        (
+                                        u.codigo.StartsWith(filtro)
+                                        ) ||
+                                        u.cnpj_cpf.StartsWith(filtro)
+                              select u;
 
-                
-
+                }
                 retorno = retorno.OrderBy(x => x.nomeCliente);
 
-                //Se não passar a número da página, caregar a primeira
                 if (Page == 0) Page = 1;
 
                 return View(retorno.ToPagedList<Cliente>(Page, 10));
@@ -175,7 +184,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
             }
 
             return View();
@@ -186,7 +195,7 @@ namespace OscaApp.Controllers
             try
             {
                 IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
-              
+
                 return View(retorno.ToPagedList<Cliente>(1, 10));
 
             }
@@ -205,9 +214,22 @@ namespace OscaApp.Controllers
             {
                 IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
 
-                //realiza busca por Nome, Código, Email e CPF
-                if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo == filtro || A.nomeCliente == filtro || A.cnpj_cpf == filtro || A.email == filtro) select A;
+                if (!String.IsNullOrEmpty(filtro))
+                {
+                    retorno = from u in retorno
+                              where (
+                                    u.nomeCliente.StartsWith(filtro)
+                                    ) ||
+                                    (
+                                    u.codigo.StartsWith(filtro)
+                                    ) ||
+                                    (
+                                    u.codigo.StartsWith(filtro)
+                                    ) ||
+                                    u.cnpj_cpf.StartsWith(filtro)
+                              select u;
 
+                }
                 retorno = retorno.OrderBy(x => x.nomeCliente);
 
                 //Se não passar a número da página, caregar a primeira

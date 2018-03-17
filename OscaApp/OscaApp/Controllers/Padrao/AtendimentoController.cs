@@ -137,9 +137,15 @@ namespace OscaApp.Controllers
         public ViewResult GridAtendimento(string filtro, int Page)
         {
             IEnumerable<AtendimentoGridViewModel> retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao);
-                   
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.atendimento.codigo.Equals(filtro,StringComparison.InvariantCultureIgnoreCase) || A.atendimento.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase)  ) select A;
 
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                            (u.atendimento.titulo.StartsWith(filtro))
+                            || (u.atendimento.codigo.StartsWith(filtro))                           
+                          select u;
+            }
             retorno = retorno.OrderByDescending(A => A.atendimento.dataAgendada);
           
             //Se não passar a número da página, caregar a primeira

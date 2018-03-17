@@ -119,9 +119,15 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Contato> retorno = contatoData.GetAll(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.nome.Equals( filtro , StringComparison.InvariantCultureIgnoreCase)|| A.telefone == filtro || A.cpf == filtro || A.email == filtro) select A;
-
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                            (u.nome.StartsWith(filtro))
+                            || (u.email.StartsWith(filtro))
+                            || (u.cpf.StartsWith(filtro))
+                          select u;
+            }
             retorno = retorno.OrderBy(x => x.nome);
 
             //Se não passar a número da página, caregar a primeira
@@ -134,9 +140,15 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Contato> retorno = contatoData.GetAll(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.email == filtro || A.nome == filtro) select A;
-
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                            (u.nome.StartsWith(filtro))
+                            || (u.email.StartsWith(filtro))
+                            ||(u.cpf.StartsWith(filtro))
+                          select u;
+            }
             retorno = retorno.OrderBy(x => x.nome);
 
             if (Page == 0) Page = 1;

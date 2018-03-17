@@ -126,11 +126,15 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Produto> retorno = produtoData.GetAll(contexto.idOrganizacao);
 
-           
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals( filtro, StringComparison.InvariantCultureIgnoreCase) ||
-                                                         A.nome.Equals(filtro,StringComparison.InvariantCultureIgnoreCase)
-                                                         || A.codigo == filtro || A.fabricante == filtro
-                                                         ) select A;
+
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                                (u.nome.StartsWith(filtro)) ||
+                                (u.codigo.StartsWith(filtro))  
+                          select u;
+            }
 
             retorno = retorno.OrderBy(x => x.nome);
 

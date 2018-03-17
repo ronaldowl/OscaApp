@@ -111,13 +111,15 @@ namespace OscaApp.Controllers
         {
             IEnumerable<ContasPagar> retorno = contasPagarData.GetAll(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
-                                                         where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-                                       A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) )
-                                                         select A;
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno where
+                  ( u.titulo.StartsWith(filtro))
+                ||( u.numeroReferencia.StartsWith(filtro))
+                || (u.codigo.StartsWith(filtro)) select u;
+            }
 
-            retorno = retorno.OrderBy(x => x.codigo);
+            retorno = retorno.OrderByDescending(x => x.dataPagamento);
 
             if (Page == 0) Page = 1;
 

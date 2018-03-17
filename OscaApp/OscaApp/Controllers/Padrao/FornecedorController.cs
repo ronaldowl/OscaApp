@@ -79,9 +79,7 @@ namespace OscaApp.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = fornecedorData.Get(modelo.Fornecedor.id, contexto.idOrganizacao);
-
-                //TODO Formata campos
+                retorno = fornecedorData.Get(modelo.Fornecedor.id, contexto.idOrganizacao);            
 
                 if (retorno != null)
                 {
@@ -118,16 +116,16 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Fornecedor> retorno = fornecedorData.GetAll(contexto.idOrganizacao);
 
-            ////realiza busca por Nome, Código, Email e CPF
-            //if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-            //                                             A.nomeFornecedor.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-            //                                             A.nomeVendedor.Equals(filtro, StringComparison.InvariantCultureIgnoreCase )) select A;
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
-                                                         where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-                                       A.nomeFornecedor.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-                                       A.nomeVendedor == filtro)
-                                                         select A;
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                            (u.nomeFornecedor.StartsWith(filtro))
+                            || (u.cnpj.StartsWith(filtro))
+                            || (u.nomeVendedor.StartsWith(filtro))
+                            ||(u.codigo.StartsWith(filtro))
+                          select u;
+            }
 
             retorno = retorno.OrderBy(x => x.nomeFornecedor);
 

@@ -122,9 +122,14 @@ namespace OscaApp.Controllers
         {
             IEnumerable<ListaPreco> retorno = listaPrecoData.GetAll(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.nome.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ) select A;
-
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                                (u.nome.StartsWith(filtro))
+                               
+                          select u;
+            }
             retorno = retorno.OrderBy(x => x.nome);
 
             //Se não passar a número da página, caregar a primeira

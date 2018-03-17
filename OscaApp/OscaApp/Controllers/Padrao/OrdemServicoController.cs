@@ -134,11 +134,16 @@ namespace OscaApp.Controllers
         {
             IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.ordemServico.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) || 
-                                                         A.cliente.idName.Equals(filtro,StringComparison.InvariantCultureIgnoreCase) ||
-                                                         A.ordemServico.tipo.ToString().Equals(filtro, StringComparison.InvariantCultureIgnoreCase)
-                                                         ) select A;
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                                (u.cliente.codigo.StartsWith(filtro)) ||
+                                (u.ordemServico.codigo.StartsWith(filtro)) ||
+                                (u.cliente.idName.StartsWith(filtro))
+
+                          select u;
+            }
 
             retorno = retorno.OrderBy(x => x.ordemServico.codigo);
 
@@ -151,9 +156,16 @@ namespace OscaApp.Controllers
         {
             IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno where (A.ordemServico.codigo == filtro || A.cliente.idName == filtro ) select A;
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                                (u.cliente.codigo.StartsWith(filtro))||
+                                (u.ordemServico.codigo.StartsWith(filtro))||
+                                (u.cliente.idName.StartsWith(filtro))
 
+                          select u;
+            }
             retorno = retorno.OrderBy(x => x.ordemServico.codigo);
 
             if (Page == 0) Page = 1;
@@ -207,8 +219,7 @@ namespace OscaApp.Controllers
             try
             {
                 if (OrdemServicoRules.OrdemServicoUpdateStatus(entrada, out modelo))
-                {
-                    //ordemServicoData.Update(modelo);
+                { 
                     OrdemServicoRules.CalculoOrdem(ref modelo, servicoOrdemData, produtoOrdemData);
                     ordemServicoData.UpdateStatus(modelo);
 

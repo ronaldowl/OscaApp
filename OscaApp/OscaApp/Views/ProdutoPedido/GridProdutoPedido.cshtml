@@ -21,10 +21,10 @@
    
     <div class="card-body">        
         <div class="row">
-            <div class="col-md-11">
-                <table class="table table-hover table-striped table-bordered">
+           
+                <table class="table table-hover table-striped table-bordered table-sm">
                     <thead>
-                        <tr>
+                        <tr><th></th>
                             <th>Código Produto</th>
                             <th>Nome Produto</th>
                             <th>Quantidade</th>
@@ -52,7 +52,7 @@
                         totalGeral += item.produtoPedido.totalGeral;
 
 
-                        <tr>
+                        <tr><td><i class="fa fa-cube"></i></td>
                             <td>@item.produto.codigo</td>
                             <td>@item.produto.nome</td>
                             <td>@item.produtoPedido.quantidade</td>                                        
@@ -76,6 +76,7 @@
                         <tr style="background-color:gray; color:white ; font-size:20px">
                             <td></td>
                             <td></td>
+                            <td></td>
                             <td>@qtd</td>
                             <td></td>                       
                             <td>R$@total.ToString("N2")</td>
@@ -97,7 +98,7 @@
             </div>
         </div>
     </div>
-</div>
+ 
 
 <script> 
     //Preenche variaves do contexto pai para criar um novo Produto do Pedido

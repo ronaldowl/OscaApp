@@ -50,10 +50,11 @@ namespace OscaApp.Controllers
             {
                 if (entrada.contasReceber != null)
                 {
-                  if  (ContasReceberRules.ContasReceberCreate(entrada, out modelo, contexto)) {
+                    if (ContasReceberRules.ContasReceberCreate(entrada, out modelo, contexto))
+                    {
                         contasReceberData.Add(modelo);
                         return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
-                  }
+                    }
                 }
             }
             catch (Exception ex)
@@ -72,7 +73,7 @@ namespace OscaApp.Controllers
             modelo.contasReceber.id = new Guid(id);
 
             ContasReceber retorno = new ContasReceber();
-       
+
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = contasReceberData.Get(modelo.contasReceber.id);
@@ -95,7 +96,7 @@ namespace OscaApp.Controllers
                 if (ContasReceberRules.ContasReceberUpdate(entrada, out modelo))
                 {
                     contasReceberData.Update(modelo);
-                    return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString()});
+                    return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
                 }
             }
             catch (Exception ex)
@@ -111,16 +112,21 @@ namespace OscaApp.Controllers
         {
             IEnumerable<ContasReceber> retorno = contasReceberData.GetAll(contexto.idOrganizacao);
 
-            //realiza busca por Nome, Código, Email e CPF
-            if (!String.IsNullOrEmpty(filtro)) retorno = from A in retorno
-                                                         where (A.codigo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase) ||
-                                       A.titulo.Equals(filtro, StringComparison.InvariantCultureIgnoreCase))
-                                                         select A;
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where
+                                (u.titulo.StartsWith(filtro))
+                                || (u.numeroReferencia.StartsWith(filtro))
+                                || (u.codigo.StartsWith(filtro))
+                          select u;
+            }
 
-            retorno = retorno.OrderBy(x => x.codigo);
+            retorno = retorno.OrderByDescending(x => x.dataPagamento);
+
 
             if (Page == 0) Page = 1;
-              return View(retorno.ToPagedList<ContasReceber>(Page, 10));
+            return View(retorno.ToPagedList<ContasReceber>(Page, 10));
         }
 
         [HttpGet]

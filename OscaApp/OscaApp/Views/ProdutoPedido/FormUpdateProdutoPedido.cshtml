@@ -25,7 +25,7 @@
                 <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido">
 
                 <div class="card" id="osc_MainForm">
-                    <div class="">
+                     
                         <table>
                             <tr>
                                 <td><h5>Produto do Pedido: &nbsp;&nbsp;</h5></td>
@@ -33,18 +33,15 @@
                                     <div id="osc_barrabotoes">
                                         <label>
                                             <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
-                                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+                                        </label>&nbsp;
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value"" data-dismiss="modal"> <span>Fechar</span></button>
+                                        </label>
                                     </div>
                                 </td>
                             </tr>
                         </table>
-                    </div>
+                   
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-5 offset-1">
@@ -112,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-           
+
             </form>
         </div>
     </div>
@@ -121,6 +118,5 @@
 <script src="~/lib/OscaJs/osc_produtoPedido.js"></script>
 <script>
     debugger;
-    OnLoad_ProdutoPedido();   
+    OnLoad_ProdutoPedido();
 </script>
- 
