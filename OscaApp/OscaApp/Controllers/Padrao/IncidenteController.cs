@@ -10,6 +10,7 @@ using OscaApp.ViewModels;
 using OscaApp.RulesServices;
 using OscaFramework.MicroServices;
 using X.PagedList;
+using OscaApp.framework;
 
 namespace OscaApp.Controllers.Padrao
 {
@@ -53,8 +54,8 @@ namespace OscaApp.Controllers.Padrao
             } // end of try
             catch (Exception ex)
             {
-                //LogOsca log = new LogOsca();
-                //log.GravaLog(1, 22, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateRecurso-post", ex.Message);
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 11, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateIncidente-post", ex.Message);
                 throw ex;
             } // end of catch
             return View();
@@ -95,7 +96,10 @@ namespace OscaApp.Controllers.Padrao
             } // end of try
             catch (Exception ex)
             {
-                throw ex;
+
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 11, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateIncidente-post", ex.Message);
+
             } // end of catch
             return RedirectToAction("FormUpdateIncidente", new { id = modelo.id.ToString() });
         } // end of method FormUpdateIncidente

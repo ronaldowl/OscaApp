@@ -152,7 +152,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-get", ex.Message);
+                log.GravaLog(1,21, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-get", ex.Message);
             }
             return View(modelo);
         }
@@ -176,7 +176,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-post", ex.Message);
+                log.GravaLog(1, 21, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-post", ex.Message);
             }
             return View();
         }

@@ -45,7 +45,12 @@ namespace OscaApp.Controllers
             {
                 modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString())));
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateAtendimento-get", ex.Message);
+
+            }
             return View(modelo);
         }
 
@@ -54,17 +59,25 @@ namespace OscaApp.Controllers
         {
             Atendimento  modelo = new Atendimento ();
 
-            if(entrada.atendimento != null)
+            try
             {
-
-               if( AtendimentoRules.AtendimentoCreate(entrada,out modelo, this.contexto))
+                if (entrada.atendimento != null)
                 {
-                    //Se retorna true grava no banco
-                    atendimentoData.Add(modelo);
 
-                    return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+                    if (AtendimentoRules.AtendimentoCreate(entrada, out modelo, this.contexto))
+                    {
+                        //Se retorna true grava no banco
+                        atendimentoData.Add(modelo);
+
+                        return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+                    }
                 }
-            }                
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateAtendimento-post", ex.Message);
+            }
 
             return View( );
         }
@@ -105,7 +118,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-get", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateAtendimento-get", ex.Message);
 
             }
 
@@ -128,7 +141,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateCliente-post", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateAtendimento-post", ex.Message);
             }
 
             return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
@@ -179,7 +192,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAtendimento-get", ex.Message);
             }
             return View(modelo);
         }
@@ -202,7 +215,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-post", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAtendimento-post", ex.Message);
             }
             return View();
         }
