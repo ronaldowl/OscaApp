@@ -30,6 +30,13 @@ namespace OscaApp.Controllers
         {
             IEnumerable<CategoriaManutencao> retorno = sqlServices.RetornaCategoriaManutencao();
 
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where (u.nome.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
+
             retorno = retorno.OrderBy(x => x.nome);
 
             if (Page == 0) Page = 1;
@@ -41,6 +48,12 @@ namespace OscaApp.Controllers
         {
             IEnumerable<CategoriaManutencao> retorno = sqlServices.RetornaCategoriaManutencao();
 
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where (u.nome.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          select u;
+            }
 
             retorno = retorno.OrderBy(x => x.nome);
 

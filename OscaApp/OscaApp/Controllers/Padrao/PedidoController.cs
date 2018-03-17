@@ -156,9 +156,10 @@ namespace OscaApp.Controllers
                 {
                     retorno = from u in retorno
                               where
-                                    (u.cliente.codigo.StartsWith(filtro)) ||
-                                    (u.pedido.codigoPedido.StartsWith(filtro)) ||
-                                    (u.cliente.nomeCliente.StartsWith(filtro))
+                                (u.cliente.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                (u.pedido.codigoPedido.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                (u.cliente.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+
 
                               select u;
                 }

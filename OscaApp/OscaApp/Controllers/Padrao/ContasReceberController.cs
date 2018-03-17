@@ -116,9 +116,8 @@ namespace OscaApp.Controllers
             {
                 retorno = from u in retorno
                           where
-                                (u.titulo.StartsWith(filtro))
-                                || (u.numeroReferencia.StartsWith(filtro))
-                                || (u.codigo.StartsWith(filtro))
+                            (u.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                            || (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
 
@@ -152,7 +151,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,21, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-get", ex.Message);
+                log.GravaLog(1, 21, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusContasReceber-get", ex.Message);
             }
             return View(modelo);
         }

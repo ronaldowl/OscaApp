@@ -118,13 +118,8 @@ namespace OscaApp.Controllers
 
             if (!String.IsNullOrEmpty(filtro))
             {
-                retorno = from u in retorno
-                          where
-                            (u.nomeFornecedor.StartsWith(filtro))
-                            || (u.cnpj.StartsWith(filtro))
-                            || (u.nomeVendedor.StartsWith(filtro))
-                            ||(u.codigo.StartsWith(filtro))
-                          select u;
+                retorno = from u in retorno where (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))||
+                          (u.nomeFornecedor.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))select u;
             }
 
             retorno = retorno.OrderBy(x => x.nomeFornecedor);

@@ -161,9 +161,9 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (u.nomeCliente.Any(A => u.nomeCliente.Contains(filtro))) ||                                 
-                                    (u.codigo.StartsWith(filtro))
-                                    select u;
+                              where (u.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                    (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                              select u;
 
                 }
                 retorno = retorno.OrderBy(x => x.nomeCliente);
@@ -206,13 +206,11 @@ namespace OscaApp.Controllers
             {
                 IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
 
-
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (u.nomeCliente.Contains(filtro.ToUpper())) ||
-                                    (u.nomeCliente.Contains(filtro.ToLower())) ||
-                                    (u.codigo.StartsWith(filtro))
+                              where (u.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                                    (u.codigo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))
                               select u;
 
                 }
@@ -232,10 +230,5 @@ namespace OscaApp.Controllers
 
             return View();
         }
-
-
-
-
-
     }
 }
