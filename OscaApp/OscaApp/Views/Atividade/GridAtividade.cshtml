@@ -1,7 +1,8 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.Atividade>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.AtividadeGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using OscaFramework.Helper;
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 offset-1">
@@ -17,6 +18,17 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
+                                            <div class="form-group">
+                                                <label>Filtros</label>
+                                                <div class="input-group">
+                                                     &nbsp;
+                                                    <select id="osc_filtro" class="form-control" required="required" onchange="OnChangeFiltro();">
+                                                        <option value="1" selected="">Minhas Tarefas Abertas</option>
+                                                        <option value="2">Todas Tarefas</option>
+                                                        <option value="3">Tarefas fechadas</option>
+                                                    </select>
+                                                </div>
+                                            </div>&nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateAtividade", "Atividade", null)'"> <span>Novo</span></button>
                                             </label>
@@ -43,17 +55,24 @@
                                     <tr>
                                         <th></th>
                                         <th>Assunto</th>
+                                        <th>Proprietário</th>
                                         <th>Data alvo</th>
                                         <th>Tipo</th>
+                                        <th>Data Fechamento</th>
+                                        <th>Status Atividade</th>
+
                                     </tr>
                                 </thead>
                                 @foreach (var item in Model)
                                 {
-                                    <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.id })'">
+                                    <tr id="@item.atividade.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.atividade.id })'">
                                         <td><i class="fa fa-file-archive-o"></i></td>
-                                        <td>@Html.ActionLink(item.assunto, "FormUpdateAtividade", new { id = item.id })</td>
-                                        <td>@item.dataAlvo</td>
-                                        <td>@item.tipo</td>
+                                        <td>@Html.ActionLink(item.atividade.assunto, "FormUpdateAtividade", new { id = item.atividade.id })</td>
+                                        <td>@item.profissional.idName</td>
+                                        <td>@item.atividade.dataAlvo.ToShortDateString()</td>
+                                        <td>@HelperEnum.FormatEnumTipoAtividade(@item.atividade.tipo)</td>
+                                        <td>@item.atividade.dataFechamento</td>
+                                        <td>@item.atividade.statusAtividade</td>
                                     </tr>
                                 }
                             </table>
@@ -126,3 +145,11 @@
         </div>
     </div>
 </div>
+<script>
+    function OnChangeFiltro()
+    {
+        var filtro = $("#osc_filtro").val();
+        alert(filtro);
+    }
+
+</script>

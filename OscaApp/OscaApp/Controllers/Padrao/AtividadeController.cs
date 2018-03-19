@@ -11,8 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
 using OscaFramework.Models;
-
-
+using OscaFramework.MicroServices;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
@@ -71,11 +71,15 @@ namespace OscaApp.Controllers
             modelo.atividade = new Atividade();
             modelo.atividade.id = new Guid(id);
 
+            SqlGenericData sqlData = new SqlGenericData();
+
             Atividade retorno = new Atividade();
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = atividadeData.Get(modelo.atividade.id, contexto.idOrganizacao);
+                retorno = atividadeData.Get(modelo.atividade.id );
+
+                modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
 
                 if (retorno != null)
                 {
@@ -107,19 +111,71 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateAtividade", new { id = modelo.id.ToString() });
         }
 
+        [HttpPost]
+        public IActionResult FormStatusAtividade(AtividadeViewModel entrada)
+        {
+            Atividade modelo = new Atividade();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (AtividadeRules.AtividadeUpdateStatus(entrada, out modelo))
+                {
+                    atividadeData.UpdateStatus(modelo);
+
+                    return RedirectToAction("FormUpdateAtividade", new { id = modelo.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAtividade-post", ex.Message);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ViewResult FormStatusAtividade(string id)
+        {
+            AtividadeViewModel modelo = new AtividadeViewModel();
+            modelo.contexto = this.contexto;
+
+            try
+            {
+                Atividade retorno = new Atividade();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = atividadeData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.atividade = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAtividade-get", ex.Message);
+            }
+            return View(modelo);
+        }
+
         public ViewResult GridAtividade(string filtro, int Page)
         {
-            IEnumerable<Atividade> retorno = atividadeData.GetAll(contexto.idOrganizacao);
+            IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridViewModel(contexto.idOrganizacao);
 
             if (!String.IsNullOrEmpty(filtro))
             {
-                retorno = from u in retorno where  u.assunto.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)  select u;
+                retorno = from u in retorno where  u.atividade.assunto.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)  select u;
             }
-            retorno = retorno.OrderBy(x => x.dataAlvo);
+            retorno = retorno.OrderBy(x => x.atividade.dataAlvo);
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Atividade>(Page, 10));
+            return View(retorno.ToPagedList<AtividadeGridViewModel>(Page, 10));
         }
     }
 }

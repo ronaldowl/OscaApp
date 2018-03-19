@@ -1,0 +1,67 @@
+﻿@model OscaApp.ViewModels.AtividadeViewModel
+@{
+    Layout = "_LayoutFrame";
+} 
+
+<div id="contexto">
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+</div>
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+        </div>
+        <div class="modal-body">
+            <form asp-controller="Atividade" asp-action="FormStatusAtividade" method="post" id="FormStatusAtividade">
+                <input asp-for="@Model.atividade.id" class="form-control" type="hidden" id="osc_atividadeId" value="@Model.atividade.id">
+
+                <div class="card" id="osc_MainForm">
+                    <div class="card-header">
+                        <div class="card-title ">
+                            <table>
+                                <tr>
+                                    <td><h3>Alteração de Status da Atividade: &nbsp;&nbsp;</h3></td>
+                                    <td>
+                                        <div id="osc_barrabotoes">
+                                            <label>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
+                                            </label>                                       
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5 offset-1">
+                                <div class="form-group">
+                                    <label class="control-label" style="color:red">Status da Atividade</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
+                                            <select id="osc_statusPedido" asp-for="@Model.atividade.statusAtividade" class="form-control" required="required">
+                                                <option value="0">Aberta</option>
+                                                <option value="1">Concluída</option>
+                                                <option value="2">Cancelada</option>                                               
+                                                
+                                            </select>
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info"  >
+                                                    <span class="fa fa-1x fa-floppy-o"></span>
+                                                </button>
+                                            </span>                                       
+                                        </div>
+                                    </div>
+                                </div>                            
+                            </div>                          
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

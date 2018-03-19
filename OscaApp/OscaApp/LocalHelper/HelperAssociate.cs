@@ -48,6 +48,20 @@ namespace OscaApp.framework
             return retorno;
         }
 
+        public static List<AtividadeGridViewModel> ConvertToGridAtividade(List<Atividade> itens)
+        {
+            List<AtividadeGridViewModel> retorno = new List<AtividadeGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                AtividadeGridViewModel X = new AtividadeGridViewModel();
+                X.profissional = sqldata.RetornaRelacaoProfissional(item.idProfissional);
+                X.atividade = item;
+                retorno.Add(X);
+            }
+            return retorno;
+        }
         public static List<PedidoGridViewModel> ConvertToGridPedido(List<Pedido> itens)
         {
             List<PedidoGridViewModel> retorno = new List<PedidoGridViewModel>();

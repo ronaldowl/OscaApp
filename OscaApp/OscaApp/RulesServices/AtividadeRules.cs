@@ -16,6 +16,7 @@ namespace OscaApp.RulesServices
         {
             modelo = new Atividade();
             modelo = entrada.atividade;
+            modelo.idProfissional = entrada.profissional.id;
 
             if (modelo.assunto != null)
             {
@@ -36,10 +37,43 @@ namespace OscaApp.RulesServices
         }
         public static bool AtividadeUpdate(AtividadeViewModel entrada,out Atividade modelo)
         {
-                modelo = new Atividade();
+
+            modelo = new Atividade();
+            modelo = entrada.atividade;
+            modelo.idProfissional = entrada.profissional.id;
+
+            if (entrada.atividade.statusAtividade == CustomEnumStatus.StatusAtividade.Cancelada || entrada.atividade.statusAtividade == CustomEnumStatus.StatusAtividade.Concluida)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }    
 
             ////************ Objetos de controle de acesso ***************
+
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = entrada.contexto.idUsuario;
+            modelo.modificadoPorName = entrada.contexto.nomeUsuario;
+            ////************ FIM Objetos de controle de acesso ***************
+
+            return true;
+        }
+        public static bool AtividadeUpdateStatus(AtividadeViewModel entrada, out Atividade modelo)
+        {
+
+            modelo = new Atividade();
             modelo = entrada.atividade;
+            
+            if(entrada.atividade.statusAtividade == CustomEnumStatus.StatusAtividade.Cancelada || entrada.atividade.statusAtividade == CustomEnumStatus.StatusAtividade.Concluida)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }
+
+            if(entrada.atividade.statusAtividade == CustomEnumStatus.StatusAtividade.Aberta)
+            {
+                modelo.dataFechamento = new DateTime();
+            }
+
+            ////************ Objetos de controle de acesso ***************
+
             modelo.modificadoEm = DateTime.Now;
             modelo.modificadoPor = entrada.contexto.idUsuario;
             modelo.modificadoPorName = entrada.contexto.nomeUsuario;

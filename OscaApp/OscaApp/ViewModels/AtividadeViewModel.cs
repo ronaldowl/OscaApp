@@ -8,6 +8,7 @@ namespace OscaApp.ViewModels
     public class AtividadeViewModel
     {
         public Atividade atividade{ get; set; }
+        public Relacao profissional { get; set; }
         public ContextPage contexto { get; set; }
 
         public AtividadeViewModel()

@@ -8,6 +8,12 @@ namespace OscaFramework.Models
 {
      public class CustomEnumStatus
     {
+        public enum StatusAtividade
+        {
+            Aberta = 0,
+            Concluida = 1,
+            Cancelada = 3
+        }
         public enum Status
         {
             Ativo = 1,
@@ -64,6 +70,13 @@ namespace OscaFramework.Models
 
     public class CustomEnum
     {
+        public enum TipoAtividade
+        {
+            Tarefa = 1,
+            Telefonema = 2,
+            Servico = 3,
+            Cobranca = 4                 
+        }
         public enum TipoReferencia
         {
             Atendimento = 0,

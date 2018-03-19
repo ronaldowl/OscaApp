@@ -1,4 +1,18 @@
 ﻿@model OscaApp.ViewModels.AtividadeViewModel
+<script>
+    function CarregaLookupProfissional() {
+
+        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
+            $("#lookupProfissional").modal("show");
+        });
+    }
+     function CarregaFormStatusAtividade() {
+        $("#ModalStatusAtividade").load("/Atividade/FormStatusAtividade?id=" + '@Model.atividade.id' , function () {
+            $("#ModalStatusAtividade").modal("show");
+        });
+    }
+</script>
+
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -28,10 +42,7 @@
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-lg btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateAtividade", "Atividade", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_status_inativa" type="button" class="btn btn-info btn-lg btn-sm fa fa-ban fa-1x" value="Inativar"> <span>Inativar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_status_Ativar" type="button" class="btn btn-info btn-lg  btn-sm fa fa-check-circle-o fa-1x" value="Ativar"> <span>Ativar</span></button>
+                                                <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusAtividade()"> <span>Reabrir</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -72,27 +83,55 @@
                                     <label class="control-label">Data Alvo </label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
                                             <input asp-for="@Model.atividade.dataAlvo" class="form-control" type="date" id="osc_dataAlvo" required="required">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Proprietário </label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_proprietario" asp-for="@Model.atividade.idProprietario" class="form-control" required="required">
-                                            <option value="1" selected="">Ronaldo</option>
-                                            <option value="2">Vanessa</option>
-                                            <option value="3">Matheus</option>
-                                            <option value="4">Cybelle</option>
-                                        </select>
+                                    <label class="control-label">Proprietário</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required">
+                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-exclamation fa-2x"></span>&nbsp;
+                                        </span>
+                                        &nbsp;
+                                        <select id="osc_filtro" class="form-control" required="required" asp-for="@Model.atividade.statusAtividade" style="background-color:aquamarine">
+                                            <option value="0" selected="">Aberta</option>
+                                            <option value="1">Concluída</option>
+                                            <option value="2">Cancelda</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Data Fechamento</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.atividade.dataFechamento" class="form-control" type="date" id="osc_dataFechamento" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
                                 <div class="form-group">
                                     <label>Descrição</label>
                                     <div class="input-group">
@@ -104,50 +143,50 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
-                                        </span>
-                                        <input id="osc_criadoPor" asp-for="@Model.atividade.criadoPorName " type="text" class="form-control" disabled="disabled" />
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Criado Por</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-user"></span>
+                                            </span>
+                                            <input id="osc_criadoPor" asp-for="@Model.atividade.criadoPorName " type="text" class="form-control" disabled="disabled" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
-                                        </span>
-                                        <input id="osc_criadoEm" asp-for="@Model.atividade.criadoEm " type="text" class="form-control" disabled="disabled" />
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Criado Em</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar fa-1x"></span>
+                                            </span>
+                                            <input id="osc_criadoEm" asp-for="@Model.atividade.criadoEm " type="text" class="form-control" disabled="disabled" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
-                                        </span>
-                                        <input id="osc_modificadoPor" for=" " type="text" class="form-control" disabled="disabled" />
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Modificado Por</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-user"></span>
+                                            </span>
+                                            <input id="osc_modificadoPor" asp-for="@Model.atividade.modificadoPorName " type="text" class="form-control" disabled="disabled" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
-                                        </span>
-                                        <input id="osc_modificadoEm" for=" " type="text" class="form-control" disabled="disabled" />
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Modificado Em</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar fa-1x"></span>
+                                            </span>
+                                            <input id="osc_modificadoEm" asp-for="@Model.atividade.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -157,4 +196,8 @@
             </form>
         </div>
     </div>
+</div>
+<div class="modal fade" id="lookupProfissional">
+</div>
+<div class="modal fade" id="ModalStatusAtividade">
 </div>

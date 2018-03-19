@@ -6,13 +6,16 @@ namespace OscaFramework.Models
 {
     [Table("Atividade")]
     public class Atividade : GenericEntity
-    {       
+    {
         public string descricao { get; set; }
         public int tipo { get; set; }
-        public Guid idProprietario { get; set; }
         public DateTime dataAlvo { get; set; }
+        public DateTime dataFechamento { get; set; }
+
         public string assunto { get; set; }
         public Guid idOrganizacao { get; set; }
+        public Guid idProfissional { get; set; }
+        public CustomEnumStatus.StatusAtividade statusAtividade { get; set; }
 
         public Atividade()
         {

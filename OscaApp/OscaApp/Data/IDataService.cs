@@ -14,8 +14,11 @@ namespace OscaApp.Data
     {
         void Add(Atividade atividade);
         void Update(Atividade atividade);
-        Atividade Get(Guid id, Guid idOrg);
+        void UpdateStatus(Atividade atividade);
+
+        Atividade Get(Guid id);
         List<Atividade> GetAll(Guid idOrg);
+        List<AtividadeGridViewModel> GetAllGridViewModel(Guid idOrg);
     }
 
     public interface IBancoData
