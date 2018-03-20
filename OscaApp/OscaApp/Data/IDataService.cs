@@ -18,7 +18,7 @@ namespace OscaApp.Data
 
         Atividade Get(Guid id);
         List<Atividade> GetAll(Guid idOrg);
-        List<AtividadeGridViewModel> GetAllGridViewModel(Guid idOrg);
+        List<AtividadeGridViewModel> GetAllGridViewModel(Guid idOrg, int view, string idProfissional);
     }
 
     public interface IBancoData

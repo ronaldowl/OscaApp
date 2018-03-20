@@ -12,5 +12,6 @@ namespace OscaApp.ViewModels.GridViewModels
     {
         public Atividade atividade { get; set; }      
         public Relacao profissional { get; set; }
+        public int filtro { get; set; }
     }
 }

@@ -21,12 +21,14 @@
                                             <div class="form-group">
                                                 <label>Filtros</label>
                                                 <div class="input-group">
-                                                     &nbsp;
-                                                    <select id="osc_filtro" class="form-control" required="required" onchange="OnChangeFiltro();">
-                                                        <option value="1" selected="">Minhas Tarefas Abertas</option>
-                                                        <option value="2">Todas Tarefas</option>
-                                                        <option value="3">Tarefas fechadas</option>
-                                                    </select>
+                                                    &nbsp;<div class="col-2">
+                                                        <select id="osc_filtro" class="form-control" required="required" onchange="OnChangeFiltro();" >
+                                                            <option value="0" selected="">Minhas Atividades Abertas</option>
+                                                            <option value="1">Minhas Atividades Fechadas</option>
+                                                            <option value="2">Todas Fechadas</option>
+                                                            <option value="3">Todas Atividades</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
                                             </div>&nbsp;&nbsp;
                                             <label>
@@ -50,46 +52,46 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                            <table class="table table-hover table-striped table-bordered table-sm">
-                                <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Assunto</th>
-                                        <th>Proprietário</th>
-                                        <th>Data alvo</th>
-                                        <th>Tipo</th>
-                                        <th>Data Fechamento</th>
-                                        <th>Status Atividade</th>
+                        <table class="table table-hover table-striped table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Assunto</th>
+                                    <th>Proprietário</th>
+                                    <th>Data alvo</th>
+                                    <th>Tipo</th>
+                                    <th>Data Fechamento</th>
+                                    <th>Status Atividade</th>
 
-                                    </tr>
-                                </thead>
-                                @foreach (var item in Model)
-                                {
-                                    <tr id="@item.atividade.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.atividade.id })'">
-                                        <td><i class="fa fa-file-archive-o"></i></td>
-                                        <td>@Html.ActionLink(item.atividade.assunto, "FormUpdateAtividade", new { id = item.atividade.id })</td>
-                                        <td>@item.profissional.idName</td>
-                                        <td>@item.atividade.dataAlvo.ToShortDateString()</td>
-                                        <td>@HelperEnum.FormatEnumTipoAtividade(@item.atividade.tipo)</td>
-                                        <td>@item.atividade.dataFechamento</td>
-                                        <td>@item.atividade.statusAtividade</td>
-                                    </tr>
-                                }
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tr id="@item.atividade.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.atividade.id })'">
+                                    <td><i class="fa fa-file-archive-o"></i></td>
+                                    <td>@Html.ActionLink(item.atividade.assunto, "FormUpdateAtividade", new { id = item.atividade.id })</td>
+                                    <td>@item.profissional.idName</td>
+                                    <td>@item.atividade.dataAlvo.ToShortDateString()</td>
+                                    <td>@HelperEnum.FormatEnumTipoAtividade(@item.atividade.tipo)</td>
+                                    <td>@item.atividade.dataFechamento</td>
+                                    <td>@item.atividade.statusAtividade</td>
+                                </tr>
+                            }
+                        </table>
+                        <div>
+                            <table>
+                                <tr>
+                                    <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAtividade", "Atividade", new { page }))</td>
+                                    <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                                </tr>
                             </table>
-                            <div>
-                                <table>
-                                    <tr>
-                                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAtividade", "Atividade", new { page }))</td>
-                                        <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                    </tr>
-                                </table>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br />
 <div class="col-md-10 offset-1" style="position:sticky;bottom:20px; padding:10px 0 0 0; background:#fff;">
     <div class="row">
@@ -146,10 +148,29 @@
     </div>
 </div>
 <script>
-    function OnChangeFiltro()
-    {
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]         
+    }
+
+    if (array.valor == 0) { $("#osc_filtro").val("0"); }
+    if (array.valor == 1) { $("#osc_filtro").val("1"); }
+    if (array.valor == 2) { $("#osc_filtro").val("2"); }
+    if (array.valor == 3) { $("#osc_filtro").val("3"); }
+
+
+    function OnChangeFiltro() {
+
         var filtro = $("#osc_filtro").val();
-        alert(filtro);
+      
+        if (filtro == 0) { $(window.document.location).attr('href', "GridAtividade?view=0"); }
+        if (filtro == 1) { $(window.document.location).attr('href', "GridAtividade?view=1"); }
+        if (filtro == 2) { $(window.document.location).attr('href', "GridAtividade?view=2"); }
+        if (filtro == 3) { $(window.document.location).attr('href', "GridAtividade?view=3"); }
+       
     }
 
 </script>

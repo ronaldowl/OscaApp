@@ -163,9 +163,12 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
-        public ViewResult GridAtividade(string filtro, int Page)
+        public ViewResult GridAtividade(string filtro, int Page, int view)
         {
-            IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridViewModel(contexto.idOrganizacao);
+            SqlGeneric sqlServices = new SqlGeneric();
+            string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
+
+            IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridViewModel(contexto.idOrganizacao, view, idProfissional);
 
             if (!String.IsNullOrEmpty(filtro))
             {

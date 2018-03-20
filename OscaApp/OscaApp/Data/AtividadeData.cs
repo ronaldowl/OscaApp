@@ -89,11 +89,34 @@ namespace OscaApp.Data
             return retorno;
         }
 
-        public List<AtividadeGridViewModel> GetAllGridViewModel(Guid idOrg)
+        public List<AtividadeGridViewModel> GetAllGridViewModel(Guid idOrg, int view, string idProfissional)
         {
             List<Atividade> itens = new List<Atividade>();
 
-            itens = db.Atividades.FromSql("SELECT * FROM Atividade  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            
+            //Minhas Atividades Abertas
+            if (view == 0)
+            {
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade = 0 and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Minhas Atividades Fechadas
+            if (view == 1)
+            {
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,3) and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Atividades Fechadas
+            if (view == 2)
+            {
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,3) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todas Atividades
+            if (view == 3)
+            {
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
 
             return HelperAssociate.ConvertToGridAtividade(itens);
         }
