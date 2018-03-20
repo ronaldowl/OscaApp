@@ -28,8 +28,8 @@ function desabilita_OrdemServico(status) {
         $("#botaoLookupCategoriaManutencao").hide();                    
 
     } else {
-        //Apresenta botoes
-        $("#osc_reabrir").show(); 
+        //Esconde botões
+        $("#osc_reabrir").hide(); 
 
         //Executa regra para tratamento dos campos de desconto
         Onchage_OrdemServicoTipoDesconto();

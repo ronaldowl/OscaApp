@@ -58,7 +58,9 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("tipoPagamento").IsModified = true;
                 db.Entry(modelo).Property("statusOrdemServico").IsModified = true;
                 db.Entry(modelo).Property("valorTotal").IsModified = true;
-                
+                db.Entry(modelo).Property("dataFechamento").IsModified = true;
+
+
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
@@ -76,7 +78,7 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                                
+                db.Entry(modelo).Property("dataFechamento").IsModified = true;
                 db.Entry(modelo).Property("statusOrdemServico").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;

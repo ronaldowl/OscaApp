@@ -25,7 +25,9 @@ namespace OscaFramework.Models
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorDesconto { get; set; }
 
-        public decimal valorDescontoPercentual { get; set; }       
+        public decimal valorDescontoPercentual { get; set; }    
+        
+        public DateTime dataFechamento { get; set; }
 
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
         public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }

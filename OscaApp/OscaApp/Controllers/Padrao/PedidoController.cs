@@ -187,7 +187,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (PedidoRules.PedidoUpdate(entrada, out pedido))
+                if (PedidoRules.PedidoUpdateStatus(entrada, out pedido))
                 {
                      pedidoData.Update(pedido);
 

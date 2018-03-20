@@ -46,10 +46,15 @@ namespace OscaApp.RulesServices
         public static bool PedidoUpdate(PedidoViewModel entrada,out Pedido modelo)
         {
             modelo = new Pedido();
+            modelo = entrada.pedido;
             modelo.id = entrada.pedido.id;
 
+            if (entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.Cancelado || entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.Fechado)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }
+
             //************ Objetos de controle de acesso *******************
-            modelo = entrada.pedido;
             modelo.modificadoEm = DateTime.Now;
             modelo.modificadoPor = entrada.contexto.idUsuario;
             modelo.modificadoPorName = entrada.contexto.nomeUsuario;
@@ -57,6 +62,39 @@ namespace OscaApp.RulesServices
 
             return true;
         }
+
+        public static bool PedidoUpdateStatus(PedidoViewModel entrada, out Pedido modelo)
+        {
+            modelo = new Pedido();
+            modelo = entrada.pedido;
+            modelo.id = entrada.pedido.id;
+           
+
+            if(entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.Cancelado || entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.Fechado)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }
+
+            if (entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.EmAndamento || entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.AguardandoProduto)
+            {
+                modelo.dataFechamento = new DateTime ();
+            }
+
+            if (entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.ParaEntrega)
+            {
+                modelo.dataFechamento = new DateTime();
+            }
+
+            //************ Objetos de controle de acesso *******************
+
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = entrada.contexto.idUsuario;
+            modelo.modificadoPorName = entrada.contexto.nomeUsuario;
+            //************ FIM Objetos de controle de acesso ***************
+
+            return true;
+        }
+
         public static void CalculoPedido(ref Pedido pedido, IProdutoPedidoData  ProdutosPedido)
         {
             List<ProdutoPedido> produtos = new List<ProdutoPedido>();

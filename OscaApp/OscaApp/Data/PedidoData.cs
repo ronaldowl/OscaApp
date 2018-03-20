@@ -48,7 +48,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("tipoPagamento").IsModified           = true;
                 db.Entry(modelo).Property("metodoEntrega").IsModified           = true;
                 db.Entry(modelo).Property("statusPedido").IsModified            = true;
-
+                db.Entry(modelo).Property("dataFechamento").IsModified = true;
 
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;

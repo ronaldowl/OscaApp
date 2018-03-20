@@ -205,7 +205,7 @@ namespace OscaApp.Controllers
 
             try
             {
-                if (AtendimentoRules.AtendimentoUpdate(entrada, out modelo))
+                if (AtendimentoRules.AtendimentoUpdateStatus(entrada, out modelo))
                 {
                     atendimentoData.UpdateStatus(modelo);
 

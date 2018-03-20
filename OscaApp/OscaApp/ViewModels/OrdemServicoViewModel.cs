@@ -13,13 +13,15 @@ namespace OscaApp.ViewModels
        public ContextPage contexto { get; set; }
        public Relacao cliente { get; set; }
        public Relacao profissional { get; set; }
-       public Relacao categoriaManutencao { get; set; }
+   
 
        public List<Relacao> servicos { get; set; }
        public List<Relacao> produtos { get; set; }
        public List<Relacao> profissionais { get; set; }
        public Relacao listaPreco { get; set; }
        public List<SelectListItem> listasPreco { get; set; }
+        public Relacao categoria { get; set; }
+        public List<SelectListItem> categorias { get; set; }
 
 
 

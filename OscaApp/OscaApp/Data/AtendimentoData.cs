@@ -52,7 +52,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("tipoReferencia").IsModified = true;
                 db.Entry(modelo).Property("idReferencia").IsModified = true;
                 db.Entry(modelo).Property("idProfissional").IsModified = true;
-
+                db.Entry(modelo).Property("dataFechamento").IsModified = true;
 
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
@@ -72,7 +72,8 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(modelo);
-                db.Entry(modelo).Property("statusAtendimento").IsModified = true;               
+                db.Entry(modelo).Property("statusAtendimento").IsModified = true;
+                db.Entry(modelo).Property("dataFechamento").IsModified = true;               
                 
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;

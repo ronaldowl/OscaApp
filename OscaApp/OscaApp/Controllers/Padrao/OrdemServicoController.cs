@@ -23,7 +23,7 @@ namespace OscaApp.Controllers
         private readonly IOrdemServicoData ordemServicoData;
         private readonly IServicoOrdemData servicoOrdemData;
         private readonly IProdutoOrdemData produtoOrdemData;
-
+      
         private ContextPage contexto;
         private readonly SqlGenericData sqlData;
         private readonly IListaPrecoData listaprecoData;
@@ -94,13 +94,19 @@ namespace OscaApp.Controllers
 
                 modelo.ordemServico = ordemServicoData.Get(modelo.ordemServico.id );
                 modelo.contexto = this.contexto;
+                SqlGeneric sqlServices = new SqlGeneric();
 
                 if (modelo.ordemServico != null)
                 {                   
                     modelo.cliente = sqlData.RetornaRelacaoCliente(modelo.ordemServico.idCliente);
                     modelo.listaPreco = sqlData.RetornaRelacaoListaPreco(modelo.ordemServico.idListaPreco);
-                    if (modelo.ordemServico.idCategoriaManutencao != null) modelo.categoriaManutencao = sqlData.RetornaRelacaoCategoriaManutencao(modelo.ordemServico.idCategoriaManutencao);
-                    if(modelo.ordemServico.idProfissional != null) modelo.profissional = sqlData.RetornaRelacaoProfissional(modelo.ordemServico.idProfissional);
+
+                    //Prenche lista de preço para o contexto da página
+                    List<SelectListItem> itens = new List<SelectListItem>();
+                    itens = HelperAttributes.PreencheDropDownList(sqlServices.RetornaRelacaoCategoriaManutencao());
+                    modelo.categorias = itens;
+                
+                    if (modelo.ordemServico.idProfissional != null) modelo.profissional = sqlData.RetornaRelacaoProfissional(modelo.ordemServico.idProfissional);
 
                 }
             }

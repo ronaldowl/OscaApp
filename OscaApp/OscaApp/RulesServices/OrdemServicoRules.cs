@@ -41,9 +41,15 @@ namespace OscaApp.RulesServices
         {
             ordemServico = new OrdemServico();
             ordemServico = entrada.ordemServico;
-            ordemServico.idCategoriaManutencao = entrada.categoriaManutencao.id;
+            ordemServico.idCategoriaManutencao = entrada.categoria.id;
             ordemServico.idProfissional = entrada.profissional.id;
             ordemServico.idCliente = entrada.cliente.id;
+
+            if(entrada.ordemServico.statusOrdemServico == CustomEnumStatus.StatusOrdemServico.Cancelado || entrada.ordemServico.statusOrdemServico == CustomEnumStatus.StatusOrdemServico.Fechado)
+            {
+                entrada.ordemServico.dataFechamento = DateTime.Now;
+            }
+
 
             //************ Objetos de controle de acesso para Update*******************
             ordemServico.modificadoEm = DateTime.Now;
@@ -55,7 +61,12 @@ namespace OscaApp.RulesServices
         public static bool OrdemServicoUpdateStatus(OrdemServicoViewModel entrada, out OrdemServico ordemServico)
         {
             ordemServico = new OrdemServico();
-            ordemServico = entrada.ordemServico;           
+            ordemServico = entrada.ordemServico;
+
+            if (entrada.ordemServico.statusOrdemServico == CustomEnumStatus.StatusOrdemServico.AguardandoProduto || entrada.ordemServico.statusOrdemServico == CustomEnumStatus.StatusOrdemServico.EmAndamento || entrada.ordemServico.statusOrdemServico == CustomEnumStatus.StatusOrdemServico.ParaEntrega)
+            {
+                entrada.ordemServico.dataFechamento =  new DateTime ();
+            }
 
             //************ Objetos de controle de acesso para Update*******************
             ordemServico.modificadoEm = DateTime.Now;

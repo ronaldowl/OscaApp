@@ -309,6 +309,48 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
+        public List<Relacao> RetornaRelacaoCategoriaManutencao()
+        {
+            List<Relacao> retorno = new List<Relacao>();
+            try
+            {
+                SqlDataReader dataReader;
+
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select * from CategoriaManutencao",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Relacao item = new Relacao();
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.idName = dataReader["nome"].ToString();
+                            retorno.Add(item);
+                        }
+                    }
+
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
         public string RetornaidProfissionalPorIdUsuario(string IdUser)
         {
              string idProfissional = String.Empty;

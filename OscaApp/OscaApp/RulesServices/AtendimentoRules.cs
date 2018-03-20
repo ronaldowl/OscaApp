@@ -66,7 +66,11 @@ namespace OscaApp.RulesServices
                 if (entrada.os != null) modelo.idReferencia = entrada.os.id;
               
             }
-          
+            
+            if(entrada.atendimento.statusAtendimento == CustomEnumStatus.StatusAtendimento.atendido || entrada.atendimento.statusAtendimento == CustomEnumStatus.StatusAtendimento.cancelado)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }
 
             if (entrada.horaInicio != null) modelo.horaInicio = Convert.ToInt32(entrada.horaInicio.horaDia);
             if (entrada.horaFim != null) modelo.horaFim = Convert.ToInt32(entrada.horaFim.horaDia);
@@ -80,5 +84,29 @@ namespace OscaApp.RulesServices
 
             return true;
         }
-}
+        public static bool AtendimentoUpdateStatus(AtendimentoViewModel entrada, out Atendimento modelo)
+        {
+            modelo = new Atendimento();
+            modelo = entrada.atendimento;                
+
+            if (entrada.atendimento.statusAtendimento == CustomEnumStatus.StatusAtendimento.agendado)
+            {
+                modelo.dataFechamento = new DateTime ();
+            }
+
+            if (entrada.atendimento.statusAtendimento == CustomEnumStatus.StatusAtendimento.atendido || entrada.atendimento.statusAtendimento == CustomEnumStatus.StatusAtendimento.cancelado)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }
+
+            //************ Objetos de controle de acesso *******************
+
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = entrada.contexto.idUsuario;
+            modelo.modificadoPorName = entrada.contexto.nomeUsuario;
+            //************ FIM Objetos de controle de acesso ***************
+
+            return true;
+        }
+    }
 }
