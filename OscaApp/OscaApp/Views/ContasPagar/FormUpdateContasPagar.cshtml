@@ -86,8 +86,8 @@
                                     <label class="control-label" style="color:red">Data Pagamento *</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.contasPagar.dataPagamento" class="form-control" type="date" id="osc_dataPagamento" required="required">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.contasPagar.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -187,7 +187,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-2x fa-user"></span>
                                         </span> &nbsp;
-                                        <input id="osc_modificadoPor" for="@Model.contasPagar.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                        <input id="osc_modificadoPor" asp-for="@Model.contasPagar.modificadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                             </div>
@@ -212,4 +212,6 @@
 <div class="modal fade" id="ModalStatus">
 </div>
 <script src="~/lib/OscaJs/osc_contaPagar.js"></script>
+<script src="~/lib/OscaJs/osc_global.js"></script>
+ 
 <script>OnLoad_ContaPagar();</script>

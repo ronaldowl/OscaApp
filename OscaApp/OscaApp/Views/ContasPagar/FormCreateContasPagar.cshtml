@@ -65,8 +65,8 @@
                                     <label class="control-label" style="color:red">Data Pagamento *</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.contasPagar.dataPagamento" class="form-control" type="date" id="osc_dataPagamento" required="required">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.contasPagar.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required">
                                         </div>
                                     </div>
                                 </div>
@@ -174,3 +174,8 @@
         </div>
     </div>
 </div>
+
+<script src="~/lib/OscaJs/osc_global.js" charset="utf-8"></script>
+<script>
+    Calendario("#osc_dataPagamento");
+</script>

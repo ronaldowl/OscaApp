@@ -1,6 +1,6 @@
 function OnLoad_ContaPagar() {
-    debugger;
-    //setStatus();
+
+    Calendario("#osc_dataPagamento");
      
     var statusContaPagar = document.getElementById("osc_statusContaPagar").value; 
     desabilitaCampos_ContaPagar(status)
@@ -14,13 +14,13 @@ function desabilitaCampos_ContaPagar(statusContaPagar) {
         $("input,select, textarea").prop("disabled", true);
 
         //Esconde botoes
-        $("#osc_salvar").hide(true);    
+        $("#osc_salvar").hide();    
 
     } else {
 
         //Desabilita botões
         //Esconde botoes
-        $("#osc_reabrir").hide(true);  
+        $("#osc_reabrir").hide();  
 
     }
 }
