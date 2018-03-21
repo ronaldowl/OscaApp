@@ -22,6 +22,7 @@ function Calendario(campo) {
 
     $(campo).datepicker({
         showButtonPanel: true,
+        defaultViewDate: true,
         changeMonth: true,
         changeYear: true,
         dateFormat: 'dd/mm/yy',

@@ -45,7 +45,7 @@
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatusAtividade()"> <span>Reabrir</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluuir</span></button>
+                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluir</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -115,10 +115,10 @@
                                             <span class="fa fa-exclamation fa-2x"></span>&nbsp;
                                         </span>
                                         &nbsp;
-                                        <select id="osc_filtro" class="form-control" required="required" asp-for="@Model.atividade.statusAtividade" style="background-color:aquamarine">
+                                        <select id="osc_statusAtividade" class="form-control" required="required" asp-for="@Model.atividade.statusAtividade" style="background-color:aquamarine">
                                             <option value="0" selected="">Aberta</option>
                                             <option value="1">Concluída</option>
-                                            <option value="2">Cancelda</option>
+                                            <option value="2">Cancelada</option>
                                         </select>
                                     </div>
                                 </div>
@@ -205,6 +205,8 @@
 <div class="modal fade" id="ModalStatusAtividade">
 </div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
+<script src="~/lib/OscaJs/osc_atividade.js"></script>
+
 <script>
-    Calendario("#osc_dataAlvo");
+    OnLoad_Atividade();
 </script>

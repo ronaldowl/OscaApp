@@ -12,7 +12,7 @@ namespace OscaFramework.Models
         {
             Aberta = 0,
             Concluida = 1,
-            Cancelada = 3
+            Cancelada = 2
         }
         public enum Status
         {

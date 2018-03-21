@@ -148,7 +148,7 @@
     </div>
 </div>
 <script>
-
+   
     var url = window.location.search.replace("?", "");
     var items = url.split("&");
 
@@ -156,20 +156,20 @@
         'valor': items[0]         
     }
 
-    if (array.valor == 0) { $("#osc_filtro").val("0"); }
-    if (array.valor == 1) { $("#osc_filtro").val("1"); }
-    if (array.valor == 2) { $("#osc_filtro").val("2"); }
-    if (array.valor == 3) { $("#osc_filtro").val("3"); }
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
 
 
     function OnChangeFiltro() {
 
         var filtro = $("#osc_filtro").val();
       
-        if (filtro == 0) { $(window.document.location).attr('href', "GridAtividade?view=0"); }
-        if (filtro == 1) { $(window.document.location).attr('href', "GridAtividade?view=1"); }
-        if (filtro == 2) { $(window.document.location).attr('href', "GridAtividade?view=2"); }
-        if (filtro == 3) { $(window.document.location).attr('href', "GridAtividade?view=3"); }
+        if (filtro == "0") { $(window.document.location).attr('href', "GridAtividade?view=0"); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridAtividade?view=1"); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridAtividade?view=2"); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridAtividade?view=3"); }
        
     }
 

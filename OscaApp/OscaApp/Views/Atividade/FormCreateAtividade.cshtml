@@ -27,10 +27,10 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-lg fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridAtividade", "Atividade" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridAtividade", "Atividade" , null)'"> <span>Fechar</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -72,7 +72,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.atividade.dataAlvo" class="form-control" type="text" id="osc_dataAlvo" required="required">
+                                            <input asp-for="@Model.atividade.dataAlvo" class="form-control" type="text" id="osc_dataAlvo" required="required" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -164,6 +164,8 @@
 <div class="modal fade" id="lookupProfissional">
 </div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
+<script src="~/lib/OscaJs/osc_atividade.js"></script>
+
 <script>
-    Calendario("#osc_dataAlvo");
+    OnLoad_Atividade();
 </script>

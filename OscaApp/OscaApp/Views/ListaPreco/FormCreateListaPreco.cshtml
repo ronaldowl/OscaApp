@@ -49,7 +49,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" id="osc_dataValidade" type="text" required="required" value="">
+                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" id="osc_dataValidade" type="text" required="required" value=""  >
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" id="osc_fimValidade" type="text" value="">
+                                            <input asp-for="@Model.listaPreco.fimValidade" class="form-control" id="osc_fimValidade" type="text" value="" >
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                             <input asp-for="@Model.listaPreco.padrao" class="form-control" type="checkbox">
                                         </div>
                                     </div>
-                                </div>
+                                </div>                           
 
                             </div>
                             <div class="col-md-3">
@@ -140,5 +140,6 @@
         </div>
     </div>
 </div>
+<script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_listaPreco.js"></script>
 <script>OnLoad_ListaPreco();</script>

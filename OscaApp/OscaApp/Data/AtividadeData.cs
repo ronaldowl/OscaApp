@@ -103,13 +103,13 @@ namespace OscaApp.Data
             //Minhas Atividades Fechadas
             if (view == 1)
             {
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,3) and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,2) and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }
 
             //Atividades Fechadas
             if (view == 2)
             {
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,3) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,2) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }
 
             //Todas Atividades
