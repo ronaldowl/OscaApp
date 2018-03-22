@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-11 offset-1">
-            <br />            
+            <br />
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
@@ -29,7 +29,9 @@
                                             <label>
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
                                             </label>&nbsp;&nbsp;
-
+                                            <label>
+                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
@@ -37,44 +39,43 @@
                         </form>
                     </div>
                 </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-bordered table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Código</th>
-                                            <th>Cliente</th>
-                                            <th>Profissional </th>
-                                            <th>Tipo OS</th>
-                                            <th>Status Ordem Servico</th>
-                                            <th>Valor</th>
-                                            <th>Criado Por</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr id="@item.ordemServico.id" onclick="location.href='@Url.Action("FormUpdateOrdemServico", "OrdemServico", new {id = item.ordemServico.id })'">
-                                            <td><i class="fa fa-file-text-o"></i></td>
-                                            <td>@Html.ActionLink(item.ordemServico.codigo.ToString(), "FormUpdateOrdemServico", new { id = item.ordemServico.id })</td>
-                                            <td>@item.cliente.idName</td>
-                                            <td>@item.profissional.idName</td>
-                                            <td>@item.ordemServico.tipo</td>
-                                            <td>@item.ordemServico.statusOrdemServico</td>
-                                            <td>R$@item.ordemServico.valorTotal.ToString("N2")</td>
-                                            <td>@item.ordemServico.criadoPorName</td>
-                                        </tr>
-                                    }
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <table class="table table-hover table-striped table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Código</th>
+                                        <th>Cliente</th>
+                                        <th>Profissional </th>
+                                        <th>Tipo OS</th>
+                                        <th>Status Ordem Servico</th>
+                                        <th>Valor</th>
+                                        <th>Criado Por</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item.ordemServico.id" onclick="location.href='@Url.Action("FormUpdateOrdemServico", "OrdemServico", new {id = item.ordemServico.id })'">
+                                        <td><i class="fa fa-file-text-o"></i></td>
+                                        <td>@Html.ActionLink(item.ordemServico.codigo.ToString(), "FormUpdateOrdemServico", new { id = item.ordemServico.id })</td>
+                                        <td>@item.cliente.idName</td>
+                                        <td>@item.profissional.idName</td>
+                                        <td>@item.ordemServico.tipo</td>
+                                        <td>@item.ordemServico.statusOrdemServico</td>
+                                        <td>R$@item.ordemServico.valorTotal.ToString("N2")</td>
+                                        <td>@item.ordemServico.criadoPorName</td>
+                                    </tr>
+                                }
+                            </table>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridOrdemServico", "OrdemServico", new { page }))</td>
+                                        <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                                    </tr>
                                 </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridOrdemServico", "OrdemServico", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -82,51 +83,52 @@
             </div>
         </div>
     </div>
-    <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br />
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
-        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+</div>
+<br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
-        <div class="col-md-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    <div class="col-md-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                </tr>
+            </table>
         </div>
     </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 </div>
 <script src="~/js/osc_cliente.js" asp-append-version="true"></script>
 <script src="~/js/osc_global.js" asp-append-version="true"></script>

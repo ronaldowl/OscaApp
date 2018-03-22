@@ -180,5 +180,14 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<AtividadeGridViewModel>(Page, 10));
         }
+        public ViewResult GridAtividadeDia( )
+        {
+            SqlGeneric sqlServices = new SqlGeneric();
+            string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
+
+            IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridViewModel(contexto.idOrganizacao, 0, idProfissional);
+
+            return View(retorno.ToPagedList<AtividadeGridViewModel>(1, 100));
+        }
     }
 }

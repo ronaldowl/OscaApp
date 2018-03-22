@@ -116,7 +116,13 @@ namespace OscaApp.Data
             List<OrdemServico > retorno = new List<OrdemServico >();
             retorno = db.OrdensServico.FromSql("SELECT * FROM OrdemServico WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return HelperAssociate.ConvertToGridOrdemServico(retorno);
-        }        
+        }
+        public List<OrdemServicoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente)
+        {
+            List<OrdemServico> retorno = new List<OrdemServico>();
+            retorno = db.OrdensServico.FromSql("SELECT * FROM OrdemServico WHERE  idCliente = '" + idCliente.ToString() + "'").ToList();
+            return HelperAssociate.ConvertToGridOrdemServico(retorno);
+        }
 
         public List<OrdemServico> GetAllByIdCliente(Guid idCliente)
         {

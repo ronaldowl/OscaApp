@@ -1,68 +1,71 @@
 ﻿@model X.PagedList.PagedList<OscaFramework.Models.LookupItemLista>
- @{
-     Layout = "_LayoutFrame";
+@{
+    Layout = "_LayoutFrame";
 }
 
-            <div class="card" id="osc_Grid">
-                <div class="card-header">
-                    <div class="card-title">
-                        <form class="form-inline">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <h5 style="font-weight:bold">Produtos: &nbsp;&nbsp;</h5>
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            &nbsp;&nbsp;
-                                            <span>
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                            </span>
-                                            <button type="submit" class="btn btn-info fa fa-search"></button>
-                                            &nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                            </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = @Model[0].produto.id })'"> <span>Fechar</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Produto</th>
-                                            <th>Código Produto</th>
-                                            <th>Fabricante</th>
-                                            <th>Lista de Preço</th>
-                                            <th>Valor Venda</th>                                         
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr  id="@item.produto.id" value="@item.produto.nome" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new {id = item.itemlistaPreco.id })'">
-                                          <td><i class="fa fa-list-ul"></i></td> 
-                                            <td>@item.produto.nome</td>
-                                            <td>@item.produto.codigo</td> 
-                                            <td>@item.produto.fabricante</td> 
-                                            <td>@item.listapreco.nome</td> 
-                                            <td>@item.itemlistaPreco.valor.ToString("N2")</td>                                                                      
-                                        </tr>
-                                    }
-                                </table>
+<div class="card" id="osc_Grid">
+    <div class="card-header">
+        <div class="card-title">
+            <form class="form-inline">
+                <table>
+                    <tr>
+                        <td>
+                            <h5 style="font-weight:bold">Produtos: &nbsp;&nbsp;</h5>
+                        </td>
+                        <td>
+                            <div class="input-group">
+                                &nbsp;&nbsp;
+                                <span>
+                                    @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                </span>
+                                <button type="submit" class="btn btn-info fa fa-search"></button>
+                                &nbsp;&nbsp;
+                                <label>
+                                    <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                </label>&nbsp;&nbsp;
+                                <label>
+                                    <button id="osc_fechar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = @Model[0].produto.id })'"> <span>Fechar</span></button>
+                                </label>&nbsp;&nbsp;
+                                <label>
+                                    <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
+                                </label>
                             </div>
-                        </div>
-                    </div>
-                </div>
-    
- 
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-11">
+                <table class="table table-hover table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Produto</th>
+                            <th>Código Produto</th>
+                            <th>Fabricante</th>
+                            <th>Lista de Preço</th>
+                            <th>Valor Venda</th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="@item.produto.id" value="@item.produto.nome" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new {id = item.itemlistaPreco.id })'">
+                            <td><i class="fa fa-list-ul"></i></td>
+                            <td>@item.produto.nome</td>
+                            <td>@item.produto.codigo</td>
+                            <td>@item.produto.fabricante</td>
+                            <td>@item.listapreco.nome</td>
+                            <td>@item.itemlistaPreco.valor.ToString("N2")</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 

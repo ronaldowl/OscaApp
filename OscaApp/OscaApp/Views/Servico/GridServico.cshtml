@@ -31,6 +31,9 @@
                                             </label>&nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelServico", "Paineis", null)'"> <span>Painel de Serviço</span></button>
+                                            </label>&nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -39,40 +42,39 @@
                         </form>
                     </div>
                 </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover table-striped table-bordered table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Código</th>
-                                            <th>Servico</th>
-                                            <th>Forma de Venda</th>
-                                            <th>Valor</th>
-                                            <th>Criado Por</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateServico", "Servico", new {id = item.id })'">
-                                            <td><i class="fa fa-shield"></i></td>
-                                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateServico", new { id = item.id })</td>
-                                            <td>@item.nomeServico</td>
-                                            <td>@item.formaVendaServico</td>
-                                            <td>@item.valor.ToString("N2")</td>
-                                            <td>@item.criadoPorName</td>
-                                        </tr>
-                                    }
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <table class="table table-hover table-striped table-bordered table-sm">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Código</th>
+                                        <th>Servico</th>
+                                        <th>Forma de Venda</th>
+                                        <th>Valor</th>
+                                        <th>Criado Por</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateServico", "Servico", new {id = item.id })'">
+                                        <td><i class="fa fa-shield"></i></td>
+                                        <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateServico", new { id = item.id })</td>
+                                        <td>@item.nomeServico</td>
+                                        <td>@item.formaVendaServico</td>
+                                        <td>@item.valor.ToString("N2")</td>
+                                        <td>@item.criadoPorName</td>
+                                    </tr>
+                                }
+                            </table>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServico", "Servico", new { page }))</td>
+                                        <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                                    </tr>
                                 </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServico", "Servico", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,51 +82,52 @@
             </div>
         </div>
     </div>
-    <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br />
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
-        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+</div>
+<br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
-        <div class="col-md-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    <div class="col-md-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
-    <script src="~/js/osc_cliente.js" asp-append-version="true"></script>
-    <script src="~/js/osc_global.js" asp-append-version="true"></script>
+</div>
+<script src="~/js/osc_cliente.js" asp-append-version="true"></script>
+<script src="~/js/osc_global.js" asp-append-version="true"></script>

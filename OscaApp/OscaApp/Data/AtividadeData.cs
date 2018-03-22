@@ -120,6 +120,16 @@ namespace OscaApp.Data
 
             return HelperAssociate.ConvertToGridAtividade(itens);
         }
+        public List<AtividadeGridViewModel> GetAllGridDia( string idProfissional)
+        {
+            List<Atividade> itens = new List<Atividade>();
+  
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,2) and idProfissional = '" + idProfissional + "' and dataAlvo = getdate()").ToList();
+        
+
+            return HelperAssociate.ConvertToGridAtividade(itens);
+        }
+
 
     }
 }

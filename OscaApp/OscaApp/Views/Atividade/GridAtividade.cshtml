@@ -22,7 +22,7 @@
                                                 <label>Filtros</label>
                                                 <div class="input-group">
                                                     &nbsp;<div class="col-2">
-                                                        <select id="osc_filtro" class="form-control" required="required" onchange="OnChangeFiltro();" >
+                                                        <select id="osc_filtro" class="form-control" required="required" onchange="OnChangeFiltro();">
                                                             <option value="0" selected="">Minhas Atividades Abertas</option>
                                                             <option value="1">Minhas Atividades Fechadas</option>
                                                             <option value="2">Todas Fechadas</option>
@@ -42,6 +42,9 @@
                                             &nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                            </label>&nbsp;&nbsp;
+                                            <label>
+                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -148,12 +151,12 @@
     </div>
 </div>
 <script>
-   
+
     var url = window.location.search.replace("?", "");
     var items = url.split("&");
 
     var array = {
-        'valor': items[0]         
+        'valor': items[0]
     }
 
     if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
@@ -165,12 +168,12 @@
     function OnChangeFiltro() {
 
         var filtro = $("#osc_filtro").val();
-      
+
         if (filtro == "0") { $(window.document.location).attr('href', "GridAtividade?view=0"); }
         if (filtro == "1") { $(window.document.location).attr('href', "GridAtividade?view=1"); }
         if (filtro == "2") { $(window.document.location).attr('href', "GridAtividade?view=2"); }
         if (filtro == "3") { $(window.document.location).attr('href', "GridAtividade?view=3"); }
-       
+
     }
 
 </script>

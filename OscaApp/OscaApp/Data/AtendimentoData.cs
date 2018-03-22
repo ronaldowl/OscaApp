@@ -129,6 +129,15 @@ namespace OscaApp.Data
             itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
 
             return HelperAssociate.ConvertToGridAtendimento(itens);
+        }          
+        public List<AtendimentoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente)
+        {
+            List<Atendimento> itens = new List<Atendimento>();
+
+            itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idCliente = '" + idCliente.ToString() + "'").ToList();
+
+            return HelperAssociate.ConvertToGridAtendimento(itens);
+       
         }
         public List<Atendimento> GetAllByIdCliente(Guid idCliente)
         {
