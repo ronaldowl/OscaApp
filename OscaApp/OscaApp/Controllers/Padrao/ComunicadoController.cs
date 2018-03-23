@@ -128,7 +128,7 @@ namespace OscaApp.Controllers
             IEnumerable<Comunicado> retorno = comunicadoData.GetAll(contexto.idOrganizacao);
 
             DateTime hoje = DateTime.Now.AddDays(1);
-             retorno = from A in retorno where (A.dataInicio <= DateTime.Now) && (A.dataFim > hoje) select A;
+             retorno = from A in retorno where (A.dataInicio <= DateTime.Now) && (A.dataFim.Day >= hoje.Day) select A;
 
             retorno = retorno.OrderBy(x => x.dataInicio);
 
@@ -143,7 +143,7 @@ namespace OscaApp.Controllers
 
             //realiza busca por Nome, Código, Email e CPF
             DateTime hoje = DateTime.Now.AddDays(1);
-            retorno = from A in retorno where (A.dataInicio <= DateTime.Now) && (A.dataFim > hoje) select A;
+            retorno = from A in retorno where (A.dataInicio <= DateTime.Now) && (A.dataFim.Day >= hoje.Day) select A;
 
             retorno = retorno.OrderBy(x => x.dataInicio);
 

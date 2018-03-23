@@ -235,5 +235,15 @@ namespace OscaApp.Controllers
             return View();
         }
 
+        public ViewResult GridAtendimentoDia()
+        {
+            SqlGeneric sqlServices = new SqlGeneric();
+            string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
+
+            IEnumerable<AtendimentoGridViewModel> retorno = atendimentoData.GetAllGridViewModelDia(new Guid(idProfissional));
+
+            return View(retorno.ToPagedList<AtendimentoGridViewModel>(1, 100));
+        }
+
     }
 }

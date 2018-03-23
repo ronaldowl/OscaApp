@@ -1,0 +1,56 @@
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.AtendimentoGridViewModel>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using OscaFramework.Helper;
+@{
+    Layout = "_LayoutFrame";
+}
+
+<div class="card" id="osc_Grid">
+    <div class="card-header">
+        <div class="card-title">
+            <center><h5 style="font-weight:bold"> Atendimentos do Dia </h5></center>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <table class="table table-hover   table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Código</th>
+                        <th>Título</th>
+                        <th>Início</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                                    {
+                    <tr id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
+                        <td><i class="fa fa-calendar-times-o"></i></td>
+                        <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
+                        <td>@item.atendimento.titulo</td>
+                        @*<td>@item.cliente.nomeCliente</td>*@
+
+                        @*<td>@item.atendimento.dataAgendada.ToShortDateString()</td>*@
+                        <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaInicio.horaDia))</td>
+                        @*<td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>*@
+                        @*<td>R$@item.atendimento.valor.ToString("N2")</td>
+                            <td>@item.atendimento.tipoReferencia</td>
+                            <td>@item.atendimento.statusAtendimento</td>*@
+                    </tr>
+                                    }
+            </table>
+            <div>
+                <table>
+                    <tr>
+                        <td> Total:@Model.TotalItemCount </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

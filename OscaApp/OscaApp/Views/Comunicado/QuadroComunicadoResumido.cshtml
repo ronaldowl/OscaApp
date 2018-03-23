@@ -9,17 +9,17 @@
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
-                        <center><h4> Quadro de Avisos </h4></center>
+                        <center><h5 style="font-weight:bold"> Quadro de Avisos </h5></center>
                     </div>
                 </div>
                 <div class="card-body">                    
                         <div  >
-                            <table class="table table-hover table-striped table-bordered">
+                            <table class="table table-hover   table-bordered">
 
                                 @foreach (var item in Model)
                                 {
                                     <tr>
-                                        <td><center><label style="font-weight:bold">@item.titulo</label></center> 
+                                        <td><center><label style="font-weight:bold">@item.mensagem</label></center> 
                                              
                                         </td>
                                     </tr>

@@ -185,7 +185,7 @@ namespace OscaApp.Controllers
             SqlGeneric sqlServices = new SqlGeneric();
             string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
 
-            IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridViewModel(contexto.idOrganizacao, 0, idProfissional);
+            IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridDia(idProfissional);
 
             return View(retorno.ToPagedList<AtividadeGridViewModel>(1, 100));
         }

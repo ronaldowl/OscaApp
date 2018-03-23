@@ -1,136 +1,134 @@
 ﻿@model OscaApp.Data.ContextPage
-  
-    <div class="row">
-        <br />
-        <div class="col-md-8 offset-1">
-            <h3> @Model.nomeUsuario seja bem vindo! <i class="fa fa-smile-o fa-1x"></i></h3>
-        </div>
+
+<div class="row">
+    <br />
+    <div class="col-md-8 offset-1">
+        <h3> @Model.nomeUsuario seja bem vindo! <i class="fa fa-smile-o fa-1x"></i></h3>
     </div>
-    <div class="row">
-        <div class="col-md-3" id="rotas">
-            <div class="card">
-                <div class="card-header bg-warning">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h5>Painel Operacional</h5></a></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card-body">
-                    <p>Utilize este painel para usar as principais funcionalidades do sistema</p>
-                </div>
+</div>
+<div class="row">
+    <div class="col-md-2 m-0" id="rotas">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h5>Painel Operacional</h5></a></td>
+                    </tr>
+                </table>
+            </div>           
+        </div>
+        <div class="card">
+            <div class="card-header bg-info">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
+                        <td><h5>Institucional</h5></td>
+                    </tr>
+                </table>
             </div>
-            <div class="card">
-                <div class="card-header bg-info">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
-                            <td><h5>Institucional</h5></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card-body">
-                    <ol >
-                        <li>Site: <a href="www.oscas.com.br">www.oscas.com.br</a></li>
-                        <li>Suporte: suporte@oscas.com.br</li>
-                        <li>Portal: <a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br</a></li>
-                        <li>WhatsApp: (11) 9-0000-0000</li>
-                    </ol>                   
+            <div class="card-body">
+                <ol>
+                    <li>Site: <a href="www.oscas.com.br">www.oscas.com.br</a></li>
+                    <li>Suporte: suporte@oscas.com.br</li>
+                    <li>Portal: <a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br</a></li>
+                    <li>WhatsApp: (11) 9-0000-0000</li>
+                </ol>
 
-                </div>
             </div>
+        </div>
 
-            <div class="card">
-                <div class="card-header bg-primary">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-code-fork iconPanel" aria-hidden="true"></i></td>
-                            <td><h5>Volumetria</h5></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card-body">
-                    <ol>
-                        <li>Quantidade de Clientes:?</li>
-                        <li>Quantidade de Contatos:?</li>
-                        <li>Quantidade de Produtos:?</li>                      
-                                                
-                    </ol>
-                </div>
+        <div class="card">
+            <div class="card-header bg-primary">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-code-fork iconPanel" aria-hidden="true"></i></td>
+                        <td><h5>Volumetria</h5></td>
+                    </tr>
+                </table>
             </div>
-        </div>
-        <div class="col-md-3" id="comunicados">
-        </div>
-        <div class="col-md-3" id="tarefas">
-        </div>
-        <div class="col-md-3" id="atendimentos">
-        </div>       
-        <div class="col-md-3" id="clientes">
-        </div>
-    </div>
-    <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
-        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+            <div class="card-body">
+                <ol>
+                    <li>Quantidade de Clientes:?</li>
+                    <li>Quantidade de Contatos:?</li>
+                    <li>Quantidade de Produtos:?</li>
 
-        <div class="col-sm-3">
-            <div class="card m-1">
-                <div class="card-body">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
-
-                            <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-1">
-                <div class="card-body">
-                    <table>
-                        <tr>
-                            <td>
-                                <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
-                            </td>
-                            <td>
-                                <a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="card m-1">
-                <div class="card-body">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card m-1">
-                <div class="card-body">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
-                        </tr>
-                    </table>
-                </div>
+                </ol>
             </div>
         </div>
     </div>
- 
+    <div class="col-md-5 m-1 m-0" id="comunicados">
+    </div> 
+        <div class="col-md-3 m-0" id="tarefas">
+        </div>
+        <div class="col-md-3 m-0" id="atendimentos">
+        </div>
+    
+
+</div>
+<div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td>
+                            <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     CarregaComunicados();
     CarregaTarefas();
-    function CarregaComunicados() {         
+    CarregaAtendimentos();
+    function CarregaComunicados() {
         $.ajax("/Comunicado/QuadroComunicadoResumido").done(function (data) {
             $("#comunicados").html(data);
         });
@@ -138,6 +136,11 @@
     function CarregaTarefas() {
         $.ajax("/Atividade/GridAtividadeDia").done(function (data) {
             $("#tarefas").html(data);
+        });
+    }
+    function CarregaAtendimentos() {
+        $.ajax("/Atendimento/GridAtendimentoDia").done(function (data) {
+            $("#atendimentos").html(data);
         });
     }
 </script>

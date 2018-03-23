@@ -106,7 +106,9 @@ namespace OscaApp.Data
         List<Atendimento> GetAll(Guid idOrg);
         List<Atendimento> GetAllByIdCliente(Guid idCliente);
         List<Relacao> GetAllRelacao(Guid idOrg);
-        List<AtendimentoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);    
+        List<AtendimentoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente); 
+        List<AtendimentoGridViewModel> GetAllGridViewModelDia(Guid idProfissional);
+
     }
 
     public interface IContasPagarData
