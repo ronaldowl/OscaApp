@@ -21,7 +21,7 @@ namespace OscaApp.Controllers
         public AtendimentoData atendimentoData;
         private readonly SqlGenericData sqlData;
 
-        public AtendimentoController(ContexDataService db, IHttpContextAccessor httpContext,  SqlGenericData _sqlData)
+        public AtendimentoController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
             this.atendimentoData = new AtendimentoData(db);
             this.sqlData = _sqlData;
@@ -29,11 +29,11 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult FormCreateAtendimento(string id)
+        public ViewResult FormCreateAtendimento(string idCliente)
         {
             SqlGeneric sqlServices = new SqlGeneric();
-           
-
+            SqlGenericData sqlData = new SqlGenericData();
+            
             AtendimentoViewModel modelo = new AtendimentoViewModel();
             modelo.contexto = contexto;
             modelo.atendimento = new Atendimento();
@@ -41,6 +41,11 @@ namespace OscaApp.Controllers
 
             modelo.atendimento.criadoEm = DateTime.Now;
             modelo.atendimento.criadoPorName = contexto.nomeUsuario;
+
+            //Se passar o id carrega o cliente
+            if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));
+
+
             try
             {
                 modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString())));
@@ -57,7 +62,7 @@ namespace OscaApp.Controllers
         [HttpPost]
         public ActionResult FormCreateAtendimento(AtendimentoViewModel entrada)
         {
-            Atendimento  modelo = new Atendimento ();
+            Atendimento modelo = new Atendimento();
 
             try
             {
@@ -79,7 +84,7 @@ namespace OscaApp.Controllers
                 log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateAtendimento-post", ex.Message);
             }
 
-            return View( );
+            return View();
         }
 
         [HttpGet]
@@ -90,7 +95,7 @@ namespace OscaApp.Controllers
             try
             {
                 Atendimento retorno = new Atendimento();
-              
+
                 if (!String.IsNullOrEmpty(id))
                 {
                     //campo que sempre contém valor
@@ -99,10 +104,10 @@ namespace OscaApp.Controllers
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
                     modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
 
-                    if(retorno.tipoReferencia == CustomEnum.TipoReferencia.Servico)modelo.servico = sqlData.RetornaRelacaoServico(retorno.idReferencia);
+                    if (retorno.tipoReferencia == CustomEnum.TipoReferencia.Servico) modelo.servico = sqlData.RetornaRelacaoServico(retorno.idReferencia);
 
                     if (retorno.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico) modelo.os = sqlData.RetornaRelacaoOrdemServico(retorno.idReferencia);
-                    
+
                     modelo.horaInicio = new ItemHoraDia();
                     modelo.horaInicio.horaDia = (CustomEnum.itemHora)retorno.horaInicio;
                     modelo.horaFim = new ItemHoraDia();
@@ -110,7 +115,7 @@ namespace OscaApp.Controllers
 
                     if (retorno != null)
                     {
-                        modelo.atendimento = retorno;                     
+                        modelo.atendimento = retorno;
                     }
                 }
 
@@ -147,27 +152,37 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridAtendimento(string filtro, int Page)
+        public ViewResult GridAtendimento(string filtro, int Page, string idCliente)
         {
-            IEnumerable<AtendimentoGridViewModel> retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao);
+            IEnumerable<AtendimentoGridViewModel> retorno;
+
+            if (String.IsNullOrEmpty(idCliente))
+            {
+                retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao);
+            }
+            else
+            {
+
+                retorno = atendimentoData.GetAllGridViewModelByCliente(new Guid(idCliente));
+            }
 
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
                           where
                             (u.atendimento.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
-                            || (u.atendimento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))                           
+                            || (u.atendimento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
             retorno = retorno.OrderByDescending(A => A.atendimento.dataAgendada);
-          
+
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
             return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
         }
 
-     
+
         [HttpGet]
         public ViewResult FormStatusAtendimento(string id)
         {

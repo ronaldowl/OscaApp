@@ -19,6 +19,8 @@ namespace OscaApp.Data
         Atividade Get(Guid id);
         List<Atividade> GetAll(Guid idOrg);
         List<AtividadeGridViewModel> GetAllGridViewModel(Guid idOrg, int view, string idProfissional);
+        List<AtividadeGridViewModel> GetAllGridDia(string idProfissional);
+
     }
 
     public interface IBancoData
@@ -70,6 +72,8 @@ namespace OscaApp.Data
         OrdemServico Get(Guid id );
         List<OrdemServico> GetAll(Guid id);
         List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg);
+        List<OrdemServicoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
+
     }
     public interface IServicoData
     {
@@ -100,7 +104,9 @@ namespace OscaApp.Data
         void Update(Atendimento atendimento);
         Atendimento Get(Guid id);
         List<Atendimento> GetAll(Guid idOrg);
+        List<Atendimento> GetAllByIdCliente(Guid idCliente);
         List<Relacao> GetAllRelacao(Guid idOrg);
+        List<AtendimentoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);    
     }
 
     public interface IContasPagarData
@@ -138,6 +144,8 @@ namespace OscaApp.Data
         List<Pedido> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
         List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg);
+        List<PedidoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
+
 
     }
 

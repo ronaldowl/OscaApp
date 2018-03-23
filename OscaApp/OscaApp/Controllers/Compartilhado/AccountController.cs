@@ -87,7 +87,7 @@ namespace OscaApp.Controllers
 
                     //*****************************************************************************
                     
-                    return RedirectToAction("PainelOperacional", "Paineis", new { });
+                    return RedirectToAction("PainelHome", "Paineis", new { });
 
                 }
 

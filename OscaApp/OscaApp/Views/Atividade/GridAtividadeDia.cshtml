@@ -1,0 +1,37 @@
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.AtividadeGridViewModel>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using OscaFramework.Helper;
+@{
+    Layout = "_LayoutFrame";
+}
+<div class="card" id="osc_Grid">
+    <div class="card-header">
+        <div class="card-title">
+            <center><h4> Atividades do Dia </h4></center>
+        </div>
+    </div>
+    <div class="card-body">
+        <div>
+            <table class="table table-hover table-striped table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Assunto</th>
+                        <th>Tipo</th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.atividade.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.atividade.id })'">
+                        <td><i class="fa fa-file-archive-o"></i></td>
+                        <td>@Html.ActionLink(item.atividade.assunto, "FormUpdateAtividade", new { id = item.atividade.id })</td>
+                        <td>@HelperEnum.FormatEnumTipoAtividade(@item.atividade.tipo)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

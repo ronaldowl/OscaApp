@@ -40,12 +40,12 @@ namespace OscaApp.Controllers
         }
 
         [HttpGet]
-        public ViewResult FormCreateOrdemServico(string id)
+        public ViewResult FormCreateOrdemServico(string idCliente)
         {
             OrdemServicoViewModel modelo = new OrdemServicoViewModel();
 
             //Se passar o id carrega o regitro relacionado, usado sempre em telas com lookup
-            if (!String.IsNullOrEmpty(id)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(id));
+            if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));
                         
             modelo.contexto = contexto;
             modelo.ordemServico.criadoEm = DateTime.Now;
@@ -136,9 +136,19 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridOrdemServico(string filtro, int Page)
+        public ViewResult GridOrdemServico(string filtro, int Page, string idCliente)
         {
-            IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
+            IEnumerable<OrdemServicoGridViewModel> retorno;
+
+            if (String.IsNullOrEmpty(idCliente)) {
+
+                retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
+            }
+            else
+            {
+                retorno = ordemServicoData.GetAllGridViewModelByCliente(new Guid(idCliente));
+
+            }
 
             if (!String.IsNullOrEmpty(filtro))
             {

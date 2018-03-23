@@ -146,11 +146,21 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        public ViewResult GridPedido(string filtro, int Page)
+        public ViewResult GridPedido(string filtro, int Page, string idCliente)
         {
             try
             {                
-                IEnumerable <PedidoGridViewModel> retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao);
+                IEnumerable <PedidoGridViewModel> retorno ;
+
+                if(String.IsNullOrEmpty(idCliente))
+                {
+
+                    retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao);
+                }
+                else
+                {
+                    retorno = pedidoData.GetAllGridViewModelByCliente(new Guid(idCliente));
+                }
 
                 if (!String.IsNullOrEmpty(filtro))
                 {

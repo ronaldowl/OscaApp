@@ -105,6 +105,15 @@ namespace OscaApp.Data
 
             return HelperAssociate.ConvertToGridPedido(itens);
         }
+        public List<PedidoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente)
+        {
+            List<Pedido> itens = new List<Pedido>();
+
+            itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idCliente = '" + idCliente.ToString() + "'").ToList();
+
+            return HelperAssociate.ConvertToGridPedido(itens);
+        }
+
 
         public List<Pedido> GetAllByIdCliente(Guid idCliente)
         {
