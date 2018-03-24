@@ -27,8 +27,8 @@
                 {
                     <tr id="@item.atividade.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.atividade.id })'">
                         <td><i class="fa fa-file-archive-o"></i></td>
-                        <td>@Html.ActionLink(item.atividade.assunto, "FormUpdateAtividade", new { id = item.atividade.id })</td>
-                        <td>@HelperEnum.FormatEnumTipoAtividade(@item.atividade.tipo)</td>
+                        <td style="font-size:12px;font-weight:bold">@Html.ActionLink(item.atividade.assunto, "FormUpdateAtividade", new { id = item.atividade.id })</td>
+                        <td style="font-size:12px">@HelperEnum.FormatEnumTipoAtividade(@item.atividade.tipo)</td>
                     </tr>
                 }
             </table>
