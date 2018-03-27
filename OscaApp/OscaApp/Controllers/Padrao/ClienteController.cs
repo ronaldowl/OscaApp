@@ -24,12 +24,9 @@ namespace OscaApp.Controllers
         private readonly PedidoData pedidoData;
         private readonly AtendimentoData atendimentoData;
 
-
-
         private readonly SqlGenericData sqlData;
         private ContextPage contexto;
-
-
+       
         public ClienteController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
             this.clienteData = new ClienteData(db);
@@ -41,6 +38,10 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.sqlData = _sqlData;
         }
+        [TempData]
+        public string StatusMessage { get; set; }
+        [TempData]
+        public bool StatusRetorno { get; set; }
 
         [HttpGet]
         public ViewResult FormCreateCliente()
@@ -117,6 +118,9 @@ namespace OscaApp.Controllers
 
                         //Preenche informações do grid de Atendiemento
                         modelo.atendimentos = atendimentoData.GetAllByIdCliente(new Guid(id));
+
+                        //apresenta mensagem de cliente atualizado com sucesso
+                        modelo.StatusMessage = StatusMessage;
                     }
                 }
 
@@ -139,7 +143,9 @@ namespace OscaApp.Controllers
             {
                 if (ClienteRules.MontaClienteUpdate(entrada, out modelo, this.contexto))
                 {
-                    clienteData.Update(modelo);
+                    clienteData.Update(modelo);                                        
+                    StatusMessage = "Cliente Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
             }

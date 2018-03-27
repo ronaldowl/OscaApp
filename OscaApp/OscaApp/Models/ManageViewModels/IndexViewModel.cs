@@ -9,6 +9,8 @@ namespace OscaApp.Models.ManageViewModels
     public class IndexViewModel
     {
         public string Username { get; set; }
+        public string NomeAmigavel { get; set; }
+
 
         public bool IsEmailConfirmed { get; set; }
 

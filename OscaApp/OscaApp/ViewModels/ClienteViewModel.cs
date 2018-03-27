@@ -18,8 +18,9 @@ namespace OscaApp.ViewModels
         public List<Atendimento> atendimentos { get; set; }
 
         public ContextPage contexto { get; set; }
-        public Relacao contato { get; set;
-        }
+        public Relacao contato { get; set;}         
+        public string StatusMessage { get; set; }
+     
         public ClienteViewModel()
         {
             this.cliente = new  Cliente();

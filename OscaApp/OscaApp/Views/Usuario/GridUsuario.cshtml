@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9 offset-1">
             <div class="card  " id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
@@ -32,9 +32,7 @@
                                             <label>
                                                 <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelGerenciamento", "Paineis", null)'"> <span>Painel Gerenciamento</span></button>
                                             </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
-                                            </label>
+                                             
                                         </div>
                                     </td>
                                 </tr>
@@ -58,7 +56,7 @@
 
                         @foreach (var item in Model)
                         {
-                            <tr id="@item.Id" onclick="location.href='@Url.Action("FormUpdateUsuario", "Usuario", new {id = item.Id })'">
+                            <tr>
                                 <td><i class="fa fa-user-circle"></i></td>
                                 <td>@item.UserName</td>
                                 <td>@item.Email</td>

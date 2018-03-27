@@ -57,6 +57,7 @@ namespace OscaApp.Controllers
             var model = new IndexViewModel
             {
                 Username = user.UserName,
+                NomeAmigavel = user.nomeAmigavel,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
@@ -91,17 +92,20 @@ namespace OscaApp.Controllers
                 }
             }
 
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
+            var nome = user.NormalizedUserName;
+            if (model.NomeAmigavel != nome)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+              
+                user.nomeAmigavel = model.NomeAmigavel;
+                
+                var setNomeResult = await _userManager.UpdateAsync(user);
+                if (!setNomeResult.Succeeded)
                 {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                    throw new ApplicationException($"Ocorreu um erro ao atulizar o nome do usuário '{user.Id}'.");
                 }
             }
 
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Seu perfil foi atualizado";
             return RedirectToAction(nameof(Index));
         }
 

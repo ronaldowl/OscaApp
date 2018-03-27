@@ -11,6 +11,7 @@ namespace OscaApp.Models
     public class ApplicationUser : IdentityUser
     {
         public Guid idOrganizacao { get; set; }
+        public string nomeAmigavel { get; set; }
 
         [NotMapped]
         public string organizacao { get; set; }
