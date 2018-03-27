@@ -81,6 +81,7 @@
     </div>   
     
     @*@RenderSection("scripts", required: false)*@
+    @{Html.RenderPartial("~/Views/Shared/Components/Mensagem/_Mensagem.cshtml");}
     <div>
         <footer class="footer">
             @await Component.InvokeAsync("Footer");

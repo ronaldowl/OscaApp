@@ -33,6 +33,19 @@ namespace OscaApp.Data
             }
            
         }
+        public void Delete(Atividade atividade)
+        {
+            try
+            {
+                db.Atividades.Remove(atividade);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         public void Update(Atividade modelo)
         {
             try

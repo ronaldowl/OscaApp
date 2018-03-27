@@ -11,6 +11,10 @@
             $("#ModalStatusAtividade").modal("show");
         });
     }
+
+   
+
+
 </script>
 
 <div id="contexto">
@@ -45,7 +49,7 @@
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatusAtividade()"> <span>Reabrir</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluir</span></button>
+                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value="" onclick="DeleteAtividade('@Model.atividade.id')"> <span>Excluir</span></button>
                                             </label>
                                         </div>
                                     </td>

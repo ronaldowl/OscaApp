@@ -33,3 +33,21 @@ function Calendario(campo) {
         monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez']
     });
 }
+
+function DeleteService(id, controller, redirect) {
+    
+    if (confirm("Deseja Excluir o Registro?")) {
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: "/API/" + controller + "/Delete",
+            data: { id: id },
+            success: function (dados) {
+                if (dados.statusOperation == true) {
+                    alert('Registro excluido com Sucesso!');
+                    $(window.document.location).attr('href', redirect);
+                }
+            }
+        });
+    }
+} 

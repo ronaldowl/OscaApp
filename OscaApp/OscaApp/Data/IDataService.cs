@@ -15,7 +15,7 @@ namespace OscaApp.Data
         void Add(Atividade atividade);
         void Update(Atividade atividade);
         void UpdateStatus(Atividade atividade);
-
+        void Delete(Atividade atividade);
         Atividade Get(Guid id);
         List<Atividade> GetAll(Guid idOrg);
         List<AtividadeGridViewModel> GetAllGridViewModel(Guid idOrg, int view, string idProfissional);
