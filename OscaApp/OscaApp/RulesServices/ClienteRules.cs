@@ -3,6 +3,7 @@ using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -47,6 +48,16 @@ namespace OscaApp.RulesServices
             ////************ FIM Objetos de controle de acesso ***************
 
             return true;           
+        }
+        public static bool Cnpj_CfpExistente(string valor, Guid idOrganizacao, SqlGenericRules sqlServices)
+        {
+
+            if(sqlServices.ConsultaCnpj_CpfDuplicado(valor, idOrganizacao.ToString()))
+            {
+                return true;
+            }
+
+            return false;
         }
         
     }

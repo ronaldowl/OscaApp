@@ -27,7 +27,7 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar" onclick="ConsultaCnpjCpfDuplicado()"> <span>Salvar</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , null)'"> <span>Fechar</span></button>
@@ -77,7 +77,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-2x"></span>
                                         </span> &nbsp;
-                                        <input id="osc_cnpj_cpf" asp-for="@Model.cliente.cnpj_cpf" type="text" class="form-control" placeholder="..." onchange="ValidaCNPJ_CPF()" />
+                                        <input id="osc_cnpj_cpf" asp-for="@Model.cliente.cnpj_cpf" type="text" class="form-control" placeholder="..." onchange="ValidaCNPJ_CPF()" value="" />
                                     </div>
                                 </div>
                                 <div class="form-group">

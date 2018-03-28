@@ -17,6 +17,29 @@ function OnChangeTipoPessoa()
     LimpaCNPJ_CPF();
 }
 
+function ConsultaCnpjCpfDuplicado() {
+
+    var cnpjCpf = $("#osc_cnpj_cpf").val(); 
+
+    if (cnpjCpf != "") {
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: "/API/ClienteAPI/ConsultaCnpjCpfDuplicado",
+            data: { valor: cnpjCpf },
+            success: function (dados) {
+                if (dados.statusOperation == true) {
+                    alert('Já existe um CNPJ/CPF na base!');
+                    return false;
+                }
+            }
+        
+        });
+    }
+    
+} 
+
 function desabilita_Cliente(status) {
 
     if (status == "Inativo") {
@@ -36,8 +59,6 @@ function desabilita_Cliente(status) {
     }
 
 }
-
-
 
 function ValidaCNPJ_CPF()
 {
@@ -74,7 +95,6 @@ function ValidaCNPJ_CPF()
         }
     }
 }
-
 
 function chkCpf(valor) {
     valor = unFormatNumber(valor);

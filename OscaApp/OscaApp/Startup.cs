@@ -57,6 +57,9 @@ namespace OscaApp
             //Serviço para retornar dados que são comuns a todas empresas        
             SqlGeneric sqlServices = new SqlGeneric();
             services.AddSingleton<SqlGeneric>(_ => sqlServices);
+            //Serviço para executar Regras no banco       
+            SqlGenericRules sqlRules = new SqlGenericRules();
+            services.AddSingleton<SqlGenericRules>(_ => sqlRules);
             //*********************** FIM Serviços para acesso a dados vi ADO *******************
 
 
