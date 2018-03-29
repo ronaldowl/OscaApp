@@ -47,23 +47,23 @@ namespace OscaFramework.Models
         }
         public enum StatusAtendimento
         {
-            agendado = 0,
-            atendido = 1,
-            cancelado = 2            
+            Agendado = 0,
+            Atendido = 1,
+            Cancelado = 2            
         }
         public enum StatusContaReceber
         {
-            agendado = 0,
-            recebido = 1,
-            cancelado = 2,
-            atrasado = 3
+            Agendado = 0,
+            Recebido = 1,
+            Cancelado = 2,
+            Atrasado = 3
         }
         public enum StatusContaPagar
         {
-            agendado = 0,
-            pago = 1,
-            cancelado = 2,
-            atrasado = 3
+            Agendado = 0,
+            Pago = 1,
+            Cancelado = 2,
+            Atrasado = 3
         }
 
     }
@@ -85,8 +85,8 @@ namespace OscaFramework.Models
         }
         public enum TipoLancamento
         {
-            manual = 0,
-            automatico = 1            
+            Manual = 0,
+            Automatico = 1            
         }
 
         public enum OrigemContaReceber
@@ -252,10 +252,10 @@ namespace OscaFramework.Models
                                                  quatozeMeia =  28,   
                                                  quinzeHoras =  29,   
                                                  quinzeMeia =  30,   
-                                                 dezeseisHoras =  31,   
-                                                 dezeseisMeia =  32,   
-                                                 dezeseteHoras =  33,   
-                                                 dezeseteMeia =  34,   
+                                                 dezesseisHoras =  31,   
+                                                 dezesseisMeia =  32,   
+                                                 dezesseteHoras =  33,   
+                                                 dezesseteMeia =  34,   
                                                  dezoitoHoras =  35,   
                                                  dezoitoMeia =  36,   
                                                  dezenoveHoras =  37,   
