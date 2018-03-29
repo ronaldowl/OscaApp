@@ -11,8 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
 using OscaFramework.Models;
-
-
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {
@@ -21,11 +20,12 @@ namespace OscaApp.Controllers
     {
         private readonly IContasReceberData contasReceberData;
         private ContextPage contexto;
+        private readonly SqlGenericData sqlData;
 
-        public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext)
+        public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext,  SqlGenericData _sqlData)
         {
             this.contasReceberData = new ContasReceberData(db);
-            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.sqlData = _sqlData;
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
@@ -76,7 +76,9 @@ namespace OscaApp.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = contasReceberData.Get(modelo.contasReceber.id);
+                retorno = contasReceberData.Get(modelo.contasReceber.id);               
+                
+                if (retorno.idCliente != null)modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
 
                 if (retorno != null)
                 {

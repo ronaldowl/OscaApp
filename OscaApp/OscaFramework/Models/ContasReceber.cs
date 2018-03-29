@@ -10,6 +10,8 @@ namespace OscaFramework.Models
         public String codigo { get; set; }
         public String titulo { get; set; }
         public Guid idOrganizacao { get; set; }
+        public Guid idCliente { get; set; }
+
         public string anotacao { get; set; }
         public string numeroReferencia { get; set; }
         public DateTime dataPagamento { get; set; }

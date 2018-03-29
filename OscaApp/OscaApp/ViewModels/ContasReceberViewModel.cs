@@ -8,6 +8,7 @@ namespace OscaApp.ViewModels
     public class ContasReceberViewModel
     {
        public ContasReceber contasReceber { get; set; }
+       public Relacao cliente { get; set; }
        public ContextPage contexto { get; set; }
     }
 }

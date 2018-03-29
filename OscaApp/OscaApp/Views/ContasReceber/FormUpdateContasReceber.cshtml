@@ -17,7 +17,7 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
     @Html.HiddenFor(m => m.contasReceber.id)
 </div>
- 
+
 
 <div class="container-fluid">
     <div class="row">
@@ -75,6 +75,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label" style="color:deepskyblue">Cliente</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user-o fa-2x"></span>
+                                        </span>
+                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" disabled="disabled">
+                                        <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
+                                      
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label" style="color:red">Valor *</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
@@ -83,15 +94,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Data Prevista*</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.contasReceber.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required">
-                                        </div>
-                                    </div>
-                                </div>
+
 
                             </div>
                             <div class="col-md-3">
@@ -123,14 +126,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Anotação</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_anotacao" asp-for="@Model.contasReceber.anotacao" class="form-control" rows="5" cols="40" placeholder="digite uma anotação"></textarea>
+                                    <label class="control-label" style="color:red">Data Prevista*</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.contasReceber.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required">
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -142,6 +146,18 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Anotação</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                        </span>
+                                        <textarea id="osc_anotacao" asp-for="@Model.contasReceber.anotacao" class="form-control" rows="5" cols="40" placeholder="digite uma anotação"></textarea>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Status Conta</label>
                                     <div class="input-group">
@@ -158,6 +174,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -207,6 +224,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </form>
         </div>
@@ -218,4 +236,4 @@
 <script src="~/lib/OscaJs/osc_contaReceber.js"></script>
 <script>OnLoad_ContaReceber();</script>
 
- 
+

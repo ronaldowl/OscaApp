@@ -12,6 +12,9 @@ namespace OscaApp.RulesServices
         {
             contasReceber = new ContasReceber();
             contasReceber = entrada.contasReceber;
+
+            if (entrada.cliente != null) contasReceber.idCliente = entrada.cliente.id;
+
             contasReceber.codigo = AutoNumber.GeraCodigo(21, contexto.idOrganizacao);
          
             if (contasReceber.codigo != null)
@@ -33,9 +36,11 @@ namespace OscaApp.RulesServices
         public static bool ContasReceberUpdate(ContasReceberViewModel entrada, out ContasReceber contasReceber)
         {
             contasReceber = new ContasReceber();
+            contasReceber = entrada.contasReceber;
+            if (entrada.cliente != null) contasReceber.idCliente = entrada.cliente.id;
+
 
             //************ Objetos de controle de acesso *******************
-            contasReceber = entrada.contasReceber;
             contasReceber.modificadoEm = DateTime.Now;
             contasReceber.modificadoPor = entrada.contexto.idUsuario;
             contasReceber.modificadoPorName = entrada.contexto.nomeUsuario;
