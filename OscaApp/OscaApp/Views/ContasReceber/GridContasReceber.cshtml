@@ -45,7 +45,7 @@
                 <div class="card-body">
                     <div class="row">
                         <table class="table table-hover  table-bordered table-sm">
-                            <thead>
+                            <thead class="thead-light">
                                 <tr>
                                     <th></th>
                                     <th>Código</th>
@@ -73,15 +73,16 @@
                                 </tr>
                             }
                         </table>
-                        <div>
-                            <table>
-                                <tr>
-                                    <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasReceber", "ContasReceber", new { page }))</td>
-                                    <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                </tr>
-                            </table>
-                        </div>
+                      
                     </div>
+                </div>
+                <div class="card-footer">
+                    <table>
+                        <tr>
+                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasReceber", "ContasReceber", new { page }))</td>
+                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -144,7 +145,5 @@
             </div>
         </div>
     </div>
-</div>
-</div>
-<script src="~/js/osc_cliente.js" asp-append-version="true"></script>
-<script src="~/js/osc_global.js" asp-append-version="true"></script>
+</div> 
+

@@ -2,7 +2,7 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-@{   
+@{
     Layout = "_LayoutFrame";
 }
 <script>
@@ -17,86 +17,85 @@
     }
 </script>
 
-<link rel="stylesheet" href="~/lib/OscaCss/style.css"> 
+<link rel="stylesheet" href="~/lib/OscaCss/style.css">
 
-<div class="card normalize" id="osc_Grid">   
-           
-                <table class="table table-hover   table-responsive-md tableNoMargin table-bordered table-sm">
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Serviço</th>
-                            <th>Qtd/Horas</th>
-                            <th>Valor</th>
-                            <th>Total Resumido</th>
-                            <th>Desconto</th>
-                            <th>Total</th>
-                           
-                        </tr>
-                    </thead>
-                    @{
-                        int qtd = 0;
-                        decimal desconto = 0;
-                        decimal total = 0;
-                        decimal totalGeral = 0;
+<div class="card normalize" id="osc_Grid">
 
-                    }
-                    @foreach (var item in Model)
-                    {
-                        qtd += item.servicoOrdem.quantidade;
-                        desconto += item.servicoOrdem.valorDesconto;
-                        total += item.servicoOrdem.total;
-                        totalGeral += item.servicoOrdem.totalGeral;
-                        <tr style="height:10px">
-                            <td>@item.servico.codigo</td>
-                            <td>@item.servico.nomeServico</td>
-                            <td>@item.servicoOrdem.quantidade</td>
-                            <td>@item.servicoOrdem.valor.ToString("N2")</td>
-                            <td>@item.servicoOrdem.total.ToString("N2")</td>
-                            <td>@item.servicoOrdem.valorDesconto.ToString("N2")</td>
-                            <td>@item.servicoOrdem.totalGeral.ToString("N2")</td>
-                            <td>
-                                <div class="form-group col-md-2">
-                                    <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="CarregaUpdateServicoOrdem('@item.servicoOrdem.id')" > <span>Editar</span></button>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group col-md-2">
-                                    <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteServicoOrdem", "ServicoOrdem", new { id = item.servicoOrdem.id, idOrdem = item.servicoOrdem.idOrdemServico })'"> <span>Remover</span></button>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                    <tfoot id="osc_tableFooterProdutoPedido" class="total">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td>@qtd</td>
-                            <td></td>
-                            <td>R$@total.ToString("N2")</td>
-                            <td>R$@desconto.ToString("N2")</td>
-                            <td>R$@totalGeral.ToString("N2")</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class="paginacao">
-                    <table>
-                        <tr>
-                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServicoOrdem", "ServicoOrdem", new { page }))</td>
-                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
- 
+    <table class="table table-hover   table-responsive-md tableNoMargin table-bordered table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th>Código</th>
+                <th>Serviço</th>
+                <th>Qtd/Horas</th>
+                <th>Valor</th>
+                <th>Total Resumido</th>
+                <th>Desconto</th>
+                <th>Total</th>
+
+            </tr>
+        </thead>
+        @{
+            int qtd = 0;
+            decimal desconto = 0;
+            decimal total = 0;
+            decimal totalGeral = 0;
+
+        }
+        @foreach (var item in Model)
+        {
+            qtd += item.servicoOrdem.quantidade;
+            desconto += item.servicoOrdem.valorDesconto;
+            total += item.servicoOrdem.total;
+            totalGeral += item.servicoOrdem.totalGeral;
+            <tr style="height:10px">
+                <td>@item.servico.codigo</td>
+                <td>@item.servico.nomeServico</td>
+                <td>@item.servicoOrdem.quantidade</td>
+                <td>@item.servicoOrdem.valor.ToString("N2")</td>
+                <td>@item.servicoOrdem.total.ToString("N2")</td>
+                <td>@item.servicoOrdem.valorDesconto.ToString("N2")</td>
+                <td>@item.servicoOrdem.totalGeral.ToString("N2")</td>
+                <td>
+                    <div class="form-group col-md-2">
+                        <button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar" onclick="CarregaUpdateServicoOrdem('@item.servicoOrdem.id')"> <span>Editar</span></button>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-group col-md-2">
+                        <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeleteServicoOrdem", "ServicoOrdem", new { id = item.servicoOrdem.id, idOrdem = item.servicoOrdem.idOrdemServico })'"> <span>Remover</span></button>
+                    </div>
+                </td>
+            </tr>
+        }
+        <tfoot id="osc_tableFooterProdutoPedido" class="total">
+            <tr>
+                <td></td>
+                <td></td>
+                <td>@qtd</td>
+                <td></td>
+                <td>R$@total.ToString("N2")</td>
+                <td>R$@desconto.ToString("N2")</td>
+                <td>R$@totalGeral.ToString("N2")</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    <div class="card-footer">
+        <table>
+            <tr>
+                <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridServicoOrdem", "ServicoOrdem", new { page }))</td>
+                <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+            </tr>
+        </table>
+    </div>
+</div>
 <script>
-   
+
     var idOrdemServico = window.parent.document.getElementById('osc_id').value;
     var statusOrdemServico = window.parent.document.getElementById('osc_statusOrdemServico').value;
 
     if (statusOrdemServico == 2 || statusOrdemServico == 5) $("input,select, textarea, button").prop("disabled", true);
-    
+
 </script>
 

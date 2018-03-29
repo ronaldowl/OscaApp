@@ -30,10 +30,8 @@
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
                                             </label>&nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_calendario" type="button" class="btn btn-info btn-lg fa fa-calendar"  onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
+                                                <button id="osc_calendario" type="button" class="btn btn-info btn-lg fa fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
                                             </label>
-
-                             
                                         </div>
                                     </td>
                                 </tr>
@@ -41,110 +39,109 @@
                         </form>
                     </div>
                 </div>
-                    <div class="card-body">
-                        <div class="row">
-                            
-                                <table class="table table-hover   table-bordered table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Código</th>
-                                            <th>Título</th>
-                                            <th>Cliente</th>                                            
-                                            <th>Data Agendada</th>
-                                            <th>Hora Início</th>
-                                            <th>Hora Fim</th>
-                                            <th>Valor</th>
-                                            <th>Associado a</th>
-                                            <th>Status do Atendimento</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-hover   table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th></th>
+                                    <th>Código</th>
+                                    <th>Título</th>
+                                    <th>Cliente</th>
+                                    <th>Data Agendada</th>
+                                    <th>Hora Início</th>
+                                    <th>Hora Fim</th>
+                                    <th>Valor</th>
+                                    <th>Associado a</th>
+                                    <th>Status do Atendimento</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
                                     {
-                                        <tr id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
-                                            <td><i class="fa fa-calendar-times-o"></i></td>
-                                            <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
-                                            <td>@item.atendimento.titulo</td>
-                                            <td>@item.cliente.nomeCliente</td>
-                                            
-                                            <td>@item.atendimento.dataAgendada.ToShortDateString()</td>
-                                            <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaInicio.horaDia))</td>
-                                            <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>
-                                            <td>R$@item.atendimento.valor.ToString("N2")</td>
-                                            <td>@item.atendimento.tipoReferencia</td>
-                                            <td>@item.atendimento.statusAtendimento</td>
-                                        </tr>
-                                    }
-                                </table>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAtendimento", "Atendimento", new { page }))</td>
-                                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-    <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <div class="col-md-10 offset-1" style="position:sticky;bottom:20px; padding:10px 0 0 0; background:#fff;">
-        <div class="row">
-            <div style="background-color:darkgrey; width:100%; height:10px;"></div>
+                                    <tr id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
+                                        <td><i class="fa fa-calendar-times-o"></i></td>
+                                        <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
+                                        <td>@item.atendimento.titulo</td>
+                                        <td>@item.cliente.nomeCliente</td>
 
-            <div class="col-sm-3">
-                <div class="card m-1">
-                    <div class="card-body">
-                        <table>
-                            <tr>
-                                <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
-                                <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                            </tr>
+                                        <td>@item.atendimento.dataAgendada.ToShortDateString()</td>
+                                        <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaInicio.horaDia))</td>
+                                        <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>
+                                        <td>R$@item.atendimento.valor.ToString("N2")</td>
+                                        <td>@item.atendimento.tipoReferencia</td>
+                                        <td>@item.atendimento.statusAtendimento</td>
+                                    </tr>
+                                    }
                         </table>
+
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card m-1">
-                    <div class="card-body">
-                        <table>
-                            <tr>
-                                <td><span class="fa fa-2x fa-money iconPanel"></span></td>
-                                <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card m-1">
-                    <div class="card-body">
-                        <table>
-                            <tr>
-                                <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
-                                <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card m-1">
-                    <div class="card-body">
-                        <table>
-                            <tr>
-                                <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
-                                <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
-                            </tr>
-                        </table>
-                    </div>
+                <div class="card-footer">
+                    <table>
+                        <tr>
+                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAtendimento", "Atendimento", new { page }))</td>
+                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
-@*<script src="~/js/osc_cliente.js" asp-append-version="true"></script>
-<script src="~/js/osc_global.js" asp-append-version="true"></script>*@
+</div>
+
+<br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div class="col-md-10 offset-1" style="position:sticky;bottom:20px; padding:10px 0 0 0; background:#fff;">
+    <div class="row">
+        <div style="background-color:darkgrey; width:100%; height:10px;"></div>
+
+        <div class="col-sm-3">
+            <div class="card m-1">
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-1">
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-1">
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card m-1">
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

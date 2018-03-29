@@ -28,9 +28,6 @@
                                             &nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                            </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelFinanceiro", "Paineis", null)'"> <span>Painel Financeiro</span></button>
                                             </label>
                                             &nbsp;&nbsp;
                                             <label>
@@ -44,10 +41,9 @@
                     </div>
                 </div>
                 <div class="card-body">
-
                     <div class="row">
                         <table class="table table-hover   table-bordered table-sm">
-                            <thead>
+                            <thead class="thead-light">
                                 <tr>
                                     <th>Código</th>
                                     <th>Nome do Fornecedor</th>
@@ -70,16 +66,16 @@
                                     <td>@item.criadoPorName</td>
                                 </tr>
                             }
-                        </table>
-                        <div>
-                            <table>
-                                <tr>
-                                    <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridFornecedor", "Fornecedor", new { page }))</td>
-                                    <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
-                                </tr>
-                            </table>
-                        </div>
+                        </table>                      
                     </div>
+                </div>
+                <div class="card-footer">
+                    <table>
+                        <tr>
+                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridFornecedor", "Fornecedor", new { page }))</td>
+                            <td><h5>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h5></td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -143,6 +139,4 @@
         </div>
     </div>
 </div>
-</div>
-<script src="~/js/osc_cliente.js" asp-append-version="true"></script>
-<script src="~/js/osc_global.js" asp-append-version="true"></script>
+ 
