@@ -3,13 +3,25 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 offset-1" id="osc_ocupado">
+        <div class="col-md-9 offset-1" id="osc_ocupado">
             <div class="card">
                 <div class="card-header">
                     <center> <label style="font-size:12px;font-weight:bold">@Model.dia.ToString() - @Model.nomeDia de @Model.nomeMes de @Model.ano</label></center>
                 </div>
                 <div class="card-body">
                     <table style="font-size:12px;width:100%; font-weight:bold;" class="table table-hover  table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Título</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>                                
+                                <th>Referente á</th>
+                                <th>Início</th>
+                                <th>Fim</th>
+                            </tr>
+                        </thead>
 
                         @foreach (var item in Model.itensCalendario)
                         {

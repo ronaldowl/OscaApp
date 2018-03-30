@@ -1,23 +1,16 @@
 ﻿//********************************* Biblioteca com funções da Tela de Cliente ***************
 
 function OnLoad() {
-    //********* Executa regra do Onload do Form **********************
-
-    // PARA HABILITAR OS CAMPOS DO FORMULÁRIO, MUDAR O true PARA false
-    var statusForm = $("#osc_status").val(); 
-
-    //Desabilita campos se o registro estiver INATIVO
-    desabilita_Cliente(statusForm);
+  
 }
 
 function OnChangeTipoPessoa()
-{
-    //alert('Implementar regra aqui');
-
+{   
     LimpaCNPJ_CPF();
 }
 
 function ConsultaCnpjCpfDuplicado() {
+    var retorno = true;
 
     var cnpjCpf = $("#osc_cnpj_cpf").val(); 
 
@@ -26,18 +19,18 @@ function ConsultaCnpjCpfDuplicado() {
         $.ajax({
             dataType: "json",
             type: "GET",
+            async: false,
             url: "/API/ClienteAPI/ConsultaCnpjCpfDuplicado",
             data: { valor: cnpjCpf },
             success: function (dados) {
                 if (dados.statusOperation == true) {
                     alert('Já existe um CNPJ/CPF na base!');
-                    return false;
+                    retorno = false;
                 }
-            }
-        
+            }        
         });
     }
-    
+    return retorno;
 } 
 
 function desabilita_Cliente(status) {
@@ -61,8 +54,7 @@ function desabilita_Cliente(status) {
 }
 
 function ValidaCNPJ_CPF()
-{
-  
+{  
     var val = document.getElementById("osc_cnpj_cpf");
     var tipo = "";
 
