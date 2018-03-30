@@ -11,9 +11,9 @@ namespace OscaApp.Data
 {
     public class OrganizacaoData : IOrganizacaoData
     {
-        private ContexDataManager db;  
+        private ContexDataService db;  
 
-        public OrganizacaoData(ContexDataManager dbContext)
+        public OrganizacaoData(ContexDataService dbContext)
         {
             this.db = dbContext;        
         }

@@ -9,7 +9,7 @@ using OscaFramework.MicroServices;
 
 namespace OscaFramework.Models
 {
-    [Table("organizacao")]
+    [Table("Organizacao")]
     public class Organizacao : GenericEntity
     {
         [Required]

@@ -19,7 +19,7 @@ namespace OscaApp.Controllers
  
         private ContextPage contexto;
 
-        public OrganizacaoController(ContexDataManager db, IHttpContextAccessor httpContext)
+        public OrganizacaoController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.organizacaoData = new OrganizacaoData(db);
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));

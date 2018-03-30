@@ -146,7 +146,7 @@ namespace OscaFramework.MicroServices
                         while (dataReader.Read())
                         {
                             retorno.id = new Guid(dataReader["idUsuario"].ToString());
-                            retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
+                            retorno.idOrganizacao = new Guid(dataReader["id"].ToString());
                             retorno.idName = dataReader["nomeUsuario"].ToString();
                             retorno.organizacao = dataReader["nomeOrganizacao"].ToString();
                         }
