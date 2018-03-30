@@ -69,7 +69,16 @@
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-lock"></span>
                                         </span>
-                                        <input id="osc_quantidadeUsuario" asp-for="@Model.organizacao.quantidadeUsuario" type="text" class="form-control" />
+                                        <input id="osc_quantidadeUsuario" asp-for="@Model.organizacao.quantidadeUsuario" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>E-mail Empresa</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_quantidadeUsuario" asp-for="@Model.organizacao.emailEmpresa" type="text" class="form-control"  />
                                     </div>
                                 </div>
 
@@ -104,6 +113,15 @@
                                             <span class="glyphicon glyphicon-lock"></span>
                                         </span>
                                         <input id="osc_dataPagamento" asp-for="@Model.organizacao.dataPagamento" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Telefone da Empresa</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-lock"></span>
+                                        </span>
+                                        <input id="osc_quantidadeUsuario" asp-for="@Model.organizacao.TelefoneEmpresa" type="text" class="form-control" />
                                     </div>
                                 </div>
 
@@ -352,7 +370,7 @@
                                 <span class="input-group-addon">
                                     <span class="fa fa-2x fa-user"></span>
                                 </span> &nbsp;
-                                <input id="osc_modificadoPor" asp-for="@Model.organizacao.modificadoPor" type="text" class="form-control" disabled="disabled" />
+                                <input id="osc_modificadoPor" asp-for="@Model.organizacao.modificadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
                     </div>
@@ -386,9 +404,7 @@
                                 <th>Telefone</th>
                             </tr>
                         </thead>
-                        <tr><td>Fornecedor 1</td><td>Mauro</td><td>964515611</td></tr>
-                        <tr><td>Fornecedor 1</td><td>Thiago</td><td>964515611</td></tr>
-                        <tr><td>Fornecedor 1</td><td>Armando</td><td>964515611</td></tr>
+                       
                     </table>
                 </div>
             </div>
@@ -405,9 +421,7 @@
                                 <th>Data</th>
                             </tr>
                         </thead>
-                        <tr><td>Atacado</td><td>10/12/2018</td></tr>
-                        <tr><td>Varejo</td><td>10/12/2018</td></tr>
-                        <tr><td>Promoção de Natal</td><td>10/12/2018</td></tr>
+                      
                     </table>
                 </div>
             </div>

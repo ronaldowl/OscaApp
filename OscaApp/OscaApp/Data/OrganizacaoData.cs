@@ -23,11 +23,10 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(organizacao);
-                db.Entry(organizacao).Property("nomeLogin").IsModified = true;
+                
                 db.Entry(organizacao).Property("nomeAmigavel").IsModified = true;
                 db.Entry(organizacao).Property("cpf_cnpj").IsModified = true;                
-                db.Entry(organizacao).Property("tipoPessoa").IsModified = true;
-                db.Entry(organizacao).Property("quantidadeUsuario").IsModified = true;
+                db.Entry(organizacao).Property("tipoPessoa").IsModified = true;           
                 db.Entry(organizacao).Property("nomeAdministrador").IsModified = true;
                 db.Entry(organizacao).Property("emailAdministrador").IsModified = true;
                 db.Entry(organizacao).Property("telefoneAdministrador").IsModified = true;
@@ -41,6 +40,9 @@ namespace OscaApp.Data
                 db.Entry(organizacao).Property("numero").IsModified = true;
                 db.Entry(organizacao).Property("bairro").IsModified = true;
                 db.Entry(organizacao).Property("complemento").IsModified = true;
+                db.Entry(organizacao).Property("emailEmpresa").IsModified = true;
+                db.Entry(organizacao).Property("TelefoneEmpresa").IsModified = true;
+
                 db.Entry(organizacao).Property("anotacao").IsModified = true;
                 db.Entry(organizacao).Property("modificadoPor").IsModified = true;
                 db.Entry(organizacao).Property("modificadoPorName").IsModified = true;

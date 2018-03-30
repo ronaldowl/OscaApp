@@ -36,7 +36,10 @@ namespace OscaFramework.Models
         public string bairro { get; set; }
         public string complemento { get; set; }
         public string anotacao { get; set; }
-  
+        public string emailEmpresa { get; set; }
+        public string TelefoneEmpresa { get; set; }
+
+
         public CustomEnumStatus.StatusOrg statusOrg { get; set; }        
         public DateTime dataExpiracao { get; set; }      
         public DateTime dataPagamento { get; set; }
