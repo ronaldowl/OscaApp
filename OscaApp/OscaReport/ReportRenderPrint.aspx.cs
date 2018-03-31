@@ -24,16 +24,30 @@ namespace OscaReport
                 ReportViewer4.ServerReport.ReportServerCredentials = irsc;               
                 ReportViewer4.ServerReport.ReportServerUrl = new Uri("http://sql5030.site4now.net/ReportServer");
 
-                if(tipo == 1)ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001/Desenv/Nativo/FICHAATENDIMENTO"; 
+                if(tipo == 1)ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001"+ RetornaAmbiente() + "/Nativo/FICHAATENDIMENTO"; 
 
-                if (tipo == 2) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001/Desenv/Nativo/IMPRESSAOPEDIDO"; 
+                if (tipo == 2) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001" + RetornaAmbiente() + "/IMPRESSAOPEDIDO"; 
 
-                if (tipo == 3) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001/Desenv/Nativo/IMPRESSAOOS"; 
+                if (tipo == 3) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001" + RetornaAmbiente() + "/IMPRESSAOOS"; 
 
                 ReportViewer4.SizeToReportContent = true;
                 ReportViewer4.ServerReport.SetParameters(new ReportParameter[] { p });
                 ReportViewer4.ServerReport.Refresh();
             }
+        }
+        public string RetornaAmbiente()
+        {
+            string ambiente = "";
+
+            System.Configuration.Configuration rootWebConfig1 =   System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/dev");
+            if (0 < rootWebConfig1.AppSettings.Settings.Count)
+            {
+                System.Configuration.KeyValueConfigurationElement customSetting =
+                    rootWebConfig1.AppSettings.Settings["ambiente"];
+                ambiente = customSetting.Value;
+            }
+
+            return ambiente;
         }
         public class CustomReportCredentials : IReportServerCredentials
         {
@@ -65,6 +79,7 @@ namespace OscaReport
                 user = password = authority = null;
                 return false;
             }
+          
         }
     }
 }
