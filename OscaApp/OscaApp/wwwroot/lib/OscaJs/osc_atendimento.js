@@ -8,17 +8,23 @@ function OnLoad_Atendimento() {
     desabilitaCampos_Atendimento(status)
 }
 
-function OpenLookupCliente(id)
+function OpenLookupCliente()
 {
-    $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + id); 
+    var idCliente = $("#osc_clienteId").val();
+
+    $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + idCliente); 
 }
 
-function OpenLookupServico(id) {
-    $(window.document.location).attr('href', "/Servico/FormUpdateServico?id=" + id);
+function OpenLookupServico() {
+
+    var idServico = $("#osc_IdServico").val();
+
+    $(window.document.location).attr('href', "/Servico/FormUpdateServico?id=" + idServico);
 }
 
-function OpenLookupProfissional(id) {
-    $(window.document.location).attr('href', "/Profissional/FormUpdateProfissional?id=" + id);
+function OpenLookupProfissional() {
+    var idProffisional = $("#osc_IdProfissional").val();
+    $(window.document.location).attr('href', "/Profissional/FormUpdateProfissional?id=" + idProffisional);
 }
 
 
