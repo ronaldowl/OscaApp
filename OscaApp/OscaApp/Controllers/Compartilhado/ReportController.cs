@@ -4,11 +4,32 @@ using OscaApp.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using OscaFramework.Models;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace OscaApp.Controllers
 {
     public class ReportController : Controller
     {
+        public IConfiguration Configuration { get; }
+        public IConfigurationSection sessao { get; }
+        public string urlAmbiente { get; set; }
+
+        public ReportController()
+        {
+
+            var builder = new ConfigurationBuilder()
+       .SetBasePath(Directory.GetCurrentDirectory())
+       .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+
+            this.Configuration = Configuration;
+            this.sessao = Configuration.GetSection("Ambiente");
+            this.urlAmbiente = sessao.GetValue<string>("valor");
+
+        }
+
         public ViewResult ReportNativo()
         {
             return View();
@@ -24,10 +45,15 @@ namespace OscaApp.Controllers
 
             if (tipo == 3) model.nomeReport = "IMPRESSAOOS";
 
-            model.url = "http://www.report.oscas.com.br/ReportRenderPrint?tipo=" + tipo + "&id=" + model.idRegistro;
+            if (urlAmbiente == "desenv")
+            {
+                model.url = "http://www.report.desenv.oscas.com.br/ReportRenderPrint?tipo=" + tipo + "&id=" + model.idRegistro;
+            }
 
-
-
+            if (urlAmbiente == "prod")
+            {
+                model.url = "http://www.report.oscas.com.br/ReportRenderPrint?tipo=" + tipo + "&id=" + model.idRegistro;
+            }
             return View(model);
         }
     }

@@ -986,7 +986,7 @@
                     <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 29, idProfissional = Model.idProfissional })'">
                         <center>
                             <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">
-                                29 - @if (Model.dias.Count > 28)
+                                29 - @if (Model.dias.Count <= 28)
                                 {@Model.dias[28].nomeDia}
                             </label>
                         </center>
@@ -1026,7 +1026,7 @@
                     <a onclick="location.href='@Url.Action("Dia", "Calendario", new {Ano = Model.ano, mes = Model.mes, dia = 30, idProfissional = Model.idProfissional })'">
                         <center>
                             <label style="padding:0.75rem 1.25rem; cursor:pointer; font-size:12px;font-weight:bold">
-                                30 - @if (Model.dias.Count > 29)
+                                30 - @if (Model.dias.Count <= 29)
                                 { @Model.dias[29].nomeDia}
                             </label>
                         </center>
@@ -1075,7 +1075,7 @@
                 <div class="card-body">
                     <table style="font-size:10px;width:120px;" class="table-hover">
 
-                        @if (Model.dias.Count <= Model.qtdDias)
+                        @if (Model.dias.Count > Model.qtdDias)
                         {
                             @foreach (var item in Model.dias[30].itensCalendario)
                             {

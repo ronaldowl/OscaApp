@@ -105,7 +105,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-user-o fa-2x"></span>&nbsp;
                                         </span>
-                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" value="@Model.cliente.idName" required="required">
+                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" value="@Model.cliente.idName" required="required" onclick="OpenLookupCliente('@Model.cliente.id')">
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="osc_buscaCliente">
@@ -259,8 +259,8 @@
                                             <span class="fa fa-list-ul fa-2x"></span>
                                         </span> &nbsp;
                                         <select asp-for="@Model.atendimento.tipoReferencia" id="osc_tipoReferencia" class="form-control" required="required" onchange="OnChangeTipoReferencia('@Model.atendimento.tipoReferencia.ToString()');">
-                                            <option value="0" selected="selected">Atendimento</option>
-                                            <option value="1">Serviço</option>
+                                            <option value="0" selected="selected" >Atendimento</option>
+                                            <option value="1" >Serviço</option>
                                             <option value="2">OS</option>
                                         </select>
                                     </div>
@@ -270,7 +270,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.servico.idName" class="form-control" type="text" id="osc_IdNameServico">
+                                            <input asp-for="@Model.servico.idName" class="form-control" type="text" id="osc_IdNameServico" onclick="OpenLookupServico('@Model.servico.id')">
                                             <input asp-for="@Model.servico.id" class="form-control" type="hidden" id="osc_IdServico">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupServico()" id="osc_botaoBuscaServico">
@@ -302,7 +302,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required">
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required" onclick="OpenLookupProfissional('@Model.profissional.id')">
                                             <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
@@ -338,51 +338,42 @@
                             </div>
                         </div>
                     </div>
-                    <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; Informações Gerais: </span></div>
-                    <div class="row" id="informacoes">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Problema relatado</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                    </span>
-                                    <textarea id="osc_problema" asp-for="@Model.atendimento.problema" class="form-control" rows="10" cols="25" placeholder="descreva o problema"></textarea>
+                    <div id="informacoes">
+                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; Informações Gerais: </span></div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Problema relatado</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                        </span>
+                                        <textarea id="osc_problema" asp-for="@Model.atendimento.problema" class="form-control" rows="10" cols="25" placeholder="descreva o problema"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Laudo</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                    </span>
-                                    <textarea id="osc_laudo" asp-for="@Model.atendimento.laudo" class="form-control" rows="10" cols="25"></textarea>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Diagnóstico</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                        </span>
+                                        <textarea id="osc_diagnostico" asp-for="@Model.atendimento.diagnostico" class="form-control" rows="10" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Diagnóstico</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                    </span>
-                                    <textarea id="osc_diagnostico" asp-for="@Model.atendimento.diagnostico" class="form-control" rows="10" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Observações gerais</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                    </span>
-                                    <textarea id="osc_observava" asp-for="@Model.atendimento.observacao" class="form-control" rows="10" cols="25"></textarea>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Observações gerais</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                        </span>
+                                        <textarea id="osc_observava" asp-for="@Model.atendimento.observacao" class="form-control" rows="10" cols="25"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -451,5 +442,5 @@
 <div class="modal fade" id="ModalStatus">
 </div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
-<script src="~/lib/OscaJs/osc_atendimento.js" asp-append-version="true"></script>
+<script src="~/lib/OscaJs/osc_atendimento.js" ></script>
 <script>OnLoad_Atendimento();</script>
