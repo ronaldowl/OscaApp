@@ -12,19 +12,36 @@ function OpenLookupCliente()
 {
     var idCliente = $("#osc_clienteId").val();
 
-    $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + idCliente); 
+    if (idCliente != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + idCliente);
+    }
 }
 
 function OpenLookupServico() {
 
     var idServico = $("#osc_IdServico").val();
 
-    $(window.document.location).attr('href', "/Servico/FormUpdateServico?id=" + idServico);
+    if (idServico != "") {
+        $(window.document.location).attr('href', "/Servico/FormUpdateServico?id=" + idServico);
+    }
 }
+
+function OpenLookupOS() {
+
+    var idOS = $("#osc_IdOs").val();
+
+    if (idOS != "") {
+        $(window.document.location).attr('href', "/OrdemServico/FormUpdateOrdemServico?id=" + idOS);
+    }
+}
+
 
 function OpenLookupProfissional() {
     var idProffisional = $("#osc_IdProfissional").val();
-    $(window.document.location).attr('href', "/Profissional/FormUpdateProfissional?id=" + idProffisional);
+
+    if (idProffisional != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/Profissional/FormUpdateProfissional?id=" + idProffisional);
+    }
 }
 
 

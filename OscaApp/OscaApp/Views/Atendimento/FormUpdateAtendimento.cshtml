@@ -103,9 +103,9 @@
                                     <label class="control-label" style="color:red">Cliente *</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x"></span>&nbsp;
+                                            <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>&nbsp;
                                         </span>
-                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" value="@Model.cliente.idName" required="required" onclick="OpenLookupCliente()" style="cursor:pointer">
+                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" value="@Model.cliente.idName" required="required" >
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="osc_buscaCliente">
@@ -269,8 +269,8 @@
                                     <label class="control-label">Servico</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.servico.idName" class="form-control" type="text" id="osc_IdNameServico" onclick="OpenLookupServico();" style="cursor:pointer">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupServico();" style="cursor:pointer"></i></span>&nbsp;
+                                            <input asp-for="@Model.servico.idName" class="form-control" type="text" id="osc_IdNameServico" >
                                             <input asp-for="@Model.servico.id" class="form-control" type="hidden" id="osc_IdServico">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupServico()" id="osc_botaoBuscaServico">
@@ -284,7 +284,7 @@
                                     <label class="control-label">OS</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupOS()" style="cursor:pointer"></i></span>&nbsp;
                                             <input asp-for="@Model.os.idName" class="form-control" type="text" id="osc_IdNameOs">
                                             <input asp-for="@Model.os.id" class="form-control" type="hidden" id="osc_IdOs">
                                             <span class="input-group-btn ">
@@ -301,8 +301,8 @@
                                     <label class="control-label">Profissional</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required" onclick="OpenLookupProfissional();"  style="cursor:pointer" >
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupProfissional();"  style="cursor:pointer" ></i></span>&nbsp;
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required" >
                                             <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">

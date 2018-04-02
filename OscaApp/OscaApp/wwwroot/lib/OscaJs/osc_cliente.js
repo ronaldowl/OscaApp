@@ -9,6 +9,15 @@ function OnChangeTipoPessoa()
     LimpaCNPJ_CPF();
 }
 
+function OpenLookupContato() {
+
+    var id = $("#osc_ContatoId").val();
+    if (id != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/Contato/FormUpdateContato?id=" + id);
+    }
+}
+
+
 function ConsultaCnpjCpfDuplicado() {
     var retorno = true;
 

@@ -113,9 +113,9 @@
                                     <label>Contato Principal: </label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x"></span>
+                                            <span class="fa fa-user-o fa-2x"  onclick="OpenLookupContato()"style="cursor:pointer;"></span>
                                         </span> &nbsp;
-                                        <input id="osc_IdContatoName" asp-for="@Model.contato.idName" type="text" class="form-control" placeholder="...">
+                                        <input id="osc_IdContatoName" asp-for="@Model.contato.idName" type="text" class="form-control" placeholder="..." >
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookup()">
                                                 <span class="fa fa-search"></span>
