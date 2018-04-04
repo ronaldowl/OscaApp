@@ -38,10 +38,10 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.sqlData = _sqlData;
         }
+
         [TempData]
         public string StatusMessage { get; set; }
-        [TempData]
-        public bool StatusRetorno { get; set; }
+     
 
         [HttpGet]
         public ViewResult FormCreateCliente()
@@ -144,7 +144,7 @@ namespace OscaApp.Controllers
                 if (ClienteRules.MontaClienteUpdate(entrada, out modelo, this.contexto))
                 {
                     clienteData.Update(modelo);                                        
-                    StatusMessage = "Cliente Atualizado com Sucesso!";
+                    StatusMessage = "Registro Atualizado com Sucesso!";
 
                     return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
