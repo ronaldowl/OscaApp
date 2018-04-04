@@ -24,11 +24,11 @@ namespace OscaReport
                 ReportViewer4.ServerReport.ReportServerCredentials = irsc;               
                 ReportViewer4.ServerReport.ReportServerUrl = new Uri("http://sql5030.site4now.net/ReportServer");
 
-                if(tipo == 1)ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001"+ RetornaAmbiente() + "/Nativo/FICHAATENDIMENTO"; 
+                if(tipo == 1)ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001"+ RetornaAmbiente() + "/NATIVO/FICHAATENDIMENTO"; 
 
-                if (tipo == 2) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001" + RetornaAmbiente() + "/IMPRESSAOPEDIDO"; 
+                if (tipo == 2) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001" + RetornaAmbiente() + "/NATIVO/IMPRESSAOPEDIDO"; 
 
-                if (tipo == 3) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001" + RetornaAmbiente() + "/IMPRESSAOOS"; 
+                if (tipo == 3) ReportViewer4.ServerReport.ReportPath = "/ronaldowl-001" + RetornaAmbiente() + "/NATIVO/IMPRESSAOOS"; 
 
                 ReportViewer4.SizeToReportContent = true;
                 ReportViewer4.ServerReport.SetParameters(new ReportParameter[] { p });
