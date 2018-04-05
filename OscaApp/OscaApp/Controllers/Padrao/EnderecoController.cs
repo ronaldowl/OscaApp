@@ -31,7 +31,10 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
 
         }
-        
+
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateEndereco(string idCliente, string NomeCliente)
         {
@@ -107,6 +110,8 @@ namespace OscaApp.Controllers
                 {
 
                     enderecoData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateEndereco", new { id = modelo.id.ToString() });
                 }
 

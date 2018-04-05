@@ -37,6 +37,9 @@ namespace OscaApp.Controllers
             this.Sqlservice = new SqlGenericData();
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreatePedido(string idCliente)
         {
@@ -134,7 +137,8 @@ namespace OscaApp.Controllers
                 {
                     PedidoRules.CalculoPedido(ref pedido, produtoPedidoData);
                     pedidoData.Update(pedido);
-                   
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdatePedido", new { id = pedido.id.ToString() });
                 }
             }

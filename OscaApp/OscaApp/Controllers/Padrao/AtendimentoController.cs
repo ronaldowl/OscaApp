@@ -28,6 +28,9 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateAtendimento(string idCliente)
         {
@@ -140,6 +143,8 @@ namespace OscaApp.Controllers
                 if (AtendimentoRules.AtendimentoUpdate(entrada, out modelo))
                 {
                     atendimentoData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
                 }
             }

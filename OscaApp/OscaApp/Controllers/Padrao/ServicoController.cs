@@ -32,6 +32,9 @@ namespace OscaApp.Controllers
 
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateServico()
         {
@@ -101,6 +104,8 @@ namespace OscaApp.Controllers
                 if (ServicoRules.ServicoUpdate(entrada, out modelo))
                 {
                     servicoData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateServico", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
             }

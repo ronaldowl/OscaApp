@@ -21,27 +21,36 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-body">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
+
             <form asp-controller="ProdutoPedido" asp-action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
                 <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido">
 
                 <div class="card" id="osc_MainForm">
-                     
-                        <table>
-                            <tr>
-                                <td><h5>Produto do Pedido: &nbsp;&nbsp;</h5></td>
-                                <td>
-                                    <div id="osc_barrabotoes">
-                                        <label>
-                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
-                                        </label>&nbsp;
-                                        <label>
-                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value"" data-dismiss="modal"> <span>Fechar</span></button>
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                   
+
+                    <table>
+                        <tr>
+                            <td><h5>Produto do Pedido: &nbsp;&nbsp;</h5></td>
+                            <td>
+                                <div id="osc_barrabotoes">
+                                    <label>
+                                        <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
+                                    </label>&nbsp;
+                                    <label>
+                                        <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value"" data-dismiss="modal"> <span>Fechar</span></button>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-5 offset-1">

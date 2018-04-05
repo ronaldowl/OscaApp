@@ -21,6 +21,7 @@ namespace OscaApp.ViewModels
 
         public List<ProdutoPedido> produtosPedido { get; set; }
 
+        public string StatusMessage { get; set; }
 
         public PedidoViewModel()
         {

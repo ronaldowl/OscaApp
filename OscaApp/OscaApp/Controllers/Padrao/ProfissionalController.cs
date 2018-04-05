@@ -30,6 +30,9 @@ namespace OscaApp.Controllers
             this.sqlData = _sqlData;
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateProfissional()
         {
@@ -101,6 +104,8 @@ namespace OscaApp.Controllers
                 if (ProfissionalRules.ProfissionalUpdate(entrada, out modelo))
                 {
                     profissionalData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateProfissional", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
             }

@@ -17,6 +17,8 @@ namespace OscaApp.ViewModels
         public List<SelectListItem> listaPrecos   { get; set; }
         public Relacao produto               { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public ItemListaPrecoViewModel()
         {
 

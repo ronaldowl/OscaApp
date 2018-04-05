@@ -29,6 +29,9 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateContasReceber()
         {
@@ -98,6 +101,8 @@ namespace OscaApp.Controllers
                 if (ContasReceberRules.ContasReceberUpdate(entrada, out modelo))
                 {
                     contasReceberData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
                 }
             }

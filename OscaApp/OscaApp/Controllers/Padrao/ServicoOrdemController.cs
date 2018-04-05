@@ -31,6 +31,9 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateServicoOrdem(string id )
         {
@@ -118,6 +121,8 @@ namespace OscaApp.Controllers
                 if (ServicoOrdemRules.ServicoOrdemUpdate(entrada, out modelo, this.contexto))
                 {
                     servicoOrdemData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateOrdemServico", "OrdemServico", new { id = entrada.ordemServico.id });
 
                 }

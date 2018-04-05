@@ -8,7 +8,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 offset-1">
- 
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
             <form action="FormUpdateItemListaPreco" method="post" id="FormUpdateItemListaPreco">
                 <input asp-for="@Model.itemlistaPreco.id" class="form-control" type="hidden" value="@Model.itemlistaPreco.id">
                 <div class="card" id="osc_MainForm">
@@ -115,7 +122,7 @@
                     </div>
                 </div>
             </form>
-            
+
         </div>
     </div>
 </div>

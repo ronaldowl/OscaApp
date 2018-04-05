@@ -1,7 +1,7 @@
 ﻿@model OscaApp.ViewModels.ContasPagarViewModel
 
 <script>
-   
+
 
     function CarregaFormStatus() {
         $("#ModalStatus").load("/ContasPagar/FormStatusContasPagar?id=" + '@Model.contasPagar.id' , function () {
@@ -21,6 +21,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9 offset-1">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
             <form action="FormUpdateContasPagar" method="post">
                 <div class="card" id="osc_MainForm">
                     <input id="osc_id" asp-for="@Model.contasPagar.id" type="hidden" class="form-control" value="@Model.contasPagar.id" />
@@ -213,5 +221,5 @@
 </div>
 <script src="~/lib/OscaJs/osc_contaPagar.js"></script>
 <script src="~/lib/OscaJs/osc_global.js"></script>
- 
+
 <script>OnLoad_ContaPagar();</script>

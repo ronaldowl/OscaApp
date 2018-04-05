@@ -11,6 +11,8 @@ namespace OscaApp.ViewModels
         public ContextPage contexto { get; set; }
         public List<ItemProdutoLista> itensListaPreco { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public ProdutoViewModel()
         {
             this.produto = new  Produto();

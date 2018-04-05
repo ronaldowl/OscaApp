@@ -25,6 +25,9 @@ namespace OscaApp.Controllers.Padrao
             this.IncidenteData = new IncidenteData(db);
         } // end of ctor
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         // Form create get
         [HttpGet]
         public ViewResult FormCreateIncidente()
@@ -91,6 +94,8 @@ namespace OscaApp.Controllers.Padrao
                 if (IncidenteRules.IncidenteUpdate(entrada, out modelo))
                 {
                     IncidenteData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateIncidente", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 } // end of if
             } // end of try

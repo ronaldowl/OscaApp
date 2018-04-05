@@ -18,6 +18,8 @@ namespace OscaApp.ViewModels
         public ContextPage contexto { get; set; }
         public IPagedList<Servico> servicos { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public ServicoOrdemViewModel()
         {
             this.ordemServico = new Relacao();

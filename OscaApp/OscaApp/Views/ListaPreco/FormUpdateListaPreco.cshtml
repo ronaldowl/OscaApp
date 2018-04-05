@@ -7,7 +7,15 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 offset-1">         
+        <div class="col-md-10 offset-1">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
             <form action="FormUpdateListaPreco" method="post" id="FormUpdateListaPreco">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
@@ -19,7 +27,7 @@
                                         <div id="osc_barrabotoes">
                                             <label>
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
-                                            </label>                                         
+                                            </label>
                                         </div>
                                     </td>
                                 </tr>
@@ -131,7 +139,7 @@
                     </div>
                 </div>
             </form>
-            
+
         </div>
     </div>
 </div>

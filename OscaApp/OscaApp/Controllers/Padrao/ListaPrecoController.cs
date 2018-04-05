@@ -31,6 +31,9 @@ namespace OscaApp.Controllers
 
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateListaPreco()
         {
@@ -57,6 +60,8 @@ namespace OscaApp.Controllers
                     if (ListaPrecoRules.ListaPrecoCreate(entrada, out listaPreco, contexto))
                     {
                         listaPrecoData.Add(listaPreco);
+                        StatusMessage = "Registro Atualizado com Sucesso!";
+
                         return RedirectToAction("FormUpdateListaPreco", new { id = listaPreco.id.ToString() });
                     }
                 }
@@ -106,6 +111,8 @@ namespace OscaApp.Controllers
                 if (ListaPrecoRules.ListaPrecoUpdate(entrada, out listapreco))
                 {
                     listaPrecoData.Update(listapreco);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateListaPreco", new { id = listapreco.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
             }

@@ -36,6 +36,9 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateProdutoPedido(string idPedido, string idListaPreco)
         {
@@ -117,6 +120,7 @@ namespace OscaApp.Controllers
                 {
                     produtoPedidoData.Update(modelo);
                     SqlGenericData sqlData = new SqlGenericData();
+                    StatusMessage = "Registro Atualizado com Sucesso!";
 
                     return RedirectToAction("FormUpdatePedido", "Pedido", new { id = entrada.produtoPedido.idPedido.ToString() });
                 }

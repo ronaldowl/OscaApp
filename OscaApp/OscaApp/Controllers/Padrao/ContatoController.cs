@@ -110,6 +110,7 @@ namespace OscaApp.Controllers
                 {
                     contatoData.Update(modelo);
                     StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateContato", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
 
