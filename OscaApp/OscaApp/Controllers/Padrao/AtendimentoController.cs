@@ -119,6 +119,9 @@ namespace OscaApp.Controllers
                     if (retorno != null)
                     {
                         modelo.atendimento = retorno;
+
+                        //apresenta mensagem de cliente atualizado com sucesso
+                        modelo.StatusMessage = StatusMessage;
                     }
                 }
 
