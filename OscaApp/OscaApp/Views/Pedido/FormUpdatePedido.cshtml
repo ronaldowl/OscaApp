@@ -15,7 +15,7 @@
 
           function Imprimir()
        {
-           window.open("/Report/ReportPrint?tipo=2&id=" + '@Model.pedido.id', "myWindow", "width=950,height=700");
+           window.open("/Report/ReportPrint?tipo=2&id=" + '@Model.pedido.id', "Print", "width=950,height=700");
        }
 
 </script>
@@ -56,7 +56,7 @@
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatusPedido()"> <span>Reabrir</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Imprimir Pedido</span></button>
+                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Pedido</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluir</span></button>

@@ -55,9 +55,12 @@
         });
     }
 
+        function Imprimir()
+       {
+           window.open("/Report/ReportPrint?tipo=3&id=" + '@Model.ordemServico.id', "Print", "width=950,height=700");
+       }
+
 </script>
-
-
 
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
@@ -95,7 +98,7 @@
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-close" value="" onclick="CarregaFormStatusOrdemServico()"> <span>Reabrir</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-lg fa fa-print" value=""> <span>Imprimir OS</span></button>
+                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluir</span></button>
