@@ -9,6 +9,14 @@
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
+                        @if (!String.IsNullOrEmpty(Model.StatusMessage))
+                        {
+
+                            <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                @Model.StatusMessage
+                            </div>
+                        }
                         <form class="form-inline">
                             <table>
                                 <tr>
@@ -57,21 +65,21 @@
                                 </tr>
                             </thead>
                             @foreach (var item in Model)
-                                    {
-                                    <tr id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
-                                        <td><i class="fa fa-calendar-times-o"></i></td>
-                                        <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
-                                        <td>@item.atendimento.titulo</td>
-                                        <td>@item.cliente.nomeCliente</td>
+                            {
+                                <tr id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
+                                    <td><i class="fa fa-calendar-times-o"></i></td>
+                                    <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
+                                    <td>@item.atendimento.titulo</td>
+                                    <td>@item.cliente.nomeCliente</td>
 
-                                        <td>@item.atendimento.dataAgendada.ToShortDateString()</td>
-                                        <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaInicio.horaDia))</td>
-                                        <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>
-                                        <td>R$@item.atendimento.valor.ToString("N2")</td>
-                                        <td>@item.atendimento.tipoReferencia</td>
-                                        <td>@item.atendimento.statusAtendimento</td>
-                                    </tr>
-                                    }
+                                    <td>@item.atendimento.dataAgendada.ToShortDateString()</td>
+                                    <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaInicio.horaDia))</td>
+                                    <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>
+                                    <td>R$@item.atendimento.valor.ToString("N2")</td>
+                                    <td>@item.atendimento.tipoReferencia</td>
+                                    <td>@item.atendimento.statusAtendimento</td>
+                                </tr>
+                            }
                         </table>
 
                     </div>

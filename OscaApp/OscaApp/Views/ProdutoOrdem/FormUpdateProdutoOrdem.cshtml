@@ -45,6 +45,15 @@
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-body">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
+
             <form asp-controller="ProdutoOrdem" asp-action="FormUpdateProdutoOrdem" method="post" id="FormUpdateProdutoOrdem">
                 <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" id="osc_idOrdemServico" />
                 <input type="hidden" asp-for="@Model.produtoOrdem.id" value="@Model.produtoOrdem.id" id="osc_idProdutoOrdem" />

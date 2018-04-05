@@ -19,6 +19,8 @@ namespace OscaApp.ViewModels
         public ContextPage contexto { get; set; }
         public IPagedList<LookupItemLista> produtos { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public ProdutoOrdemViewModel()
         {
             this.ordemServico = new Relacao();

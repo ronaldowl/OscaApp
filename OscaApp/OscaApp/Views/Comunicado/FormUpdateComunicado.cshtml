@@ -9,6 +9,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8 offset-2">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
             <form action="FormUpdateComunicado" method="post">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
@@ -26,7 +34,7 @@
                                             </label>
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateComunicado", "Comunicado", null)'"> <span>Novo</span></button>
-                                            </label>                                         
+                                            </label>
                                             <label>
                                                 <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluir</span></button>
                                             </label>

@@ -17,5 +17,6 @@ namespace OscaApp.ViewModels
         public String nome { get; set; }
         public DateTime dataValidade { get; set; }
 
+        public string StatusMessage { get; set; }
     }
 }

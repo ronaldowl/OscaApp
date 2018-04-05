@@ -72,6 +72,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 offset-1">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
             <form action="FormUpdateOrdemServico" method="post" id="osc_Mainform">
                 <div class="card">
                     <div class="card-header">
@@ -284,7 +292,7 @@
                                             <select asp-items="@Model.categorias" asp-for="@Model.categoria.id" id="osc_idCategoriaManutencao" required="required"></select>
                                         </div>
                                     </div>
-                                </div>                                
+                                </div>
                                 <div class="form-group">
                                     <label>Marca</label>
                                     <div class="inputGroupContainer">

@@ -4,10 +4,12 @@
 
 
     function CarregaFormStatus() {
-        $("#ModalStatus").load("/ContasReceber/FormStatusContasReceber?id=" + '@Model.contasReceber.id' , function () {
-            $("#ModalStatus").modal("show");
-        });
-    }
+        /**/
+        $("#ModalStatus").load("/ContasReceber/FormStatusContasReceber?id=" + '@Model.contasReceber.id', function () {
+        /**/
+        $("#ModalStatus").modal("show");
+    });
+}
 
 </script>
 <div id="contexto">
@@ -22,6 +24,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-9 offset-1">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+            <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessage
+            </div>
+            }
             <form action="FormUpdateContasReceber" method="post">
                 <div class="card" id="osc_MainForm">
                     <input id="osc_id" asp-for="@Model.contasReceber.id" type="hidden" class="form-control" value="@Model.contasReceber.id" />
@@ -36,10 +46,10 @@
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-sm  fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridContasReceber", "ContasReceber" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action(" GridContasReceber", "ContasReceber" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasReceber", "ContasReceber", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action(" FormCreateContasReceber", "ContasReceber" , null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatus();"> <span>Reabrir</span></button>
@@ -82,7 +92,7 @@
                                         </span>
                                         <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" disabled="disabled">
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
-                                      
+
                                     </div>
                                 </div>
                                 <div class="form-group">

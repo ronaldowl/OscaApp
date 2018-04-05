@@ -8,5 +8,7 @@ namespace OscaApp.ViewModels
     {
        public ContasPagar contasPagar { get; set; }
        public ContextPage contexto { get; set; }
+
+       public string StatusMessage { get; set; }
     }
 }

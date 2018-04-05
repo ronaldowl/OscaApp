@@ -11,6 +11,8 @@ namespace OscaApp.ViewModels
     {
         public Comunicado comunicado { get; set; }
         public ContextPage Contexto { get; set; }
+
+        public string StatusMessage { get; set; }
     }
 }
 

@@ -10,5 +10,7 @@ namespace OscaApp.ViewModels
     {
         public ContextPage Contexto { get; set; }
         public Incidente Incidente { get; set; }
+
+        public string StatusMessage { get; set; }
     } // end of class IncidenteViewModel
 } // end of namespace OscaApp.ViewModels

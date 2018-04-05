@@ -16,5 +16,7 @@ namespace OscaApp.ViewModels
         public ItemHoraDia horaInicio { get; set; }
         public ItemHoraDia horaFim { get; set; }
         public ContextPage contexto { get; set; }
+
+        public string StatusMessage { get; set; }
     }
 }

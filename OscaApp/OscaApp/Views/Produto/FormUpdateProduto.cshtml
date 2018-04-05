@@ -9,6 +9,15 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-8">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
+
             <form action="FormUpdateProduto" method="post" id="FormUpdateProduto">
                 <div class="card " id="osc_MainForm">
                     <div class="card-header">
@@ -26,7 +35,7 @@
                                             </label>
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
-                                            </label>                                      
+                                            </label>
 
                                         </div>
                                     </td>
@@ -227,7 +236,7 @@
                                             <button id="osc_itemProdutoLista" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-plus" value="Novo Endereço" onclick="location.href='@Url.Action("FormCreateItemListaPreco", "ItemListaPreco", new { idProduto = @Model.produto.id})'"> <span>Novo</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_gridItemListaPreco" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridItemListaPreco", "ItemListaPreco", new {idProduto = @Model.produto.id })'" >Ver mais</button> Total:@Model.itensListaPreco.Count
+                                            <button id="osc_gridItemListaPreco" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridItemListaPreco", "ItemListaPreco", new {idProduto = @Model.produto.id })'">Ver mais</button> Total:@Model.itensListaPreco.Count
                                         </label>
                                     </div>
                                 </td>

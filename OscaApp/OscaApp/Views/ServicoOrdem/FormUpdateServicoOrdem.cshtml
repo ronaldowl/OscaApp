@@ -41,6 +41,14 @@
     <div class="modal-content">
 
         <div class="modal-body">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
             <form asp-controller="ServicoOrdem" asp-action="FormUpdateServicoOrdem" method="post" id="FormUpdateServicoOrdem">
                 <input type="hidden" asp-for="@Model.ordemServico.id" value="@Model.ordemServico.id" />
                 <input type="hidden" asp-for="@Model.servicoOrdem.id" value="@Model.servicoOrdem.id" />

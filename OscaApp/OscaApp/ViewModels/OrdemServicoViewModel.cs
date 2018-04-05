@@ -23,9 +23,8 @@ namespace OscaApp.ViewModels
         public Relacao categoria { get; set; }
         public List<SelectListItem> categorias { get; set; }
 
-
-
-
+        public string StatusMessage { get; set; }
+        
         public OrdemServicoViewModel()
         {
             this.ordemServico = new OrdemServico();

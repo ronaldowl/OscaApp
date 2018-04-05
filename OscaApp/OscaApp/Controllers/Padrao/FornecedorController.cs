@@ -32,6 +32,9 @@ namespace OscaApp.Controllers
 
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateFornecedor()
         {
@@ -100,6 +103,8 @@ namespace OscaApp.Controllers
                 if (FornecedorRules.FornecedorUpdate(entrada, out modelo))
                 {
                     fornecedorData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateFornecedor", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
             }

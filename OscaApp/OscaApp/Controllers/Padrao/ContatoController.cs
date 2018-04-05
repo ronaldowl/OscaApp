@@ -31,6 +31,10 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+  
+
         [HttpGet]
         public ViewResult FormCreateContato()
         {
@@ -85,6 +89,9 @@ namespace OscaApp.Controllers
                 if (retorno != null)
                 {
                     modelo.contato = retorno;
+
+                    //apresenta mensagem de registro atualizado com sucesso
+                    modelo.StatusMessage = StatusMessage;
                 }
             }
             return View(modelo);
@@ -102,6 +109,8 @@ namespace OscaApp.Controllers
                 if (ContatoRules.MontaContatoUpdate(entrada, out modelo))
                 {
                     contatoData.Update(modelo);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateContato", new { id = modelo.id.ToString(), idOrg = contexto.idOrganizacao });
                 }
 

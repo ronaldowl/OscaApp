@@ -35,6 +35,9 @@ namespace OscaApp.Controllers
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
+        [TempData]
+        public string StatusMessage { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateItemListaPreco(string idProduto)
         {
@@ -135,6 +138,8 @@ namespace OscaApp.Controllers
                 if (ItemListaPrecoRules.ItemListaPrecoUpdate(entrada, out itemlistaPreco))
                 {
                     ItemlistaPrecoData.Update(itemlistaPreco);
+                    StatusMessage = "Registro Atualizado com Sucesso!";
+
                     return RedirectToAction("FormUpdateItemListaPreco", new { id = itemlistaPreco.id.ToString() });
                 }
             }

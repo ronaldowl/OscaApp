@@ -12,6 +12,8 @@ namespace OscaApp.ViewModels
            
         public ContextPage contexto { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public EnderecoViewModel()
         {
             this.endereco = new  Endereco();

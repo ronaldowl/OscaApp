@@ -15,6 +15,8 @@ namespace OscaApp.ViewModels
         public Relacao banco { get; set; }
         public Relacao usuario { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public ProfissionalViewModel()
         {
 

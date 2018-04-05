@@ -11,6 +11,8 @@ namespace OscaApp.ViewModels
         public Relacao profissional { get; set; }
         public ContextPage contexto { get; set; }
 
+        public string StatusMessage { get; set; }
+
         public AtividadeViewModel()
         {
             this.atividade = new  Atividade();

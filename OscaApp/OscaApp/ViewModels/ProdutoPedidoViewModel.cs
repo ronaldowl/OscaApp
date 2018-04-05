@@ -16,5 +16,7 @@ namespace OscaApp.ViewModels
         public Relacao produto { get; set; }
         public ContextPage contexto { get; set; }
         public  IPagedList<OscaFramework.Models.LookupItemLista> produtos { get; set; }
+
+        public string StatusMessage { get; set; }
     }
 }
