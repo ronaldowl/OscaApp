@@ -16,6 +16,7 @@ namespace OscaApp.ViewModels
         public List<Pedido> pedidos { get; set; }
         public List<OrdemServico> ordensServico { get; set; }
         public List<Atendimento> atendimentos { get; set; }
+        public List<ContasReceber> contasReceber { get; set; }
 
         public ContextPage contexto { get; set; }
         public Relacao contato { get; set;}         

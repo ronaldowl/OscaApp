@@ -20,7 +20,7 @@
     </thead>
     @foreach (var item in Model)
     {
-        <tr id="@item.produto.id" value="@item.produto.nome" onclick="ConfigLookup('@item.produto.id.ToString()','@item.produto.nome.ToString()','@item.itemlistaPreco.valor.ToString("N2")')">
+        <tr style="cursor:pointer;" id="@item.produto.id" value="@item.produto.nome" onclick="ConfigLookup('@item.produto.id.ToString()','@item.produto.nome.ToString()','@item.itemlistaPreco.valor.ToString("N2")')">
             <td><i class="fa fa-cube"></i></td>
             <td>@item.produto.codigo.ToString()</td>
             <td>@item.produto.nome</td>

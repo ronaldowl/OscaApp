@@ -33,13 +33,17 @@ namespace OscaApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
-        public ViewResult FormCreateContasReceber()
+        public ViewResult FormCreateContasReceber(string idCliente)
         {
             ContasReceberViewModel modelo = new ContasReceberViewModel();
             modelo.contasReceber = new ContasReceber();
             modelo.contexto = contexto;
             modelo.contasReceber.criadoEm = DateTime.Now;
             modelo.contasReceber.criadoPorName = contexto.nomeUsuario;
+
+            //Se passar o id carrega o cliente
+            if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));
+
 
             return View(modelo);
         }

@@ -93,5 +93,13 @@ namespace OscaApp.Data
             return retorno;
 
         }
+        public List<ContasReceber> GetAllByIdCliente(Guid idCliente)
+        {
+            List<ContasReceber> retorno = new List<ContasReceber>();
+            retorno = db.ContasR.FromSql("SELECT * FROM ContasReceber WHERE  idCliente = '" + idCliente.ToString() + "'").ToList();
+            return retorno;
+
+        }
+        
     }
 }

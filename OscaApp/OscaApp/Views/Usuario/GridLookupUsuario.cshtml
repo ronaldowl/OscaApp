@@ -23,7 +23,7 @@
 
             @foreach (var item in Model)
             {
-                <tr id="@item.Id" onclick="ConfigLookup('@item.Id.ToString()','@item.UserName.ToString()') " data data-dismiss="modal">
+                <tr  style="cursor:pointer;" id="@item.Id" onclick="ConfigLookup('@item.Id.ToString()','@item.UserName.ToString()') " data data-dismiss="modal">
 
                     <td><i class="fa fa-user-circle"></i></td>
                     <td>@item.UserName</td>

@@ -17,7 +17,7 @@
     </thead>
     @foreach (var item in Model)
     {
-        <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeProfissional.ToString()') " data-dismiss="modal">
+        <tr  style="cursor:pointer;" id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeProfissional.ToString()') " data-dismiss="modal">
             <td><i class="fa fa-black-tie"></i></td>
             <td>@item.codigo </td>
             <td>@item.nomeProfissional</td>

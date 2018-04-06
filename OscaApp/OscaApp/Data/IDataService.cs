@@ -136,6 +136,8 @@ namespace OscaApp.Data
 
         ContasReceber Get(Guid id );
         List<ContasReceber> GetAll(Guid idOrg);
+        List<ContasReceber> GetAllByIdCliente(Guid idCliente);
+        
     }
 
     public interface IPedidoData
