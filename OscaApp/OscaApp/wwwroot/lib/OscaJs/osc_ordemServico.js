@@ -8,6 +8,23 @@ function OnLoad_OrdemServico() {
   
 }
 
+function OpenLookupCliente() {
+    var idCliente = $("#osc_clienteId").val();
+
+    if (idCliente != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + idCliente);
+    }
+}  
+
+function OpenLookupProfissional() {
+    var id = $("#osc_IdProfissional").val();
+
+    if (id != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/Profissional/FormUpdateProfissional?id=" + id);
+    }
+}  
+
+
 function desabilita_OrdemServico(status) {
 
     //Fechado ou cancelado
