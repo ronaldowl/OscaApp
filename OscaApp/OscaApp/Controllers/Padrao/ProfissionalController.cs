@@ -88,6 +88,8 @@ namespace OscaApp.Controllers
                 if (retorno != null)
                 {
                     modelo.profissional = retorno;
+                    //apresenta mensagem de registro atualizado com sucesso
+                    modelo.StatusMessage = StatusMessage;
                 }
             }
             return View(modelo);

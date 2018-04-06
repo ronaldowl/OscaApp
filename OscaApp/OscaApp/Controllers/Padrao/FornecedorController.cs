@@ -87,6 +87,8 @@ namespace OscaApp.Controllers
                 if (retorno != null)
                 {
                     modelo.Fornecedor = retorno;
+                    //apresenta mensagem de registro atualizado com sucesso
+                    modelo.StatusMessage = StatusMessage;
                 }
             }
 

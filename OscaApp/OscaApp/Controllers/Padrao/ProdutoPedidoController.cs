@@ -99,6 +99,8 @@ namespace OscaApp.Controllers
                 modelo.produtoPedido = produtoPedidoData.Get(new Guid(idProdutoPedido));
                 modelo.produto = new Relacao();
                 modelo.produto = sqlData.RetornaRelacaoProduto(modelo.produtoPedido.idProduto);
+                //apresenta mensagem de registro atualizado com sucesso
+                modelo.StatusMessage = StatusMessage;
             }
             catch (Exception ex)
             {

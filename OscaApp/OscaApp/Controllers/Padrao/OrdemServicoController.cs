@@ -108,7 +108,9 @@ namespace OscaApp.Controllers
                     List<SelectListItem> itens = new List<SelectListItem>();
                     itens = HelperAttributes.PreencheDropDownList(sqlServices.RetornaRelacaoCategoriaManutencao());
                     modelo.categorias = itens;
-                
+                    //apresenta mensagem de registro atualizado com sucesso
+                    modelo.StatusMessage = StatusMessage;
+
                     if (modelo.ordemServico.idProfissional != null) modelo.profissional = sqlData.RetornaRelacaoProfissional(modelo.ordemServico.idProfissional);
 
                 }

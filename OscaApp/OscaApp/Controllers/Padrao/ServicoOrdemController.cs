@@ -100,7 +100,8 @@ namespace OscaApp.Controllers
                 modelo.servico = new Relacao();
                 modelo.ordemServico = new Relacao();
                 modelo.ordemServico = sqlData.RetornaRelacaoOrdemServicoPorIDServicoOrdem(new Guid(id));
-
+                //apresenta mensagem de registro atualizado com sucesso
+                modelo.StatusMessage = StatusMessage;
                 modelo.servico = sqlData.RetornaRelacaoServico(modelo.servicoOrdem.idServico);
             }
             catch (Exception ex)

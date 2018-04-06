@@ -112,7 +112,8 @@ namespace OscaApp.Controllers
                         modelo.pedido = retorno;
                         modelo.cliente = Sqlservice.RetornaRelacaoCliente(retorno.idCliente);
                         modelo.listapreco = Sqlservice.RetornaRelacaoListaPreco(retorno.idListaPreco);
-
+                        //apresenta mensagem de registro atualizado com sucesso
+                        modelo.StatusMessage = StatusMessage;
                     }
                 }
 

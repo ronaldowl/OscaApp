@@ -114,6 +114,8 @@ namespace OscaApp.Controllers
                         modelo.listaPrecos = itens;
                         //Preenche produto
                         modelo.produto = produtoData.GetRelacao(modelo.itemlistaPreco.idProduto);
+                        //apresenta mensagem de registro atualizado com sucesso
+                        modelo.StatusMessage = StatusMessage;
                     }
                 }
             }

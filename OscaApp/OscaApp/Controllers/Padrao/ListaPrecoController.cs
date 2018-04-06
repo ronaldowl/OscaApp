@@ -77,9 +77,9 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormUpdateListaPreco(string id)
         {
-            ListaPrecoViewModel listapreco = new ListaPrecoViewModel();
-            listapreco.listaPreco = new ListaPreco();
-            listapreco.listaPreco.id = new Guid(id);
+            ListaPrecoViewModel modelo = new ListaPrecoViewModel();
+            modelo.listaPreco = new ListaPreco();
+            modelo.listaPreco.id = new Guid(id);
             try
             {
                 ListaPreco retorno = new ListaPreco();
@@ -88,7 +88,9 @@ namespace OscaApp.Controllers
 
                     if (retorno != null)
                     {
-                        listapreco.listaPreco = retorno;
+                        modelo.listaPreco = retorno;
+                        //apresenta mensagem de registro atualizado com sucesso
+                        modelo.StatusMessage = StatusMessage;
                     }
                 }
 
@@ -98,7 +100,7 @@ namespace OscaApp.Controllers
                 LogOsca log = new LogOsca();
                 log.GravaLog(1,12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateListaPreco-get", ex.Message);
             }
-            return View(listapreco);
+            return View(modelo);
         }
 
         [HttpPost]
