@@ -4,7 +4,7 @@
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-11 offset-1">
+        <div class="col-md-10 offset-1">
             <br />            
             <div class="card" id="osc_Grid">
                 <div class="card-header">
@@ -98,11 +98,12 @@
         </div>
     </div>
     <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br />
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
-        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+<div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
-        <div class="col-md-3">
-            <div class="card m-2">
+    <div class="col-md-3">
+        <div class="card m-2">
+            <div class="card-body">
                 <table>
                     <tr>
                         <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
@@ -111,8 +112,10 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <div class="card-body">
                 <table>
                     <tr>
                         <td><span class="fa fa-2x fa-money iconPanel"></span></td>
@@ -121,8 +124,10 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <div class="card-body">
                 <table>
                     <tr>
                         <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
@@ -131,8 +136,10 @@
                 </table>
             </div>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <div class="card-body">
                 <table>
                     <tr>
                         <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
@@ -142,6 +149,7 @@
             </div>
         </div>
     </div>
+</div>
     <script>
 
         var url = window.location.search.replace("?", "");

@@ -6,9 +6,8 @@
     @Html.HiddenFor(m => m.Contexto.nomeUsuario)
     @Html.HiddenFor(m => m.comunicado.id)*@
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8 offset-2">
+<div class="row">
+        <div class="col-md-10 offset-1">
             <form action="FormCreateComunicado" method="post" id="osc_Mainform">
                 <div class="card">
                     <div class="card-header">
@@ -131,7 +130,6 @@
             </form>
         </div>
     </div>
-</div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_comunicado.js"></script>
 <script>OnLoad_Comunicado();</script>

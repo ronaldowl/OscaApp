@@ -25,12 +25,11 @@
             @if (!String.IsNullOrEmpty(Model.StatusMessage))
             {
 
-                <div class="alert alert-success alert-dismissible" style="height:38px; font-size:15px;font-weight:bold" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                    <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     @Model.StatusMessage
                 </div>
             }
-
             <form asp-controller="ProdutoPedido" asp-action="FormCreateProdutoPedido" method="post" id="FormCreateProdutoPedido">
                 <input asp-for="produtoPedido.idPedido" class="form-control" type="hidden" id="osc_pedidoId" value="@Model.produtoPedido.idPedido">
 
