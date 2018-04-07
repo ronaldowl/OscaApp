@@ -306,3 +306,7 @@ OscaApp/OscaApp/Views/Comunicado/GridComunicado.cshtml
 OscaApp/OscaApp/Views/ContasPagar/GridContasPagar.cshtml
 OscaApp/OscaApp/Views/ContasReceber/GridContasReceber.cshtml
 OscaApp/OscaApp/Views/ListaPreco/GridListaPreco.cshtml
+OscaApp/OscaApp/Views/OrdemServico/FormUpdateOrdemServico.cshtml
+OscaApp/OscaApp/Controllers/Padrao/AtendimentoController.cs
+OscaApp/OscaApp/Controllers/Padrao/AtendimentoController.cs
+OscaApp/OscaApp/Controllers/Padrao/AtendimentoController.cs

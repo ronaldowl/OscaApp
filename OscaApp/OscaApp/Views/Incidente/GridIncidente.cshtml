@@ -33,9 +33,7 @@
                                             <label>
                                                 <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelSuporte", "Paineis", null)'"> <span>Painel de Suporte</span></button>
                                             </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
-                                            </label>
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -57,7 +55,7 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateIncidente", "Incidente", new {id = item.id })'">
+                                <tr style="cursor:pointer;" id="@item.id" onclick="location.href='@Url.Action("FormUpdateIncidente", "Incidente", new {id = item.id })'">
                                     <td><i class="fa fa-desktop"></i></td>
                                     <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateIncidente", new { id = item.id })</td>
                                     <td>@item.titulo</td>

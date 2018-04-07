@@ -85,11 +85,30 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
-        public List<ContasPagar> GetAll(Guid idOrg)
+        public List<ContasPagar> GetAll(Guid idOrg, int view)
         {
-            List<ContasPagar> retorno = new List<ContasPagar>();
-            retorno = db.ContasP.FromSql("SELECT * FROM ContasPagar WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            return retorno;
+            List<ContasPagar> itens = new List<ContasPagar>();
+
+            //Contas em Aberto
+            if (view == 0)
+            {
+                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where statusContaPagar in (0,3) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Contas Fechadas
+            if (view == 1)
+            {
+                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where statusContaPagar in (1,2) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos Contas   
+            if (view == 2)
+            {
+                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+            }
+             
+            return itens;
 
         }
     }

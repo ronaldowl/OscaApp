@@ -112,7 +112,8 @@ namespace OscaApp.Controllers
                         modelo.pedido = retorno;
                         modelo.cliente = Sqlservice.RetornaRelacaoCliente(retorno.idCliente);
                         modelo.listapreco = Sqlservice.RetornaRelacaoListaPreco(retorno.idListaPreco);
-
+                        //apresenta mensagem de registro atualizado com sucesso
+                        modelo.StatusMessage = StatusMessage;
                     }
                 }
 
@@ -150,7 +151,7 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        public ViewResult GridPedido(string filtro, int Page, string idCliente)
+        public ViewResult GridPedido(string filtro, int Page, string idCliente, int view)
         {
             try
             {                
@@ -159,7 +160,7 @@ namespace OscaApp.Controllers
                 if(String.IsNullOrEmpty(idCliente))
                 {
 
-                    retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao);
+                    retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao, view);
                 }
                 else
                 {

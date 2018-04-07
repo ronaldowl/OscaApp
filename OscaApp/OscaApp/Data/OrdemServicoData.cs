@@ -111,11 +111,42 @@ namespace OscaApp.Data
             return retorno;
 
         }
-        public List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg)
+        public List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg, int view)
         {
-            List<OrdemServico > retorno = new List<OrdemServico >();
-            retorno = db.OrdensServico.FromSql("SELECT * FROM OrdemServico WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            return HelperAssociate.ConvertToGridOrdemServico(retorno);
+            List<OrdemServico > itens = new List<OrdemServico >();
+
+            //Em Andamento
+            if (view == 0)
+            {
+                itens = db.OrdensServico.FromSql("SELECT * FROM OrdemServico  where statusOrdemServico = 1  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Aguardando produto
+            if (view == 1)
+            {
+                itens = db.OrdensServico.FromSql("SELECT * FROM OrdemServico  where statusOrdemServico in (3)  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Para Entrega
+            if (view == 2)
+            {
+                itens = db.OrdensServico.FromSql("SELECT * FROM OrdemServico  where statusOrdemServico in (4) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos  Fechado
+            if (view == 3)
+            {
+                itens = db.OrdensServico.FromSql("SELECT * FROM OrdemServico  where statusOrdemServico in (2,5) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos   
+            if (view == 4)
+            {
+                itens = db.OrdensServico.FromSql("SELECT * FROM OrdemServico  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+            }
+ 
+            return HelperAssociate.ConvertToGridOrdemServico(itens);
         }
         public List<OrdemServicoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente)
         {

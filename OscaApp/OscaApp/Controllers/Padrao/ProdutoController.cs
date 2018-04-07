@@ -91,7 +91,8 @@ namespace OscaApp.Controllers
                 retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
                 modelo.itensListaPreco = new List<ItemProdutoLista>();
                 modelo.itensListaPreco = ProdutoRules.RetornaItemListaProduto(itemListaPrecoData.GetAllByProduto(modelo.produto.id));
-
+                //apresenta mensagem de registro atualizado com sucesso
+                modelo.StatusMessage = StatusMessage;
 
                 if (retorno != null)
                 {

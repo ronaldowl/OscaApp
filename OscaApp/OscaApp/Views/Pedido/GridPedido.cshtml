@@ -16,6 +16,21 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
+                                            <div class="form-group">
+                                                <label>Filtros</label>
+                                                <div class="input-group">
+                                                    &nbsp;<div class="col-2">
+                                                              <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
+                                                                  <option value="0" selected="">Em Andamento</option>
+                                                                  <option value="1">Aguardando Produto</option>
+                                                                  <option value="2">Para Entrega</option>
+                                                                  <option value="3">Fechados</option>
+                                                                  <option value="4">Todos Pedidos</option>
+
+                                                              </select>
+                                                    </div>
+                                                </div>
+                                            </div>&nbsp;
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreatePedido", "Pedido", null)'"> <span>Novo</span></button>
                                             </label>
@@ -27,7 +42,7 @@
                                             &nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                            </label>&nbsp;&nbsp;                                         
+                                            </label>&nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
                                             </label>
@@ -38,39 +53,39 @@
                         </form>
                     </div>
                 </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-11">
-                                <table class="table table-hover   table-bordered table-sm">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th></th>
-                                            <th>Código Pedido</th>
-                                            <th>Cliente</th>
-                                            <th>CNPJ/CPF</th>
-                                            <th>Telefone</th>
-                                            <th>Valor</th>
-                                            <th>Status Pedido</th>
-                                        </tr>
-                                    </thead>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr id="@item.pedido.id" onclick="location.href='@Url.Action("FormUpdatePedido", "Pedido", new {id = item.pedido.id })'">
-                                            <td><i class="fa fa-file-powerpoint-o"></i></td>
-                                            <td>@Html.ActionLink(item.pedido.codigoPedido.ToString(), "FormUpdatePedido", new { id = item.pedido.id })</td>
-                                            <td>@item.cliente.nomeCliente</td>
-                                            <td>@item.cliente.cnpj_cpf</td>
-                                            <td>@item.cliente.telefone</td>
-                                            <td>@item.pedido.valorTotal.ToString("N2")</td>
-                                            <td>@item.pedido.statusPedido</td>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <table class="table table-hover   table-bordered table-sm">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th></th>
+                                        <th>Código Pedido</th>
+                                        <th>Cliente</th>
+                                        <th>CNPJ/CPF</th>
+                                        <th>Telefone</th>
+                                        <th>Valor</th>
+                                        <th>Status Pedido</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tr style="cursor:pointer;" id="@item.pedido.id" onclick="location.href='@Url.Action("FormUpdatePedido", "Pedido", new {id = item.pedido.id })'">
+                                        <td><i class="fa fa-file-powerpoint-o"></i></td>
+                                        <td>@Html.ActionLink(item.pedido.codigoPedido.ToString(), "FormUpdatePedido", new { id = item.pedido.id })</td>
+                                        <td>@item.cliente.nomeCliente</td>
+                                        <td>@item.cliente.cnpj_cpf</td>
+                                        <td>@item.cliente.telefone</td>
+                                        <td>R$@item.pedido.valorTotal.ToString("N2")</td>
+                                        <td>@item.pedido.statusPedido</td>
 
-                                        </tr>
-                                    }
-                                </table>
-                               
-                            </div>
+                                    </tr>
+                                }
+                            </table>
+
                         </div>
                     </div>
+                </div>
                 <div class="card-footer">
                     <table>
                         <tr>
@@ -79,53 +94,80 @@
                         </tr>
                     </table>
                 </div>
-                </div>
             </div>
         </div>
     </div>
-    <br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
-    <div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
-        <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+</div>
+<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:40px; padding:10px 0 0 0; background:#fff;    ">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
-        <div class="col-md-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    <div class="col-md-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                </tr>
+            </table>
         </div>
-        <div class="col-sm-3">
-            <div class="card m-2">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
-                    </tr>
-                </table>
-            </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-2">
+            <table>
+                <tr>
+                    <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                    <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                </tr>
+            </table>
         </div>
-    </div> 
+    </div>
+</div>
 
+<script>
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+    if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
+    
+    function OnChangeFiltro() {
+
+        var filtro = $("#osc_filtro").val();
+
+        if (filtro == "0") { $(window.document.location).attr('href', "GridPedido?view=0"); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridPedido?view=1"); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridPedido?view=2"); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridPedido?view=3"); }
+        if (filtro == "4") { $(window.document.location).attr('href', "GridPedido?view=4"); }
+    }
+
+</script>

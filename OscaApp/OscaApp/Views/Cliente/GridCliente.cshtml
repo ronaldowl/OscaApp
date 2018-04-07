@@ -2,7 +2,7 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-<div class="container-fluid">
+ 
     <div class="row">
         <div class="col-md-10 offset-1">
             <div class="card" id="osc_Grid">
@@ -56,7 +56,7 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr  id="@item.id" onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new {id = item.id })'">
+                                        <tr style="cursor:pointer;" id="@item.id" onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new {id = item.id })'">
                                             <td><i class="fa  fa-users"></i></td>
                                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateCliente", new { id = item.id })</td>
                                             <td>@item.nomeCliente</td>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+       
     <br /><br /><br /><br /> <br /><br /><br /><br />  
     <div class="col-md-10 offset-1" style="position:sticky;bottom:20px; padding:10px 0 0 0; background:#fff;">
         <div class="row">

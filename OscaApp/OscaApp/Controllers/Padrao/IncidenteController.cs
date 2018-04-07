@@ -80,6 +80,8 @@ namespace OscaApp.Controllers.Padrao
             {
                 retorno = IncidenteData.Get(modelo.Incidente.id, contexto.idOrganizacao);
                 modelo.Incidente = retorno;
+                //apresenta mensagem de registro atualizado com sucesso
+                modelo.StatusMessage = StatusMessage;
             } // end of if
             return View(modelo);
         } // end of FormUpdateIncidente

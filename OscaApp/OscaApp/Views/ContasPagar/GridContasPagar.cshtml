@@ -17,10 +17,22 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
+                                            <div class="form-group">
+                                                <label>Filtros</label>
+                                                <div class="input-group">
+                                                    &nbsp;<div class="col-2">
+                                                        <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
+                                                            <option value="0" selected="">Todas em Aberto</option>
+                                                            <option value="1">Todas Fechadas</option>
+                                                            <option value="2">Todas Contas</option>                                                         
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>&nbsp;
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasPagar", "ContasPagar", null)'"> <span>Novo</span></button>
                                             </label>
-                                            &nbsp;&nbsp;
+                                            &nbsp;
                                             <span>
                                                 @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
                                             </span>
@@ -28,13 +40,8 @@
                                             &nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                            </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelFinanceiro", "Paineis", null)'"> <span>Painel Financeiro</span></button>
-                                            </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
-                                            </label>
+                                            </label> 
+
                                         </div>
                                     </td>
                                 </tr>
@@ -60,7 +67,7 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tr id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasPagar", "ContasPagar", new { id = item.id })'">
+                                <tr style="cursor:pointer;" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasPagar", "ContasPagar", new { id = item.id })'">
                                     <td><i class="fa fa-envelope-o"></i></td>
                                     <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasPagar", new { id = item.id })</td>
                                     <td>@item.titulo</td>
@@ -73,7 +80,7 @@
                                 </tr>
                             }
                         </table>
-                      
+
                     </div>
                 </div>
                 <div class="card-footer">
@@ -146,4 +153,30 @@
         </div>
     </div>
 </div>
+<script>
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    
+
+    function OnChangeFiltro() {
+
+        var filtro = $("#osc_filtro").val();
+
+        if (filtro == "0") { $(window.document.location).attr('href', "GridContasPagar?view=0"); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridContasPagar?view=1"); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridContasPagar?view=2"); }
+ 
+    }
+
+</script>
+
 

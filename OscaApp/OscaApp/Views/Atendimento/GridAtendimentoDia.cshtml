@@ -27,7 +27,7 @@
                 </thead>
                 @foreach (var item in Model)
                                     {
-                    <tr id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
+                    <tr style="cursor:pointer;" id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
                         <td><i class="fa fa-calendar-times-o"></i></td>
                         <td style="font-size:12px;font-weight:bold">@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
                         <td style="font-size:12px;font-weight:bold">@item.atendimento.titulo</td>

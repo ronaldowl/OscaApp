@@ -71,7 +71,7 @@ namespace OscaApp.Data
         void UpdateStatus(OrdemServico ordemServico);
         OrdemServico Get(Guid id );
         List<OrdemServico> GetAll(Guid id);
-        List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg);
+        List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg, int view);
         List<OrdemServicoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
 
     }
@@ -117,7 +117,7 @@ namespace OscaApp.Data
         void Update(ContasPagar contasPagar);
         void UpdateStatus(ContasPagar contasPagar);
         ContasPagar Get(Guid id );
-        List<ContasPagar> GetAll(Guid idOrg);
+        List<ContasPagar> GetAll(Guid idOrg, int view);
     }
 
     public interface IRecursoData
@@ -135,7 +135,9 @@ namespace OscaApp.Data
         void UpdateStatus(ContasReceber contasReceber);
 
         ContasReceber Get(Guid id );
-        List<ContasReceber> GetAll(Guid idOrg);
+        List<ContasReceber> GetAll(Guid idOrg, int view);
+        List<ContasReceber> GetAllByIdCliente(Guid idCliente);
+        
     }
 
     public interface IPedidoData
@@ -145,7 +147,7 @@ namespace OscaApp.Data
         Pedido Get(Guid id);
         List<Pedido> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
-        List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg);
+        List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg, int view);
         List<PedidoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
 
 

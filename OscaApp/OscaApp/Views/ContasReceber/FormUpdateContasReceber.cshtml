@@ -46,10 +46,10 @@
                                                 <button id="osc_salvar" type="submit" class="btn btn-info btn-sm  fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action(" GridContasReceber", "ContasReceber" , null)'"> <span>Fechar</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridContasReceber", "ContasReceber" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action(" FormCreateContasReceber", "ContasReceber" , null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasReceber", "ContasReceber" , null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatus();"> <span>Reabrir</span></button>
@@ -88,7 +88,7 @@
                                     <label class="control-label" style="color:deepskyblue">Cliente</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x"></span>
+                                            <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>
                                         </span>
                                         <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" disabled="disabled">
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />

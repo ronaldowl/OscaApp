@@ -97,11 +97,41 @@ namespace OscaApp.Data
 
         }
 
-        public List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg)
+        public List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg, int view)
         {
             List<Pedido> itens = new List<Pedido>();
 
-            itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            //Em Andamento
+            if (view == 0)
+            {
+                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido = 1  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Aguardando produto
+            if (view == 1)
+            {
+                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido in (3)  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Para Entrega
+            if (view == 2)
+            {
+                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido in (4) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos  Fechado
+            if (view == 3)
+            {
+                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido in (2,5) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos   
+            if (view == 4)
+            {
+                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+            }
+
 
             return HelperAssociate.ConvertToGridPedido(itens);
         }

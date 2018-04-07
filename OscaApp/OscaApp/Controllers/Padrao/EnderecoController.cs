@@ -94,6 +94,8 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 modelo.endereco = enderecoData.Get(new Guid(id));
+                //apresenta mensagem de registro atualizado com sucesso
+                modelo.StatusMessage = StatusMessage;
             }
             return View(modelo);
         }
