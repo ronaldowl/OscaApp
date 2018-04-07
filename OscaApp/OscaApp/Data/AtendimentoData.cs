@@ -20,6 +20,21 @@ namespace OscaApp.Data
         {
             this.db = dbContext;        
         }
+
+        public void Delete(Atendimento modelo)
+        {
+            try
+            {
+                db.Atendimentos.Remove(modelo);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
         public void Add(Atendimento modelo)
         {
             try

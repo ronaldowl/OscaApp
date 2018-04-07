@@ -10,14 +10,14 @@ using OscaApp.Data;
 namespace OscaAPI.Controllers
 {
     
-    public class AtividadeAPIController : Controller
+    public class ContatoAPIController : Controller
     {
-        private readonly IAtividadeData atividadeData;
+        private readonly IContatoData serviceData;
         
 
-        public AtividadeAPIController(ContexDataService db)
+        public ContatoAPIController(ContexDataService db)
         {
-            this.atividadeData = new AtividadeData(db);          
+            this.serviceData = new ContatoData(db);          
         }    
 
         [Route("api/[controller]/Delete")]
@@ -27,10 +27,10 @@ namespace OscaAPI.Controllers
             ResultService retorno = new ResultService();
             try
             {
-                Atividade modelo = new Atividade();
+                Contato modelo = new Contato();
                 modelo.id = new Guid(id);
 
-                atividadeData.Delete(modelo);
+                serviceData.Delete(modelo);
                 retorno.statusOperation = true;
                return Json(retorno);
             }

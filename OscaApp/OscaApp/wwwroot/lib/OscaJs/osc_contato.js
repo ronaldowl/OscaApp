@@ -1,5 +1,12 @@
 ﻿//********************************* Biblioteca com funções da Tela de Contato***************
 
+function DeleteContato(id) {
+
+    DeleteService(id, "ContatoAPI", "GridContato?view=0");
+} 
+
+
+
 function ValidaCPF() {
 
     var val = document.getElementById("osc_cpf");

@@ -102,6 +102,7 @@ namespace OscaApp.Data
     {
         void Add(Atendimento atendimento);
         void Update(Atendimento atendimento);
+        void Delete(Atendimento atendimento);
         Atendimento Get(Guid id);
         List<Atendimento> GetAll(Guid idOrg);
         List<Atendimento> GetAllByIdCliente(Guid idCliente);
@@ -208,6 +209,7 @@ namespace OscaApp.Data
     {
         void Add(Contato contato);
         void Update(Contato contato);
+        void Delete(Contato contato);
         Contato Get(Guid id, Guid idOrg);
         List<Contato> GetAll(Guid idOrg);
     }

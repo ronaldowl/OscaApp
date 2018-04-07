@@ -8,6 +8,12 @@ function OnLoad_Atendimento() {
     desabilitaCampos_Atendimento(status)
 }
 
+function DeleteAtendimento(id) {  
+
+    DeleteService(id, "AtendimentoAPI", "GridAtendimento?view=0");
+} 
+
+
 function OpenLookupCliente()
 {
     var idCliente = $("#osc_clienteId").val();
