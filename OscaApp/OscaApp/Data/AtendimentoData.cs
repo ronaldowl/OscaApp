@@ -122,12 +122,41 @@ namespace OscaApp.Data
             return retorno;
 
         }
-        public List<AtendimentoGridViewModel> GetAllGridViewModel(Guid idOrg)
+        public List<AtendimentoGridViewModel> GetAllGridViewModel(Guid idOrg,int view,string idProfissional)
         {
             List<Atendimento> itens = new List<Atendimento>();
 
-            itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            //Meus Atendimentos abertos
+            if (view == 0)
+            {
+                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento = 0 and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
 
+            //Meus Atendimentos Fechados
+            if (view == 1)
+            {
+                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento in (1,2) and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos Fechados
+            if (view == 2)
+            {
+                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento in (1,2) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos  Abertos
+            if (view == 3)
+            {
+                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento in (0) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Todos   
+            if (view == 4)
+            {
+                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+           
             return HelperAssociate.ConvertToGridAtendimento(itens);
         }          
         public List<AtendimentoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente)

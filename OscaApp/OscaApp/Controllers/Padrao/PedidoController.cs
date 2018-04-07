@@ -151,7 +151,7 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        public ViewResult GridPedido(string filtro, int Page, string idCliente)
+        public ViewResult GridPedido(string filtro, int Page, string idCliente, int view)
         {
             try
             {                
@@ -160,7 +160,7 @@ namespace OscaApp.Controllers
                 if(String.IsNullOrEmpty(idCliente))
                 {
 
-                    retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao);
+                    retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao, view);
                 }
                 else
                 {

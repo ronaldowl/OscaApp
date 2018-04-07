@@ -22,7 +22,7 @@ namespace OscaApp.Controllers
         private ContextPage contexto;
         private readonly SqlGenericData sqlData;
 
-        public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext,  SqlGenericData _sqlData)
+        public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
             this.contasReceberData = new ContasReceberData(db);
             this.sqlData = _sqlData;
@@ -83,9 +83,9 @@ namespace OscaApp.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = contasReceberData.Get(modelo.contasReceber.id);               
-                
-                if (retorno.idCliente != null)modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
+                retorno = contasReceberData.Get(modelo.contasReceber.id);
+
+                if (retorno.idCliente != null) modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
 
                 if (retorno != null)
                 {
@@ -121,9 +121,18 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridContasReceber(string filtro, int Page)
+        public ViewResult GridContasReceber(string filtro, int Page, int view, string idCliente)
         {
-            IEnumerable<ContasReceber> retorno = contasReceberData.GetAll(contexto.idOrganizacao);
+            IEnumerable<ContasReceber> retorno;
+
+            if (String.IsNullOrEmpty(idCliente))
+            {
+                retorno = contasReceberData.GetAll(contexto.idOrganizacao, view);
+            }
+            else
+            {
+                retorno = contasReceberData.GetAllByIdCliente(new Guid(idCliente));
+            }
 
             if (!String.IsNullOrEmpty(filtro))
             {

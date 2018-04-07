@@ -114,9 +114,9 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateContasPagar", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridContasPagar(string filtro, int Page)
+        public ViewResult GridContasPagar(string filtro, int Page,int view)
         {
-            IEnumerable<ContasPagar> retorno = contasPagarData.GetAll(contexto.idOrganizacao);
+            IEnumerable<ContasPagar> retorno = contasPagarData.GetAll(contexto.idOrganizacao, view);
 
             if (!String.IsNullOrEmpty(filtro))
             {

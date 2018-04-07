@@ -3,9 +3,9 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 @using OscaFramework.Helper;
-<div class="container-fluid">
+ 
     <div class="row">
-        <div class="col-md-10 offset-1">
+        <div class="col-md-11  offset-1">
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
@@ -14,10 +14,25 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <h5 style="font-weight:bold">Lista de Atendimentos: &nbsp;&nbsp;</h5>
+                                        <h5 style="font-weight:bold">Atendimentos: &nbsp;</h5>
                                     </td>
                                     <td>
                                         <div class="input-group">
+                                            <div class="form-group">
+                                                <label>Filtros</label>
+                                                <div class="input-group">
+                                                    &nbsp;<div class="col-2">
+                                                              <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
+                                                                  <option value="0" selected="">Meus Atendimento Abertos</option>
+                                                                  <option value="1">Meus Atendimentos Fechados</option>
+                                                                  <option value="2">Todos Atendimentos Fechados</option>
+                                                                  <option value="3">Todos Atendimentos Abertos</option>
+                                                                  <option value="4">Todos Atendimentos</option>
+
+                                                              </select>
+                                                    </div>
+                                                </div>
+                                            </div>&nbsp;
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"> <span>Novo</span></button>
                                             </label>
@@ -53,8 +68,8 @@
                                     <th>Hora Início</th>
                                     <th>Hora Fim</th>
                                     <th>Valor</th>
-                                    <th>Associado a</th>
-                                    <th>Status do Atendimento</th>
+                                     
+                                    <th>Status Aten </th>
                                 </tr>
                             </thead>
                             @foreach (var item in Model)
@@ -69,7 +84,7 @@
                                     <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaInicio.horaDia))</td>
                                     <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>
                                     <td>R$@item.atendimento.valor.ToString("N2")</td>
-                                    <td>@item.atendimento.tipoReferencia</td>
+                                   
                                     <td>@item.atendimento.statusAtendimento</td>
                                 </tr>
                             }
@@ -146,3 +161,32 @@
     </div>
 </div>
 
+<script>
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+    if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
+
+
+    function OnChangeFiltro() {
+
+        var filtro = $("#osc_filtro").val();
+
+        if (filtro == "0") { $(window.document.location).attr('href', "GridAtendimento?view=0"); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridAtendimento?view=1"); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridAtendimento?view=2"); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridAtendimento?view=3"); }
+        if (filtro == "4") { $(window.document.location).attr('href', "GridAtendimento?view=4"); }
+
+    }
+
+</script>

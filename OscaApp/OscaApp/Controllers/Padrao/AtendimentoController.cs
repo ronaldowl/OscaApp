@@ -159,13 +159,17 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridAtendimento(string filtro, int Page, string idCliente)
+        public ViewResult GridAtendimento(string filtro, int Page, string idCliente, int view)
         {
             IEnumerable<AtendimentoGridViewModel> retorno;
 
+            SqlGeneric sqlServices = new SqlGeneric();
+            string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
+
+
             if (String.IsNullOrEmpty(idCliente))
             {
-                retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao);
+                retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao, view, idProfissional);
             }
             else
             {

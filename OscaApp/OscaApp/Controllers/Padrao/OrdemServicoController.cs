@@ -143,13 +143,13 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridOrdemServico(string filtro, int Page, string idCliente)
+        public ViewResult GridOrdemServico(string filtro, int Page, string idCliente, int view)
         {
             IEnumerable<OrdemServicoGridViewModel> retorno;
 
             if (String.IsNullOrEmpty(idCliente)) {
 
-                retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
+                retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao, view);
             }
             else
             {
@@ -176,9 +176,9 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 10));
         }
 
-        public ViewResult GridLookupOrdemServico(string filtro, int Page)
+        public ViewResult GridLookupOrdemServico(string filtro, int Page, int view)
         {
-            IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao);
+            IEnumerable<OrdemServicoGridViewModel> retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao, view);
 
             if (!String.IsNullOrEmpty(filtro))
             {

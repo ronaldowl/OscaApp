@@ -17,6 +17,21 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
+                                            <div class="form-group">
+                                                <label>Filtros</label>
+                                                <div class="input-group">
+                                                    &nbsp;<div class="col-2">
+                                                        <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
+                                                            <option value="0" selected="">Em Andamento</option>
+                                                            <option value="1">Aguardando Produto</option>
+                                                            <option value="2">Para Entrega</option>
+                                                            <option value="3">Fechados</option>
+                                                            <option value="4">Todas Ordens</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>&nbsp;
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico", null)'"> <span>Novo</span></button>
                                             </label>
@@ -48,9 +63,9 @@
                                             <th>Cliente</th>
                                             <th>Profissional </th>
                                             <th>Tipo OS</th>
-                                            <th>Status Ordem Servico</th>
+                                            <th>Status OS</th>
                                             <th>Valor</th>
-                                            <th>Criado Por</th>
+                                            <th>Data Criação</th>
                                         </tr>
                                     </thead>
                                     @foreach (var item in Model)
@@ -63,7 +78,7 @@
                                             <td>@item.ordemServico.tipo</td>
                                             <td>@item.ordemServico.statusOrdemServico</td>
                                             <td>R$@item.ordemServico.valorTotal.ToString("N2")</td>
-                                            <td>@item.ordemServico.criadoPorName</td>
+                                            <td>@item.ordemServico.criadoEm.ToShortDateString()</td>
                                         </tr>
                                     }
                                 </table>                              
@@ -127,5 +142,32 @@
             </div>
         </div>
     </div>
+    <script>
+
+        var url = window.location.search.replace("?", "");
+        var items = url.split("&");
+
+        var array = {
+            'valor': items[0]
+        }
+
+        if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+        if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+        if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+        if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+        if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
+
+        function OnChangeFiltro() {
+
+            var filtro = $("#osc_filtro").val();
+
+            if (filtro == "0") { $(window.document.location).attr('href', "GridOrdemServico?view=0"); }
+            if (filtro == "1") { $(window.document.location).attr('href', "GridOrdemServico?view=1"); }
+            if (filtro == "2") { $(window.document.location).attr('href', "GridOrdemServico?view=2"); }
+            if (filtro == "3") { $(window.document.location).attr('href', "GridOrdemServico?view=3"); }
+            if (filtro == "4") { $(window.document.location).attr('href', "GridOrdemServico?view=4"); }
+        }
+
+    </script>
  
 
