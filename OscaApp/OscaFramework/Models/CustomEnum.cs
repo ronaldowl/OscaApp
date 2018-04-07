@@ -16,8 +16,8 @@ namespace OscaFramework.Models
         }
         public enum Status
         {
-            Ativo = 1,
-            Inativo = 0
+            Inativo = 0,
+            Ativo = 1
         }
 
         public enum StatusOrg
@@ -155,8 +155,7 @@ namespace OscaFramework.Models
         public enum codicaoPagamento
         {
             Avista = 1,
-            Parcelado = 2
-                     
+            Parcelado = 2                    
         }
 
         public enum tipoPagamento
@@ -164,14 +163,14 @@ namespace OscaFramework.Models
             Dinheiro = 1,
             Cartao = 2,
             Cheque = 3,
-            Deposito =4          
+            Deposito = 4          
         }
         public enum metodoEntrega
         {
             ClienteRetira = 1,
             Sedex = 2,
             Transportadora = 3,
-            Deposito =4,
+            Deposito = 4,
             FedEx = 5,
             Correio = 6          
         }
@@ -208,70 +207,149 @@ namespace OscaFramework.Models
 
         public enum itemHora
         {
-                                                 [Description("01:00")]
-                                                 umHora =  1,   
-                                                 [Description("01:30")]
-                                                 umHoraMeia =  2,   
-                                                 [Description("02:00")]
-                                                 duasHoras = 3,    
-                                                 [Description("02:30")]
-                                                 duasHorasMeia =  4,                                                   
-                                                 [Description("03:00")]
-                                                 tresHoras =  5,
-                                                 [Description("03:30")]
-                                                 tresHorasMeia =  6,
-                                                [Description("04:00")]
-                                                quatroHoras =  7,
-                                                [Description("04:30")]
-                                                quatrosMeia =  8,
-                                                [Description("05:00")]
-                                                cincoHoras =  9,
-                                                [Description("05:30")]
-                                                cincoHorasMeia =  10,
-                                                [Description("06:00")]
-                                                seisHoras =  11,
-                                                [Description("06:30")]
-                                                seisHorasMeia =  12,
-                                                [Description("07:00")]
-                                                seteHoras =  13,
-                                                [Description("07:30")]
-                                                seteHorasMeia =  14  ,
-                                                 oitoHoras =  15,  
-                                                 oitoMeia =  16,   
-                                                 noveHoras =  17,   
-                                                 noveMeia =  18,   
-                                                 dezHoras =  19,   
-                                                 dezMeia =  20,   
-                                                 onzeHoras =  21,  
-                                                 onzeMeia =  22,   
-                                                 meioDia =  23,   
-                                                 dozeMeia =  24,   
-                                                 trezeHoras =  25,   
-                                                 trezeMeia =  26,   
-                                                 quatozeHoras =  27,   
-                                                 quatozeMeia =  28,   
-                                                 quinzeHoras =  29,   
-                                                 quinzeMeia =  30,   
-                                                 dezeseisHoras =  31,   
-                                                 dezeseisMeia =  32,   
-                                                 dezeseteHoras =  33,   
-                                                 dezeseteMeia =  34,   
-                                                 dezoitoHoras =  35,   
-                                                 dezoitoMeia =  36,   
-                                                 dezenoveHoras =  37,   
-                                                 dezenoveMeia =  38,   
-                                                 vinteHoras =  39,   
-                                                 vinteMeia =  40,   
-                                                 vinteUmaHora =  41,   
-                                                 vinteUmaMeia =  42,   
-                                                 vinteDuasHoras =  43,   
-                                                 vinteDuasMeia =  44,   
-                                                 vinteTresHoras =  45,   
-                                                 vinteTresMeia =  46,   
-                                                 meiaNoite =  47  
+            [Description("01:00")]
+                umHora =  1,   
 
+            [Description("01:30")]
+                umHoraMeia =  2,
+                                                 
+            [Description("02:00")]
+                duasHoras = 3,    
 
+            [Description("02:30")]
+                duasHorasMeia =  4, 
+                                                 
+            [Description("03:00")]
+                tresHoras =  5,
 
+            [Description("03:30")]
+                tresHorasMeia =  6,
+
+            [Description("04:00")]
+                quatroHoras =  7,
+
+            [Description("04:30")]
+                quatroHorasMeia =  8,
+
+            [Description("05:00")]
+                cincoHoras =  9,
+
+            [Description("05:30")]
+                cincoHorasMeia =  10,
+
+            [Description("06:00")]
+                seisHoras =  11,
+
+            [Description("06:30")]
+                seisHorasMeia =  12,
+
+            [Description("07:00")]
+                seteHoras =  13,
+
+            [Description("07:30")]
+                seteHorasMeia =  14 ,
+
+            [Description("08:00")]
+                oitoHoras =  15, 
+
+            [Description("08:30")]
+                oitoHorasMeia =  16,  
+
+            [Description("09:00")]                                                
+                noveHoras =  17,
+                                                 
+            [Description("09:30")]
+                noveHorasMeia =  18,
+                                                 
+            [Description("10:00")]                                                 
+                dezHoras =  19,
+                                                                                                  
+            [Description("10:30")]
+                dezHorasMeia =  20, 
+                                                                                                  
+            [Description("11:00")]
+                onzeHoras =  21,
+                                                                                                  
+            [Description("11:30")]
+                onzeHorasMeia =  22, 
+                                                                                                  
+            [Description("12:00")]
+                meioDia =  23, 
+                                                                                                  
+            [Description("12:30")]
+                meioDiaMeia =  24, 
+                                                                                                  
+            [Description("13:00")]
+                trezeHoras =  25,  
+                                                                                                  
+            [Description("13:30")]
+                trezeHorasMeia =  26,  
+                                                                                                  
+            [Description("14:00")]
+                quatozeHoras =  27, 
+                                                                                                  
+            [Description("14:30")]
+                quatozeHorasMeia =  28, 
+                                                                                                  
+            [Description("15:00")]
+                quinzeHoras =  29,
+                                                                                                  
+            [Description("15:30")]
+                quinzeHorasMeia =  30, 
+                                                                                                  
+            [Description("16:00")]
+                dezesseisHoras =  31, 
+                                                                                                  
+            [Description("16:30")]
+                dezesseisHorasMeia =  32, 
+                                                                                                  
+            [Description("17:00")]
+                dezesseteHoras =  33, 
+                                                                                                  
+            [Description("17:30")]
+                dezesseteHorasMeia =  34, 
+                                                                                                  
+            [Description("18:00")]
+                dezoitoHoras =  35, 
+                                                                                                  
+            [Description("18:30")]
+                dezoitoHorasMeia =  36, 
+                                                                                                  
+            [Description("19:00")]
+                dezenoveHoras =  37,  
+                                                                                                  
+            [Description("19:30")]
+                dezenoveHorasMeia =  38, 
+                                                                                                  
+            [Description("20:00")]
+                vinteHoras =  39, 
+                                                                                                  
+            [Description("20:30")]
+                vinteHorasMeia =  40,   
+                                                                                                 
+            [Description("21:00")]
+                vinteUmaHora =  41,  
+                                                                                                  
+            [Description("21:30")]
+                vinteUmaHorasMeia =  42,  
+                                                                                                  
+            [Description("22:00")]
+                vinteDuasHoras =  43,  
+                                                                                                  
+            [Description("22:30")]
+                vinteDuasHorasMeia =  44,   
+                                                                                                 
+            [Description("23:00")]
+                vinteTresHoras =  45,  
+                                                                                                  
+            [Description("23:30")]
+                vinteTresHorasMeia =  46,  
+                                                                                                  
+            [Description("00:00")]
+                meiaNoite =  47,
+                                                                                                 
+            [Description("00:30")]
+                meiaNoiteMeia = 48
         }
     }
 
