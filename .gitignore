@@ -310,3 +310,8 @@ OscaApp/OscaApp/Views/OrdemServico/FormUpdateOrdemServico.cshtml
 OscaApp/OscaApp/Controllers/Padrao/AtendimentoController.cs
 OscaApp/OscaApp/Controllers/Padrao/AtendimentoController.cs
 OscaApp/OscaApp/Controllers/Padrao/AtendimentoController.cs
+OscaApp/OscaApp/Views/Endereco/FormCreateEndereco.cshtml
+OscaApp/OscaApp/Views/Endereco/FormCreateEndereco.cshtml
+OscaApp/OscaApp/Views/Endereco/FormUpdateEndereco.cshtml
+OscaApp/OscaApp/Views/Endereco/GridEndereco.cshtml
+OscaApp/OscaApp/Views/Endereco/GridEndereco.cshtml

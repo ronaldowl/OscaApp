@@ -33,3 +33,12 @@
 .clicky {
     cursor: pointer !important;
 }
+.alertPers {
+ height:36px;
+ font-size:15px;
+ font-weight:bold;
+ padding:0.25rem 1rem !important;
+}
+.alert-dismissiblePers, .closePers{
+    padding:0.25rem 1rem !important;
+}
