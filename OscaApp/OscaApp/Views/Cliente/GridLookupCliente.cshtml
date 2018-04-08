@@ -9,25 +9,26 @@
 
 <table class="table table-hover   table-bordered table-sm">
     <thead class="thead-light">
-        <tr>
+        <tr style="font-size:12px">
             <th></th>
-            <th>Código</th>
-            <th>Cliente</th>
-            <th>CNPJ/CPF</th>
-            <th>Tipo de Pessoa</th>
-
+            <th style="width:100px">Código</th>
+            <th style="width:300px">Cliente</th>
+            <th style="width:300px">Razão Social</th>
+            <th style="width:150px">CNPJ/CPF</th>
+            <th style="width:150px">Tipo de Pessoa</th>
         </tr>
     </thead>
     @foreach (var item in Model)
     {
-        <tr id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeCliente.ToString()') " data-dismiss="modal">
-            <td><i class="fa  fa-users"></i></td>
-            <td>@item.codigo.ToString()</td>
-            <td>@item.nomeCliente</td>
-            <td>@item.cnpj_cpf</td>
-            <td>@item.tipoPessoa</td>
+    <tr style="font-size:12px" id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeCliente.ToString()') " data-dismiss="modal">
+        <td><i class="fa  fa-users"></i></td>
+        <td>@item.codigo.ToString()</td>
+        <td>@item.nomeCliente</td>
+        <td>@item.razaoSocial</td>
+        <td>@item.cnpj_cpf</td>
+        <td>@item.tipoPessoa</td>
 
-        </tr>
+    </tr>
     }
 </table>
 

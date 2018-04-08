@@ -16,6 +16,21 @@ namespace OscaApp.Data
         {
             this.db = dbContext;
         }
+
+        public void Delete(ContasReceber contasReceber)
+        {
+            try
+            {
+                db.ContasR.Remove(contasReceber);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
         public void Add(ContasReceber contasReceber)
         {
             try

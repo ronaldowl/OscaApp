@@ -16,6 +16,20 @@ namespace OscaApp.Data
         {
             this.db = dbContext;
         }
+        public void Delete(Comunicado modelo)
+        {
+            try
+            {
+                db.Comunicados.Remove(modelo);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
         public void Add(Comunicado comunicado)
         {
             try

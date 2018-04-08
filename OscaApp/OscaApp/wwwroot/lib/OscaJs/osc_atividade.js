@@ -27,7 +27,7 @@ function desabilitaCampos_Atividade(status) {
 }
 
 function DeleteAtividade(id) {
-    debugger;
+    
 
     DeleteService(id, "AtividadeAPI", "GridAtividade?view=0");      
 } 

@@ -54,6 +54,7 @@ namespace OscaApp.Data
     {
         void Add(Comunicado comunicado);
         void Update(Comunicado comunicado);
+        void Delete(Comunicado comunicado);
         Comunicado Get(Guid id, Guid idOrg);
         List<Comunicado> GetAll(Guid idOrg);
     }
@@ -116,6 +117,7 @@ namespace OscaApp.Data
     {
         void Add(ContasPagar contasPagar);
         void Update(ContasPagar contasPagar);
+        void Delete(ContasPagar contasPagar);
         void UpdateStatus(ContasPagar contasPagar);
         ContasPagar Get(Guid id );
         List<ContasPagar> GetAll(Guid idOrg, int view);
@@ -134,6 +136,7 @@ namespace OscaApp.Data
         void Add(ContasReceber contasReceber);
         void Update(ContasReceber contasReceber);
         void UpdateStatus(ContasReceber contasReceber);
+        void Delete(ContasReceber contasReceber);
 
         ContasReceber Get(Guid id );
         List<ContasReceber> GetAll(Guid idOrg, int view);
@@ -226,6 +229,7 @@ namespace OscaApp.Data
     {
         void Add(Endereco endereco);
         void Update(Endereco endereco);
+        void Delete(Endereco endereco);
         Endereco Get(Guid id);
         List<Endereco> GetAll(Guid idOrg);
         List<Endereco> GetAllByIdClinte(Guid idCliente);

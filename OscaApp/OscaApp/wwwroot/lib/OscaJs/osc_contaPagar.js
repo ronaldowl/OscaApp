@@ -48,27 +48,7 @@ function desabilitaCampos_Status(status)
     }
 }
 
-function setStatus() {
+function DeleteContasPagar(id) {
 
-    var relacao = {
-        id: "111" 
-    } 
-
-    
-       
-     
-            $.ajax({
-            url: 'http://localhost:49797/api/SetStatus',
-                type: 'POST',
-                data: JSON.stringify(relacao),
-                contentType: "application/json;charset=utf-8",
-                success: function (data) {
-                    WriteResponse(data);
-                },
-                error: function (x, y, z) {
-                    alert(x + '\n' + y + '\n' + z);
-                }
-            });
-
-       
+    DeleteService(id, "ContasPagarAPI", "GridContasPagar?view=0");
 } 

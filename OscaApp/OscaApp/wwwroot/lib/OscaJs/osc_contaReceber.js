@@ -32,3 +32,9 @@ function OpenLookupCliente() {
         $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + idCliente);
     }
 } 
+
+
+function DeleteContasReceber(id) {
+
+    DeleteService(id, "ContasReceberAPI", "GridContasReceber?view=0");
+} 

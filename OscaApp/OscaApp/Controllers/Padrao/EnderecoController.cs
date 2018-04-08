@@ -12,7 +12,7 @@ using System.Linq;
 using X.PagedList;
 using OscaApp.framework;
 using OscaFramework.Models;
-
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {
@@ -21,12 +21,13 @@ namespace OscaApp.Controllers
     {
         private readonly IEnderecoData enderecoData;
         private ContextPage contexto;
+        private readonly SqlGenericData Sqlservice;
 
         public EnderecoController(ContexDataService db, IHttpContextAccessor httpContext)
         {
            
             this.enderecoData = new EnderecoData(db);
-
+            this.Sqlservice = new SqlGenericData();
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.contexto = new ContextPage().ExtractContext(httpContext);
 
@@ -34,6 +35,8 @@ namespace OscaApp.Controllers
 
         [TempData]
         public string StatusMessage { get; set; }
+        public string idCliente { get; set; }
+
 
         [HttpGet]
         public ViewResult FormCreateEndereco(string idCliente, string NomeCliente)
@@ -42,10 +45,10 @@ namespace OscaApp.Controllers
             modelo.endereco = new Endereco();
             try
             {
-            
-            modelo.contexto = contexto;          
-            modelo.endereco.idCliente = new Guid(idCliente);
-            modelo.endereco.idClienteName = NomeCliente;      
+             Relacao cliente = Sqlservice.RetornaRelacaoCliente(new Guid(idCliente));
+             modelo.contexto = contexto;          
+            modelo.endereco.idCliente = cliente.id;
+            modelo.endereco.idClienteName = cliente.idName;      
 
             }
             catch (Exception)
@@ -131,7 +134,8 @@ namespace OscaApp.Controllers
         {
             IEnumerable<Endereco> retorno = enderecoData.GetAllByIdClinte(new Guid(idCliente));
 
-            retorno = retorno.OrderBy(x => x.logradouro);
+            ViewBag.idcliente = idCliente;
+            retorno = retorno.OrderBy(x => x.logradouro);          
 
             if (Page == 0) Page = 1;
 

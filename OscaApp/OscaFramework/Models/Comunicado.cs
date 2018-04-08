@@ -11,8 +11,13 @@ namespace OscaFramework.Models
     {
     
         public String titulo { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dataInicio { get; set; }
+
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dataFim { get; set; }
+
         public String mensagem { get; set; }
         public Guid idOrganizacao { get; set; }
 

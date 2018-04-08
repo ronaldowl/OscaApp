@@ -36,7 +36,7 @@
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateComunicado", "Comunicado", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluir</span></button>
+                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteComunicado('@Model.comunicado.id')"> <span>Excluir</span></button>
                                             </label>
                                         </div>
                                     </td>

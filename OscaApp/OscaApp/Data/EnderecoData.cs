@@ -16,6 +16,19 @@ namespace OscaApp.Data
         {
             this.db = dbContext;        
         }
+        public void Delete(Endereco end)
+        {
+            try
+            {
+                db.Enderecos.Remove(end);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         public void Add(Endereco end)
         {
             try
