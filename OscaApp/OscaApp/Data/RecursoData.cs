@@ -16,6 +16,18 @@ namespace OscaApp.Data
         {
             this.db = dbContext;
         }
+        public void Delete(Recurso modelo)
+        {
+            try
+            {
+                db.Recursos.Remove(modelo);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public void Add(Recurso modelo)
         {
             try

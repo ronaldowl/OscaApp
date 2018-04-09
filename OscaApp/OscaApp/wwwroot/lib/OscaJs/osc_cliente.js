@@ -1,8 +1,64 @@
 ﻿//********************************* Biblioteca com funções da Tela de Cliente ***************
 
 function OnLoad() {
+
+    var status = $("#osc_status").val();
+    desabilita_Cliente(status);
   
 }
+ 
+function OnChangeFiltro() {
+
+    var filtro = $("#osc_filtro").val();
+
+    if (filtro == "0") { $(window.document.location).attr('href', "GridCliente?view=0"); }
+    if (filtro == "1") { $(window.document.location).attr('href', "GridCliente?view=1"); }
+
+
+}
+
+function SetStatusCliente(id, valor) {
+
+    if (valor == 0) {
+
+        if (confirm("Deseja Inativar o Registro? não será possivel mais usar esse cliente!")) {
+
+            SetStatus(id, valor);
+        }
+    }
+
+    if (valor == 1) {
+
+        if (confirm("Deseja Ativar o Registro?")) {
+
+            SetStatus(id, valor);
+        }
+    }
+
+}
+
+function SetStatus(id, valor ) {
+
+    
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: "/API/ClienteAPI/SetStatus",
+            data: {
+                valor: valor,
+                idCliente: id
+            },
+            success: function (dados) {
+                if (dados.statusOperation == true) {
+                    alert('Registro atualizado com sucesso!');
+                    $(window.document.location).attr('href', 'FormUpdateCliente?id=' + id);
+                } else {
+                    alert('Falha ao atualizar! - ' + dados.statusMensagem);
+                }
+            }
+        });
+    
+} 
 
 function OnChangeTipoPessoa()
 {   
@@ -53,10 +109,24 @@ function desabilita_Cliente(status) {
         $("#osc_salvar").hide();
         $("#osc_status_inativa").hide();
         $("#osc_endereco").hide();
+        $("#osc_ordemservico").hide();
+        $("#osc_atendimento").hide();
+        $("#osc_pedido").hide();
+        $("#osc_conta").hide();  
+        $("#botaoBuscarCliente").hide();  
+
+        
+
+        $("#osc_inativar").hide();      
+        $("#osc_ativar").show();
+
+
 
     } else {
 
-        $("#osc_status_Ativar").hide();
+        
+        $("#osc_ativar").hide();
+        $("#osc_inativar").show();
 
     }
 

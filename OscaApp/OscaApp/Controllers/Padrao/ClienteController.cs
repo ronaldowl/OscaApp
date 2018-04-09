@@ -164,11 +164,11 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridCliente(string filtro, int Page)
+        public ViewResult GridCliente(string filtro, int Page,int view)
         {
             try
             {
-                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
+                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, view);
 
                 if (!String.IsNullOrEmpty(filtro))
                 {
@@ -198,7 +198,7 @@ namespace OscaApp.Controllers
         {
             try
             {
-                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
+                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, 1);
 
                 return View(retorno.ToPagedList<Cliente>(1, 10));
 
@@ -216,7 +216,7 @@ namespace OscaApp.Controllers
         {
             try
             {
-                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao);
+                IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, 1);
 
                 if (!String.IsNullOrEmpty(filtro))
                 {

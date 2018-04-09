@@ -45,7 +45,10 @@
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" value=""> <span>Excluir</span></button>
+                                                <button id="osc_inativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusCliente('@Model.cliente.id', 0)"> <span>Inativar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_ativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusCliente('@Model.cliente.id', 1)"> <span>Ativar</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -117,7 +120,7 @@
                                         </span> &nbsp;
                                         <input id="osc_IdContatoName" asp-for="@Model.contato.idName" type="text" class="form-control" placeholder="...">
                                         <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info" onclick="CarregaLookup()">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookup()" id="botaoBuscarCliente">
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
@@ -149,7 +152,7 @@
                                
                             </div>
                             <div class="col-md-4">
-                                
+
                                 <div class="form-group">
                                     <label>Telefone</label>
                                     <div class="input-group">
@@ -166,6 +169,15 @@
                                             <span class="fa fa-mobile-phone fa-2x"></span>
                                         </span> &nbsp;
                                         <input id="osc_celular" asp-for="@Model.cliente.celular" type="text" class="form-control" maxlength="15" placeholder="..." />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-exclamation fa-2x"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_status" asp-for="@Model.cliente.status" type="text" class="form-control" disabled="disabled"   />
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -228,6 +240,7 @@
                                     </div>
                                 </div>
                             </div>
+                        
                         </div>
                     </div>
                     <!-- FOOTER -->

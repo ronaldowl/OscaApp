@@ -87,8 +87,9 @@ namespace OscaApp.Data
     {
         void Add(Cliente cliente);
         void Update(Cliente cliente);
+        void SetStatus(Cliente modelo);
         Cliente Get(Guid id, Guid idOrg);
-        List<Cliente> GetAll(Guid idOrg);       
+        List<Cliente> GetAll(Guid idOrg, int view);       
     }
     public interface IListaPrecoData
     {
@@ -127,6 +128,7 @@ namespace OscaApp.Data
     {
         void Add(Recurso recurso);
         void Update(Recurso recurso);
+        void Delete(Recurso recurso);
         Recurso Get(Guid id, Guid idOrg);
         List<Recurso> GetAll(Guid idOrg);
     }

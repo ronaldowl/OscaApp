@@ -22,15 +22,14 @@ namespace OscaApp.Data
         {        
                 try
                 {
-                    db.Fornecedor.Add(cliente);                
+                    db.Clientes.Add(cliente);                
                     db.SaveChanges();
                 }
                 catch (Exception ex)
                 {
                     throw;
                 }
-            }
-     
+            }     
         public void Update(Cliente modelo)
         {
             try
@@ -59,13 +58,31 @@ namespace OscaApp.Data
             }
 
         }
+        public void SetStatus(Cliente modelo)
+        {
+            try
+            {
+                db.Attach(modelo);
+                db.Entry(modelo).Property("status").IsModified = true;                
+                db.Entry(modelo).Property("modificadoPor").IsModified = true;
+                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+                db.Entry(modelo).Property("modificadoEm").IsModified = true;
+                
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         public Cliente Get(Guid id, Guid idOrg)
         {
             List<Cliente> retorno = new List<Cliente>();
             try
             {
                
-                retorno = db.Fornecedor.FromSql("SELECT * FROM Cliente where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }         
             catch (SqlException ex)
             {
@@ -75,10 +92,25 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
-        public List<Cliente> GetAll(Guid idOrg)
+        public List<Cliente> GetAll(Guid idOrg,int view)
         {
             List<Cliente> retorno = new List<Cliente>();
-            retorno = db.Fornecedor.FromSql("SELECT * FROM Cliente where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+
+            //Cliente Inativo
+            if (view == 0)
+            {
+                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where status = 0 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Cliente Ativo
+            if (view == 1)
+            {
+                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where status = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+
+
             return retorno;
 
         }
