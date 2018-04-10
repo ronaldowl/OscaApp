@@ -34,9 +34,7 @@
                                             <label>
                                                 <button id="osc_back_Produto" type="button" class="btn btn-info btn-lg fa fa-cubes" value="voltar" onclick="location.href='@Url.Action("GridProduto", "Produto", null)'"><span>Produtos</span></button>
                                             </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
-                                            </label>
+                                              
                                         </div>
                                     </td>
                                 </tr>
@@ -61,7 +59,7 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tr style="cursor:pointer;" id="@item.id" onclick="location.href='@Url.Action("FormUpdateListaPreco", "ListaPreco", new {id = item.id })'">
+                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateListaPreco", "ListaPreco", new {id = item.id })'">
                                     <td><i class="fa fa-list-alt"></i></td>
                                     <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateListaPreco", new { id = item.id })</td>
                                     <td>@item.padrao</td>

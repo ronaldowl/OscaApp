@@ -10,14 +10,14 @@ using OscaApp.Data;
 namespace OscaAPI.Controllers
 {
 
-    public class PedidoAPIController : Controller
+    public class OrdemServicoAPIController : Controller
     {
-        private readonly IPedidoData serviceData;
+        private readonly IOrdemServicoData serviceData;
 
 
-        public PedidoAPIController(ContexDataService db)
+        public OrdemServicoAPIController(ContexDataService db)
         {
-            this.serviceData = new PedidoData(db);
+            this.serviceData = new OrdemServicoData(db);
         }
 
         [Route("api/[controller]/Delete")]
@@ -27,7 +27,7 @@ namespace OscaAPI.Controllers
             ResultService retorno = new ResultService();
             try
             {
-                Pedido modelo = new Pedido();
+                OrdemServico modelo = new OrdemServico();
                 modelo.id = new Guid(id);
 
                 serviceData.Delete(modelo);

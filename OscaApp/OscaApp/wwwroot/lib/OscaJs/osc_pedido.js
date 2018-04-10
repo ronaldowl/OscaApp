@@ -7,6 +7,12 @@ function OnLoad_Pedido() {
 
 }
 
+function DeletePedido(id) {
+
+    DeleteService(id, "PedidoAPI", "GridPedido?view=0");
+} 
+
+
 function desabilita_Pedido(status) {
 
     //Fechado ou cancelado

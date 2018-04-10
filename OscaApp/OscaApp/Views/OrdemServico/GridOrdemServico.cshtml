@@ -70,7 +70,7 @@
                                     </thead>
                                     @foreach (var item in Model)
                                     {
-                                        <tr style="cursor:pointer;" id="@item.ordemServico.id" onclick="location.href='@Url.Action("FormUpdateOrdemServico", "OrdemServico", new {id = item.ordemServico.id })'">
+                                        <tr style="cursor:pointer;font-size:12px" id="@item.ordemServico.id" onclick="location.href='@Url.Action("FormUpdateOrdemServico", "OrdemServico", new {id = item.ordemServico.id })'">
                                             <td><i class="fa fa-file-text-o"></i></td>
                                             <td>@Html.ActionLink(item.ordemServico.codigo.ToString(), "FormUpdateOrdemServico", new { id = item.ordemServico.id })</td>
                                             <td>@item.cliente.idName</td>

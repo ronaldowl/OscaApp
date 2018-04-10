@@ -8,6 +8,11 @@ function OnLoad_OrdemServico() {
   
 }
 
+function DeleteOrdemServico(id) {
+
+    DeleteService(id, "OrdemServicoAPI", "GridOrdemServico?view=0");
+} 
+
 function OpenLookupCliente() {
     var idCliente = $("#osc_clienteId").val();
 

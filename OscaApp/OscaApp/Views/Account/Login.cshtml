@@ -73,7 +73,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <center> <h2 style="font-weight:bold">Seja bem vindo! ** Lançamento 10 de Abril **</h2></center>
+                <center> <h2 style="font-weight:bold">Seja bem vindo!</h2></center>
             </div><br />
             <div class="row">
                 <div class="col-md-5">
@@ -102,16 +102,7 @@
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-8">
-                                    <div class="checkbox">
-                                        <label asp-for="RememberMe">
-                                            <input asp-for="RememberMe" />
-                                            Lembrar de mim?
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                        
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-7">
                                     <button type="submit" class="btn btn-primary btn-lg" style="width:150px">Entrar</button>
@@ -121,7 +112,8 @@
                                 <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">&nbsp;&nbsp; Ativar nova Empresa?</a>
                             </p>
                             <p>
-                                <a asp-action="ForgotPassword">&nbsp;&nbsp; Esqueceu sua senha?</a>
+                                <label>Esqueceu sua senha? contate o suporte.</label><br />
+                                <label style="font-weight:bold">E-mail:suporte@oscas.com.br</label>
                             </p>
                         </form>
                     </section>
@@ -130,8 +122,7 @@
                     <section class="alert alert-warning text-justify">
                         <h5>Próximas manutenções!</h5>
                         <div>
-                            <ul>
-                                <li>07 de Abril de 2018 as 19:00</li>
+                            <ul>                               
                                 <li>05 de Maio de 2018  as 19:00</li>
                                 <li>02 de Junho de 2018 as 19:00</li>
                             </ul>
@@ -142,6 +133,7 @@
                         <ul>
                             <li>Integração com os Correios</li>
                             <li>Alerta via SMS</li>
+                            <li>Novos Relatórios</li>
 
                         </ul>
                     </section>

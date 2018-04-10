@@ -42,9 +42,7 @@
                                             <label>
                                                 <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
                                             </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
-                                            </label>
+                                             
                                         </div>
                                     </td>
                                 </tr>
@@ -69,13 +67,13 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tr style="cursor:pointer;" id="@item.atividade.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.atividade.id })'">
+                                <tr style="cursor:pointer; font-size:12px" id="@item.atividade.id" onclick="location.href='@Url.Action("FormUpdateAtividade", "Atividade", new {id = item.atividade.id })'">
                                     <td><i class="fa fa-file-archive-o"></i></td>
                                     <td>@Html.ActionLink(item.atividade.assunto, "FormUpdateAtividade", new { id = item.atividade.id })</td>
                                     <td>@item.profissional.idName</td>
                                     <td>@item.atividade.dataAlvo.ToShortDateString()</td>
                                     <td>@HelperEnum.FormatEnumTipoAtividade(@item.atividade.tipo)</td>
-                                    <td>@item.atividade.dataFechamento</td>
+                                    <td>@item.atividade.dataFechamento.ToShortDateString()</td>
                                     <td>@item.atividade.statusAtividade</td>
                                 </tr>
                             }

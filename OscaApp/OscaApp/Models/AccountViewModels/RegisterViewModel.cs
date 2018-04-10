@@ -34,6 +34,7 @@ namespace OscaApp.Models.AccountViewModels
         public ContextPage contexto { get; set; }
 
         public string idOrganizacao { get; set; }
+        public Boolean sucesso { get; set; }
 
     }
 }

@@ -15,7 +15,7 @@
     <script type="text/javaScript">
         function BloqueiSpacoEmBranco(input) {
             return input.replace(/^\s+|\s+$/g, "");
-            }
+        }
     </script>
 
 </head>
@@ -31,13 +31,13 @@
                 <h4 class="bg-warning text-center">@Model.msgOrganizacao</h4>
             }
             <div class="card-body">
-                <div class="col-8">
+                <div class="col-7">
                     <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="form-group">
                             <label asp-for="organizacao.nomeLogin" class="col-md-4 control-label">Empresa</label>
                             <div class="col-md-6">
-                                <input asp-for="organizacao.nomeLogin" class="form-control" onkeyup="this.value = BloqueiSpacoEmBranco( this.value )"  />
+                                <input asp-for="organizacao.nomeLogin" class="form-control" onkeyup="this.value = BloqueiSpacoEmBranco( this.value )" />
                                 <span asp-validation-for="organizacao.nomeLogin" class="text-danger"></span>
                             </div>
                         </div>
@@ -64,7 +64,15 @@
                         </div>
                         <div class="form-group">
                             <div class="  col-md-4">
-                                <button type="submit" class="btn btn-default">Registrar</button>
+                                @if (Model != null && Model.sucesso == true)
+                                {
+                                    <button type="button" class="btn btn-default btn-success" onclick="location.href='@Url.Action("Login", "Account", null)'">Login</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-default">Registrar</button>
+
+                                }
                             </div>
                         </div>
                     </form>
@@ -72,13 +80,14 @@
             </div>
         </div>
     </div>
+    <br />
     <footer>
         <nav class="navbar fixed-bottom" style="background-color:#0C0C0A">
             <div class="col-md8 offset-5">
                 <table>
                     <tr>
                         <td style="color:#FFF"><i class="fa  fa-2x fa-home "></i></td>
-                        <td style="color:#FFF"><h4>Osca Online Services 2017 </h4> </td>
+                        <td style="color:#FFF"><h4>Oscas Online Services 2018 </h4> </td>
                     </tr>
                 </table>
             </div>

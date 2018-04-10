@@ -70,6 +70,8 @@ namespace OscaApp.Data
         void Add(OrdemServico ordemServico);
         void Update(OrdemServico ordemServico);
         void UpdateStatus(OrdemServico ordemServico);
+        void Delete(OrdemServico ordemServico);
+
         OrdemServico Get(Guid id );
         List<OrdemServico> GetAll(Guid id);
         List<OrdemServicoGridViewModel> GetAllGridViewModel(Guid idOrg, int view);
@@ -150,6 +152,7 @@ namespace OscaApp.Data
     {
         void Add(Pedido pedido);
         void Update(Pedido pedido);
+        void Delete(Pedido pedido);
         Pedido Get(Guid id);
         List<Pedido> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);

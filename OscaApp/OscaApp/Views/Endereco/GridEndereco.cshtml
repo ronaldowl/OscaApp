@@ -44,7 +44,7 @@
 
                                 @foreach (var item in Model)
                                 {
-                                    <tr style="cursor:pointer;">
+                                    <tr style="cursor:pointer;font-size:12px">
                                         <td>@Html.ActionLink(item.logradouro.ToString(), "FormUpdateEndereco", new { id = item.id })</td>
                                         <td>@item.TipoEndereco</td>
                                         <td>@item.bairro</td>

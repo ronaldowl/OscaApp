@@ -18,6 +18,19 @@ namespace OscaApp.Data
         {
             this.db = dbContext;
         }
+        public void Delete(OrdemServico ordemServico)
+        {
+            try
+            {
+                db.OrdensServico.Remove(ordemServico);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
         public void Add(OrdemServico ordemServico)
         {
             try

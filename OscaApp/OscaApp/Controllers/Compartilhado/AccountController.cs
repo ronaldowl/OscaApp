@@ -245,7 +245,7 @@ namespace OscaApp.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                Guid idOrg = new Guid();
+                Guid idOrg = Guid.NewGuid();
                 SqlGenericManager _sqlManager = new SqlGenericManager();
                 SqlGeneric _sqlService = new SqlGeneric();
 
@@ -256,26 +256,26 @@ namespace OscaApp.Controllers
                     model.msgOrganizacao = "** Essa empresa já está cadastrada. ***";
                     return View(model);
                 }
-                
- 
-                //Cria nova Organização
-                idOrg = _sqlManager.CriaOrganizacao(model.organizacao.nomeLogin, model.Email);
 
                 //Passa informações da Org para o novo usuário
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = idOrg };
-                              
+
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                //Inicializa valores padrões
+                //Cria nova Organização e Inicializa valores padrões
                 _sqlService.InicializaOrg(idOrg.ToString(), model.organizacao.nomeLogin, model.Email);
 
-
                 if (result.Succeeded)
-                {                   
-                    return RedirectToLocal(returnUrl);
+                {
+                    model.sucesso = true;
+                    model.msgOrganizacao = "Organização criada, Empresa:" + model.organizacao.nomeLogin + ", E-mail de acesso:" + model.Email;
+                    return View(model);                     
                 }
-                AddErrors(result);
+                else
+                {
+                    AddErrors(result);
+                }
             }
 
             // If we got this far, something failed, redisplay form
@@ -531,7 +531,7 @@ namespace OscaApp.Controllers
             }
             else
             {
-                return RedirectToAction(nameof(AccountController.Login), "Account");
+                return RedirectToAction( "Login", "Account");
             }
         }
 
