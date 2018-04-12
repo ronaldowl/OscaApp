@@ -16,7 +16,7 @@
                                         <h5 style="font-weight:bold">Atendimentos: &nbsp;</h5>
                                     </td>
                                     <td>
-                                        <div class="input-group">
+                                        <div class="input-group ">
                                             <div class="form-group">
                                                 <label>Filtros</label>
                                                 <div class="input-group">
@@ -33,19 +33,19 @@
                                                 </div>
                                             </div>&nbsp;
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"> <span>Novo</span></button>
                                             </label>
                                             &nbsp;&nbsp;
                                             <span>
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                @Html.TextBox("filtro", "", new { @class = "form-control  ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
                                             </span>
-                                            <button type="submit" class="btn btn-info fa fa-search"></button>
+                                            <button type="submit" class="btn btn-info fa fa-1x fa-search"></button>
                                             &nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove " value="Limpar" onclick="RecarregarGridAtendimento()"> <span>Limpar</span></button>
                                             </label>&nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_calendario" type="button" class="btn btn-info btn-lg fa fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
+                                                <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
                                             </label>
                                         </div>
                                     </td>
@@ -156,7 +156,7 @@
             </div>
         </div>
     </div>
-
+<script src="~/lib/OscaJs/osc_atendimento.js"></script>
 <script>
 
     var url = window.location.search.replace("?", "");

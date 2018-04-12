@@ -62,9 +62,9 @@ namespace OscaApp.Data
         }
         public Organizacao Get(Guid idOrg)
         {
-            List<Organizacao> retorno = new List<Organizacao>();
-            retorno = db.Organizacao.FromSql("SELECT * FROM Organizacao where  id = '" + idOrg.ToString() + "'").ToList();
-            return retorno[0];
+            Organizacao retorno = new Organizacao ();
+            retorno = db.Organizacao.Single(A => A.id.Equals(idOrg));
+            return retorno;
         }
      
     }

@@ -174,6 +174,10 @@ namespace OscaApp.Controllers
         {
             SqlGeneric sqlServices = new SqlGeneric();
             string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
+            
+            //Se tiver filtro, busca em todas as linhas
+            if (!String.IsNullOrEmpty(filtro)) view = 2;
+
 
             IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridViewModel(contexto.idOrganizacao, view, idProfissional);
 

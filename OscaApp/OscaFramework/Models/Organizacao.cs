@@ -44,6 +44,19 @@ namespace OscaFramework.Models
         public DateTime dataExpiracao { get; set; }      
         public DateTime dataPagamento { get; set; }
 
+        [Key]
+        public Guid id { get; set; }
+
+        [NotMapped]
+        public int entityType { get; set; }
+        public Guid criadoPor { get; set; }
+        public string criadoPorName { get; set; }
+        public Guid modificadoPor { get; set; }
+        public string modificadoPorName { get; set; }
+        public CustomEnumStatus.Status status { get; set; }
+
+        public DateTime modificadoEm { get; set; }
+        public DateTime criadoEm { get; set; }
 
 
         public Organizacao(Guid idOrg)

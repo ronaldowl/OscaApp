@@ -118,6 +118,10 @@ namespace OscaApp.Controllers
         {
             IEnumerable<ContasPagar> retorno = contasPagarData.GetAll(contexto.idOrganizacao, view);
 
+            //Se tiver filtro, busca em todas as linhas
+            if (!String.IsNullOrEmpty(filtro)) view = 2;
+
+
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno where

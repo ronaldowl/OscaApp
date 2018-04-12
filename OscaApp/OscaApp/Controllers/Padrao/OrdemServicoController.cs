@@ -149,6 +149,9 @@ namespace OscaApp.Controllers
 
             if (String.IsNullOrEmpty(idCliente)) {
 
+                //Se tiver filtro, busca em todas as linhas
+                if (!String.IsNullOrEmpty(filtro)) view = 4;
+
                 retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao, view);
             }
             else

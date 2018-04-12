@@ -32,7 +32,7 @@
                                                 </div>
                                             </div>&nbsp;
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreatePedido", "Pedido", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreatePedido", "Pedido", null)'"> <span>Novo</span></button>
                                             </label>
                                             &nbsp;&nbsp;
                                             <span>
@@ -41,12 +41,8 @@
                                             <button type="submit" class="btn btn-info fa fa-search"></button>
                                             &nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                            </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
-                                            </label>
-                                        </div>
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridPedido()"> <span>Limpar</span></button>
+                                            </label> 
                                     </td>
                                 </tr>
                             </table>
@@ -151,7 +147,7 @@
         </div>
     </div>
 </div>
-
+<script src="~/lib/OscaJs/osc_pedido.js"></script>
 <script>
 
     var url = window.location.search.replace("?", "");

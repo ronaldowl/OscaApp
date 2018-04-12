@@ -13,6 +13,11 @@ function DeleteAtendimento(id) {
     DeleteService(id, "AtendimentoAPI", "GridAtendimento?view=0");
 } 
 
+function RecarregarGridAtendimento() {
+
+    $(window.document.location).attr('href', "GridAtendimento?view=0");
+
+}
 
 function OpenLookupCliente()
 {

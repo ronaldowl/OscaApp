@@ -31,3 +31,9 @@ function DeleteAtividade(id) {
 
     DeleteService(id, "AtividadeAPI", "GridAtividade?view=0");      
 } 
+
+function RecarregarGridAtividade() {
+
+    $(window.document.location).attr('href', "GridAtividade?view=0");
+
+}

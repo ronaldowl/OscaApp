@@ -127,6 +127,9 @@ namespace OscaApp.Controllers
 
             if (String.IsNullOrEmpty(idCliente))
             {
+                //Se tiver filtro, busca em todas as linhas
+                if (!String.IsNullOrEmpty(filtro)) view = 2;
+
                 retorno = contasReceberData.GetAll(contexto.idOrganizacao, view);
             }
             else

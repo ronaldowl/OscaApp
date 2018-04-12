@@ -38,3 +38,9 @@ function DeleteContasReceber(id) {
 
     DeleteService(id, "ContasReceberAPI", "GridContasReceber?view=0");
 } 
+
+function RecarregarGridContaReceber() {
+
+    $(window.document.location).attr('href', "GridContasReceber?view=0");
+
+}

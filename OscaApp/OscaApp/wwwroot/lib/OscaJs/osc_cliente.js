@@ -17,6 +17,12 @@ function OnChangeFiltro() {
 
 }
 
+function RecarregarGridConta() {
+
+    $(window.document.location).attr('href', "GridCliente?view=1");
+
+}
+
 function SetStatusCliente(id, valor) {
 
     if (valor == 0) {

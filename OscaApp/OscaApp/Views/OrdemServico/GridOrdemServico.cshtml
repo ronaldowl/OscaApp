@@ -33,7 +33,7 @@
                                                 </div>
                                             </div>&nbsp;
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico", null)'"> <span>Novo</span></button>
                                             </label>
                                             &nbsp;&nbsp;
                                             <span>
@@ -42,7 +42,7 @@
                                             <button type="submit" class="btn btn-info fa fa-search"></button>
                                             &nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridOrdemServico()"> <span>Limpar</span></button>
                                             </label>&nbsp;&nbsp;
 
                                         </div>
@@ -150,6 +150,7 @@
         </div>
     </div>
 </div>
+<script src="~/lib/OscaJs/osc_ordemServico.js"></script>
     <script>
 
         var url = window.location.search.replace("?", "");

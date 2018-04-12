@@ -52,3 +52,9 @@ function DeleteContasPagar(id) {
 
     DeleteService(id, "ContasPagarAPI", "GridContasPagar?view=0");
 } 
+
+function RecarregarGridContaPagar() {
+
+    $(window.document.location).attr('href', "GridContasPagar?view=0");
+
+}

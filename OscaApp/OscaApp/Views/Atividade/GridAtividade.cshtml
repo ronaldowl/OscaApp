@@ -21,7 +21,7 @@
                                                 <label>Filtros</label>
                                                 <div class="input-group">
                                                     &nbsp;<div class="col-2">
-                                                        <select id="osc_filtro" class="form-control" required="required" onchange="OnChangeFiltro();">
+                                                        <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
                                                             <option value="0" selected="">Minhas Atividades Abertas</option>
                                                             <option value="1">Minhas Atividades Fechadas</option>
                                                             <option value="2">Todas Fechadas</option>
@@ -31,7 +31,7 @@
                                                 </div>
                                             </div>&nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateAtividade", "Atividade", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateAtividade", "Atividade", null)'"> <span>Novo</span></button>
                                             </label>
                                             &nbsp;&nbsp;
                                             <span>
@@ -40,7 +40,7 @@
                                             <button type="submit" class="btn btn-info fa fa-search"></button>
                                             &nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridAtividade()"> <span>Limpar</span></button>
                                             </label>&nbsp;&nbsp;
                                              
                                         </div>
@@ -145,6 +145,7 @@
             </div>
         </div>
     </div>
+<script src="~/lib/OscaJs/osc_atividade.js"></script>
 <script>
 
     var url = window.location.search.replace("?", "");

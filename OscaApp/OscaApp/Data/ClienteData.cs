@@ -109,7 +109,11 @@ namespace OscaApp.Data
                 retorno = db.Clientes.FromSql("SELECT * FROM Cliente where status = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }
 
-
+            //Todos Clientes  
+            if (view == 2)
+            {
+                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
 
             return retorno;
 

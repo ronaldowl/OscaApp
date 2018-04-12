@@ -2,6 +2,8 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+
+
  
     <div class="row">
         <div class="col-md-10 offset-1">
@@ -20,15 +22,15 @@
                                                 <label>Filtros</label>
                                                 <div class="input-group">
                                                     &nbsp;<div class="col-2">
-                                                        <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">                                                           
-                                                            <option value="1" selected="">Todas Ativos</option>
-                                                            <option value="0">Todas Inativos</option>
-                                                        </select>
+                                                              <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
+                                                                  <option value="1" selected="">Todas Ativos</option>
+                                                                  <option value="0">Todas Inativos</option>                                                                   
+                                                              </select>
                                                     </div>
                                                 </div>
                                             </div>&nbsp;
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateCliente", "Cliente", null)'"> <span>Novo</span></button>
                                             </label>
                                             &nbsp;&nbsp;
                                             <span>
@@ -37,12 +39,9 @@
                                             <button type="submit" class="btn btn-info fa fa-search"></button>
                                             &nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridConta()"> <span>Limpar</span></button>
                                             </label>
-                                            &nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_voltar" type="button" class="btn btn-info btn-lg fa fa-backward" onclick="history.back();"> <span>Voltar</span></button>
-                                            </label>
+                                           
                                         </div>
                                     </td>
                                 </tr>
@@ -148,4 +147,17 @@
         </div>
     </div>
 <script src="~/lib/OscaJs/osc_cliente.js"></script>
+<script>
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+
+</script>
  

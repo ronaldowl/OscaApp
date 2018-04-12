@@ -159,11 +159,15 @@ namespace OscaApp.Controllers
 
                 if(String.IsNullOrEmpty(idCliente))
                 {
+                    //Se tiver filtro, busca em todas as linhas
+                    if (!String.IsNullOrEmpty(filtro)) view = 4;
+
 
                     retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao, view);
                 }
                 else
                 {
+                  
                     retorno = pedidoData.GetAllGridViewModelByCliente(new Guid(idCliente));
                 }
 

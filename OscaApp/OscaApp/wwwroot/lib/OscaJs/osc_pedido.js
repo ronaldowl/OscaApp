@@ -12,6 +12,11 @@ function DeletePedido(id) {
     DeleteService(id, "PedidoAPI", "GridPedido?view=0");
 } 
 
+function RecarregarGridPedido() {
+
+    $(window.document.location).attr('href', "GridPedido?view=0");
+
+}
 
 function desabilita_Pedido(status) {
 
