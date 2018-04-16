@@ -51,6 +51,12 @@ namespace OscaFramework.Models
             atendido = 1,
             cancelado = 2            
         }
+        public enum StatusAgendamento
+        {
+            agendado = 0,
+            concluido = 1,
+            cancelado = 2
+        }
         public enum StatusContaReceber
         {
             agendado = 0,

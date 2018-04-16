@@ -1,0 +1,289 @@
+﻿@model OscaApp.ViewModels.AgendamentoViewModel
+
+<script>
+    function CarregaLookupCliente() {
+        $("#lookupCliente").load("/Cliente/LookupCliente", function () {
+            $("#lookupCliente").modal("show");
+        })
+    }
+
+    function CarregaLookupServico() {
+
+        $("#lookupServico").load("/servico/LookupServico", function () {
+            $("#lookupServico").modal("show");
+        });
+    }
+    function CarregaLookupProfissional() {
+
+        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
+            $("#lookupProfissional").modal("show");
+        });
+    }
+</script>
+
+<div id="contexto">
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+</div>
+<div class="row">
+        <div class="col-md-10 offset-1">
+            <form action="FormCreateAgendamento" method="post" id="FormCreateAgendamento">
+                <div class="card" id="osc_MainForm">
+                    <div class="card-header">
+                        <div class="card-title ">
+                            <table>
+                                <tr>
+                                    <td><h3>Agendamento: &nbsp;&nbsp;</h3></td>
+                                    <td>
+                                        <div id="osc_barrabotoes">
+                                            <label>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-window-close" value="Fechar" onclick="location.href='@Url.Action("Gridagendamento", "Agendamento" , null)'"> <span>Fechar</span></button>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+           
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Código</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <input id="osc_nome" asp-for="@Model.agendamento.codigo" placeholder="Codigo" class="form-control" type="text" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label" style="color:red">Cliente *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user-o fa-1x"></span>
+                                        </span>
+                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
+                                        <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
+                                        <span class="input-group-btn ">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
+                                                <span class="fa fa-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>                            
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Data agendada</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
+                                            <input id="osc_dataInicio" asp-for="@Model.agendamento.dataAgendada" class="form-control" type="text" value="" required="required">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hora Inicio</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
+                                            <select id="osc_horaInicio" asp-for="@Model.horaInicio.horaDia" class="form-control" onchange="ValidaHora(1);" required="required">
+                                                <option value="1">01:00</option>
+                                                <option value="2">01:30</option>
+                                                <option value="3">02:00</option>
+                                                <option value="4">02:30</option>
+                                                <option value="5">03:00</option>
+                                                <option value="6">03:30</option>
+                                                <option value="7">04:00</option>
+                                                <option value="8">04:30</option>
+                                                <option value="9">05:00</option>
+                                                <option value="10">05:30</option>
+                                                <option value="11">06:00</option>
+                                                <option value="12">06:30</option>
+                                                <option value="13">07:00</option>
+                                                <option value="14">07:30</option>
+                                                <option value="15" selected="">08:00</option>
+                                                <option value="16">08:30</option>
+                                                <option value="17">09:00</option>
+                                                <option value="18">09:30</option>
+                                                <option value="19">10:00</option>
+                                                <option value="20">10:30</option>
+                                                <option value="21">11:00</option>
+                                                <option value="22">11:30</option>
+                                                <option value="23">12:00</option>
+                                                <option value="24">12:30</option>
+                                                <option value="25">13:00</option>
+                                                <option value="26">13:30</option>
+                                                <option value="27">14:00</option>
+                                                <option value="28">14:30</option>
+                                                <option value="29">15:00</option>
+                                                <option value="30">15:30</option>
+                                                <option value="31">16:00</option>
+                                                <option value="32">16:30</option>
+                                                <option value="33">17:00</option>
+                                                <option value="34">17:30</option>
+                                                <option value="35">18:00</option>
+                                                <option value="36">18:30</option>
+                                                <option value="37">19:00</option>
+                                                <option value="38">19:30</option>
+                                                <option value="39">20:00</option>
+                                                <option value="40">20:30</option>
+                                                <option value="41">21:00</option>
+                                                <option value="42">21:30</option>
+                                                <option value="43">22:00</option>
+                                                <option value="44">22:30</option>
+                                                <option value="45">23:00</option>
+                                                <option value="46">23:30</option>
+                                                <option value="47">00:00</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Hora Fim</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
+                                            <select id="osc_horaFim" asp-for="@Model.horaFim.horaDia" class="form-control" onchange="ValidaHora(2);" required="required">
+                                                <option value="1">01:00</option>
+                                                <option value="2">01:30</option>
+                                                <option value="3">02:00</option>
+                                                <option value="4">02:30</option>
+                                                <option value="5">03:00</option>
+                                                <option value="6">03:30</option>
+                                                <option value="7">04:00</option>
+                                                <option value="8">04:30</option>
+                                                <option value="9">05:00</option>
+                                                <option value="10">05:30</option>
+                                                <option value="11">06:00</option>
+                                                <option value="12">06:30</option>
+                                                <option value="13">07:00</option>
+                                                <option value="14">07:30</option>
+                                                <option value="15">08:00</option>
+                                                <option value="16">08:30</option>
+                                                <option value="17">09:00</option>
+                                                <option value="18">09:30</option>
+                                                <option value="19">10:00</option>
+                                                <option value="20">10:30</option>
+                                                <option value="21">11:00</option>
+                                                <option value="22">11:30</option>
+                                                <option value="23">12:00</option>
+                                                <option value="24">12:30</option>
+                                                <option value="25">13:00</option>
+                                                <option value="26">13:30</option>
+                                                <option value="27">14:00</option>
+                                                <option value="28">14:30</option>
+                                                <option value="29">15:00</option>
+                                                <option value="30">15:30</option>
+                                                <option value="31">16:00</option>
+                                                <option value="32">16:30</option>
+                                                <option value="33">17:00</option>
+                                                <option value="34">17:30</option>
+                                                <option value="35">18:00</option>
+                                                <option value="36">18:30</option>
+                                                <option value="37">19:00</option>
+                                                <option value="38">19:30</option>
+                                                <option value="39">20:00</option>
+                                                <option value="40">20:30</option>
+                                                <option value="41">21:00</option>
+                                                <option value="42">21:30</option>
+                                                <option value="43">22:00</option>
+                                                <option value="44">22:30</option>
+                                                <option value="45">23:00</option>
+                                                <option value="46">23:30</option>
+                                                <option value="47" selected="selected">00:00</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Profissional</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required">
+                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color:gray ; height:20px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; </span></div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </span>
+                                        <input id="osc_criadoPor" asp-for="@Model.agendamento.criadoPorName " type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-1x"></span>
+                                        </span>
+                                        <input id="osc_criadoEm" asp-for="@Model.agendamento.criadoEm " type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-user"></span>
+                                        </span>
+                                        <input id="osc_modificadoPor" for=" " type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-1x"></span>
+                                        </span>
+                                        <input id="osc_modificadoEm" for=" " type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<div class="modal fade" id="lookupCliente">
+</div>
+<div class="modal fade" id="lookupServico">
+</div>
+<div class="modal fade" id="lookupProfissional">
+</div>
+<script src="~/lib/OscaJs/osc_global.js"></script>
+<script src="~/lib/OscaJs/osc_agendamento.js"></script>
+
+<script>OnLoad_Agendamento();</script>

@@ -12,30 +12,25 @@ namespace OscaFramework.Models
     public class Atendimento : GenericEntity
     {
         public Guid idOrganizacao { get; set; }
-        public Guid idCliente { get; set; }        
-        public Guid idReferencia { get; set; }
+        public Guid idCliente { get; set; }
         public Guid idProfissional { get; set; }
+        public Guid idServico { get; set; }
+
 
         public string codigo { get; set; }
         public string titulo { get; set; }
         public string problema { get; set; }
-        public string diagnostico { get; set; }
-        public string laudo { get; set; }
+        public string diagnostico { get; set; }      
         public string observacao { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime dataAgendada { get; set; }
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime dataFechamento { get; set; }
-        
-        public int horaInicio { get; set; }
-        public int horaFim { get; set; }
-
-
+        public DateTime dataFechamento { get; set; }       
+            
         public StatusAtendimento statusAtendimento { get; set; }
-        public TipoReferencia tipoReferencia { get; set; }
-
+     
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valor { get; set; }
 

@@ -6,7 +6,7 @@ namespace OscaFramework.Helper
 {
    public static  class HelperCalendario
     {
-        public static string RetornaHoraFormatda(int hora)
+        public static string RetornaHoraFormatada(int hora)
         {
             string horaFormatada = "";               
 

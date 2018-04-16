@@ -1,6 +1,8 @@
-﻿
+﻿@model OscaFramework.Models.Relatorio
+@{
+    Layout = "_LayoutPrint";
+}
 
-<div id="MainGridServico">
-    <iframe class="embed-responsive-item" src="http://ronaldowl-001-site6.gtempurl.com/ReportRenderAdm?org=trine" height="500" width="1223"></iframe>
+<div id="MainPrint">
+    <iframe class="embed-responsive-item embed-responsive-1by1" src="@Model.url"></iframe>
 </div>
-

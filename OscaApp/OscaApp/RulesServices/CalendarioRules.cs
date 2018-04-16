@@ -27,7 +27,7 @@ namespace OscaApp.RulesServices
             retorno.qtdDias = qtdDiasMes;
 
             List<Dia> diasMEs = new List<Dia>();
-            List<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosMes(Mes.ToString(), Ano.ToString(), idProfissional, contexto.idOrganizacao.ToString());
+            List<Agendamento> Agendamentos = sqlServices.RetornaAgendamentosMes(Mes.ToString(), Ano.ToString(), idProfissional, contexto.idOrganizacao.ToString());
 
             //Preenche todos o dias do Mes
             for (int i = 1; i <= qtdDiasMes; i++)
@@ -37,7 +37,7 @@ namespace OscaApp.RulesServices
                 Dia dia = new Dia();
                 dia.dia = i;
                 dia.nomeDia = dataFormat.GetDayName(dataRef.DayOfWeek);
-                dia.itensCalendario = PreencheItemCalendario(i, Atendimentos);
+                dia.itensCalendario = PreencheItemCalendario(i, Agendamentos);
                 diasMEs.Add(dia);
             }
             retorno.dias = diasMEs;
@@ -48,29 +48,28 @@ namespace OscaApp.RulesServices
             return retorno;
         }
 
-
-        public static List<ItemCalendario> PreencheItemCalendario(int dia, List<Atendimento> atendimentos)
+        public static List<ItemCalendario> PreencheItemCalendario(int dia, List<Agendamento> agendamentos)
         {
             List<ItemCalendario> retorno = new List<ItemCalendario>();
 
-            foreach (var item in atendimentos)
+            foreach (var item in agendamentos)
             {
                 if (item.dataAgendada.Day == dia)
                 {
-                    ItemCalendario atendimento = new ItemCalendario();
-                    atendimento.id = item.id.ToString();
-                    atendimento.titulo = item.codigo;
-                    atendimento.statusAtendimento = item.statusAtendimento;
+                    ItemCalendario agendamento = new ItemCalendario();
+                    agendamento.id = item.id.ToString();
+                    agendamento.titulo = item.codigo;
+                    agendamento.statusAgendamento = item.statusAgendamento;
 
-                    atendimento.inicio = new ItemHoraDia();
-                    atendimento.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
-                    atendimento.inicio.HoraFormatada = HelperCalendario.RetornaHoraFormatda(item.horaInicio);
+                    agendamento.inicio = new ItemHoraDia();
+                    agendamento.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
+                    agendamento.inicio.HoraFormatada = HelperCalendario.RetornaHoraFormatada(item.horaInicio);
 
-                    atendimento.fim = new ItemHoraDia();
-                    atendimento.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
-                    atendimento.fim.HoraFormatada = HelperCalendario.RetornaHoraFormatda(item.horaFim);
+                    agendamento.fim = new ItemHoraDia();
+                    agendamento.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
+                    agendamento.fim.HoraFormatada = HelperCalendario.RetornaHoraFormatada(item.horaFim);
 
-                    retorno.Add(atendimento);
+                    retorno.Add(agendamento);
                 }
             }
 
@@ -91,7 +90,7 @@ namespace OscaApp.RulesServices
             retorno.nomeMes = dataFormat.MonthNames[Mes - 1];
 
             SqlGenericData sqldata = new SqlGenericData();
-            IEnumerable<Atendimento> Atendimentos = sqlServices.RetornaAtendimentosDia(data, idProfissional, contexto.idOrganizacao.ToString());
+            IEnumerable<Agendamento> Atendimentos = sqlServices.RetornaAgendamentosDia(data, idProfissional, contexto.idOrganizacao.ToString());
            
             List<ItemCalendario> lancamentos = new List<ItemCalendario>();
           
@@ -106,7 +105,7 @@ namespace OscaApp.RulesServices
                         hoc.inicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
                         hoc.fim = new ItemHoraDia();
                         hoc.fim.horaDia = (CustomEnum.itemHora)item.horaFim;
-                        hoc.titulo = item.titulo;
+                     
                         hoc.cliente = sqldata.RetornaRelacaoCliente(item.idCliente).idName;
                         hoc.tipo = item.tipoReferencia.ToString();
 

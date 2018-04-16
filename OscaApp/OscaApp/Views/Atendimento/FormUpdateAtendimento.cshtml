@@ -46,397 +46,258 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
 </div>
 <div class="row">
-        <div class="col-md-10 offset-1">
-            @if (!String.IsNullOrEmpty(Model.StatusMessage))
-            {
+    <div class="col-md-10 offset-1">
+        @if (!String.IsNullOrEmpty(Model.StatusMessage))
+        {
 
-                <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
-                    <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    @Model.StatusMessage
-                </div>
-            }
-            <form action="FormUpdateAtendimento" method="post" id="FormUpdateAtendimento">
-                <input id="osc_idAtendimento" asp-for="@Model.atendimento.id" type="hidden" class="form-control" value="@Model.atendimento.id" />
-                <div class="card" id="osc_MainForm">
-                    <div class="card-header">
-                        <div class="card-title ">
-                            <table>
-                                <tr>
-                                    <td><h3>Atendimento: &nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value=""> <span>Salvar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento" , null)'"> <span>Novo</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento" , null)'"> <span>Fechar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatus()"> <span>Reabrir</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-paste" onclick="Imprimir();"> <span>Ficha</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteAtendimento('@Model.atendimento.id')"> <span>Excluir</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" value="" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
-                                            </label>
-                                            <span class="input-group-addon m-2" style="font-weight:bold;font-size:20px"> Valor:</span>
-                                            <input id="osc_valor" asp-for="@Model.atendimento.valor" class=" " type="text">
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessage
+            </div>
+        }
+        <form action="FormUpdateAtendimento" method="post" id="FormUpdateAtendimento">
+            <input id="osc_idAtendimento" asp-for="@Model.atendimento.id" type="hidden" class="form-control" value="@Model.atendimento.id" />
+            <div class="card" id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title ">
+                        <table>
+                            <tr>
+                                <td><h3>Atendimento: &nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value=""> <span>Salvar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento" , null)'"> <span>Novo</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento" , null)'"> <span>Fechar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatus()"> <span>Reabrir</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-paste" onclick="Imprimir();"> <span>Ficha</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteAtendimento('@Model.atendimento.id')"> <span>Excluir</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" value="" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
+                                        </label>                                      
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Código</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_nome" asp-for="@Model.atendimento.codigo" placeholder="Codigo" class="form-control" type="text" disabled="disabled">
-                                        </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Código</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_nome" asp-for="@Model.atendimento.codigo" placeholder="Codigo" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Cliente *</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="color:red">Cliente *</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" value="@Model.cliente.idName" required="required">
+                                    <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
+                                    <span class="input-group-btn ">
+                                        <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="osc_buscaCliente">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Título</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" value="@Model.cliente.idName" required="required">
-                                        <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                        <input id="osc_titulo" asp-for="@Model.atendimento.titulo" class="form-control" type="text" required="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Servico</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupServico();" style="cursor:pointer"></i></span>&nbsp;
+                                        <input asp-for="@Model.servico.idName" class="form-control" type="text" id="osc_IdNameServico" required="required">
+                                        <input asp-for="@Model.servico.id" class="form-control" type="hidden" id="osc_IdServico">
                                         <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="osc_buscaCliente">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookupServico()" id="osc_botaoBuscaServico">
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">Título</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                            <input id="osc_titulo" asp-for="@Model.atendimento.titulo" class="form-control" type="text" required="required">
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Data agendada</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input id="osc_dataInicio" asp-for="@Model.atendimento.dataAgendada" class="form-control" type="text" required="required">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Hora Inicio</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <select id="osc_horaInicio" asp-for="@Model.horaInicio.horaDia" class="form-control" onchange="ValidaHora(1);" required="required">
-                                                <option value="1">01:00</option>
-                                                <option value="2">01:30</option>
-                                                <option value="3">02:00</option>
-                                                <option value="4">02:30</option>
-                                                <option value="5">03:00</option>
-                                                <option value="6">03:30</option>
-                                                <option value="7">04:00</option>
-                                                <option value="8">04:30</option>
-                                                <option value="9">05:00</option>
-                                                <option value="10">05:30</option>
-                                                <option value="11">06:00</option>
-                                                <option value="12">06:30</option>
-                                                <option value="13">07:00</option>
-                                                <option value="14">07:30</option>
-                                                <option value="15">08:00</option>
-                                                <option value="16">08:30</option>
-                                                <option value="17">09:00</option>
-                                                <option value="18">09:30</option>
-                                                <option value="19">10:00</option>
-                                                <option value="20">10:30</option>
-                                                <option value="21">11:00</option>
-                                                <option value="22">11:30</option>
-                                                <option value="23">12:00</option>
-                                                <option value="24">12:30</option>
-                                                <option value="25">13:00</option>
-                                                <option value="26">13:30</option>
-                                                <option value="27">14:00</option>
-                                                <option value="28">14:30</option>
-                                                <option value="29">15:00</option>
-                                                <option value="30">15:30</option>
-                                                <option value="31">16:00</option>
-                                                <option value="32">16:30</option>
-                                                <option value="33">17:00</option>
-                                                <option value="34">17:30</option>
-                                                <option value="35">18:00</option>
-                                                <option value="36">18:30</option>
-                                                <option value="37">19:00</option>
-                                                <option value="38">19:30</option>
-                                                <option value="39">20:00</option>
-                                                <option value="40">20:30</option>
-                                                <option value="41">21:00</option>
-                                                <option value="42">21:30</option>
-                                                <option value="43">22:00</option>
-                                                <option value="44">22:30</option>
-                                                <option value="45">23:00</option>
-                                                <option value="46">23:30</option>
-                                                <option value="47">00:00</option>
-                                                <option value="48">00:30</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Hora Fim</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <select id="osc_horaFim" asp-for="@Model.horaFim.horaDia" class="form-control" onchange="ValidaHora(2);" required="required">
-                                                <option value="1">01:00</option>
-                                                <option value="2">01:30</option>
-                                                <option value="3">02:00</option>
-                                                <option value="4">02:30</option>
-                                                <option value="5">03:00</option>
-                                                <option value="6">03:30</option>
-                                                <option value="7">04:00</option>
-                                                <option value="8">04:30</option>
-                                                <option value="9">05:00</option>
-                                                <option value="10">05:30</option>
-                                                <option value="11">06:00</option>
-                                                <option value="12">06:30</option>
-                                                <option value="13">07:00</option>
-                                                <option value="14">07:30</option>
-                                                <option value="15">08:00</option>
-                                                <option value="16">08:30</option>
-                                                <option value="17">09:00</option>
-                                                <option value="18">09:30</option>
-                                                <option value="19">10:00</option>
-                                                <option value="20">10:30</option>
-                                                <option value="21">11:00</option>
-                                                <option value="22">11:30</option>
-                                                <option value="23">12:00</option>
-                                                <option value="24">12:30</option>
-                                                <option value="25">13:00</option>
-                                                <option value="26">13:30</option>
-                                                <option value="27">14:00</option>
-                                                <option value="28">14:30</option>
-                                                <option value="29">15:00</option>
-                                                <option value="30">15:30</option>
-                                                <option value="31">16:00</option>
-                                                <option value="32">16:30</option>
-                                                <option value="33">17:00</option>
-                                                <option value="34">17:30</option>
-                                                <option value="35">18:00</option>
-                                                <option value="36">18:30</option>
-                                                <option value="37">19:00</option>
-                                                <option value="38">19:30</option>
-                                                <option value="39">20:00</option>
-                                                <option value="40">20:30</option>
-                                                <option value="41">21:00</option>
-                                                <option value="42">21:30</option>
-                                                <option value="43">22:00</option>
-                                                <option value="44">22:30</option>
-                                                <option value="45">23:00</option>
-                                                <option value="46">23:30</option>
-                                                <option value="47">00:00</option>
-                                                <option value="48">00:30</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Associar com</label>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Profissional</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>
-                                        </span> &nbsp;
-                                        <select asp-for="@Model.atendimento.tipoReferencia" id="osc_tipoReferencia" class="form-control" required="required" onchange="OnChangeTipoReferencia('@Model.atendimento.tipoReferencia.ToString()');">
-                                            <option value="0" selected="selected">Atendimento</option>
-                                            <option value="1">Serviço</option>
-                                            <option value="2">OS</option>
+                                        <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupProfissional();" style="cursor:pointer"></i></span>&nbsp;
+                                        <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required">
+                                        <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
+                                        <span class="input-group-btn ">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
+                                                <span class="fa fa-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Data de Fechamento</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
+                                            <input id="osc_dataFechamento" asp-for="@Model.atendimento.dataFechamento" class="form-control" type="text" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Status Atendimento</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <select id="osc_statusAtendimento" asp-for="@Model.atendimento.statusAtendimento" class="form-control" style="background-color:aquamarine">
+                                            <option value="0">Agendado</option>
+                                            <option value="1">Atendido</option>
+                                            <option value="2">Cancelado</option>
+
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">Servico</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupServico();" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.servico.idName" class="form-control" type="text" id="osc_IdNameServico">
-                                            <input asp-for="@Model.servico.id" class="form-control" type="hidden" id="osc_IdServico">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info" onclick="CarregaLookupServico()" id="osc_botaoBuscaServico">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">OS</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupOS()" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.os.idName" class="form-control" type="text" id="osc_IdNameOs">
-                                            <input asp-for="@Model.os.id" class="form-control" type="hidden" id="osc_IdOs">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info" onclick="CarregaLookupOS()" id="osc_botaoBuscaOS">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="form-group">
                                 <div class="form-group">
-                                    <label class="control-label">Profissional</label>
+                                    <label>Valor</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupProfissional();" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required">
-                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
+                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
+                                            <input id="osc_valor" asp-for="@Model.atendimento.valor" class="form-control" type="text"  >
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>Data de Fechamento</label>
-                                        <div class="inputGroupContainer">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
-                                                <input id="osc_dataFechamento" asp-for="@Model.atendimento.dataFechamento" class="form-control" type="text" disabled="disabled">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <label>Status Atendimento</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <select id="osc_statusAtendimento" asp-for="@Model.atendimento.statusAtendimento" class="form-control" style="background-color:aquamarine">
-                                                <option value="0">Agendado</option>
-                                                <option value="1">Atendido</option>
-                                                <option value="2">Cancelado</option>
+                            </div>                           
 
-                                            </select>
-                                        </div>
-                                    </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="informacoes">
+                    <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; Informações Gerais: </span></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Problema relatado</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_problema" asp-for="@Model.atendimento.problema" class="form-control" rows="10" cols="25" placeholder="descreva o problema"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div id="informacoes">
-                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; Informações Gerais: </span></div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Problema relatado</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_problema" asp-for="@Model.atendimento.problema" class="form-control" rows="10" cols="25" placeholder="descreva o problema"></textarea>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Diagnóstico</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_diagnostico" asp-for="@Model.atendimento.diagnostico" class="form-control" rows="10" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Diagnóstico</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_diagnostico" asp-for="@Model.atendimento.diagnostico" class="form-control" rows="10" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Observações gerais</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_observava" asp-for="@Model.atendimento.observacao" class="form-control" rows="10" cols="25"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
-                                        </span>
-                                        <input id="osc_criadoPor" asp-for="@Model.atendimento.criadoPorName " type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
-                                        </span>
-                                        <input id="osc_criadoEm" asp-for="@Model.atendimento.criadoEm " type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
-                                        </span>
-                                        <input id="osc_modificadoPor" asp-for="@Model.atendimento.modificadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
-                                        </span>
-                                        <input id="osc_modificadoEm" asp-for="@Model.atendimento.modificadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Observações gerais</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_observava" asp-for="@Model.atendimento.observacao" class="form-control" rows="10" cols="25"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-user"></span>
+                                    </span>
+                                    <input id="osc_criadoPor" asp-for="@Model.atendimento.criadoPorName " type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-1x"></span>
+                                    </span>
+                                    <input id="osc_criadoEm" asp-for="@Model.atendimento.criadoEm " type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-user"></span>
+                                    </span>
+                                    <input id="osc_modificadoPor" asp-for="@Model.atendimento.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-1x"></span>
+                                    </span>
+                                    <input id="osc_modificadoEm" asp-for="@Model.atendimento.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 <div class="modal fade" id="lookupCliente">
 </div>
 <div class="modal fade" id="lookupServico">

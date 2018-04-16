@@ -14,8 +14,9 @@ namespace OscaApp.Controllers
         public IConfiguration Configuration { get; }
         public IConfigurationSection sessao { get; }
         public string urlAmbiente { get; set; }
+        private ContextPage contexto;
 
-        public ReportController()
+        public ReportController(IHttpContextAccessor httpContext)
         {
 
             var builder = new ConfigurationBuilder()
@@ -28,6 +29,7 @@ namespace OscaApp.Controllers
             this.sessao = Configuration.GetSection("Ambiente");
             this.urlAmbiente = sessao.GetValue<string>("valor");
 
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         public ViewResult ReportNativo()
@@ -39,7 +41,7 @@ namespace OscaApp.Controllers
             Relatorio model = new Relatorio();
             model.idRegistro = id;
 
-            if(tipo == 1) model.nomeReport = "FICHAATENDIMENTO";
+            if (tipo == 1) model.nomeReport = "FICHAATENDIMENTO";
 
             if (tipo == 2) model.nomeReport = "IMPRESSAOPEDIDO";
 
@@ -55,6 +57,24 @@ namespace OscaApp.Controllers
                 model.url = "http://www.report.oscas.com.br/ReportRenderPrint?tipo=" + tipo + "&id=" + model.idRegistro;
             }
             return View(model);
+        }
+
+        public ViewResult ExportGrid(string nome)
+        {
+            Relatorio model = new Relatorio();
+            model.nomeReport = nome;
+
+            if (urlAmbiente == "desenv")
+            {
+                model.url = "http://www.report.desenv.oscas.com.br/ReportRenderNativo?nome=" + nome + "&org=" + this.contexto.idOrganizacao;
+            }
+
+            if (urlAmbiente == "prod")
+            {
+                model.url = "http://www.report.oscas.com.br/ReportRenderNativo?nome=" + nome + "&org=" + this.contexto.idOrganizacao;
+            }
+            return View(model);
+
         }
     }
 }

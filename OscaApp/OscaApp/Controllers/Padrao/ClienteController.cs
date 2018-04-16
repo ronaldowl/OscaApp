@@ -24,7 +24,7 @@ namespace OscaApp.Controllers
         private readonly PedidoData pedidoData;
         private readonly AtendimentoData atendimentoData;
         private readonly ContasReceberData contasReceberData;
-
+        public string urlAmbiente { get; set; }
 
         private readonly SqlGenericData sqlData;
         private ContextPage contexto;
@@ -246,5 +246,8 @@ namespace OscaApp.Controllers
 
             return View();
         }
+
+
+       
     }
 }

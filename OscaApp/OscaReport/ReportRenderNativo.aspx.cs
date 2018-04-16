@@ -13,16 +13,37 @@ namespace OscaReport
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!this.IsPostBack)
-            {
+         
+                ReportParameter p = new ReportParameter("org", Request.QueryString["org"]);
+                string nome =  Request.QueryString["nome"];
+
+
                 ReportViewer2.ProcessingMode = ProcessingMode.Remote;
-                IReportServerCredentials irsc = new CustomReportCredentials("ronaldowl-001", "Rvnc123...", "ifc"); // e.g.: ("demo-001", "123456789", "ifc")
+                IReportServerCredentials irsc = new CustomReportCredentials("ronaldowl-001", "Rvnc123...", "ifc");
                 ReportViewer2.ServerReport.ReportServerCredentials = irsc;
                 ReportViewer2.ServerReport.ReportServerUrl = new Uri("http://sql5030.site4now.net/ReportServer");
-                ReportViewer2.ServerReport.ReportPath = "/ronaldowl-001/Desenv/Nativo/Usuarios_Organizacao"; //e.g.: /demo-001/test
+
+                ReportViewer2.ServerReport.ReportPath = "/ronaldowl-001" + RetornaAmbiente() + "/NATIVO/" + nome;
+
+
                 ReportViewer2.SizeToReportContent = true;
+                ReportViewer2.ServerReport.SetParameters(new ReportParameter[] { p });
                 ReportViewer2.ServerReport.Refresh();
+            
+        }
+        public string RetornaAmbiente()
+        {
+            string ambiente = "";
+
+            System.Configuration.Configuration rootWebConfig1 = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("/dev");
+            if (0 < rootWebConfig1.AppSettings.Settings.Count)
+            {
+                System.Configuration.KeyValueConfigurationElement customSetting =
+                    rootWebConfig1.AppSettings.Settings["ambiente"];
+                ambiente = customSetting.Value;
             }
+
+            return ambiente;
         }
         public class CustomReportCredentials : IReportServerCredentials
         {

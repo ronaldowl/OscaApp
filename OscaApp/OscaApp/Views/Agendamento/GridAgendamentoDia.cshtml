@@ -21,7 +21,7 @@
                         <th></th>
                         <th>Código</th>
                         <th>Título</th>
-                        <th>Data</th>
+                        <th>Início</th>
 
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                         @*<td>@item.cliente.nomeCliente</td>*@
 
                         @*<td>@item.atendimento.dataAgendada.ToShortDateString()</td>*@
-                        <td style="font-size:12px;font-weight:bold">@item.atendimento.dataAgendada.ToShortDateString()</td>
+                        <td style="font-size:12px;font-weight:bold">@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaInicio.horaDia))</td>
                         @*<td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>*@
                         @*<td>R$@item.atendimento.valor.ToString("N2")</td>
                             <td>@item.atendimento.tipoReferencia</td>

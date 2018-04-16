@@ -197,10 +197,57 @@ namespace OscaFramework.MicroServices
                             item.codigo = dataReader["codigo"].ToString();
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
-                            item.idReferencia = new Guid(dataReader["idReferencia"].ToString());
-                            item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
-                            item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
+                            item.idServico = new Guid(dataReader["idServico"].ToString());
+                   
                             item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());
+                            retorno.Add(item);
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+        public List<Agendamento> RetornaAgendamentosMes(string mes, string ano, string idProfissional, string idOrg)
+        {
+            SqlDataReader dataReader;
+            List<Agendamento> retorno = new List<Agendamento>();
+            try
+            {
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_RetornaAtendimentosMes",
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    _Command.Parameters.AddWithValue("mes", mes);
+                    _Command.Parameters.AddWithValue("ano", ano);
+                    _Command.Parameters.AddWithValue("idProfissional", idProfissional);
+                    _Command.Parameters.AddWithValue("idOrg", idOrg);
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Agendamento item = new Agendamento();
+
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.codigo = dataReader["codigo"].ToString();
+                            item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
+                            item.idCliente = new Guid(dataReader["idCliente"].ToString());
+                            item.id = new Guid(dataReader["idServico"].ToString());
+
+                            item.statusAgendamento = (CustomEnumStatus.StatusAgendamento)Convert.ToInt32(dataReader["statusAgendamento"].ToString());
                             retorno.Add(item);
                         }
                     }
@@ -246,12 +293,57 @@ namespace OscaFramework.MicroServices
                             item.codigo = dataReader["codigo"].ToString();
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
-                            item.idReferencia = new Guid(dataReader["idReferencia"].ToString());
-                            item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
-                            item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
+                            item.idServico = new Guid(dataReader["idServico"].ToString());                       
                             item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());
                             item.titulo = dataReader["titulo"].ToString();
-                            item.tipoReferencia = (CustomEnum.TipoReferencia)Convert.ToInt32(dataReader["tipoReferencia"].ToString());
+                      
+                            retorno.Add(item);
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+        public List<Agendamento> RetornaAgendamentosDia(string data, string idProfissional, string idOrg)
+        {
+            SqlDataReader dataReader;
+            List<Agendamento> retorno = new List<Agendamento>();
+            try
+            {
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_RetornaAtendimentosDia",
+                        CommandType = CommandType.StoredProcedure
+                    };
+                    _Command.Parameters.AddWithValue("dia", data);
+                    _Command.Parameters.AddWithValue("idProfissional", idProfissional);
+                    _Command.Parameters.AddWithValue("idOrg", idOrg);
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Agendamento item = new Agendamento();
+
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.codigo = dataReader["codigo"].ToString();
+                            item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
+                            item.idCliente = new Guid(dataReader["idCliente"].ToString());
+                            item.idReferencia = new Guid(dataReader["idReferencia"].ToString());
+                            item.statusAgendamento = (CustomEnumStatus.StatusAgendamento)Convert.ToInt32(dataReader["statusAgendamento"].ToString());
+                        
 
                             retorno.Add(item);
                         }

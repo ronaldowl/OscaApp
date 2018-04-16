@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+ 
 using OscaFramework.Models;
 using OscaApp.ViewModels;
 using OscaApp.Data;
@@ -15,15 +15,15 @@ using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
-    public class AtendimentoController : Controller
+    public class AgendamentoController : Controller
     {
         private ContextPage contexto;
-        public AtendimentoData atendimentoData;
+        public AgendamentoData agendamentoData;
         private readonly SqlGenericData sqlData;
 
-        public AtendimentoController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
+        public AgendamentoController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
-            this.atendimentoData = new AtendimentoData(db);
+            this.agendamentoData = new AgendamentoData(db);
             this.sqlData = _sqlData;
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
@@ -32,18 +32,18 @@ namespace OscaApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
-        public ViewResult FormCreateAtendimento(string idCliente)
+        public ViewResult FormCreateAgendamento(string idCliente)
         {
             SqlGeneric sqlServices = new SqlGeneric();
             SqlGenericData sqlData = new SqlGenericData();
-            
-            AtendimentoViewModel modelo = new AtendimentoViewModel();
-            modelo.contexto = contexto;
-            modelo.atendimento = new Atendimento();
-            modelo.atendimento.status = CustomEnumStatus.Status.Ativo;
 
-            modelo.atendimento.criadoEm = DateTime.Now;
-            modelo.atendimento.criadoPorName = contexto.nomeUsuario;
+            AgendamentoViewModel modelo = new AgendamentoViewModel();
+            modelo.contexto = contexto;
+            modelo.agendamento = new Agendamento();
+            modelo.agendamento.status = CustomEnumStatus.Status.Ativo;
+
+            modelo.agendamento.criadoEm = DateTime.Now;
+            modelo.agendamento.criadoPorName = contexto.nomeUsuario;
 
             //Se passar o id carrega o cliente
             if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));
@@ -63,55 +63,62 @@ namespace OscaApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult FormCreateAtendimento(AtendimentoViewModel entrada)
+        public ActionResult FormCreateAgendamento(AgendamentoViewModel entrada)
         {
-            Atendimento modelo = new Atendimento();
+            Agendamento modelo = new Agendamento();
 
             try
             {
-                if (entrada.atendimento != null)
+                if (entrada.agendamento != null)
                 {
 
-                    if (AtendimentoRules.AtendimentoCreate(entrada, out modelo, this.contexto))
+                    if (AgendamentoRules.AgendamentoCreate(entrada, out modelo, this.contexto))
                     {
                         //Se retorna true grava no banco
-                        atendimentoData.Add(modelo);
+                        agendamentoData.Add(modelo);
 
-                        return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+                        return RedirectToAction("FormUpdateAgendamento", new { id = modelo.id.ToString() });
                     }
                 }
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateAtendimento-post", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateAgendamento-post", ex.Message);
             }
 
             return View();
         }
 
         [HttpGet]
-        public ViewResult FormUpdateAtendimento(string id)
+        public ViewResult FormUpdateAgendamento(string id)
         {
-            AtendimentoViewModel modelo = new AtendimentoViewModel();
+            AgendamentoViewModel modelo = new AgendamentoViewModel();
 
             try
             {
-                Atendimento retorno = new Atendimento();
+                Agendamento retorno = new Agendamento();
 
                 if (!String.IsNullOrEmpty(id))
                 {
                     //campo que sempre contém valor
-                    retorno = atendimentoData.Get(new Guid(id));
+                    retorno = agendamentoData.Get(new Guid(id));
 
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
                     modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
 
-                    modelo.servico = sqlData.RetornaRelacaoServico(retorno.idServico);           
-             
+                    if (retorno.tipoReferencia == CustomEnum.TipoReferencia.Servico) modelo.servico = sqlData.RetornaRelacaoServico(retorno.idReferencia);
+
+                    if (retorno.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico) modelo.os = sqlData.RetornaRelacaoOrdemServico(retorno.idReferencia);
+
+                    modelo.horaInicio = new ItemHoraDia();
+                    modelo.horaInicio.horaDia = (CustomEnum.itemHora)retorno.horaInicio;
+                    modelo.horaFim = new ItemHoraDia();
+                    modelo.horaFim.horaDia = (CustomEnum.itemHora)retorno.horaFim;
+
                     if (retorno != null)
                     {
-                        modelo.atendimento = retorno;
+                        modelo.agendamento = retorno;
                         //apresenta mensagem de registro atualizado com sucesso
                         modelo.StatusMessage = StatusMessage;
                     }
@@ -121,7 +128,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateAtendimento-get", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateAgendamento-get", ex.Message);
 
             }
 
@@ -129,32 +136,32 @@ namespace OscaApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult FormUpdateAtendimento(AtendimentoViewModel entrada)
+        public IActionResult FormUpdateAgendamento(AgendamentoViewModel entrada)
         {
-            Atendimento modelo = new Atendimento();
+            Agendamento modelo = new Agendamento();
             entrada.contexto = this.contexto;
             try
             {
-                if (AtendimentoRules.AtendimentoUpdate(entrada, out modelo))
+                if (AgendamentoRules.AtegendamentoUpdate(entrada, out modelo))
                 {
-                    atendimentoData.Update(modelo);
+                    agendamentoData.Update(modelo);
                     StatusMessage = "Registro Atualizado com Sucesso!";
 
-                    return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+                    return RedirectToAction("FormUpdateAgendamento", new { id = modelo.id.ToString() });
                 }
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateAtendimento-post", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateAgendamento-post", ex.Message);
             }
 
-            return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+            return RedirectToAction("FormUpdateAgendamento", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridAtendimento(string filtro, int Page, string idCliente, int view)
+        public ViewResult GridAgendamento(string filtro, int Page, string idCliente, int view)
         {
-            IEnumerable<AtendimentoGridViewModel> retorno;
+            IEnumerable<AgendamentoGridViewModel> retorno;
 
             SqlGeneric sqlServices = new SqlGeneric();
             string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
@@ -165,91 +172,90 @@ namespace OscaApp.Controllers
                 //Se tiver filtro, busca em todas as linhas
                 if (!String.IsNullOrEmpty(filtro)) view = 4;
 
-                retorno = atendimentoData.GetAllGridViewModel(contexto.idOrganizacao, view, idProfissional);
+                retorno = agendamentoData.GetAllGridViewModel(contexto.idOrganizacao, view, idProfissional);
             }
             else
             {
 
-                retorno = atendimentoData.GetAllGridViewModelByCliente(new Guid(idCliente));
+                retorno = agendamentoData.GetAllGridViewModelByCliente(new Guid(idCliente));
             }
 
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
                           where
-                            (u.atendimento.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
-                            || (u.atendimento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                            ( u.agendamento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
-            retorno = retorno.OrderByDescending(A => A.atendimento.dataAgendada);
+            retorno = retorno.OrderByDescending(A => A.agendamento.dataAgendada);
 
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
+            return View(retorno.ToPagedList<AgendamentoGridViewModel>(Page, 10));
         }
 
 
         [HttpGet]
-        public ViewResult FormStatusAtendimento(string id)
+        public ViewResult FormStatusAgendamento(string id)
         {
-            AtendimentoViewModel modelo = new AtendimentoViewModel();
+            AgendamentoViewModel modelo = new AgendamentoViewModel();
             modelo.contexto = this.contexto;
 
             try
             {
-                Atendimento retorno = new Atendimento();
+                Agendamento retorno = new Agendamento();
 
                 if (!String.IsNullOrEmpty(id))
                 {
                     //campo que sempre contém valor
-                    retorno = atendimentoData.Get(new Guid(id));
+                    retorno = agendamentoData.Get(new Guid(id));
 
                     if (retorno != null)
                     {
-                        modelo.atendimento = retorno;
+                        modelo.agendamento = retorno;
                     }
                 }
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAtendimento-get", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAgendamento-get", ex.Message);
             }
             return View(modelo);
         }
 
         [HttpPost]
-        public IActionResult FormStatusAtendimento(AtendimentoViewModel entrada)
+        public IActionResult FormStatusAgendamento(AgendamentoViewModel entrada)
         {
-            Atendimento modelo = new Atendimento();
+            Agendamento modelo = new Agendamento();
             entrada.contexto = this.contexto;
 
             try
             {
-                if (AtendimentoRules.AtendimentoUpdateStatus(entrada, out modelo))
+                if (AgendamentoRules.AtendimentoUpdateStatus(entrada, out modelo))
                 {
-                    atendimentoData.UpdateStatus(modelo);
+                    agendamentoData.UpdateStatus(modelo);
 
-                    return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
+                    return RedirectToAction("FormUpdateAgendamento", new { id = modelo.id.ToString() });
                 }
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAtendimento-post", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusAgendamento-post", ex.Message);
             }
             return View();
         }
 
-        public ViewResult GridAtendimentoDia()
+        public ViewResult GridAgendamentoDia()
         {
             SqlGeneric sqlServices = new SqlGeneric();
             string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
 
-            IEnumerable<AtendimentoGridViewModel> retorno = atendimentoData.GetAllGridViewModelDia(new Guid(idProfissional));
+            IEnumerable<AgendamentoGridViewModel> retorno = agendamentoData.GetAllGridViewModelDia(new Guid(idProfissional));
 
-            return View(retorno.ToPagedList<AtendimentoGridViewModel>(1, 100));
+            return View(retorno.ToPagedList<AgendamentoGridViewModel>(1, 100));
         }
 
     }

@@ -129,12 +129,26 @@ namespace OscaApp.framework
                 AtendimentoGridViewModel X = new AtendimentoGridViewModel();
                 X.atendimento = item;
                 X.cliente = sqldata.RetornaCliente(item.idCliente);
-                X.servico = sqldata.RetornaServico(item.idReferencia);                
-                X.horaInicio = new ItemHoraDia();
-                X.horaInicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
+                X.servico = sqldata.RetornaServico(item.idServico);               
+                
+                retorno.Add(X);
+            }
+            return retorno;
+        }
+        public static List<AgendamentoGridViewModel> ConvertToGridAgendamento(List<Agendamento> itens)
+        {
+            List<AgendamentoGridViewModel> retorno = new List<AgendamentoGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                AgendamentoGridViewModel X = new AgendamentoGridViewModel();
+                X.agendamento = item;
+                X.cliente = sqldata.RetornaCliente(item.idCliente);
                 X.horaFim = new ItemHoraDia();
                 X.horaFim.horaDia = (CustomEnum.itemHora)item.horaFim;
-                X.horaFim.HoraFormatada = ((CustomEnum.itemHora)item.horaFim).ToString();
+                X.horaInicio = new ItemHoraDia();
+                X.horaInicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
 
                 retorno.Add(X);
             }

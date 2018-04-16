@@ -116,6 +116,20 @@ namespace OscaApp.Data
 
     }
 
+    public interface IAgendamentoData
+    {
+        void Add(Agendamento agendamento);
+        void Update(Agendamento agendamento);
+        void Delete(Agendamento agendamento);
+        Agendamento Get(Guid id);
+        List<Agendamento> GetAll(Guid idOrg);
+        List<Agendamento> GetAllByIdCliente(Guid idCliente);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+        List<AgendamentoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
+        List<AgendamentoGridViewModel> GetAllGridViewModelDia(Guid idProfissional);
+
+    }
+
     public interface IContasPagarData
     {
         void Add(ContasPagar contasPagar);
