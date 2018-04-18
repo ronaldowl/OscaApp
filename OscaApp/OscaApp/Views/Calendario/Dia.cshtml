@@ -26,7 +26,7 @@
                         @foreach (var item in Model.itensCalendario)
                         {
                             
-                                <tr id="1" style="height:20px" class="border border-dark" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new { id = item.id.ToString() })'">
+                                <tr id="1" style="height:20px" class="border border-dark" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new { id = item.id.ToString() })'">
                                 <td><i class="fa fa-2x fa-user-md"></i></td>
                                 <td><span class="">@item.codigo</span></td>
                                 <td><span class="">@item.titulo</span></td> 
@@ -34,8 +34,8 @@
                                 <td><span class="">@item.tipo</span></td>                                
                                 <td><span class="">@item.referencia</span></td>                              
                                     
-                                <td><span>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.inicio.horaDia)) </span></td >
-                                <td><span> @HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.fim.horaDia))</span ></td >
+                                <td><span>@HelperCalendario.RetornaHoraFormatada(Convert.ToInt32(item.inicio.horaDia)) </span></td >
+                                <td><span> @HelperCalendario.RetornaHoraFormatada(Convert.ToInt32(item.fim.horaDia))</span ></td >
                                 </tr >                      
                         }
                     </table >

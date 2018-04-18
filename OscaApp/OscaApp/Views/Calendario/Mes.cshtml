@@ -39,7 +39,7 @@
                             <div class="input-group">
                                 <button id="osc_filtro" type="submit" style="font-size:20px;" class="btn btn-info btn-sm fa fa-exclamation-circle" value="filtro"> <span>Aplicar</span></button>
                                 &nbsp;&nbsp;
-                                <button id="osc_novo" style="font-size:20px;" type="button" class="btn btn-info btn-sm fa fa-calendar-times-o" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"> <span>Novo</span></button>
+                                <button id="osc_novo" style="font-size:20px;" type="button" class="btn btn-info btn-sm fa fa-calendar-times-o" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", null)'"> <span>Novo</span></button>
                             </div>
                             <div class="input-group">
                                 &nbsp;&nbsp;
@@ -63,12 +63,12 @@
                                 @foreach (var item in Model.dias[0].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -96,12 +96,12 @@
                                 @foreach (var item in Model.dias[1].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -129,12 +129,12 @@
                                 @foreach (var item in Model.dias[2].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -162,12 +162,12 @@
                                 @foreach (var item in Model.dias[3].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -194,12 +194,12 @@
                                 @foreach (var item in Model.dias[4].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -227,12 +227,12 @@
                                 @foreach (var item in Model.dias[5].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -260,12 +260,12 @@
                                 @foreach (var item in Model.dias[6].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -295,12 +295,12 @@
                                 @foreach (var item in Model.dias[7].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -328,12 +328,12 @@
                                 @foreach (var item in Model.dias[8].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -361,12 +361,12 @@
                                 @foreach (var item in Model.dias[9].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -394,12 +394,12 @@
                                 @foreach (var item in Model.dias[10].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -427,12 +427,12 @@
                                 @foreach (var item in Model.dias[11].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -460,12 +460,12 @@
                                 @foreach (var item in Model.dias[12].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -493,12 +493,12 @@
                                 @foreach (var item in Model.dias[13].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -528,12 +528,12 @@
                                 @foreach (var item in Model.dias[14].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -561,12 +561,12 @@
                                 @foreach (var item in Model.dias[15].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -594,12 +594,12 @@
                                 @foreach (var item in Model.dias[16].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -626,12 +626,12 @@
                                 @foreach (var item in Model.dias[17].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -659,12 +659,12 @@
                                 @foreach (var item in Model.dias[18].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -692,12 +692,12 @@
                                 @foreach (var item in Model.dias[19].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -725,12 +725,12 @@
                                 @foreach (var item in Model.dias[20].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -760,12 +760,12 @@
                                 @foreach (var item in Model.dias[21].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -793,12 +793,12 @@
                                 @foreach (var item in Model.dias[22].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -826,12 +826,12 @@
                                 @foreach (var item in Model.dias[23].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -859,12 +859,12 @@
                                 @foreach (var item in Model.dias[24].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -892,12 +892,12 @@
                                 @foreach (var item in Model.dias[25].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -924,12 +924,12 @@
                                 @foreach (var item in Model.dias[26].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -957,12 +957,12 @@
                                 @foreach (var item in Model.dias[27].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -999,12 +999,12 @@
                                 @foreach (var item in Model.dias[28].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -1039,12 +1039,12 @@
                                 @foreach (var item in Model.dias[29].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -1079,12 +1079,12 @@
                                 @foreach (var item in Model.dias[30].itensCalendario)
                                 {
 
-                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.id })'">
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.agendado)
+                                    <tr class="border border-dark " id="@item.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.id })'">
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.agendado)
                                         {
                                             <td class="bg-info"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
-                                        @if (item.statusAtendimento == OscaFramework.Models.CustomEnumStatus.StatusAtendimento.atendido)
+                                        @if (item.statusAgendamento == OscaFramework.Models.CustomEnumStatus.StatusAgendamento.concluido)
                                         {
                                             <td class="bg-secondary"><i class=" fa fa-1x fa-user-circle-o"></i></td>
                                         }
@@ -1103,7 +1103,7 @@
 
             </div>
             <div class="row" id="legenda">
-                <label style="font-weight:bold; font-size:25px">&nbsp;Legenda: <span style="font-size:20px;" class="bg-info">Agendado</span>, <span style="font-size:20px;" class="bg-secondary">Atendido</span></label>
+                <label style="font-weight:bold; font-size:25px">&nbsp;Legenda: <span style="font-size:20px;" class="bg-info">Agendado</span>, <span style="font-size:20px;" class="bg-secondary">concluido</span></label>
 
             </div>
         </form>

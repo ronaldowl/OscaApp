@@ -5,14 +5,29 @@
         $("#lookupCliente").load("/Cliente/LookupCliente", function () {
             $("#lookupCliente").modal("show");
         })
-    }
+    }  
+ 
+    function CarregaLookupOS() {
 
-    function CarregaLookupServico() {
-
-        $("#lookupServico").load("/servico/LookupServico", function () {
-            $("#lookupServico").modal("show");
+        $("#lookupOS").load("/OrdemServico/LookupOrdemServico", function () {
+            $("#lookupOS").modal("show");
         });
     }
+
+    function CarregaLookupPedido() {
+
+        $("#lookupPedido").load("/Pedido/LookupPedido", function () {
+            $("#lookupPedido").modal("show");
+        });
+    }
+
+    function CarregaLookupAtendimento() {
+
+        $("#lookupAtendimento").load("/Atendimento/LookupAtendimento", function () {
+            $("#lookupAtendimento").modal("show");
+        });
+    }
+
     function CarregaLookupProfissional() {
 
         $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
@@ -49,8 +64,7 @@
                                 </tr>
                             </table>
                         </div>
-                    </div>
-           
+                    </div>           
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">
@@ -58,7 +72,7 @@
                                     <label class="control-label">Código</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>
                                             <input id="osc_nome" asp-for="@Model.agendamento.codigo" placeholder="Codigo" class="form-control" type="text" disabled="disabled">
                                         </div>
                                     </div>
@@ -67,7 +81,7 @@
                                     <label class="control-label" style="color:red">Cliente *</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-1x"></span>
+                                            <span class="fa fa-user-o fa-2x"></span>
                                         </span>
                                         <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
@@ -77,14 +91,28 @@
                                             </button>
                                         </span>
                                     </div>
-                                </div>                            
+                                </div>
+                                <div class="form-group">
+                                    <label>Associar com</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </span> &nbsp;
+                                        <select asp-for="@Model.agendamento.tipoReferencia" id="osc_tipoReferencia" class="form-control" required="required" onchange="OnChangeTipoReferencia();">
+                                            <option value="0" selected="selected">Atendimento</option>                                           
+                                            <option value="2">Ordem de Serviço</option>
+                                            <option value="3">Pedido</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
+
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Data agendada</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>
                                             <input id="osc_dataInicio" asp-for="@Model.agendamento.dataAgendada" class="form-control" type="text" value="" required="required">
                                         </div>
                                     </div>
@@ -93,7 +121,7 @@
                                     <label>Hora Inicio</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>
                                             <select id="osc_horaInicio" asp-for="@Model.horaInicio.horaDia" class="form-control" onchange="ValidaHora(1);" required="required">
                                                 <option value="1">01:00</option>
                                                 <option value="2">01:30</option>
@@ -151,7 +179,7 @@
                                     <label>Hora Fim</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-1x"></i></span>
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>
                                             <select id="osc_horaFim" asp-for="@Model.horaFim.horaDia" class="form-control" onchange="ValidaHora(2);" required="required">
                                                 <option value="1">01:00</option>
                                                 <option value="2">01:30</option>
@@ -207,6 +235,54 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
+                                    <label class="control-label">Atendimento</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupAtendimento();" style="cursor:pointer"></i></span>&nbsp;
+                                            <input asp-for="@Model.atendimento.idName" class="form-control" type="text" id="osc_IdNameAtendimento">
+                                            <input asp-for="@Model.atendimento.id" class="form-control" type="hidden" id="osc_IdAtendimento">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupAtendimento()" id="osc_botaoBuscaAtendimento">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Pedido</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupPedido();" style="cursor:pointer"></i></span>&nbsp;
+                                            <input asp-for="@Model.pedido.idName" class="form-control" type="text" id="osc_IdNamePedido">
+                                            <input asp-for="@Model.pedido.id" class="form-control" type="hidden" id="osc_IdPedido">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupPedido()" id="osc_botaoBuscaPedido">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">OS</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupOS()" style="cursor:pointer"></i></span>&nbsp;
+                                            <input asp-for="@Model.os.idName" class="form-control" type="text" id="osc_IdNameOs">
+                                            <input asp-for="@Model.os.id" class="form-control" type="hidden" id="osc_IdOs">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupOS()" id="osc_botaoBuscaOS">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
                                     <label class="control-label">Profissional</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
@@ -232,7 +308,7 @@
                                     <label class="control-label">Criado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
+                                            <span class="fa fa-user fa-2x"></span>
                                         </span>
                                         <input id="osc_criadoPor" asp-for="@Model.agendamento.criadoPorName " type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -243,7 +319,7 @@
                                     <label class="control-label">Criado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
+                                            <span class="fa fa-calendar fa-2x"></span>
                                         </span>
                                         <input id="osc_criadoEm" asp-for="@Model.agendamento.criadoEm " type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -254,7 +330,7 @@
                                     <label class="control-label">Modificado Por</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-user"></span>
+                                            <span class="fa fa-user fa-2x"></span>
                                         </span>
                                         <input id="osc_modificadoPor" for=" " type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -265,7 +341,7 @@
                                     <label class="control-label">Modificado Em</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-1x"></span>
+                                            <span class="fa fa-calendar fa-2x"></span>
                                         </span>
                                         <input id="osc_modificadoEm" for=" " type="text" class="form-control" disabled="disabled" />
                                     </div>
@@ -279,8 +355,12 @@
     </div>
 <div class="modal fade" id="lookupCliente">
 </div>
-<div class="modal fade" id="lookupServico">
+<div class="modal fade" id="lookupAtendimento">
 </div>
+<div class="modal fade" id="lookupPedido">
+</div>
+<div class="modal fade" id="lookupOS">
+</div> 
 <div class="modal fade" id="lookupProfissional">
 </div>
 <script src="~/lib/OscaJs/osc_global.js"></script>

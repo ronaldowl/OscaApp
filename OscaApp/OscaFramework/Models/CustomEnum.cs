@@ -87,7 +87,8 @@ namespace OscaFramework.Models
         {
             Atendimento = 0,
             Servico = 1,
-            OrdemServico = 2
+            OrdemServico = 2,
+            Pedido = 3
         }
         public enum TipoLancamento
         {

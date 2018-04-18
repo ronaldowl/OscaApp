@@ -224,7 +224,7 @@ namespace OscaFramework.MicroServices
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "osc_RetornaAtendimentosMes",
+                        CommandText = "osc_RetornaAgendamentosMes",
                         CommandType = CommandType.StoredProcedure
                     };
                     _Command.Parameters.AddWithValue("mes", mes);
@@ -245,7 +245,7 @@ namespace OscaFramework.MicroServices
                             item.codigo = dataReader["codigo"].ToString();
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
-                            item.id = new Guid(dataReader["idServico"].ToString());
+                           // item.id = new Guid(dataReader["idServico"].ToString());
 
                             item.statusAgendamento = (CustomEnumStatus.StatusAgendamento)Convert.ToInt32(dataReader["statusAgendamento"].ToString());
                             retorno.Add(item);

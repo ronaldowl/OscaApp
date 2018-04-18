@@ -13,12 +13,7 @@
             $("#lookupServico").modal("show");
         });
     }
-    function CarregaLookupOS() {
-
-        $("#lookupOS").load("/OrdemServico/LookupOrdemServico", function () {
-            $("#lookupOS").modal("show");
-        });
-    }
+   
 
     function CarregaLookupProfissional() {
 
@@ -48,13 +43,13 @@
 <div class="row">
     <div class="col-md-10 offset-1">
         @if (!String.IsNullOrEmpty(Model.StatusMessage))
-        {
+    {
 
-            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
-                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                @Model.StatusMessage
-            </div>
-        }
+        <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+            <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            @Model.StatusMessage
+        </div>
+}
         <form action="FormUpdateAtendimento" method="post" id="FormUpdateAtendimento">
             <input id="osc_idAtendimento" asp-for="@Model.atendimento.id" type="hidden" class="form-control" value="@Model.atendimento.id" />
             <div class="card" id="osc_MainForm">
@@ -84,8 +79,11 @@
                                             <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteAtendimento('@Model.atendimento.id')"> <span>Excluir</span></button>
                                         </label>
                                         <label>
+                                            <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new {id = Model.atendimento.id })'"> <span>Agendar</span></button>
+                                        </label>
+                                        <label>
                                             <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" value="" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
-                                        </label>                                      
+                                        </label>
                                     </div>
                                 </td>
                             </tr>
@@ -197,11 +195,11 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                            <input id="osc_valor" asp-for="@Model.atendimento.valor" class="form-control" type="text"  >
+                                            <input id="osc_valor" asp-for="@Model.atendimento.valor" class="form-control" type="text">
                                         </div>
                                     </div>
                                 </div>
-                            </div>                           
+                            </div>
 
                         </div>
                     </div>
@@ -253,7 +251,7 @@
                                 <label class="control-label">Criado Por</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-user"></span>
+                                        <span class="fa fa-user fa-2x"></span>
                                     </span>
                                     <input id="osc_criadoPor" asp-for="@Model.atendimento.criadoPorName " type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -264,7 +262,7 @@
                                 <label class="control-label">Criado Em</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-calendar fa-1x"></span>
+                                        <span class="fa fa-calendar fa-2x"></span>
                                     </span>
                                     <input id="osc_criadoEm" asp-for="@Model.atendimento.criadoEm " type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -275,7 +273,7 @@
                                 <label class="control-label">Modificado Por</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-user"></span>
+                                        <span class="fa fa-user fa-2x"></span>
                                     </span>
                                     <input id="osc_modificadoPor" asp-for="@Model.atendimento.modificadoPorName" type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -286,7 +284,7 @@
                                 <label class="control-label">Modificado Em</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-calendar fa-1x"></span>
+                                        <span class="fa fa-calendar fa-2x"></span>
                                     </span>
                                     <input id="osc_modificadoEm" asp-for="@Model.atendimento.modificadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
@@ -296,14 +294,15 @@
                 </div>
             </div>
         </form>
+        <br />
+        <br />
+
     </div>
 </div>
 <div class="modal fade" id="lookupCliente">
-</div>
+</div> 
 <div class="modal fade" id="lookupServico">
-</div>
-<div class="modal fade" id="lookupOS">
-</div>
+</div> 
 <div class="modal fade" id="lookupProfissional">
 </div>
 <div class="modal fade" id="ModalStatus">

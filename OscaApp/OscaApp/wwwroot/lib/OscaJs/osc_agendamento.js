@@ -1,8 +1,7 @@
 function OnLoad_Agendamento() {
     
     Calendario("#osc_dataInicio");
-    OnChangeTipoReferencia();
-    EscondeCamposInformacoes();
+    OnChangeTipoReferencia();    
      
     var status = document.getElementById("osc_statusAgendamento").value; 
     desabilitaCampos_Atendimento(status)
@@ -28,12 +27,21 @@ function OpenLookupCliente()
     }
 }
 
-function OpenLookupServico() {
+function OpenLookupPedido() {
 
-    var idServico = $("#osc_IdServico").val();
+    var idPedido = $("#osc_IdPedido").val();
 
     if (idServico != "") {
-        $(window.document.location).attr('href', "/Servico/FormUpdateServico?id=" + idServico);
+        $(window.document.location).attr('href', "/Pedido/FormUpdatePedido?id=" + idPedido);
+    }
+}
+
+function OpenLookupAtendimento() {
+
+    var idAtendimento = $("#osc_IdAtendimento").val();
+
+    if (idAtendimento != "") {
+        $(window.document.location).attr('href', "/Atendimento/FormUpdateAtendimento?id=" + idAtendimento);
     }
 }
 
@@ -56,39 +64,83 @@ function OpenLookupProfissional() {
 }
 
 
-function EscondeCamposInformacoes() {
-    var tipo = document.getElementById("osc_tipoReferencia").value;
 
-    if ( tipo == 2)
-    {
-        $("#informacoes").hide();
-    } else {
-        $("#informacoes").show();
-
-    }     
-}
-
-function desabilitaCampos_Agendamento(status) {
+function OnChangeTipoReferencia( ) {
+     
   
-    if (status == 1 || status == 2 ) {
+    var tipo = $("#osc_tipoReferencia").val();
 
-        //Desabilita todos campos do Form
-        $("input,select, textarea").prop("disabled", true);
+    if (tipo == 0) {
 
-        $("#osc_buscaCliente").hide();
-        $("#osc_botaoBuscaProfissional").hide();
+        $("#osc_imprimir").show();
+
+        //Habilita Atendimento
+        $("#osc_IdNameAtendimento").val("");
+        $("#osc_IdNameAtendimento").prop("disabled", false);
+        $("#osc_IdNameAtendimento").attr("required", true);
+        $("#osc_botaoBuscaAtendimento").show();  
+
+        //Desabilita OS
+        $("#osc_IdNameOs").val("");
+        $("#osc_IdNameOs").prop("disabled", true);
+        $("#osc_IdNameOs").attr("required", false);
         $("#osc_botaoBuscaOS").hide();
-        $("#osc_botaoBuscaServico").hide();
+
+        //Disabilita Pedido
+        $("#osc_IdNamePedido").val("");
+        $("#osc_IdNamePedido").prop("disabled", true);
+        $("#osc_IdNamePedido").attr("required", false);
+        $("#osc_botaoBuscaPedido").hide();
 
 
-        //Esconde botoes
-        $("#osc_salvar").hide();    
+    }
 
-    } else {
 
-        //Desabilita botões
-        //Esconde botoes
-        $("#osc_reabrir").hide();  
+    if (tipo == 2) {
+        $("#osc_imprimir").show();
+
+        //Habilita OS
+        $("#osc_IdNameOs").val("");
+        $("#osc_IdNameOs").prop("disabled", false);
+        $("#osc_IdNameOs").attr("required", true);
+        $("#osc_botaoBuscaOS").show();
+
+
+        //Disabilita Pedido
+        $("#osc_IdNamePedido").val("");
+        $("#osc_IdNamePedido").prop("disabled", true);
+        $("#osc_IdNamePedido").attr("required", false);
+        $("#osc_botaoBuscaPedido").hide();
+
+        //Disabilita Atendimento
+        $("#osc_IdNameAtendimento").val("");
+        $("#osc_IdNameAtendimento").prop("disabled", true);
+        $("#osc_IdNameAtendimento").attr("required", false);
+        $("#osc_botaoBuscaAtendimento").hide();        
+
+    }
+
+    if (tipo == 3) {
+        $("#osc_imprimir").hide();
+
+        //Habilita Pedido
+        $("#osc_IdNamePedido").val("");
+        $("#osc_IdNamePedido").prop("disabled", false);
+        $("#osc_IdNamePedido").attr("required", true);
+        $("#osc_botaoBuscaPedido").show();
+
+
+        //Desabilita OS
+        $("#osc_IdNameOs").val("");
+        $("#osc_IdNameOs").prop("disabled", true);
+        $("#osc_IdNameOs").attr("required", false);
+        $("#osc_botaoBuscaOS").hide();
+
+        //Desabilita Atendimento
+        $("#osc_IdNameAtendimento").val("");
+        $("#osc_IdNameAtendimento").prop("disabled", true);
+        $("#osc_IdNameAtendimento").attr("required", false);
+        $("#osc_botaoBuscaAtendimento").hide();  
 
     }
 }
@@ -116,66 +168,4 @@ function ValidaHora(hora)
 
 }
 
-function OnChangeTipoReferencia()
-{
-    EscondeCamposInformacoes();
-    var tipo = $("#osc_tipoReferencia").val();   
-
-    if (tipo == 0) {      
-
-        $("#osc_IdNameOs").val("");
-        $("#osc_IdNameOs").prop("disabled", true);
-        $("#osc_IdNameOs").attr("required", false);   
-
-        $("#osc_botaoBuscaOS").hide();
-
-        $("#osc_IdNameServico").val("");
-        $("#osc_IdNameServico").prop("disabled", true);
-        $("#osc_IdNameServico").attr("required", false);  
-
-        $("#osc_botaoBuscaServico").hide();
-        //$("#osc_valor").val("0,00");
-        //$("#osc_valor").prop("disabled", true);
-        $("#osc_imprimir").show();        
-
-    }
-
-    
-    if (tipo == 1)
-    {
-        $("#osc_imprimir").show();
-
-        $("#osc_IdNameOs").val("");
-        $("#osc_IdOs").val("");
-        $("#osc_IdNameOs").prop("disabled", true);
-        $("#osc_botaoBuscaOS").hide();
-        $("#osc_IdNameOs").attr("required", false);   
-
-        $("#osc_IdNameServico").attr("required", true);    
-        
-        
-        //habilita
-        $("#osc_IdNameServico").prop("disabled", false);
-        $("#osc_botaoBuscaServico").show();
-        $("#osc_valor").prop("disabled", false);
-
-    }
-
-    if (tipo == 2)
-    {              
-        $("#osc_imprimir").hide();  
-
-        $("#osc_IdNameServico").val("");
-        $("#osc_IdServico").val("");
-        $("#osc_IdNameServico").prop("disabled", true);
-        $("#osc_botaoBuscaServico").hide();
-        $("#osc_IdNameServico").attr("required", false);   
-
-        //habilita
-        $("#osc_IdNameOs").prop("disabled", false);
-        $("#osc_IdNameOs").attr("required", true);   
-
-        $("#osc_botaoBuscaOS").show();
-        $("#osc_valor").prop("disabled", false);
-    }
-}
+ 
