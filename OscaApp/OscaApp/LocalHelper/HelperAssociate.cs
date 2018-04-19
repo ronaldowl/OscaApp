@@ -150,6 +150,24 @@ namespace OscaApp.framework
                 X.horaInicio = new ItemHoraDia();
                 X.horaInicio.horaDia = (CustomEnum.itemHora)item.horaInicio;
 
+                if (item.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico)
+                {
+                    X.Tiporeferencia = sqldata.RetornaRelacaoOrdemServico(item.idReferencia);
+                    X.referencia = "OrdemServiço";
+                }
+
+                if (item.tipoReferencia == CustomEnum.TipoReferencia.Pedido)
+                {
+                    X.Tiporeferencia = sqldata.RetornaRelacaoPedido(item.idReferencia);
+                    X.referencia = "Pedido";
+                }
+
+                if (item.tipoReferencia == CustomEnum.TipoReferencia.Atendimento)
+                {
+                    X.Tiporeferencia = sqldata.RetornaRelacaoAtendimento(item.idReferencia);
+                    X.referencia = "Atendimento";
+                }
+
                 retorno.Add(X);
             }
             return retorno;

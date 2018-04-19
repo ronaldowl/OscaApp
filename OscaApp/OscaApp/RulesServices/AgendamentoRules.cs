@@ -19,13 +19,13 @@ namespace OscaApp.RulesServices
             modelo.codigo = AutoNumber.GeraCodigo(24, contexto.idOrganizacao);
             modelo.idCliente = entrada.cliente.id;
                         
-            if(entrada.servico != null) modelo.idReferencia = entrada.servico.id;
+         
 
-            if (entrada.os != null) modelo.idReferencia = entrada.os.id;
+            if (entrada.agendamento.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico) modelo.idReferencia = entrada.os.id;
 
-            if (entrada.pedido != null) modelo.idReferencia = entrada.pedido.id;
+            if (entrada.agendamento.tipoReferencia == CustomEnum.TipoReferencia.Pedido) modelo.idReferencia = entrada.pedido.id;
 
-            if (entrada.atendimento != null) modelo.idReferencia = entrada.atendimento.id;
+            if (entrada.agendamento.tipoReferencia == CustomEnum.TipoReferencia.Atendimento) modelo.idReferencia = entrada.atendimento.id;
 
             if (entrada.profissional != null) modelo.idProfissional = entrada.profissional.id;
 

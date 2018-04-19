@@ -79,7 +79,7 @@
                                             <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteAtendimento('@Model.atendimento.id')"> <span>Excluir</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new {id = Model.atendimento.id })'"> <span>Agendar</span></button>
+                                            <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new {idReferencia = Model.atendimento.id, tipoReferencia = 0, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
                                         </label>
                                         <label>
                                             <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" value="" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>

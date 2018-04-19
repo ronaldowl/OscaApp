@@ -99,9 +99,10 @@
                                             <span class="fa fa-list-ul fa-2x"></span>
                                         </span> &nbsp;
                                         <select asp-for="@Model.agendamento.tipoReferencia" id="osc_tipoReferencia" class="form-control" required="required" onchange="OnChangeTipoReferencia();">
-                                            <option value="0" selected="selected">Atendimento</option>                                           
-                                            <option value="2">Ordem de Serviço</option>
+                                            <option value="0" selected="selected">Atendimento</option>
                                             <option value="3">Pedido</option>
+                                            <option value="2">Ordem de Serviço</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -239,7 +240,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupAtendimento();" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.atendimento.idName" class="form-control" type="text" id="osc_IdNameAtendimento">
+                                            <input asp-for="@Model.atendimento.codigo class="form-control" type="text" id="osc_IdNameAtendimento">
                                             <input asp-for="@Model.atendimento.id" class="form-control" type="hidden" id="osc_IdAtendimento">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupAtendimento()" id="osc_botaoBuscaAtendimento">

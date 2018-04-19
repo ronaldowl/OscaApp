@@ -4,7 +4,7 @@ function OnLoad_Agendamento() {
     OnChangeTipoReferencia();    
      
     var status = document.getElementById("osc_statusAgendamento").value; 
-    desabilitaCampos_Atendimento(status)
+    desabilitaCampos_Agendamento(status)
 }
 
 function DeleteAgendamento(id) {  
@@ -75,7 +75,7 @@ function OnChangeTipoReferencia( ) {
         $("#osc_imprimir").show();
 
         //Habilita Atendimento
-        $("#osc_IdNameAtendimento").val("");
+ 
         $("#osc_IdNameAtendimento").prop("disabled", false);
         $("#osc_IdNameAtendimento").attr("required", true);
         $("#osc_botaoBuscaAtendimento").show();  
@@ -100,7 +100,7 @@ function OnChangeTipoReferencia( ) {
         $("#osc_imprimir").show();
 
         //Habilita OS
-        $("#osc_IdNameOs").val("");
+    
         $("#osc_IdNameOs").prop("disabled", false);
         $("#osc_IdNameOs").attr("required", true);
         $("#osc_botaoBuscaOS").show();
@@ -124,7 +124,7 @@ function OnChangeTipoReferencia( ) {
         $("#osc_imprimir").hide();
 
         //Habilita Pedido
-        $("#osc_IdNamePedido").val("");
+    
         $("#osc_IdNamePedido").prop("disabled", false);
         $("#osc_IdNamePedido").attr("required", true);
         $("#osc_botaoBuscaPedido").show();
@@ -168,4 +168,29 @@ function ValidaHora(hora)
 
 }
 
- 
+function desabilitaCampos_Agendamento(status) {
+
+    if (status == 1 || status == 2) {
+
+        //Desabilita todos campos do Form
+        $("input,select, textarea").prop("disabled", true);
+
+        $("#osc_buscaCliente").hide();
+        $("#osc_botaoBuscaProfissional").hide();
+        $("#osc_botaoBuscaOS").hide();
+        $("#osc_botaoBuscaAtendimento").hide();
+        $("#osc_botaoBuscaPedido").hide();
+
+
+
+        //Esconde botoes
+        $("#osc_salvar").hide();
+
+    } else {
+
+        //Desabilita botões
+        //Esconde botoes
+        $("#osc_reabrir").hide();
+
+    }
+}
