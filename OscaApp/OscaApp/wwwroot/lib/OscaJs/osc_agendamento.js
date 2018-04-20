@@ -1,7 +1,7 @@
 function OnLoad_Agendamento() {
     
     Calendario("#osc_dataInicio");
-    OnChangeTipoReferencia();    
+    //OnChangeTipoReferencia();    
      
     var status = document.getElementById("osc_statusAgendamento").value; 
     desabilitaCampos_Agendamento(status)

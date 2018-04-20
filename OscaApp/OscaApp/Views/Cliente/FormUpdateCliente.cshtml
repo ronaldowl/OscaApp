@@ -387,9 +387,9 @@
                             @if (contadorA == 5) { break; }
                             <tr style="font-size:12px">
                                 <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateAtendimento", "Atendimento", new { id = item.id })</td>
-                                <td>@item.dataAgendada.ToShortDateString()</td>
-                                <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(@item.horaInicio))</td>
-                                <td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(@item.horaFim))</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td>R$@item.valor.ToString("N2")</td>
                             </tr>
                             contadorA++;

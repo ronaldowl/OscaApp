@@ -183,7 +183,7 @@ namespace OscaApp.Data
         {
             List<Agendamento> itens = new List<Agendamento>();
 
-            itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where  idProfissional = '" + idProfissional.ToString()  + "' and Cast(dataAgendada as date) = Cast(getdate() as date) ").ToList();
+            itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where  idProfissional = '" + idProfissional.ToString()  + "' and Cast(dataAgendada as date) = Cast(getdate() as date) order by criadoEm desc").ToList();
 
             return HelperAssociate.ConvertToGridAgendamento(itens);
         }

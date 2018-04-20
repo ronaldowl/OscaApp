@@ -13,9 +13,10 @@ namespace OscaApp.ViewModels
        public ContextPage contexto { get; set; }
        public Relacao cliente { get; set; }
        public Relacao profissional { get; set; }
-   
+       public string idAgendamento { get; set; }
 
-       public List<Relacao> servicos { get; set; }
+
+        public List<Relacao> servicos { get; set; }
        public List<Relacao> produtos { get; set; }
        public List<Relacao> profissionais { get; set; }
        public Relacao listaPreco { get; set; }

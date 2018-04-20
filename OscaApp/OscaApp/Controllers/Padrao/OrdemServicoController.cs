@@ -100,7 +100,13 @@ namespace OscaApp.Controllers
                 SqlGeneric sqlServices = new SqlGeneric();
 
                 if (modelo.ordemServico != null)
-                {                   
+                {
+                    if (!String.IsNullOrEmpty(sqlData.RetornaRelacaoAgendamentoByIdReferencia(modelo.ordemServico.id).codigo))
+                    {
+                        modelo.idAgendamento = sqlData.RetornaRelacaoAgendamentoByIdReferencia(modelo.ordemServico.id).id.ToString();
+                    }
+
+
                     modelo.cliente = sqlData.RetornaRelacaoCliente(modelo.ordemServico.idCliente);
                     modelo.listaPreco = sqlData.RetornaRelacaoListaPreco(modelo.ordemServico.idListaPreco);
 

@@ -110,6 +110,13 @@ namespace OscaApp.Controllers
                     if (retorno != null)
                     {
                         modelo.pedido = retorno;
+
+                        if (!String.IsNullOrEmpty(Sqlservice.RetornaRelacaoAgendamentoByIdReferencia(modelo.pedido.id).codigo))
+                        {
+                            modelo.idAgendamento = Sqlservice.RetornaRelacaoAgendamentoByIdReferencia(modelo.pedido.id).id.ToString();
+                        }
+
+
                         modelo.cliente = Sqlservice.RetornaRelacaoCliente(retorno.idCliente);
                         modelo.listapreco = Sqlservice.RetornaRelacaoListaPreco(retorno.idListaPreco);
                         //apresenta mensagem de registro atualizado com sucesso

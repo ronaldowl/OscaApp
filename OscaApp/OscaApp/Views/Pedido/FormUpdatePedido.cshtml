@@ -11,8 +11,8 @@
         $("#ModalProdutoPedido").load("/ProdutoPedido/FormCreateProdutoPedido?idPedido=" + '@Model.pedido.id' + "&idListaPreco=" + '@Model.pedido.idListaPreco', function () {
             $("#ModalProdutoPedido").modal("show");
         });
-         
-    }  
+
+    }
 
           function Imprimir()
        {
@@ -70,9 +70,19 @@
                                             <label>
                                                 <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeletePedido('@Model.pedido.id')"> <span>Excluir</span></button>
                                             </label>
-                                            <label>
-                                                <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new {idReferencia = Model.pedido.id, tipoReferencia = 3, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
-                                            </label>
+                                            @if (!String.IsNullOrEmpty(Model.idAgendamento))
+                                            {
+                                                <label>
+                                                    <button id="osc_verAgendamento" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new { id = Model.idAgendamento })'"> <span>Ver Agendamento</span></button>
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label>
+                                                    <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new { idReferencia = Model.pedido.id, tipoReferencia = 3, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
+                                                </label>
+
+                                            }
                                         </div>
                                     </td>
                                 </tr>

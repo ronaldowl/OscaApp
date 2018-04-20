@@ -13,7 +13,7 @@
             $("#lookupServico").modal("show");
         });
     }
-   
+
 
     function CarregaLookupProfissional() {
 
@@ -43,13 +43,13 @@
 <div class="row">
     <div class="col-md-10 offset-1">
         @if (!String.IsNullOrEmpty(Model.StatusMessage))
-    {
+        {
 
-        <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
-            <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            @Model.StatusMessage
-        </div>
-}
+            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessage
+            </div>
+        }
         <form action="FormUpdateAtendimento" method="post" id="FormUpdateAtendimento">
             <input id="osc_idAtendimento" asp-for="@Model.atendimento.id" type="hidden" class="form-control" value="@Model.atendimento.id" />
             <div class="card" id="osc_MainForm">
@@ -79,11 +79,21 @@
                                             <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteAtendimento('@Model.atendimento.id')"> <span>Excluir</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new {idReferencia = Model.atendimento.id, tipoReferencia = 0, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
-                                        </label>
-                                        <label>
                                             <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" value="" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
                                         </label>
+                                        @if (!String.IsNullOrEmpty(Model.idAgendamento))
+                                        {
+                                            <label>
+                                                <button id="osc_verAgendamento" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new { id = Model.idAgendamento })'"> <span>Ver Agendamento</span></button>
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label>
+                                                <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new { idReferencia = Model.atendimento.id, tipoReferencia = 0, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
+                                            </label>
+
+                                        }
                                     </div>
                                 </td>
                             </tr>
@@ -300,9 +310,9 @@
     </div>
 </div>
 <div class="modal fade" id="lookupCliente">
-</div> 
+</div>
 <div class="modal fade" id="lookupServico">
-</div> 
+</div>
 <div class="modal fade" id="lookupProfissional">
 </div>
 <div class="modal fade" id="ModalStatus">

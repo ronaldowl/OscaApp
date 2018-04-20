@@ -107,7 +107,12 @@ namespace OscaApp.Controllers
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
                     modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
 
-                    modelo.servico = sqlData.RetornaRelacaoServico(retorno.idServico);           
+                    modelo.servico = sqlData.RetornaRelacaoServico(retorno.idServico);
+
+                    if (!String.IsNullOrEmpty(sqlData.RetornaRelacaoAgendamentoByIdReferencia(retorno.id).codigo))
+                    {
+                        modelo.idAgendamento = sqlData.RetornaRelacaoAgendamentoByIdReferencia(retorno.id).id.ToString();
+                    }
              
                     if (retorno != null)
                     {

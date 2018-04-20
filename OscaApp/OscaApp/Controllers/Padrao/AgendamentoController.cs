@@ -31,11 +31,16 @@ namespace OscaApp.Controllers
         [TempData]
         public string StatusMessage { get; set; }
 
+        [TempData]
+        public int tempTipoReferencia { get; set; }
+
         [HttpGet]
         public ViewResult FormCreateAgendamento(string idCliente, int tipoReferencia, string idReferencia)
         {
             SqlGeneric sqlServices = new SqlGeneric();
             SqlGenericData sqlData = new SqlGenericData();
+
+            tempTipoReferencia = tipoReferencia;
 
             AgendamentoViewModel modelo = new AgendamentoViewModel();
             modelo.contexto = contexto;
@@ -77,7 +82,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateAtendimento-get", ex.Message);
+                log.GravaLog(1, 3, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateAgendamento-get", ex.Message);
 
             }
             return View(modelo);
@@ -92,6 +97,7 @@ namespace OscaApp.Controllers
             {
                 if (entrada.agendamento != null)
                 {
+                    entrada.agendamento.tipoReferencia = (CustomEnum.TipoReferencia)tempTipoReferencia;
 
                     if (AgendamentoRules.AgendamentoCreate(entrada, out modelo, this.contexto))
                     {

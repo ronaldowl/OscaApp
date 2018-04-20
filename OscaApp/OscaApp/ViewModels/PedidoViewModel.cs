@@ -23,6 +23,8 @@ namespace OscaApp.ViewModels
 
         public string StatusMessage { get; set; }
 
+        public string idAgendamento { get; set; }
+
         public PedidoViewModel()
         {
 

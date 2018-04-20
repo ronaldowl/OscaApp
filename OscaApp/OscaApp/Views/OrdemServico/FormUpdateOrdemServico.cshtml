@@ -69,421 +69,431 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
     @Html.HiddenFor(m => m.ordemServico.id)
 </div>
- 
-    <div class="row">
-        <div class="col-md-11 offset-1">
-            @if (!String.IsNullOrEmpty(Model.StatusMessage))
-            {
 
-                <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
-                    <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    @Model.StatusMessage
-                </div>
-            }
-            <form action="FormUpdateOrdemServico" method="post" id="osc_Mainform">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <table>
-                                <tr>
-                                    <td><h3>Ordem de Servico:&nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
+<div class="row">
+    <div class="col-md-11 offset-1">
+        @if (!String.IsNullOrEmpty(Model.StatusMessage))
+        {
+
+            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessage
+            </div>
+        }
+        <form action="FormUpdateOrdemServico" method="post" id="osc_Mainform">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Ordem de Servico:&nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value=""> <span>Salvar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico" , null)'"> <span>Novo</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="" onclick="location.href='@Url.Action("GridOrdemServico", "OrdemServico" , null)'"> <span>Fechar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_calcular" type="submit" class="btn btn-info btn-sm fa fa-calculator" value=""> <span>Calcular OS</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatusOrdemServico()"> <span>Reabrir</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteOrdemServico('@Model.ordemServico.id')"> <span>Excluir</span></button>
+                                        </label>
+                                        @if (!String.IsNullOrEmpty(Model.idAgendamento))
+                                        {
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value=""> <span>Salvar</span></button>
+                                                <button id="osc_verAgendamento" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new { id = Model.idAgendamento })'"> <span>Ver Agendamento</span></button>
                                             </label>
+                                        }
+                                        else
+                                        {
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("FormCreateOrdemServico", "OrdemServico" , null)'"> <span>Novo</span></button>
+                                                <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new { idReferencia = Model.ordemServico.id, tipoReferencia = 2, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
                                             </label>
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="" onclick="location.href='@Url.Action("GridOrdemServico", "OrdemServico" , null)'"> <span>Fechar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_calcular" type="submit" class="btn btn-info btn-sm fa fa-calculator" value=""> <span>Calcular OS</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatusOrdemServico()"> <span>Reabrir</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteOrdemServico('@Model.ordemServico.id')"> <span>Excluir</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new {idReferencia = Model.ordemServico.id, tipoReferencia = 2, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="card-body">
-                        <input id="osc_id" asp-for="ordemServico.id" type="hidden" class="form-control" value="@Model.ordemServico.id" />
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Código</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_codigo" asp-for="@Model.ordemServico.codigo" class="form-control" type="text" disabled="disabled">
-                                        </div>
+                </div>
+                <div class="card-body">
+                    <input id="osc_id" asp-for="ordemServico.id" type="hidden" class="form-control" value="@Model.ordemServico.id" />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Código</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_codigo" asp-for="@Model.ordemServico.codigo" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Cliente*</label>
+                            </div>
+                            <div class="form-group">
+                                <label>Cliente*</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
+                                    <span class="input-group-btn ">
+                                        <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="botaoLookupCliente">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                    <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo </label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_tipo" asp-for="@Model.ordemServico.tipo" class="form-control" required="required">
+                                        <option value="1" selected="">Orçamento</option>
+                                        <option value="2">Execução</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Profissional</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
+                                        <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupProfissional()" style="cursor:pointer"></i></span>&nbsp;
+                                        <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional">
+                                        <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
                                         <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="botaoLookupCliente">
+                                            <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
-                                        <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Tipo </label>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Tipo de Desconto</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control" value="@Model.ordemServico.tipoDesconto" onchange="Onchage_OrdemServicoTipoDesconto();">
+                                        <option value="1">Valor</option>
+                                        <option value="2">Percentual</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Valor Desconto</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_valorDesconto" asp-for="@Model.ordemServico.valorDesconto" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>% Desconto</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_valorDescontoPercentual" asp-for="@Model.ordemServico.valorDescontoPercentual" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Lista de Preço</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_tipo" asp-for="@Model.ordemServico.tipo" class="form-control" required="required">
-                                            <option value="1" selected="">Orçamento</option>
-                                            <option value="2">Execução</option>
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_idNameListaPreco" asp-for="@Model.listaPreco.idName" type="text" class="form-control" disabled="disabled" />
+                                        <input id="osc_idListaPreco" asp-for="@Model.listaPreco.idName" type="hidden" class="form-control" value="@Model.listaPreco.id" />
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Tipo de Pagamento</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_tipoPagamento" asp-for="@Model.ordemServico.tipoPagamento" class="form-control">
+                                        <option value="1" selected="">Dinheiro</option>
+                                        <option value="2">Cartão</option>
+                                        <option value="3">Cheque</option>
+                                        <option value="4">Depósito</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Condição de Pagamento</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_codicaoPagamento" asp-for="@Model.ordemServico.condicaoPagamento" class="form-control">
+                                        <option value="1" selected="">A Vista</option>
+                                        <option value="2">Parcelado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Valor Total</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_valorTotal" asp-for="@Model.ordemServico.valorTotal" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Status Ordem Servico</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <select id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" style="background-color:aquamarine">
+                                            <option value="1">Em Andamento</option>
+                                            <option value="2">Fechado</option>
+                                            <option value="3">Aguardando Produto</option>
+                                            <option value="4">Cancelado</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">Profissional</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupProfissional()" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional">
-                                            <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
 
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Tipo de Desconto</label>
+                            <div class="form-group">
+                                <label>Data de Fechamento</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control" value="@Model.ordemServico.tipoDesconto" onchange="Onchage_OrdemServicoTipoDesconto();">
-                                            <option value="1">Valor</option>
-                                            <option value="2">Percentual</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Valor Desconto</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_valorDesconto" asp-for="@Model.ordemServico.valorDesconto" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>% Desconto</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_valorDescontoPercentual" asp-for="@Model.ordemServico.valorDescontoPercentual" type="text" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Lista de Preço</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_idNameListaPreco" asp-for="@Model.listaPreco.idName" type="text" class="form-control" disabled="disabled" />
-                                            <input id="osc_idListaPreco" asp-for="@Model.listaPreco.idName" type="hidden" class="form-control" value="@Model.listaPreco.id" />
-
-                                        </div>
+                                        <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
+                                        <input id="osc_dataFechamento" asp-for="@Model.ordemServico.dataFechamento" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Tipo de Pagamento</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_tipoPagamento" asp-for="@Model.ordemServico.tipoPagamento" class="form-control">
-                                            <option value="1" selected="">Dinheiro</option>
-                                            <option value="2">Cartão</option>
-                                            <option value="3">Cheque</option>
-                                            <option value="4">Depósito</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Condição de Pagamento</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_codicaoPagamento" asp-for="@Model.ordemServico.condicaoPagamento" class="form-control">
-                                            <option value="1" selected="">A Vista</option>
-                                            <option value="2">Parcelado</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Valor Total</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_valorTotal" asp-for="@Model.ordemServico.valorTotal" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Status Ordem Servico</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <select id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" style="background-color:aquamarine">
-                                                <option value="1">Em Andamento</option>
-                                                <option value="2">Fechado</option>
-                                                <option value="3">Aguardando Produto</option>
-                                                <option value="4">Cancelado</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-
-                                <div class="form-group">
-                                    <label>Data de Fechamento</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
-                                            <input id="osc_dataFechamento" asp-for="@Model.ordemServico.dataFechamento" class="form-control" type="text" disabled="disabled">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; Especificação Ténica</span></div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Categoria*</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <select asp-items="@Model.categorias" asp-for="@Model.categoria.id" id="osc_idCategoriaManutencao" required="required"></select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Marca</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_marca" asp-for="@Model.ordemServico.marca" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 ">
-                                <div class="form-group">
-                                    <label>Modelo</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_modelo" asp-for="@Model.ordemServico.modelo" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Cor</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_cor" asp-for="@Model.ordemServico.cor" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 ">
-                                <div class="form-group">
-                                    <label>Número de Série</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_numeroSerie" asp-for="@Model.ordemServico.numeroSerie" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Placa</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-car fa-2x"></i></span>&nbsp;
-                                            <input id="osc_placa" asp-for="@Model.ordemServico.placa" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;  Informações Gerais</span></div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Problema relatado</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_problema" asp-for="@Model.ordemServico.problema" class="form-control" rows="3" cols="25" placeholder="descreva o problema"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Diagnóstico</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_diagnostico" asp-for="@Model.ordemServico.diagnostico" class="form-control" rows="3" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Laudo</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_laudo" asp-for="@Model.ordemServico.laudo" class="form-control" rows="3" cols="25"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Observações gerais</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_observacao" asp-for="@Model.ordemServico.observacao" class="form-control" rows="3" cols="25"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-header">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <h5 style="font-weight:bold">&nbsp;&nbsp;Serviço da Ordem: &nbsp;&nbsp;</h5>
-                                    </td>
-                                    <td>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_novoServicoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Novo</span></button>
-                                        </div>
-                                    </td>
-
-                                </tr>
-                            </table>
-                        </div>
-                        <div id="MainGridServico">
-                            <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id" height="300" width="1180"></iframe>
-                        </div>
-                        <div class="card-header">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <h5 style="font-weight:bold">&nbsp;&nbsp;Produto da Ordem: &nbsp;&nbsp;</h5>
-                                    </td>
-                                    <td>
-                                        <div class="form-group col-md-2">
-                                            <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem()"> <span>Novo</span></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div>
-                            <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="300" width="1180"></iframe>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
+                    <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; Especificação Ténica</span></div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Categoria*</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.ordemServico.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <select asp-items="@Model.categorias" asp-for="@Model.categoria.id" id="osc_idCategoriaManutencao" required="required"></select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
+                            <div class="form-group">
+                                <label>Marca</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.ordemServico.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_marca" asp-for="@Model.ordemServico.marca" class="form-control" type="text">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Modelo</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoPor" asp-for="@Model.ordemServico.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_modelo" asp-for="@Model.ordemServico.modelo" class="form-control" type="text">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
+                            <div class="form-group">
+                                <label>Cor</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoEm" asp-for="@Model.ordemServico.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_cor" asp-for="@Model.ordemServico.cor" class="form-control" type="text">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label>Número de Série</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_numeroSerie" asp-for="@Model.ordemServico.numeroSerie" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Placa</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-car fa-2x"></i></span>&nbsp;
+                                        <input id="osc_placa" asp-for="@Model.ordemServico.placa" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background-color:gray ; height:30px"><span style="font-weight:bold; color:white">&nbsp;&nbsp;  Informações Gerais</span></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Problema relatado</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_problema" asp-for="@Model.ordemServico.problema" class="form-control" rows="3" cols="25" placeholder="descreva o problema"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Diagnóstico</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_diagnostico" asp-for="@Model.ordemServico.diagnostico" class="form-control" rows="3" cols="25" placeholder="descreva o diagnóstico do problema"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Laudo</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_laudo" asp-for="@Model.ordemServico.laudo" class="form-control" rows="3" cols="25"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Observações gerais</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_observacao" asp-for="@Model.ordemServico.observacao" class="form-control" rows="3" cols="25"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">&nbsp;&nbsp;Serviço da Ordem: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="form-group col-md-2">
+                                        <button id="osc_novoServicoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaServicoOrdem()"> <span>Novo</span></button>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="MainGridServico">
+                        <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id" height="300" width="1180"></iframe>
+                    </div>
+                    <div class="card-header">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">&nbsp;&nbsp;Produto da Ordem: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="form-group col-md-2">
+                                        <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem()"> <span>Novo</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div>
+                        <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="300" width="1180"></iframe>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.ordemServico.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.ordemServico.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" asp-for="@Model.ordemServico.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" asp-for="@Model.ordemServico.modificadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
- 
+</div>
+
 <div class="modal fade" id="lookupCliente">
 </div>
 <div class="modal fade" id="lookupCategoriaManutencao">
