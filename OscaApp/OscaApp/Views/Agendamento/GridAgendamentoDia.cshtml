@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.AtendimentoGridViewModel>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.AgendamentoGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -10,7 +10,7 @@
 <div class="card" id="osc_Grid">
     <div class="card-header">
         <div class="card-title">
-            <center><h5 style="font-weight:bold"> Atendimentos</h5></center>
+            <center><h5 style="font-weight:bold"> Agendamentos</h5></center>
         </div>
     </div>
     <div class="card-body">
@@ -20,17 +20,17 @@
                     <tr>
                         <th></th>
                         <th>Código</th>
-                        <th>Título</th>
+                        <th>Tipo</th>
                         <th>Início</th>
 
                     </tr>
                 </thead>
                 @foreach (var item in Model)
                                     {
-                    <tr style="cursor:pointer;" id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
+                    <tr style="cursor:pointer;" id="@item.agendamento.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.agendamento.id })'">
                         <td><i class="fa fa-calendar-times-o"></i></td>
-                        <td style="font-size:12px;font-weight:bold">@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
-                        <td style="font-size:12px;font-weight:bold">@item.atendimento.titulo</td>
+                        <td style="font-size:12px;font-weight:bold">@Html.ActionLink(item.agendamento.codigo.ToString(), "FormUpdateAgendamento", new { id = item.agendamento.id })</td>
+                        <td style="font-size:12px;font-weight:bold">@item.agendamento.tipoReferencia</td>
                         @*<td>@item.cliente.nomeCliente</td>*@
 
                         @*<td>@item.atendimento.dataAgendada.ToShortDateString()</td>*@

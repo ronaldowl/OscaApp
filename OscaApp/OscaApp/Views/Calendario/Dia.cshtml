@@ -14,9 +14,9 @@
                             <tr>
                                 <th></th>
                                 <th>Código</th>
-                                <th>Título</th>
+                              
                                 <th>Cliente</th>
-                                <th>Tipo</th>                                
+                                <th>Tipo</th>
                                 <th>Referente á</th>
                                 <th>Início</th>
                                 <th>Fim</th>
@@ -25,40 +25,40 @@
 
                         @foreach (var item in Model.itensCalendario)
                         {
-                            
-                                <tr id="1" style="height:20px" class="border border-dark" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new { id = item.id.ToString() })'">
+
+                            <tr id="1" style="height:20px" class="border border-dark" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new { id = item.id.ToString() })'">
                                 <td><i class="fa fa-2x fa-user-md"></i></td>
                                 <td><span class="">@item.codigo</span></td>
-                                <td><span class="">@item.titulo</span></td> 
+                                
                                 <td><span class="">@item.cliente</span></td>
-                                <td><span class="">@item.tipo</span></td>                                
-                                <td><span class="">@item.referencia</span></td>                              
-                                    
-                                <td><span>@HelperCalendario.RetornaHoraFormatada(Convert.ToInt32(item.inicio.horaDia)) </span></td >
-                                <td><span> @HelperCalendario.RetornaHoraFormatada(Convert.ToInt32(item.fim.horaDia))</span ></td >
-                                </tr >                      
-                        }
-                    </table >
-                </div >
-            </div >
-        </div>
-        @*<div class="col-4 offset-1"  id="osc_livre">
-            <div class="card">
-                <div class="card-header">
-                    <center> <label style="font-size:12px;font-weight:bold">Segunda Feira dia 1 de Fevereiro de 2018</label></center>
-                </div>
-                <div class="card-body">
-                    <table style="font-size:10px;width:100%;" class="table table-hover">
+                                <td><span class="">@item.tipo</span></td>
+                                <td><span class="">@item.referencia</span></td>
 
-                        @foreach (var item in Model.itensCalendarioVazios)
-                        {
-                            <tr id="1" style="height:20px" class="border border-dark bg-success" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"><td><i class="fa fa-2x fa-cog"></i></td><td><span class=""></span></td><td><span class="">@item.titulo</span></td><td><td><span class=""></span></td> <td><span>@item.inicio.HoraFormatada</span></td><td><span>00:02</span></td></tr>
+                                <td><span>@HelperCalendario.RetornaHoraFormatada(Convert.ToInt32(item.inicio.horaDia)) </span></td>
+                                <td><span> @HelperCalendario.RetornaHoraFormatada(Convert.ToInt32(item.fim.horaDia))</span></td>
+                            </tr>
                         }
                     </table>
                 </div>
             </div>
-        </div>>*@
-        <div class="col-1 " >
+        </div>
+        @*<div class="col-4 offset-1"  id="osc_livre">
+                <div class="card">
+                    <div class="card-header">
+                        <center> <label style="font-size:12px;font-weight:bold">Segunda Feira dia 1 de Fevereiro de 2018</label></center>
+                    </div>
+                    <div class="card-body">
+                        <table style="font-size:10px;width:100%;" class="table table-hover">
+
+                            @foreach (var item in Model.itensCalendarioVazios)
+                            {
+                                <tr id="1" style="height:20px" class="border border-dark bg-success" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"><td><i class="fa fa-2x fa-cog"></i></td><td><span class=""></span></td><td><span class="">@item.titulo</span></td><td><td><span class=""></span></td> <td><span>@item.inicio.HoraFormatada</span></td><td><span>00:02</span></td></tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>>*@
+        <div class="col-1 ">
             <div class="input-group">
                 &nbsp;<button id="osc_voltar" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-backward" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Voltar</span></button>
             </div>
@@ -66,7 +66,13 @@
                 &nbsp;<button id="osc_cliente" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-users" onclick="location.href='@Url.Action("GridCliente", "Cliente", null)'"> <span>Clientes</span></button>
             </div>
             <div class="input-group">
-                &nbsp;<button id="osc_atendimento" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-calendar-times-o" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento", null)'"> <span>Atendimentos</span></button>
+                &nbsp;<button id="osc_agendamento" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-calendar-times-o" onclick="location.href='@Url.Action("GridAgendamento", "Agendamento", null)'"> <span>Agendamentos</span></button>
+            </div>
+            <div class="input-group">
+                &nbsp;<button id="osc_pedido" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-file-text-o" onclick="location.href='@Url.Action("GridPedido", "Pedido", null)'"> <span>Pedidos</span></button>
+            </div>
+            <div class="input-group">
+                &nbsp;<button id="osc_atendimento" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-file-text-o" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento", null)'"> <span>Atendimentos</span></button>
             </div>
             <div class="input-group">
                 &nbsp;<button id="osc_ordemServico" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-file-text-o" onclick="location.href='@Url.Action("GridOrdemServico", "OrdemServico", null)'"> <span>Ordens de Serviço</span></button>
@@ -75,5 +81,5 @@
                 &nbsp;<button id="osc_profissionais" style="font-size:15px;" type="button" class="btn btn-info btn-sm fa fa-user" onclick="location.href='@Url.Action("GridProfissional", "Profissional", null)'"> <span>Profissionais</span></button>
             </div>
         </div>
-</div>  
+    </div>
 </div>

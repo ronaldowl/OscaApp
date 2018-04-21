@@ -17,9 +17,63 @@
             return input.replace(/^\s+|\s+$/g, "");
         }
     </script>
+    <style>
+        .barraMain {
+            background: linear-gradient(to right bottom,#66dbff, #1c177f);
+            height: 50px;
+            color: black;
+            padding-top: 5px;
+        }
+
+        .footer {
+            background: linear-gradient(to right bottom, #1c177f,#66dbff);
+            height: 30px;
+        }
+
+        .osca {
+            margin-top: -3px;
+            float: left;
+            margin-left: 10px;
+            font-weight: bold;
+            font-size: 30px;
+            color: white;
+        }
+
+            .osca:hover, .osca:focus, .osca:active {
+                color: aliceblue;
+                text-decoration: none;
+            }
+
+        a {
+            text-decoration: none !important;
+        }
+
+        .fa-facebook-official {
+            color: #1a13ad;
+        }
+
+        .fa-youtube {
+            color: #ff0000;
+        }
+
+        .alert-warning {
+            box-shadow: 6px 7px 7px -3px rgba(150,150,150,1);
+        }
+
+        .alert-personalized {
+            color: black;
+            background: #f7f7f7;
+            box-shadow: 6px 7px 7px -3px rgba(150,150,150,1);
+        }
+    </style>
 
 </head>
 <body>
+    <div class="barraMain navbar-fixed-top">
+        <div class="container">
+            <div class="text-left"> </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="card col-8 offset-2">
             <div class="card-header">
@@ -81,19 +135,13 @@
         </div>
     </div>
     <br />
-    <footer>
-        <nav class="navbar fixed-bottom" style="background-color:#0C0C0A">
-            <div class="col-md8 offset-5">
-                <table>
-                    <tr>
-                        <td style="color:#FFF"><i class="fa  fa-2x fa-home "></i></td>
-                        <td style="color:#FFF"><h4>Oscas Online Services 2018 </h4> </td>
-                    </tr>
-                </table>
-            </div>
-        </nav>
 
+    <footer class="footer fixed-bottom">
+        <div style="color:#fff; text-align:center;">
+            <h6><i class="fa fa-home fa-1x"></i>&nbsp;OSCAS SERVIÇOS ONLINE 2018</h6>
+        </div>
     </footer>
+
 </body>
 </html>
 @section Scripts {

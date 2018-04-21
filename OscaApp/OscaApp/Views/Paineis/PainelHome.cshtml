@@ -46,9 +46,9 @@
             </div>
             <div class="card-body">
                 <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
-                    <li>Quantidade de Clientes:83</li>
-                    <li>Quantidade de Contatos:132</li>
-                    <li>Quantidade de Produtos:23</li>
+                    <li>Quantidade de Clientes:0</li>
+                    <li>Quantidade de Contatos:0</li>
+                    <li>Quantidade de Produtos:0</li>
                 </ol>
             </div>
         </div>
@@ -69,7 +69,7 @@
     </div>
     <div class="col-md-2 m-0 p-0" id="tarefas">
     </div>
-    <div class="col-md-3 m-0 p-0" id="atendimentos">
+    <div class="col-md-3 m-0 p-0" id="agendamentos">
     </div>
 
 
@@ -127,7 +127,7 @@
             <div class="card-body">
                 <table>
                     <tr>
-                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                        <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
                         <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
                     </tr>
                 </table>
@@ -139,7 +139,7 @@
 <script>
     CarregaComunicados();
     CarregaTarefas();
-    CarregaAtendimentos();
+    CarregaAgendamentos();
     function CarregaComunicados() {
         $.ajax("/Comunicado/QuadroComunicadoResumido").done(function (data) {
             $("#comunicados").html(data);
@@ -150,9 +150,9 @@
             $("#tarefas").html(data);
         });
     }
-    function CarregaAtendimentos() {
-        $.ajax("/Atendimento/GridAtendimentoDia").done(function (data) {
-            $("#atendimentos").html(data);
+    function CarregaAgendamentos() {
+        $.ajax("/agendamento/GridAgendamentoDia").done(function (data) {
+            $("#agendamentos").html(data);
         });
     }
 </script>

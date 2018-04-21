@@ -245,7 +245,10 @@ namespace OscaFramework.MicroServices
                             item.codigo = dataReader["codigo"].ToString();
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
-                           // item.id = new Guid(dataReader["idServico"].ToString());
+                            item.horaInicio = Convert.ToInt32(dataReader["horaInicio"].ToString());
+                            item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
+
+
 
                             item.statusAgendamento = (CustomEnumStatus.StatusAgendamento)Convert.ToInt32(dataReader["statusAgendamento"].ToString());
                             retorno.Add(item);
@@ -321,7 +324,7 @@ namespace OscaFramework.MicroServices
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "osc_RetornaAtendimentosDia",
+                        CommandText = "osc_RetornaAgendamentosDia",
                         CommandType = CommandType.StoredProcedure
                     };
                     _Command.Parameters.AddWithValue("dia", data);
@@ -343,7 +346,12 @@ namespace OscaFramework.MicroServices
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
                             item.idReferencia = new Guid(dataReader["idReferencia"].ToString());
                             item.statusAgendamento = (CustomEnumStatus.StatusAgendamento)Convert.ToInt32(dataReader["statusAgendamento"].ToString());
-                        
+                            item.tipoReferencia = (CustomEnum.TipoReferencia)Convert.ToInt32(dataReader["tipoReferencia"].ToString());
+
+                            item.horaInicio =  Convert.ToInt32(dataReader["horaInicio"].ToString());
+                            item.horaFim = Convert.ToInt32(dataReader["horaFim"].ToString());
+
+
 
                             retorno.Add(item);
                         }
