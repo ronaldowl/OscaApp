@@ -31,7 +31,7 @@ function OpenLookupPedido() {
 
     var idPedido = $("#osc_IdPedido").val();
 
-    if (idServico != "") {
+    if (idPedido != "") {
         $(window.document.location).attr('href', "/Pedido/FormUpdatePedido?id=" + idPedido);
     }
 }
