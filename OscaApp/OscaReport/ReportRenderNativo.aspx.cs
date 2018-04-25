@@ -13,9 +13,11 @@ namespace OscaReport
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-         
+            if (!this.IsPostBack)
+            {
+
                 ReportParameter p = new ReportParameter("org", Request.QueryString["org"]);
-                string nome =  Request.QueryString["nome"];
+                string nome = Request.QueryString["nome"];
 
 
                 ReportViewer2.ProcessingMode = ProcessingMode.Remote;
@@ -29,6 +31,7 @@ namespace OscaReport
                 ReportViewer2.SizeToReportContent = true;
                 ReportViewer2.ServerReport.SetParameters(new ReportParameter[] { p });
                 ReportViewer2.ServerReport.Refresh();
+            }
             
         }
         public string RetornaAmbiente()

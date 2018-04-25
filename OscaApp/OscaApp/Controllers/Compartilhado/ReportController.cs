@@ -49,12 +49,12 @@ namespace OscaApp.Controllers
 
             if (urlAmbiente == "desenv")
             {
-                model.url = "http://www.report.desenv.oscas.com.br/ReportRenderPrint?tipo=" + tipo + "&id=" + model.idRegistro;
+                model.url = "http://www.report.desenv.oscas.com.br/ReportRenderPrint.aspx?tipo=" + tipo + "&id=" + model.idRegistro;
             }
 
             if (urlAmbiente == "prod")
             {
-                model.url = "http://www.report.oscas.com.br/ReportRenderPrint?tipo=" + tipo + "&id=" + model.idRegistro;
+                model.url = "http://www.report.oscas.com.br/ReportRenderPrint.aspx?tipo=" + tipo + "&id=" + model.idRegistro;
             }
             return View(model);
         }
@@ -66,12 +66,12 @@ namespace OscaApp.Controllers
 
             if (urlAmbiente == "desenv")
             {
-                model.url = "http://www.report.desenv.oscas.com.br/ReportRenderNativo?nome=" + nome + "&org=" + this.contexto.idOrganizacao;
+                model.url = "http://www.report.desenv.oscas.com.br/ReportRenderNativo.aspx?nome=" + nome + "&org=" + this.contexto.idOrganizacao;
             }
 
             if (urlAmbiente == "prod")
             {
-                model.url = "http://www.report.oscas.com.br/ReportRenderNativo?nome=" + nome + "&org=" + this.contexto.idOrganizacao;
+                model.url = "http://www.report.oscas.com.br/ReportRenderNativo.aspx?nome=" + nome + "&org=" + this.contexto.idOrganizacao;
             }
             return View(model);
 
