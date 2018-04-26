@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OscaApp.Models;
 using OscaFramework.Models;
 using OscaApp.Data;
+using Correios;
 
 namespace OscaAPI.Controllers
 {
@@ -34,12 +35,31 @@ namespace OscaAPI.Controllers
                 retorno.statusOperation = true;
                return Json(retorno);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 retorno.statusMensagem = ex.Message;
             }
 
             return Json(retorno);
+        }
+        [Route("api/[controller]/ConsultaCEP")]
+        [HttpGet("{cep}")]
+        public JsonResult ConsultaCEP(string cep)
+        {
+            ResultService retorno = new ResultService();
+           
+
+            var service = new CorreiosApi();
+            var dados = service.consultaCEP("cep");
+            retorno.statusMensagem = dados.bairro;
+               
+
+
+                retorno.statusOperation = true;
+                return Json(dados);
+         
+
+        
         }
     }
 }
