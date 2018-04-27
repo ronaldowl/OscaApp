@@ -8,6 +8,12 @@ namespace OscaFramework.Models
 {
      public class CustomEnumStatus
     {
+        public enum StatusLead
+        {
+            Ativo = 0,
+            Inativo = 1,
+            Qualificado = 2
+        }
         public enum StatusAtividade
         {
             Aberta = 0,
@@ -391,6 +397,7 @@ namespace OscaFramework.Models
             ItemProdutoLista =25,
             ServicoOrdem = 26,
             Atividade = 27,
+            ClientePotencial = 28,
             Organizacao = 1000
 
         }

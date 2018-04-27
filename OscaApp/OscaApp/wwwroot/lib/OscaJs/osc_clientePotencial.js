@@ -2,7 +2,7 @@
 
 function OnLoad() {
 
-    var status = $("#osc_status").val();
+    var status = $("#osc_statusLead").val();
     desabilita_Cliente(status);
   
 }
@@ -13,6 +13,7 @@ function OnChangeFiltro() {
 
     if (filtro == "0") { $(window.document.location).attr('href', "GridClientePotencial?view=0"); }
     if (filtro == "1") { $(window.document.location).attr('href', "GridClientePotencial?view=1"); }
+    if (filtro == "2") { $(window.document.location).attr('href', "GridClientePotencial?view=2"); }
 
 
 }
@@ -29,7 +30,7 @@ function SetStatusCliente(id, valor) {
 
     if (valor == 0) {
 
-        if (confirm("Deseja Inativar o Registro? não será possivel mais usar esse cliente!")) {
+        if (confirm("Deseja Inativar o Registro? não será possivel mais usar esse registro!")) {
 
             SetStatus(id, valor);
         }
@@ -37,7 +38,7 @@ function SetStatusCliente(id, valor) {
 
     if (valor == 1) {
 
-        if (confirm("Deseja Ativar o Registro?")) {
+        if (confirm("Deseja Converter o Registro para base de Clientes?")) {
 
             SetStatus(id, valor);
         }
@@ -51,7 +52,7 @@ function SetStatus(id, valor ) {
         $.ajax({
             dataType: "json",
             type: "GET",
-            url: "/API/ClienteAPI/SetStatus",
+            url: "/API/ClientePotencialAPI/SetStatus",
             data: {
                 valor: valor,
                 idCliente: id
@@ -59,7 +60,7 @@ function SetStatus(id, valor ) {
             success: function (dados) {
                 if (dados.statusOperation == true) {
                     alert('Registro atualizado com sucesso!');
-                    $(window.document.location).attr('href', 'FormUpdateCliente?id=' + id);
+                    $(window.document.location).attr('href', 'FormUpdateClientePotencial?id=' + id);
                 } else {
                     alert('Falha ao atualizar! - ' + dados.statusMensagem);
                 }
@@ -77,29 +78,21 @@ function OnChangeTipoPessoa()
  
 function desabilita_Cliente(status) {
 
-    if (status == "Inativo") {
+    if (status == 1 || status == 2) {
 
         //Desabilita todos campos do Form
         $("input,select, textarea").prop("disabled", true);
 
         //Esconde botoes
-        $("#osc_salvar").hide();
-        $("#osc_status_inativa").hide();
-        $("#osc_endereco").hide();
-        $("#osc_ordemservico").hide();
-        $("#osc_atendimento").hide();
-        $("#osc_pedido").hide();
-        $("#osc_conta").hide();  
-        $("#botaoBuscarCliente").hide(); 
-                
+        $("#osc_salvar").hide();          
 
         $("#osc_inativar").hide();      
-        $("#osc_ativar").show();
+        $("#osc_converter").hide();
         
 
     } else {
-        
-        $("#osc_ativar").hide();
+
+        $("#osc_converter").show();
         $("#osc_inativar").show();
 
     }

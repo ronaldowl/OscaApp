@@ -42,7 +42,7 @@
                                             <button id="osc_inativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusCliente('@Model.clientePotencial.id', 0)"> <span>Inativar</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_ativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusCliente('@Model.clientePotencial.id', 1)"> <span>Ativar</span></button>
+                                            <button id="osc_converter" type="button" class="btn btn-info btn-sm fa fa-plus" onclick="SetStatusCliente('@Model.clientePotencial.id', 1)"> <span>Qualificar</span></button>
                                         </label>
                                     </div>
                                 </td>
@@ -108,6 +108,20 @@
                                     <input id="osc_celular" asp-for="@Model.clientePotencial.celular" type="text" class="form-control" placeholder="..." maxlength="15" />
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <div class="input-group" >
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-alt fa-2x"></span>
+                                    </span> &nbsp;
+                                    <select style="background-color:aquamarine" id="osc_statusLead" asp-for="@Model.clientePotencial.statusLead" class="form-control" disabled="disabled">
+                                        <option value="0">Ativo</option>
+                                        <option value="1">Inativo</option>
+                                        <option value="2">Qualificado</option>
+
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
@@ -169,6 +183,8 @@
                                     <input id="osc_modificadoEm" asp-for="@Model.clientePotencial.modificadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
+
+                          
                         </div>
 
                     </div>
@@ -180,6 +196,9 @@
 
     </div>
 </div>
-
+<script src="~/lib/OscaJs/osc_clientePotencial.js"></script>
+<script>
+    OnLoad();
+</script>
 
 
