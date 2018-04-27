@@ -10,16 +10,16 @@ using Correios;
 
 namespace OscaAPI.Controllers
 {
-    
+
     public class EnderecoAPIController : Controller
     {
         private readonly IEnderecoData serviceData;
-        
+
 
         public EnderecoAPIController(ContexDataService db)
         {
-            this.serviceData = new EnderecoData(db);          
-        }    
+            this.serviceData = new EnderecoData(db);
+        }
 
         [Route("api/[controller]/Delete")]
         [HttpGet("{id}")]
@@ -33,7 +33,7 @@ namespace OscaAPI.Controllers
 
                 serviceData.Delete(modelo);
                 retorno.statusOperation = true;
-               return Json(retorno);
+                return Json(retorno);
             }
             catch (System.Exception ex)
             {
@@ -47,19 +47,38 @@ namespace OscaAPI.Controllers
         public JsonResult ConsultaCEP(string cep)
         {
             ResultService retorno = new ResultService();
-           
+            EnderecoCorreio end = new EnderecoCorreio();
 
-            var service = new CorreiosApi();
-            var dados = service.consultaCEP("cep");
-            retorno.statusMensagem = dados.bairro;
-               
+            try
+            {
 
+                var service = new CorreiosApi();
+                var dados = service.consultaCEP(cep);
+
+                if (!String.IsNullOrEmpty(dados.end))
+                {
+                    if (!String.IsNullOrEmpty(dados.end)) end.logradouro = dados.end;
+
+                    if (!String.IsNullOrEmpty(dados.bairro)) end.bairro = dados.bairro;
+
+                    if (!String.IsNullOrEmpty(dados.cidade)) end.cidade = dados.cidade;
+
+                    if (!String.IsNullOrEmpty(dados.complemento)) end.complemento = dados.complemento;
+
+                    retorno.value = end;
+                }
 
                 retorno.statusOperation = true;
-                return Json(dados);
-         
+                return Json(retorno);
+            }
+            catch (System.Exception ex)
+            {
 
-        
+                retorno.statusMensagem = ex.Message;
+            }
+
+            return Json(retorno);
+
         }
     }
 }

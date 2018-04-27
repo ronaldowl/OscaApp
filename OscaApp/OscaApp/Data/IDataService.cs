@@ -261,6 +261,15 @@ namespace OscaApp.Data
         
     }
 
+    public interface IClientePotencialData
+    {
+        void Add(ClientePotencial cliente);
+        void Update(ClientePotencial cliente);
+        void SetStatus(ClientePotencial modelo);
+        ClientePotencial Get(Guid id);
+        List<ClientePotencial> GetAll(Guid idOrg, int view);
+    }
+
     public interface ISqlGenericService
     {
         String RetornaNovaPosicao(int Entidade, Guid idOrganizacao);    

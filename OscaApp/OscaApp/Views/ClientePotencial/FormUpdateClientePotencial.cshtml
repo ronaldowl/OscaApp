@@ -1,0 +1,185 @@
+﻿@model OscaApp.ViewModels.ClientePotencialViewModel
+@using OscaFramework.Helper;
+
+<div id="contexto">
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+    @Html.HiddenFor(m => m.clientePotencial.id)
+</div>
+ 
+<div class="row">
+    <div class="col-md-10 offset-1">
+        @if (!String.IsNullOrEmpty(Model.StatusMessage))
+        {
+
+            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessage
+            </div>
+        }
+        <form action="FormUpdateClientePotencial" method="post" id="osc_MainFormUpdate">
+            <div class="card  " id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Atualiza Cliente Potencial:&nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                        </label>
+
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridClientePotencial", "ClientePotencial" , new {view = 1 })'"> <span>Fechar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateClientePotencial", "ClientePotencial", null)'"> <span>Novo</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_inativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusCliente('@Model.clientePotencial.id', 0)"> <span>Inativar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_ativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusCliente('@Model.clientePotencial.id', 1)"> <span>Ativar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <input id="osc_id" asp-for="clientePotencial.id" type="hidden" class="form-control" value="@Model.clientePotencial.id" />
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Nome Cliente*</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-user-o fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_nome" asp-for="@Model.clientePotencial.nomeCliente" type="text" class="form-control" required="required" placeholder="..." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-envelope-o fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_email" asp-for="@Model.clientePotencial.email" type="email" class="form-control" placeholder="..." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Sexo</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>
+                                    </span> &nbsp;
+                                    <select id="osc_sexo" asp-for="@Model.clientePotencial.sexo" class="form-control">
+                                        <option value="1" selected="">Masculino</option>
+                                        <option value="2">Feminino</option>
+                                        <option value="3">Outros</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-phone fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_telefone" asp-for="@Model.clientePotencial.telefone" type="text" class="form-control" placeholder="..." maxlength="15" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Celular</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-mobile-phone fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_celular" asp-for="@Model.clientePotencial.celular" type="text" class="form-control" placeholder="..." maxlength="15" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label>Anotação</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>
+                                    </span> &nbsp;
+                                    <textarea id="osc_anotacao" asp-for="@Model.clientePotencial.anotacao" class="form-control" rows="8" cols="40" placeholder="..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- FOOTER -->
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.clientePotencial.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.clientePotencial.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" asp-for="@Model.clientePotencial.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" asp-for="@Model.clientePotencial.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- FOOTER -->
+            </div>
+        </form>
+        <br />
+
+    </div>
+</div>
+
+
+

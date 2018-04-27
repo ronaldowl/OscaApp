@@ -8,6 +8,7 @@ namespace OscaFramework.Models
     /// </summary>
     public class ResultService
     {       
+        public object value { get; set; }
         public bool statusOperation {get;set;}
         public string statusMensagem { get; set; }
     }

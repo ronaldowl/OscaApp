@@ -45,6 +45,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label">CEP</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
+                                            <input id="osc_cep" asp-for="@Model.endereco.cep" placeholder="apenas números" class="form-control" type="text"   maxlength="8" onchange="ConsultaCep();">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label">Logradouro</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
@@ -53,15 +62,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">Número</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
-                                            <input id="osc_numero" asp-for="@Model.endereco.numero" placeholder="Número" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
+                               
                                 <div class="form-group">
                                     <label class="control-label">Bairro</label>
                                     <div class="inputGroupContainer">
@@ -87,15 +88,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">CEP</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
-                                            <input id="osc_cep" asp-for="@Model.endereco.cep" placeholder="apenas números" class="form-control" type="text" pattern="[0-9]+$" maxlength="8">
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="form-group">
                                     <label class="control-label">Cidade</label>
                                     <div class="inputGroupContainer">
@@ -142,6 +135,15 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label">Número</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-home fa-2x"></i></span>&nbsp;
+                                            <input id="osc_numero" asp-for="@Model.endereco.numero" placeholder="Número" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                             <!------ COL3 ------>
@@ -161,7 +163,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-comment-o fa-2x"></span>&nbsp;
                                         </span>
-                                        <textarea id="osc_anotacao" asp-for="@Model.endereco.anotacao" class="form-control" rows="9" cols="25" placeholder="digite uma anotação"></textarea>
+                                        <textarea id="osc_anotacao" asp-for="@Model.endereco.anotacao" class="form-control" rows="7" cols="25" placeholder="digite uma anotação"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -223,3 +225,4 @@
     </div>
 </div>
 
+<script src="~/lib/OscaJs/osc_endereco.js"></script>

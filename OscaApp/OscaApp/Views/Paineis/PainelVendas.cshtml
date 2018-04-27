@@ -36,6 +36,19 @@
                     <p>Consulte e cadastre novos Contatos</p>
                 </div>
             </div>
+            <div class="card m-2">
+                <div class="card-header">
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-drivers-license iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="ClientePotencial" asp-action="GridClientePotencial" asp-route-view="1"><h4>Cliente Potencial</h4></a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <p>Consulte e cadastre novos possiveis Clientes </p>
+                </div>
+            </div>
             <!-- CARD -->
             <div class="card m-2">
                 <div class="card-header">
@@ -60,7 +73,7 @@
                     <table>
                         <tr>
                             <td><i class="fa fa-2x fa-user-md iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Atendimento" asp-action="GridAtendimento"><h4>Atendimentos</h4></a></td>
+                            <td><a asp-controller="Atendimento" asp-action="GridAtendimento" asp-route-view="1"><h4>Atendimentos</h4></a></td>
                         </tr>
                     </table>
                 </div>
@@ -96,7 +109,7 @@
                     <table>
                         <tr>
                             <td><i class="fa fa-2x fa-file-powerpoint-o iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Pedido" asp-action="GridPedido"><h4>Pedidos</h4></a></td>
+                            <td><a asp-controller="Pedido" asp-action="GridPedido" asp-route-view="1"><h4>Pedidos</h4></a></td>
                         </tr>
                     </table>
                 </div>

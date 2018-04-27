@@ -1,0 +1,161 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.ClientePotencial>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+
+<div class="row">
+    <div class="col-md-10 offset-1">
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Lista de Clientes Potencial: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <div class="form-group">
+                                            <label>Filtros</label>
+                                            <div class="input-group">
+                                                &nbsp;<div class="col-2">
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
+                                                        <option value="1" selected="">Todos Ativos</option>
+                                                        <option value="0">Todos Qualificados</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>&nbsp;
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateClientePotencial", "ClientePotencial", null)'"> <span>Novo</span></button>
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <span>
+                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                        </span>
+                                        <button type="submit" class="btn btn-info fa fa-search"></button>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick=""> <span>Limpar</span></button>
+                                        </label>
+                                      
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover   table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Cliente</th>
+                                <th>E-mail</th>
+                                <th>Celular</th>
+                                <th>Telefone</th>
+                                <th>Sexo</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                        <tr style="cursor:pointer; font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateClientePotencial", "ClientePotencial", new {id = item.id })'">
+                            <td><i class="fa  fa-drivers-license"></i></td>
+                            <td>@Html.ActionLink(item.nomeCliente.ToString(), "FormUpdateClientePotencial", new { id = item.id })</td>
+
+                            <td>@item.email</td>
+                            <td>@item.celular</td>
+                            <td>@item.telefone</td>
+                            <td>@item.sexo</td>
+                            <td>@item.status</td>
+                        </tr>
+                        }
+                    </table>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <table class="table  table-striped table-bordered table-sm">
+                    <tr>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridClientePotencial", "ClientePotencial", new { page }))</td>
+                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br /><br /><br /><br /> <br /><br /><br /><br />  <br /><br /><br />
+<div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+
+    <div style="background-color:darkgrey; width:100%; height:10px;"></div>
+
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/OscaJs/osc_clientePotencial.js"></script>
+<script>
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+
+</script>
+

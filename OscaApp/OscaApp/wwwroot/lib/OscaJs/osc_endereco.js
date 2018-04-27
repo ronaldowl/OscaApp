@@ -19,3 +19,25 @@ function DeleteEndereco(id, idcliente) {
         });
     }
 } 
+
+function ConsultaCep() {    
+
+    var cepEntrada = $("#osc_cep").val();
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: "/API/EnderecoAPI/ConsultaCep",
+            data: { cep: cepEntrada },
+            success: function (dados) {
+                if (dados.statusOperation == true) {
+
+                    $("#osc_bairro").val(dados.value.bairro);   
+                    $("#osc_logradouro").val(dados.value.logradouro);   
+                    $("#osc_cidade").val(dados.value.cidade);                                                      
+                                         
+                }
+            }
+        });    
+} 
+
