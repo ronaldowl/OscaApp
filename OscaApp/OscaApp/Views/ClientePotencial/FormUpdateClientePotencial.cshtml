@@ -33,16 +33,16 @@
                                         </label>
 
                                         <label>
-                                            <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridClientePotencial", "ClientePotencial" , new {view = 1 })'"> <span>Fechar</span></button>
+                                            <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridClientePotencial", "ClientePotencial" , new {view = 0 })'"> <span>Fechar</span></button>
                                         </label>
                                         <label>
                                             <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateClientePotencial", "ClientePotencial", null)'"> <span>Novo</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_inativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusCliente('@Model.clientePotencial.id', 0)"> <span>Inativar</span></button>
+                                            <button id="osc_inativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusClientePotencial('@Model.clientePotencial.id', 1)"> <span>Inativar</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_converter" type="button" class="btn btn-info btn-sm fa fa-plus" onclick="SetStatusCliente('@Model.clientePotencial.id', 1)"> <span>Qualificar</span></button>
+                                            <button id="osc_converter" type="button" class="btn btn-info btn-sm fa fa-plus" onclick="SetStatusClientePotencial('@Model.clientePotencial.id', 2)"> <span>Qualificar</span></button>
                                         </label>
                                     </div>
                                 </td>

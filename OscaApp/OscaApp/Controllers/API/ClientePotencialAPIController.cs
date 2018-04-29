@@ -19,10 +19,12 @@ namespace OscaAPI.Controllers
         private readonly SqlGenericRules sqlServices;
         private readonly ContextPage contexto;
         private readonly ClienteData clienteData;
+        private readonly ClientePotencialData clientePotencialData;
 
         public ClientePotencialAPIController(SqlGenericRules _sqlRules, IHttpContextAccessor httpContext, ContexDataService db)
         {
             this.clienteData = new ClienteData(db);
+            this.clientePotencialData = new ClientePotencialData(db);
             this.sqlServices = _sqlRules;
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
@@ -57,8 +59,9 @@ namespace OscaAPI.Controllers
             ResultService retorno = new ResultService();
             try
             {
-                if (ClienteRules.SetStatus(valor, idCliente, clienteData, this.contexto))
+                if (ClientePotencialRules.SetStatus(valor, idCliente, clientePotencialData, clienteData, this.contexto))
                 {
+                    
                     retorno.statusOperation = true;
                 }
                 return Json(retorno);

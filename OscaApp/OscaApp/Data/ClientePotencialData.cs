@@ -66,6 +66,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
                 
                 db.SaveChanges();
+             
             }
             catch (Exception ex)
             {
@@ -97,19 +98,19 @@ namespace OscaApp.Data
             //Cliente Ativo
             if (view == 0)
             {
-                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where status = 0 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where statusLead = 0 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }
 
             //Cliente Inativo
             if (view == 1)
             {
-                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where status = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where statusLead = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }
 
             //Qualificados  
             if (view == 2)
             {
-                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where  status = 2 and   idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where  statusLead = 2 and   idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             }
 
             return retorno;

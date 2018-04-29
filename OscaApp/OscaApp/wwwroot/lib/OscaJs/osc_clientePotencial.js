@@ -26,9 +26,9 @@ function RecarregarGridConta() {
 
 }
 
-function SetStatusCliente(id, valor) {
+function SetStatusClientePotencial(id, valor) {
 
-    if (valor == 0) {
+    if (valor == 1) {
 
         if (confirm("Deseja Inativar o Registro? não será possivel mais usar esse registro!")) {
 
@@ -36,7 +36,7 @@ function SetStatusCliente(id, valor) {
         }
     }
 
-    if (valor == 1) {
+    if (valor == 2) {
 
         if (confirm("Deseja Converter o Registro para base de Clientes?")) {
 
