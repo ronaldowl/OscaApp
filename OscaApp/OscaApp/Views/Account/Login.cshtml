@@ -73,36 +73,41 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <center> <h2 style="font-weight:bold">Seja bem vindo!</h2></center>
-            </div><br />
+                <table>
+                    <tr>
+                        <td width="56%"><h2 style="font-weight:bold">Entrar</h2></td>
+                        <td><h2 style="font-weight:bold;color:forestgreen">** Gratuito até 100 Clientes **</h2></td>
+                    </tr>
+                </table>
+                </div><br />
             <div class="row">
                 <div class="col-md-5">
                     <section>
-                        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+                        <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" >
 
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="form-group">
-                                <label asp-for="empresa" class="col-md-3 control-label">Empresa</label>
+                                <label asp-for="empresa" class="col-md-3 control-label" style="font-weight:bold">Empresa</label>
                                 <div class="col-md-10">
                                     <input asp-for="empresa" class="form-control" />
                                     <span asp-validation-for="empresa" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Email" class="col-md-3 control-label">E-mail</label>
+                                <label asp-for="Email" class="col-md-3 control-label" style="font-weight:bold">E-mail</label>
                                 <div class="col-md-10">
                                     <span asp-validation-for="Email" class="text-danger "></span>
                                     <input asp-for="Email" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Password" class="col-md-3 control-label">Senha</label>
+                                <label asp-for="Password" class="col-md-3 control-label" style="font-weight:bold">Senha</label>
                                 <div class="col-md-10">
                                     <input asp-for="Password" class="form-control" />
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
-                        
+
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-7">
                                     <button type="submit" class="btn btn-primary btn-lg" style="width:150px">Entrar</button>
@@ -114,27 +119,36 @@
                             <p>
                                 <label>Esqueceu sua senha? contate o suporte.</label><br />
                                 <label style="font-weight:bold">E-mail:suporte@oscas.com.br</label>
+                                <label style="font-weight:bold">Contato:contato@oscas.com.br</label>
                             </p>
                         </form>
+                    </section>
+                    <section class="alert alert-personalized text-justify">
+                        <h5>Redes sociais</h5>
+                        <p>Site: <a href="http://www.oscas.com.br" target="_blank">www.oscas.com.br</a></p>
+                        <div class="col-md-6 offset-md-4">
+                            <a href="https://www.youtube.com/channel/UCanh_FSlWdpoaxTrLiKoYKw" target="_blank" class="lin"><i class="fa fa-2x fa-youtube"></i></a>
+                            &nbsp;&nbsp;
+                            <a href="https://www.facebook.com/OscasServicosOnline/" target="_blank"><i class="fa fa-2x fa-facebook-official"></i></a>
+                        </div>
                     </section>
                 </div>
                 <div class="col-md-4 offset-2">
                     <section class="alert alert-warning text-justify">
                         <h5>Próximas manutenções!</h5>
                         <div>
-                            <ul>                               
+                            <ul>
                                 <li>05 de Maio de 2018  as 19:00</li>
                                 <li>02 de Junho de 2018 as 19:00</li>
                             </ul>
                         </div>
                     </section>
                     <section class="alert alert-personalized text-justify">
-                        <h5>Melhorias para 7 de Maio</h5>
+                        <h5>Melhorias para 4 de Junho</h5>
                         <ul>
-                            <li>Integração com os Correios</li>
+                            <li>Controle de Estoque</li>
                             <li>Alerta via SMS</li>
                             <li>Novos Relatórios</li>
-
                         </ul>
                     </section>
                     <section class="alert alert-personalized text-justify">
@@ -142,18 +156,18 @@
                         <ul>
                             <li>Treinamento em Vídeo</li>
                             <li>FAQ</li>
+                            <li>Atualizações</li>
                             <li>Documentação</li>
                         </ul>
                     </section>
-                    <section class="alert alert-personalized text-justify">
-                        <h5>Redes sociais</h5>                   
-                            <p>Site: <a href="http://www.oscas.com.br" target="_blank">www.oscas.com.br</a></p>
-                            <div class="col-md-6 offset-md-4">
-                                <a href="https://www.youtube.com/channel/UCanh_FSlWdpoaxTrLiKoYKw" target="_blank" class="lin"><i class="fa fa-2x fa-youtube"></i></a>
-                                &nbsp;&nbsp;
-                                <a href="https://www.facebook.com/OscasServicosOnline/" target="_blank"><i class="fa fa-2x fa-facebook-official"></i></a>
-                            </div>
+                    <section class="alert alert-success text-justify">
+                        <h5><a href="http://loja.oscas.com.br">Nossa Loja</a></h5>
+                        <ul>
+                            <li>Assinatura de Planos</li>
+                            <li>Compra de Produtos</li>                      
+                        </ul>
                     </section>
+               
                 </div>
                 </div>
         </div>

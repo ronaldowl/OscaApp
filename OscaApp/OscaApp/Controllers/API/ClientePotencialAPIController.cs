@@ -14,9 +14,8 @@ namespace OscaAPI.Controllers
 {
     
     public class ClientePotencialAPIController : Controller
-    {
+    {        
         
-        private readonly SqlGenericRules sqlServices;
         private readonly ContextPage contexto;
         private readonly ClienteData clienteData;
         private readonly ClientePotencialData clientePotencialData;
@@ -24,8 +23,7 @@ namespace OscaAPI.Controllers
         public ClientePotencialAPIController(SqlGenericRules _sqlRules, IHttpContextAccessor httpContext, ContexDataService db)
         {
             this.clienteData = new ClienteData(db);
-            this.clientePotencialData = new ClientePotencialData(db);
-            this.sqlServices = _sqlRules;
+            this.clientePotencialData = new ClientePotencialData(db);            
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
      
@@ -38,10 +36,10 @@ namespace OscaAPI.Controllers
             try
             {
 
-                if (ClienteRules.Cnpj_CfpExistente(valor, contexto.idOrganizacao, sqlServices))
-                {
-                    retorno.statusOperation = true;
-                }
+                //if (ClienteRules.Cnpj_CfpExistente(valor, contexto.idOrganizacao, sqlServices))
+                //{
+                //    retorno.statusOperation = true;
+                //}
                return Json(retorno);
             }
             catch (Exception ex)
@@ -57,9 +55,10 @@ namespace OscaAPI.Controllers
         public JsonResult SetStatus(string idCliente, int valor)
         {
             ResultService retorno = new ResultService();
+            SqlGenericData sqlServices = new SqlGenericData();
             try
             {
-                if (ClientePotencialRules.SetStatus(valor, idCliente, clientePotencialData, clienteData, this.contexto))
+                if (ClientePotencialRules.SetStatus(valor, idCliente, clientePotencialData, clienteData, this.contexto, sqlServices))
                 {
                     
                     retorno.statusOperation = true;

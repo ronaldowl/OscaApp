@@ -56,7 +56,7 @@ namespace OscaApp.RulesServices
 
             return false;
         }
-        public static bool SetStatus(int valor, string idCliente, ClientePotencialData clientePotencialData, ClienteData clienteData, ContextPage contexto)
+        public static bool SetStatus(int valor, string idCliente, ClientePotencialData clientePotencialData, ClienteData clienteData, ContextPage contexto, SqlGenericData sqlService)
         {
 
             ClientePotencial modelo = new ClientePotencial();
@@ -74,7 +74,7 @@ namespace OscaApp.RulesServices
 
                 Cliente cliente = new Cliente();
                 ClientePotencial clientePotencial = new ClientePotencial();
-                clientePotencial = clientePotencialData.Get(new Guid(idCliente));
+                clientePotencial = sqlService.RetornaClientePotencial(new Guid( idCliente));
 
                 cliente.nomeCliente = clientePotencial.nomeCliente;
                 cliente.sexo = clientePotencial.sexo;

@@ -25,6 +25,54 @@ namespace OscaFramework.MicroServices
             this.conectService = Configuration.GetConnectionString("databaseService");
         }
 
+        public ClientePotencial RetornaClientePotencial(Guid id)
+        {
+            ClientePotencial retorno = new ClientePotencial();
+            SqlDataReader dataReader;
+            try
+            {
+
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.id , o.nomeCliente ,  statusLead, email, telefone, celular,anotacao, sexo from ClientePotencial as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.nomeCliente = dataReader["nomeCliente"].ToString();
+                            retorno.statusLead = (CustomEnumStatus.StatusLead)Convert.ToInt32(dataReader["statusLead"].ToString());
+                            retorno.email = dataReader["email"].ToString();
+                            retorno.telefone =  dataReader["telefone"].ToString();
+                            retorno.celular = dataReader["celular"].ToString();
+                            retorno.anotacao = dataReader["anotacao"].ToString();
+                            retorno.sexo = (CustomEnum.Sexo)Convert.ToInt32(dataReader["sexo"].ToString());                                    
+                             
+                            
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
         public List<Profissional> RetornaProfissional(Guid idOrganizacao)
         {
             List<Profissional> retorno = new List<Profissional>();
