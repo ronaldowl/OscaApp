@@ -9,6 +9,30 @@ namespace OscaApp.RulesServices
 {
     public static class ClientePotencialRules
     {
+        public static bool MontaClientePotencialCreateFomulario(PaginaClienteViewModel entrada, out ClientePotencial modelo, Guid idOrganizacao)
+        {
+            modelo = new ClientePotencial();
+
+            if (entrada.clientePotencial != null)
+            {
+                modelo = entrada.clientePotencial;
+
+                ////************ Objetos de controle de acesso ***************
+                modelo.criadoEm = DateTime.Now;
+                modelo.criadoPor = new Guid("6E835F74-5249-4B36-AF2E-21F89D1E5964");
+                modelo.criadoPorName = "OscaAdmin";
+                modelo.modificadoEm = DateTime.Now;
+                modelo.modificadoPor = new Guid("6E835F74-5249-4B36-AF2E-21F89D1E5964");
+                modelo.modificadoPorName = "OscaAdmin";
+                modelo.idOrganizacao = idOrganizacao;
+                ////************ FIM Objetos de controle de acesso ***************
+
+
+                return true;
+            }
+
+            return false;
+        }
         public static bool MontaClientePotencialCreate(ClientePotencialViewModel entrada,out ClientePotencial modelo, ContextPage contexto )
         {
             modelo = new ClientePotencial();                        
@@ -46,10 +70,10 @@ namespace OscaApp.RulesServices
 
             return true;           
         }
-        public static bool Cnpj_CfpExistente(string valor, Guid idOrganizacao, SqlGenericRules sqlServices)
+        public static bool EmailExistente(string valor, Guid idOrganizacao, SqlGenericRules sqlServices)
         {
 
-            if(sqlServices.ConsultaCnpj_CpfDuplicado(valor, idOrganizacao.ToString()))
+            if(sqlServices.ConsultaEmailDuplicado(valor, idOrganizacao.ToString()))
             {
                 return true;
             }

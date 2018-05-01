@@ -127,7 +127,7 @@ namespace OscaApp.Controllers.Padrao
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Incidente>(Page, 2));
+            return View(retorno.ToPagedList<Incidente>(Page, 20));
         }
 
     } // end of class IncidenteController

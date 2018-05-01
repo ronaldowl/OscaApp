@@ -147,7 +147,7 @@ namespace OscaApp.Controllers
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Produto>(Page, 10));
+            return View(retorno.ToPagedList<Produto>(Page, 20));
         }
     }
 }

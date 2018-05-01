@@ -150,7 +150,7 @@ namespace OscaApp.Controllers
 
 
             if (Page == 0) Page = 1;
-            return View(retorno.ToPagedList<ContasReceber>(Page, 10));
+            return View(retorno.ToPagedList<ContasReceber>(Page, 20));
         }
 
         [HttpGet]

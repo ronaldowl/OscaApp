@@ -1,11 +1,36 @@
 ﻿//********************************* Biblioteca com funções da Tela de Cliente ***************
 
-function OnLoad() {
+function OnLoadLead() {
 
     var status = $("#osc_statusLead").val();
     desabilita_Cliente(status);
   
 }
+
+
+function ConsultaEmailDuplicado() {
+    var retorno = true;
+
+    var email = $("#osc_email").val();
+
+    if (email != "") {
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            async: false,
+            url: "/API/ClientePotencialAPI/ConsultaEmailDuplicado",
+            data: { valor: email },
+            success: function (dados) {
+                if (dados.statusOperation == true) {
+                    alert('E-mail já cadastrado!');
+                    retorno = false;
+                }
+            }
+        });
+    }
+    return retorno;
+} 
  
 function OnChangeFiltro() {
 

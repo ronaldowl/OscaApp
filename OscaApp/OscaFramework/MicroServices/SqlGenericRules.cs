@@ -58,6 +58,42 @@ namespace OscaFramework.MicroServices
             return sucesso;
 
         }
+        public Boolean ConsultaEmailDuplicado(string valor, string idOrganizacao)
+        {
+            bool sucesso = false;
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    object retorno = null;
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_EmailExistente",
+                        CommandType = CommandType.StoredProcedure
+                    };
+
+                    _Command.Parameters.AddWithValue("valor", valor);
+                    _Command.Parameters.AddWithValue("idOrganizacao", idOrganizacao);
+
+                    Connection.Open();
+                    retorno = _Command.ExecuteScalar();
+
+                    if (retorno != null) sucesso = true;
+
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return sucesso;
+
+        }
+
 
     }
 }

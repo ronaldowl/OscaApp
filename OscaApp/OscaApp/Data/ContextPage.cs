@@ -58,11 +58,16 @@ namespace OscaApp.Data
         public ContextPage ExtractContext(IHttpContextAccessor httpContext)
         {
             ContextPage retorno = new ContextPage();
+            try
+            {          
 
             retorno.idOrganizacao =  new Guid(httpContext.HttpContext.Session.GetString("idOrganizacao"));
             retorno.idUsuario = new Guid(httpContext.HttpContext.Session.GetString("idUsuario"));
             retorno.nomeUsuario =  httpContext.HttpContext.Session.GetString("nomeUsuario");
             retorno.organizacao =  httpContext.HttpContext.Session.GetString("organizacao");
+
+            }
+            catch (Exception) {}
 
             return retorno;
         }

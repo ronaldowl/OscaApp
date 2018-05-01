@@ -191,7 +191,7 @@ namespace OscaApp.Controllers
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 10));
+            return View(retorno.ToPagedList<AtendimentoGridViewModel>(Page, 20));
         }
 
 
@@ -254,7 +254,7 @@ namespace OscaApp.Controllers
 
             IEnumerable<AtendimentoGridViewModel> retorno = atendimentoData.GetAllGridViewModelDia(new Guid(idProfissional));
 
-            return View(retorno.ToPagedList<AtendimentoGridViewModel>(1, 100));
+            return View(retorno.ToPagedList<AtendimentoGridViewModel>(1, 20));
         }
 
     }

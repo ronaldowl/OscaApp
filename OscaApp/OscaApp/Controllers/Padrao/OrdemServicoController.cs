@@ -182,7 +182,7 @@ namespace OscaApp.Controllers
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 10));
+            return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 20));
         }
 
         public ViewResult GridLookupOrdemServico(string filtro, int Page, int view)
@@ -203,7 +203,7 @@ namespace OscaApp.Controllers
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 10));
+            return View(retorno.ToPagedList<OrdemServicoGridViewModel>(Page, 20));
         }
 
         public ViewResult LookupOrdemServico()

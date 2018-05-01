@@ -19,7 +19,7 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar" onclick="return ConsultaCnpjCpfDuplicado();"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar" onclick="return ConsultaEmailDuplicado();"> <span>Salvar</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"> <span>Fechar</span></button>
@@ -152,8 +152,8 @@
             <br />
         </div>
     </div>
-
+<script src="~/lib/OscaJs/osc_clientePotencial.js"></script>
 <script>
     //Executa regras de carregamento do Form
-    OnLoad();
+    OnLoadLead();
 </script>

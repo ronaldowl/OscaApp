@@ -1,0 +1,110 @@
+﻿@model OscaApp.ViewModels.PaginaClienteViewModel
+@{
+    Layout = "_LayoutFrame";
+}
+
+
+<div class="row">
+    <div class="col-md-8 offset-1">
+        @if (!String.IsNullOrEmpty(Model.StatusMessageLead))
+        {
+
+            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessageLead
+            </div>
+        }
+        <form action="FormularioEntrada" method="post" id="FormularioEntrada">
+            <div class="card " id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Entre em contato:&nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar" onclick="return ConsultaEmailDuplicado();"> <span>Enviar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Nome Cliente*</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-user-o fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_nome" asp-for="@Model.clientePotencial.nomeCliente" type="text" class="form-control" required="required" placeholder="..." />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-envelope-o fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_email" asp-for="@Model.clientePotencial.email" type="email" class="form-control" placeholder="..." required="required" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label>Telefone</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-phone fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_telefone" asp-for="@Model.clientePotencial.telefone" type="text" class="form-control" placeholder="..." maxlength="15" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Sexo</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>
+                                    </span> &nbsp;
+                                    <select id="osc_sexo" asp-for="@Model.clientePotencial.sexo" class="form-control">
+                                        <option value="1" selected="">Masculino</option>
+                                        <option value="2">Feminino</option>
+                                        <option value="3">Outros</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label>Mensagem</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>
+                                    </span> &nbsp;
+                                    <textarea id="osc_anotacao" asp-for="@Model.clientePotencial.anotacao" class="form-control" rows="4" cols="35" placeholder="..."></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br />
+    </div>
+</div>
+<script src="~/lib/OscaJs/osc_clientePotencial.js"></script>
+<script>
+    //Executa regras de carregamento do Form
+    OnLoadLead();
+</script>

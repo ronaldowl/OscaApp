@@ -90,7 +90,7 @@
                 <div class="card-footer">
                     <table>
                         <tr>
-                            <td style="width:83%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAgendamento", "Agendamento", new { page }))</td>
+                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAgendamento", "Agendamento", new { page }))</td>
                             <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
                         </tr>
                     </table>

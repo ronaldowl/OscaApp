@@ -189,7 +189,7 @@ namespace OscaApp.Controllers
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<AtividadeGridViewModel>(Page, 10));
+            return View(retorno.ToPagedList<AtividadeGridViewModel>(Page, 20));
         }
         public ViewResult GridAtividadeDia( )
         {
@@ -198,7 +198,7 @@ namespace OscaApp.Controllers
 
             IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridDia(idProfissional);
 
-            return View(retorno.ToPagedList<AtividadeGridViewModel>(1, 100));
+            return View(retorno.ToPagedList<AtividadeGridViewModel>(1, 20));
         }
     }
 }

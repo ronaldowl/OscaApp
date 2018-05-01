@@ -33,8 +33,7 @@ namespace OscaApp.Controllers
         }
 
         [TempData]
-        public string StatusMessage { get; set; }
-     
+        public string StatusMessage { get; set; }              
 
         [HttpGet]
         public ViewResult FormCreateClientePotencial()
@@ -138,7 +137,8 @@ namespace OscaApp.Controllers
             }
 
             return RedirectToAction("FormUpdateClientePotencial", new { id = modelo.id.ToString() });
-        }
+        }  
+
 
         public ViewResult GridClientePotencial(string filtro, int Page,int view)
         {
@@ -159,7 +159,7 @@ namespace OscaApp.Controllers
 
                 if (Page == 0) Page = 1;
 
-                return View(retorno.ToPagedList<ClientePotencial>(Page, 10));
+                return View(retorno.ToPagedList<ClientePotencial>(Page, 20));
 
             }
             catch (Exception ex)
@@ -170,56 +170,6 @@ namespace OscaApp.Controllers
 
             return View();
         }
-
-        //public ViewResult LookupCliente()
-        //{
-        //    try
-        //    {
-        //        IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, 1);
-
-        //        return View(retorno.ToPagedList<Cliente>(1, 10));
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
-        //    }
-
-        //    return View();
-        //}
-
-        //public ViewResult GridLookupCliente(string filtro, int Page)
-        //{
-        //    try
-        //    {
-        //        IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, 1);
-
-        //        if (!String.IsNullOrEmpty(filtro))
-        //        {
-        //            retorno = from u in retorno
-        //                      where (u.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
-        //                            (u.codigo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))
-        //                      select u;
-
-        //        }
-        //        retorno = retorno.OrderBy(x => x.nomeCliente);
-
-        //        //Se não passar a número da página, caregar a primeira
-        //        if (Page == 0) Page = 1;
-
-        //        return View(retorno.ToPagedList<Cliente>(Page, 10));
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
-        //    }
-
-        //    return View();
-        //}
-
 
        
     }

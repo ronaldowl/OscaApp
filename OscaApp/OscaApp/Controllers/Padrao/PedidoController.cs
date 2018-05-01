@@ -193,7 +193,7 @@ namespace OscaApp.Controllers
                 retorno = retorno.OrderBy(x => x.pedido.codigoPedido); 
 
                 if (Page == 0) Page = 1;
-                return View(retorno.ToPagedList<PedidoGridViewModel>(Page, 10));
+                return View(retorno.ToPagedList<PedidoGridViewModel>(Page, 20));
 
             }
             catch (Exception ex)

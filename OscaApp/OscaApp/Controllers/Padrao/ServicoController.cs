@@ -136,7 +136,7 @@ namespace OscaApp.Controllers
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Servico>(Page, 10));
+            return View(retorno.ToPagedList<Servico>(Page, 20));
         }
 
         public ViewResult LookupServico( )

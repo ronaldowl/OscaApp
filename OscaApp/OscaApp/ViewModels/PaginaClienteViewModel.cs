@@ -9,16 +9,15 @@ using OscaApp.Models;
 
 namespace OscaApp.ViewModels
 {
-    public class ClientePotencialViewModel : ViewModelBase
+    public class PaginaClienteViewModel : ViewModelBase
     {
-        public ClientePotencial clientePotencial { get; set; }               
-    
-        public ContextPage contexto { get; set; }
-        
-        public string StatusMessage { get; set; }    
+        public ClientePotencial clientePotencial { get; set; }              
+                 
+
+        public string StatusMessageLead { get; set; }
               
 
-        public ClientePotencialViewModel()
+        public PaginaClienteViewModel()
         {
             this.clientePotencial = new ClientePotencial();
            

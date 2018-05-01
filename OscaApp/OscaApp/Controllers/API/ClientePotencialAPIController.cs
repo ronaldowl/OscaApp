@@ -28,19 +28,20 @@ namespace OscaAPI.Controllers
         }
      
 
-        [Route("api/[controller]/ConsultaCnpjCpfDuplicado")]
+        [Route("api/[controller]/ConsultaEmailDuplicado")]
         [HttpGet("{valor}")]
-        public JsonResult ConsultaCnpjCpfDuplicado(string valor)
+        public JsonResult ConsultaEmailDuplicado(string valor)
         {
             ResultService retorno = new ResultService();
+            SqlGenericRules sqlRules = new SqlGenericRules();
             try
             {
 
-                //if (ClienteRules.Cnpj_CfpExistente(valor, contexto.idOrganizacao, sqlServices))
-                //{
-                //    retorno.statusOperation = true;
-                //}
-               return Json(retorno);
+                if (ClientePotencialRules.EmailExistente(valor, contexto.idOrganizacao, sqlRules))
+                {
+                    retorno.statusOperation = true;
+                }
+                return Json(retorno);
             }
             catch (Exception ex)
             {
