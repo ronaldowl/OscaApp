@@ -203,15 +203,15 @@ namespace OscaApp.Controllers
         {
             IEnumerable<AgendamentoGridViewModel> retorno;
 
+            ViewBag.viewContexto = view;
+
             SqlGeneric sqlServices = new SqlGeneric();
             string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
 
 
             if (String.IsNullOrEmpty(idCliente))
             {
-                //Se tiver filtro, busca em todas as linhas
-                if (!String.IsNullOrEmpty(filtro)) view = 4;
-
+               
                 retorno = agendamentoData.GetAllGridViewModel(contexto.idOrganizacao, view, idProfissional);
             }
             else
@@ -232,7 +232,7 @@ namespace OscaApp.Controllers
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<AgendamentoGridViewModel>(Page, 5));
+            return View(retorno.ToPagedList<AgendamentoGridViewModel>(Page, 20));
         }
 
 

@@ -66,19 +66,16 @@ namespace OscaApp.Controllers
         public ActionResult FormCreateAtendimento(AtendimentoViewModel entrada)
         {
             Atendimento modelo = new Atendimento();
-
+        
             try
             {
-                if (entrada.atendimento != null)
+
+                if (AtendimentoRules.AtendimentoCreate(entrada, out modelo, this.contexto))
                 {
+                    //Se retorna true grava no banco
+                    atendimentoData.Add(modelo);
 
-                    if (AtendimentoRules.AtendimentoCreate(entrada, out modelo, this.contexto))
-                    {
-                        //Se retorna true grava no banco
-                        atendimentoData.Add(modelo);
-
-                        return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
-                    }
+                    return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });
                 }
             }
             catch (Exception ex)
@@ -182,8 +179,7 @@ namespace OscaApp.Controllers
             {
                 retorno = from u in retorno
                           where
-                            (u.atendimento.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
-                            || (u.atendimento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                            (u.atendimento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
             retorno = retorno.OrderByDescending(A => A.atendimento.dataAgendada);

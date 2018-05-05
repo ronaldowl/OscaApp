@@ -297,9 +297,7 @@ namespace OscaFramework.MicroServices
                             item.dataAgendada = Convert.ToDateTime(dataReader["dataAgendada"].ToString());
                             item.idCliente = new Guid(dataReader["idCliente"].ToString());
                             item.idServico = new Guid(dataReader["idServico"].ToString());                       
-                            item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());
-                            item.titulo = dataReader["titulo"].ToString();
-                      
+                            item.statusAtendimento = (CustomEnumStatus.StatusAtendimento)Convert.ToInt32(dataReader["statusAtendimento"].ToString());                                         
                             retorno.Add(item);
                         }
                     }

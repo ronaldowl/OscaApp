@@ -64,10 +64,10 @@
                                             <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value=""> <span>Salvar</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento" , null)'"> <span>Novo</span></button>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("FormCreateAtendimento", "Atendimento", null)'"> <span>Novo</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento" , null)'"> <span>Fechar</span></button>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="" onclick="location.href='@Url.Action("GridAtendimento", "Atendimento", new {view = 0})'"> <span>Fechar</span></button>
                                         </label>
                                         <label>
                                             <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatus()"> <span>Reabrir</span></button>
@@ -132,15 +132,6 @@
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label">Título</label>
-                                <div class="inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-1x"></i></span>
-                                        <input id="osc_titulo" asp-for="@Model.atendimento.titulo" class="form-control" type="text" required="required">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="control-label">Servico</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
@@ -152,6 +143,17 @@
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label>Valor</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
+                                            <input id="osc_valor" asp-for="@Model.atendimento.valor" class="form-control" type="text">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -199,17 +201,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="form-group">
-                                    <label>Valor</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                            <input id="osc_valor" asp-for="@Model.atendimento.valor" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                          
 
                         </div>
                     </div>

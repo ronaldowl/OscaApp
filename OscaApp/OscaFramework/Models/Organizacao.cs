@@ -21,7 +21,9 @@ namespace OscaFramework.Models
         
         public CustomEnum.TipoPessoa tipoPessoa { get; set; }       
         public int quantidadeUsuario { get; set; }
-        
+
+        public int servicoPaginaCapturaLead { get; set; }
+
         public string nomeAdministrador { get; set; }
         public string emailAdministrador { get; set; }
         public string telefoneAdministrador { get; set; }

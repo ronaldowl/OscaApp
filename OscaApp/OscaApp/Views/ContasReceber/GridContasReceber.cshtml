@@ -73,7 +73,7 @@
                                     <td>@item.titulo</td>
                                     <td>@item.origemContaReceber</td>
                                     <td>@item.tipoLancamento</td>
-                                    <td>@item.dataPagamento</td>
+                                    <td>@item.dataPagamento.ToShortDateString()</td>
                                     <td>R$@item.valor.ToString("N2")</td>
                                     <td>@item.statusContaReceber</td>
 

@@ -81,7 +81,7 @@ namespace OscaFramework.MicroServices
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select O.id , o.nomeLogin ,o.nomeAmigavel, status, statusOrg, dataExpiracao from Organizacao as O where O.id = '" + idOrg.ToString() + "'",
+                        CommandText = "select O.id , o.nomeLogin ,o.nomeAmigavel, status, statusOrg, dataExpiracao, servicoPaginaCapturaLead from Organizacao as O where O.id = '" + idOrg.ToString() + "'",
                         CommandType = CommandType.Text
                     };
                  
@@ -99,6 +99,8 @@ namespace OscaFramework.MicroServices
                             retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
                             retorno.statusOrg = (CustomEnumStatus.StatusOrg)Convert.ToInt32(dataReader["statusOrg"].ToString());
                             retorno.dataExpiracao = (DateTime)dataReader["dataExpiracao"];
+                            retorno.servicoPaginaCapturaLead = (int)dataReader["servicoPaginaCapturaLead"];
+
                         }
                     }
                     Connection.Close();

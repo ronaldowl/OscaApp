@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using OscaApp.framework;
 using OscaFramework.Models;
 using OscaFramework.MicroServices;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {

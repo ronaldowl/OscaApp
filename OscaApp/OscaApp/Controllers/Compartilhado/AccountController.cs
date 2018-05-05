@@ -262,12 +262,12 @@ namespace OscaApp.Controllers
 
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
-
-                //Cria nova Organização e Inicializa valores padrões
-                _sqlService.InicializaOrg(idOrg.ToString(), model.organizacao.nomeLogin, model.Email);
-
+              
                 if (result.Succeeded)
                 {
+                    //Cria nova Organização e Inicializa valores padrões
+                    _sqlService.InicializaOrg(idOrg.ToString(), model.organizacao.nomeLogin, model.Email);
+
                     model.sucesso = true;
                     model.msgOrganizacao = "Organização criada, Empresa:" + model.organizacao.nomeLogin + ", E-mail de acesso:" + model.Email;
                     return View(model);                     

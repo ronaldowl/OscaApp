@@ -40,8 +40,9 @@
                                         <label>
                                             <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick=""> <span>Limpar</span></button>
                                         </label>&nbsp;&nbsp;
+
                                         <label>
-                                            <button id="osc_paginaCaptura" type="button" class="btn btn-info btn-sm fa fa-external-link"> <span>Página Captura</span></button>
+                                            <button id="osc_paginaCaptura" type="button" class="btn btn-info btn-sm fa fa-external-link" onclick="ModalPaginaCaptura();"> <span>Página Captura</span></button>
                                         </label>
 
                                     </div>
@@ -148,6 +149,8 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="ModalPaginaCaptura">
+</div>
 <script src="~/lib/OscaJs/osc_clientePotencial.js"></script>
 <script>
 
@@ -161,6 +164,14 @@
     if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
     if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
     if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+
+
+    function ModalPaginaCaptura() {
+        $("#ModalPaginaCaptura").load("/Componentes/VisualizaURLCaptura", function () {
+            $("#ModalPaginaCaptura").modal("show");
+        });
+
+    }
 
 </script>
 

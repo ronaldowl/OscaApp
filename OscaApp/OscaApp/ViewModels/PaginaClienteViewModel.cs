@@ -15,7 +15,8 @@ namespace OscaApp.ViewModels
                  
 
         public string StatusMessageLead { get; set; }
-              
+        public string urlPaginaCaptura { get; set; }
+
 
         public PaginaClienteViewModel()
         {

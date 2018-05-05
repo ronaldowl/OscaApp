@@ -45,7 +45,7 @@
                                                 <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove " value="Limpar" onclick="RecarregarGridAtendimento()"> <span>Limpar</span></button>
                                             </label>&nbsp;&nbsp;
                                             <label>
-                                                <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
+                                                <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"></button>
                                             </label>
                                         </div>
                                     </td>
@@ -60,13 +60,10 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th></th>
-                                    <th>Código</th>
-                                    <th>Título</th>
+                                    <th>Código</th>                               
                                     <th>Cliente</th>
                                     <th>Serviço</th>
-
                                     <th>Valor</th>
-
                                     <th>Status Atendimento </th>
                                 </tr>
                             </thead>
@@ -74,8 +71,7 @@
                             {
                                 <tr style="cursor:pointer; font-size:12px" id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
                                     <td><i class="fa fa-user-md"></i></td>
-                                    <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
-                                    <td>@item.atendimento.titulo</td>
+                                    <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>                                  
                                     <td>@item.cliente.nomeCliente</td>
 
                                     <td>@item.servico.nomeServico</td>

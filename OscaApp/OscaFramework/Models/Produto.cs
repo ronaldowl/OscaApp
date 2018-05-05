@@ -24,6 +24,9 @@ namespace OscaFramework.Models
         public decimal peso { get; set; }
 
         public CustomEnum.FormaVendaProduto formaVendaProduto { get; set; }
+
+        public CustomEnum.TipoProduto tipoProduto { get; set; }
+        
         public Guid idOrganizacao { get; set; }
 
 

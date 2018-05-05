@@ -506,8 +506,7 @@ namespace OscaFramework.MicroServices
                     {
                         while (dataReader.Read())
                         {
-                            retorno.id = new Guid(dataReader["id"].ToString());
-                            retorno.idName = dataReader["titulo"].ToString();
+                            retorno.id = new Guid(dataReader["id"].ToString());                          
                             retorno.codigo = dataReader["codigo"].ToString();
 
 

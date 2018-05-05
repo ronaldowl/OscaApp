@@ -64,7 +64,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-2x"></span>
                                         </span> &nbsp;
-                                        <select id="osc_tipopessoa" class="form-control" required="required" onchange="OnChangeTipoPessoa();">
+                                        <select id="osc_tipopessoa" class="form-control" required="required" onchange="OnChangeTipoPessoa();"  asp-for="@Model.cliente.tipoPessoa">
                                             <option value="1" selected="">Fisica</option>
                                             <option value="2">Juridica</option>
                                         </select>

@@ -82,6 +82,14 @@ namespace OscaFramework.Models
 
     public class CustomEnum
     {
+        
+        public enum TipoProduto
+        {
+            produto = 0,
+            servico = 1
+        }
+
+
         public enum TipoAtividade
         {
             Tarefa = 1,

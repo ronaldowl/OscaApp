@@ -59,8 +59,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("diagnostico").IsModified = true;               
                 db.Entry(modelo).Property("observacao").IsModified = true;           
                 db.Entry(modelo).Property("statusAtendimento").IsModified = true;
-                db.Entry(modelo).Property("valor").IsModified = true;
-                db.Entry(modelo).Property("titulo").IsModified = true;              
+                db.Entry(modelo).Property("valor").IsModified = true;     
                 db.Entry(modelo).Property("idServico").IsModified = true;
                 db.Entry(modelo).Property("idProfissional").IsModified = true;
                 db.Entry(modelo).Property("dataFechamento").IsModified = true;
