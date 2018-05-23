@@ -43,7 +43,7 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
 </div>
 <div class="row">
-        <div class="col-md-10 offset-1">
+        <div class="col-md-11">
             <form action="FormCreateAgendamento" method="post" id="FormCreateAgendamento">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
@@ -269,7 +269,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" disabled="disabled">
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional"  >
                                             <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">

@@ -5,9 +5,8 @@
     @Html.HiddenFor(m => m.contexto.idUsuario)
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
 </div>
-<div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 offset-1">
+        <div class="col-md-11">
             @if (!String.IsNullOrEmpty(Model.StatusMessage))
             {
 
@@ -148,7 +147,7 @@
 
         </div>
     </div>
-</div>
+
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_listaPreco.js"></script>
 <script>OnLoad_ListaPreco();</script>

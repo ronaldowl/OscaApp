@@ -28,9 +28,9 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
     @Html.HiddenFor(m => m.cliente.id)
 </div>
-<div class="container-fluid">
+
     <div class="row">
-        <div class="col-md-11 offset-1">
+        <div class="col-md-11">
             @if (!String.IsNullOrEmpty(Model.StatusMessage))
             {
 
@@ -335,7 +335,7 @@
             </form>
         </div>
     </div>
-</div>
+
 <div class="modal fade" id="ModalProdutoPedido">
 </div>
 <div class="modal fade" id="ModalStatusPedido">

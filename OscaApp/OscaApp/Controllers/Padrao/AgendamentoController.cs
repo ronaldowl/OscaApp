@@ -76,7 +76,7 @@ namespace OscaApp.Controllers
                 }
 
 
-                modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(idProfissional)));
+                modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid( idProfissional));
             }
             catch (Exception ex)
             {
