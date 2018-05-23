@@ -158,6 +158,8 @@ namespace OscaApp.Controllers
         {
             IEnumerable<AtendimentoGridViewModel> retorno;
 
+            ViewBag.viewContexto = view;
+
             SqlGeneric sqlServices = new SqlGeneric();
             string idProfissional = sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString());
 

@@ -164,12 +164,11 @@ namespace OscaApp.Controllers
             {                
                 IEnumerable <PedidoGridViewModel> retorno ;
 
-                if(String.IsNullOrEmpty(idCliente))
+                ViewBag.viewContexto = view;
+
+                if (String.IsNullOrEmpty(idCliente))
                 {
-                    //Se tiver filtro, busca em todas as linhas
-                    if (!String.IsNullOrEmpty(filtro)) view = 4;
-
-
+                  
                     retorno = pedidoData.GetAllGridViewModel(contexto.idOrganizacao, view);
                 }
                 else

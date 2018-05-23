@@ -90,7 +90,7 @@
                                         else
                                         {
                                             <label>
-                                                <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new { idReferencia = Model.atendimento.id, tipoReferencia = 0, idCliente = Model.cliente.id })'"> <span>Agendar</span></button>
+                                                <button id="osc_agendar" type="button" class="btn btn-info btn-sm fa fa-calendar-check-o" value="" onclick="location.href='@Url.Action("FormCreateAgendamento", "Agendamento", new { idReferencia = Model.atendimento.id, tipoReferencia = 0, idCliente = Model.cliente.id, idProfissional = Model.profissional.id })'"> <span>Agendar</span></button>
                                             </label>
 
                                         }

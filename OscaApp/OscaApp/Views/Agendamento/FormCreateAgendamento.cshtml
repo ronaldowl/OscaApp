@@ -86,7 +86,7 @@
                                         <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required" disabled="disabled">
                                         <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                         <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info"  >
+                                            <button type="button" class="btn btn-info">
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
@@ -98,11 +98,10 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-2x"></span>
                                         </span> &nbsp;
-                                        <input id="osc_tipoReferencia" asp-for="@Model.agendamento.tipoReferencia" class="form-control" type="hidden"     value="@Model.agendamento.tipoReferencia" disabled="disabled">                                        
+                                        <input id="osc_tipoReferencia" asp-for="@Model.agendamento.tipoReferencia" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Data agendada</label>
@@ -235,29 +234,20 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupAtendimento();" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.atendimento.codigo class="form-control" type="text" id="osc_IdNameAtendimento" disabled="disabled">
+                                            <input asp-for="@Model.atendimento.codigo" class="form-control" type="text" id="osc_IdNameAtendimento" disabled="disabled">
                                             <input asp-for="@Model.atendimento.id" class="form-control" type="hidden" id="osc_IdAtendimento">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info"   id="osc_botaoBuscaAtendimento">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
+
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="control-label">Pedido</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupPedido();" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.pedido.codigo" class="form-control" type="text" id="osc_IdNamePedido" disabled="disabled">
+                                            <input asp-for="@Model.pedido.codigo" class="form-control  " type="text" id="osc_IdNamePedido" disabled="disabled">
                                             <input asp-for="@Model.pedido.id" class="form-control" type="hidden" id="osc_IdPedido">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info"   id="osc_botaoBuscaPedido">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -266,13 +256,9 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupOS()" style="cursor:pointer"></i></span>&nbsp;
-                                            <input asp-for="@Model.os.idName" class="form-control" type="text" id="osc_IdNameOs" disabled="disabled">
+                                            <input asp-for="@Model.os.idName" class="form-control  " type="text" id="osc_IdNameOs" disabled="disabled">
                                             <input asp-for="@Model.os.id" class="form-control" type="hidden" id="osc_IdOs">
-                                            <span class="input-group-btn ">
-                                                <button type="button" class="btn btn-info"   id="osc_botaoBuscaOS">
-                                                    <span class="fa fa-search"></span>
-                                                </button>
-                                            </span>
+
                                         </div>
                                     </div>
                                 </div>
@@ -283,7 +269,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-list fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" required="required">
+                                            <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" disabled="disabled">
                                             <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
@@ -294,8 +280,9 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-                    </div>
+                       
                     <div style="background-color:gray ; height:20px"><span style="font-weight:bold; color:white">&nbsp;&nbsp; </span></div>
                     <div class="card-footer">
                         <div class="row">

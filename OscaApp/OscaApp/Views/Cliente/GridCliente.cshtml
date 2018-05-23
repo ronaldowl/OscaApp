@@ -2,9 +2,9 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-
+@{int viewContexto = ViewBag.viewContexto; }
 <div class="row">
-    <div class="col-md-10 offset-1">
+    <div class="col-md-10  ">
         <div class="card" id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
@@ -20,7 +20,7 @@
                                             <label>Filtros</label>
                                             <div class="input-group">
                                                 &nbsp;<div class="col-2">
-                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
                                                         <option value="1" selected="">Todas Ativos</option>
                                                         <option value="0">Todas Inativos</option>
                                                     </select>
@@ -86,7 +86,7 @@
             <div class="card-footer">
                 <table class="table  table-striped table-bordered table-sm">
                     <tr>
-                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridCliente", "Cliente", new { page }))</td>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridCliente", "Cliente", new { page, view = viewContexto }))</td>
                         <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
                     </tr>
                 </table>

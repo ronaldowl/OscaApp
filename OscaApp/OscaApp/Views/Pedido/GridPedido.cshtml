@@ -2,9 +2,10 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{int viewContexto = ViewBag.viewContexto; }
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-10 offset-1">
+        <div class="col-md-11">
             <div class="card" id="osc_Grid">
                 <div class="card-header">
                     <div class="card-title">
@@ -20,14 +21,14 @@
                                                 <label>Filtros</label>
                                                 <div class="input-group">
                                                     &nbsp;<div class="col-2">
-                                                              <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
-                                                                  <option value="0" selected="">Em Andamento</option>
-                                                                  <option value="1">Aguardando Produto</option>
-                                                                  <option value="2">Para Entrega</option>
-                                                                  <option value="3">Fechados</option>
-                                                                  <option value="4">Todos Pedidos</option>
+                                                        <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                            <option value="0" selected="">Em Andamento</option>
+                                                            <option value="1">Aguardando Produto</option>
+                                                            <option value="2">Para Entrega</option>
+                                                            <option value="3">Fechados</option>
+                                                            <option value="4">Todos Pedidos</option>
 
-                                                              </select>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>&nbsp;
@@ -42,7 +43,7 @@
                                             &nbsp;&nbsp;
                                             <label>
                                                 <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridPedido()"> <span>Limpar</span></button>
-                                            </label> 
+                                            </label>
                                     </td>
                                 </tr>
                             </table>
@@ -85,7 +86,7 @@
                 <div class="card-footer">
                     <table>
                         <tr>
-                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridPedido", "Pedido", new { page }))</td>
+                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridPedido", "Pedido", new { page, view = viewContexto }))</td>
                             <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
                         </tr>
                     </table>
@@ -162,7 +163,7 @@
     if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
     if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
     if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
-    
+
     function OnChangeFiltro() {
 
         var filtro = $("#osc_filtro").val();

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
- 
+
 using OscaFramework.Models;
 using OscaApp.ViewModels;
 using OscaApp.Data;
@@ -35,49 +35,48 @@ namespace OscaApp.Controllers
         public int tempTipoReferencia { get; set; }
 
         [HttpGet]
-        public ViewResult FormCreateAgendamento(string idCliente, int tipoReferencia, string idReferencia)
+        public ViewResult FormCreateAgendamento(string idCliente, int tipoReferencia, string idReferencia, string idProfissional)
         {
-            SqlGeneric sqlServices = new SqlGeneric();
-            SqlGenericData sqlData = new SqlGenericData();
-
-            tempTipoReferencia = tipoReferencia;
-
             AgendamentoViewModel modelo = new AgendamentoViewModel();
-            modelo.contexto = contexto;
-            modelo.agendamento = new Agendamento();
-            modelo.agendamento.status = CustomEnumStatus.Status.Ativo;
-
-            modelo.agendamento.criadoEm = DateTime.Now;
-            modelo.agendamento.criadoPorName = contexto.nomeUsuario;
-
-            //Se passar o id carrega o cliente
-            if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));
-
-            if (!String.IsNullOrEmpty(idReferencia))
-            {
-                if (tipoReferencia == (int)CustomEnum.TipoReferencia.Atendimento)
-                {
-                    modelo.agendamento.tipoReferencia = CustomEnum.TipoReferencia.Atendimento;
-                    modelo.atendimento = sqlData.RetornaRelacaoAtendimento(new Guid(idReferencia));
-                }
-
-                if (tipoReferencia == (int)CustomEnum.TipoReferencia.OrdemServico)
-                {
-                    modelo.agendamento.tipoReferencia = CustomEnum.TipoReferencia.OrdemServico;
-                    modelo.os = sqlData.RetornaRelacaoOrdemServico(new Guid(idReferencia));
-                }
-
-                if (tipoReferencia == (int)CustomEnum.TipoReferencia.Pedido)
-                {
-                    modelo.agendamento.tipoReferencia = CustomEnum.TipoReferencia.Pedido;
-                    modelo.pedido = sqlData.RetornaRelacaoPedido(new Guid(idReferencia));
-                }
-            }
-
-
             try
             {
-                modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(contexto.idUsuario.ToString())));
+                SqlGeneric sqlServices = new SqlGeneric();
+                SqlGenericData sqlData = new SqlGenericData();
+
+                tempTipoReferencia = tipoReferencia;
+                modelo.contexto = contexto;
+                modelo.agendamento = new Agendamento();
+                modelo.agendamento.status = CustomEnumStatus.Status.Ativo;
+
+                modelo.agendamento.criadoEm = DateTime.Now;
+                modelo.agendamento.criadoPorName = contexto.nomeUsuario;
+
+                //Se passar o id carrega o cliente
+                if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));
+
+                if (!String.IsNullOrEmpty(idReferencia))
+                {
+                    if (tipoReferencia == (int)CustomEnum.TipoReferencia.Atendimento)
+                    {
+                        modelo.agendamento.tipoReferencia = CustomEnum.TipoReferencia.Atendimento;
+                        modelo.atendimento = sqlData.RetornaRelacaoAtendimento(new Guid(idReferencia));
+                    }
+
+                    if (tipoReferencia == (int)CustomEnum.TipoReferencia.OrdemServico)
+                    {
+                        modelo.agendamento.tipoReferencia = CustomEnum.TipoReferencia.OrdemServico;
+                        modelo.os = sqlData.RetornaRelacaoOrdemServico(new Guid(idReferencia));
+                    }
+
+                    if (tipoReferencia == (int)CustomEnum.TipoReferencia.Pedido)
+                    {
+                        modelo.agendamento.tipoReferencia = CustomEnum.TipoReferencia.Pedido;
+                        modelo.pedido = sqlData.RetornaRelacaoPedido(new Guid(idReferencia));
+                    }
+                }
+
+
+                modelo.profissional = sqlData.RetornaRelacaoProfissional(new Guid(sqlServices.RetornaidProfissionalPorIdUsuario(idProfissional)));
             }
             catch (Exception ex)
             {
@@ -133,7 +132,7 @@ namespace OscaApp.Controllers
 
                     modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
                     modelo.profissional = sqlData.RetornaRelacaoProfissional(retorno.idProfissional);
-                                  
+
 
                     modelo.horaInicio = new ItemHoraDia();
                     modelo.horaInicio.horaDia = (CustomEnum.itemHora)retorno.horaInicio;
@@ -146,17 +145,17 @@ namespace OscaApp.Controllers
                         //modelo.agendamento.tipoReferencia = new CustomEnum.TipoReferencia();
 
                         if (retorno.tipoReferencia == CustomEnum.TipoReferencia.Atendimento)
-                        {                           
+                        {
                             modelo.atendimento = sqlData.RetornaRelacaoAtendimento(modelo.agendamento.idReferencia);
                         }
 
                         if (retorno.tipoReferencia == CustomEnum.TipoReferencia.OrdemServico)
-                        {                         
+                        {
                             modelo.os = sqlData.RetornaRelacaoOrdemServico(modelo.agendamento.idReferencia);
                         }
 
                         if (retorno.tipoReferencia == CustomEnum.TipoReferencia.Pedido)
-                        {                        
+                        {
                             modelo.pedido = sqlData.RetornaRelacaoPedido(modelo.agendamento.idReferencia);
                         }
                         //apresenta mensagem de registro atualizado com sucesso
@@ -211,7 +210,7 @@ namespace OscaApp.Controllers
 
             if (String.IsNullOrEmpty(idCliente))
             {
-               
+
                 retorno = agendamentoData.GetAllGridViewModel(contexto.idOrganizacao, view, idProfissional);
             }
             else
@@ -224,7 +223,7 @@ namespace OscaApp.Controllers
             {
                 retorno = from u in retorno
                           where
-                            ( u.agendamento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                            (u.agendamento.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
             retorno = retorno.OrderByDescending(A => A.agendamento.dataAgendada);

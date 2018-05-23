@@ -152,11 +152,9 @@ namespace OscaApp.Controllers
         public ViewResult GridOrdemServico(string filtro, int Page, string idCliente, int view)
         {
             IEnumerable<OrdemServicoGridViewModel> retorno;
+            ViewBag.viewContexto = view;
 
-            if (String.IsNullOrEmpty(idCliente)) {
-
-                //Se tiver filtro, busca em todas as linhas
-                if (!String.IsNullOrEmpty(filtro)) view = 4;
+            if (String.IsNullOrEmpty(idCliente)) {              
 
                 retorno = ordemServicoData.GetAllGridViewModel(contexto.idOrganizacao, view);
             }

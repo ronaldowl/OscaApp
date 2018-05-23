@@ -168,8 +168,7 @@ namespace OscaApp.Controllers
         {
             try
             {
-                //Se tiver filtro, busca em todas as linhas
-                if (!String.IsNullOrEmpty(filtro)) view = 2;
+                ViewBag.viewContexto = view;          
 
 
                     IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, view);

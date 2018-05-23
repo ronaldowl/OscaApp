@@ -19,8 +19,7 @@ namespace OscaApp.RulesServices
             profissional.codigo = sqlservice.RetornaNovaPosicao(17, contexto.idOrganizacao);
             profissional.idBanco = entrada.banco.id;
             profissional.idUsuario = entrada.usuario.id;
-            profissional.nomeProfissional = entrada.usuario.idName;
-
+            
 
             if (profissional.idUsuario != null)
             {

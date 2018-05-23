@@ -20,7 +20,7 @@
     <style>
         .barraMain {
             background: linear-gradient(to right bottom,#66dbff, #1c177f);
-            height: 50px;
+            height: 40px;
             color: black;
             padding-top: 5px;
         }
@@ -51,7 +51,8 @@
         <a asp-controller="Paineis" asp-action="PainelHome" class="osca"><i class="fa fa-1x fa-home" aria-hidden="true"></i>OSCAS</a>
         <div style="float:right;">@await Html.PartialAsync("_LoginPartial") </div>
     </div>
-    <div  >        
+    <div class="container-fluid  " style="margin-bottom:5px;">
+        <div style="height:3px"></div>
         @RenderBody()
     </div>
     <!-- Modal About-->
@@ -63,13 +64,13 @@
                 </div>
                 <div class="modal-body">
                     <center><h3>OSCAS® Serviços Online</h3></center>
-                    <br /><br /><br />                   
+                    <br /><br /><br />
                     <h6>Desenvolvido por - Trine Assessoria em Informática</h6>
                     <br />
                     <p>OSCA APP</p>
                     <p>Versão 1.9.0</p>
                     <p> Para obter mais informações, visite www.oscas.com.br.</p>
-                    <br/>
+                    <br />
                     <p>Aviso: este programa de computador é protegido pela lei de copyright e tratados internacionais. A reprodução ou distribuição não autorizada deste programa, ou qualquer parte dele, resultará na imposição de rigorosas penas civis e criminais e será objeto de ação judicial promovida na máxima extensão possível, nos termos da lei.</p>
                 </div>
                 <div class="modal-footer">
@@ -77,8 +78,8 @@
                 </div>
             </div>
         </div>
-    </div>   
-    
+    </div>
+
     @*@RenderSection("scripts", required: false)*@
     <div>
         <footer class="footer">

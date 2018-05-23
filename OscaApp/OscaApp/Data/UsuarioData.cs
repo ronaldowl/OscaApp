@@ -24,5 +24,13 @@ namespace OscaApp.Data
             return retorno;
 
         }
+
+        public ApplicationUser Get(string id)
+        {
+            List<ApplicationUser> retorno = new List<ApplicationUser>();
+            retorno = db.Users.FromSql("SELECT * FROM AspNetUsers where  id = '" + id + "'").ToList();
+            return retorno[0];
+
+        }
     }
 }

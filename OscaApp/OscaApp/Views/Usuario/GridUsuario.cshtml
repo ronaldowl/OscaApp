@@ -53,16 +53,16 @@
                             </tr>
                         </thead>
                         @foreach (var item in Model)
-                        {
-                            <tr style="font-size:12px">
-                                <td><i class="fa fa-user-circle"></i></td>
-                                <td>@item.UserName</td>
-                                <td>@item.Email</td>
-                                <td>@item.PhoneNumber</td>
-                                <td>System</td>
-                                <td>XX-XX-XXXX</td>
-                            </tr>
-                        }
+    {
+                    <tr style="cursor:pointer;font-size:12px" id="@item.Id" onclick="location.href='@Url.Action("FormUpdateUsuario", "Usuario", new {id = item.Id })'">
+                        <td><i class="fa fa-user-circle"></i></td>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>System</td>
+                        <td>XX-XX-XXXX</td>
+                    </tr>
+}
                     </table>
                 </div>
             </div>

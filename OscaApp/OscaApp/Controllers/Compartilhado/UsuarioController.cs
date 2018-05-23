@@ -68,20 +68,18 @@ namespace OscaApp.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult FormUpdateUsuario(UsuarioViewModel entrada)
+        [HttpGet]
+        public ViewResult FormUpdateUsuario(string id)
         {
             ApplicationUser user = new ApplicationUser();
 
+            UsuarioViewModel modelo = new UsuarioViewModel();
+            modelo.contexto = this.contexto;
 
             try
             {
-                //if (ClienteRules.MontaClienteUpdate(entrada, out cli))
-                //{
-                //    clienteDataService.Update(cli);
-                //    return RedirectToAction("FormUpdateUsuario", new { id = cli.id.ToString(), idOrg = contexto.idOrganizacao });
-                //}
-
+                user = usuarioData.Get(id);
+                modelo.usuario = user;                
             }
             catch (Exception ex)
             {
@@ -89,7 +87,7 @@ namespace OscaApp.Controllers
                 log.GravaLog(1, 10, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateUsuario-post", ex.Message);
             }
 
-            return RedirectToAction("FormUpdateUsuario", new { id = user.Id.ToString() });
+            return View(modelo);
         }
 
         public ViewResult GridUsuario(string filtro, int Page)

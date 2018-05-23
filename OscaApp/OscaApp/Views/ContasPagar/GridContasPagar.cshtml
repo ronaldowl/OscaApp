@@ -2,97 +2,98 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{int viewContexto = ViewBag.viewContexto; }
 <div class="row">
-        <div class="col-md-10 offset-1">
-            <br />
-            <div class="card" id="osc_Grid">
-                <div class="card-header">
-                    <div class="card-title">
-                        <form class="form-inline">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <h5 style="font-weight:bold">Contas a Pagar: &nbsp;&nbsp;</h5>
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <div class="form-group">
-                                                <label>Filtros</label>
-                                                <div class="input-group">
-                                                    &nbsp;<div class="col-2">
-                                                        <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();">
-                                                            <option value="0" selected="">Todas em Aberto</option>
-                                                            <option value="1">Todas Fechadas</option>
-                                                            <option value="2">Todas Contas</option>                                                         
-                                                        </select>
-                                                    </div>
+    <div class="col-md-10">
+        <br />
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Contas a Pagar: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <div class="form-group">
+                                            <label>Filtros</label>
+                                            <div class="input-group">
+                                                &nbsp;<div class="col-2">
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                        <option value="0" selected="">Todas em Aberto</option>
+                                                        <option value="1">Todas Fechadas</option>
+                                                        <option value="2">Todas Contas</option>
+                                                    </select>
                                                 </div>
-                                            </div>&nbsp;
-                                            <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasPagar", "ContasPagar", null)'"> <span>Novo</span></button>
-                                            </label>
-                                            &nbsp;
-                                            <span>
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                            </span>
-                                            <button type="submit" class="btn btn-info fa fa-search"></button>
-                                            &nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGridContaPagar()"> <span>Limpar</span></button>
-                                            </label> 
+                                            </div>
+                                        </div>&nbsp;
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateContasPagar", "ContasPagar", null)'"> <span>Novo</span></button>
+                                        </label>
+                                        &nbsp;
+                                        <span>
+                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                        </span>
+                                        <button type="submit" class="btn btn-info fa fa-search"></button>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGridContaPagar()"> <span>Limpar</span></button>
+                                        </label>
 
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table table-hover   table-bordered table-sm">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th></th>
-                                    <th>Código</th>
-                                    <th>Título</th>
-                                    <th>Tipo Lançamento</th>
-                                    <th>Origem</th>
-                                    <th>Data de Pagamento</th>
-                                    <th>Valor</th>
-                                    <th>Status Conta</th>
-
-                                </tr>
-                            </thead>
-                            @foreach (var item in Model)
-                            {
-                                <tr style="cursor:pointer; font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasPagar", "ContasPagar", new { id = item.id })'">
-                                    <td><i class="fa fa-envelope-o"></i></td>
-                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasPagar", new { id = item.id })</td>
-                                    <td>@item.titulo</td>
-                                    <td>@item.tipoLancamento</td>
-                                    <td>@item.origemContaPagar</td>
-                                    <td>@item.dataPagamento</td>
-                                    <td>R$@item.valor.ToString("N2")</td>
-                                    <td>@item.statusContaPagar</td>
-
-                                </tr>
-                            }
+                                    </div>
+                                </td>
+                            </tr>
                         </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover   table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Título</th>
+                                <th>Tipo Lançamento</th>
+                                <th>Origem</th>
+                                <th>Data de Pagamento</th>
+                                <th>Valor</th>
+                                <th>Status Conta</th>
 
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <table>
-                        <tr>
-                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasPagar", "ContasPagar", new { page }))</td>
-                            <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
-                        </tr>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="cursor:pointer; font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasPagar", "ContasPagar", new { id = item.id })'">
+                                <td><i class="fa fa-envelope-o"></i></td>
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasPagar", new { id = item.id })</td>
+                                <td>@item.titulo</td>
+                                <td>@item.tipoLancamento</td>
+                                <td>@item.origemContaPagar</td>
+                                <td>@item.dataPagamento</td>
+                                <td>R$@item.valor.ToString("N2")</td>
+                                <td>@item.statusContaPagar</td>
+
+                            </tr>
+                        }
                     </table>
+
                 </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasPagar", "ContasPagar", new { page, view = viewContexto }))</td>
+                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+</div>
 <br /><br /><br /><br /> <br /><br /><br /><br />
 <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
     <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
@@ -164,7 +165,7 @@
     if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
     if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
     if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
-    
+
 
     function OnChangeFiltro() {
 
@@ -173,7 +174,7 @@
         if (filtro == "0") { $(window.document.location).attr('href', "GridContasPagar?view=0"); }
         if (filtro == "1") { $(window.document.location).attr('href', "GridContasPagar?view=1"); }
         if (filtro == "2") { $(window.document.location).attr('href', "GridContasPagar?view=2"); }
- 
+
     }
 
 </script>

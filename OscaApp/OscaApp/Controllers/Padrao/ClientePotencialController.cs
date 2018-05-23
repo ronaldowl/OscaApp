@@ -144,9 +144,10 @@ namespace OscaApp.Controllers
         public ViewResult GridClientePotencial(string filtro, int Page,int view)
         {
             try
-            {
-               
-                    IEnumerable<ClientePotencial> retorno = clientePotencialData.GetAll(contexto.idOrganizacao, view);
+            {               
+               IEnumerable<ClientePotencial> retorno = clientePotencialData.GetAll(contexto.idOrganizacao, view);
+
+                ViewBag.viewContexto = view;
 
                 if (!String.IsNullOrEmpty(filtro))
                 {

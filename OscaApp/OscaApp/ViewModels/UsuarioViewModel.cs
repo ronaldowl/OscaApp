@@ -9,5 +9,6 @@ namespace OscaApp.ViewModels
     {
         public ApplicationUser usuario { get; set; }
         public ContextPage contexto { get; set; }
+        public string StatusMessage { get; set; }
     }
 }
