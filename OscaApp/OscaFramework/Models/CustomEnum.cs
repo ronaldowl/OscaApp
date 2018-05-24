@@ -160,6 +160,7 @@ namespace OscaFramework.Models
 
         public enum FormaVendaProduto
         {
+            Lote = 0,
             Unidade = 1,
             Peso = 2,
             Hora = 3,
