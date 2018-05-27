@@ -407,6 +407,7 @@ namespace OscaFramework.Models
             ServicoOrdem = 26,
             Atividade = 27,
             ClientePotencial = 28,
+            PerfilAcesso = 29,
             Organizacao = 1000
 
         }

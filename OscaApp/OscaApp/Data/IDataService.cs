@@ -288,5 +288,13 @@ namespace OscaApp.Data
     {
         
     }
-    
+
+    public interface IPerfilAcesso
+    {
+        void Add(PerfilAcesso perfilAcesso);
+        void Update(PerfilAcesso perfilAcesso);
+        PerfilAcesso Get(Guid id );
+        List<PerfilAcesso> GetAll(Guid idOrg);
+    }
+
 }

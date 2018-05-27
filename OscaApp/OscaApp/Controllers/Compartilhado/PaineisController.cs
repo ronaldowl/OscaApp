@@ -14,7 +14,7 @@ namespace OscaApp.Controllers
         public PaineisController(  IHttpContextAccessor httpContext)
         {
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-            this.contexto = new ContextPage().ExtractContext(httpContext);
+           // this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         public ViewResult PainelHome()

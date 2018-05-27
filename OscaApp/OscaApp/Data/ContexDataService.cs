@@ -37,6 +37,8 @@ namespace OscaApp.Data
         public DbSet<Organizacao> Organizacao { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
         public DbSet<ClientePotencial> ClientePotencial { get; set; }
+        public DbSet<PerfilAcesso> PerfilAcessos { get; set; }
+
 
 
     }

@@ -29,7 +29,7 @@ namespace OscaFramework.Models
         public PerfilAcesso()
         {
             this.status = CustomEnumStatus.Status.Ativo;
-            this.entityType = 12;
+            this.entityType = 29;
         }
 
     }
