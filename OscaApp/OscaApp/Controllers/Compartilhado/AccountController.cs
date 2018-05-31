@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using OscaApp.Data;
+using OscaApp.framework;
 using OscaApp.Models;
 using OscaApp.Models.AccountViewModels;
 using OscaApp.Services;
- 
-using Microsoft.AspNetCore.Http;
-using OscaApp.Data;
-using Newtonsoft.Json;
-using OscaFramework.Data;
 using OscaFramework.MicroServices;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace OscaApp.Controllers
 {
@@ -30,17 +24,23 @@ namespace OscaApp.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private ContexDataService dbContext;
+        private ContextPage contexto;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,  ContexDataService _dbContext, IHttpContextAccessor httpContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            this.dbContext = _dbContext;
+
+            //Tenta carregar o Contexto caso seja um usuário logado
+            try { contexto = new ContextPage().ExtractContext(httpContext); } catch (Exception ) { }
         }
 
         [TempData]
@@ -80,7 +80,7 @@ namespace OscaApp.Controllers
                     ////***********Gerar Contexto para todos controller *******************
                     HttpContext.Session.SetString("email", model.Email);
                     HttpContext.Session.SetString("organizacao", model.empresa);
-                    ContextPage contexto = new ContextPage(model.Email, model.empresa);
+                    contexto = new ContextPage(model.Email, model.empresa);
                     HttpContext.Session.SetString("idOrganizacao", contexto.idOrganizacao.ToString());
                     HttpContext.Session.SetString("idUsuario", contexto.idUsuario.ToString());
                     HttpContext.Session.SetString("nomeUsuario", contexto.nomeUsuario.ToString());
@@ -302,11 +302,16 @@ namespace OscaApp.Controllers
                 SqlGenericManager _sqlManager = new SqlGenericManager();                          
                             
                 //Passa informações da Org para o novo usuário
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = new Guid(model.idOrganizacao) };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = new Guid(model.idOrganizacao), nomeAmigavel = model.NomeAmigavel };
                          
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
-             
+
+                
+                //Cria Profissinal para cada usuário
+                CargaInicial CA = new CargaInicial(); CA.CreateProfissional(user, this.contexto, this.dbContext);
+
+
                 if (result.Succeeded)
                 {               
                        return RedirectToAction(nameof(UsuarioController.GridUsuario), "Usuario");

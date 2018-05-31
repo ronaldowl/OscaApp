@@ -1,90 +1,63 @@
 ﻿@model OscaApp.Data.ContextPage
 
-
-    <div class="row">
-        <div class="col-md-2" id="rotas">
-            <div class="card">
-                <div class="card-header bg-warning">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                        </tr>
-                    </table>
-                </div>
+<div class="row">
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                    </tr>
+                </table>
             </div>
-            <div class="card">
-                <div class="card-header bg-info">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
-                            <td><h5>Institucional</h5></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card-body">
-                    <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
-                        <li>Site: <a href="www.oscas.com.br">www.oscas.com.br</a></li>
-                        <li>Suporte: suporte@oscas.com.br</li>
-                        <li>Contato: contato@oscas.com.br</li>
-                        <li>Portal: <a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br</a></li>
-                        <li>WhatsApp Contato: (11) 9-8872-2348</li>
-                        <li>WhatsApp Suporte: (11) 9-0000-0000</li>
-                    </ol>
-
-                </div>
+        </div>
+        <div class="card">
+            <div class="card-header bg-info">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
+                        <td><h5>Institucional</h5></td>
+                    </tr>
+                </table>
             </div>
-            <div class="card">
-                <div class="card-header bg-primary">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-tachometer iconPanel" aria-hidden="true"></i></td>
-                            <td><h5>Volumetria</h5></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card-body">
-                    <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
-                        <li>Quantidade de Clientes:0</li>
-                        <li>Quantidade de Contatos:0</li>
-                        <li>Quantidade de Produtos:0</li>
-                    </ol>
-                </div>
-            </div>
-            @*<div class="card" data-toggle="tooltip" data-placement="right" title="Apresenta a soma de todos Atendimentos, Pedidos e OS abertos ou fechados do mês atual">
-                <div class="card-header bg-primary">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
-                            @*<td><h5>Prévia Faturamento</h5></td>*@
-            
-            @*<tr><td>Total</td><td>R$00,00</td></tr>*@
-            @*</table>
-                    </div>
+            <div class="card-body">
+                <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
+                    <li><a href="www.oscas.com.br">www.oscas.com.br</a></li>
+                    <li><a href="www.loja.oscas.com.br">www.loja.oscas.com.br </a></li>
+                    <li><a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br </a></li>
+                    <li>suporte@oscas.com.br</li>
+                    <li>WhatsApp (11) 9-8872-2348</li>
+                </ol>
 
-                </div>*@
+            </div>
         </div>
-        <div class="col-md-5   m-0 p-0" id="comunicados">
-        </div>
-        <div class="col-md-2 m-0 p-0" id="tarefas">
-        </div>
-        <div class="col-md-3 m-0 p-0" id="agendamentos">
+        <div class="card" id="volumetria">
+
         </div>
     </div>
+    <div class="col-md-8" id="comunicados">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4" id="tarefas">
+    </div>
+    <div class="col-md-4" id="agendamentos">
+    </div>
+    <div class="col-md-4" id="contasReceber">
+    </div>
+</div>
 
 <br /><br /><br />
 
 <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
-
     <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
-
     <div class="col-sm-3">
         <div class="card m-1">
             <div class="card-body">
                 <table>
                     <tr>
                         <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
-
                         <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
                     </tr>
                 </table>
@@ -132,11 +105,12 @@
         </div>
     </div>
 </div>
-
 <script>
     CarregaComunicados();
     CarregaTarefas();
     CarregaAgendamentos();
+    CarregaContasReceber();
+    CarregaVolumetria();
     function CarregaComunicados() {
         $.ajax("/Comunicado/QuadroComunicadoResumido").done(function (data) {
             $("#comunicados").html(data);
@@ -150,6 +124,16 @@
     function CarregaAgendamentos() {
         $.ajax("/agendamento/GridAgendamentoDia").done(function (data) {
             $("#agendamentos").html(data);
+        });
+    }
+    function CarregaContasReceber() {
+        $.ajax("/contasReceber/GridContasReceberDia").done(function (data) {
+            $("#contasReceber").html(data);
+        });
+    }
+    function CarregaVolumetria() {
+        $.ajax("/Volumetria/VolumetriaResumo").done(function (data) {
+            $("#volumetria").html(data);
         });
     }
 </script>

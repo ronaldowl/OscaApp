@@ -37,12 +37,9 @@ namespace OscaApp.ViewComponents
 
             //consulta se a Organização esta ativa
             if (org.statusOrg == CustomEnumStatus.StatusOrg.EmAvaliacao)
-            {
-                //modelo.msgAvaliacao = "Avaliação: Experia em -" + org.dataExpiracao.ToShortDateString();
+            {          
                 modelo.msgAvaliacao =  " - Avaliação: expira em " + org.dataExpiracao.ToShortDateString();
-
             }
-
 
             return View("LoginFooter", modelo);
 

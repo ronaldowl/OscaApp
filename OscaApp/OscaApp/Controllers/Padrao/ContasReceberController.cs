@@ -205,5 +205,24 @@ namespace OscaApp.Controllers
             return View();
         }
 
+        public ViewResult GridContasReceberDia( )
+        {
+            IEnumerable<ContasReceber> retorno;
+                  
+           
+           retorno = contasReceberData.GetAll(contexto.idOrganizacao, 0);
+          
+                         retorno = from u in retorno
+                          where
+                            (u.dataPagamento.Date == DateTime.Now.Date)
+                          
+                          select u;           
+
+            retorno = retorno.OrderByDescending(x => x.dataPagamento);
+            
+            return View(retorno.ToPagedList<ContasReceber>(1, 10));
+        }
+
+
     }
 }

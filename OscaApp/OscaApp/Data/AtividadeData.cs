@@ -137,7 +137,7 @@ namespace OscaApp.Data
         {
             List<Atividade> itens = new List<Atividade>();
   
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade = 0 and idProfissional = '" + idProfissional + "' and Cast(dataAlvo as date) = Cast(getdate() as date)").ToList();
+                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade = 0 and idProfissional = '" + idProfissional + "'").ToList();
         
 
             return HelperAssociate.ConvertToGridAtividade(itens);

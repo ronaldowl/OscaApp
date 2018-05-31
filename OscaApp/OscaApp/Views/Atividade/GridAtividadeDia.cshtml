@@ -9,13 +9,13 @@
 <div class="card" id="osc_Grid">
     <div class="card-header">
         <div class="card-title">
-            <center><h5 style="font-weight:bold"> Atividades</h5></center>
+            <center><h5 style="font-weight:bold"> <a asp-controller="Atividade" asp-action="GridAtividade">Atividades</a></h5></center>
         </div>
     </div>
     <div class="card-body">
         <div>
             <table class="table table-hover   table-bordered table-sm">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th></th>
                         <th>Assunto</th>
@@ -32,13 +32,13 @@
                     </tr>
                 }
             </table>
-            <div>
-                <table>
-                    <tr>
-                        <td> Total:@Model.TotalItemCount </td>
-                    </tr>
-                </table>
-            </div>
         </div>
+    </div>
+    <div class="card-footer">
+        <table>
+            <tr>
+                <td><h6>  Total:@Model.TotalItemCount</h6></td>
+            </tr>
+        </table>
     </div>
 </div>

@@ -1,0 +1,22 @@
+﻿@model OscaFramework.Models.Volumetria;
+
+@{
+    Layout = "_LayoutFrame";
+}
+ 
+    <div class="card-header bg-primary">
+        <table>
+            <tr>
+                <td><i class="fa fa-2x fa-tachometer iconPanel" aria-hidden="true"></i></td>
+                <td><h5>Volumetria</h5></td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-body">
+        <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
+            <li>QTD de Clientes: @Model.qtdCliente</li>
+            <li>QTD de Contatos: @Model.qtdContato</li>
+            <li>QTD de Produtos: @Model.qtdProduto</li>
+        </ol>
+    </div>
+ 

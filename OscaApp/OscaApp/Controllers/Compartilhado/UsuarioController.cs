@@ -20,7 +20,8 @@ namespace OscaApp.Controllers
     public class UsuarioController : Controller
     {
         private ContextPage contexto;
-        private ApplicationDbContext db;
+        private ApplicationDbContext db;      
+
         private readonly UsuarioData usuarioData;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -31,10 +32,11 @@ namespace OscaApp.Controllers
         {
             this.usuarioData = new UsuarioData(db);
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-            this.contexto = new ContextPage().ExtractContext(httpContext);
+          
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         [HttpGet]
@@ -57,6 +59,7 @@ namespace OscaApp.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = contexto.idOrganizacao };
                 var result = await _userManager.CreateAsync(user, model.Password);
 
+           
                 if (result.Succeeded)
                 {
                     return RedirectToLocal(returnUrl);

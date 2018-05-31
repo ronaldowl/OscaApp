@@ -1,0 +1,53 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.ContasReceber>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+
+@{
+    Layout = "_LayoutFrame";
+}
+
+    <div class="card" id="osc_Grid">
+        <div class="card-header">
+            <div class="card-title">
+                <center><h5 style="font-weight:bold"> <a asp-controller="ContasReceber" asp-action="GridContasReceber">Contas a Receber</a></h5></center>
+            </div>
+        </div>
+        <div class="card-body">
+           
+                <table class="table table-hover  table-bordered table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th></th>
+                            <th>Código</th>
+                            <th>Título</th>
+                            <th>Valor</th>
+
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
+                            <td><i class="fa fa-envelope-open-o"></i></td>
+                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
+                            <td>@item.titulo</td>
+
+                            <td>R$@item.valor.ToString("N2")</td>
+
+                        </tr>
+                    }
+                </table>
+
+          
+        </div>
+        <div class="card-footer">
+            <table>
+                <tr>
+                    <td><h6>  Total:@Model.TotalItemCount</h6></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+

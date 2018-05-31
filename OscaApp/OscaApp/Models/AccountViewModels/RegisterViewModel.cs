@@ -27,7 +27,7 @@ namespace OscaApp.Models.AccountViewModels
         [Display(Name = "Confirmar senha")]
         [Compare("Password", ErrorMessage = "A senha e a confirmação devem ser iguais")]
         public string ConfirmPassword { get; set; }
-
+        public string NomeAmigavel { get; set; }
         public string msgOrganizacao { get; set; }
 
         public  Organizacao organizacao { get; set; }

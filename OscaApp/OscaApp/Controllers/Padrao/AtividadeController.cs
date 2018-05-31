@@ -196,7 +196,15 @@ namespace OscaApp.Controllers
 
             IEnumerable<AtividadeGridViewModel> retorno = atividadeData.GetAllGridDia(idProfissional);
 
-            return View(retorno.ToPagedList<AtividadeGridViewModel>(1, 20));
+            retorno = from u in retorno
+                      where
+                        (u.atividade.dataAlvo.Date == DateTime.Now.Date)
+
+                      select u;
+
+            retorno = retorno.OrderByDescending(x => x.atividade.dataAlvo);
+
+            return View(retorno.ToPagedList<AtividadeGridViewModel>(1,10));
         }
     }
 }

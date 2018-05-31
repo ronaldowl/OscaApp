@@ -72,7 +72,49 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
+        public Volumetria RetornaVolumetriaResumo(Guid id)
+        {
+            Volumetria retorno = new Volumetria();
+            SqlDataReader dataReader;
+            try
+            {
 
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "osc_ConsultaVolumetria",
+                        CommandType = CommandType.StoredProcedure
+                    
+                    };
+                    _Command.Parameters.AddWithValue("idOrg", id.ToString());
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {                 
+                            retorno.qtdCliente = dataReader["Conta"].ToString();
+                            retorno.qtdContato = dataReader["Contato"].ToString();
+                            retorno.qtdProduto = dataReader["Produto"].ToString();                     
+                            
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
         public List<Profissional> RetornaProfissional(Guid idOrganizacao)
         {
             List<Profissional> retorno = new List<Profissional>();
@@ -940,7 +982,6 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
-
-
+        
     }
 }

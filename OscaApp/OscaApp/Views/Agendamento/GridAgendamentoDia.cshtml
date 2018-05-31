@@ -10,13 +10,13 @@
 <div class="card" id="osc_Grid">
     <div class="card-header">
         <div class="card-title">
-            <center><h5 style="font-weight:bold"> Agendamentos</h5></center>
+            <center><h5 style="font-weight:bold"> <a asp-controller="Agendamento" asp-action="GridAgendamento">Agendamentos</a></h5></center>
         </div>
     </div>
     <div class="card-body">
         <div class="row">
             <table class="table table-hover   table-bordered table-sm">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th></th>
                         <th>Código</th>
@@ -26,30 +26,24 @@
                     </tr>
                 </thead>
                 @foreach (var item in Model)
-                                    {
+                {
                     <tr style="cursor:pointer;" id="@item.agendamento.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.agendamento.id })'">
                         <td><i class="fa fa-calendar-times-o"></i></td>
                         <td style="font-size:12px;font-weight:bold">@Html.ActionLink(item.agendamento.codigo.ToString(), "FormUpdateAgendamento", new { id = item.agendamento.id })</td>
                         <td style="font-size:12px;font-weight:bold">@item.agendamento.tipoReferencia</td>
-                        @*<td>@item.cliente.nomeCliente</td>*@
-
-                        @*<td>@item.atendimento.dataAgendada.ToShortDateString()</td>*@
                         <td style="font-size:12px;font-weight:bold">@HelperCalendario.RetornaHoraFormatada(Convert.ToInt32(item.horaInicio.horaDia))</td>
-                        @*<td>@HelperCalendario.RetornaHoraFormatda(Convert.ToInt32(item.horaFim.horaDia))</td>*@
-                        @*<td>R$@item.atendimento.valor.ToString("N2")</td>
-                            <td>@item.atendimento.tipoReferencia</td>
-                            <td>@item.atendimento.statusAtendimento</td>*@
                     </tr>
-                                    }
+                }
             </table>
-            <div>
-                <table>
-                    <tr>
-                        <td> Total:@Model.TotalItemCount </td>
-                    </tr>
-                </table>
-            </div>
+         
         </div>
+    </div>
+    <div class="card-footer">
+        <table>
+            <tr>
+                <td><h6>  Total:@Model.TotalItemCount</h6></td>
+            </tr>
+        </table>
     </div>
 </div>
 

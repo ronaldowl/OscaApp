@@ -294,7 +294,15 @@ namespace OscaApp.Controllers
 
             IEnumerable<AgendamentoGridViewModel> retorno = agendamentoData.GetAllGridViewModelDia(new Guid(idProfissional));
 
-            return View(retorno.ToPagedList<AgendamentoGridViewModel>(1, 20));
+            retorno = from u in retorno
+                      where
+                        (u.agendamento.dataAgendada.Date == DateTime.Now.Date)
+
+                      select u;
+
+            retorno = retorno.OrderByDescending(x => x.agendamento.dataAgendada);
+
+            return View(retorno.ToPagedList<AgendamentoGridViewModel>(1, 10));
         }
 
     }

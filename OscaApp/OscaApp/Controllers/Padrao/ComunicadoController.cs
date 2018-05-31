@@ -150,13 +150,13 @@ namespace OscaApp.Controllers
 
             //realiza busca por Nome, Código, Email e CPF
             DateTime hoje = DateTime.Now.AddDays(1);
-            retorno = from A in retorno where (A.dataInicio <= DateTime.Now) && (A.dataFim.Day >= hoje.Day) select A;
+            retorno = from A in retorno where (A.dataInicio.Date >= DateTime.Now.Date) && (A.dataFim.Date <= hoje.Date) select A;
 
             retorno = retorno.OrderBy(x => x.dataInicio);
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Comunicado>(Page, 20));
+            return View(retorno.ToPagedList<Comunicado>(Page, 3));
         }
     }
 }

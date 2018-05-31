@@ -49,7 +49,7 @@ namespace OscaApp.Controllers.Padrao
                     if (PerfilAcessoRules.PerfilAcessoCreate(entrada, out modelo, contexto))
                     {
                         perfilAcessoData.Add(modelo);
-                        return RedirectToAction("FormUpdatePerfilAcesso", new { id = modelo.id.ToString() });
+                        return RedirectToAction("FormUpdatePerfilAcesso", new { id = modelo.id.ToString() }); 
                     } // end of if 2
                 } // end of if 1
             } // end of try

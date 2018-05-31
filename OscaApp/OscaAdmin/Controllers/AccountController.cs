@@ -234,12 +234,12 @@ namespace OscaAdmin.Controllers
                     await _signInManager.SignInAsync(user, isPersistent: false);
 
                     ////***********Gerar Contexto para todos controller *******************
-                    HttpContext.Session.SetString("email", model.Email);
-                    HttpContext.Session.SetString("organizacao", model.empresa);
-                    ContextPage contexto = new ContextPage(model.Email, model.empresa);
-                    HttpContext.Session.SetString("idOrganizacao", contexto.idOrganizacao.ToString());
-                    HttpContext.Session.SetString("idUsuario", contexto.idUsuario.ToString());
-                    HttpContext.Session.SetString("nomeUsuario", contexto.nomeUsuario.ToString());
+                    //HttpContext.Session.SetString("email", model.Email);
+                    //HttpContext.Session.SetString("organizacao", model.empresa);
+                    //ContextPage contexto = new ContextPage(model.Email, model.empresa);
+                    //HttpContext.Session.SetString("idOrganizacao", contexto.idOrganizacao.ToString());
+                    //HttpContext.Session.SetString("idUsuario", contexto.idUsuario.ToString());
+                    //HttpContext.Session.SetString("nomeUsuario", contexto.nomeUsuario.ToString());
 
                     //*****************************************************************************
 
@@ -365,32 +365,32 @@ namespace OscaAdmin.Controllers
             return View();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
-                }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var user = await _userManager.FindByEmailAsync(model.Email);
+        //        if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+        //        {
+        //            // Don't reveal that the user does not exist or is not confirmed
+        //            return RedirectToAction(nameof(ForgotPasswordConfirmation));
+        //        }
 
-                // For more information on how to enable account confirmation and password reset please
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
-                await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
-                return RedirectToAction(nameof(ForgotPasswordConfirmation));
-            }
+        //        // For more information on how to enable account confirmation and password reset please
+        //        // visit https://go.microsoft.com/fwlink/?LinkID=532713
+        //        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+        //        //var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
+        //        await _emailSender.SendEmailAsync(model.Email, "Reset Password",
+        //           $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+        //        return RedirectToAction(nameof(ForgotPasswordConfirmation));
+        //    }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+        //    // If we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
 
         [HttpGet]
         [AllowAnonymous]
