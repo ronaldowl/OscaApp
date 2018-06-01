@@ -76,7 +76,7 @@
                 <table>
                     <tr>
                         <td width="56%"><h2 style="font-weight:bold">Seja bem vindo ao OSCAS</h2></td>
-                        <td><h2 style="font-weight:bold;color:forestgreen">** GESTÃO DE SERVIÇOS**</h2></td>
+                        <td><h2 style="font-weight:bold;color:forestgreen">** GESTÃO DE SERVIÇOS **</h2></td>
                     </tr>
                 </table>
                 </div><br />
@@ -89,7 +89,7 @@
                             <div class="form-group">
                                 <label asp-for="empresa" class="col-md-3 control-label" style="font-weight:bold">Empresa</label>
                                 <div class="col-md-10">
-                                    <input asp-for="empresa" class="form-control" />
+                                    <input asp-for="empresa" class="form-control" required="required"/>
                                     <span asp-validation-for="empresa" class="text-danger"></span>
                                 </div>
                             </div>
@@ -97,13 +97,13 @@
                                 <label asp-for="Email" class="col-md-3 control-label" style="font-weight:bold">E-mail</label>
                                 <div class="col-md-10">
                                     <span asp-validation-for="Email" class="text-danger "></span>
-                                    <input asp-for="Email" class="form-control" />
+                                    <input asp-for="Email" class="form-control" required="required" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label asp-for="Password" class="col-md-3 control-label" style="font-weight:bold">Senha</label>
                                 <div class="col-md-10">
-                                    <input asp-for="Password" class="form-control" />
+                                    <input asp-for="Password" class="form-control" required="required"/>
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </div>
@@ -133,21 +133,20 @@
                         </div>
                     </section>
                 </div>
-                <div class="col-md-5 offset-1">
+                <div class="col-md-6 offset-1">
                     <section class="alert alert-warning text-justify">
                         <h5>Próximas manutenções!</h5>
                         <div>
                             <ul>
-                                <li>05 de Maio de 2018  as 19:00</li>
-                                <li>02 de Junho de 2018 as 19:00</li>
+                                <li>07 de Julho de 2018  as 19:00</li>
+                                <li>11 de Agosto de 2018 as 19:00</li>
                             </ul>
                         </div>
                     </section>
                     <section class="alert alert-personalized text-justify">
-                        <h5>Melhorias para 4 de Junho</h5>
+                        <h5>Melhorias para 9 de Julho</h5>
                         <ul>
-                            <li>Controle de Estoque</li>
-                            <li>Alerta via SMS</li>
+                            <li>Controle de Estoque</li>                          
                             <li>Novos Relatórios</li>
                         </ul>
                     </section>
