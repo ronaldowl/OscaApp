@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using OscaApp.Data;
 using OscaApp.framework;
@@ -11,6 +12,7 @@ using OscaApp.Models.AccountViewModels;
 using OscaApp.Services;
 using OscaFramework.MicroServices;
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -248,7 +250,7 @@ namespace OscaApp.Controllers
                 Guid idOrg = Guid.NewGuid();
                 SqlGenericManager _sqlManager = new SqlGenericManager();
                 SqlGeneric _sqlService = new SqlGeneric();
-
+                
 
                 //Se for a primeira Organização criar no banco
                 if (_sqlManager.ExisteOrganizacao(model.organizacao.nomeLogin, out idOrg))
@@ -265,8 +267,21 @@ namespace OscaApp.Controllers
               
                 if (result.Succeeded)
                 {
+                    //Cria objeto do contexto
+                    this.contexto.idOrganizacao = idOrg;
+                    this.contexto.idUsuario = new Guid(user.Id);
+
                     //Cria nova Organização e Inicializa valores padrões
                     _sqlService.InicializaOrg(idOrg.ToString(), model.organizacao.nomeLogin, model.Email);
+
+                    //***************** CARGA INICIAL DA ORGANIZAÇÃO VIA OBJETO *************************
+                    CargaInicial CA = new CargaInicial();
+                   
+                    //Cria Perfils de acesso
+                    CA.CreatePerfis(user, this.contexto, this.dbContext);
+
+                    //***************** FIM CARGA INICIAL DA ORGANIZAÇÃO *************************
+
 
                     model.sucesso = true;
                     model.msgOrganizacao = "Organização criada, Empresa:" + model.organizacao.nomeLogin + ", E-mail de acesso:" + model.Email;
@@ -289,6 +304,12 @@ namespace OscaApp.Controllers
             RegisterViewModel modelo = new RegisterViewModel();
             modelo.idOrganizacao = idOrganizacao;
 
+            //Prenche lista de preço para o contexto da página
+            List<SelectListItem> itens = new List<SelectListItem>();
+            SqlGenericData sqlData = new SqlGenericData();
+            itens = HelperAttributes.PreencheDropDownList(sqlData.RetornaTodosPerfis(this.contexto.idOrganizacao));
+            modelo.perfis = itens;
+
             return View(modelo);
         }
 
@@ -302,15 +323,24 @@ namespace OscaApp.Controllers
                 SqlGenericManager _sqlManager = new SqlGenericManager();                          
                             
                 //Passa informações da Org para o novo usuário
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = new Guid(model.idOrganizacao), nomeAmigavel = model.NomeAmigavel };
+                var user = new ApplicationUser {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    idOrganizacao = new Guid(model.idOrganizacao),
+                    nomeAmigavel = model.NomeAmigavel,
+                    idPerfil = new Guid( model.perfil)                   
+                };
                          
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
 
-                
+            
+                CargaInicial CA = new CargaInicial();
                 //Cria Profissinal para cada usuário
-                CargaInicial CA = new CargaInicial(); CA.CreateProfissional(user, this.contexto, this.dbContext);
+                CA.CreateProfissional(user, this.contexto, this.dbContext);
+             
 
+        
 
                 if (result.Succeeded)
                 {               

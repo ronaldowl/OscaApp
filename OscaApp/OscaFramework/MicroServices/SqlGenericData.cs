@@ -366,6 +366,46 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
+        public List<Relacao> RetornaTodosPerfis(Guid idOrganizacao)
+        {
+            List<Relacao> retorno = new List<Relacao>();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select id,nome from PerfilAcesso where idOrganizacao = '" + idOrganizacao.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Relacao item = new Relacao();
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.idName = dataReader["nome"].ToString();
+                            retorno.Add(item);
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
         public Relacao RetornaRelacaoProfissional(Guid id)
         {
              Relacao retorno = new Relacao();

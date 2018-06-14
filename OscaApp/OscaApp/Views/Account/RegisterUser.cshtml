@@ -17,9 +17,9 @@
                         <div asp-validation-summary="All" class="text-danger"></div>
 
                         <div class="form-group">
-                            <label  class="col-md-4 control-label">Nome</label>
+                            <label class="col-md-4 control-label">Nome</label>
                             <div class="col-md-6">
-                                <input asp-for="NomeAmigavel" class="form-control" required="required"/>                              
+                                <input asp-for="NomeAmigavel" class="form-control" required="required" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -41,6 +41,15 @@
                             <div class="col-md-6">
                                 <input asp-for="ConfirmPassword" class="form-control" />
                                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Perfil de Acesso</label>
+                            <div class="inputGroupContainer">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                    <select asp-items="@Model.perfis" asp-for="@Model.perfil" id="osc_perfis" required="required"></select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">

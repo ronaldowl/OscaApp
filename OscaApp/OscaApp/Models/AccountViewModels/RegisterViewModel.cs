@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using OscaFramework.Models;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OscaApp.Models.AccountViewModels
 {
@@ -35,6 +35,10 @@ namespace OscaApp.Models.AccountViewModels
 
         public string idOrganizacao { get; set; }
         public Boolean sucesso { get; set; }
+
+        public List<SelectListItem> perfis { get; set; }
+        public string perfil { get; set; }
+
 
     }
 }

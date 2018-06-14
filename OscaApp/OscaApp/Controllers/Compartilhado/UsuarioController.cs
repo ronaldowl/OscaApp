@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using OscaApp.Data;
 using OscaApp.framework;
 using OscaApp.Models;
 using OscaApp.Models.AccountViewModels;
 using OscaApp.ViewModels;
+using OscaFramework.MicroServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,8 @@ namespace OscaApp.Controllers
     public class UsuarioController : Controller
     {
         private ContextPage contexto;
-        private ApplicationDbContext db;      
+        private ApplicationDbContext db;
+        private SqlGenericData sqlData;
 
         private readonly UsuarioData usuarioData;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -36,6 +39,7 @@ namespace OscaApp.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            sqlData = new SqlGenericData();
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
@@ -82,7 +86,12 @@ namespace OscaApp.Controllers
             try
             {
                 user = usuarioData.Get(id);
-                modelo.usuario = user;                
+                modelo.usuario = user;
+
+                //Prenche lista de preço para o contexto da página
+                List<SelectListItem> itens = new List<SelectListItem>();
+                itens = HelperAttributes.PreencheDropDownList(sqlData.RetornaTodosPerfis(this.contexto.idOrganizacao));
+                modelo.perfis = itens;
             }
             catch (Exception ex)
             {
@@ -92,6 +101,28 @@ namespace OscaApp.Controllers
 
             return View(modelo);
         }
+        [HttpPost]
+        public ViewResult FormUpdateUsuario(UsuarioViewModel entrada)
+        {
+            ApplicationUser user = new ApplicationUser();
+
+            UsuarioViewModel modelo = new UsuarioViewModel();
+            modelo.contexto = this.contexto;
+
+            try
+            {
+               
+         
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 10, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdateUsuario-post", ex.Message);
+            }
+
+            return View(modelo);
+        }
+
 
         public ViewResult GridUsuario(string filtro, int Page)
         {

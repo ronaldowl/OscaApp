@@ -12,6 +12,8 @@ namespace OscaApp.Models
     {
         public Guid idOrganizacao { get; set; }
         public string nomeAmigavel { get; set; }
+        public Guid idPerfil { get; set; }
+        public bool userAdmin { get; set; }
 
         [NotMapped]
         public string organizacao { get; set; }

@@ -16,7 +16,7 @@
                     @Model.StatusMessage
                 </div>
             }
-                <form action="FormUpdateListaPreco" method="post" id="FormUpdateUsuario">
+                <form action="FormUpdateUsuario" method="post" id="FormUpdateUsuario">
                     <div class="card" id="osc_MainForm">
                         <div class="card-header">
                             <div class="card-title ">
@@ -77,13 +77,31 @@
                                         </div>
                                     </div>                        
                                 </div>
-                                <div class="col-md-3">                           
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="control-label">Habilitado?</label>
                                         <div class="inputGroupContainer">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                                <input id="osc_LockoutEnabled" asp-for="@Model.usuario.LockoutEnabled" class="form-control" type="checkbox" >
+                                                <input id="osc_LockoutEnabled" asp-for="@Model.usuario.LockoutEnabled" class="form-control" type="checkbox">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">User Admin</label>
+                                        <div class="inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                <input id="osc_userAdmin" asp-for="@Model.usuario.userAdmin" class="form-control" type="checkbox" disabled="disabled">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Perfil de Acesso</label>
+                                        <div class="inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                <select asp-items="@Model.perfis" asp-for="@Model.usuario." id="osc_perfis" required="required"></select>
                                             </div>
                                         </div>
                                     </div>
