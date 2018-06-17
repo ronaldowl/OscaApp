@@ -22,7 +22,13 @@ namespace OscaFramework.Models
         public bool permitePainelSuporte            { get; set; }
         public bool permitePainelGerenciamento      { get; set; }
         public bool permitePainelOperacional        { get; set; }
-            
+
+        public bool permiteTodosAtendimento         { get; set; }
+        public bool permiteTodosAtividades          { get; set; }
+        public bool permiteTodosOrdemServico        { get; set; }
+        public bool permiteTodosAgendamentos        { get; set; }
+
+
 
         public Guid idOrganizacao { get; set; }
 

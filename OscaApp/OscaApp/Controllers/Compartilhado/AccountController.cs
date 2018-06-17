@@ -260,7 +260,7 @@ namespace OscaApp.Controllers
                 }
 
                 //Passa informações da Org para o novo usuário
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = idOrg };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, idOrganizacao = idOrg, userAdmin = true };
 
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -333,18 +333,15 @@ namespace OscaApp.Controllers
                          
                 //Cria o usuários
                 var result = await _userManager.CreateAsync(user, model.Password);
-
             
                 CargaInicial CA = new CargaInicial();
                 //Cria Profissinal para cada usuário
-                CA.CreateProfissional(user, this.contexto, this.dbContext);
-             
-
-        
+                CA.CreateProfissional(user, this.contexto, this.dbContext);                    
 
                 if (result.Succeeded)
-                {               
-                       return RedirectToAction(nameof(UsuarioController.GridUsuario), "Usuario");
+                {            
+                  
+                    return RedirectToAction("FormUpdateUsuario","Usuario", new { id = user.Id.ToString() });
                 }
                 AddErrors(result);
             }

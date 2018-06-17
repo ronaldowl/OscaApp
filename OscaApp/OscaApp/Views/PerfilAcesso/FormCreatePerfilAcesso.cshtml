@@ -1,5 +1,5 @@
-﻿@model OscaApp.ViewModels.PerfilAcessoViewModel 
-     
+﻿@model OscaApp.ViewModels.PerfilAcessoViewModel
+
 
 <div id="contexto">
     @Html.HiddenFor(m => m.Contexto.idOrganizacao)
@@ -7,103 +7,283 @@
     @Html.HiddenFor(m => m.Contexto.idUsuario)
     @Html.HiddenFor(m => m.Contexto.nomeUsuario)
 </div>
- 
-    <div class="row">
-        <div class="col-md-11">
-            <form action="FormCreatePerfilAcesso" method="post" id="FormCreatePerfilAcesso">
-                <div class="card" id="osc_MainForm">
-                    <div class="card-header">
-                        <div class="card-title ">
-                            <table>
-                                <tr>
-                                    <td><h3>Perfil de Acesso: &nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridPerfilAcesso", "PerfilAcesso" , null)'"> <span>Fechar</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
+
+<div class="row">
+    <div class="col-md-11">
+        <form action="FormCreatePerfilAcesso" method="post" id="FormCreatePerfilAcesso">
+            <div class="card" id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title ">
+                        <table>
+                            <tr>
+                                <td><h3>Perfil de Acesso: &nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridPerfilAcesso", "PerfilAcesso" , null)'"> <span>Fechar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">Nome</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_nome" asp-for="@Model.perfilAcesso.nome" placeholder="Nome" class="form-control" type="text" required="required">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Nome</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_nome" asp-for="@Model.perfilAcesso.nome" placeholder="Nome" class="form-control" type="text" required="required">
+                    <div class="row">
+                        <div class="card col-12" id="osc_FormSegurança">
+                            <div class="card-header">
+                                <h5> Segurança - Controle de acesso aos módulos: &nbsp;&nbsp;</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Vendas</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteVendas" asp-for="@Model.perfilAcesso.permitePainelVendas" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>                      
-                                <div class="form-group">
-                                    <label class="control-label">Permite Painel Vendas ?</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-check-square fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.perfilAcesso.permitePainelVendas" class="form-control" type="checkbox">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Financeiro</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteFinanceiro" asp-for="@Model.perfilAcesso.permitePainelFinanceiro" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>                        
-                            </div>                   
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Serviço</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteServico" asp-for="@Model.perfilAcesso.permitePainelServico" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Configurações</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteConfiguracoes" asp-for="@Model.perfilAcesso.permitePainelConfiguracoes" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.perfilAcesso.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                    <div class="row">
+                        <div class="card col-12" id="osc_FormPaineis">
+                            <div class="card-header">
+                                <h5> Painéis - Controle de acesso aos painéis secundários: &nbsp;&nbsp;</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Operacional</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteOperacional" asp-for="@Model.perfilAcesso.permitePainelOperacional" class="form-control" type="checkbox" disabled="disabled">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Home</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteHome" asp-for="@Model.perfilAcesso.permitePainelHome" class="form-control" type="checkbox" disabled="disabled" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Global</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteGlobal" asp-for="@Model.perfilAcesso.permitePainelGlobal" class="form-control" type="checkbox" disabled="disabled">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Cadastro</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteCadastro" asp-for="@Model.perfilAcesso.permitePainelCadastro" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Suporte</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteSuporte" asp-for="@Model.perfilAcesso.permitePainelSuporte" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Gerenciamento</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_permiteGerenciamento" asp-for="@Model.perfilAcesso.permitePainelSuporte" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="card col-12" id="osc_FormRegistro">
+                            <div class="card-header">
+                                <h5> Segurança - Controle de acesso aos registros: &nbsp;&nbsp;</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Todos Atendimentos</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_todosAtendimentos" asp-for="@Model.perfilAcesso.permiteTodosAtendimento" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Todos Agendamentos</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_todosAgendamentos" asp-for="@Model.perfilAcesso.permiteTodosAgendamentos" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Todas Atividades</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_todosAtividades" asp-for="@Model.perfilAcesso.permiteTodosAtividades" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label">Todas Ordens Serviço</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                                    <input id="osc_todosOrdensServico" asp-for="@Model.perfilAcesso.permiteTodosOrdemServico" class="form-control" type="checkbox">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.perfilAcesso.criadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.perfilAcesso.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.perfilAcesso.criadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>            
-        </div>
-    </div> 
+            </div>
+        </form>
+    </div>
+</div>

@@ -32,6 +32,10 @@ namespace OscaApp.Controllers.Padrao
         {
             PerfilAcessoViewModel modelo = new PerfilAcessoViewModel();
             modelo.perfilAcesso = new PerfilAcesso();
+            modelo.perfilAcesso.permitePainelGlobal = true;
+            modelo.perfilAcesso.permitePainelOperacional = true;
+            modelo.perfilAcesso.permitePainelHome = true;
+
             modelo.Contexto = contexto;
             modelo.perfilAcesso.criadoEm = DateTime.Now;
             modelo.perfilAcesso.criadoPorName = contexto.nomeUsuario;
