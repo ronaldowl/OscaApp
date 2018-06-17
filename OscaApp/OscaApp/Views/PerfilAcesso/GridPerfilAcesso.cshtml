@@ -4,7 +4,7 @@
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 
 <div class="row">
-    <div class="col-md-11">
+    <div class="col-md-12">
         <div class="card" id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
@@ -30,7 +30,7 @@
                                         </label>&nbsp;&nbsp;
                                         <label>
                                             <button id="osc_back_PainelGerenciamento" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelGerenciamento", "Paineis", null)'"> <span>Painel Gerenciamento</span></button>
-                                        </label>&nbsp; &nbsp;                                     
+                                        </label>&nbsp; &nbsp;
 
                                     </div>
                                 </td>
@@ -85,6 +85,7 @@
 <br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br />
 <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
     <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
     <div class="col-sm-3">
         <div class="card m-1">
             <div class="card-body">
@@ -92,7 +93,7 @@
                     <tr>
                         <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
 
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td>
                     </tr>
                 </table>
             </div>
@@ -107,7 +108,7 @@
                             <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
                         </td>
                         <td>
-                            <a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a>
                         </td>
                     </tr>
                 </table>
@@ -120,7 +121,7 @@
                 <table>
                     <tr>
                         <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td>
                     </tr>
                 </table>
             </div>
@@ -131,12 +132,11 @@
             <div class="card-body">
                 <table>
                     <tr>
-                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
+                        <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </div>
-

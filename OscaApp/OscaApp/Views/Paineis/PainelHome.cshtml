@@ -1,45 +1,46 @@
 ﻿@model OscaApp.Data.ContextPage
 
 <div class="row">
-    <div class="col-md-2">
-        <div class="card">
-            <div class="card-header bg-warning">
-                <table>
-                    <tr>
-                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                    </tr>
-                </table>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header bg-warning">
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="card-header bg-info">
-                <table>
-                    <tr>
-                        <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
-                        <td><h5>Institucional</h5></td>
-                    </tr>
-                </table>
+            <div class="card">
+                <div class="card-header bg-info">
+                    <table>
+                        <tr>
+                            <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
+                            <td><h5>Institucional</h5></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
+                        <li><a href="www.oscas.com.br">www.oscas.com.br</a></li>
+                        <li><a href="www.loja.oscas.com.br">www.loja.oscas.com.br </a></li>
+                        <li><a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br </a></li>
+                        <li>suporte@oscas.com.br</li>
+                        <li>WhatsApp (11) 9-8872-2348</li>
+                    </ol>
+
+                </div>
             </div>
-            <div class="card-body">
-                <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
-                    <li><a href="www.oscas.com.br">www.oscas.com.br</a></li>
-                    <li><a href="www.loja.oscas.com.br">www.loja.oscas.com.br </a></li>
-                    <li><a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br </a></li>
-                    <li>suporte@oscas.com.br</li>
-                    <li>WhatsApp (11) 9-8872-2348</li>
-                </ol>
+            <div id="volumetria">
 
             </div>
         </div>
-        <div class="card" id="volumetria">
-
-        </div>
-    </div>
-    <div class="col-md-8" id="comunicados">
-    </div>
+        <div class="col-md-8" id="comunicados">
+        </div>   
 </div>
-<div class="row">
+<br />
+<div class="row"> 
     <div class="col-md-4" id="tarefas">
     </div>
     <div class="col-md-4" id="agendamentos">

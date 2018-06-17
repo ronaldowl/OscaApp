@@ -5,7 +5,7 @@
 @{int viewContexto = ViewBag.viewContexto; }
 
 <div class="row">
-    <div class="col-md-11">
+    <div class="col-md-12">
         <div class="card" id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
@@ -41,16 +41,9 @@
                                         <label>
                                             <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick=""> <span>Limpar</span></button>
                                         </label>&nbsp;&nbsp;
-
                                         <label>
                                             <button id="osc_paginaCaptura" type="button" class="btn btn-info btn-sm fa fa-external-link" onclick="ModalPaginaCaptura();"> <span>Página Captura</span></button>
                                         </label>
-
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <button id="osc_painelOperacional" type="button" class="btn btn-info btn-sm fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelOperacional", "Paineis", null)'"> <span>Painel Operacional</span></button>
-                                        </label>&nbsp;&nbsp;
-
                                     </div>
                                 </td>
                             </tr>
@@ -103,16 +96,16 @@
 
 <br /><br /><br /><br /> <br /><br /><br /><br />  <br /><br /><br />
 <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
-    <div style="background-color:darkgrey; width:100%; height:10px;"></div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
 
-    <div class="col-sm-3">
-        <div class="card m-1">
-            <div class="card-body">
-                <table>
-                    <tr>
-                        <td><span class="fa fa-2x fa-cog iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td>
                     </tr>
                 </table>
             </div>
@@ -123,8 +116,12 @@
             <div class="card-body">
                 <table>
                     <tr>
-                        <td><span class="fa fa-2x fa-money iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                        <td>
+                            <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a>
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -135,20 +132,20 @@
             <div class="card-body">
                 <table>
                     <tr>
-                        <td><span class="fa fa-2x fa-handshake-o iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a></td>
+                        <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-sm-3">
+    <div class="col-md-3">
         <div class="card m-1">
             <div class="card-body">
                 <table>
                     <tr>
-                        <td><span class="fa fa-2x fa-wrench iconPanel"></span></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                        <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td>
                     </tr>
                 </table>
             </div>

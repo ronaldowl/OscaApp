@@ -2,81 +2,81 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-11">
-            <br />
-            <div class="card" id="osc_Grid">
-                <div class="card-header">
-                    <div class="card-title">
-                        <form class="form-inline">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <h5 style="font-weight:bold">Lista de Fornecedores: &nbsp;&nbsp;</h5>
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateFornecedor", "Fornecedor", null)'"> <span>Novo</span></button>
-                                            </label>
-                                            &nbsp;&nbsp;
-                                            <span>
-                                                @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                            </span>
-                                            <button type="submit" class="btn btn-info fa fa-search"></button>
-                                            &nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                            </label>                                         
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <br />
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Lista de Fornecedores: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateFornecedor", "Fornecedor", null)'"> <span>Novo</span></button>
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <span>
+                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                        </span>
+                                        <button type="submit" class="btn btn-info fa fa-search"></button>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table table-hover   table-bordered table-sm">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Código</th>
-                                    <th>Nome do Fornecedor</th>
-                                    <th>CNPJ</th>
-                                    <th>Nome do Vendedor</th>
-                                    <th>Telefone</th>
-                                    <th>E-mail</th>
-                                    <th>Criado Por</th>
-                                </tr>
-                            </thead>
-                            @foreach (var item in Model)
-                            {
-                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateFornecedor", "Fornecedor", new {id = item.id })'">
-                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateFornecedor", new { id = item.id })</td>
-                                    <td>@item.nomeFornecedor</td>
-                                    <td>@item.cnpj</td>
-                                    <td>@item.nomeVendedor</td>
-                                    <td>@item.telefone</td>
-                                    <td>@item.email</td>
-                                    <td>@item.criadoPorName</td>
-                                </tr>
-                            }
-                        </table>                      
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <table>
-                        <tr>
-                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridFornecedor", "Fornecedor", new { page }))</td>
-                            <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
-                        </tr>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover   table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome do Fornecedor</th>
+                                <th>CNPJ</th>
+                                <th>Nome do Vendedor</th>
+                                <th>Telefone</th>
+                                <th>E-mail</th>
+                                <th>Criado Por</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateFornecedor", "Fornecedor", new {id = item.id })'">
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateFornecedor", new { id = item.id })</td>
+                                <td>@item.nomeFornecedor</td>
+                                <td>@item.cnpj</td>
+                                <td>@item.nomeVendedor</td>
+                                <td>@item.telefone</td>
+                                <td>@item.email</td>
+                                <td>@item.criadoPorName</td>
+                            </tr>
+                        }
                     </table>
                 </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridFornecedor", "Fornecedor", new { page }))</td>
+                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
 </div>
+
 <br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
 <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
     <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
@@ -88,7 +88,7 @@
                     <tr>
                         <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
 
-                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h6>Financeiro</h6></a></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td>
                     </tr>
                 </table>
             </div>
@@ -103,7 +103,7 @@
                             <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
                         </td>
                         <td>
-                            <a asp-controller="Paineis" asp-action="PainelVendas"><h6>Vendas</h6></a>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a>
                         </td>
                     </tr>
                 </table>
@@ -116,7 +116,7 @@
                 <table>
                     <tr>
                         <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h6>Serviços</h6></a></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td>
                     </tr>
                 </table>
             </div>
@@ -127,12 +127,14 @@
             <div class="card-body">
                 <table>
                     <tr>
-                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h6>Configurações</h6></a></td>
+                        <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td>
                     </tr>
                 </table>
             </div>
         </div>
     </div>
 </div>
- 
+
+
+
