@@ -720,6 +720,43 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
+        public Relacao RetornaRelacaoListaPrecoPadrao(Guid idOrg)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.id , o.nome,   status from ListaPreco as O where O.idOrganizacao = '" + idOrg.ToString() + "' and padrao = 1",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idName = dataReader["nome"].ToString();
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
         public Relacao RetornaRelacaoCliente(Guid id)
         {
             Relacao retorno = new Relacao();

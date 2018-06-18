@@ -34,6 +34,7 @@ namespace OscaFramework.Models
         {
             this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 7;
+            this.formaVendaProduto = CustomEnum.FormaVendaProduto.Unidade;
         }
 
     }

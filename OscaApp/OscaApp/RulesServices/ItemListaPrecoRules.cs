@@ -35,6 +35,24 @@ namespace OscaApp.RulesServices
             
             return false;
         }
+
+        public static ItemListaPreco ItemListaPrecoCreateRelacionado(ItemListaPreco modelo, ContextPage contexto)
+        {                      
+
+                //************ Objetos de controle de acesso ******************
+                modelo.criadoEm = DateTime.Now;
+                modelo.criadoPor = contexto.idUsuario;
+                modelo.criadoPorName = contexto.nomeUsuario;
+                modelo.modificadoEm = DateTime.Now;
+                modelo.modificadoPor = contexto.idUsuario;
+                modelo.modificadoPorName = contexto.nomeUsuario;
+                modelo.idOrganizacao = contexto.idOrganizacao;
+                //************ FIM Objetos de controle de acesso ***************
+ 
+
+            return modelo;
+        }
+
         public static bool ItemListaPrecoUpdate(ItemListaPrecoViewModel entrada,out ItemListaPreco modelo)
         {
             modelo = new ItemListaPreco();

@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
 using OscaFramework.Models;
-
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {
@@ -55,6 +55,10 @@ namespace OscaApp.Controllers
         {
 
             Produto prod = new Produto();
+            ItemListaPreco itemLista = new ItemListaPreco();
+            SqlGenericData sqlService = new SqlGenericData();
+
+
 
             try
             {
@@ -63,6 +67,13 @@ namespace OscaApp.Controllers
                     if (ProdutoRules.MontaProdutoCreate(entrada, out prod, contexto))
                     {
                         produtoData.Add(prod);
+
+                        //Create de item da lista
+                        itemLista.idProduto = prod.id;
+                        itemLista.idListaPreco = sqlService.RetornaRelacaoListaPrecoPadrao(contexto.idOrganizacao).id;
+                        itemLista.valor = prod.valorCompra;
+                        ItemListaPrecoRules.ItemListaPrecoCreateRelacionado(itemLista, contexto);
+                        itemListaPrecoData.Add(itemLista);
 
                         return RedirectToAction("FormUpdateProduto", new { id = prod.id.ToString() });
                     }

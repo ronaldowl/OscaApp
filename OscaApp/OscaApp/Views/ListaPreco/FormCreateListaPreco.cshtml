@@ -20,7 +20,7 @@
                                     <td>
                                         <div id="osc_barrabotoes">
                                             <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"   onclick="return ConsultaSeExisteListaPadrao();"> <span>Salvar</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridListaPreco", "ListaPreco" , null)'"> <span>Fechar</span></button>
@@ -67,7 +67,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-check-square fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.listaPreco.padrao" class="form-control" type="checkbox">
+                                            <input asp-for="@Model.listaPreco.padrao" class="form-control" type="checkbox" id="osc_listaPrecoPadrao" value="false">
                                         </div>
                                     </div>
                                 </div>                           

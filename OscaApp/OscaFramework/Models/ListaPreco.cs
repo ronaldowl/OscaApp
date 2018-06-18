@@ -26,6 +26,7 @@ namespace OscaFramework.Models
         {
             this.status = CustomEnumStatus.Status.Ativo;
             this.entityType = 12;
+            this.padrao = false;
         }
 
     }

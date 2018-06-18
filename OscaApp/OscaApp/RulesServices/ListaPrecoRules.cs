@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OscaFramework.Models;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -46,6 +47,16 @@ namespace OscaApp.RulesServices
             //************ FIM Objetos de controle de acesso ***************
 
             return true;
-        }       
+        }
+        public static bool ConsultaListaPadrao(string idOrg, SqlGenericData sqlService)
+        {
+            Relacao listaPadrao = new Relacao();
+            listaPadrao = sqlService.RetornaRelacaoListaPrecoPadrao(new Guid(idOrg));
+
+            if (listaPadrao.idName != "") return true;
+
+         
+            return false;
+        }
     }
 }

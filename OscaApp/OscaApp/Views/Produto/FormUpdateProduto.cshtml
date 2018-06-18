@@ -44,7 +44,6 @@
                     </div>
                     <div class="card-body">
                         <input id="osc_id" asp-for="produto.id" type="hidden" class="form-control" value="@Model.produto.id" />
-
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -263,8 +262,7 @@
                             <tr>
                                 <th>Item</th>
                                 <th>Lista de Preco</th>
-                                <th>Valor</th>
-                                <th>Data de Criação</th>
+                                <th>Valor</th>                                
                             </tr>
                         </thead>
                         @{int contador = 0;}
@@ -272,10 +270,9 @@
                         {
                             @if (contador == 5) { break; }
                             <tr>
-                                <td><a class="fa fa-2x fa-shopping-basket" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })'"></a></td>
+                                <td><a class="fa fa-1x fa-shopping-basket" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })'"></a></td>
                                 <td>@Html.ActionLink(item.nomeListaPreco, "FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })</td>
-                                <td>R$ @item.valorVenda</td>
-                                <td>@item.dataCriacao</td>
+                                <td>R$ @item.valorVenda</td>                              
                             </tr>
                             contador++;
                         }
