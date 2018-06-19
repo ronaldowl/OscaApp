@@ -3,72 +3,72 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 @using OscaFramework.Helper;
-@{int viewContexto = ViewBag.viewContexto;  }
- <div class="row">
-        <div class="col-md-12">
-            <div class="card" id="osc_Grid">
-                <div class="card-header">
-                    <div class="card-title">                     
-                        <form class="form-inline">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <h5 style="font-weight:bold">Agendamentos: &nbsp;</h5>
-                                    </td>
-                                    <td>
-                                        <div class="input-group ">
-                                            <div class="form-group">
-                                                <label>Filtros</label>
-                                                <div class="input-group">
-                                                    &nbsp;<div class="col-2">
-                                                              <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
-                                                                  <option value="0" selected="">Meus Agendamentos Abertos</option>
-                                                                  <option value="1">Meus Agendamentos Fechados</option>
-                                                                  <option value="2">Todos Agendamentos Fechados</option>
-                                                                  <option value="3">Todos Agendamentos Abertos</option>
-                                                                  <option value="4">Todos Agendamentos</option>
-                                                              </select>
-                                                    </div>
+@{int viewContexto = ViewBag.viewContexto; }
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Agendamentos: &nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="input-group ">
+                                        <div class="form-group">
+                                            <label>Filtros</label>
+                                            <div class="input-group">
+                                                &nbsp;<div class="col-2">
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                        <option value="0" selected="">Meus Agendamentos Abertos</option>
+                                                        <option value="1">Meus Agendamentos Fechados</option>
+                                                        <option value="2">Todos Agendamentos Fechados</option>
+                                                        <option value="3">Todos Agendamentos Abertos</option>
+                                                        <option value="4">Todos Agendamentos</option>
+                                                    </select>
                                                 </div>
-                                            </div> 
-                                          
-                                            <span>
-                                                @Html.TextBox("filtro", "", new { @class = "form-control  ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                            </span>
-                                            <button type="submit" class="btn btn-info fa fa-1x fa-search"></button>
-                                            &nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove " value="Limpar" onclick="RecarregarGridAgendamento()"> <span>Limpar</span></button>
-                                            </label>&nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
-                                            </label>
+                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </div>
+
+                                        <span>
+                                            @Html.TextBox("filtro", "", new { @class = "form-control  ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                        </span>
+                                        <button type="submit" class="btn btn-info fa fa-1x fa-search"></button>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove " value="Limpar" onclick="RecarregarGridAgendamento()"> <span>Limpar</span></button>
+                                        </label>&nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_calendario" type="button" class="btn btn-info btn-sm fa fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario", null)'"> <span>Calendário</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <table class="table table-hover   table-bordered table-sm">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th></th>
-                                    <th>Código</th>
-                                    <th>Cliente</th>
-                                    <th>Tipo</th>
-                                    <th>Cod Referência</th>
-                                    <th>Data Criação</th>
-                                    <th>Data Agendada</th>
-                                    <th>Hora Início</th>
-                                    <th>Hora Fim</th>
-                                    <th>Status  </th>
-                                </tr>
-                            </thead>
-                            @foreach (var item in Model)
-                            {
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover   table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                                <th>Cod Referência</th>
+                                <th>Data Criação</th>
+                                <th>Data Agendada</th>
+                                <th>Hora Início</th>
+                                <th>Hora Fim</th>
+                                <th>Status  </th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
                             <tr style="cursor:pointer; font-size:12px; align-content:flex-end" id="@item.agendamento.id" onclick="location.href='@Url.Action("FormUpdateAgendamento", "Agendamento", new {id = item.agendamento.id })'">
                                 <td><i class="fa fa-calendar-times-o"></i></td>
                                 <td>@Html.ActionLink(item.agendamento.codigo.ToString(), "FormUpdateAgendamento", new { id = item.agendamento.id })</td>
@@ -82,81 +82,81 @@
 
                                 <td>@item.agendamento.statusAgendamento</td>
                             </tr>
-                            }
-                        </table>
-
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <table>
-                        <tr>
-                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAgendamento", "Agendamento", new { page, view = viewContexto }))</td>
-                            <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
-                        </tr>
+                        }
                     </table>
+
                 </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridAgendamento", "Agendamento", new { page, view = viewContexto }))</td>
+                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
-<br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                                                                               <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
-                                                                                   <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
-                                                                                   <div class="col-sm-3">
-                                                                                       <div class="card m-1">
-                                                                                           <div class="card-body">
-                                                                                               <table>
-                                                                                                   <tr>
-                                                                                                       <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
 
-                                                                                                       <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td>
-                                                                                                   </tr>
-                                                                                               </table>
-                                                                                           </div>
-                                                                                       </div>
-                                                                                   </div>
-                                                                                   <div class="col-sm-3">
-                                                                                       <div class="card m-1">
-                                                                                           <div class="card-body">
-                                                                                               <table>
-                                                                                                   <tr>
-                                                                                                       <td>
-                                                                                                           <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
-                                                                                                       </td>
-                                                                                                       <td>
-                                                                                                           <a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a>
-                                                                                                       </td>
-                                                                                                   </tr>
-                                                                                               </table>
-                                                                                           </div>
-                                                                                       </div>
-                                                                                   </div>
-                                                                                   <div class="col-sm-3">
-                                                                                       <div class="card m-1">
-                                                                                           <div class="card-body">
-                                                                                               <table>
-                                                                                                   <tr>
-                                                                                                       <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
-                                                                                                       <td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td>
-                                                                                                   </tr>
-                                                                                               </table>
-                                                                                           </div>
-                                                                                       </div>
-                                                                                   </div>
-                                                                                   <div class="col-md-3">
-                                                                                       <div class="card m-1">
-                                                                                           <div class="card-body">
-                                                                                               <table>
-                                                                                                   <tr>
-                                                                                                       <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
-                                                                                                       <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td>
-                                                                                                   </tr>
-                                                                                               </table>
-                                                                                           </div>
-                                                                                       </div>
-                                                                                   </div>
-                                                                               </div>
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td>
+                            <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="~/lib/OscaJs/osc_agendamento.js"></script>
 <script>
     var filtroLoad = $("#osc_filtro").val();
@@ -178,7 +178,7 @@
     function OnChangeFiltro() {
 
         var filtro = $("#osc_filtro").val();
-    
+
 
         if (filtro == "0") { $(window.document.location).attr('href', "GridAgendamento?view=0"); }
         if (filtro == "1") { $(window.document.location).attr('href', "GridAgendamento?view=1"); }

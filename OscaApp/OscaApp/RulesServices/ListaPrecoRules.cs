@@ -53,7 +53,7 @@ namespace OscaApp.RulesServices
             Relacao listaPadrao = new Relacao();
             listaPadrao = sqlService.RetornaRelacaoListaPrecoPadrao(new Guid(idOrg));
 
-            if (listaPadrao.idName != "") return true;
+            if (listaPadrao.idName != null) return true;
 
          
             return false;

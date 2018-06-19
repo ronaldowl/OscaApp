@@ -48,16 +48,23 @@
                             <th>Nome</th>
                             <th>Email</th>
                             <th>Telefone</th>
+                            <th>Admin?</th>
+                            <th>Habilitado?</th>
+
                         </tr>
                     </thead>
                     @foreach (var item in Model)
                     {
-                        <tr style="cursor:pointer;font-size:12px" id="@item.Id" onclick="location.href='@Url.Action("FormUpdateUsuario", "Usuario", new {id = item.Id })'">
-                            <td><i class="fa fa-user-circle"></i></td>
-                            <td>@item.nomeAmigavel</td>
-                            <td>@item.Email</td>
-                            <td>@item.PhoneNumber</td>
-                        </tr>}
+                    <tr style="cursor:pointer;font-size:12px" id="@item.Id" onclick="location.href='@Url.Action("FormUpdateUsuario", "Usuario", new {id = item.Id })'">
+                        <td><i class="fa fa-user-circle"></i></td>
+                        <td>@item.nomeAmigavel</td>
+                        <td>@item.Email</td>
+                        <td>@item.PhoneNumber</td>
+                        <td>@(@item.userAdmin ? "Sim" : "Não")</td>
+                        <td>@(@item.LockoutEnabled ? "Sim" : "Não")</td>
+
+
+                    </tr>}
                 </table>
             </div>
             <div class="card-footer">
@@ -71,7 +78,7 @@
         </div>
     </div>
 </div>
-<br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br />
+<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
     <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 

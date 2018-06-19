@@ -9,8 +9,8 @@
 function ConsultaSeExisteListaPadrao() {
     var retorno = true;
 
-    var lista = $("#osc_listaPrecoPadrao").val();
-    alert(lista);
+    var lista = document.getElementById("osc_listaPrecoPadrao").checked;
+    
 
     if (lista == true) {
         $.ajax({

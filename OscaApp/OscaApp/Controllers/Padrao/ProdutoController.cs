@@ -23,7 +23,7 @@ namespace OscaApp.Controllers
         private readonly ProdutoData produtoData;
         private readonly ItemListaPrecoData itemListaPrecoData;
         private ContextPage contexto;
-       
+
 
 
         public ProdutoController(ContexDataService db, IHttpContextAccessor httpContext)
@@ -55,6 +55,7 @@ namespace OscaApp.Controllers
         {
 
             Produto prod = new Produto();
+            Relacao lista = new Relacao();
             ItemListaPreco itemLista = new ItemListaPreco();
             SqlGenericData sqlService = new SqlGenericData();
 
@@ -68,13 +69,17 @@ namespace OscaApp.Controllers
                     {
                         produtoData.Add(prod);
 
-                        //Create de item da lista
-                        itemLista.idProduto = prod.id;
-                        itemLista.idListaPreco = sqlService.RetornaRelacaoListaPrecoPadrao(contexto.idOrganizacao).id;
-                        itemLista.valor = prod.valorCompra;
-                        ItemListaPrecoRules.ItemListaPrecoCreateRelacionado(itemLista, contexto);
-                        itemListaPrecoData.Add(itemLista);
+                        //Create de item da lista se houver lista padrão
+                        lista = sqlService.RetornaRelacaoListaPrecoPadrao(contexto.idOrganizacao);
 
+                        if (lista.idName != null)
+                        {
+                            itemLista.idProduto = prod.id;
+                            itemLista.idListaPreco = lista.id;
+                            itemLista.valor = prod.valorCompra;
+                            ItemListaPrecoRules.ItemListaPrecoCreateRelacionado(itemLista, contexto);
+                            itemListaPrecoData.Add(itemLista);
+                        }
                         return RedirectToAction("FormUpdateProduto", new { id = prod.id.ToString() });
                     }
                 }
@@ -149,7 +154,7 @@ namespace OscaApp.Controllers
                 retorno = from u in retorno
                           where
                                 (u.nome.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
-                                (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))  
+                                (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                           select u;
             }
 

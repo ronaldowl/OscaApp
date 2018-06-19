@@ -12,7 +12,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold">Lista de Clientes: &nbsp;&nbsp;</h5>
+                                    <h5 style="font-weight:bold">Listas de Preço: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
                                     <div class="input-group">
@@ -50,8 +50,8 @@
                                 <th></th>
                                 <th>Nome da Lista</th>
                                 <th>Padrão?</th>
-                                <th>Data Inicio Validade</th>
-                                <th>Data Fim Validade</th>
+                                <th>Início Validade</th>
+                                <th>Fim Validade</th>
                                 <th>Criado Por</th>
                                 <th>Data de Criação</th>
 
@@ -62,9 +62,9 @@
                             <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateListaPreco", "ListaPreco", new {id = item.id })'">
                                 <td><i class="fa fa-list-alt"></i></td>
                                 <td>@Html.ActionLink(item.nome.ToString(), "FormUpdateListaPreco", new { id = item.id })</td>
-                                <td>@item.padrao</td>
-                                <td>@item.dataValidade</td>
-                                <td>@item.fimValidade</td>
+                                <td>@(@item.padrao ? "Sim" : "Não")</td>
+                                <td>@item.dataValidade.ToShortDateString()</td>
+                                <td>@item.fimValidade.ToShortDateString()</td>
                                 <td>@item.criadoPorName</td>
                                 <td>@item.criadoEm</td>
                             </tr>
@@ -85,7 +85,7 @@
     </div>
 </div>
 
-<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br />
+<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
     <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
 
