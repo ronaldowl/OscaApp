@@ -11,8 +11,8 @@
     <thead class="thead-light">
         <tr>
             <th></th>
-            <th>Código</th>
-            <th>Produto</th>
+            <th width="15%">Código</th>
+            <th width="50%">Produto</th>
             <th>Forma</th>
             <th>Valor</th>
 
@@ -25,7 +25,7 @@
             <td>@item.produto.codigo.ToString()</td>
             <td>@item.produto.nome</td>
             <td>@item.produto.formaVendaProduto</td>
-            <td>@item.itemlistaPreco.valor.ToString("N2")</td>
+            <td>R$@item.itemlistaPreco.valor.ToString("N2")</td>
         </tr>
     }
 </table>

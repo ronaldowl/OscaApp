@@ -5,7 +5,8 @@
     Layout = "_LayoutFrame";
 }
 <script>
- 
+  
+
     function CarregaLookupProdutoPedido() {
 
         $("#lookupProdutoPedido").load("/ItemListaPreco/LookupProdutoPedido?idListaPreco=" + '@Model.produtoPedido.idListaPreco' + '&Page=0' + '', function () {
@@ -148,7 +149,7 @@
                                     <div class="form-group ">
                                         <label style="font-weight:bold">Pesquisa de Produtos:&nbsp;&nbsp;</label>
                                         <div class="input-group">
-                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "...", id = "grid", onkeydown = " CarregaGridFiltro();" })
+                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "...", id = "grid" })
                                             <span class="input-group-btn ">
                                                 <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
                                                     <span class="fa fa-search fa-1x"></span>
@@ -186,6 +187,14 @@
 
     //OnLoad_ProdutoPedido();
     CarregaGrid();
+
+    $('#grid').keypress(function (e) {
+        var code = null;
+        code = (e.keyCode ? e.keyCode : e.which);
+        return (code == 13) ? false : true;
+    });
+
+
     $('#paginacao').on('click', 'a', function (e) {
 
         e.preventDefault();
@@ -194,7 +203,7 @@
     });
 
     function Onchage_ProdutoPedidoTipoDesconto() {
-        debugger;
+     
 
         var tipo = document.getElementById("osc_tipoDesconto");
         var descontoValor = document.getElementById("osc_valorDescontoMoney");
