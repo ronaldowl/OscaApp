@@ -10,7 +10,7 @@ function ConsultaSeExisteListaPadrao() {
     var retorno = true;
 
     var lista = document.getElementById("osc_listaPrecoPadrao").checked;
-    
+    var id = $("#osc_id").val();       
 
     if (lista == true) {
         $.ajax({
@@ -18,7 +18,7 @@ function ConsultaSeExisteListaPadrao() {
             type: "GET",
             async: false,
             url: "/API/ListaPrecoAPI/ConsultaListaPrecoPadrao",
-            data: { valor: null },
+            data: { valor: id },
             success: function (dados) {
                 if (dados.statusOperation == true) {
                     alert('Já existe uma lista de Preço Padrão!');

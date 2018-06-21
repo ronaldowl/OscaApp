@@ -56,7 +56,7 @@ namespace OscaApp.Controllers
 
                 //Prenche lista de preço para o contexto da página
                 List<SelectListItem> itens = new List<SelectListItem>();
-                itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
+                itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao) );
                 modelo.listaPrecos = itens;
 
             }

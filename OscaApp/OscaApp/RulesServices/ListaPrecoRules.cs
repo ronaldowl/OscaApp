@@ -48,12 +48,12 @@ namespace OscaApp.RulesServices
 
             return true;
         }
-        public static bool ConsultaListaPadrao(string idOrg, SqlGenericData sqlService)
+        public static bool ConsultaListaPadrao(Guid valor,string idOrg, SqlGenericData sqlService)
         {
             Relacao listaPadrao = new Relacao();
             listaPadrao = sqlService.RetornaRelacaoListaPrecoPadrao(new Guid(idOrg));
 
-            if (listaPadrao.idName != null) return true;
+            if (listaPadrao.idName != null & !valor.Equals(listaPadrao.id)) return true;
 
          
             return false;

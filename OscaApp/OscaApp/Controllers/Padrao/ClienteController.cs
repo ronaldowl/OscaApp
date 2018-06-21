@@ -164,6 +164,42 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
         }
 
+        //[HttpGet]
+        //public ViewResult GridCliente(string filtro,  int view)
+        //{
+        //    try
+        //    {
+        //        ViewBag.viewContexto = 1;
+
+
+        //        IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, view);
+
+        //        if (!String.IsNullOrEmpty(filtro))
+        //        {
+        //            retorno = from u in retorno
+        //                      where (u.nomeCliente.Contains(filtro)) ||
+        //                            (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+        //                      select u;
+
+        //        }
+        //        retorno = retorno.OrderBy(x => x.nomeCliente);
+
+        //        //if (Page == 0) Page = 1;
+
+        //        return View(retorno.ToPagedList<Cliente>(1, 20));
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        LogOsca log = new LogOsca();
+        //        log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
+        //    }
+
+        //    return View();
+        //}
+
+
+       
         public ViewResult GridCliente(string filtro, int Page,int view)
         {
             try
@@ -176,7 +212,7 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (u.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                              where (u.nomeCliente.Contains(filtro)) ||
                                     (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                               select u;
 

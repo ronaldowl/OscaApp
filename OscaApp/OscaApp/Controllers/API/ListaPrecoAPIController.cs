@@ -28,13 +28,13 @@ namespace OscaAPI.Controllers
 
         [Route("api/[controller]/ConsultaListaPrecoPadrao")]
         [HttpGet("{valor}")]
-        public JsonResult ConsultaListaPrecoPadrao(string valor)
+        public JsonResult ConsultaListaPrecoPadrao(Guid valor)
         {
             ResultService retorno = new ResultService();
             try
             {
 
-                if (ListaPrecoRules.ConsultaListaPadrao(contexto.idOrganizacao.ToString(), sqlServices))
+                if (ListaPrecoRules.ConsultaListaPadrao(valor , contexto.idOrganizacao.ToString(), sqlServices))
                 {
                     retorno.statusOperation = true;
                 }

@@ -177,7 +177,8 @@ namespace OscaFramework.Models
         public enum codicaoPagamento
         {
             Avista = 1,
-            Parcelado = 2                    
+            Parcelado = 2,     
+            Prazo = 3
         }
 
         public enum tipoPagamento

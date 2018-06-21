@@ -84,7 +84,7 @@ namespace OscaApp.Data
             List<ListaPreco> retorno = new List<ListaPreco>();
             List<Relacao> lista = new List<Relacao>();
 
-            retorno = db.ListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = db.ListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "' order by padrao desc").ToList();         
 
             return Relacao.ConvertToRelacao(retorno);
 
