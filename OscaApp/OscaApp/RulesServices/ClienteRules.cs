@@ -49,10 +49,10 @@ namespace OscaApp.RulesServices
 
             return true;           
         }
-        public static bool Cnpj_CfpExistente(string valor, Guid idOrganizacao, SqlGenericRules sqlServices)
+        public static bool Cnpj_CfpExistente(string valor, Guid idOrganizacao, SqlGenericRules sqlServices, string id)
         {
 
-            if(sqlServices.ConsultaCnpj_CpfDuplicado(valor, idOrganizacao.ToString()))
+            if(sqlServices.ConsultaCnpj_CpfDuplicado(valor, idOrganizacao.ToString(), id))
             {
                 return true;
             }

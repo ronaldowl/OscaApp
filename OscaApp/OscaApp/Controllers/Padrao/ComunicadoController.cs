@@ -120,7 +120,7 @@ namespace OscaApp.Controllers
 
             if (!String.IsNullOrEmpty(filtro))
             {
-                retorno = from u in retorno where u.titulo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) select u;
+                retorno = from u in retorno where u.titulo.ToLower().Contains(filtro.ToLower()) select u;
             }
 
             retorno = retorno.OrderBy(x => x.dataInicio);

@@ -55,6 +55,7 @@ function SetStatus(id, valor ) {
             data: {
                 valor: valor,
                 idCliente: id
+                
             },
             success: function (dados) {
                 if (dados.statusOperation == true) {
@@ -82,7 +83,7 @@ function OpenLookupContato() {
 }
 
 
-function ConsultaCnpjCpfDuplicado() {
+function ConsultaCnpjCpfDuplicado(idCli) {
     var retorno = true;
 
     var cnpjCpf = $("#osc_cnpj_cpf").val(); 
@@ -94,7 +95,10 @@ function ConsultaCnpjCpfDuplicado() {
             type: "GET",
             async: false,
             url: "/API/ClienteAPI/ConsultaCnpjCpfDuplicado",
-            data: { valor: cnpjCpf },
+            data: {
+                valor: cnpjCpf,
+                idClient: idCli
+            },
             success: function (dados) {
                 if (dados.statusOperation == true) {
                     alert('Já existe um CNPJ/CPF na base!');

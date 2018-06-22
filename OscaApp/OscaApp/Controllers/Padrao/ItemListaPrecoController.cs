@@ -153,16 +153,16 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        public ViewResult GridItemListaPreco(string idProduto, int Page, string Filtro)
+        public ViewResult GridItemListaPreco(string idProduto, int Page, string filtro)
         {
             IEnumerable<LookupItemLista> modelo = ItemlistaPrecoData.GetAllByIdProduto(new Guid(idProduto));
 
-            if (!String.IsNullOrEmpty(Filtro))
+            if (!String.IsNullOrEmpty(filtro))
             {
                 modelo = from u in modelo
                          where
-                            (u.produto.codigo.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
-                            || (u.produto.nome.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
+                            (u.produto.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                            || (u.produto.nome.ToLower().Contains(filtro.ToLower()))
                           select u;
             }
 
@@ -183,16 +183,16 @@ namespace OscaApp.Controllers
             return View( );
 
         }
-        public PartialViewResult GridLookupProdutoOrdem(string idListaPreco, int Page, string Filtro)
+        public PartialViewResult GridLookupProdutoOrdem(string idListaPreco, int Page, string filtro)
         {
             IEnumerable<LookupItemLista> retorno = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
 
-            if (!String.IsNullOrEmpty(Filtro))
+            if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
                           where
-                            (u.produto.codigo.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
-                            || (u.produto.nome.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
+                            (u.produto.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                            || (u.produto.nome.ToLower().Contains(filtro.ToLower()))
                           select u;
             }
             retorno = retorno.OrderBy(x => x.produto.nome);
@@ -209,17 +209,17 @@ namespace OscaApp.Controllers
             return View();
 
         }
-        public PartialViewResult GridLookupProdutoPedido(string idListaPreco, int Page, string Filtro)
+        public PartialViewResult GridLookupProdutoPedido(string idListaPreco, int Page, string filtro)
         {
             IEnumerable<LookupItemLista> retorno = ItemlistaPrecoData.GetAllByListaPreco(new Guid(idListaPreco));
 
 
-            if (!String.IsNullOrEmpty(Filtro))
+            if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
                           where
-                            (u.produto.codigo.StartsWith(Filtro,StringComparison.InvariantCultureIgnoreCase))
-                            || (u.produto.nome.StartsWith(Filtro, StringComparison.InvariantCultureIgnoreCase))
+                            (u.produto.codigo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))
+                            || (u.produto.nome.ToLower().Contains(filtro.ToLower()))
                           select u;
             }
             retorno = retorno.OrderBy(x => x.produto.nome);

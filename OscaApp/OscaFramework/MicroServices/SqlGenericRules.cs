@@ -23,7 +23,7 @@ namespace OscaFramework.MicroServices
             this.conectService = Configuration.GetConnectionString("databaseService");
         }      
 
-        public Boolean ConsultaCnpj_CpfDuplicado(string valor, string idOrganizacao)
+        public Boolean ConsultaCnpj_CpfDuplicado(string valor, string idOrganizacao, string id)
         {
             bool sucesso = false;
 
@@ -42,11 +42,12 @@ namespace OscaFramework.MicroServices
 
                     _Command.Parameters.AddWithValue("valor", valor);
                     _Command.Parameters.AddWithValue("idOrganizacao", idOrganizacao);
+                    _Command.Parameters.AddWithValue("idCliente", id);
 
                     Connection.Open();
                     retorno = _Command.ExecuteScalar();
 
-                    if (retorno != null) sucesso = true;
+                    if (retorno != null  ) sucesso = true;
 
                     Connection.Close();
                 };

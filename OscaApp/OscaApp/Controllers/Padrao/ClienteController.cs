@@ -212,7 +212,7 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (u.nomeCliente.Contains(filtro)) ||
+                              where (u.nomeCliente.ToLower().Contains(filtro.ToLower())) ||
                                     (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
                               select u;
 
@@ -260,7 +260,7 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (u.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
+                              where (u.nomeCliente.ToLower().Contains(filtro.ToLower())) ||
                                     (u.codigo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))
                               select u;
 

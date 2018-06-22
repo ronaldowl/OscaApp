@@ -131,7 +131,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
-                          where (u.nome.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                          where (u.nome.ToLower().Contains(filtro.ToLower()) || u.email.ToLower().Contains(filtro.ToLower()))
                           select u;
             }
             retorno = retorno.OrderBy(x => x.nome);
@@ -149,7 +149,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
-                          where   (u.nome.StartsWith( filtro, StringComparison.InvariantCultureIgnoreCase))                            
+                          where   (u.nome.ToLower().Contains(filtro.ToLower()) || u.email.ToLower().Contains(filtro.ToLower()))                            
                           select u;
             }
             retorno = retorno.OrderBy(x => x.nome);

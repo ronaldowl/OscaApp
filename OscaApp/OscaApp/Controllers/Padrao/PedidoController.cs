@@ -183,7 +183,7 @@ namespace OscaApp.Controllers
                               where
                                 (u.cliente.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
                                 (u.pedido.codigoPedido.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
-                                (u.cliente.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                (u.cliente.nomeCliente.ToLower().Contains(filtro.ToLower()))
 
 
                               select u;

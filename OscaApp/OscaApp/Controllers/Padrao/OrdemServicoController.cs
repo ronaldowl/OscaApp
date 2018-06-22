@@ -170,7 +170,7 @@ namespace OscaApp.Controllers
                           where
                                  (u.cliente.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
                                 (u.ordemServico.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
-                                (u.cliente.idName.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                (u.cliente.idName.ToLower().Contains(filtro.ToLower()))
 
 
                           select u;
@@ -193,7 +193,7 @@ namespace OscaApp.Controllers
                           where
                                 (u.cliente.codigo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))||
                                 (u.ordemServico.codigo.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))||
-                                (u.cliente.idName.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                (u.cliente.idName.ToLower().Contains(filtro.ToLower()))
 
                           select u;
             }

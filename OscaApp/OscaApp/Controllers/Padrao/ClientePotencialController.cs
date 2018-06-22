@@ -152,8 +152,8 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(filtro))
                 {
                     retorno = from u in retorno
-                              where (u.nomeCliente.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)) ||
-                                    (u.email.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                              where (u.nomeCliente.ToLower().Contains(filtro.ToLower())) ||
+                                    (u.email.ToLower().Contains(filtro.ToLower()))
                               select u;
 
                 }

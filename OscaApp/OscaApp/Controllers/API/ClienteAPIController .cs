@@ -29,14 +29,14 @@ namespace OscaAPI.Controllers
      
 
         [Route("api/[controller]/ConsultaCnpjCpfDuplicado")]
-        [HttpGet("{valor}")]
-        public JsonResult ConsultaCnpjCpfDuplicado(string valor)
+        [HttpGet("{valor, idClient}")]
+        public JsonResult ConsultaCnpjCpfDuplicado(string valor, string idClient)
         {
             ResultService retorno = new ResultService();
             try
             {
 
-                if (ClienteRules.Cnpj_CfpExistente(valor, contexto.idOrganizacao, sqlServices))
+                if (ClienteRules.Cnpj_CfpExistente(valor, contexto.idOrganizacao, sqlServices, idClient))
                 {
                     retorno.statusOperation = true;
                 }

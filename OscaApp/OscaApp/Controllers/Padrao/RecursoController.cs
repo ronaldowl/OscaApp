@@ -121,7 +121,8 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno where u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)
-                          ||(u.nome.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))select u;
+                          ||(u.nome.ToLower().Contains(filtro.ToLower()))
+                          select u;
             }
             retorno = retorno.OrderBy(x => x.codigo);
 

@@ -135,7 +135,7 @@ namespace OscaApp.Controllers
             {
                 retorno = from u in retorno
                           where
-                                (u.nome.StartsWith(filtro,StringComparison.InvariantCultureIgnoreCase))
+                                (u.nome.ToLower().Contains(filtro.ToLower()))
                                
                           select u;
             }
