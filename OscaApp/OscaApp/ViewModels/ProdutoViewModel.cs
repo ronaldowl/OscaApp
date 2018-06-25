@@ -2,6 +2,7 @@
 using OscaApp.Models;
 using System.Collections.Generic;
 using OscaFramework.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace OscaApp.ViewModels
 {
@@ -10,7 +11,7 @@ namespace OscaApp.ViewModels
         public Produto produto { get; set; }
         public ContextPage contexto { get; set; }
         public List<ItemProdutoLista> itensListaPreco { get; set; }
-
+      
         public string StatusMessage { get; set; }
 
         public ProdutoViewModel()

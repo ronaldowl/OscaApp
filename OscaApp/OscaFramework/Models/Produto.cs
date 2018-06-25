@@ -13,6 +13,7 @@ namespace OscaFramework.Models
         public string fabricante { get; set; }
         public string nome { get; set; }
         public string descricao { get; set; }
+        public string urlProduto { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorCompra { get; set; }
@@ -21,8 +22,8 @@ namespace OscaFramework.Models
         public decimal largura { get; set; }
         public decimal altura { get; set; }
         public decimal area { get; set; }
-        public decimal peso { get; set; }
-
+        public decimal peso { get; set; }    
+        
         public CustomEnum.FormaVendaProduto formaVendaProduto { get; set; }
 
         public CustomEnum.TipoProduto tipoProduto { get; set; }

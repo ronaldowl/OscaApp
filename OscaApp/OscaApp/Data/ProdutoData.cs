@@ -51,8 +51,30 @@ namespace OscaApp.Data
                 db.Entry(produto).Property("formaVendaProduto").IsModified = true;
                 db.Entry(produto).Property("modificadoPorName").IsModified = true;
                 db.Entry(produto).Property("modificadoPor").IsModified = true;
+                db.Entry(produto).Property("modificadoEm").IsModified = true;
 
                 db.SaveChanges(); 
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        public void UpdateImage(Produto produto)
+        {
+            try
+            {
+                db.Attach(produto);
+                db.Entry(produto).Property("urlProduto").IsModified = true;
+              
+                db.Entry(produto).Property("modificadoPorName").IsModified = true;
+                db.Entry(produto).Property("modificadoPor").IsModified = true;
+                db.Entry(produto).Property("modificadoEm").IsModified = true;
+                
+
+
+                db.SaveChanges();
             }
             catch (Exception ex)
             {

@@ -60,6 +60,13 @@ namespace OscaApp
             //Serviço para executar Regras no banco       
             SqlGenericRules sqlRules = new SqlGenericRules();
             services.AddSingleton<SqlGenericRules>(_ => sqlRules);
+
+            //Carregar Configurações Globais
+            OscaConfig oscaConfig = new OscaConfig(Configuration.GetSection("Ambiente").GetValue<string>("valor"),Configuration);
+         
+            services.AddScoped<OscaConfig>(_ => oscaConfig);
+
+
             //*********************** FIM Serviços para acesso a dados vi ADO *******************
 
 

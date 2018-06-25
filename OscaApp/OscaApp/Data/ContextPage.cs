@@ -14,8 +14,7 @@ namespace OscaApp.Data
         public Guid idUsuario { get; set; }
         public String nomeUsuario { get; set; }
         public string idRelacionado { get; set; }
-        public PerfilAcesso perfilAcesso { get; set; }
-
+        public PerfilAcesso perfilAcesso { get; set; }       
 
         //Construtor padrão
         public ContextPage() { }

@@ -13,6 +13,10 @@ using System.Threading.Tasks;
 using X.PagedList;
 using OscaFramework.Models;
 using OscaFramework.MicroServices;
+using System.IO;
+using Microsoft.AspNetCore.Hosting.Server;
+
+using System.Web;
 
 namespace OscaApp.Controllers
 {
@@ -23,19 +27,25 @@ namespace OscaApp.Controllers
         private readonly ProdutoData produtoData;
         private readonly ItemListaPrecoData itemListaPrecoData;
         private ContextPage contexto;
+        private OscaConfig oscaConfig;
 
 
 
-        public ProdutoController(ContexDataService db, IHttpContextAccessor httpContext)
+        public ProdutoController(ContexDataService db, IHttpContextAccessor httpContext, OscaConfig _oscaConfig)
         {
             this.produtoData = new ProdutoData(db);
             this.itemListaPrecoData = new ItemListaPrecoData(db);
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.oscaConfig = _oscaConfig;
         }
 
         [TempData]
         public string StatusMessage { get; set; }
+
+        [TempData]
+        public string idProdutoTemp { get; set; }
+
 
         [HttpGet]
         public ViewResult FormCreateProduto()
@@ -125,6 +135,7 @@ namespace OscaApp.Controllers
             Produto modelo = new Produto();
             entrada.contexto = this.contexto;
 
+
             try
             {
                 if (ProdutoRules.MontaProdutoUpdate(entrada, out modelo))
@@ -185,6 +196,58 @@ namespace OscaApp.Controllers
             if (Page == 0) Page = 1;
 
             return View(retorno.ToPagedList<Produto>(Page, 20));
+        }
+        [HttpGet]
+        public ViewResult AddImage(string idProduto)
+        {
+            idProdutoTemp = idProduto;
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddImage(IFormFile file)
+        {
+            string path = "";
+
+
+            if (file == null || file.Length == 0)
+                return Content("file not selected");
+
+
+            if (this.oscaConfig.ambiente == "prod")
+            {
+                path = "G:\\root\\home\\ronaldowl-001\\www\\orgfiles\\producao\\" + this.contexto.organizacao + "\\produto\\imagens\\";
+            }
+            else
+            {
+                path = "D:\\root\\home\\ronaldowl-001\\www\\orgfiles\\desenv\\" + this.contexto.organizacao + "\\produto\\imagens\\";
+
+            }
+
+            path = path + Path.GetFileName(file.FileName); ;
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            Produto modelo = new Produto();
+            ProdutoViewModel entrada = new ProdutoViewModel();
+            entrada.contexto = this.contexto;
+            entrada.produto.id = new Guid(idProdutoTemp);
+            entrada.produto.urlProduto = path;
+
+
+            if (ProdutoRules.MontaProdutoUpdate(entrada, out modelo))
+            {
+                produtoData.UpdateImage(modelo);
+
+                
+            }
+
+            return RedirectToAction("FormUpdateProduto", new { id = entrada.produto.id });
+
         }
     }
 }

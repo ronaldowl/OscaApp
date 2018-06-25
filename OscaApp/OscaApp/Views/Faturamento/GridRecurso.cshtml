@@ -1,0 +1,134 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Recurso>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+<div class="row">.</div>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Recursos: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateRecurso", "Recurso", null)'"> <span>Novo</span></button>
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <span>
+                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                        </span>
+                                        <button type="submit" class="btn btn-info fa fa-search"></button>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                                        </label>&nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelCadastro", "Paineis", null)'"> <span>Painel Cadastro</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover   table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th></th>
+                                    <th>Código</th>
+                                    <th>Nome</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateRecurso", "Recurso", new {id = item.id })'">
+                                    <td><i class="fa fa-desktop"></i></td>
+                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateRecurso", new { id = item.id })</td>
+                                    <td>@item.nome</td>
+                                </tr>
+                            }
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridRecurso", "Recurso", new { page }))</td>
+                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td>
+                            <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
