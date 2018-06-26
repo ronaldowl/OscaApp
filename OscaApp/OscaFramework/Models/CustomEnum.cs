@@ -104,6 +104,14 @@ namespace OscaFramework.Models
             OrdemServico = 2,
             Pedido = 3
         }
+        public enum OrigemFaturamento
+        {
+            Atendimento = 0,
+            Servico = 1,
+            OrdemServico = 2,
+            Pedido = 3,
+            Balcao = 4
+        }
         public enum TipoLancamento
         {
             manual = 0,
@@ -409,6 +417,7 @@ namespace OscaFramework.Models
             Atividade = 27,
             ClientePotencial = 28,
             PerfilAcesso = 29,
+            Faturamento = 30,
             Organizacao = 1000
 
         }

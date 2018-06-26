@@ -1,7 +1,5 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.Recurso>
-@using X.PagedList.Mvc;
-@using X.PagedList;
-@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+﻿@model List<OscaApp.ViewModels.GridViewModels.FaturamentoGridViewModel>
+
 <div class="row">.</div>
 <div class="row">
     <div class="col-md-12">
@@ -9,33 +7,25 @@
         <div class="card" id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
-                    <form class="form-inline">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5 style="font-weight:bold">Recursos: &nbsp;&nbsp;</h5>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <label>
-                                            <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateRecurso", "Recurso", null)'"> <span>Novo</span></button>
-                                        </label>
-                                        &nbsp;&nbsp;
-                                        <span>
-                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                        </span>
-                                        <button type="submit" class="btn btn-info fa fa-search"></button>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </label>&nbsp;&nbsp;
-                                        <label>
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("PainelCadastro", "Paineis", null)'"> <span>Painel Cadastro</span></button>
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                    <form class="form-inline" method="post">
+                        <div class="form-group mb-2">
+                            <label for="osc_titulo" style="font-weight:bold">Pesquisar Faturamento</label>
+
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input type="text" class="form-control" id="osc_DataInicio" placeholder="Data Início" name="datainicio">
+                            &nbsp;
+                            <input type="text" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="datafim">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">PESQUISAR</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group mb-2">
+                            <label for="osc_valor" style="font-weight:bold; font-size:medium">Total:R$0,00</label>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div class="form-group mb-2">
+                            <label for="osc_qtd" style="font-weight:bold; font-size:medium">QTD:0</label>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -46,17 +36,24 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th></th>
-                                    <th>Código</th>
-                                    <th>Nome</th>
+                                    <th>Data Faturamento</th>
+                                    <th>Tipo de Refêrencia</th>
+                                    <th>Valor</th>
+
                                 </tr>
                             </thead>
-                            @foreach (var item in Model)
+                            @if(Model != null)
                             {
-                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateRecurso", "Recurso", new {id = item.id })'">
-                                    <td><i class="fa fa-desktop"></i></td>
-                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateRecurso", new { id = item.id })</td>
-                                    <td>@item.nome</td>
+                                foreach (var item in Model)
+                                {
+                                <tr style="cursor:pointer;font-size:12px" id="@item.faturamento.id" onclick="location.href='@Url.Action("FormViewFaturamento", "Faturamento", new {id = item.faturamento.id })'">
+                                    <td><i class="fa fa-money"></i></td>
+                                    <td>@item.faturamento.dataFaturamento</td>
+                                    <td>@item.faturamento.origemFaturamento</td>
+                                    <td>R$@item.faturamento.valor.ToString("N2")</td>
+
                                 </tr>
+                                }
                             }
                         </table>
 
@@ -66,8 +63,8 @@
             <div class="card-footer">
                 <table>
                     <tr>
-                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridRecurso", "Recurso", new { page }))</td>
-                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                        <td style="width:75%"></td>
+
                     </tr>
                 </table>
             </div>
@@ -132,3 +129,10 @@
         </div>
     </div>
 </div>
+<script src="~/lib/OscaJs/osc_global.js"></script>
+<script>
+    //Configura calendario
+    Calendario("#osc_DataInicio");
+    Calendario("#osc_DataFim");
+
+</script>

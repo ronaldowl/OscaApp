@@ -25,6 +25,52 @@ namespace OscaFramework.MicroServices
             this.conectService = Configuration.GetConnectionString("databaseService");
         }
 
+        public List<Faturamento> ConsultaFaturamento(string dataInicio, string dataFim, string idOrg)
+        {
+            List<Faturamento> listaRetorno = new List<Faturamento>();
+            SqlDataReader dataReader;
+            try
+            {
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = " select id,idOrganizacao,status,valor,origemFaturamento,idReferencia,dataFaturamento from Faturamento where idOrganizacao = '" + idOrg + "'  and dataFaturamento between  Cast( '"+ dataInicio +"'as date ) and Cast( '" + dataFim +"'as date ) or ( Cast( dataFaturamento as date ) = Cast( '" + dataInicio +"'as date ))",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Faturamento retorno = new Faturamento();
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            retorno.valor = Convert.ToDecimal(dataReader["valor"].ToString());
+                            retorno.origemFaturamento = (CustomEnum.OrigemFaturamento)Convert.ToInt32(dataReader["origemFaturamento"].ToString());
+                            retorno.idOrganizacao = new Guid(dataReader["idReferencia"].ToString());
+                            retorno.dataFaturamento = Convert.ToDateTime(dataReader["dataFaturamento"].ToString());
+
+                            listaRetorno.Add(retorno);
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return listaRetorno;
+        }
         public ClientePotencial RetornaClientePotencial(Guid id)
         {
             ClientePotencial retorno = new ClientePotencial();

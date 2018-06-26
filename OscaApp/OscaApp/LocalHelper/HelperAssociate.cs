@@ -172,5 +172,44 @@ namespace OscaApp.framework
             }
             return retorno;
         }
+        public static List<FaturamentoGridViewModel> ConvertToGridFaturamento(List<Faturamento> itens)
+        {
+            List<FaturamentoGridViewModel> retorno = new List<FaturamentoGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                FaturamentoGridViewModel X = new FaturamentoGridViewModel();
+                X.faturamento = item;
+
+                if (item.origemFaturamento == CustomEnum.OrigemFaturamento.OrdemServico)
+                {
+                    X.faturamento.idReferencia = sqldata.RetornaRelacaoOrdemServico(item.idReferencia).id;
+                    X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.OrdemServico;
+                }
+
+                if (item.origemFaturamento == CustomEnum.OrigemFaturamento.Pedido)
+                {
+                    X.faturamento.idReferencia = sqldata.RetornaRelacaoPedido(item.idReferencia).id;
+                    X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.Pedido;
+                }
+
+                if (item.origemFaturamento == CustomEnum.OrigemFaturamento.Atendimento)
+                {
+                    X.faturamento.idReferencia = sqldata.RetornaRelacaoAtendimento(item.idReferencia).id;
+                    X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.Atendimento;
+                }
+
+                if (item.origemFaturamento == CustomEnum.OrigemFaturamento.Balcao)
+                {
+                   // X.faturamento.idReferencia = sqldata.RetornaRelacaoAtendimento(item.idReferencia).id;
+                    X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.Balcao;
+                }
+
+               
+                retorno.Add(X);
+            }
+            return retorno;
+        }
     }
 }
