@@ -21,10 +21,12 @@ namespace OscaApp.Controllers
     {
 
         private ContextPage contexto;
+        private SqlGenericData sqlService;
 
-        public FaturamentoController(IHttpContextAccessor httpContext)
+        public FaturamentoController(IHttpContextAccessor httpContext, SqlGenericData _sqlService)
         {
             this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.sqlService = _sqlService;
         }
 
         [TempData]
@@ -36,7 +38,7 @@ namespace OscaApp.Controllers
         {
             Faturamento modelo = new Faturamento();
 
-            modelo.id = new Guid(id);
+            modelo = sqlService.RetornaFaturamento(id);
 
             return View(modelo);
         }
@@ -46,7 +48,7 @@ namespace OscaApp.Controllers
         {
             List<FaturamentoGridViewModel> grid = new List<FaturamentoGridViewModel>();
 
-            SqlGenericData sqlService = new SqlGenericData();
+            
 
             grid = HelperAssociate.ConvertToGridFaturamento(sqlService.ConsultaFaturamento(DateTime.Now.Date.ToString("yyyy-MM-dd"), DateTime.Now.Date.ToString("yyyy-MM-dd"), contexto.idOrganizacao.ToString()));
 
@@ -59,7 +61,7 @@ namespace OscaApp.Controllers
 
             List<FaturamentoGridViewModel> grid = new List<FaturamentoGridViewModel>();
 
-            SqlGenericData sqlService = new SqlGenericData();
+           
 
             grid = HelperAssociate.ConvertToGridFaturamento(sqlService.ConsultaFaturamento(dataInicio.ToString("yyyy-MM-dd"), dataFim.ToString("yyyy-MM-dd"), contexto.idOrganizacao.ToString()));
 

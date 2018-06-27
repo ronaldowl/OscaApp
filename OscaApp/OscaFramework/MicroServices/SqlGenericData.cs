@@ -24,7 +24,52 @@ namespace OscaFramework.MicroServices
             this.Configuration = Configuration; 
             this.conectService = Configuration.GetConnectionString("databaseService");
         }
+        public Faturamento RetornaFaturamento(string id)
+        {
+            Faturamento retorno = new Faturamento();
+            SqlDataReader dataReader;
+            try
+            {
 
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = " select id,idOrganizacao,status,valor,origemFaturamento,idReferencia,dataFaturamento from Faturamento where id = '" + id + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            retorno.valor = Convert.ToDecimal(dataReader["valor"].ToString());
+                            retorno.origemFaturamento = (CustomEnum.OrigemFaturamento)Convert.ToInt32(dataReader["origemFaturamento"].ToString());
+                            retorno.idOrganizacao = new Guid(dataReader["idReferencia"].ToString());
+                            retorno.dataFaturamento = Convert.ToDateTime(dataReader["dataFaturamento"].ToString());
+
+                            
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
         public List<Faturamento> ConsultaFaturamento(string dataInicio, string dataFim, string idOrg)
         {
             List<Faturamento> listaRetorno = new List<Faturamento>();

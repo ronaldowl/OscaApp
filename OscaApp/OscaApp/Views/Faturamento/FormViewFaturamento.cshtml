@@ -1,128 +1,80 @@
-﻿@model OscaApp.ViewModels.RecursoViewModel
-<div id="contexto">
-    @Html.HiddenFor(m => m.contexto.idOrganizacao)
-    @Html.HiddenFor(m => m.contexto.organizacao)
-    @Html.HiddenFor(m => m.contexto.idUsuario)
-    @Html.HiddenFor(m => m.contexto.nomeUsuario)
-    @Html.HiddenFor(m => m.recurso.id)
-</div>
- 
-    <div class="row">
-        <div class="col-md-11">
-            @if (!String.IsNullOrEmpty(Model.StatusMessage))
-            {
+﻿@model OscaFramework.Models.Faturamento
 
-                <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
-                    <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    @Model.StatusMessage
-                </div>
-            }
-            <form action="FormUpdateRecurso" method="post">
-                <div class="card" id="osc_MainForm">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <table>
-                                <tr>
-                                    <td><h3>Alterar dados:&nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridRecurso", "Recurso" , null)'"> <span>Fechar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateRecurso", "Recurso", null)'"> <span>Novo</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteRecurso('@Model.recurso.id')"> <span>Excluir</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <input id="osc_id" asp-for="recurso.id" type="hidden" class="form-control" value="@Model.recurso.id" />
-                            <div class="col-md-4 offset-1">
-                                <div class="form-group">
-                                    <label>Código</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_codigo" asp-for="@Model.recurso.codigo" class="form-control" type="text" disabled="disabled">
-                                        </div>
+<div class="row">
+    <div class="col-md-11">
+
+        <form>
+            <div class="card" id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Detalhes do Faturamento:&nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" data-dismiss="modal"> <span>Fechar</span></button>
+                                        </label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 offset-1">
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_nome" asp-for="@Model.recurso.nome" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br /><br /><br /><br />
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.recurso.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.recurso.criadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoPor" asp-for="@Model.recurso.modificadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoEm" asp-for="@Model.recurso.modificadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="card-body">
+                    <div class="row">
+                        <input id="osc_id" asp-for="@Model.id" type="hidden" class="form-control" value="@Model.id" />
+                        <div class="col-md-4 offset-1">
+                            <div class="form-group">
+                                <label>Data de Faturamento</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_codigo" asp-for="@Model.dataFaturamento" class="form-control" type="text" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 offset-1">
+                            <div class="form-group">
+                                <label>Origem</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_origemFaturamento" asp-for="@Model.origemFaturamento" class="form-control" type="text" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-4 offset-1">
+                            <div class="form-group">
+                                <label>Valor</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_valor" class="form-control" type="text" disabled="disabled" value="R$@Model.valor.ToString("N2")">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="col-md-4 offset-1">
+                            <div class="form-group">
+                                <label>Origem</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_origemFaturamento" asp-for="@Model.origemFaturamento" class="form-control" type="text" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                <br /><br /><br /><br />
+            </div>
+        </form>
     </div>
- 
-<script src="~/lib/OscaJs/osc_recurso.js"></script>
+</div>

@@ -1,9 +1,8 @@
 ﻿@model List<OscaApp.ViewModels.GridViewModels.FaturamentoGridViewModel>
 
-<div class="row">.</div>
+ 
 <div class="row">
-    <div class="col-md-12">
-        <br />
+    <div class="col-md-11">   
         <div class="card" id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
@@ -13,19 +12,11 @@
 
                         </div>
                         <div class="form-group mx-sm-3 mb-2">
-                            <input type="text" class="form-control" id="osc_DataInicio" placeholder="Data Início" name="datainicio">
+                            <input type="text" class="form-control" id="osc_DataInicio" placeholder="Data Início" name="datainicio" required="required" autocomplete="off">
                             &nbsp;
-                            <input type="text" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="datafim">
+                            <input type="text" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="datafim" required="required" autocomplete="off">
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">PESQUISAR</button>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="form-group mb-2">
-                            <label for="osc_valor" style="font-weight:bold; font-size:medium">Total:R$0,00</label>
-                        </div>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div class="form-group mb-2">
-                            <label for="osc_qtd" style="font-weight:bold; font-size:medium">QTD:0</label>
-                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">PESQUISAR</button>                      
                     </form>
                 </div>
             </div>
@@ -37,24 +28,33 @@
                                 <tr>
                                     <th></th>
                                     <th>Data Faturamento</th>
-                                    <th>Tipo de Refêrencia</th>
+                                    <th>Origem</th>
+                            
+
                                     <th>Valor</th>
 
                                 </tr>
                             </thead>
-                            @if(Model != null)
-                            {
-                                foreach (var item in Model)
+                            <tbody>
+                                @{ decimal total = 0; }
+                                @foreach (var item in Model)
                                 {
-                                <tr style="cursor:pointer;font-size:12px" id="@item.faturamento.id" onclick="location.href='@Url.Action("FormViewFaturamento", "Faturamento", new {id = item.faturamento.id })'">
+                                     
+                                    total += item.faturamento.valor;
+                                <tr style="cursor:pointer;font-size:12px" id="@item.faturamento.id" onclick=" CarregaFormFaturamentoView('@item.faturamento.id')">
                                     <td><i class="fa fa-money"></i></td>
                                     <td>@item.faturamento.dataFaturamento</td>
                                     <td>@item.faturamento.origemFaturamento</td>
+                               
+
                                     <td>R$@item.faturamento.valor.ToString("N2")</td>
 
                                 </tr>
                                 }
-                            }
+                            </tbody>
+                            <tfoot>
+                              
+                            </tfoot>
                         </table>
 
                     </div>
@@ -62,10 +62,10 @@
             </div>
             <div class="card-footer">
                 <table>
-                    <tr>
-                        <td style="width:75%"></td>
+                   
+                    <tr style="font-weight:bold"><td style="width:50px">QTD:@Model.Count</td><td>Total:</td><td>R$ @total.ToString("N2")</td></tr>
 
-                    </tr>
+                   
                 </table>
             </div>
         </div>
@@ -129,10 +129,18 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="ModalFaturamentoView">
+</div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script>
     //Configura calendario
     Calendario("#osc_DataInicio");
     Calendario("#osc_DataFim");
+
+     function CarregaFormFaturamentoView(idFaturamento) {
+        $("#ModalFaturamentoView").load("/Faturamento/FormViewFaturamento?id=" + idFaturamento, function () {
+            $("#ModalFaturamentoView").modal("show");
+        });
+    }
 
 </script>

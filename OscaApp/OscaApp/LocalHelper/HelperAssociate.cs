@@ -175,12 +175,16 @@ namespace OscaApp.framework
         public static List<FaturamentoGridViewModel> ConvertToGridFaturamento(List<Faturamento> itens)
         {
             List<FaturamentoGridViewModel> retorno = new List<FaturamentoGridViewModel>();
+
+          
+            
             SqlGenericData sqldata = new SqlGenericData();
 
             foreach (var item in itens)
             {
-                FaturamentoGridViewModel X = new FaturamentoGridViewModel();
+                FaturamentoGridViewModel X = new FaturamentoGridViewModel();              
                 X.faturamento = item;
+              
 
                 if (item.origemFaturamento == CustomEnum.OrigemFaturamento.OrdemServico)
                 {
@@ -208,7 +212,7 @@ namespace OscaApp.framework
 
                
                 retorno.Add(X);
-            }
+            }       
             return retorno;
         }
     }
