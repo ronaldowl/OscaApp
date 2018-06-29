@@ -16,7 +16,11 @@ namespace OscaFramework.Models
         public string codigoPedido { get; set; }
         public string anotacao { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Currency)]
+        //[Column(TypeName = "money(5,2)")]
+        //[Column(TypeName = "decimal(5, 2)")]
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+
         public decimal valorTotal { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]

@@ -50,6 +50,8 @@ namespace OscaFramework.MicroServices
                         {
                             
                             retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idReferencia = new Guid(dataReader["idReferencia"].ToString());
+
                             retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
                             retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
                             retorno.valor = Convert.ToDecimal(dataReader["valor"].ToString());
@@ -96,6 +98,7 @@ namespace OscaFramework.MicroServices
                         {
                             Faturamento retorno = new Faturamento();
                             retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idReferencia = new Guid(dataReader["idReferencia"].ToString());
                             retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
                             retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
                             retorno.valor = Convert.ToDecimal(dataReader["valor"].ToString());

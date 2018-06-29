@@ -204,10 +204,10 @@ namespace OscaApp.framework
                     X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.Atendimento;
                 }
 
-                if (item.origemFaturamento == CustomEnum.OrigemFaturamento.Balcao)
+                if (item.origemFaturamento == CustomEnum.OrigemFaturamento.BalcaoVendas)
                 {
                    // X.faturamento.idReferencia = sqldata.RetornaRelacaoAtendimento(item.idReferencia).id;
-                    X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.Balcao;
+                    X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.BalcaoVendas;
                 }
 
                

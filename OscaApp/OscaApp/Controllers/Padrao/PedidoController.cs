@@ -145,6 +145,13 @@ namespace OscaApp.Controllers
                 {
                     PedidoRules.CalculoPedido(ref pedido, produtoPedidoData);
                     pedidoData.Update(pedido);
+
+                    //Se fechar o Pedido insere o faturamento              
+                    if (entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.Fechado && entrada.pedido.condicaoPagamento == CustomEnum.codicaoPagamento.Avista)
+                    {
+                        FaturamentoRules.InsereFaturamento(pedido, contexto.idOrganizacao);
+                    }
+
                     StatusMessage = "Registro Atualizado com Sucesso!";
 
                     return RedirectToAction("FormUpdatePedido", new { id = pedido.id.ToString() });

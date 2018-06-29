@@ -29,7 +29,10 @@ namespace OscaFramework.Models
         public DateTime dataFechamento { get; set; }       
             
         public StatusAtendimento statusAtendimento { get; set; }
-     
+
+        public codicaoPagamento CondicaoPagamento { get; set; }
+
+
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valor { get; set; }
 

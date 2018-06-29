@@ -45,6 +45,7 @@ namespace OscaFramework.Models
 
         public enum StatusOrdemServico
         {
+            AguardandoAprovacao =0,
             EmAndamento = 1,
             Fechado = 2,
             AguardandoProduto = 3,
@@ -106,11 +107,10 @@ namespace OscaFramework.Models
         }
         public enum OrigemFaturamento
         {
-            Atendimento = 0,
-            Servico = 1,
+            Pedido = 0,
+            Atendimento = 1,
             OrdemServico = 2,
-            Pedido = 3,
-            Balcao = 4
+            BalcaoVendas = 3
         }
         public enum TipoLancamento
         {
@@ -186,7 +186,8 @@ namespace OscaFramework.Models
         {
             Avista = 1,
             Parcelado = 2,     
-            Prazo = 3
+            Prazo = 3,
+            SemPagamento = 4
         }
 
         public enum tipoPagamento

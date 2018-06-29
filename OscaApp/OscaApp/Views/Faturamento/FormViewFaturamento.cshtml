@@ -39,9 +39,10 @@
                             <div class="form-group">
                                 <label>Origem</label>
                                 <div class="inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                        <input id="osc_origemFaturamento" asp-for="@Model.origemFaturamento" class="form-control" type="text" disabled="disabled">
+                                    <div class="input-group" onclick="OpenReference('@Model.origemFaturamento', '@Model.idReferencia');">
+                                        <span class="input-group-addon"><i class="fa fa-crosshairs fa-2x"></i></span>&nbsp;
+                                        <input id="osc_origemFaturamento" asp-for="@Model.origemFaturamento" class="form-control" type="text" disabled="disabled" onclick="OpenReference('@Model.origemFaturamento', '@Model.idReferencia');">
+                                        <input id="osc_idReferencia" asp-for="@Model.idReferencia" class="form-control" type="hidden" >
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +55,7 @@
                                 <label>Valor</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
                                         <input id="osc_valor" class="form-control" type="text" disabled="disabled" value="R$@Model.valor.ToString("N2")">
                                     </div>
                                 </div>
@@ -78,3 +79,21 @@
         </form>
     </div>
 </div>
+<script>
+
+    function OpenReference(tipo, idRef)
+    {
+
+     
+        if (tipo == 'Atendimento') { $(window.document.location).attr('href', "/Atendimento/FormUpdateAtendimento?id=" + idRef);}       
+
+        if (tipo == 'OrdemServico') { $(window.document.location).attr('href', "/OrdemServico/FormUpdateOrdemServico?id=" + idRef); }
+
+        if (tipo == 'Pedido') { $(window.document.location).attr('href', "/Pedido/FormUpdatePedido?id=" + idRef);}
+
+        if (tipo == 'BalcaoVendas') { $(window.document.location).attr('href', "/VendaBalcao/FormUpdateVendaBalcao?id=" + idRef);}
+
+    }
+
+
+</script>

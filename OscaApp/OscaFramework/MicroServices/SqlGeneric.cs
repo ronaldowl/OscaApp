@@ -524,175 +524,37 @@ namespace OscaFramework.MicroServices
             return false;
         }
 
-        //public void InicializaOrg(string idOrg, string nomeLogin, string nomeUsuario)
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection Connection = new SqlConnection(conectService))
-        //        {
-
-        //            var _Command = new SqlCommand()
-        //            {
-        //                Connection = Connection,
-        //                CommandText = "osc_InializaNovaOrg",
-        //                CommandType = CommandType.StoredProcedure
-        //            };
-
-        //            _Command.Parameters.AddWithValue("idOrg", idOrg);
-        //            _Command.Parameters.AddWithValue("loginName", nomeLogin);
-        //            _Command.Parameters.AddWithValue("nomeUsuario", nomeUsuario);
-
-        //            Connection.Open();
-        //            _Command.ExecuteScalar();
-        //            Connection.Close();
-        //        };
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw;
-        //    }
-
-        //}
-
-        //public String RetornaNovaPosicao(int Entidade, Guid idOrganizacao)
-        //{
-        //    object retorno;
-
-        //    try
-        //    {
-
-        //        using (SqlConnection Connection = new SqlConnection(this.conectService))
-        //        {
-
-        //            var _Command = new SqlCommand()
-        //            {
-        //                Connection = Connection,
-        //                CommandText = "osc_RetornaUltimaPosicao",
-        //                CommandType = CommandType.StoredProcedure
-        //            };
-
-        //            _Command.Parameters.AddWithValue("idOrganizacao", idOrganizacao);
-        //            _Command.Parameters.AddWithValue("entidade", Entidade);
-
-        //            Connection.Open();
-        //            retorno = _Command.ExecuteScalar();
-        //            Connection.Close();
-        //        };
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw;
-        //    }
-        //    return retorno.ToString();
-        //}
-
-        //public Relacao RetornaContextPage(string email, string org)
-        //{
-
-        //    Relacao retorno = new Relacao();
-        //    try
-        //    {
-        //        SqlDataReader dataReader;
-
-        //        using (SqlConnection Connection = new SqlConnection(this.conectService))
-        //        {
-        //            var _Command = new SqlCommand()
-        //            {
-        //                Connection = Connection,
-        //                CommandText = "osc_RetornaContextoOrg",
-        //                CommandType = CommandType.StoredProcedure
-        //            };
-
-        //            _Command.Parameters.AddWithValue("Org", org);
-        //            _Command.Parameters.AddWithValue("Email", email);
-
-        //            Connection.Open();
-        //            dataReader = _Command.ExecuteReader();
-
-        //            if (dataReader.HasRows)
-        //            {
-        //                while (dataReader.Read())
-        //                {
-        //                    retorno.id = new Guid(dataReader["idUsuario"].ToString());
-        //                    retorno.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
-        //                    retorno.idName = dataReader["nomeUsuario"].ToString();
-        //                    retorno.organizacao = dataReader["nomeOrganizacao"].ToString();
-        //                }
-        //            }
-
-        //            //Fechando conexao após tratar o retorno
-        //            Connection.Close();
-
-        //        };
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw;
-        //    }
-        //    return retorno;
-        //}
+        public bool InsereFaturamento(Faturamento faturamento, int origemFaturamento)
+        {
 
 
-        //public String RetornaNovaPosicao(int Entidade, Guid idOrganizacao)
-        //{
-        //    object retorno;
+            try
+            {
+                SqlDataReader dataReader;
 
-        //    try
-        //    {
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = @"insert into faturamento (id,idOrganizacao,status,valor,origemFaturamento,idReferencia,dataFaturamento) values(default, '" + faturamento.idOrganizacao +"', 1, '"+ faturamento.valor.ToString().Replace(",",".") + "', " + origemFaturamento.ToString() +", '" + faturamento.idReferencia.ToString() + "', '"+ DateTime.Now.ToString("yyyy-MM-dd") +"')"                                            
+                        
+                    };
 
-        //        using (SqlConnection Connection = new SqlConnection(this.conectService))
-        //        {
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
 
-        //            var _Command = new SqlCommand()
-        //            {
-        //                Connection = Connection,
-        //                CommandText = "osc_RetornaUltimaPosicao",
-        //                CommandType = CommandType.StoredProcedure
-        //            };
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
 
-        //            _Command.Parameters.AddWithValue("idOrganizacao", idOrganizacao);
-        //            _Command.Parameters.AddWithValue("entidade", Entidade);
-
-        //            Connection.Open();
-        //            retorno = _Command.ExecuteScalar();
-        //            Connection.Close();
-        //        };
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw;
-        //    }
-        //    return retorno.ToString();
-        //}
-        //public void InicializaOrg(string idOrg)
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection Connection = new SqlConnection(conectService))
-        //        {
-
-        //            var _Command = new SqlCommand()
-        //            {
-        //                Connection = Connection,
-        //                CommandText = "osc_InializaNovaOrg",
-        //                CommandType = CommandType.StoredProcedure
-        //            };
-
-        //            _Command.Parameters.AddWithValue("idOrg", idOrg);
-
-        //            Connection.Open();
-        //            _Command.ExecuteScalar();
-        //            Connection.Close();
-        //        };
-        //    }
-        //    catch (SqlException ex)
-        //    {
-        //        throw;
-        //    }
-
-        //}
-
-
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
 
     }
 }

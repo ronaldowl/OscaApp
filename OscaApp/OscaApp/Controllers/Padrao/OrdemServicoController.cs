@@ -135,6 +135,14 @@ namespace OscaApp.Controllers
                 {
                     OrdemServicoRules.CalculoOrdem(ref modelo, servicoOrdemData, produtoOrdemData);
                     ordemServicoData.Update(modelo);
+
+                    //Se fechar o Ordem insere o faturamento              
+                    if (entrada.ordemServico.statusOrdemServico == CustomEnumStatus.StatusOrdemServico.Fechado && entrada.ordemServico.condicaoPagamento == CustomEnum.codicaoPagamento.Avista)
+                    {
+                        FaturamentoRules.InsereFaturamento(modelo, contexto.idOrganizacao);
+                    }
+
+
                     StatusMessage = "Registro Atualizado com Sucesso!";
 
                     return RedirectToAction("FormUpdateOrdemServico", new { id = modelo.id.ToString() });

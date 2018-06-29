@@ -251,8 +251,10 @@
                                         <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                     </span>
                                     <select id="osc_codicaoPagamento" asp-for="@Model.ordemServico.condicaoPagamento" class="form-control">
-                                        <option value="1" selected="">A Vista</option>
+                                        <option value="1">Á Vista</option>
                                         <option value="2">Parcelado</option>
+                                        <option value="3">Á Prazo</option>
+                                        <option value="4">Sem Pagamento</option>
                                     </select>
                                 </div>
                             </div>
@@ -271,6 +273,7 @@
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
                                         <select id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" style="background-color:aquamarine">
+                                            <option value="0">Aguardando Aprovação</option>
                                             <option value="1">Em Andamento</option>
                                             <option value="2">Fechado</option>
                                             <option value="3">Aguardando Produto</option>
@@ -409,6 +412,23 @@
                         <table>
                             <tr>
                                 <td>
+                                    <h5 style="font-weight:bold">&nbsp;&nbsp;Produto da Ordem: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="form-group col-md-2">
+                                        <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem()"> <span>Novo</span></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="MainGridProduto" class="embed-responsive embed-responsive-21by9">
+                        <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="300"  ></iframe>
+                    </div>
+                    <div class="card-header">
+                        <table>
+                            <tr>
+                                <td>
                                     <h5 style="font-weight:bold">&nbsp;&nbsp;Serviço da Ordem: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
@@ -420,26 +440,10 @@
                             </tr>
                         </table>
                     </div>
-                    <div id="MainGridServico">
-                        <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id" height="300" width="1180"></iframe>
+                    <div id="MainGridServico" class="embed-responsive embed-responsive-21by9">
+                        <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id"   ></iframe>
                     </div>
-                    <div class="card-header">
-                        <table>
-                            <tr>
-                                <td>
-                                    <h5 style="font-weight:bold">&nbsp;&nbsp;Produto da Ordem: &nbsp;&nbsp;</h5>
-                                </td>
-                                <td>
-                                    <div class="form-group col-md-2">
-                                        <button id="osc_novoProdutoOrdem" type="button" class="btn btn-info bt fa fa-plus" value="Novo" onclick="CarregaProdutoOrdem()"> <span>Novo</span></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div>
-                        <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="300" width="1180"></iframe>
-                    </div>
+
                 </div>
                 <div class="card-footer">
                     <div class="row">

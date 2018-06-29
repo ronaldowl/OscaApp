@@ -140,6 +140,14 @@ namespace OscaApp.Controllers
                 if (AtendimentoRules.AtendimentoUpdate(entrada, out modelo))
                 {
                     atendimentoData.Update(modelo);
+
+                    //Se fechar o Atendimento insere o faturamento              
+                    if (entrada.atendimento.statusAtendimento == CustomEnumStatus.StatusAtendimento.atendido && entrada.atendimento.CondicaoPagamento == CustomEnum.codicaoPagamento.Avista)
+                    {
+                        FaturamentoRules.InsereFaturamento(modelo, contexto.idOrganizacao);
+                    }
+
+
                     StatusMessage = "Registro Atualizado com Sucesso!";
 
                     return RedirectToAction("FormUpdateAtendimento", new { id = modelo.id.ToString() });

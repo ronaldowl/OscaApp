@@ -52,7 +52,7 @@ namespace OscaApp.RulesServices
             if (entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.Cancelado || entrada.pedido.statusPedido == CustomEnumStatus.StatusPedido.Fechado)
             {
                 modelo.dataFechamento = DateTime.Now;
-            }
+            }         
 
             //************ Objetos de controle de acesso *******************
             modelo.modificadoEm = DateTime.Now;
