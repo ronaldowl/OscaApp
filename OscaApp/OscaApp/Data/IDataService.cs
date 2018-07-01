@@ -171,7 +171,18 @@ namespace OscaApp.Data
         List<Pedido> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
         List<PedidoGridViewModel> GetAllGridViewModel(Guid idOrg, int view);
-        List<PedidoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
+        List<PedidoGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);        
+    }
+    public interface IBalcaoVendasData
+    {
+        void Add(BalcaoVendas balcaoVendas);
+        void Update(BalcaoVendas balcaoVendas);
+        void Delete(BalcaoVendas balcaoVendas);
+        BalcaoVendas Get(Guid id);
+        List<BalcaoVendas> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+        List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg, int view);
+        //List<BalcaoVendasGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
 
 
     }

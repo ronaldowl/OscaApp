@@ -62,6 +62,21 @@ namespace OscaApp.framework
             }
             return retorno;
         }
+        public static List<BalcaoVendasGridViewModel> ConvertToGridBalcaoVendas(List<BalcaoVendas> itens)
+        {
+            List<BalcaoVendasGridViewModel> retorno = new List<BalcaoVendasGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            //foreach (var item in itens)
+            //{
+            //    BalcaoVendasGridViewModel X = new BalcaoVendasGridViewModel();
+               
+            //    X. = item;
+
+            //    retorno.Add(X);
+            //}
+            return retorno;
+        }
         public static List<PedidoGridViewModel> ConvertToGridPedido(List<Pedido> itens)
         {
             List<PedidoGridViewModel> retorno = new List<PedidoGridViewModel>();

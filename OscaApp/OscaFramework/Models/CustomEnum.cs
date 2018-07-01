@@ -43,6 +43,14 @@ namespace OscaFramework.Models
             Cancelado = 5
         }
 
+        public enum StatusBalcaoVendas
+        {
+            EmAndamento = 0,
+            Fechado = 1, 
+            Cancelado = 2
+        }
+
+
         public enum StatusOrdemServico
         {
             AguardandoAprovacao =0,
@@ -419,6 +427,7 @@ namespace OscaFramework.Models
             ClientePotencial = 28,
             PerfilAcesso = 29,
             Faturamento = 30,
+            BalcaoVendas = 31,
             Organizacao = 1000
 
         }

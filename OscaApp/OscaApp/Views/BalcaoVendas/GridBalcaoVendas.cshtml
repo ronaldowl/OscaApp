@@ -1,0 +1,185 @@
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.PedidoGridViewModel>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{int viewContexto = ViewBag.viewContexto; }
+<div class="row">.</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline" asp-route-view="@viewContexto" >
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Lista de Pedidos: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <div class="form-group">
+                                            <label>Filtros</label>
+                                            <div class="input-group">
+                                                &nbsp;<div class="col-2">
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                        <option value="0" selected="">Em Andamento</option>
+                                                        <option value="1">Aguardando Produto</option>
+                                                        <option value="2">Para Entrega</option>
+                                                        <option value="3">Fechados</option>
+                                                        <option value="4">Todos Pedidos</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>&nbsp;
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreatePedido", "Pedido", null)'"> <span>Novo</span></button>
+                                        </label>
+                                        &nbsp;&nbsp;
+                                        <span>
+                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                        </span>
+                                        <button type="submit" class="btn btn-info fa fa-search"></button>
+                                        &nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridPedido()"> <span>Limpar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover   table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th></th>
+                                    <th>Código Pedido</th>
+                                    <th>Cliente</th>
+                                    <th>CNPJ/CPF</th>
+                                    <th>Telefone</th>
+                                    <th>Valor</th>
+                                    <th>Status Pedido</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tr style="cursor:pointer;font-size:12px" id="@item.pedido.id" onclick="location.href='@Url.Action("FormUpdatePedido", "Pedido", new {id = item.pedido.id })'">
+                                    <td><i class="fa fa-file-powerpoint-o"></i></td>
+                                    <td>@Html.ActionLink(item.pedido.codigoPedido.ToString(), "FormUpdatePedido", new { id = item.pedido.id })</td>
+                                    <td>@item.cliente.nomeCliente</td>
+                                    <td>@item.cliente.cnpj_cpf</td>
+                                    <td>@item.cliente.telefone</td>
+                                    <td>R$@item.pedido.valorTotal.ToString("N2")</td>
+                                    <td>@item.pedido.statusPedido</td>
+
+                                </tr>
+                            }
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridPedido", "Pedido", new { page, view = viewContexto }))</td>
+                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br /><br /><br /><br /> <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+<div class="row" style="position:sticky;bottom:35px; padding:10px 0 0 0; background:#fff;">
+    <div style="background-color:darkgrey; width: 100%; height:10px;"></div>
+
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-money iconPanel" aria-hidden="true"></i></td>
+
+                        <td><a asp-controller="Paineis" asp-action="PainelFinanceiro"><h4>Financeiro</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td>
+                            <i class="fa fa-2x fa-handshake-o iconPanel" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <a asp-controller="Paineis" asp-action="PainelVendas"><h4>Vendas</h4></a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-wrench iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelServico"><h4>Serviços</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card m-1">
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cog iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelConfiguracoes"><h4>Configurações</h4></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/OscaJs/osc_pedido.js"></script>
+<script>
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+    if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
+
+    function OnChangeFiltro() {
+
+        var filtro = $("#osc_filtro").val();
+
+        if (filtro == "0") { $(window.document.location).attr('href', "GridPedido?view=0"); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridPedido?view=1"); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridPedido?view=2"); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridPedido?view=3"); }
+        if (filtro == "4") { $(window.document.location).attr('href', "GridPedido?view=4"); }
+    }
+
+</script>

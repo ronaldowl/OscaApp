@@ -21,8 +21,56 @@ namespace OscaFramework.MicroServices
             Configuration = builder.Build();
             this.Configuration = Configuration;            
             this.conectService = Configuration.GetConnectionString("databaseService");
-        }      
+        }
 
+        public List<ProdutoBalcao> ConsultaProduto(string filtro, string idLista)
+        {           
+            List<ProdutoBalcao> Listaretorno = new List<ProdutoBalcao>();
+            SqlDataReader dataReader;
+
+            string SelectProduto = "select LP.id, P.codigo, P.nome, Lp.valor, P.quantidade,isnull( P.fabricante,'Ausente')fabricante, isnull(P.modelo, 'Ausente')modelo from itemListaPreco LP inner join produto as P on P.id = Lp.idProduto where Lp.idListaPreco = '" + idLista +"' and(P.nome like('%"+ filtro +"%')  or P.codigo = '"+ filtro + "')";
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {                 
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = SelectProduto,
+                        CommandType = CommandType.Text
+                    };            
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            ProdutoBalcao retorno = new ProdutoBalcao();
+
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.nome = dataReader["nome"].ToString();
+                            retorno.fabricante = dataReader["fabricante"].ToString();
+                            retorno.modelo = dataReader["modelo"].ToString();
+                            retorno.codigo = dataReader["codigo"].ToString();
+                            retorno.quantidade = Convert.ToInt32(dataReader["quantidade"].ToString());
+                            retorno.valor = Convert.ToDecimal(dataReader["valor"].ToString());
+                            Listaretorno.Add(retorno);
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return Listaretorno;
+
+        }
         public Boolean ConsultaCnpj_CpfDuplicado(string valor, string idOrganizacao, string id)
         {
             bool sucesso = false;

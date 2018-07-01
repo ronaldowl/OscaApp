@@ -1,0 +1,94 @@
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
+using OscaApp.Models;
+using OscaApp.ViewModels;
+using OscaApp.Data;
+using OscaApp.RulesServices;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
+using System.Collections.Generic;
+using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
+using OscaApp.framework;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using OscaApp.ViewModels.GridViewModels;
+using OscaFramework.Models;
+using OscaFramework.MicroServices;
+
+namespace OscaApp.Controllers
+{
+    [Authorize]
+    public class BalcaoVendasController : Controller
+    {        
+        private readonly IBalcaoVendasData balcaoVendasData;    
+        private readonly IListaPrecoData listaprecoData;
+        private readonly SqlGenericData Sqlservice;
+        private ContextPage contexto;
+
+        public BalcaoVendasController(ContexDataService db, IHttpContextAccessor httpContext)
+        {
+             
+            this.balcaoVendasData = new BalcaoVendasData(db);        
+            this.listaprecoData = new ListaPrecoData(db);
+            this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.Sqlservice = new SqlGenericData();
+        }
+
+        [TempData]
+        public string StatusMessage { get; set; }
+
+        [HttpGet]
+        public ViewResult BalcaoVendas(string idCliente)
+        {
+            BalcaoVendasViewModel modelo = new BalcaoVendasViewModel();
+
+            try
+            {
+                modelo.contexto = contexto;
+                modelo.balcaoVendas.criadoEm = DateTime.Now;
+                modelo.balcaoVendas.criadoPorName = contexto.nomeUsuario;
+          
+                //Prenche lista de preço para o contexto da página
+                List<SelectListItem> itens = new List<SelectListItem>();
+                itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao) );
+                modelo.listaPrecos = itens;
+
+            }
+            catch (Exception ex)
+            {
+
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreatePedido-get", ex.Message);
+            }
+          
+            return View(modelo);
+        }
+
+    
+        public ViewResult GridBalcaoVendas(string filtro, int Page, string idCliente, int view)
+        {
+            try
+            {                
+                IEnumerable <BalcaoVendasGridViewModel> retorno ;
+
+                ViewBag.viewContexto = view;
+
+             
+                    retorno = balcaoVendasData.GetAllGridViewModel(contexto.idOrganizacao, view);
+                             
+ 
+                if (Page == 0) Page = 1;
+                return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 20));
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1,4, this.contexto.idUsuario, this.contexto.idOrganizacao, "GridPedido", ex.Message);
+            }
+
+            return View();
+        }
+
+    }
+}

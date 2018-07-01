@@ -1,0 +1,231 @@
+﻿@model OscaApp.ViewModels.BalcaoVendasViewModel
+
+<script>
+
+    function CarregaFormStatusPedido() {
+        $("#ModalStatusPedido").load("/Pedido/FormStatusPedido?id=" + '', function () {
+            $("#ModalStatusPedido").modal("show");
+        });
+    }
+
+
+    function Imprimir() {
+
+    }
+
+</script>
+
+<div id="contexto">
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        @if (!String.IsNullOrEmpty(Model.StatusMessage))
+        {
+
+            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessage
+            </div>
+        }
+        <form action="BalcaoVendas" method="post" id="BalcaoVendas">
+            <div class="card " id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Venda:&nbsp; </h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+
+                                        <label>
+                                            <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas" , null)'"> <span>Nova Venda</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"> <span>Fechar</span></button>
+                                        </label>
+
+                                        <label>
+                                            <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Cupom</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="form-inline" method="post">
+                                    <div class="form-group mb-2">
+                                        <label for="osc_titulo" style="font-weight:bold">Pesquisar Produto</label>
+                                    </div>
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <input type="text" class="form-control" id="osc_pesquisaProduto" placeholder="..." name="osc_filtro" required="required" autocomplete="off" onkeypress="ConsultaProduto();">
+                                        &nbsp;
+                                    </div>
+                                    <button type="button" class="btn btn-primary mb-2" onclick="ConsultaProduto();">PESQUISAR</button>
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Lista de Preço</label>&nbsp;
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <select asp-items="@Model.listaPrecos" asp-for="@Model.balcaoVendas.idListaPreco" id="osc_listaPreco" required="required"></select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <input type="text" class="form-control" id="osc_CPF" placeholder="CPF" name="osc_cpf" autocomplete="off">
+                                        &nbsp;
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="produtosPequisa" class="table table-bordered table-hover table-striped table-sm table-responsive-sm"   >
+                                <thead>
+                                    <tr>
+                                        <th> </th>
+                                        <th>Código</th>
+                                        <th>Nome</th>
+                                        <th>Fabricante</th>
+                                        <th>Modelo</th>
+                                        <th>QTD Disp</th>
+                                        <th>Valor</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="form-inline" method="post">
+                                    <div class="form-group mb-2">
+                                        <label for="osc_titulo" style="font-weight:bold">Produtos da Venda</label>
+                                    </div>&nbsp;&nbsp;&nbsp;
+                                    <div class="form-group mb-2">
+                                        <label for="osc_total" style="font-weight:bold; font-size:x-large">Total:</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="produtosVendas" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Nome</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>  <br /><br />   <br /><br />   <br /><br />   <br /><br />   <br />
+                <div class="card-footer ">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.balcaoVendas.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.balcaoVendas.statusBalcaoVendas" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+<br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />
+<br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />
+
+<div class="modal fade" id="ModalProdutoPedido">
+</div>
+<div class="modal fade" id="ModalStatusPedido">
+</div>
+<script>
+    function ConsultaProduto() {
+
+        var retorno = true;
+
+        var lista = $("#osc_listaPreco").val();
+        var filtroProduto = $("#osc_pesquisaProduto").val();
+
+        $("tr:has(td)").remove();
+
+        if (filtroProduto != "") {
+
+            $.ajax({
+                dataType: "json",
+                type: "GET",
+                async: false,
+                url: "/API/BalcaoVendasAPI/ConsultaProduto",
+                data: {
+                    filtro: filtroProduto,
+                    idLista: lista
+                },
+                success: function (dados) {
+                    
+                    if (dados.statusOperation == true) {                  
+                       
+                        $.each(dados.listaProdutoBalcao, function (idx, obj) {                             
+
+                            $('#produtosPequisa').append('<tr><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td> R$' + dados.listaProdutoBalcao[idx].valor +'</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick=""> <span>Adicionar..</span></button></div> </td></tr>');
+           
+                        });                 
+                                                 
+                    }
+                }
+            });
+        }
+        return retorno;
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
