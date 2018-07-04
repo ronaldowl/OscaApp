@@ -51,3 +51,10 @@ function DeleteService(id, controller, redirect) {
         });
     }
 } 
+
+function FormatMoney(valor) {
+
+    valor = valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    return valor;
+}

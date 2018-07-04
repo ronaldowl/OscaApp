@@ -53,7 +53,14 @@
                                         <label>
                                             <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Cupom</span></button>
                                         </label>
+
+
                                     </div>
+                                </td>
+                                <td width="300px" align="center"></td>
+                                <td>
+                                    <input style="font-weight:bold; font-size:x-large" id="ValorTotalVendas" value="TOTAL:R$ 0,00" readonly="" class="form-control" />
+
                                 </td>
                             </tr>
                         </table>
@@ -68,7 +75,7 @@
                                         <label for="osc_titulo" style="font-weight:bold">Pesquisar Produto</label>
                                     </div>
                                     <div class="form-group mx-sm-3 mb-2">
-                                        <input type="text" class="form-control" id="osc_pesquisaProduto" placeholder="..." name="osc_filtro" required="required" autocomplete="off" onkeypress="ConsultaProduto();">
+                                        <input type="text" class="form-control" id="osc_pesquisaProduto" placeholder="Digite o nome Produto" name="osc_filtro" required="required" autocomplete="off" onkeypress="ConsultaProduto();">
                                         &nbsp;
                                     </div>
                                     <button type="button" class="btn btn-primary mb-2" onclick="ConsultaProduto();">PESQUISAR</button>
@@ -90,7 +97,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="produtosPequisa" class="table table-bordered table-hover table-striped table-sm table-responsive-sm"   >
+                            <table id="produtosPequisa" class="table table-bordered table-hover table-striped table-sm table-responsive-sm ">
                                 <thead>
                                     <tr>
                                         <th> </th>
@@ -113,16 +120,13 @@
                                 <div class="form-inline" method="post">
                                     <div class="form-group mb-2">
                                         <label for="osc_titulo" style="font-weight:bold">Produtos da Venda</label>
-                                    </div>&nbsp;&nbsp;&nbsp;
-                                    <div class="form-group mb-2">
-                                        <label for="osc_total" style="font-weight:bold; font-size:x-large">Total:</label>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="produtosVendas" class="display" style="width:100%">
+                            <table id="produtosVendas" class="table table-bordered table-hover table-striped table-sm table-responsive-sm" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Código</th>
@@ -130,13 +134,15 @@
                                         <th>Quantidade</th>
                                         <th>Valor</th>
                                         <th>Total</th>
+                                        <th>Ação</th>
                                     </tr>
                                 </thead>
+                                <tbody></tbody>
                             </table>
 
                         </div>
                     </div>
-                </div>  <br /><br />   <br /><br />   <br /><br />   <br /><br />   <br />
+                </div>  <br /><br />   <br /><br />   <br /><br />
                 <div class="card-footer ">
 
                     <div class="row">
@@ -158,7 +164,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-asterisk fa-2x"></span>
                                     </span> &nbsp;
-                                    <input id="osc_criadoEm" asp-for="@Model.balcaoVendas.statusBalcaoVendas" type="text" class="form-control" disabled="disabled" />
+                                    <input id="osc_criadoEm" asp-for="@Model.balcaoVendas.statusBalcaoVendas" type="text" class="form-control" disabled="disabled"  />
                                 </div>
                             </div>
                         </div>
@@ -170,52 +176,16 @@
         </form>
     </div>
 </div>
-<br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />
-<br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />   <br /><br />
+
 
 <div class="modal fade" id="ModalProdutoPedido">
 </div>
 <div class="modal fade" id="ModalStatusPedido">
 </div>
-<script>
-    function ConsultaProduto() {
+<script src="~/lib/OscaJs/osc_global.js"></script>
+<script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
 
-        var retorno = true;
 
-        var lista = $("#osc_listaPreco").val();
-        var filtroProduto = $("#osc_pesquisaProduto").val();
-
-        $("tr:has(td)").remove();
-
-        if (filtroProduto != "") {
-
-            $.ajax({
-                dataType: "json",
-                type: "GET",
-                async: false,
-                url: "/API/BalcaoVendasAPI/ConsultaProduto",
-                data: {
-                    filtro: filtroProduto,
-                    idLista: lista
-                },
-                success: function (dados) {
-                    
-                    if (dados.statusOperation == true) {                  
-                       
-                        $.each(dados.listaProdutoBalcao, function (idx, obj) {                             
-
-                            $('#produtosPequisa').append('<tr><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td> R$' + dados.listaProdutoBalcao[idx].valor +'</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick=""> <span>Adicionar..</span></button></div> </td></tr>');
-           
-                        });                 
-                                                 
-                    }
-                }
-            });
-        }
-        return retorno;
-    }
-
-</script>
 
 
 
