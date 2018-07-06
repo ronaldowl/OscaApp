@@ -9,31 +9,33 @@ namespace OscaApp.RulesServices
 {
     public static class BalcaoVendasRules
     {
-        public static bool MontaBalcaoVendasCreate(BalcaoVendasViewModel entrada, out BalcaoVendas modelo, ContextPage contexto)
+        public static Guid BalcaoVendasCreate(BalcaoVendasViewModel entrada,  ContextPage contexto, IBalcaoVendasData balcaoData)
         {
-            modelo = new BalcaoVendas();
-            modelo = entrada.balcaoVendas;
-            modelo.codigo = AutoNumber.GeraCodigo(31, contexto.idOrganizacao);
+        
+            entrada.balcaoVendas.codigo = AutoNumber.GeraCodigo(31, contexto.idOrganizacao);
 
 
-            if (modelo.codigo != null)
-            {              
-                               
-
+            if (entrada.balcaoVendas.codigo != null)
+            {
                 ////************ Objetos de controle de acesso ***************
-                modelo.criadoEm = DateTime.Now;
-                modelo.criadoPor = contexto.idUsuario;
-                modelo.criadoPorName = contexto.nomeUsuario;
-                modelo.modificadoEm = DateTime.Now;
-                modelo.modificadoPor = contexto.idUsuario;
-                modelo.modificadoPorName = contexto.nomeUsuario;
-                modelo.idOrganizacao = contexto.idOrganizacao;
+                entrada.balcaoVendas.criadoEm = DateTime.Now;
+                entrada.balcaoVendas.criadoPor = contexto.idUsuario;
+                entrada.balcaoVendas.criadoPorName = contexto.nomeUsuario;
+                entrada.balcaoVendas.modificadoEm = DateTime.Now;
+                entrada.balcaoVendas.modificadoPor = contexto.idUsuario;
+                entrada.balcaoVendas.modificadoPorName = contexto.nomeUsuario;
+                entrada.balcaoVendas.idOrganizacao = contexto.idOrganizacao;
                 ////************ FIM Objetos de controle de acesso ***************
-                
-                return true;
+
+                //Grava objeto na base
+                balcaoData.Add(entrada.balcaoVendas);
+
+
+               
             }
 
-            return false;
+            return entrada.balcaoVendas.id;
+
         }
         //public static bool MontaClienteUpdate(ClienteViewModel entrada,out Cliente modelo, ContextPage contexto)
         //{

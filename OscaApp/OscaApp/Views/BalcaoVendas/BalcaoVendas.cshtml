@@ -1,14 +1,7 @@
 ﻿@model OscaApp.ViewModels.BalcaoVendasViewModel
 
 <script>
-
-    function CarregaFormStatusPedido() {
-        $("#ModalStatusPedido").load("/Pedido/FormStatusPedido?id=" + '', function () {
-            $("#ModalStatusPedido").modal("show");
-        });
-    }
-
-
+ 
     function Imprimir() {
 
     }
@@ -34,7 +27,7 @@
             </div>
         }
  
-            <form action="BalcaoVendas" method="post" id="BalcaoVendas">
+            <div  id="BalcaoVendas">
                 <div class="card " id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title">
@@ -224,25 +217,17 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-secondary" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas" , null)'">Concluir</button>
-
+                                <button type="button" class="btn btn-secondary" onclick="Execute();">Concluir</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
 
                             </div>
                         </div>
                     </div>
-                </div>
-
-
-            </form>
+                </div>                
+            </div>
     </div>
 </div>
 
-
-<div class="modal fade" id="ModalProdutoPedido">
-</div>
-<div class="modal fade" id="ModalStatusPedido">
-</div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
 

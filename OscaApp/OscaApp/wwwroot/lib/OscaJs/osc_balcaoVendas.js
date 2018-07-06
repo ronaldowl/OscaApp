@@ -1,5 +1,4 @@
-﻿
-
+﻿ 
 function ConsultaProduto() {
 
     var lista = $("#osc_listaPreco").val();
@@ -27,7 +26,6 @@ function ConsultaProduto() {
                         $('#produtosPequisa').append('<tr id="key_' + dados.listaProdutoBalcao[idx].id + '" ><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td>' + dados.listaProdutoBalcao[idx].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="AdicionaProduto(' + "'" + dados.listaProdutoBalcao[idx].id + "'" + ');"> <span>Adicionar..</span></button></div> </td></tr>');
 
                     });
-
                 }
             }
         });
@@ -106,16 +104,12 @@ function SomaTotal() {
     $('#produtosVendas > tbody tr .somaTD').each(function (i) {
         VALORTOTAL += parseFloat($(this).val().replace('$', '').replace('R', '').replace('.', ''));
     });
-
-
+    
     $('#ValorTotalVendas').val('TOTAL: ' + FormatMoney(VALORTOTAL));
     $('#ValorTotalVendasDiag').val('TOTAL: ' + FormatMoney(VALORTOTAL));
-
-    
+        
     $('#InputValorTotalVendas').val(VALORTOTAL);
-
-
-    
+        
 }
 
 function LimpaBusca() {
@@ -126,3 +120,50 @@ function LimpaBusca() {
     $(chaveBusca).val('');
 }
 
+
+function Execute(){
+       
+    var url = '/API/BalcaoVendasAPI/GravarVenda';
+    var produtosBalcaoP = [];
+    var Entrada = MontaObjetoEntrada();
+
+        produtosBalcaoP.push(
+            {
+                codigo: 'Laptop',
+                quantidade: 1000,
+            },
+            {
+                codigo: 'Laptop',
+                quantidade: 1000,
+            }
+        );
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                modelo: Entrada,
+                produtosBalcao: produtosBalcaoP
+            },
+            datatype: 'json',
+            ContentType: 'application/json;utf-8'
+        }).done(function (resp) {
+            alert('Success ');
+        }).error(function (err) {
+            alert("Error " + err.status);
+        });      
+
+}
+
+function MontaObjetoEntrada() {
+
+    var ObjetoEntrada = new Object();
+
+    ObjetoEntrada.valorTotal =          $('#InputValorTotalVendas').val();
+    ObjetoEntrada.idListaPreco =        $('#osc_listaPreco').val();
+    ObjetoEntrada.cpf =                 $('#osc_CPF').val();
+    ObjetoEntrada.condicaoPagamento   = $('#osc_condicaoPagamento').val();
+    ObjetoEntrada.tipoPagamento =       $('#osc_tipoPagamento').val();    
+
+    return ObjetoEntrada;
+
+}

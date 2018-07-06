@@ -86,34 +86,7 @@ namespace OscaApp.Controllers
           
             return View(modelo);
         }
-
-        [HttpPost]
-        public ActionResult BalcaoVendas(BalcaoVendasViewModel entrada)
-        {
-            BalcaoVendas modelo = new BalcaoVendas();
-
-            try
-            {
-                if (entrada.balcaoVendas != null)
-                {
-                    if (BalcaoVendasRules.MontaBalcaoVendasCreate(entrada, out modelo, contexto))
-                    {
-                        balcaoVendasData.Add(modelo);
-                        return RedirectToAction("BalcaoVendasView", new { id = modelo.id.ToString() });
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                LogOsca log = new LogOsca();
-                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "BalcaoVendas-post", ex.Message);
-            }
-
-            return View(modelo);
-        }
-
+            
         public ViewResult GridBalcaoVendas(string filtro, int Page, string idCliente, int view)
         {
             try
