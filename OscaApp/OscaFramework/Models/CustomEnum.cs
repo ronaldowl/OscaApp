@@ -428,6 +428,8 @@ namespace OscaFramework.Models
             PerfilAcesso = 29,
             Faturamento = 30,
             BalcaoVendas = 31,
+            ProdutoBalcao = 32,
+
             Organizacao = 1000
 
         }

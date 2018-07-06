@@ -39,8 +39,9 @@ namespace OscaApp.Data
         public DbSet<ClientePotencial> ClientePotencial { get; set; }
         public DbSet<PerfilAcesso> PerfilAcessos { get; set; }
         public DbSet<BalcaoVendas> BalcaoVendas { get; set; }
-
-
+        public DbSet<ProdutoBalcao> ProdutosBalcao { get; set; }
+          
+        
 
 
     }

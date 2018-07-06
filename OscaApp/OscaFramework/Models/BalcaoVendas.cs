@@ -8,12 +8,14 @@ namespace OscaFramework.Models
     [Table("BalcaoVendas")]
     public class BalcaoVendas : GenericEntity
     {
+
+        public string codigo { get; set; }
+        public string cpf { get; set; }
+
         public Guid idOrganizacao { get; set; }   
         public Guid idListaPreco { get; set; }     
        
-        //[DataType(DataType.Currency)]
-        //[Column(TypeName = "money(5,2)")]
-        //[Column(TypeName = "decimal(5, 2)")]
+        [DataType(DataType.Currency)]      
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorTotal { get; set; }       
        

@@ -109,6 +109,13 @@ function SomaTotal() {
 
 
     $('#ValorTotalVendas').val('TOTAL: ' + FormatMoney(VALORTOTAL));
+    $('#ValorTotalVendasDiag').val('TOTAL: ' + FormatMoney(VALORTOTAL));
+
+    
+    $('#InputValorTotalVendas').val(VALORTOTAL);
+
+
+    
 }
 
 function LimpaBusca() {

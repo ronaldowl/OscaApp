@@ -23,6 +23,7 @@ namespace OscaApp.Controllers
         private readonly IBalcaoVendasData balcaoVendasData;    
         private readonly IListaPrecoData listaprecoData;
         private readonly SqlGenericData Sqlservice;
+        
         private ContextPage contexto;
 
         public BalcaoVendasController(ContexDataService db, IHttpContextAccessor httpContext)
@@ -36,6 +37,28 @@ namespace OscaApp.Controllers
 
         [TempData]
         public string StatusMessage { get; set; }
+
+        [HttpGet]
+        public ViewResult BalcaoVendasView(string id)
+        {
+            BalcaoVendasViewModel modelo = new BalcaoVendasViewModel();
+
+            try
+            {
+                modelo.contexto = this.contexto;
+                modelo.balcaoVendas = balcaoVendasData.Get(new Guid(id));
+                modelo.listapreco = Sqlservice.RetornaRelacaoListaPreco(modelo.balcaoVendas.idListaPreco);
+            }
+            catch (Exception ex)
+            {
+
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "BalcaoVendasView-get", ex.Message);
+            }
+
+            return View(modelo);
+        }
+
 
         [HttpGet]
         public ViewResult BalcaoVendas(string idCliente)
@@ -64,7 +87,33 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
-    
+        [HttpPost]
+        public ActionResult BalcaoVendas(BalcaoVendasViewModel entrada)
+        {
+            BalcaoVendas modelo = new BalcaoVendas();
+
+            try
+            {
+                if (entrada.balcaoVendas != null)
+                {
+                    if (BalcaoVendasRules.MontaBalcaoVendasCreate(entrada, out modelo, contexto))
+                    {
+                        balcaoVendasData.Add(modelo);
+                        return RedirectToAction("BalcaoVendasView", new { id = modelo.id.ToString() });
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "BalcaoVendas-post", ex.Message);
+            }
+
+            return View(modelo);
+        }
+
         public ViewResult GridBalcaoVendas(string filtro, int Page, string idCliente, int view)
         {
             try
@@ -74,11 +123,11 @@ namespace OscaApp.Controllers
                 ViewBag.viewContexto = view;
 
              
-                    retorno = balcaoVendasData.GetAllGridViewModel(contexto.idOrganizacao, view);
+                    retorno = balcaoVendasData.GetAllGridViewModel(contexto.idOrganizacao);
                              
  
                 if (Page == 0) Page = 1;
-                return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 20));
+                return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 100));
 
             }
             catch (Exception ex)

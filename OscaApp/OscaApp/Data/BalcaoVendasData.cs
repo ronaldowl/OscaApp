@@ -106,48 +106,22 @@ namespace OscaApp.Data
 
         }
 
-        public List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg, int view)
+        public List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg)
+        {
+            List<BalcaoVendas> itens = new List<BalcaoVendas>();                      
+           
+            itens = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+             
+            return HelperAssociate.ConvertToGridBalcaoVendas(itens);
+        }
+
+        public List<BalcaoVendasGridViewModel> GetAllGridViewModelDay(Guid idOrg, string Date)
         {
             List<BalcaoVendas> itens = new List<BalcaoVendas>();
 
-            //Em Andamento
-            if (view == 0)
-            {
-                itens = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where statusBalcaoVendas = 0  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-
-            //Fechado
-            if (view == 1)
-            {
-                itens = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where statusBalcaoVendas in (1)  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-
-            //Cancelado
-            if (view == 2)
-            {
-                itens = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where statusBalcaoVendas in (2) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }    
-
+            itens = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
 
             return HelperAssociate.ConvertToGridBalcaoVendas(itens);
         }
-        //public List<BalcaoVendasGridViewModel> GetAllGridViewModelByCliente(Guid idCliente)
-        //{
-        //    List<BalcaoVendas> itens = new List<BalcaoVendas>();
-
-        //    itens = db.BalcaoVendas.FromSql("SELECT * FROM Pedido  where  idCliente = '" + idCliente.ToString() + "'").ToList();
-
-        //    return HelperAssociate.ConvertToGridBalcaoVendas(itens);
-        //}
-
-
-        //public List<BalcaoVendas> GetAllByIdCliente(Guid idCliente)
-        //{
-        //    List<BalcaoVendas> retorno = new List<BalcaoVendas>();
-        //    retorno = db.Pedidos.FromSql("SELECT * FROM Pedido where  idCliente = '" + idCliente.ToString() + "'").ToList();
-        //    return retorno;
-
-        //}
-
     }
 }
