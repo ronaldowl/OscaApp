@@ -51,5 +51,18 @@ namespace OscaApp.RulesServices
 
             return false;
         }
+
+        public static bool InsereFaturamento(BalcaoVendas modelo, Guid idOrganizacao)
+        {
+            SqlGeneric sqlGeneric = new SqlGeneric();
+            Faturamento fat = new Faturamento();
+            fat.valor = modelo.valorTotal;
+            fat.idOrganizacao = idOrganizacao;
+            fat.idReferencia = modelo.id;
+            fat.origemFaturamento = CustomEnum.OrigemFaturamento.BalcaoVendas;
+            sqlGeneric.InsereFaturamento(fat, 3);
+
+            return false;
+        }
     }
 }

@@ -500,7 +500,13 @@ namespace OscaFramework.MicroServices
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "select * from ProdutoBalcao where idBalcaoVendas = '" + idBalcao + "'",
+                        CommandText = @"select PB.id,PB.idOrganizacao, PB.valor, PB.valorTotal, PB.idListaPreco,
+                                        PB.idBalcaoVendas, PB.idItemListaPreco, PB.quantidade, P.nome, P.codigo,P.id as idProduto  from produtoBalcao as PB
+                                        inner join ItemListaPreco as ILP
+                                        on PB.idItemListaPreco = ILP.id
+                                        inner join Produto as P
+                                        on ILP.idProduto = P.id
+                                        where idBalcaoVendas = '" + idBalcao + "'",
                         CommandType = CommandType.Text
                     };
 
@@ -516,9 +522,12 @@ namespace OscaFramework.MicroServices
                             item.idBalcaoVenda = new Guid(dataReader["idBalcaoVendas"].ToString());
                             item.idItemListaPreco = new Guid(dataReader["idItemListaPreco"].ToString());
                             item.idListaPreco = new Guid(dataReader["idListaPreco"].ToString());
+                            item.idProduto = new Guid(dataReader["idProduto"].ToString());
                             item.quantidade = Convert.ToInt32(dataReader["quantidade"].ToString());
                             item.valor = Convert.ToDecimal(dataReader["valor"].ToString());
                             item.valorTotal = Convert.ToDecimal(dataReader["valorTotal"].ToString());
+                            item.nome =   dataReader["nome"].ToString();
+                            item.codigo = dataReader["codigo"].ToString();
 
                             retorno.Add(item);
                         }

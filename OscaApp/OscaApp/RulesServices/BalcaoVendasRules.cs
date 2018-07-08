@@ -13,7 +13,7 @@ namespace OscaApp.RulesServices
         {
         
             entrada.balcaoVendas.codigo = AutoNumber.GeraCodigo(31, contexto.idOrganizacao);
-
+            entrada.balcaoVendas.statusBalcaoVendas = CustomEnumStatus.StatusBalcaoVendas.Fechado;
 
             if (entrada.balcaoVendas.codigo != null)
             {

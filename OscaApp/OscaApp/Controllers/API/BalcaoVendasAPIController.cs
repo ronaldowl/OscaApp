@@ -60,6 +60,7 @@ namespace OscaAPI.Controllers
             entrada.balcaoVendas = modelo;
             entrada.contexto = this.contexto;
             Guid idBalcaoVendas = new Guid();
+         
 
             try
             {
@@ -67,6 +68,9 @@ namespace OscaAPI.Controllers
 
                 if (BalcaoVendasRules.GravaProdutoBalcao(produtosBalcao, this.contexto, this.sqlGeneric, idBalcaoVendas))
                 {
+                    //Grava lançamento na tabela de faturamento
+                    entrada.balcaoVendas.id = idBalcaoVendas;
+                    FaturamentoRules.InsereFaturamento(entrada.balcaoVendas, this.contexto.idOrganizacao);
 
                     retorno.id = idBalcaoVendas.ToString();
                     retorno.statusOperation = true;

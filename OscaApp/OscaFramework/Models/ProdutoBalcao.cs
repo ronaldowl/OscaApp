@@ -30,7 +30,8 @@ namespace OscaFramework.Models
         public Guid idBalcaoVenda { get; set; }
         public Guid idListaPreco { get; set; }
         public Guid idItemListaPreco { get; set; }
-        
+        public Guid idProduto { get; set; }
+
         public ProdutoBalcao()
         {
          

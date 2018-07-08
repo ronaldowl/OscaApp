@@ -40,7 +40,7 @@
                                 <label>Origem</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group" onclick="OpenReference('@Model.origemFaturamento', '@Model.idReferencia');">
-                                        <span class="input-group-addon"><i class="fa fa-crosshairs fa-2x"></i></span>&nbsp;
+                                        <span class="input-group-addon"><i class="fa fa-search fa-2x"></i></span>&nbsp;
                                         <input id="osc_origemFaturamento" asp-for="@Model.origemFaturamento" class="form-control" type="text" disabled="disabled" onclick="OpenReference('@Model.origemFaturamento', '@Model.idReferencia');">
                                         <input id="osc_idReferencia" asp-for="@Model.idReferencia" class="form-control" type="hidden" >
                                     </div>
@@ -49,7 +49,6 @@
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="col-md-4 offset-1">
                             <div class="form-group">
                                 <label>Valor</label>
@@ -91,7 +90,7 @@
 
         if (tipo == 'Pedido') { $(window.document.location).attr('href', "/Pedido/FormUpdatePedido?id=" + idRef);}
 
-        if (tipo == 'BalcaoVendas') { $(window.document.location).attr('href', "/VendaBalcao/FormUpdateVendaBalcao?id=" + idRef);}
+        if (tipo == 'BalcaoVendas') { $(window.document.location).attr('href', "/BalcaoVendas/BalcaoVendasView?id=" + idRef);}
 
     }
 
