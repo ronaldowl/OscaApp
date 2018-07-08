@@ -4,20 +4,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
 namespace OscaFramework.Models
-{
-    [Table("produtoBalcao")]
-    public class ProdutoBalcao : GenericEntity
+{   
+    public class ProdutoBalcao 
     {
-        [NotMapped]
+        public Guid id { get; set; }
+
+        public int entityType { get; set; }
+        
         public string codigo { get; set; }
-
-        [NotMapped]
+        
         public string nome { get; set; }
-
-        [NotMapped]
+        
         public string fabricante { get; set; }
-
-        [NotMapped]
+           
         public string modelo { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
@@ -30,12 +29,11 @@ namespace OscaFramework.Models
         public Guid idOrganizacao { get; set; }
         public Guid idBalcaoVenda { get; set; }
         public Guid idListaPreco { get; set; }
-        public Guid idProduto { get; set; }
-
-
+        public Guid idItemListaPreco { get; set; }
+        
         public ProdutoBalcao()
         {
-            this.status = CustomEnumStatus.Status.Ativo;
+         
             this.entityType = 32;
        
         }

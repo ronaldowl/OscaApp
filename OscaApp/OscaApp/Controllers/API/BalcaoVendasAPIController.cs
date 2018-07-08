@@ -18,13 +18,15 @@ namespace OscaAPI.Controllers
     {
 
         private readonly SqlGenericRules sqlServices;
+        private readonly SqlGeneric sqlGeneric;
         private readonly ContextPage contexto;
         private readonly IBalcaoVendasData balcaoVendasData;
 
-        public BalcaoVendasAPIController(SqlGenericRules _sqlRules, IHttpContextAccessor httpContext, ContexDataService db)
+        public BalcaoVendasAPIController(SqlGeneric _sqlGeneric, SqlGenericRules _sqlRules, IHttpContextAccessor httpContext, ContexDataService db)
         {
             this.balcaoVendasData = new BalcaoVendasData(db);
             this.sqlServices = _sqlRules;
+            this.sqlGeneric =  _sqlGeneric;
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
@@ -63,9 +65,14 @@ namespace OscaAPI.Controllers
             {
                 idBalcaoVendas = BalcaoVendasRules.BalcaoVendasCreate(entrada, this.contexto,balcaoVendasData);
 
-                retorno.statusOperation = true;
+                if (BalcaoVendasRules.GravaProdutoBalcao(produtosBalcao, this.contexto, this.sqlGeneric, idBalcaoVendas))
+                {
 
-                return Json(retorno);
+                    retorno.id = idBalcaoVendas.ToString();
+                    retorno.statusOperation = true;
+
+                    return Json(retorno);
+                }
             }
             catch (Exception ex)
             {

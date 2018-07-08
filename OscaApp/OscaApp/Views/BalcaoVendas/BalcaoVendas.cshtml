@@ -38,19 +38,14 @@
                                         <div id="osc_barrabotoes">
 
                                             <label>
-                                                <button id="osc_novo" type="button" class="btn btn-info btn-sm fa fa-plus" value="" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas" , null)'"> <span>Nova Venda</span></button>
+                                                <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas" , null)'"> <span>Nova Venda</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"> <span>Fechar</span></button>
-                                            </label>
-
-                                            <label>
-                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Cupom</span></button>
+                                                <button id="osc_fechar" type="button" class="btn btn-danger btn-lg fa fa-close" value="" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"> <span>Fechar</span></button>
                                             </label>
                                             <label>
-                                                <button id="osc_fecharVenda" type="button" class="btn btn-info btn-sm fa fa-cart-plus" data-toggle="modal" data-target="#fechamento"> <span>Fechar Venda</span></button>
+                                                <button id="osc_fecharVenda" type="button" class="btn btn-success btn-lg fa fa-cart-plus" data-toggle="modal" data-target="#fechamento"> <span>Concluir Venda</span></button>
                                             </label>
-
                                         </div>
                                     </td>
                                     <td width="300px" align="center"></td>
@@ -227,7 +222,6 @@
             </div>
     </div>
 </div>
-
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
 

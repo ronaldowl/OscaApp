@@ -37,29 +37,26 @@ namespace OscaApp.RulesServices
             return entrada.balcaoVendas.id;
 
         }
-        //public static bool MontaClienteUpdate(ClienteViewModel entrada,out Cliente modelo, ContextPage contexto)
-        //{
-        //    modelo = new Cliente();
-        //    modelo = entrada.cliente;
-        //    modelo.idContato = entrada.contato.id;
-        //    ////************ Objetos de controle de acesso ***************
-        //    modelo.modificadoEm         = DateTime.Now;
-        //    modelo.modificadoPor        = contexto.idUsuario;
-        //    modelo.modificadoPorName    = contexto.nomeUsuario;
-        //    ////************ FIM Objetos de controle de acesso ***************
+       
+        public static bool GravaProdutoBalcao(ProdutoBalcao[] produtosBalcao, ContextPage contexto, SqlGeneric sqlGeneric, Guid idBalcao)
+        {
+            try
+            {
+                foreach (var item in produtosBalcao)
+                {
+                    sqlGeneric.InsereProdutoBalcao(MontaCreate( item, contexto, idBalcao));
+                }
 
-        //    return true;           
-        //}
-        //public static bool ConsultaProduto(string filtro, Guid idListaPreco, SqlGenericRules sqlServices)
-        //{
+                return true;
+            }
+            catch (Exception)
+            {
 
-        //    if(sqlServices.ConsultaProduto(filtro, idListaPreco.ToString()))
-        //    {
-        //        return true;
-        //    }
+                throw;
+            }
+          
+        }
 
-        //    return false;
-        //}
         public static bool FechaVenda(int valor, string idCliente, ClienteData clienteData, ContextPage contexto)
         {
 
@@ -73,6 +70,20 @@ namespace OscaApp.RulesServices
 
             return true;            
 
+        }
+
+        public static  ProdutoBalcao MontaCreate(ProdutoBalcao produtoBalcao, ContextPage contexto,Guid idBalcao)
+        {
+            ProdutoBalcao retorno = new ProdutoBalcao();
+
+            retorno = produtoBalcao;
+
+            ////************ Objetos de controle de acesso ***************
+            retorno.idBalcaoVenda = idBalcao;
+            retorno.idOrganizacao = contexto.idOrganizacao;
+            ////************ FIM Objetos de controle de acesso ***************
+            
+            return retorno;
         }
     }
 }

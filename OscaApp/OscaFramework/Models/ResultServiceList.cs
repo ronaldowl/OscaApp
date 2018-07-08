@@ -11,5 +11,6 @@ namespace OscaFramework.Models
         public  List<ProdutoBalcao> ListaProdutoBalcao   { get; set; }
         public bool statusOperation {get;set;}
         public string statusMensagem { get; set; }
+        public string id { get; set; }
     }
 }

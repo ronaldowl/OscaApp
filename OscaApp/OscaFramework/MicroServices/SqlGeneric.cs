@@ -448,7 +448,6 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
-
         public string RetornaidProfissionalPorIdUsuario(string IdUser)
         {
              string idProfissional = String.Empty;
@@ -488,6 +487,53 @@ namespace OscaFramework.MicroServices
                 throw;
             }
             return idProfissional;
+        }
+        public List<ProdutoBalcao> RetornaProdutoBalcaoByBalcao(Guid idBalcao)
+        {
+            List<ProdutoBalcao> retorno = new List<ProdutoBalcao>();
+            try
+            {
+                SqlDataReader dataReader;
+
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select * from ProdutoBalcao where idBalcaoVendas = '" + idBalcao + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            ProdutoBalcao item = new ProdutoBalcao();
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.idBalcaoVenda = new Guid(dataReader["idBalcaoVendas"].ToString());
+                            item.idItemListaPreco = new Guid(dataReader["idItemListaPreco"].ToString());
+                            item.idListaPreco = new Guid(dataReader["idListaPreco"].ToString());
+                            item.quantidade = Convert.ToInt32(dataReader["quantidade"].ToString());
+                            item.valor = Convert.ToDecimal(dataReader["valor"].ToString());
+                            item.valorTotal = Convert.ToDecimal(dataReader["valorTotal"].ToString());
+
+                            retorno.Add(item);
+                        }
+                    }
+
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
         }
         //********** Atualiza valores nas tabelas diretamente *********
         public bool SetStates(Relacao Registro)
@@ -539,6 +585,37 @@ namespace OscaFramework.MicroServices
                         Connection = Connection,
                         CommandText = @"insert into faturamento (id,idOrganizacao,status,valor,origemFaturamento,idReferencia,dataFaturamento) values(default, '" + faturamento.idOrganizacao +"', 1, '"+ faturamento.valor.ToString().Replace(",",".") + "', " + origemFaturamento.ToString() +", '" + faturamento.idReferencia.ToString() + "', '"+ DateTime.Now.ToString("yyyy-MM-dd") +"')"                                            
                         
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public bool InsereProdutoBalcao(ProdutoBalcao produtoBalcao)
+        {
+            
+            try
+            {
+                SqlDataReader dataReader;
+
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = @"insert into produtoBalcao(id, idOrganizacao, valor, valorTotal, idListaPreco, idBalcaoVendas, idItemListaPreco, quantidade) values(default, '" + produtoBalcao.idOrganizacao + "', '" + produtoBalcao.valor.ToString().Replace(",", ".") + "','" + produtoBalcao.valorTotal.ToString().Replace(",", ".") + "','" + produtoBalcao.idListaPreco.ToString() + "','" + produtoBalcao.idBalcaoVenda.ToString() + "', '" + produtoBalcao.idItemListaPreco.ToString() + "' ,'" + produtoBalcao.quantidade + "')"
+
                     };
 
                     Connection.Open();

@@ -23,7 +23,9 @@ namespace OscaApp.Controllers
         private readonly IBalcaoVendasData balcaoVendasData;    
         private readonly IListaPrecoData listaprecoData;
         private readonly SqlGenericData Sqlservice;
-        
+        private readonly SqlGeneric sqlGeneric;
+
+
         private ContextPage contexto;
 
         public BalcaoVendasController(ContexDataService db, IHttpContextAccessor httpContext)
@@ -33,6 +35,7 @@ namespace OscaApp.Controllers
             this.listaprecoData = new ListaPrecoData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.Sqlservice = new SqlGenericData();
+            this.sqlGeneric = new SqlGeneric();
         }
 
         [TempData]
@@ -48,6 +51,7 @@ namespace OscaApp.Controllers
                 modelo.contexto = this.contexto;
                 modelo.balcaoVendas = balcaoVendasData.Get(new Guid(id));
                 modelo.listapreco = Sqlservice.RetornaRelacaoListaPreco(modelo.balcaoVendas.idListaPreco);
+                modelo.produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(new Guid(id));
             }
             catch (Exception ex)
             {
