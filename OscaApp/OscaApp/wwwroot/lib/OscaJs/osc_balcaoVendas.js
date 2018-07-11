@@ -157,9 +157,12 @@ function MontaObjetoEntrada() {
 
     ObjetoEntrada.valorTotal =          $('#InputValorTotalVendas').val();
     ObjetoEntrada.idListaPreco =        $('#osc_listaPreco').val();
-    ObjetoEntrada.cpf =                 $('#osc_CPF').val();
+    ObjetoEntrada.cpf =                 $('#osc_cpf').val();
     ObjetoEntrada.condicaoPagamento   = $('#osc_condicaoPagamento').val();
     ObjetoEntrada.tipoPagamento =       $('#osc_tipoPagamento').val();    
+    ObjetoEntrada.parcelas =            $('#osc_parcelas').val();    
+    ObjetoEntrada.diaVencimento =       $('#osc_diaVencimento').val();    
+
 
     return ObjetoEntrada;
 }
@@ -183,5 +186,16 @@ function MontaListaObjeto() {
     });
 
     return todos;
+}
+
+function CalcularParcela() {
+
+    var valorTotal =    $('#InputValorTotalVendas').val();
+    var parcelas =      $('#osc_parcelas').val(); 
+    var calcResult = 0;
+
+    calcResult = valorTotal / parcelas;
+
+    $('#osc_valorParcela').val(FormatMoney(calcResult)); 
 }
  

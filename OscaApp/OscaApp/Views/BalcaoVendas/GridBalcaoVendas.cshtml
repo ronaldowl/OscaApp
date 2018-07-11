@@ -50,6 +50,7 @@
                                 <th>Tipo Pagamento</th>
                                 <th>Vendido Por</th>
                                 <th>Data Venda</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         @foreach (var item in Model)
@@ -63,6 +64,8 @@
                             <td>@item.balcaoVendas.tipoPagamento</td>
                             <td>@item.balcaoVendas.criadoPorName</td>
                             <td>@item.balcaoVendas.criadoEm</td>
+                            <td>@item.balcaoVendas.statusBalcaoVendas</td>
+
                         </tr>
                         }
                     </table>

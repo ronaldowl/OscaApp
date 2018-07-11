@@ -21,10 +21,12 @@ namespace OscaAPI.Controllers
         private readonly SqlGeneric sqlGeneric;
         private readonly ContextPage contexto;
         private readonly IBalcaoVendasData balcaoVendasData;
+        private readonly IContasReceberData contaReceberData;
 
         public BalcaoVendasAPIController(SqlGeneric _sqlGeneric, SqlGenericRules _sqlRules, IHttpContextAccessor httpContext, ContexDataService db)
         {
             this.balcaoVendasData = new BalcaoVendasData(db);
+            this.contaReceberData = new ContasReceberData(db);
             this.sqlServices = _sqlRules;
             this.sqlGeneric =  _sqlGeneric;
             this.contexto = new ContextPage().ExtractContext(httpContext);
@@ -71,6 +73,12 @@ namespace OscaAPI.Controllers
                     //Grava lançamento na tabela de faturamento
                     entrada.balcaoVendas.id = idBalcaoVendas;
                     FaturamentoRules.InsereFaturamento(entrada.balcaoVendas, this.contexto.idOrganizacao);
+
+                    //Grava Parcelas
+                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Prazo)
+                    {
+                        ContasReceberRules.GravaParcela(entrada.balcaoVendas, this.contaReceberData, this.contexto);
+                    }
 
                     retorno.id = idBalcaoVendas.ToString();
                     retorno.statusOperation = true;

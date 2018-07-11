@@ -1,7 +1,11 @@
 ﻿@model OscaApp.ViewModels.BalcaoVendasViewModel
 
 <script>
-
+        function CarregaFormStatus() {
+        $("#ModalStatus").load("/BalcaoVendas/FormStatusBalcaoVendas?id=" + '@Model.balcaoVendas.id' , function () {
+            $("#ModalStatus").modal("show");
+        });
+    }
     function Imprimir() {
 
     }
@@ -38,7 +42,7 @@
                                 <div id="osc_barrabotoes">
 
                                     <label>
-                                        <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus"  value="" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas" , null)'"> <span>Nova Venda</span></button>
+                                        <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas" , null)'"> <span>Nova Venda</span></button>
                                     </label>
                                     <label>
                                         <button id="osc_fechar" type="button" class="btn btn-danger btn-lg fa fa-close" value="" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"> <span>Fechar</span></button>
@@ -46,7 +50,9 @@
                                     <label>
                                         <button id="osc_imprimir" type="button" class="btn btn-success btn-lg fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Cupom</span></button>
                                     </label>
-
+                                    <label>
+                                        <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-exclamation" value="" onclick="CarregaFormStatus()"> <span>Cancelar</span></button>
+                                    </label>
                                 </div>
                             </td>
                             <td width="300px" align="center"></td>
@@ -96,6 +102,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Dia Vencimento</label>
+                                        <div class="inputGroupContainer">
+                                            <div class="input-group">
+                                                <input id="osc_diaVencimento" asp-for="@Model.balcaoVendas.diaVencimento" type="text" class="form-control" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -111,6 +125,14 @@
                                         <div class="inputGroupContainer">
                                             <div class="input-group">
                                                 <input id="osc_valorTotal" asp-for="@Model.balcaoVendas.valorTotal" type="text" class="form-control" disabled="disabled" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Quantidade Parcela</label>
+                                        <div class="inputGroupContainer">
+                                            <div class="input-group">
+                                                <input id="osc_quantidadeParcela" asp-for="@Model.balcaoVendas.parcelas" type="text" class="form-control" disabled="disabled" />
                                             </div>
                                         </div>
                                     </div>
@@ -170,7 +192,8 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="ModalStatus">
+</div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
 

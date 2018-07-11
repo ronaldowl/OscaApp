@@ -49,6 +49,17 @@
                         </div>
                     </div>
                     <div class="row">
+                        @*<div class="col-md-4 offset-1">
+                            <div class="form-group">
+                                <labe>Códi</labe>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-exclamation-circle fa-2x"></i></span>&nbsp;
+                                        <input id="osc_status" asp-for="@Model.status" class="form-control" type="text" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
                         <div class="col-md-4 offset-1">
                             <div class="form-group">
                                 <label>Valor</label>
@@ -60,17 +71,17 @@
                                 </div>
                             </div>
                         </div>
-                        @*<div class="col-md-4 offset-1">
+                        <div class="col-md-4 offset-1">
                             <div class="form-group">
-                                <label>Origem</label>
+                                <labe>Status</labe>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                        <input id="osc_origemFaturamento" asp-for="@Model.origemFaturamento" class="form-control" type="text" disabled="disabled">
+                                        <span class="input-group-addon"><i class="fa fa-exclamation-circle fa-2x"></i></span>&nbsp;
+                                        <input id="osc_status" asp-for="@Model.status" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
-                        </div>*@
+                        </div>
                     </div>
                 </div>
                 <br /><br /><br /><br />

@@ -116,5 +116,63 @@ namespace OscaApp.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public IActionResult FormStatusBalcaoVendas(BalcaoVendasViewModel entrada)
+        {          
+            try
+            {
+                if (entrada != null)
+                {
+                    entrada.balcaoVendas.statusBalcaoVendas = CustomEnumStatus.StatusBalcaoVendas.Cancelado;
+                    entrada.balcaoVendas.modificadoEm = DateTime.Now;
+                    entrada.balcaoVendas.modificadoPor = contexto.idUsuario;
+                    entrada.balcaoVendas.modificadoPorName = contexto.nomeUsuario;
+
+                    balcaoVendasData.UpdateStatus(entrada.balcaoVendas);
+
+                    SqlGenericRules sqlGenericRules = new SqlGenericRules();
+                    sqlGenericRules.CancelaFaturamentoBalcao(entrada.balcaoVendas.id.ToString());
+
+                    return RedirectToAction("BalcaoVendasView", new { id = entrada.balcaoVendas.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-post", ex.Message);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ViewResult FormStatusBalcaoVendas(string id)
+        {
+            BalcaoVendasViewModel modelo = new BalcaoVendasViewModel();
+            modelo.contexto = this.contexto;
+
+            try
+            {
+                BalcaoVendas retorno = new BalcaoVendas();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = balcaoVendasData.Get(new Guid(id));
+
+                    if (retorno != null)
+                    {
+                        modelo.balcaoVendas = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusBalcaoVendas-get", ex.Message);
+            }
+            return View(modelo);
+        }
+
     }
 }

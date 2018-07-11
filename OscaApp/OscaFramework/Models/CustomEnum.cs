@@ -130,7 +130,8 @@ namespace OscaFramework.Models
         {
             Pedido = 0,
             Atendimento = 1,
-            OrdemServico = 2,           
+            OrdemServico = 2,  
+            BalcaoVendas = 3,
             Outros = 100
         }
 

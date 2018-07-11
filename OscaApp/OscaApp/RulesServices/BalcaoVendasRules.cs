@@ -28,14 +28,10 @@ namespace OscaApp.RulesServices
                 ////************ FIM Objetos de controle de acesso ***************
 
                 //Grava objeto na base
-                balcaoData.Add(entrada.balcaoVendas);
-
-
+                balcaoData.Add(entrada.balcaoVendas);              
                
             }
-
             return entrada.balcaoVendas.id;
-
         }
        
         public static bool GravaProdutoBalcao(ProdutoBalcao[] produtosBalcao, ContextPage contexto, SqlGeneric sqlGeneric, Guid idBalcao)
@@ -51,7 +47,6 @@ namespace OscaApp.RulesServices
             }
             catch (Exception)
             {
-
                 throw;
             }
           
@@ -85,5 +80,7 @@ namespace OscaApp.RulesServices
             
             return retorno;
         }
+
+ 
     }
 }

@@ -112,7 +112,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                         </span>
-                                        <select id="osc_tipoLancamento" asp-for="@Model.contasReceber.tipoLancamento" class="form-control">
+                                        <select id="osc_tipoLancamento" asp-for="@Model.contasReceber.tipoLancamento" class="form-control" disabled="disabled">
                                             <option value="0">Manual</option>
                                             <option value="1">Automático</option>
                                         </select>
@@ -128,6 +128,7 @@
                                             <option value="0">Pedido</option>
                                             <option value="1">Atendimento</option>
                                             <option value="2">Ordem de Serviço</option>
+                                            <option value="3">Balcão Vendas</option>
                                             <option value="100">Outros</option>
 
                                         </select>

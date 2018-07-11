@@ -27,11 +27,12 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th></th>
-                                    <th>Data Faturamento</th>
+                                    <th>Código Referencia</th>
                                     <th>Origem</th>
-                            
+                                    <th>Data Faturamento</th>
 
                                     <th>Valor</th>
+                                    <th>Status</th>
 
                                 </tr>
                             </thead>
@@ -43,18 +44,16 @@
                                     total += item.faturamento.valor;
                                 <tr style="cursor:pointer;font-size:12px" id="@item.faturamento.id" onclick=" CarregaFormFaturamentoView('@item.faturamento.id')">
                                     <td><i class="fa fa-money"></i></td>
-                                    <td>@item.faturamento.dataFaturamento</td>
+                                    <td>@item.codigo</td>
                                     <td>@item.faturamento.origemFaturamento</td>
-                               
-
+                                    <td>@item.faturamento.dataFaturamento.ToShortDateString()</td>
                                     <td>R$@item.faturamento.valor.ToString("N2")</td>
-
+                                    <td>@item.faturamento.status</td>
                                 </tr>
                                 }
                             </tbody>
-                            <tfoot>
-                              
-                            </tfoot>
+                                             
+                       
                         </table>
 
                     </div>

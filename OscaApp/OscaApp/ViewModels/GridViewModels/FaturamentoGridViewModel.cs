@@ -9,5 +9,6 @@ namespace OscaApp.ViewModels.GridViewModels
         public Cliente cliente { get; set; }
         public int qtd { get; set; }
         public decimal total {get;set;}
+        public string codigo { get; set; }
     }
 }

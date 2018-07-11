@@ -199,32 +199,39 @@ namespace OscaApp.framework
             {
                 FaturamentoGridViewModel X = new FaturamentoGridViewModel();              
                 X.faturamento = item;
-              
+                Relacao relacao = new Relacao();
+
 
                 if (item.origemFaturamento == CustomEnum.OrigemFaturamento.OrdemServico)
                 {
-                    X.faturamento.idReferencia = sqldata.RetornaRelacaoOrdemServico(item.idReferencia).id;
+                    relacao = sqldata.RetornaRelacaoOrdemServico(item.idReferencia);
+                    X.faturamento.idReferencia = relacao.id;
                     X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.OrdemServico;
+                    X.codigo = relacao.codigo;
                 }
 
                 if (item.origemFaturamento == CustomEnum.OrigemFaturamento.Pedido)
                 {
-                    X.faturamento.idReferencia = sqldata.RetornaRelacaoPedido(item.idReferencia).id;
+                    relacao = sqldata.RetornaRelacaoPedido(item.idReferencia);
+                    X.faturamento.idReferencia = relacao.id;
                     X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.Pedido;
+                    X.codigo = relacao.codigo;
                 }
 
                 if (item.origemFaturamento == CustomEnum.OrigemFaturamento.Atendimento)
                 {
-                    X.faturamento.idReferencia = sqldata.RetornaRelacaoAtendimento(item.idReferencia).id;
+                    relacao = sqldata.RetornaRelacaoAtendimento(item.idReferencia);
+                    X.faturamento.idReferencia = relacao.id;
                     X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.Atendimento;
+                    X.codigo = relacao.codigo;
                 }
 
                 if (item.origemFaturamento == CustomEnum.OrigemFaturamento.BalcaoVendas)
                 {
-                   // X.faturamento.idReferencia = sqldata.RetornaRelacaoAtendimento(item.idReferencia).id;
+                    relacao = sqldata.RetornaRelacaoBalcaoVendas(item.idReferencia);
                     X.faturamento.origemFaturamento = CustomEnum.OrigemFaturamento.BalcaoVendas;
+                    X.codigo = relacao.codigo;
                 }
-
                
                 retorno.Add(X);
             }       

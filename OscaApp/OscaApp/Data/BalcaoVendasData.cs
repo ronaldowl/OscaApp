@@ -88,6 +88,26 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
+
+        public void UpdateStatus(BalcaoVendas modelo)
+        {
+            try
+            {
+                db.Attach(modelo);          
+                db.Entry(modelo).Property("statusBalcaoVendas").IsModified = true;
+                db.Entry(modelo).Property("modificadoPor").IsModified = true;
+                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+                db.Entry(modelo).Property("modificadoEm").IsModified = true;
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+
         public List<BalcaoVendas> GetAll(Guid idOrg)
         {
             List<BalcaoVendas> retorno = new List<BalcaoVendas>();

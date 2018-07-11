@@ -177,6 +177,8 @@ namespace OscaApp.Data
     {
         void Add(BalcaoVendas balcaoVendas);
         void Update(BalcaoVendas balcaoVendas);
+        void UpdateStatus(BalcaoVendas balcaoVendas);
+
         void Delete(BalcaoVendas balcaoVendas);
         BalcaoVendas Get(Guid id);
         List<BalcaoVendas> GetAll(Guid idOrg);

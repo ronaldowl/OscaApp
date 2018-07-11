@@ -11,6 +11,8 @@ namespace OscaFramework.Models
 
         public string codigo { get; set; }
         public string cpf { get; set; }
+        public int parcelas { get; set; }
+        public int diaVencimento { get; set; }
 
         public Guid idOrganizacao { get; set; }   
         public Guid idListaPreco { get; set; }     

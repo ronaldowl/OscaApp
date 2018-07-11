@@ -143,6 +143,31 @@ namespace OscaFramework.MicroServices
 
         }
 
+        public bool CancelaFaturamentoBalcao(string idReferencia)
+        {
+            try
+            {
+                SqlDataReader dataReader;
 
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = @"update Faturamento set status = 0 where idReferencia = '" + idReferencia + "'"
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
     }
 }
