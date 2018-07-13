@@ -14,16 +14,35 @@ namespace OscaFramework.Models
         public string nome { get; set; }
         public string descricao { get; set; }
         public string urlProduto { get; set; }
+        public string codigoBarra { get; set; }
+
 
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorCompra { get; set; }
 
         public int quantidade { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal largura { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal altura { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal area { get; set; }
-        public decimal peso { get; set; }    
-        
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal peso { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal icms { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal ipi { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal iss { get; set; }
+
         public CustomEnum.FormaVendaProduto formaVendaProduto { get; set; }
 
         public CustomEnum.TipoProduto tipoProduto { get; set; }

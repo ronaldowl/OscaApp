@@ -100,6 +100,15 @@
 
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Código do Fabricante</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_codigoFabricante" asp-for="@Model.produto.codigoFabricante" type="text" class="form-control" />
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -153,16 +162,8 @@
                             </div>
 
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>Código do Fabricante</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                    </span>
-                                    <input id="osc_codigoFabricante" asp-for="@Model.produto.codigoFabricante" type="text" class="form-control" />
-                                </div>
-                            </div>
+                        <div class="col-md-5">
+                        
                             <div class="form-group">
                                 <label>Fabricante</label>
                                 <div class="input-group">
@@ -173,12 +174,48 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label>Código Barra</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_codigoBarra" asp-for="@Model.produto.codigoBarra" type="text" class="form-control" placeholder="000000000000"   pattern="[0-9]+$" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>ICMS</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_icms" asp-for="@Model.produto.icms" type="text" class="form-control"   pattern="[0-9]+$" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>IPI</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_ipi" asp-for="@Model.produto.ipi" type="text" class="form-control"   pattern="[0-9]+$" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>ISS</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_iss" asp-for="@Model.produto.iss" type="text" pattern="[-+]?[0-9]*[.,]?[0-9]+"  class="form-control"    />
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label>Descrição</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                     </span>
-                                    <textarea id="osc_descricao" asp-for="@Model.produto.descricao" class="form-control" rows="7" cols="40" placeholder="digite uma descrição do Produto"></textarea>
+                                    <textarea id="osc_descricao" asp-for="@Model.produto.descricao" class="form-control" rows="3" cols="40" placeholder="digite uma descrição do Produto"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -246,19 +283,15 @@
                                 <div id="barra_acoes_Foto">
                                     <label>
                                         <button id="osc_upload" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-plus" onclick="location.href='@Url.Action("AddImage", "Produto", new { idProduto = Model.produto.id })'"> <span>Upload</span></button>
-                                    </label>
-                                    <label>
-                                        <button id="osc_ampliar" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-search-plus" data-toggle="modal" data-target="#modalImagem">Destacar</button>
-                                    </label>
+                                    </label>                                  
                                 </div>
                             </td>
-                        </tr>
-                   
+                        </tr>                   
                     </table>
                 </div>
             </div>
-            <div class="card-body">              
-               <img src="@Model.produto.urlProduto"  style=" display: block;margin-left: auto; margin-right: auto " width="100" height="100" onclick="zoomToggle('100px','100px','450px','340px',this);" />
+            <div class="card-body">
+                <img src="@Model.produto.urlProduto" style=" display: block;margin-left: auto; margin-right: auto " width="100" height="100" onclick="zoomToggle('100px','100px','450px','340px',this);" />
             </div>
         </div>
         <div class="card card-success" id="osc_itensProdutoListaPreco">
@@ -307,30 +340,8 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-10 offset-2">
-        <div class="modal fade modal-lg modal-dialog-centered" id="modalImagem" tabindex="-1" role="dialog" aria-labelledby="sobreModalLongTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bg-dark">
-                        <h5 class="modal-title " id="exampleModalLongTitle" style="color:white;font-weight:bold">Produto</h5>
-                    </div>
-                    <div class="modal-body">
-                        .
-                        <img src="@Model.produto.urlProduto
-                             
-                             
-                             
-                             " style=" display: block;margin-left: auto; margin-right: auto " width="300" />
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+   
 
 <script type='text/javascript'>
 

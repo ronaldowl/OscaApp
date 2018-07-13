@@ -37,8 +37,14 @@ namespace OscaApp.Data
             try
             {
                 db.Attach(produto);
+                
+                db.Entry(produto).Property("codigoBarra").IsModified = true;
                 db.Entry(produto).Property("nome").IsModified = true;
                 db.Entry(produto).Property("quantidade").IsModified = true;
+                db.Entry(produto).Property("icms").IsModified = true;
+                db.Entry(produto).Property("iss").IsModified = true;
+                db.Entry(produto).Property("ipi").IsModified = true;
+
                 db.Entry(produto).Property("descricao").IsModified = true;
                 db.Entry(produto).Property("codigoFabricante").IsModified = true;
                 db.Entry(produto).Property("fabricante").IsModified = true;

@@ -117,8 +117,12 @@ namespace OscaApp.Controllers
                 retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
                 modelo.itensListaPreco = new List<ItemProdutoLista>();
                 modelo.itensListaPreco = ProdutoRules.RetornaItemListaProduto(itemListaPrecoData.GetAllByProduto(modelo.produto.id));
+
+                retorno.urlProduto = "http://" + retorno.urlProduto;
+
                 //apresenta mensagem de registro atualizado com sucesso
                 modelo.StatusMessage = StatusMessage;
+
 
                 if (retorno != null)
                 {
@@ -209,23 +213,42 @@ namespace OscaApp.Controllers
         public async Task<IActionResult> AddImage(IFormFile file)
         {
             string path = "";
+            string URLPAT = "";
+            string NomeFile = Path.GetFileName(file.FileName);
 
-
+            //Regra 1 
             if (file == null || file.Length == 0)
                 return Content("file not selected");
+
+            //Regra 2 - Remove espaço
+             if(  NomeFile.Contains(' '))
+                return Content("Não pode haver espaço em branco no nome do arquivo");
+
+            //Regra 3 - Limite de tamanho
+            if (file.Length >= 2001000)
+                return Content("Não pode ter mais de 2 MB");
+
+            //Regra 4 - Apenas PNG e JPG
+            string[] contentTypes = new string[] { "image/jpg", "image/png" };
+            if (!contentTypes.Contains(file.ContentType))
+            {
+                return Content("Suporte apenas para arquivos PNG e JPG");
+            }
 
 
             if (this.oscaConfig.ambiente == "prod")
             {
-                path = "G:\\root\\home\\ronaldowl-001\\www\\orgfiles\\producao\\" + this.contexto.organizacao + "\\produto\\imagens\\";
+                path = "h:\\root\\home\\ronaldowl-001\\www\\bancoimagem\\prod\\OrgFiles\\" + this.contexto.organizacao + "\\produto\\imagens\\";
+                URLPAT = "imagens.oscas.com.br/prod/orgfiles/" + this.contexto.organizacao + "/produto/imagens/" + NomeFile;
+
             }
             else
             {
-                path = "D:\\root\\home\\ronaldowl-001\\www\\orgfiles\\desenv\\" + this.contexto.organizacao + "\\produto\\imagens\\";
-
+                path = "h:\\root\\home\\ronaldowl-001\\www\\bancoimagem\\desenv\\OrgFiles\\" + this.contexto.organizacao + "\\produto\\imagens\\";
+                URLPAT = "imagens.oscas.com.br/desenv/orgfiles/" + this.contexto.organizacao + "/produto/imagens/" + NomeFile;
             }
 
-            path = path + Path.GetFileName(file.FileName); ;
+            path = path + NomeFile ;
 
             using (var stream = new FileStream(path, FileMode.Create))
             {
@@ -236,14 +259,11 @@ namespace OscaApp.Controllers
             ProdutoViewModel entrada = new ProdutoViewModel();
             entrada.contexto = this.contexto;
             entrada.produto.id = new Guid(idProdutoTemp);
-            entrada.produto.urlProduto = path;
-
-
+            entrada.produto.urlProduto = URLPAT;
+            
             if (ProdutoRules.MontaProdutoUpdate(entrada, out modelo))
             {
-                produtoData.UpdateImage(modelo);
-
-                
+                produtoData.UpdateImage(modelo);                
             }
 
             return RedirectToAction("FormUpdateProduto", new { id = entrada.produto.id });
