@@ -7,258 +7,260 @@
     @Html.HiddenFor(m => m.produto.id)
 </div>
 
-    <div class="row">
-        <div class="col-md-11">          
-            <form action="FormCreateProduto" method="post" id="FormCreateProduto">
-                <div class="card " id="osc_MainForm">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <table>
-                                <tr>
-                                    <td><h3>Produto:&nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridProduto", "Produto" , null)'"> <span>Fechar</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+<div class="row">
+    <div class="col-md-11">
+        <form action="FormCreateProduto" method="post" id="FormCreateProduto">
+            <div class="card " id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Produto:&nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridProduto", "Produto" , null)'"> <span>Fechar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Código</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_codigo" asp-for="@Model.produto.codigo" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nome*</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_nome" asp-for="@Model.produto.nome" type="text" class="form-control" required="required" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Forma de Venda</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_formavenda" asp-for="@Model.produto.formaVendaProduto" class="form-control" required="required">
-                                            <option value="1" selected="selected">Unidade</option>
-                                            <option value="2">Peso</option>
-                                            <option value="3">Hora</option>
-                                            <option value="4">Taxa</option>
-                                            <option value="5">Aluguel</option>
-                                            <option value="0">Lote</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Quantidade</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_quantidade" asp-for="@Model.produto.quantidade" type="number" class="form-control" placeholder="Quantidade" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Valor de Compra</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-money fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_valorCompra" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Código do Fabricante</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_codigoFabricante" asp-for="@Model.produto.codigoFabricante" type="text" class="form-control" />
-                                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Código</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_codigo" asp-for="@Model.produto.codigo" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Tipo Produto</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>
-                                        </span> &nbsp;
-                                        <select id="osc_tipoProduto" class="form-control" required="required" asp-for="produto.tipoProduto">
-                                            <option value="0" selected="">Produto</option>
-                                            <option value="1">Serviço</option>
-                                        </select>
-                                    </div>
+                            <div class="form-group">
+                                <label>Nome*</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_nome" asp-for="@Model.produto.nome" type="text" class="form-control" required="required" />
                                 </div>
-                                <div class="form-group">
-                                    <label>Largura</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_largura" asp-for="@Model.produto.largura" type="number" class="form-control" placeholder="Largura"  />
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Forma de Venda</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_formavenda" asp-for="@Model.produto.formaVendaProduto" class="form-control" required="required">
+                                        <option value="1" selected="selected">Unidade</option>
+                                        <option value="2">Peso</option>
+                                        <option value="3">Hora</option>
+                                        <option value="4">Taxa</option>
+                                        <option value="5">Aluguel</option>
+                                        <option value="0">Lote</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Altura</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_altura" asp-for="@Model.produto.altura" type="number" class="form-control" placeholder="Altura"   />
-                                    </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo Produto</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>
+                                    </span> &nbsp;
+                                    <select id="osc_tipoProduto" class="form-control" required="required" asp-for="produto.tipoProduto">
+                                        <option value="0" selected="">Produto</option>
+                                        <option value="1">Serviço</option>
+                                    </select>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantidade</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_quantidade" asp-for="@Model.produto.quantidade" type="number" class="form-control" placeholder="Quantidade" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Valor de Compra</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-money fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_valorCompra" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" pattern="[0-9]+([\.,][0-9]+)?" />
+                                </div>
+                            </div>
+                         
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Código do Fabricante</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_codigoFabricante" asp-for="@Model.produto.codigoFabricante" type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Largura</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_largura" asp-for="@Model.produto.largura" type="text" class="form-control" placeholder="Largura" pattern="[0-9]+([\.,][0-9]+)?" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Altura</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_altura" asp-for="@Model.produto.altura" type="text" class="form-control" placeholder="Altura" pattern="[0-9]+([\.,][0-9]+)?" />
+                                </div>
+                            </div>
 
-                                <div class="form-group">
-                                    <label>Peso</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_peso" asp-for="@Model.produto.peso" type="number" class="form-control" placeholder="Peso" maxlength="15"  />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Area</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_area" asp-for="@Model.produto.area" type="number" class="form-control" placeholder="Area" maxlength="15"   />
-                                    </div>
+                            <div class="form-group">
+                                <label>Peso</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_peso" asp-for="@Model.produto.peso" type="text" class="form-control" placeholder="Peso" pattern="[0-9]+([\.,][0-9]+)?" />
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                               
-                                <div class="form-group">
-                                    <label>Fabricante</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_fabricante" asp-for="@Model.produto.fabricante" type="text" class="form-control" placeholder="Fabricante" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Código Barra</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_codigoBarra" asp-for="@Model.produto.codigoBarra" type="number" class="form-control" placeholder="000000000000" pattern="[0-9]+$" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>ICMS</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_icms" asp-for="@Model.produto.icms" type="number" class="form-control"   />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>IPI</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_ipi" asp-for="@Model.produto.ipi" type="number" class="form-control"   />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>ISS</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_iss" asp-for="@Model.produto.iss" type="text" pattern="[-+]?[0-9]*[.,]?[0-9]+"  class="form-control" maxlength="15"  />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Descrição</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_descricao" asp-for="@Model.produto.descricao" class="form-control" rows="3" cols="40" placeholder="digite uma descrição do Produto"></textarea>
-                                    </div>
+                            <div class="form-group">
+                                <label>Area</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_area" asp-for="@Model.produto.area" type="text" class="form-control" placeholder="Area" pattern="[0-9]+([\.,][0-9]+)?" />
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.produto.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        <div class="col-md-5">
+
+                            <div class="form-group">
+                                <label>Fabricante</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_fabricante" asp-for="@Model.produto.fabricante" type="text" class="form-control" placeholder="Fabricante" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.produto.criadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                            <div class="form-group">
+                                <label>Código Barra</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_codigoBarra" asp-for="@Model.produto.codigoBarra" type="number" class="form-control" placeholder="000000000000" pattern="[0-9]+$" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                            <div class="form-group">
+                                <label>ICMS</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_icms" asp-for="@Model.produto.icms" type="text" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                            <div class="form-group">
+                                <label>ISS</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_iss" asp-for="@Model.produto.iss" type="text" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>IPI</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <input id="osc_ipi" asp-for="@Model.produto.ipi" type="text" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_descricao" asp-for="@Model.produto.descricao" class="form-control" rows="3" cols="40" placeholder="digite uma descrição do Produto"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-            
-            <br />
-        </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.produto.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.produto.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <br />
     </div>
+</div>
 
-
+ 
 

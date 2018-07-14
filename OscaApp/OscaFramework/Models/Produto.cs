@@ -22,25 +22,35 @@ namespace OscaFramework.Models
 
         public int quantidade { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal largura { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal altura { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal area { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal peso { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal icms { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal ipi { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+       
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal iss { get; set; }
 
         public CustomEnum.FormaVendaProduto formaVendaProduto { get; set; }
