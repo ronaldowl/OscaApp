@@ -44,7 +44,7 @@ namespace OscaApp.Data
                 db.Entry(produto).Property("icms").IsModified = true;
                 db.Entry(produto).Property("iss").IsModified = true;
                 db.Entry(produto).Property("ipi").IsModified = true;
-
+                db.Entry(produto).Property("modelo").IsModified = true;
                 db.Entry(produto).Property("descricao").IsModified = true;
                 db.Entry(produto).Property("codigoFabricante").IsModified = true;
                 db.Entry(produto).Property("fabricante").IsModified = true;

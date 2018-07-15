@@ -21,11 +21,24 @@ function ConsultaProduto() {
 
                 if (dados.statusOperation == true) {
 
-                    $.each(dados.listaProdutoBalcao, function (idx, obj) {
+                    //Caso traga apenas um produto adiciona direto na lista
+                    if (dados.listaProdutoBalcao.length == 1) {
 
-                        $('#produtosPequisa').append('<tr id="key_' + dados.listaProdutoBalcao[idx].id + '" ><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td>' + dados.listaProdutoBalcao[idx].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="AdicionaProduto(' + "'" + dados.listaProdutoBalcao[idx].id + "'" + ');"> <span>Adicionar..</span></button></div> </td></tr>');
+                        inserirLinha(dados.listaProdutoBalcao[0].id, dados.listaProdutoBalcao[0].codigo, dados.listaProdutoBalcao[0].nome, dados.listaProdutoBalcao[0].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), $('#osc_listaPreco').val())
 
-                    });
+                        SomaTotal();
+
+                        LimpaBusca();
+
+                    }
+                    else {
+
+                        $.each(dados.listaProdutoBalcao, function (idx, obj) {
+
+                            $('#produtosPequisa').append('<tr id="key_' + dados.listaProdutoBalcao[idx].id + '" ><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td>' + dados.listaProdutoBalcao[idx].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="AdicionaProduto(' + "'" + dados.listaProdutoBalcao[idx].id + "'" + ');"> <span>Adicionar..</span></button></div> </td></tr>');
+
+                        });
+                    }
                 }
             }
         });

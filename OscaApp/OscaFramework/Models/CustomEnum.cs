@@ -430,6 +430,8 @@ namespace OscaFramework.Models
             Faturamento = 30,
             BalcaoVendas = 31,
             ProdutoBalcao = 32,
+            PedidoRetirada = 33,
+            ServicoPedidoRetirada = 34,
 
             Organizacao = 1000
 
