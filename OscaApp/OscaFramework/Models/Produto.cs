@@ -24,6 +24,10 @@ namespace OscaFramework.Models
 
         [Column(TypeName = "decimal(18, 2)")]
         [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
+        public decimal margemLucroBase { get; set; }
+
+        [Column(TypeName = "decimal(18, 2)")]
+        [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal largura { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]

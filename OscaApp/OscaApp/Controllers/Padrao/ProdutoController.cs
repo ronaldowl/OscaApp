@@ -86,7 +86,7 @@ namespace OscaApp.Controllers
                         {
                             itemLista.idProduto = prod.id;
                             itemLista.idListaPreco = lista.id;
-                            itemLista.valor = prod.valorCompra;
+                            itemLista.valor = (prod.valorCompra / 100) * prod.margemLucroBase + prod.valorCompra;
                             ItemListaPrecoRules.ItemListaPrecoCreateRelacionado(itemLista, contexto);
                             itemListaPrecoData.Add(itemLista);
                         }
