@@ -18,7 +18,7 @@
                                 <td>
                                     <div class="input-group">
                                         <label>
-                                            <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Novo" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas", null)'"> <span>Novo</span></button>
+                                            <button id="osc_novo" type="button" class="btn btn-success btn-lg fa fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas", null)'"> <span>Nova venda</span></button>
                                         </label>
                                         &nbsp;&nbsp;
                                         <span>
@@ -28,8 +28,10 @@
                                         &nbsp;&nbsp;
                                         <label>
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </label>                            
-
+                                        </label>&nbsp;&nbsp;
+                                        <label>
+                                            <button id="osc_back_Produto" type="button" class="btn btn-info btn-lg fa fa-cubes" value="voltar" onclick="location.href='@Url.Action("GridProduto", "Produto", null)'"><span>Produtos</span></button>
+                                        </label>
                                     </div>
                                 </td>
                             </tr>
