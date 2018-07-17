@@ -139,13 +139,15 @@ function Execute(){
     var url = '/API/BalcaoVendasAPI/GravarVenda';
     var produtosBalcaoP = MontaListaObjeto();
     var Entrada = MontaObjetoEntrada();
+    var entradaCliente = MontaObjetoCliente();
       
         $.ajax({
             url: url,
             type: "POST",
             data: {
                 modelo: Entrada,
-                produtosBalcao: produtosBalcaoP
+                produtosBalcao: produtosBalcaoP,
+                cliente: entradaCliente
             },
             datatype: 'json',
             ContentType: 'application/json;utf-8'
@@ -170,16 +172,28 @@ function MontaObjetoEntrada() {
 
     ObjetoEntrada.valorTotal =          $('#InputValorTotalVendas').val();
     ObjetoEntrada.idListaPreco =        $('#osc_listaPreco').val();
-    ObjetoEntrada.cpf =                 $('#osc_cpf').val();
+    ObjetoEntrada.cpf =                 $('#osc_cnpj_cpf').val();
     ObjetoEntrada.condicaoPagamento   = $('#osc_condicaoPagamento').val();
     ObjetoEntrada.tipoPagamento =       $('#osc_tipoPagamento').val();    
     ObjetoEntrada.parcelas =            $('#osc_parcelas').val();    
     ObjetoEntrada.diaVencimento =       $('#osc_diaVencimento').val();    
-
-
+    
     return ObjetoEntrada;
 }
 
+function MontaObjetoCliente() {
+
+    var ObjetoCliente = new Object();
+
+    ObjetoCliente.id =          $('#osc_clienteId').val();
+    ObjetoCliente.nomeCliente = $('#osc_clienteIdName').val();
+    ObjetoCliente.tipoPessoa =  $('#osc_tipopessoa').val();
+    ObjetoCliente.email =       $('#osc_email').val();
+    ObjetoCliente.telefone =    $('#osc_telefone').val();
+    ObjetoCliente.cnpj_cpf =    $('#osc_cnpj_cpf').val();
+  
+    return ObjetoCliente;
+}
 
 function MontaListaObjeto() {
 

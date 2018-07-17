@@ -12,7 +12,14 @@
         })
     }
 
+    function ValidaClienteCPF() {
 
+        var idCliente = $('#osc_clienteId').val();
+
+        if (idCliente != "00000000-0000-0000-0000-000000000000") {
+            ConsultaCnpjCpfDuplicado(idCliente)
+        }
+    }
 </script>
 
 <div id="contexto">
@@ -213,7 +220,7 @@
                                         <span class="input-group-addon">
                                             <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                         </span>
-                                        <input type="text" class="form-control" id="osc_cnpj_cpf" placeholder="" autocomplete="off" asp-for="@Model.balcaoVendas.cpf" onchange=" ValidaCNPJ_CPF()">
+                                        <input type="text" class="form-control" id="osc_cnpj_cpf" placeholder="" autocomplete="off" asp-for="@Model.balcaoVendas.cpf" onchange=" ValidaCNPJ_CPF(); ValidaClienteCPF();">
                                     </div>
                                 </div>
                                 <div class="form-group">
