@@ -234,10 +234,10 @@ namespace OscaApp.Controllers
                 return Content("Não pode ter mais de 2 MB");
 
             //Regra 4 - Apenas PNG e JPG
-            string[] contentTypes = new string[] { "image/jpg", "image/png" };
+            string[] contentTypes = new string[] { "image/jpg", "image/png", "image/jpeg" };
             if (!contentTypes.Contains(file.ContentType))
             {
-                return Content("Suporte apenas para arquivos PNG e JPG");
+                return Content("Suporte apenas para arquivos PNG,JPG e JPEG");
             }
 
 
