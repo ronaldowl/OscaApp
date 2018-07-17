@@ -211,4 +211,27 @@ function CalcularParcela() {
 
     $('#osc_valorParcela').val(FormatMoney(calcResult)); 
 }
+
+function HabilitaParcela() {
+
+    var condPag = document.getElementById("osc_condicaoPagamento");
+
+    if (condPag.value == 3) {
  
+        document.getElementById("div_Parcela").hidden = false;
+        document.getElementById("div_DiaVencimento").hidden = false;
+        document.getElementById("div_valorParcela").hidden = false;
+        
+
+    } else {
+
+        document.getElementById("div_Parcela").hidden = true;
+        document.getElementById("div_DiaVencimento").hidden = true;
+        document.getElementById("div_valorParcela").hidden = true;
+
+        $("#osc_parcelas").val('1');       
+        $("#osc_diaVencimento").val('1');    
+        $("#osc_valorParcela").val('R$ 0,00');              
+                
+    }
+}

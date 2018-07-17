@@ -19,6 +19,15 @@ namespace OscaApp.ViewModels
               
         public List<ProdutoBalcao> produtosBalcao { get; set; }
 
+        public Relacao cliente { get; set; }
+
+        public CustomEnum.TipoPessoa tipoPessoa { get; set; }
+
+        public string telefone { get; set; }
+
+        public string email { get; set; }
+
+        public string cpf_cnpj { get; set; } 
 
         public string StatusMessage { get; set; }
   
