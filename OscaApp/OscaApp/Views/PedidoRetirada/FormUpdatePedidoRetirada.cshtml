@@ -1,0 +1,213 @@
+﻿@model OscaApp.ViewModels.PedidoRetiradaViewModel
+<div id="contexto">
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+    @Html.HiddenFor(m => m.pedidoRetirada.id)
+</div>
+ 
+    <div class="row">
+        <div class="col-md-11">
+            @if (!String.IsNullOrEmpty(Model.StatusMessage))
+            {
+
+                <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                    <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Model.StatusMessage
+                </div>
+            }
+            <form action="FormUpdatePedidoRetirada" method="post">
+                <div class="card" id="osc_MainForm">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td><h3>Alterar dados:&nbsp;&nbsp;</h3></td>
+                                    <td>
+                                        <div id="osc_barrabotoes">
+                                            <label>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-1x fa-floppy-o" value="Salvar"> <span>Salvar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_fechar" type="button" class="btn btn-info  btn-sm fa fa-1x fa-close" value="Fechar" onclick="location.href='@Url.Action("GridPedidoRetirada", "PedidoRetirada" , null)'"> <span>Fechar</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreatePedidoRetirada", "PedidoRetirada", null)'"> <span>Novo</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteRecurso('@Model.pedidoRetirada.id')"> <span>Excluir</span></button>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <input id="osc_id" asp-for="pedidoRetirada.id" type="hidden" class="form-control" value="@Model.pedidoRetirada.id" />
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Código</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                            <input id="osc_codigo" asp-for="@Model.pedidoRetirada.codigo" class="form-control" type="text" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Tipo Pagamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_tipoPagamento" asp-for="@Model.pedidoRetirada.tipoPagamento" class="form-control" required="required">
+                                            <option value="1" selected="">Dinheiro</option>
+                                            <option value="2">Cartão</option>
+                                            <option value="3">Cheque</option>
+                                            <option value="4">Deposito</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Condição de Pagamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_condicaoPagamento" asp-for="@Model.pedidoRetirada.condicaoPagamento" class="form-control" required="required">
+                                            <option value="1" selected="">Á Vista</option>
+                                            <option value="2">Parcelado</option>
+                                            <option value="3">Á Prazo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Tipo de Desconto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control" onchange="Onchage_PedidoTipoDesconto();">
+                                            <option value="1" selected="">Valor</option>
+                                            <option value="2">Percentual</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Valor Desconto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calculator fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input id="osc_valorDesconto" asp-for="@Model.pedidoRetirada.valorDesconto" type="text" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Valor Total</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calculator fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input id="osc_valorTotal" asp-for="@Model.pedidoRetirada.valorTotal" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Status do Pedido de Retirada</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-exclamation fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_statusPedido" asp-for="@Model.pedidoRetirada.statusPedidoRetirada" class="form-control" style="background-color:aquamarine">
+                                            <option value="0">Em Aprovação</option>
+                                            <option value="1">Em Andamento</option>
+                                            <option value="2">Fechado</option>
+                                            <option value="3">Cancelado</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Data Fechamento</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                            <input asp-for="@Model.pedidoRetirada.dataFechamento" class="form-control" type="date" id="osc_dataFechamento" disabled="disabled">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Anotação</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                        </span>
+                                        <textarea id="osc_anotacao" asp-for="@Model.pedidoRetirada.anotacao" class="form-control" rows="4" cols="4" placeholder="digite uma anotação"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <br /><br /><br /><br />
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-2x fa-user"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_criadoPor" asp-for="@Model.pedidoRetirada.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-2x"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_criadoEm" asp-for="@Model.pedidoRetirada.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-2x fa-user"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_modificadoPor" asp-for="@Model.pedidoRetirada.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-2x"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_modificadoEm" asp-for="@Model.pedidoRetirada.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+ 
+<script src="~/lib/OscaJs/osc_recurso.js"></script>

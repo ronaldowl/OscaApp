@@ -43,6 +43,14 @@ namespace OscaFramework.Models
             Cancelado = 5
         }
 
+        public enum StatusPedidoRetirada
+        {
+            EmAprovacao = 0,
+            EmAndamento = 1,
+            Fechado = 2,
+            Cancelado = 3
+        }
+
         public enum StatusBalcaoVendas
         {
             EmAndamento = 0,

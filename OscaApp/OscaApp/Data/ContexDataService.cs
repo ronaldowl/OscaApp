@@ -26,6 +26,7 @@ namespace OscaApp.Data
         public DbSet<ItemListaPreco> ItemListaPrecos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ProdutoPedido> ProdutosPedido { get; set; }
+        public DbSet<PedidoRetirada> PedidosRetirada { get; set; }
         public DbSet<Profissional> Profissionais { get; set; }
         public DbSet<Servico> Servicos { get; set; }
         public DbSet<OrdemServico> OrdensServico { get; set; }

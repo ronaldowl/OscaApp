@@ -149,6 +149,15 @@ namespace OscaApp.Data
         List<Recurso> GetAll(Guid idOrg);
     }
 
+    public interface IPedidoRetiradaData
+    {
+        void Add(PedidoRetirada pedidoRetirada);
+        void Update(PedidoRetirada pedidoRetirada);
+        void Delete(PedidoRetirada pedidoRetirada);
+        PedidoRetirada Get(Guid id, Guid idOrg);
+        List<PedidoRetirada> GetAll(Guid idOrg);
+    }
+
     public interface IContasReceberData
     {
         void Add(ContasReceber contasReceber);
