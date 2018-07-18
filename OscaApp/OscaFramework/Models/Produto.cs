@@ -15,6 +15,7 @@ namespace OscaFramework.Models
         public string descricao { get; set; }
         public string urlProduto { get; set; }
         public string codigoBarra { get; set; }
+        public string modelo { get; set; }
 
 
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]

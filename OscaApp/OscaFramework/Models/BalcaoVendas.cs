@@ -15,8 +15,10 @@ namespace OscaFramework.Models
         public int diaVencimento { get; set; }
 
         public Guid idOrganizacao { get; set; }   
-        public Guid idListaPreco { get; set; }     
-       
+        public Guid idListaPreco { get; set; }
+        public Guid idCliente { get; set; }
+
+
         [DataType(DataType.Currency)]      
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorTotal { get; set; }       

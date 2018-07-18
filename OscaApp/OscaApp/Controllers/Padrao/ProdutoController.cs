@@ -169,8 +169,12 @@ namespace OscaApp.Controllers
                 retorno = from u in retorno
                           where
                                 (u.nome.ToLower().Contains(filtro.ToLower())) ||
-                                (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))||
+                                (u.codigoBarra == filtro)
                           select u;
+
+              
+
             }
 
             retorno = retorno.OrderBy(x => x.nome);
@@ -178,7 +182,7 @@ namespace OscaApp.Controllers
             //Se não passar a número da página, caregar a primeira
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<Produto>(Page, 20));
+            return View(retorno.ToPagedList<Produto>(Page, 100));
         }
         public ViewResult LookupProduto(string filtro, int Page)
         {
@@ -190,7 +194,8 @@ namespace OscaApp.Controllers
                 retorno = from u in retorno
                           where
                                 (u.nome.ToLower().Contains(filtro.ToLower())) ||
-                                (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                                (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))||
+                                 (u.codigoBarra == filtro)
                           select u;
             }
 
@@ -229,10 +234,10 @@ namespace OscaApp.Controllers
                 return Content("Não pode ter mais de 2 MB");
 
             //Regra 4 - Apenas PNG e JPG
-            string[] contentTypes = new string[] { "image/jpg", "image/png" };
+            string[] contentTypes = new string[] { "image/jpg", "image/png", "image/jpeg" };
             if (!contentTypes.Contains(file.ContentType))
             {
-                return Content("Suporte apenas para arquivos PNG e JPG");
+                return Content("Suporte apenas para arquivos PNG,JPG e JPEG");
             }
 
 

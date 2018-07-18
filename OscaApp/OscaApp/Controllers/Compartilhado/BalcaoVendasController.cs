@@ -45,13 +45,19 @@ namespace OscaApp.Controllers
         public ViewResult BalcaoVendasView(string id)
         {
             BalcaoVendasViewModel modelo = new BalcaoVendasViewModel();
-
+            BalcaoVendas retorno = new BalcaoVendas();
             try
             {
                 modelo.contexto = this.contexto;
-                modelo.balcaoVendas = balcaoVendasData.Get(new Guid(id));
+                retorno = balcaoVendasData.Get(new Guid(id));
+                modelo.balcaoVendas = retorno;
+
                 modelo.listapreco = Sqlservice.RetornaRelacaoListaPreco(modelo.balcaoVendas.idListaPreco);
                 modelo.produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(new Guid(id));
+
+                if (retorno.idCliente != null) modelo.cliente = Sqlservice.RetornaRelacaoCliente(retorno.idCliente);
+
+
             }
             catch (Exception ex)
             {

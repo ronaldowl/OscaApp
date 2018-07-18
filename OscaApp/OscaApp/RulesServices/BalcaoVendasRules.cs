@@ -15,6 +15,8 @@ namespace OscaApp.RulesServices
             entrada.balcaoVendas.codigo = AutoNumber.GeraCodigo(31, contexto.idOrganizacao);
             entrada.balcaoVendas.statusBalcaoVendas = CustomEnumStatus.StatusBalcaoVendas.Fechado;
 
+            if(entrada.cliente != null) entrada.balcaoVendas.idCliente = entrada.cliente.id;
+
             if (entrada.balcaoVendas.codigo != null)
             {
                 ////************ Objetos de controle de acesso ***************

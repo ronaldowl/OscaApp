@@ -9,6 +9,33 @@ namespace OscaApp.RulesServices
 {
     public static class ClienteRules
     {
+        public static Guid CreateClienteResumo(Cliente modelo,  ContextPage contexto, ClienteData clienteData)
+        {
+
+            modelo.idOrganizacao = contexto.idOrganizacao;
+
+            if (modelo.idOrganizacao != null)
+            {
+
+                modelo.codigo = AutoNumber.GeraCodigo(1, contexto.idOrganizacao);
+
+                ////************ Objetos de controle de acesso ***************
+                modelo.criadoEm = DateTime.Now;
+                modelo.criadoPor = contexto.idUsuario;
+                modelo.criadoPorName = contexto.nomeUsuario;
+                modelo.modificadoEm = DateTime.Now;
+                modelo.modificadoPor = contexto.idUsuario;
+                modelo.modificadoPorName = contexto.nomeUsuario;
+                modelo.idOrganizacao = contexto.idOrganizacao;
+                ////************ FIM Objetos de controle de acesso ***************
+
+                //Cria Cliente 
+                clienteData.Add(modelo);
+            }
+
+            return modelo.id;
+        }
+
         public static bool MontaClienteCreate(ClienteViewModel entrada,out Cliente modelo, ContextPage contexto )
         {
             modelo = new Cliente ();                        

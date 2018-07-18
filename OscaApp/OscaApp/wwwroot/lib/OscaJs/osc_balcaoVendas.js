@@ -21,11 +21,24 @@ function ConsultaProduto() {
 
                 if (dados.statusOperation == true) {
 
-                    $.each(dados.listaProdutoBalcao, function (idx, obj) {
+                    //Caso traga apenas um produto adiciona direto na lista
+                    if (dados.listaProdutoBalcao.length == 1) {
 
-                        $('#produtosPequisa').append('<tr id="key_' + dados.listaProdutoBalcao[idx].id + '" ><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td>' + dados.listaProdutoBalcao[idx].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="AdicionaProduto(' + "'" + dados.listaProdutoBalcao[idx].id + "'" + ');"> <span>Adicionar..</span></button></div> </td></tr>');
+                        inserirLinha(dados.listaProdutoBalcao[0].id, dados.listaProdutoBalcao[0].codigo, dados.listaProdutoBalcao[0].nome, dados.listaProdutoBalcao[0].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), $('#osc_listaPreco').val())
 
-                    });
+                        SomaTotal();
+
+                        LimpaBusca();
+
+                    }
+                    else {
+
+                        $.each(dados.listaProdutoBalcao, function (idx, obj) {
+
+                            $('#produtosPequisa').append('<tr id="key_' + dados.listaProdutoBalcao[idx].id + '" ><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td>' + dados.listaProdutoBalcao[idx].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="AdicionaProduto(' + "'" + dados.listaProdutoBalcao[idx].id + "'" + ');"> <span>Adicionar..</span></button></div> </td></tr>');
+
+                        });
+                    }
                 }
             }
         });
@@ -126,13 +139,15 @@ function Execute(){
     var url = '/API/BalcaoVendasAPI/GravarVenda';
     var produtosBalcaoP = MontaListaObjeto();
     var Entrada = MontaObjetoEntrada();
+    var entradaCliente = MontaObjetoCliente();
       
         $.ajax({
             url: url,
             type: "POST",
             data: {
                 modelo: Entrada,
-                produtosBalcao: produtosBalcaoP
+                produtosBalcao: produtosBalcaoP,
+                cliente: entradaCliente
             },
             datatype: 'json',
             ContentType: 'application/json;utf-8'
@@ -157,16 +172,28 @@ function MontaObjetoEntrada() {
 
     ObjetoEntrada.valorTotal =          $('#InputValorTotalVendas').val();
     ObjetoEntrada.idListaPreco =        $('#osc_listaPreco').val();
-    ObjetoEntrada.cpf =                 $('#osc_cpf').val();
+    ObjetoEntrada.cpf =                 $('#osc_cnpj_cpf').val();
     ObjetoEntrada.condicaoPagamento   = $('#osc_condicaoPagamento').val();
     ObjetoEntrada.tipoPagamento =       $('#osc_tipoPagamento').val();    
     ObjetoEntrada.parcelas =            $('#osc_parcelas').val();    
     ObjetoEntrada.diaVencimento =       $('#osc_diaVencimento').val();    
-
-
+    
     return ObjetoEntrada;
 }
 
+function MontaObjetoCliente() {
+
+    var ObjetoCliente = new Object();
+
+    ObjetoCliente.id =          $('#osc_clienteId').val();
+    ObjetoCliente.nomeCliente = $('#osc_clienteIdName').val();
+    ObjetoCliente.tipoPessoa =  $('#osc_tipopessoa').val();
+    ObjetoCliente.email =       $('#osc_email').val();
+    ObjetoCliente.telefone =    $('#osc_telefone').val();
+    ObjetoCliente.cnpj_cpf =    $('#osc_cnpj_cpf').val();
+  
+    return ObjetoCliente;
+}
 
 function MontaListaObjeto() {
 
@@ -198,4 +225,27 @@ function CalcularParcela() {
 
     $('#osc_valorParcela').val(FormatMoney(calcResult)); 
 }
+
+function HabilitaParcela() {
+
+    var condPag = document.getElementById("osc_condicaoPagamento");
+
+    if (condPag.value == 3) {
  
+        document.getElementById("div_Parcela").hidden = false;
+        document.getElementById("div_DiaVencimento").hidden = false;
+        document.getElementById("div_valorParcela").hidden = false;
+        
+
+    } else {
+
+        document.getElementById("div_Parcela").hidden = true;
+        document.getElementById("div_DiaVencimento").hidden = true;
+        document.getElementById("div_valorParcela").hidden = true;
+
+        $("#osc_parcelas").val('1');       
+        $("#osc_diaVencimento").val('1');    
+        $("#osc_valorParcela").val('R$ 0,00');              
+                
+    }
+}

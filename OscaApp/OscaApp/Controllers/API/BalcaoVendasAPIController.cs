@@ -22,6 +22,7 @@ namespace OscaAPI.Controllers
         private readonly ContextPage contexto;
         private readonly IBalcaoVendasData balcaoVendasData;
         private readonly IContasReceberData contaReceberData;
+        private readonly ClienteData clienteData;
 
         public BalcaoVendasAPIController(SqlGeneric _sqlGeneric, SqlGenericRules _sqlRules, IHttpContextAccessor httpContext, ContexDataService db)
         {
@@ -30,6 +31,7 @@ namespace OscaAPI.Controllers
             this.sqlServices = _sqlRules;
             this.sqlGeneric =  _sqlGeneric;
             this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.clienteData = new ClienteData(db);
         }
 
         [Route("api/[controller]/ConsultaProduto")]
@@ -54,7 +56,7 @@ namespace OscaAPI.Controllers
 
         [Route("api/[controller]/GravarVenda")]
         [HttpGet("{entrada, produtosBalcao}")]
-        public JsonResult GravarVenda(BalcaoVendas modelo, ProdutoBalcao[] produtosBalcao)
+        public JsonResult GravarVenda(BalcaoVendas modelo, ProdutoBalcao[] produtosBalcao, Cliente cliente)
         {
 
             ResultServiceList retorno = new ResultServiceList();
@@ -62,10 +64,24 @@ namespace OscaAPI.Controllers
             entrada.balcaoVendas = modelo;
             entrada.contexto = this.contexto;
             Guid idBalcaoVendas = new Guid();
+                      
          
-
             try
             {
+                if (cliente.id.ToString() != "00000000-0000-0000-0000-000000000000")
+                {
+                    entrada.cliente = new Relacao();
+                    entrada.cliente.id = cliente.id;
+                }
+                else
+                {
+                    if (cliente.nomeCliente != null)
+                    {
+                        entrada.cliente = new Relacao();
+                        entrada.cliente.id = ClienteRules.CreateClienteResumo(cliente, this.contexto, clienteData);
+                    }
+                }
+
                 idBalcaoVendas = BalcaoVendasRules.BalcaoVendasCreate(entrada, this.contexto,balcaoVendasData);
 
                 if (BalcaoVendasRules.GravaProdutoBalcao(produtosBalcao, this.contexto, this.sqlGeneric, idBalcaoVendas))

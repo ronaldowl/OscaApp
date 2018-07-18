@@ -61,7 +61,8 @@
                                 <th>Título</th>
                                 <th>Origem</th>
                                 <th>Tipo Lancamento</th>
-                                <th>Data</th>
+                                <th>Data Lançamento</th>
+                                <th>Data Prevista Pag</th>
                                 <th>Valor</th>
                                 <th>Status Recebimento</th>
 
@@ -77,6 +78,7 @@
 
                             <td>@item.origemContaReceber</td>
                             <td>@item.tipoLancamento</td>
+                            <td>@item.criadoEm.ToShortDateString()</td>
                             <td>@item.dataPagamento.ToShortDateString()</td>
                             <td>R$@item.valor.ToString("N2")</td>
                             <td>@item.statusContaReceber</td>

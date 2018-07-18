@@ -1,11 +1,25 @@
 ﻿@model OscaApp.ViewModels.BalcaoVendasViewModel
 
 <script>
- 
+
     function Imprimir() {
 
     }
 
+    function CarregaLookupCliente() {
+        $("#lookupCliente").load("/Cliente/LookupCliente", function () {
+            $("#lookupCliente").modal("show");
+        })
+    }
+
+    function ValidaClienteCPF() {
+
+        var idCliente = $('#osc_clienteId').val();
+
+        if (idCliente != "00000000-0000-0000-0000-000000000000") {
+            ConsultaCnpjCpfDuplicado(idCliente)
+        }
+    }
 </script>
 
 <div id="contexto">
@@ -26,225 +40,263 @@
                 @Model.StatusMessage
             </div>
         }
- 
-            <div  id="BalcaoVendas">
-                <div class="card " id="osc_MainForm">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <table>
-                                <tr>
-                                    <td><h3>Venda:&nbsp; </h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-danger btn-lg fa fa-close" value="" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"> <span>Fechar</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_fecharVenda" type="button" class="btn btn-success btn-lg fa fa-cart-plus" data-toggle="modal" data-target="#fechamento"> <span>Concluir Venda</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td width="300px" align="center"></td>
-                                    <td>
-                                        <input style="font-weight:bold; font-size:x-large" id="ValorTotalVendas" value="TOTAL:R$ 0,00" readonly="" class="form-control">
-                                        <input type="text" asp-for="@Model.balcaoVendas.valorTotal" id="InputValorTotalVendas" hidden="hidden">
 
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+        <div id="BalcaoVendas">
+            <div class="card " id="osc_MainForm">
+                <div class="card-header">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Venda:&nbsp; </h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-danger btn-lg fa fa-close" value="" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"> <span>Fechar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_fecharVenda" type="button" class="btn btn-success btn-lg fa fa-cart-plus" data-toggle="modal" data-target="#fechamento"> <span>Concluir Venda</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td width="300px" align="center"></td>
+                                <td>
+                                    <input style="font-weight:bold; font-size:x-large" id="ValorTotalVendas" value="TOTAL:R$ 0,00" readonly="" class="form-control">
+                                    <input type="text" asp-for="@Model.balcaoVendas.valorTotal" id="InputValorTotalVendas" hidden="hidden">
+
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="card-body">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <div class="form-inline" >
-                                        <div class="form-group mb-2">
-                                            <label for="osc_titulo" style="font-weight:bold">Pesquisar Produto</label>
-                                        </div>
-                                        <div class="form-group mx-sm-3 mb-2">
-                                            <input type="text" class="form-control" id="osc_pesquisaProduto" placeholder="Digite o nome Produto" name="osc_filtro"   autocomplete="off" onkeypress="ConsultaProduto();">
-                                            &nbsp;
-                                        </div>
-                                        <button type="button" class="btn btn-primary mb-2" onclick="ConsultaProduto();">PESQUISAR</button>
-                                        <div class="form-group mx-sm-3 mb-2">
-                                            <div class="form-group">
-                                                <label class="control-label">Lista de Preço</label>&nbsp;
-                                                <div class="inputGroupContainer">
-                                                    <div class="input-group">
-                                                        <select asp-items="@Model.listaPrecos" asp-for="@Model.balcaoVendas.idListaPreco" id="osc_listaPreco" required="required"></select>
-                                                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <div class="form-inline">
+                                    <div class="form-group mx-sm-6 mb-2">
+                                        <input type="text" class="form-control" id="osc_pesquisaProduto" placeholder="Pesquisar Produto..." name="osc_filtro" autocomplete="off" onkeypress="ConsultaProduto();">
+                                        &nbsp;
+                                    </div>
+                                    <div class="form-group mx-sm-3 mb-2">
+                                        <div class="form-group">
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <select asp-items="@Model.listaPrecos" asp-for="@Model.balcaoVendas.idListaPreco" id="osc_listaPreco" required="required"></select>
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <table id="produtosPequisa" class="table table-bordered table-hover table-striped table-sm table-responsive-sm ">
-                                    <thead>
-                                        <tr>
-                                            <th> </th>
-                                            <th>Código</th>
-                                            <th>Nome</th>
-                                            <th>Fabricante</th>
-                                            <th>Modelo</th>
-                                            <th>QTD Disp</th>
-                                            <th>Valor</th>
-                                            <th> </th>
-                                        </tr>
-                                    </thead>
-                                </table>
-
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header alert-info">
-                                <div class="card-title">
-                                    <div class="form-inline" method="post">
-                                        <div class="form-group mb-2">
-                                            <label for="osc_titulo" style="font-weight:bold">Produtos da Venda</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required" placeholder="Cliente">
+                                            <span class="input-group-btn ">
+                                                <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
+                                                    <span class="fa fa-search"></span>
+                                                </button>
+                                            </span>
+                                            <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <table id="produtosVendas" class="table table-bordered table-hover table-striped table-sm table-responsive-sm" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Código</th>
-                                            <th>Nome</th>
-                                            <th>Quantidade</th>
-                                            <th>Valor</th>
-                                            <th>Total</th>
-                                            <th>Ação</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                    <div class="form-group">
 
-                            </div>
-                        </div>
-                    </div>  <br /><br />   <br /><br />   <br /><br />
-                    <div class="card-footer ">
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.balcaoVendas.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa   fa-2x"></span>
+                                            </span> &nbsp;
+                                            <input id="osc_telefone" asp-for="@Model.email" type="email" class="form-control" placeholder="E-mail" />
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
+                                    <div class="form-group">
 
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.balcaoVendas.statusBalcaoVendas" type="text" class="form-control" disabled="disabled" />
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa   fa-2x"></span>
+                                            </span> &nbsp;
+                                            <input id="osc_email" asp-for="@Model.telefone" type="text" class="form-control" placeholder="Telefone" />
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <select id="osc_tipopessoa" class="form-control" required="required" onchange="OnChangeTipoPessoa();" asp-for="@Model.tipoPessoa">
+                                                <option value="1" selected="">Fisica</option>
+                                                <option value="2">Juridica</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
+                        <div class="card-body">
+                            <table id="produtosPequisa" class="table table-bordered table-hover table-striped table-sm table-responsive-sm ">
+                                <thead>
+                                    <tr>
+                                        <th> </th>
+                                        <th>Código</th>
+                                        <th>Nome</th>
+                                        <th>Fabricante</th>
+                                        <th>Modelo</th>
+                                        <th>QTD Disp</th>
+                                        <th>Valor</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+                            </table>
 
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header alert-info">
+                            <div class="card-title">
+                                <div class="form-inline" method="post">
+                                    <div class="form-group mb-2">
+                                        <label for="osc_titulo" style="font-weight:bold">Produtos da Venda</label>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="produtosVendas" class="table table-bordered table-hover table-striped table-sm table-responsive-sm" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Código</th>
+                                        <th>Nome</th>
+                                        <th>Quantidade</th>
+                                        <th>Valor</th>
+                                        <th>Total</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>  <br /><br />   <br /><br />   <br /><br />
+                <div class="card-footer ">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.balcaoVendas.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.balcaoVendas.statusBalcaoVendas" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <!-- Modal About-->
-                <div class="modal fade" id="fechamento" tabindex="-1" role="dialog" aria-labelledby="sobreModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header badge-success">
-                                <h5 class="modal-title " id="exampleModalLongTitle" style="color:white;font-weight:bold">Fechamento</h5>
-                            </div>
-                            <div class="modal-body">
-                                <center><h3> <input style="font-weight:bold; font-size:x-large" id="ValorTotalVendasDiag" value="TOTAL:R$ 0,00" readonly="" class="form-control"> </h3></center>
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        <label>CPF</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                            </span>
-                                            <input type="text" class="form-control" id="osc_cpf" placeholder="000.000.000-00" autocomplete="off" asp-for="@Model.balcaoVendas.cpf" onchange=" ValidaCPF()">
-                                        </div>
+
+            </div>
+            <!-- Modal About-->
+            <div class="modal fade" id="fechamento" tabindex="-1" role="dialog" aria-labelledby="sobreModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header badge-success">
+                            <h5 class="modal-title " id="exampleModalLongTitle" style="color:white;font-weight:bold">Fechamento</h5>
+                        </div>
+                        <div class="modal-body">
+                            <center><h3> <input style="font-weight:bold; font-size:x-large" id="ValorTotalVendasDiag" value="TOTAL:R$ 0,00" readonly="" class="form-control"> </h3></center>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <label>CPF/CNPJ</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input type="text" class="form-control" id="osc_cnpj_cpf" placeholder="" autocomplete="off" asp-for="@Model.balcaoVendas.cpf" onchange=" ValidaCNPJ_CPF(); ValidaClienteCPF();">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Tipo Pagamento</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                            </span>
-                                            <select id="osc_tipoPagamento" asp-for="@Model.balcaoVendas.tipoPagamento" class="form-control" required="required">
-                                                <option value="1">Dinheiro</option>
-                                                <option value="2">Cartão</option>
-                                                <option value="3">Cheque</option>
-                                                <option value="4">Deposito</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo Pagamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_tipoPagamento" asp-for="@Model.balcaoVendas.tipoPagamento" class="form-control" required="required">
+                                            <option value="1">Dinheiro</option>
+                                            <option value="2">Cartão</option>
+                                            <option value="3">Cheque</option>
+                                            <option value="4">Deposito</option>
+                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Condição de Pagamento</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                            </span>
-                                            <select id="osc_condicaoPagamento" asp-for="@Model.balcaoVendas.condicaoPagamento" class="form-control" required="required">
-                                                <option value="1">Á Vista</option>                                    
-                                                <option value="3">Á Prazo</option>
-                                                <option value="4">Sem Pagamento</option>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Condição de Pagamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_condicaoPagamento" asp-for="@Model.balcaoVendas.condicaoPagamento" class="form-control" required="required" onchange="HabilitaParcela();">
+                                            <option value="1">Á Vista</option>
+                                            <option value="3">Á Prazo</option>
+                                            <option value="4">Sem Pagamento</option>
+                                        </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Quantidade Parcela</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                            </span>
-                                            <input type="text" class="form-control" id="osc_parcelas" value="1" autocomplete="off" onchange="CalcularParcela();">
-                                        </div>
+                                </div>
+                                <div class="form-group" hidden="hidden" id="div_Parcela">
+                                    <label>Quantidade Parcela</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input type="text" class="form-control" id="osc_parcelas" value="1" autocomplete="off" onchange="CalcularParcela();">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Dia de Vencimento</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <span class="fa fa-calendar fa-2x"></span>&nbsp;
-                                            </span>
-                                            <input type="text" class="form-control" id="osc_diaVencimento" value="10" autocomplete="off">
-                                        </div>
+                                </div>
+                                <div class="form-group" hidden="hidden" id="div_DiaVencimento">
+                                    <label>Dia de Vencimento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input type="text" class="form-control" id="osc_diaVencimento" value="1" autocomplete="off">
                                     </div>
-                                    <div class="form-group">
-                                        <label>Valor Parcela</label>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <span class="fa fa-money fa-2x"></span>&nbsp;
-                                            </span>
-                                            <input type="text" class="form-control" id="osc_valorParcela" value="R$ 0,00" autocomplete="off" readonly="readonly">
-                                        </div>
+                                </div>
+                                <div class="form-group" hidden="hidden" id="div_valorParcela">
+                                    <label>Valor Parcela</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-money fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input type="text" class="form-control" id="osc_valorParcela" value="R$ 0,00" autocomplete="off" readonly="readonly">
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" onclick="Execute();">Concluir</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Voltar</button>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="Execute();">Concluir</button>
+                            <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Voltar</button>
                         </div>
                     </div>
-                </div>                
+                </div>
             </div>
+        </div>
     </div>
 </div>
+
+<div class="modal fade" id="lookupCliente">
+</div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
+
 <script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
+<script src="~/lib/OscaJs/osc_cliente.js"></script>
+
 
 
 

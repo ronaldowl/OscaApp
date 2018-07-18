@@ -28,7 +28,7 @@ namespace OscaFramework.MicroServices
             List<ProdutoBalcao> Listaretorno = new List<ProdutoBalcao>();
             SqlDataReader dataReader;
 
-            string SelectProduto = "select LP.id, P.codigo, P.nome, Lp.valor, P.quantidade,isnull( P.fabricante,'Ausente')fabricante, isnull(P.modelo, 'Ausente')modelo from itemListaPreco LP inner join produto as P on P.id = Lp.idProduto where Lp.idListaPreco = '" + idLista +"' and(P.nome like('%"+ filtro +"%')  or P.codigo = '"+ filtro + "')";
+            string SelectProduto = "select LP.id, P.codigo, P.nome, Lp.valor, P.quantidade,isnull( P.fabricante,'Ausente')fabricante, isnull(P.modelo, 'Ausente')modelo from itemListaPreco LP inner join produto as P on P.id = Lp.idProduto where Lp.idListaPreco = '" + idLista +"' and(P.nome like('%"+ filtro +"%')  or P.codigo = '"+ filtro + "' or P.codigoBarra = '"+ filtro +"')";
 
             try
             {
