@@ -7,7 +7,28 @@
         });
     }
     function Imprimir() {
+        Inicializa();
+        ImprimeTextoSemFormatacao();
+        Finaliza();
+    }
 
+  
+    function ImprimeTextoSemFormatacao() {
+        
+            for (i = 0; i < 10; i++) {
+                BemaPrinter1.FormataTX("************** Texte de Impressão**********" + "\n", 3, 0, 0, 0, 0);
+            }
+        
+    }
+
+    function Inicializa() {
+
+        // Abre a porta de comunicacao
+        BemaPrinter1.IniciaPorta("COM11");
+
+    }
+    function Finaliza() {
+        BemaPrinter1.FechaPorta();
     }
 
 </script>
@@ -216,6 +237,8 @@
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_lookup.js"></script>
 <script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
+<object id="BemaPrinter1" height="14" width="14" classid="clsid:310DBDAC-85FF-4008-82A8-E22A09F9460B" VIEWASTEXT ></object>
+
 
 
 
