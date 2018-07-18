@@ -16,18 +16,6 @@ namespace OscaApp.Data
         {
             this.db = dbContext;
         }
-        public void Add(OrgConfig modelo)
-        {
-            try
-            {
-                db.OrgsConfig.Add(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
         public void Update(OrgConfig modelo)
         {
             try
@@ -50,12 +38,12 @@ namespace OscaApp.Data
             }
 
         }
-        public OrgConfig Get(Guid id, Guid idOrg)
+        public OrgConfig Get(Guid id)
         {
             List<OrgConfig> retorno = new List<OrgConfig>();
             try
             {
-                retorno = db.OrgsConfig.FromSql("SELECT * FROM OrgConfig WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.OrgsConfig.FromSql("SELECT * FROM OrgConfig WHERE  id = '" + id.ToString() + "'").ToList();
             }
             catch (SqlException ex)
             {

@@ -27,53 +27,16 @@ namespace OscaApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
-        public ViewResult FormCreateOrgConfig()
+        public ViewResult FormUpdateOrgConfig()
         {
             OrgConfigViewModel modelo = new OrgConfigViewModel();
-            modelo.orgConfig = new OrgConfig();
-            modelo.contexto = contexto;
-            modelo.orgConfig.criadoEm = DateTime.Now;
-            modelo.orgConfig.criadoPorName = contexto.nomeUsuario;
-
-            return View(modelo);
-        }
-
-        [HttpPost]
-        public IActionResult FormCreateOrgConfig(OrgConfigViewModel entrada)
-        {
-            OrgConfig modelo = new OrgConfig();
-
-            try
-            {
-                if (entrada.orgConfig != null)
-                {
-                    if (OrgConfigRules.OrgConfigCreate(entrada, out modelo, contexto))
-                    {
-                        modeloData.Add(modelo);
-                        return RedirectToAction("FormUpdateOrgConfig", new { id = modelo.id.ToString() });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1, 34, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreateOrgConfig-post", ex.Message);
-            }
-            return View();
-        }
-
-        [HttpGet]
-        public ViewResult FormUpdateOrgConfig(string id)
-        {
-            OrgConfigViewModel modelo = new OrgConfigViewModel();
-            modelo.orgConfig = new OrgConfig();
-            modelo.orgConfig.id = new Guid(id);
+            modelo.orgConfig = new OrgConfig();        
 
             OrgConfig retorno = new OrgConfig();
        
-            if (!String.IsNullOrEmpty(id))
+            if (contexto.idOrganizacao != null)
             {
-                retorno = modeloData.Get(modelo.orgConfig.id, contexto.idOrganizacao);
+                retorno = modeloData.Get(contexto.idOrganizacao);
 
                 if (retorno != null)
                 {

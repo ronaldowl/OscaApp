@@ -159,9 +159,8 @@ namespace OscaApp.Data
     }
     public interface IOrgConfigData
     {
-        void Add(OrgConfig orgConfig);
         void Update(OrgConfig orgConfig);
-        OrgConfig Get(Guid id, Guid idOrg);
+        OrgConfig Get(Guid id);
     }
 
     public interface IServicoPedidoRetiradaData

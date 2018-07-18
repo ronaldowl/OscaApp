@@ -1,5 +1,5 @@
 ﻿using System;
- 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OscaFramework.Models
@@ -10,6 +10,7 @@ namespace OscaFramework.Models
        
         public Guid idOrganizacao { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal margemBaseProduto { get; set; }
 
         public int qtdDiasCartaoCredito { get; set; }

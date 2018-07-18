@@ -34,14 +34,49 @@
                     <div class="card-body">
                         <div class="row">
                             <input id="osc_id" asp-for="orgConfig.id" type="hidden" class="form-control" value="@Model.orgConfig.id" />
-                            <div class="col-md-4 offset-1">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nome</label>
+                                    <label>Margem base do produto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-money fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input id="osc_margemBaseProduto" asp-for="@Model.orgConfig.margemBaseProduto" type="text" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Quantidade de dias no cartão de crédito</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_nome" asp-for="@Model.orgConfig.nome" class="form-control" type="text">
+                                            <span class="input-group-addon"><i class="fa fa-credit-card-alt fa-2x"></i></span>&nbsp;
+                                            <input id="osc_qtdDiasCartaoCredito" asp-for="@Model.orgConfig.qtdDiasCartaoCredito"  class="form-control" type="number">
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Quantidade de dias no cartão de débito</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-credit-card fa-2x"></i></span>&nbsp;
+                                            <input id="osc_qtdDiasCartaoDebito" asp-for="@Model.orgConfig.qtdDiasCartaoDebito" class="form-control" type="number">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Mensagem</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                        </span>
+                                        <textarea id="osc_mensagem" asp-for="@Model.orgConfig.mensagemPedido" class="form-control" rows="9" cols="4" placeholder="digite uma mensagem para o pedido"></textarea>
                                     </div>
                                 </div>
                             </div>
