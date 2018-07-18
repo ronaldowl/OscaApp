@@ -62,6 +62,11 @@ namespace OscaApp.Controllers
             return View();
         }
 
+        public ViewResult PainelParametros()
+        {
+            return View();
+        }
+
         public ViewResult PainelAll()
         {
             return View();

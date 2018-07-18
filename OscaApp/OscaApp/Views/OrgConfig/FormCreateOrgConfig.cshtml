@@ -1,0 +1,103 @@
+﻿@model OscaApp.ViewModels.OrgConfigViewModel
+<div id="contexto">
+    @Html.HiddenFor(m => m.contexto.idOrganizacao)
+    @Html.HiddenFor(m => m.contexto.organizacao)
+    @Html.HiddenFor(m => m.contexto.idUsuario)
+    @Html.HiddenFor(m => m.contexto.nomeUsuario)
+    @Html.HiddenFor(m => m.orgConfig.id)
+</div>
+ 
+    <div class="row">
+        <div class="col-md-11">
+            <form action="FormCreateOrgConfig" method="post" id="osc_Mainform">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td><h3> Configuração de Organização: &nbsp;&nbsp;</h3></td>
+                                    <td>
+                                        <div id="osc_barrabotoes">
+                                            <label>
+                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"><span>Salvar</span></button>
+                                            </label>
+                                            &nbsp;
+                                            <label>
+                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("PainelParametros","Paineis", null)'"><span>Fechar</span></button>
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <input id="osc_id" asp-for="orgConfig.id" type="hidden" class="form-control" value="@Model.orgConfig.id" />
+                            <div class="col-md-4 offset-1">
+                                <div class="form-group">
+                                    <label>Nome</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                            <input id="osc_nome" asp-for="@Model.orgConfig.nome" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br /><br /><br /><br />
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-2x fa-user"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_criadoPor" asp-for="@Model.orgConfig.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Criado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-2x"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_criadoEm" asp-for="@Model.orgConfig.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Por</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-2x fa-user"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Modificado Em</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-calendar fa-2x"></span>
+                                        </span> &nbsp;
+                                        <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+ 

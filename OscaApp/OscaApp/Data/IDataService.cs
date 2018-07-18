@@ -157,6 +157,12 @@ namespace OscaApp.Data
         PedidoRetirada Get(Guid id, Guid idOrg);
         List<PedidoRetirada> GetAll(Guid idOrg);
     }
+    public interface IOrgConfigData
+    {
+        void Add(OrgConfig orgConfig);
+        void Update(OrgConfig orgConfig);
+        OrgConfig Get(Guid id, Guid idOrg);
+    }
 
     public interface IContasReceberData
     {
