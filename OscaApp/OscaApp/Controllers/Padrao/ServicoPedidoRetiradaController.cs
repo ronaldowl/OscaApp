@@ -36,7 +36,7 @@ namespace OscaApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
-        public ViewResult FormCreateSServicoPedidoRetirada()
+        public ViewResult FormCreateServicoPedidoRetirada()
         {
             ServicoPedidoRetiradaViewModel modelo = new ServicoPedidoRetiradaViewModel();
             modelo.servicoPedidoRetirada = new ServicoPedidoRetirada();

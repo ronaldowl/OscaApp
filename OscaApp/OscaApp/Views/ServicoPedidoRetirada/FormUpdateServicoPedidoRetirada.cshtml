@@ -17,7 +17,7 @@
                     @Model.StatusMessage
                 </div>
             }
-            <form action="FormUpdateRecurso" method="post">
+            <form action="FormUpdateServicoPedidoRetirada" method="post">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
                         <div class="card-title">
@@ -34,9 +34,6 @@
                                             </label>
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateServicoPedidoRetirada", "ServicoPedidoRetirada", null)'"> <span>Novo</span></button>
-                                            </label>
-                                            <label>
-                                                <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteRecurso('@Model.servicoPedidoRetirada.id')"> <span>Excluir</span></button>
                                             </label>
                                         </div>
                                     </td>
