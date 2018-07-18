@@ -440,6 +440,7 @@ namespace OscaFramework.Models
             ProdutoBalcao = 32,
             PedidoRetirada = 33,
             Orgconfig = 34,
+            ServicoPedidoRetirada = 35,
 
             Organizacao = 1000
 
