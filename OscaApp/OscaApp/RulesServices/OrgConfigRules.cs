@@ -19,7 +19,7 @@ namespace OscaApp.RulesServices
             SqlGeneric sqlServic = new SqlGeneric();
 
 
-            if (modelo.nome != null)
+            if (modelo.idOrganizacao != null)
             {
                 //************ Objetos de controle de acesso ******************
                 modelo.criadoEm = DateTime.Now;

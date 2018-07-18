@@ -7,8 +7,17 @@ namespace OscaFramework.Models
     [Table("OrgConfig")]
     public class OrgConfig : GenericEntity
     {
-        public String nome { get; set; }
+       
         public Guid idOrganizacao { get; set; }
+
+        public decimal margemBaseProduto { get; set; }
+
+        public int qtdDiasCartaoCredito { get; set; }
+
+        public int qtdDiasCartaoDebito { get; set; }
+
+        public string mensagemPedido { get; set; }
+
 
         public OrgConfig()
         {
