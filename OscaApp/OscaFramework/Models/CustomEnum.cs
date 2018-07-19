@@ -210,9 +210,11 @@ namespace OscaFramework.Models
         public enum tipoPagamento
         {
             Dinheiro = 1,
-            Cartao = 2,
+            CartaoDebito = 2,
             Cheque = 3,
-            Deposito = 4          
+            Deposito = 4,    
+            CartaoCredito =5,
+            Boleto = 6
         }
         public enum metodoEntrega
         {

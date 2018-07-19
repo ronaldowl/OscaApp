@@ -136,5 +136,30 @@ namespace OscaApp.framework
 
         }
 
+        public void CreateOrgConfig(  ContextPage contexto, ContexDataService dbContext)
+        {
+            OrgConfig modelo = new OrgConfig();
+
+            modelo.margemBaseProduto = 25;
+            modelo.qtdDiasCartaoCredito = 28;
+            modelo.qtdDiasCartaoDebito = 1;
+            modelo.mensagemPedido = " Defina a sua mensagem personalidada no caminhjo  Configurações - Parametros - Configurações do Sistema";
+
+            //************ Objetos de controle de acesso ******************
+            modelo.criadoEm = DateTime.Now;
+            modelo.criadoPor = contexto.idUsuario;
+            modelo.criadoPorName = contexto.nomeUsuario;
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = contexto.idUsuario;
+            modelo.modificadoPorName = contexto.nomeUsuario;
+            modelo.idOrganizacao = contexto.idOrganizacao;
+            //************ FIM Objetos de controle de acesso ***************
+    
+            OrgConfigData orgConfigData = new OrgConfigData(dbContext);
+
+            orgConfigData.Add(modelo);
+
+        }
+
     }
 }

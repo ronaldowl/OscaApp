@@ -143,7 +143,9 @@
                                     </span>
                                     <select id="osc_tipoPagamento" asp-for="@Model.pedido.tipoPagamento" class="form-control" required="required">
                                         <option value="1">Dinheiro</option>
-                                        <option value="2">Cartão</option>
+                                        <option value="2">Cartão Débito</option>
+                                        <option value="5">Cartão Crédito</option>
+                                        <option value="6">Boleto</option>
                                         <option value="3">Cheque</option>
                                         <option value="4">Deposito</option>
                                     </select>
@@ -170,7 +172,7 @@
                                         <span class="fa fa-truck fa-2x"></span>&nbsp;
                                     </span>
                                     <select id="osc_metodoEntrega" asp-for="@Model.pedido.metodoEntrega" class="form-control" required="required" onchange="LimpaCNPJ_CPF()">
-                                        <option value="1" selected="">Cliente Retira</option>
+                                        <option value="1"  >Cliente Retira</option>
                                         <option value="2">Sedex</option>
                                         <option value="3">Transportadora</option>
                                         <option value="4">Depósito</option>
@@ -197,7 +199,7 @@
                                         <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                     </span>
                                     <select id="osc_tipoDesconto" asp-for="@Model.pedido.tipoDesconto" class="form-control" onchange="Onchage_PedidoTipoDesconto();">
-                                        <option value="1" selected="">Valor</option>
+                                        <option value="1">Valor</option>
                                         <option value="2">Percentual</option>
                                     </select>
                                 </div>

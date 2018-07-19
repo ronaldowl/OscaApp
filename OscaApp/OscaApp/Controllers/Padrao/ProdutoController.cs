@@ -3,20 +3,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OscaApp.Data;
 using OscaApp.framework;
-using OscaApp.Models;
 using OscaApp.RulesServices;
 using OscaApp.ViewModels;
+using OscaFramework.MicroServices;
+using OscaFramework.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
-using OscaFramework.Models;
-using OscaFramework.MicroServices;
-using System.IO;
-using Microsoft.AspNetCore.Hosting.Server;
-
-using System.Web;
 
 namespace OscaApp.Controllers
 {
@@ -28,6 +24,8 @@ namespace OscaApp.Controllers
         private readonly ItemListaPrecoData itemListaPrecoData;
         private ContextPage contexto;
         private OscaConfig oscaConfig;
+        private OrgConfigData  orgConfig;
+
 
 
 
@@ -35,7 +33,7 @@ namespace OscaApp.Controllers
         {
             this.produtoData = new ProdutoData(db);
             this.itemListaPrecoData = new ItemListaPrecoData(db);
-            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.orgConfig = new OrgConfigData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.oscaConfig = _oscaConfig;
         }
@@ -56,6 +54,8 @@ namespace OscaApp.Controllers
             modelo.contexto = contexto;
             modelo.produto.criadoEm = DateTime.Now;
             modelo.produto.criadoPorName = contexto.nomeUsuario;
+
+            modelo.produto.margemLucroBase = orgConfig.Get(this.contexto.idOrganizacao).margemBaseProduto;
 
             return View(modelo);
         }

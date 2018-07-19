@@ -280,8 +280,10 @@ namespace OscaApp.Controllers
                     //Cria Perfils de acesso
                     CA.CreatePerfis(user, this.contexto, this.dbContext);
 
-                    //***************** FIM CARGA INICIAL DA ORGANIZAÇÃO *************************
+                    //Cria OrgConfig
+                    CA.CreateOrgConfig(this.contexto, this.dbContext);
 
+                    //***************** FIM CARGA INICIAL DA ORGANIZAÇÃO *************************
 
                     model.sucesso = true;
                     model.msgOrganizacao = "Organização criada, Empresa:" + model.organizacao.nomeLogin + ", E-mail de acesso:" + model.Email;
