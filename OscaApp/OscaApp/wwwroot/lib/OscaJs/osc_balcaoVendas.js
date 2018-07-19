@@ -176,7 +176,10 @@ function MontaObjetoEntrada() {
     ObjetoEntrada.condicaoPagamento   = $('#osc_condicaoPagamento').val();
     ObjetoEntrada.tipoPagamento =       $('#osc_tipoPagamento').val();    
     ObjetoEntrada.parcelas =            $('#osc_parcelas').val();    
-    ObjetoEntrada.diaVencimento =       $('#osc_diaVencimento').val();    
+    ObjetoEntrada.diaVencimento       = $('#osc_diaVencimento').val();    
+    ObjetoEntrada.valorDesconto =       $('#osc_valorDesconto').val();    
+    ObjetoEntrada.tipoDesconto =        $('#osc_tipoDesconto').val();    
+
     
     return ObjetoEntrada;
 }

@@ -21,17 +21,23 @@ namespace OscaFramework.Models
 
         [DataType(DataType.Currency)]      
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
-        public decimal valorTotal { get; set; }       
-       
+        public decimal valorTotal { get; set; }
+
+        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal valorDesconto { get; set; }
+
         public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }
         public CustomEnum.tipoPagamento tipoPagamento { get; set; } 
-        public CustomEnumStatus.StatusBalcaoVendas statusBalcaoVendas { get; set; }        
+        public CustomEnumStatus.StatusBalcaoVendas statusBalcaoVendas { get; set; }    
+        public CustomEnum.tipoDesconto tipoDesconto { get; set; }
 
         public BalcaoVendas()
         {
 
             this.status = CustomEnumStatus.Status.Ativo;
             this.statusBalcaoVendas = CustomEnumStatus.StatusBalcaoVendas.EmAndamento;
+            this.tipoDesconto = CustomEnum.tipoDesconto.Money;
             this.entityType = 31;            
 
         }

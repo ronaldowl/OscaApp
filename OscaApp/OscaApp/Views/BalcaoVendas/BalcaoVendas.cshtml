@@ -250,6 +250,27 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label>Tipo de Desconto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_tipoDesconto" asp-for="@Model.balcaoVendas.tipoDesconto"   class="form-control" onchange="HabilitaParcela();">
+                                            <option value="1" selected="selected">Valor</option>
+                                            <option value="2">Percentual</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="div_Desconto">
+                                    <label>Valor Desconto</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-money fa-2x"></span>&nbsp;
+                                        </span>
+                                        <input type="text" class="form-control" id="osc_valorDesconto" value="0,00" autocomplete="off">
+                                    </div>
+                                </div>
                                 <div class="form-group" hidden="hidden" id="div_Parcela">
                                     <label>Quantidade Parcela</label>
                                     <div class="input-group">
