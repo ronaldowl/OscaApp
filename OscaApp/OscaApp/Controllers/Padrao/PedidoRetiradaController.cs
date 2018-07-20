@@ -12,6 +12,7 @@ using System.Linq;
 using X.PagedList;
 using OscaFramework.Models;
 using OscaApp.RulesServices;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.Controllers
 {
@@ -21,12 +22,13 @@ namespace OscaApp.Controllers
         private readonly IPedidoRetiradaData modeloData;
         private readonly IClienteData clienteData;
         private ContextPage contexto;
+        private readonly SqlGenericData Sqlservice;
 
         public PedidoRetiradaController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.modeloData = new PedidoRetiradaData(db);
             this.clienteData = new ClienteData(db);
-            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.Sqlservice = new SqlGenericData();
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
@@ -85,6 +87,13 @@ namespace OscaApp.Controllers
                 if (retorno != null)
                 {
                     modelo.pedidoRetirada = retorno;
+                    modelo.cliente = Sqlservice.RetornaRelacaoCliente(retorno.idCliente);
+
+                    if (modelo.pedidoRetirada.idProfissional != null)
+                    {
+                        modelo.profissional = Sqlservice.RetornaRelacaoProfissional(retorno.idProfissional);
+                    }
+
                     //apresenta mensagem de registro atualizado com sucesso
                     modelo.StatusMessage = StatusMessage;
                 }
@@ -138,13 +147,14 @@ namespace OscaApp.Controllers
 
             modelo.pedidoRetirada = new PedidoRetirada();
             modelo.pedidoRetirada.id = new Guid(id);
+            modelo.cliente = new Cliente();
 
             PedidoRetirada retorno = new PedidoRetirada();
 
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = modeloData.Get(modelo.pedidoRetirada.id, contexto.idOrganizacao);
-                modelo.cliente = clienteData.Get(modelo.cliente.id, contexto.idOrganizacao);
+                modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
 
                 if (retorno != null)
                 {
