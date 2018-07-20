@@ -18,6 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Shared\Components\_LayoutPrint.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Remove="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Remove="Properties\PublishProfiles\FolderProfile.pubxml" />

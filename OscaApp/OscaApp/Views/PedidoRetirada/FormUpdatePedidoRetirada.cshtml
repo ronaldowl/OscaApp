@@ -6,7 +6,12 @@
     @Html.HiddenFor(m => m.contexto.nomeUsuario)
     @Html.HiddenFor(m => m.pedidoRetirada.id)
 </div>
- 
+
+<script>
+    function Imprimir(){
+        window.open("/PedidoRetirada/ImpressaoPedidoRetirada?id=" + '@Model.pedidoRetirada.id', "Print", "width=950,height=700");
+       }</script> 
+
     <div class="row">
         <div class="col-md-11">
             @if (!String.IsNullOrEmpty(Model.StatusMessage))
@@ -34,6 +39,9 @@
                                             </label>
                                             <label>
                                                 <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreatePedidoRetirada", "PedidoRetirada", null)'"> <span>Novo</span></button>
+                                            </label>
+                                            <label>
+                                                <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Pedido</span></button>
                                             </label>
                                             <label>
                                                 <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteRecurso('@Model.pedidoRetirada.id')"> <span>Excluir</span></button>
