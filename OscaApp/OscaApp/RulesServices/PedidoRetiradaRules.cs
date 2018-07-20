@@ -39,9 +39,15 @@ namespace OscaApp.RulesServices
         public static bool PedidoRetiradaUpdate(PedidoRetiradaViewModel entrada, out PedidoRetirada modelo)
         {
             modelo = new PedidoRetirada();
+            modelo = entrada.pedidoRetirada;
+
+            if (entrada.profissional != null)
+            {
+                modelo.idProfissional = entrada.profissional.id;
+            }
 
             //************ Objetos de controle de acesso *******************
-            modelo = entrada.pedidoRetirada;
+         
             modelo.modificadoEm = DateTime.Now;
             modelo.modificadoPor = entrada.contexto.idUsuario;
             modelo.modificadoPorName = entrada.contexto.nomeUsuario;
