@@ -448,7 +448,8 @@ namespace OscaFramework.Models
 
         }
         public enum Estado
-        {
+        {   
+            Ausente = 0,
             Acre = 1,
             Alagoas = 2,
             Amapa = 3,

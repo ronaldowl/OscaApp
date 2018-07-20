@@ -5,3 +5,9 @@
         $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + idCliente);
     }
 } 
+
+function CarregaLookupCliente() {
+    $("#lookupCliente").load("/Cliente/LookupCliente", function () {
+        $("#lookupCliente").modal("show");
+    })
+}

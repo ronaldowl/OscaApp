@@ -1,5 +1,8 @@
 ﻿ 
-function ConsultaProduto() {
+function ConsultaProduto(evento) {
+
+    if (evento.keyCode != 13) return false;
+
 
     var lista = $("#osc_listaPreco").val();
     var filtroProduto = $("#osc_pesquisaProduto").val();
