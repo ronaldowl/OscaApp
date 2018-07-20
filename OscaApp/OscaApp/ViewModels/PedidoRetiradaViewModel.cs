@@ -9,6 +9,8 @@ namespace OscaApp.ViewModels
     {
        public PedidoRetirada pedidoRetirada { get; set; }
        public Relacao cliente { get; set; }
+       public Relacao profissional { get; set; }
+
        public ContextPage contexto { get; set; }
 
         public string StatusMessage { get; set; }

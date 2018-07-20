@@ -16,7 +16,8 @@ namespace OscaApp.RulesServices
 
             SqlGeneric sqlServic = new SqlGeneric();
             modelo.codigo = sqlServic.RetornaNovaPosicao(33,contexto.idOrganizacao);
-                                 
+            modelo.idCliente = entrada.cliente.id;
+            modelo.idProfissional = entrada.profissional.id;                                 
  
             if (modelo.codigo != null)
             {

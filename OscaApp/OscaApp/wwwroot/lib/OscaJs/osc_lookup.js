@@ -11,3 +11,28 @@ function CarregaLookupCliente() {
         $("#lookupCliente").modal("show");
     })
 }
+
+function CarregaUpdateProdutoOrdem(id) {
+    $("#ModalProdutoOrdem").load("/ProdutoOrdem/FormUpdateProdutoOrdem?id=" + id, function () {
+        $("#ModalProdutoOrdem").modal("show");
+    });
+}
+
+function CarregaLookupProfissional() {
+
+    $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
+        $("#lookupProfissional").modal("show");
+    });
+}
+
+function CarregaLookupCategoriaManutencao() {
+    $("#lookupCategoriaManutencao").load("/CategoriaManutencao/LookupCategoriaManutencao", function () {
+        $("#lookupCategoriaManutencao").modal("show");
+    })
+}
+
+function CarregaUpdateServicoOrdem(id) {
+    $("#ModalServicoOrdem").load("/ServicoOrdem/FormUpdateServicoOrdem?id=" + id, function () {
+        $("#ModalServicoOrdem").modal("show");
+    });
+}

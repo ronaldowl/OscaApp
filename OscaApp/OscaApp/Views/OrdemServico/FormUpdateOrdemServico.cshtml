@@ -1,20 +1,6 @@
 ﻿@model OscaApp.ViewModels.OrdemServicoViewModel
 
 <script>
-    //var idOrdemServico = window.parent.document.getElementById('osc_id').value;
-    //var idListaPreco = window.parent.document.getElementById('osc_idListaPreco').value;
-
-    function CarregaLookupCliente() {
-        $("#lookupCliente").load("/Cliente/LookupCliente", function () {
-            $("#lookupCliente").modal("show");
-        })
-    }
-
-    function CarregaLookupCategoriaManutencao() {
-        $("#lookupCategoriaManutencao").load("/CategoriaManutencao/LookupCategoriaManutencao", function () {
-            $("#lookupCategoriaManutencao").modal("show");
-        })
-    }
 
     function CarregaFormStatusOrdemServico() {
         $("#ModalStatusOrdem").load("/OrdemServico/FormStatusOrdemServico?id=" + '@Model.ordemServico.id' , function () {
@@ -22,35 +8,14 @@
         });
     }
 
-    function CarregaLookupProfissional() {
-
-        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
-            $("#lookupProfissional").modal("show");
-        });
-    }
-
-
     function CarregaProdutoOrdem() {
         $("#ModalProdutoOrdem").load("/ProdutoOrdem/FormCreateProdutoOrdem?id=" + '@Model.ordemServico.id' + "&idListaPreco=" + '@Model.ordemServico.idListaPreco', function () {
             $("#ModalProdutoOrdem").modal("show");
         });
     }
 
-
-    function CarregaUpdateProdutoOrdem(id) {
-        $("#ModalProdutoOrdem").load("/ProdutoOrdem/FormUpdateProdutoOrdem?id=" + id, function () {
-            $("#ModalProdutoOrdem").modal("show");
-        });
-    }
     function CarregaServicoOrdem() {
         $("#ModalServicoOrdem").load("/ServicoOrdem/FormCreateServicoOrdem?id=" +  '@Model.ordemServico.id', function () {
-            $("#ModalServicoOrdem").modal("show");
-        });
-    }
-
-
-    function CarregaUpdateServicoOrdem(id) {
-        $("#ModalServicoOrdem").load("/ServicoOrdem/FormUpdateServicoOrdem?id=" + id, function () {
             $("#ModalServicoOrdem").modal("show");
         });
     }
@@ -425,7 +390,7 @@
                         </table>
                     </div>
                     <div id="MainGridProduto" class="embed-responsive embed-responsive-21by9">
-                        <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="300"  ></iframe>
+                        <iframe class="embed-responsive-item" src="/ProdutoOrdem/GridProdutoOrdem?id=@Model.ordemServico.id" height="300"></iframe>
                     </div>
                     <div class="card-header">
                         <table>
@@ -443,7 +408,7 @@
                         </table>
                     </div>
                     <div id="MainGridServico" class="embed-responsive embed-responsive-21by9">
-                        <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id"   ></iframe>
+                        <iframe class="embed-responsive-item" src="/ServicoOrdem/GridServicoOrdem?id=@Model.ordemServico.id"></iframe>
                     </div>
 
                 </div>
@@ -516,6 +481,8 @@
 </div>
 
 <script src="~/lib/OscaJs/osc_ordemServico.js"></script>
+<script src="~/lib/OscaJs/osc_lookup.js"></script>
+
 
 <script>
     OnLoad_OrdemServico();
