@@ -19,11 +19,13 @@ namespace OscaApp.Controllers
     public class PedidoRetiradaController : Controller
     {
         private readonly IPedidoRetiradaData modeloData;
+        private readonly IClienteData clienteData;
         private ContextPage contexto;
 
         public PedidoRetiradaController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.modeloData = new PedidoRetiradaData(db);
+            this.clienteData = new ClienteData(db);
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
@@ -133,6 +135,7 @@ namespace OscaApp.Controllers
         public ViewResult ImpressaoPedidoRetirada(string id)
         {
             ImpressaoPedidoRetiradaViewModel modelo = new ImpressaoPedidoRetiradaViewModel();
+
             modelo.pedidoRetirada = new PedidoRetirada();
             modelo.pedidoRetirada.id = new Guid(id);
 
@@ -141,10 +144,11 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = modeloData.Get(modelo.pedidoRetirada.id, contexto.idOrganizacao);
+                modelo.cliente = clienteData.Get(modelo.cliente.id, contexto.idOrganizacao);
 
                 if (retorno != null)
                 {
-                    modelo.pedidoRetirada = retorno;                   
+                    modelo.pedidoRetirada = retorno;
                 }
             }
             return View(modelo);
