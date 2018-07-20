@@ -9,6 +9,8 @@ namespace OscaFramework.Models
     {
         public String codigo { get; set; }
         public Guid idOrganizacao { get; set; }
+        public Guid idCliente { get; set; }
+        public Guid idProfissional { get; set; }
 
         public decimal valorTotal { get; set; }
         public string anotacao { get; set; }
@@ -21,6 +23,9 @@ namespace OscaFramework.Models
 
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorDesconto { get; set; }
+
+
+
 
         public PedidoRetirada()
         {
