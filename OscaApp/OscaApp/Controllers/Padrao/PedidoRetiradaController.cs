@@ -21,6 +21,8 @@ namespace OscaApp.Controllers
     {
         private readonly IPedidoRetiradaData modeloData;
         private readonly IClienteData clienteData;
+        private readonly IOrgConfigData orgConfigData;
+        private readonly IOrganizacaoData organizacaoData;
         private ContextPage contexto;
         private readonly SqlGenericData Sqlservice;
 
@@ -28,6 +30,8 @@ namespace OscaApp.Controllers
         {
             this.modeloData = new PedidoRetiradaData(db);
             this.clienteData = new ClienteData(db);
+            this.orgConfigData = new OrgConfigData(db);
+            this.organizacaoData = new OrganizacaoData(db);
             this.Sqlservice = new SqlGenericData();
             this.contexto = new ContextPage().ExtractContext(httpContext);
         }
@@ -148,6 +152,8 @@ namespace OscaApp.Controllers
             modelo.pedidoRetirada = new PedidoRetirada();
             modelo.pedidoRetirada.id = new Guid(id);
             modelo.cliente = new Cliente();
+            modelo.orgConfig = new OrgConfig();
+            modelo.organizacao = new Organizacao();
 
             PedidoRetirada retorno = new PedidoRetirada();
 
@@ -155,6 +161,8 @@ namespace OscaApp.Controllers
             {
                 retorno = modeloData.Get(modelo.pedidoRetirada.id, contexto.idOrganizacao);
                 modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
+                modelo.orgConfig = orgConfigData.Get(contexto.idOrganizacao);
+                modelo.organizacao = organizacaoData.Get(contexto.idOrganizacao);
 
                 if (retorno != null)
                 {

@@ -5,8 +5,8 @@
 <header>
     <div class="row">
         <div class="col-md-12 text-center">
-            <h1 class="fonte-kac"><strong>K.A.C</strong> REMOÇÃO DE ENTULHOS</h1>
-            <h2><span class="fonte-kac">Contato: </span>3447-9461 / 3483-5530 </h2>
+            <h1>@Model.organizacao.nomeAmigavel</h1>
+            <h2>Contato: 3447-9461 / 3483-5530 </h2>
         </div>
     </div>
 </header>
@@ -85,9 +85,9 @@
                     <div class="col-md-4 mb-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text">Valor unitário:</span>
+                                <span class="input-group-text">Valor Total:</span>
                             </div>
-                            <input type="text" id="vlrUnitario" asp-for="@Model.orgConfig.margemBaseProduto" name="vlrUnitario" class="form-control">
+                            <input type="text" id="vlrUnitario" asp-for="@Model.pedidoRetirada.valorTotal" name="vlrUnitario" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-4 mb-2">
@@ -124,8 +124,11 @@
         <div class="col-12">
             <h5 class="fonte-kac text-center">IMPORTANTE!</h5>
         </div>
-        <div class="col-12 mb-1">
-            <ul class="mt-1">
+        <div class="col-12 my-1">
+            <p>
+                @Model.orgConfig.mensagemPedido
+            </p>
+            @*<ul class="mt-1">
                 <strong>A falta de pagamento implicará na devolução do material.</strong>
                 <li>É expressamente proibido lixo domiciliar, hospitalar ou industrial, podas de árvores e material de jardinagem nas caçambas.</li>
                 <li>O entulho não deverá ultrapassar as bordas da caçamba.</li>
@@ -134,7 +137,7 @@
                 <li>O prazo de locação é de 3 (três) dias úteis.</li>
                 <li>É proibido colocar a caçamba em cima de passeio para pedestres.</li>
                 <li>Horário de atendimento: de segunda a sexta das 8 às 18 horas, sábado das 8 às 12 horas.</li>
-            </ul>
+            </ul>*@
         </div>
     </div>
     <div class="row">
@@ -155,8 +158,8 @@
     <div class="mt-5">
         <div class="row">
             <div class="col-md-12 mt-3 text-center">
-                <h1 class="fonte-kac"><strong>K.A.C</strong> REMOÇÃO DE ENTULHOS</h1>
-                <h2><span class="fonte-kac">Contato: </span>3447-9461 / 3483-5530 </h2>
+                <h1>@Model.organizacao.nomeAmigavel</h1>
+                <h2>Contato: 3447-9461 / 3483-5530 </h2>
             </div>
         </div>
     </div>
@@ -234,9 +237,9 @@
                         <div class="col-md-4 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Valor unitário:</span>
+                                    <span class="input-group-text">Valor Total:</span>
                                 </div>
-                                <input type="text" id="vlrUnitario_2" name="vlrUnitario_2" asp-for="@Model.orgConfig.margemBaseProduto" class="form-control">
+                                <input type="text" id="vlrUnitario_2" name="vlrUnitario_2" asp-for="@Model.pedidoRetirada.valorTotal" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
