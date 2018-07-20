@@ -129,5 +129,26 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<PedidoRetirada>(Page, 20));
         }
+        [HttpGet]
+        public ViewResult ImpressaoPedidoRetirada(string id)
+        {
+            ImpressaoPedidoRetiradaViewModel modelo = new ImpressaoPedidoRetiradaViewModel();
+            modelo.pedidoRetirada = new PedidoRetirada();
+            modelo.pedidoRetirada.id = new Guid(id);
+
+            PedidoRetirada retorno = new PedidoRetirada();
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                retorno = modeloData.Get(modelo.pedidoRetirada.id, contexto.idOrganizacao);
+
+                if (retorno != null)
+                {
+                    modelo.pedidoRetirada = retorno;                   
+                }
+            }
+            return View(modelo);
+        }
+
     }
 }
