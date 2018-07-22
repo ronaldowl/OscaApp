@@ -1,4 +1,4 @@
-﻿ 
+﻿
 function ConsultaProduto(evento) {
 
     if (evento.keyCode != 13) return false;
@@ -86,11 +86,11 @@ function inserirLinha(idItemListaPreco, codigo, NomeProduto, valorProduto, lista
 };
 
 function RemoveLinhaProduto(linha) {
-    
+
     var chaveTr = "#keyPro_" + linha;
     $(chaveTr).remove();
-     SomaTotal();
-       
+    SomaTotal();
+
 }
 function calcularLinha(chaveLinha) {
 
@@ -116,16 +116,36 @@ function calcularLinha(chaveLinha) {
 function SomaTotal() {
 
     var VALORTOTAL = 0;
+    var totalDesconto = 0;
+    var tipoDesconto = $('#osc_tipoDesconto').val();
+    var valorDesconto = $('#osc_valorDesconto').val();
 
     $('#produtosVendas > tbody tr .somaTD').each(function (i) {
         VALORTOTAL += parseFloat($(this).val().replace('$', '').replace('R', '').replace('.', ''));
     });
-    
+
+    if (tipoDesconto == 1) {
+
+        if (valorDesconto != undefined || valorDesconto > 0) {
+
+            totalDesconto = VALORTOTAL - valorDesconto;
+        }
+
+    } else {
+
+        if (valorDesconto != undefined || valorDesconto > 0)
+        {
+            totalDesconto = (VALORTOTAL / 100) * valorDesconto;
+        }
+    }
+
+    VALORTOTAL = VALORTOTAL - totalDesconto;
+
     $('#ValorTotalVendas').val('TOTAL: ' + FormatMoney(VALORTOTAL));
     $('#ValorTotalVendasDiag').val('TOTAL: ' + FormatMoney(VALORTOTAL));
-        
+
     $('#InputValorTotalVendas').val(VALORTOTAL);
-        
+
 }
 
 function LimpaBusca() {
@@ -137,35 +157,35 @@ function LimpaBusca() {
 }
 
 
-function Execute(){
-       
+function Execute() {
+
     var url = '/API/BalcaoVendasAPI/GravarVenda';
     var produtosBalcaoP = MontaListaObjeto();
     var Entrada = MontaObjetoEntrada();
     var entradaCliente = MontaObjetoCliente();
-      
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: {
-                modelo: Entrada,
-                produtosBalcao: produtosBalcaoP,
-                cliente: entradaCliente
-            },
-            datatype: 'json',
-            ContentType: 'application/json;utf-8'
-        }).done(function (resp) {
 
-            if (resp.statusOperation == true) {
-              
-                $(window.document.location).attr('href', 'BalcaoVendasView?id=' + resp.id);
-            } else {
-                alert('Falha ao atualizar! - ' + dados.statusMensagem);
-            }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: {
+            modelo: Entrada,
+            produtosBalcao: produtosBalcaoP,
+            cliente: entradaCliente
+        },
+        datatype: 'json',
+        ContentType: 'application/json;utf-8'
+    }).done(function (resp) {
 
-        }).error(function (err) {
-            //alert("Error " + err.status);
-        });     
+        if (resp.statusOperation == true) {
+
+            $(window.document.location).attr('href', 'BalcaoVendasView?id=' + resp.id);
+        } else {
+            alert('Falha ao atualizar! - ' + dados.statusMensagem);
+        }
+
+    }).error(function (err) {
+        //alert("Error " + err.status);
+    });
 
 }
 
@@ -173,17 +193,17 @@ function MontaObjetoEntrada() {
 
     var ObjetoEntrada = new Object();
 
-    ObjetoEntrada.valorTotal =          $('#InputValorTotalVendas').val();
-    ObjetoEntrada.idListaPreco =        $('#osc_listaPreco').val();
-    ObjetoEntrada.cpf =                 $('#osc_cnpj_cpf').val();
-    ObjetoEntrada.condicaoPagamento   = $('#osc_condicaoPagamento').val();
-    ObjetoEntrada.tipoPagamento =       $('#osc_tipoPagamento').val();    
-    ObjetoEntrada.parcelas =            $('#osc_parcelas').val();    
-    ObjetoEntrada.diaVencimento       = $('#osc_diaVencimento').val();    
-    ObjetoEntrada.valorDesconto =       $('#osc_valorDesconto').val();    
-    ObjetoEntrada.tipoDesconto =        $('#osc_tipoDesconto').val();    
+    ObjetoEntrada.valorTotal = $('#InputValorTotalVendas').val();
+    ObjetoEntrada.idListaPreco = $('#osc_listaPreco').val();
+    ObjetoEntrada.cpf = $('#osc_cnpj_cpf').val();
+    ObjetoEntrada.condicaoPagamento = $('#osc_condicaoPagamento').val();
+    ObjetoEntrada.tipoPagamento = $('#osc_tipoPagamento').val();
+    ObjetoEntrada.parcelas = $('#osc_parcelas').val();
+    ObjetoEntrada.diaVencimento = $('#osc_diaVencimento').val();
+    ObjetoEntrada.valorDesconto = $('#osc_valorDesconto').val();
+    ObjetoEntrada.tipoDesconto = $('#osc_tipoDesconto').val();
 
-    
+
     return ObjetoEntrada;
 }
 
@@ -191,28 +211,28 @@ function MontaObjetoCliente() {
 
     var ObjetoCliente = new Object();
 
-    ObjetoCliente.id =          $('#osc_clienteId').val();
+    ObjetoCliente.id = $('#osc_clienteId').val();
     ObjetoCliente.nomeCliente = $('#osc_clienteIdName').val();
-    ObjetoCliente.tipoPessoa =  $('#osc_tipopessoa').val();
-    ObjetoCliente.email =       $('#osc_email').val();
-    ObjetoCliente.telefone =    $('#osc_telefone').val();
-    ObjetoCliente.cnpj_cpf =    $('#osc_cnpj_cpf').val();
-  
+    ObjetoCliente.tipoPessoa = $('#osc_tipopessoa').val();
+    ObjetoCliente.email = $('#osc_email').val();
+    ObjetoCliente.telefone = $('#osc_telefone').val();
+    ObjetoCliente.cnpj_cpf = $('#osc_cnpj_cpf').val();
+
     return ObjetoCliente;
 }
 
 function MontaListaObjeto() {
 
-    var todos = [];    
+    var todos = [];
 
     $('#produtosVendas > tbody tr').each(function (index, object) {
-                      
+
         var entidade = {
             idItemListaPreco: $(this).find('.idItemListaPreco').val(),
-            quantidade:   $(this).find('.qtd').val(),
+            quantidade: $(this).find('.qtd').val(),
             idListaPreco: $(this).find('.lista').val(),
-            valor:        $(this).find('.valor').val().replace('$', '').replace('R', '').replace('.', ''),
-            valorTotal:   $(this).find('.somaTD').val().replace('$', '').replace('R', '').replace('.', '')      
+            valor: $(this).find('.valor').val().replace('$', '').replace('R', '').replace('.', ''),
+            valorTotal: $(this).find('.somaTD').val().replace('$', '').replace('R', '').replace('.', '')
         };
 
         todos.push(entidade);
@@ -223,13 +243,13 @@ function MontaListaObjeto() {
 
 function CalcularParcela() {
 
-    var valorTotal =    $('#InputValorTotalVendas').val();
-    var parcelas =      $('#osc_parcelas').val(); 
+    var valorTotal = $('#InputValorTotalVendas').val();
+    var parcelas = $('#osc_parcelas').val();
     var calcResult = 0;
 
     calcResult = valorTotal / parcelas;
 
-    $('#osc_valorParcela').val(FormatMoney(calcResult)); 
+    $('#osc_valorParcela').val(FormatMoney(calcResult));
 }
 
 function HabilitaParcela() {
@@ -237,11 +257,11 @@ function HabilitaParcela() {
     var condPag = document.getElementById("osc_condicaoPagamento");
 
     if (condPag.value == 3) {
- 
+
         document.getElementById("div_Parcela").hidden = false;
         document.getElementById("div_DiaVencimento").hidden = false;
         document.getElementById("div_valorParcela").hidden = false;
-        
+
 
     } else {
 
@@ -249,9 +269,9 @@ function HabilitaParcela() {
         document.getElementById("div_DiaVencimento").hidden = true;
         document.getElementById("div_valorParcela").hidden = true;
 
-        $("#osc_parcelas").val('1');       
-        $("#osc_diaVencimento").val('1');    
-        $("#osc_valorParcela").val('R$ 0,00');              
-                
+        $("#osc_parcelas").val('1');
+        $("#osc_diaVencimento").val('1');
+        $("#osc_valorParcela").val('R$ 0,00');
+
     }
 }
