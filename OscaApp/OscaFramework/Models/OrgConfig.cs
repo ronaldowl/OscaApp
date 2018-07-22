@@ -19,6 +19,10 @@ namespace OscaFramework.Models
 
         public string mensagemPedido { get; set; }
 
+        public string mensagemCupom { get; set; }
+
+        public string tituloImpressao { get; set; }
+
 
         public OrgConfig()
         {

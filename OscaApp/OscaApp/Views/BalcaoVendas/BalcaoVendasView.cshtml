@@ -11,6 +11,9 @@
         ImprimeTextoSemFormatacao();
         Finaliza();
     }
+        function Imprimir2(){
+        window.open("/BalcaoVendas/ImpressaoCupom?id=" + '@Model.balcaoVendas.id', "Print", "width=950,height=700");
+    }
 
   
     function ImprimeTextoSemFormatacao() {
@@ -69,7 +72,7 @@
                                         <button id="osc_fechar" type="button" class="btn btn-danger btn-lg fa fa-close" value="" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"> <span>Fechar</span></button>
                                     </label>
                                     <label>
-                                        <button id="osc_imprimir" type="button" class="btn btn-success btn-lg fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Cupom</span></button>
+                                        <button id="osc_imprimir" type="button" class="btn btn-success btn-lg fa fa-print" value="" onclick="Imprimir2();"> <span>Emitir Cupom</span></button>
                                     </label>
                                     <label>
                                         <button id="osc_reabrir" type="button" class="btn btn-info btn-lg fa fa-exclamation" value="" onclick="CarregaFormStatus()"> <span>Cancelar</span></button>
@@ -99,7 +102,7 @@
                                     <div class="form-group">
                                         <label class="control-label" style="color:deepskyblue">Cliente</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon">
+                                            <span class="input-group-text">
                                                 <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>
                                             </span>
                                             <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" disabled="disabled">

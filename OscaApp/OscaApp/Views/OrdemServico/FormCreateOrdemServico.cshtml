@@ -51,7 +51,9 @@
                                 <label>Código</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-asterisk fa-2x"></i></span>
+                                        </div>
                                         <input id="osc_codigo" asp-for="@Model.ordemServico.codigo" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
@@ -59,9 +61,11 @@
                             <div class="form-group">
                                 <label>Cliente*</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-user-o fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-user-o fa-2x"></span>
+                                        </div>
+                                    </div>
                                     <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
                                     <span class="input-group-btn ">
                                         <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
@@ -74,9 +78,11 @@
                             <div class="form-group">
                                 <label>Tipo </label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </div>
+                                    </div>
                                     <select id="osc_tipo" asp-for="@Model.ordemServico.tipo" class="form-control" required="required">
                                         <option value="1" selected="">Orçamento</option>
                                         <option value="2">Execução</option>
@@ -89,9 +95,11 @@
                             <div class="form-group">
                                 <label>Tipo de Desconto</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </div>
+                                    </div>
                                     <select id="osc_tipoDesconto" asp-for="@Model.ordemServico.tipoDesconto" class="form-control">
                                         <option value="1" selected="">Valor</option>
                                         <option value="2">Percentual</option>
@@ -101,18 +109,23 @@
                             <div class="form-group">
                                 <label>Valor Desconto</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-calculator fa-2x"></span>
+                                        </div>
+                                    </div>
                                     <input id="osc_valorDesconto" asp-for="@Model.ordemServico.valorDesconto" type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>% Desconto</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-calculator fa-2x"></span>
+                                        </div>
+                                    </div>
+
                                     <input id="osc_valorDescontoPercentual" asp-for="@Model.ordemServico.valorDescontoPercentual" type="text" class="form-control" />
                                 </div>
                             </div>
@@ -120,7 +133,11 @@
                                 <label class="control-label">Lista de Preço</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-asterisk fa-2x"></i>
+                                            </div>
+                                        </div>
                                         <select asp-items="@Model.listasPreco" asp-for="@Model.ordemServico.idListaPreco" id="osc_listaPreco" required="required"></select>
                                     </div>
                                 </div>
@@ -130,9 +147,11 @@
                             <div class="form-group">
                                 <label>Tipo de Pagamento</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </div>
+                                    </div>
                                     <select id="osc_tipoPagamento" asp-for="@Model.ordemServico.tipoPagamento" class="form-control">
                                         <option value="1" selected="selected">Dinheiro</option>
                                         <option value="2">Cartão Débito</option>
@@ -146,9 +165,12 @@
                             <div class="form-group">
                                 <label>Condição de Pagamento</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </span>
+                                    </div>
+
                                     <select id="osc_codicaoPagamento" asp-for="@Model.ordemServico.condicaoPagamento" class="form-control">
                                         <option value="1" selected>Á Vista</option>
                                         <option value="2">Parcelado</option>
@@ -160,7 +182,7 @@
                             <div class="form-group">
                                 <label>Valor Total</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
+                                    <span class="input-group-text">
                                         <span class="fa fa-calculator fa-2x"></span>&nbsp;
                                     </span>
                                     <input id="osc_valorTotal" asp-for="@Model.ordemServico.valorTotal" type="text" class="form-control" disabled="disabled" />
@@ -170,7 +192,7 @@
                                 <label>Status Ordem Servico</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <span class="input-group-text"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
                                         <input id="osc_statusOrdemServico" asp-for="@Model.ordemServico.statusOrdemServico" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
@@ -183,7 +205,7 @@
                                 <label>Data de Fechamento</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
+                                        <span class="input-group-text"><i class="fa fa-calendar-check-o fa-2x"></i></span>&nbsp;
                                         <input id="osc_dataFechamento" asp-for="@Model.ordemServico.dataFechamento" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
@@ -199,7 +221,7 @@
                         <div class="form-group">
                             <label class="control-label">Criado Por</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-text">
                                     <span class="fa fa-2x fa-user"></span>
                                 </span> &nbsp;
                                 <input id="osc_criadoPor" asp-for="@Model.ordemServico.criadoPorName" type="text" class="form-control" disabled="disabled" />
@@ -210,7 +232,7 @@
                         <div class="form-group">
                             <label class="control-label">Criado Em</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-text">
                                     <span class="fa fa-calendar fa-2x"></span>
                                 </span> &nbsp;
                                 <input id="osc_criadoEm" asp-for="@Model.ordemServico.criadoEm" type="text" class="form-control" disabled="disabled" />
@@ -221,7 +243,7 @@
                         <div class="form-group">
                             <label class="control-label">Modificado Por</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-text">
                                     <span class="fa fa-2x fa-user"></span>
                                 </span> &nbsp;
                                 <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
@@ -232,7 +254,7 @@
                         <div class="form-group">
                             <label class="control-label">Modificado Em</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-text">
                                     <span class="fa fa-calendar fa-2x"></span>
                                 </span> &nbsp;
                                 <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />

@@ -20,8 +20,12 @@ namespace OscaApp.Controllers
     [Authorize]
     public class BalcaoVendasController : Controller
     {        
-        private readonly IBalcaoVendasData balcaoVendasData;    
+        private readonly IBalcaoVendasData balcaoVendasData;
+        private readonly IClienteData clienteData;
+        private readonly IOrganizacaoData organizacaoData;
+        private readonly IOrgConfigData orgConfigData;
         private readonly IListaPrecoData listaprecoData;
+        private readonly IProdutoData produtoData;
         private readonly SqlGenericData Sqlservice;
         private readonly SqlGeneric sqlGeneric;
 
@@ -33,6 +37,10 @@ namespace OscaApp.Controllers
              
             this.balcaoVendasData = new BalcaoVendasData(db);        
             this.listaprecoData = new ListaPrecoData(db);
+            this.clienteData = new ClienteData(db);
+            this.organizacaoData = new OrganizacaoData(db);
+            this.orgConfigData = new OrgConfigData(db);
+            this.produtoData = new ProdutoData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.Sqlservice = new SqlGenericData();
             this.sqlGeneric = new SqlGeneric();
@@ -176,6 +184,37 @@ namespace OscaApp.Controllers
             {
                 LogOsca log = new LogOsca();
                 log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusBalcaoVendas-get", ex.Message);
+            }
+            return View(modelo);
+        }
+        [HttpGet]
+        public ViewResult ImpressaoCupom(string id)
+
+        {
+            ImpressaoCupomViewModel modelo = new ImpressaoCupomViewModel();
+
+            modelo.balcaoVendas = new BalcaoVendas();
+            modelo.balcaoVendas.id = new Guid(id);
+            modelo.cliente = new Cliente();
+            modelo.produto = new Produto();
+            modelo.orgConfig = new OrgConfig();
+            modelo.organizacao = new Organizacao();
+
+            BalcaoVendas retorno = new BalcaoVendas();
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                retorno = balcaoVendasData.Get(modelo.balcaoVendas.id);
+                if(retorno.idCliente != Guid.Empty) modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
+                modelo.orgConfig = orgConfigData.Get(contexto.idOrganizacao);
+                modelo.produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(new Guid(id));
+                modelo.organizacao = organizacaoData.Get(contexto.idOrganizacao);
+                //modelo.produto = produtoData.Get(retorno.produto.id,contexto.idOrganizacao);
+
+                if (retorno != null)
+                {
+                    modelo.balcaoVendas = retorno;
+                }
             }
             return View(modelo);
         }

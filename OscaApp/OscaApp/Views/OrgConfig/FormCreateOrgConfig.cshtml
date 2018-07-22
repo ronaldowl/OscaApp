@@ -38,10 +38,12 @@
                                 <div class="form-group">
                                     <label>Margem base do produto</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-money fa-2x"></span>&nbsp;
-                                        </span>
-                                        <input id="osc_margemBaseProduto" asp-for="@Model.orgConfig.margemBaseProduto" type="text" class="form-control"/>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-money fa-2x"></span>
+                                            </span>
+                                        </div>
+                                        <input id="osc_margemBaseProduto" asp-for="@Model.orgConfig.margemBaseProduto" type="text" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -50,21 +52,45 @@
                                     <label>Quantidade de dias no cartão de crédito</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-credit-card-alt fa-2x"></i></span>&nbsp;
-                                            <input id="osc_qtdDiasCartaoCredito" asp-for="@Model.orgConfig.qtdDiasCartaoCredito"  class="form-control" type="number">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-credit-card-alt fa-2x"></i></span>
+                                            </div>
+                                            <input id="osc_qtdDiasCartaoCredito" asp-for="@Model.orgConfig.qtdDiasCartaoCredito" class="form-control" type="number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Quantidade de dias no cartão de débito</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-credit-card fa-2x"></i></span>
+                                            </div>
+                                            <input id="osc_qtdDiasCartaoDebito" asp-for="@Model.orgConfig.qtdDiasCartaoDebito" class="form-control" type="number">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Quantidade de dias no cartão de débito</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-credit-card fa-2x"></i></span>&nbsp;
-                                            <input id="osc_qtdDiasCartaoDebito" asp-for="@Model.orgConfig.qtdDiasCartaoDebito" class="form-control" type="number">
+                                    <label>Título para a impressão</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-comment-o fa-2x"></span>
+                                            </span>
                                         </div>
+                                        <textarea id="osc_tituloImpressao" asp-for="@Model.orgConfig.tituloImpressao" class="form-control" rows="4" cols="2" placeholder="..."></textarea>
                                     </div>
+                                </div>
+                                <label>Mensagem do cupom</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-comment-o fa-2x"></span>
+                                        </span>
+                                    </div>
+                                    <textarea id="osc_mensagemCupom" asp-for="@Model.orgConfig.mensagemCupom" class="form-control" rows="4" cols="2" placeholder="..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -73,9 +99,11 @@
                                 <div class="form-group">
                                     <label>Mensagem</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-comment-o fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <textarea id="osc_mensagem" asp-for="@Model.orgConfig.mensagemPedido" class="form-control" rows="9" cols="4" placeholder="digite uma mensagem para o pedido"></textarea>
                                     </div>
                                 </div>
@@ -89,9 +117,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Criado Por</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-2x fa-user"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_criadoPor" asp-for="@Model.orgConfig.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -100,9 +130,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Criado Em</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-calendar fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_criadoEm" asp-for="@Model.orgConfig.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -111,9 +143,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Modificado Por</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-2x fa-user"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -122,9 +156,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Modificado Em</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-calendar fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
