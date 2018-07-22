@@ -30,7 +30,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-11">
+    <div class="col-md-12">
         @if (!String.IsNullOrEmpty(Model.StatusMessage))
         {
 
@@ -60,7 +60,6 @@
                                         <label>
                                             <button id="osc_calcular" type="submit" class="btn btn-info btn-sm fa fa-calculator" value=""> <span>Calcular Pedido</span></button>
                                         </label>
-
                                         <label>
                                             <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatusPedido()"> <span>Reabrir</span></button>
                                         </label>
@@ -96,18 +95,22 @@
                             <div class="form-group">
                                 <label>Código do Pedido</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-asterisk fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <input id="osc_codigo" asp-for="pedido.codigoPedido" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Cliente*</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente();" style="cursor:pointer"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente();" style="cursor:pointer"></span>   
+                                        </span>
+                                    </div>
                                     <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" disabled="disabled">
                                     <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                 </div>
@@ -116,9 +119,11 @@
                             <div class="form-group">
                                 <label>Código do Cliente</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-asterisk fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <input id="osc_codigoCliente" asp-for="@Model.cliente.codigo" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
@@ -127,7 +132,9 @@
                                 <label class="control-label">Lista de Preço</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-asterisk fa-2x"></i></span>
+                                        </div>
                                         <input id="osc_idNameListaPreco" asp-for="@Model.listapreco.idName" type="text" class="form-control" disabled="disabled" />
                                         <input id="osc_idListaPreco" asp-for="@Model.listapreco.idName" type="hidden" class="form-control" value="@Model.listapreco.id" />
                                     </div>
@@ -138,9 +145,11 @@
                             <div class="form-group">
                                 <label>Tipo Pagamento</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <select id="osc_tipoPagamento" asp-for="@Model.pedido.tipoPagamento" class="form-control" required="required">
                                         <option value="1">Dinheiro</option>
                                         <option value="2">Cartão Débito</option>
@@ -154,9 +163,11 @@
                             <div class="form-group">
                                 <label>Condição de Pagamento</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <select id="osc_condicaoPagamento" asp-for="@Model.pedido.condicaoPagamento" class="form-control" required="required">
                                         <option value="1">Á Vista</option>
                                         <option value="2">Parcelado</option>
@@ -168,11 +179,13 @@
                             <div class="form-group">
                                 <label>Método de Entrega</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-truck fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-truck fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <select id="osc_metodoEntrega" asp-for="@Model.pedido.metodoEntrega" class="form-control" required="required" onchange="LimpaCNPJ_CPF()">
-                                        <option value="1"  >Cliente Retira</option>
+                                        <option value="1">Cliente Retira</option>
                                         <option value="2">Sedex</option>
                                         <option value="3">Transportadora</option>
                                         <option value="4">Depósito</option>
@@ -184,9 +197,11 @@
                             <div class="form-group">
                                 <label>Valor Frete</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-truck fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-truck fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <input id="osc_valorFrete" asp-for="@Model.pedido.valorFrete" type="text" class="form-control" />
                                 </div>
                             </div>
@@ -195,9 +210,11 @@
                             <div class="form-group">
                                 <label>Tipo de Desconto</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-list-ul fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <select id="osc_tipoDesconto" asp-for="@Model.pedido.tipoDesconto" class="form-control" onchange="Onchage_PedidoTipoDesconto();">
                                         <option value="1">Valor</option>
                                         <option value="2">Percentual</option>
@@ -207,27 +224,34 @@
                             <div class="form-group">
                                 <label>Valor Desconto</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-calculator fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <input id="osc_valorDesconto" asp-for="@Model.pedido.valorDesconto" type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>% Desconto</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-calculator fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <input id="osc_valorDescontoPercentual" asp-for="@Model.pedido.valorDescontoPercentual" type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Valor Total</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-calculator fa-2x"></span>
+                                        </span>
+                                    </div>
+
                                     <input id="osc_valorTotal" asp-for="@Model.pedido.valorTotal" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
@@ -236,9 +260,11 @@
                             <div class="form-group">
                                 <label>Status do Pedido</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-exclamation fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-exclamation fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <select id="osc_statusPedido" asp-for="@Model.pedido.statusPedido" class="form-control" style="background-color:aquamarine">
                                         <option value="1">Em Andamento</option>
                                         <option value="2">Fechado</option>
@@ -252,7 +278,9 @@
                                 <label class="control-label">Data Fechamento</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fa fa-calendar fa-2x"></i></span>
+                                        </div>
                                         <input asp-for="@Model.pedido.dataFechamento" class="form-control" type="date" id="osc_dataFechamento" disabled="disabled">
                                     </div>
                                 </div>
@@ -260,9 +288,11 @@
                             <div class="form-group">
                                 <label>Anotação</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                    </span>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <span class="fa fa-comment-o fa-2x"></span>
+                                        </span>
+                                    </div>
                                     <textarea id="osc_anotacao" asp-for="@Model.pedido.anotacao" class="form-control" rows="4" cols="4" placeholder="digite uma anotação"></textarea>
                                 </div>
                             </div>
@@ -295,9 +325,11 @@
                         <div class="form-group">
                             <label class="control-label">Criado Por</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-2x fa-user"></span>
-                                </span> &nbsp;
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span>
+                                </div>
                                 <input id="osc_criadoPor" asp-for="@Model.pedido.criadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
@@ -306,9 +338,11 @@
                         <div class="form-group">
                             <label class="control-label">Criado Em</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-2x"></span>
-                                </span> &nbsp;
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span>
+                                </div>
                                 <input id="osc_criadoEm" asp-for="@Model.pedido.criadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
@@ -317,9 +351,11 @@
                         <div class="form-group">
                             <label class="control-label">Modificado Por</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-2x fa-user"></span>
-                                </span> &nbsp;
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span>
+                                </div>
                                 <input id="osc_modificadoPor" asp-for="@Model.pedido.modificadoPorName" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>
@@ -328,9 +364,11 @@
                         <div class="form-group">
                             <label class="control-label">Modificado Em</label>
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-2x"></span>
-                                </span> &nbsp;
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span>
+                                </div>
                                 <input id="osc_modificadoEm" asp-for="@Model.pedido.modificadoEm" type="text" class="form-control" disabled="disabled" />
                             </div>
                         </div>

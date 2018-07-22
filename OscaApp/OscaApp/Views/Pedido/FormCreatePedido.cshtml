@@ -19,7 +19,7 @@
 </div>
 
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <form action="FormCreatePedido" method="post" id="FormCreatePedido">
                 <div class="card " id="osc_MainForm">
                     <div class="card-header">
@@ -49,21 +49,25 @@
                                 <div class="form-group">
                                     <label>Código do Pedido</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-asterisk fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-asterisk fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_codigo" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Cliente*</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-user-o fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
                                         <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
+                                            <button type="button" class="btn btn-lg btn-info" onclick="CarregaLookupCliente()">
                                                 <span class="fa fa-search"></span>
                                             </button>
                                         </span>
@@ -74,7 +78,9 @@
                                     <label class="control-label">Lista de Preço</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-asterisk fa-2x"></i></span>
+                                            </div>
                                             <select asp-items="@Model.listaPrecos" asp-for="@Model.pedido.idListaPreco" id="osc_listaPreco" required="required"></select>
                                         </div>
                                     </div>
@@ -84,9 +90,11 @@
                                 <div class="form-group">
                                     <label>Tipo Pagamento</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-list-ul fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <select id="osc_tipoPagamento" asp-for="@Model.pedido.tipoPagamento" class="form-control" required="required">
                                             <option value="1" selected="selected">Dinheiro</option>
                                             <option value="2">Cartão Débito</option>
@@ -100,9 +108,11 @@
                                 <div class="form-group">
                                     <label>Condição de Pagamento</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-list-ul fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <select id="osc_condicaoPagamento" asp-for="@Model.pedido.condicaoPagamento" class="form-control" required="required">
                                             <option value="1" selected="">Á Vista</option>
                                             <option value="2">Parcelado</option>
@@ -113,9 +123,11 @@
                                 <div class="form-group">
                                     <label>Método de Entrega</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-truck fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-truck fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <select id="osc_metodoEntrega" asp-for="@Model.pedido.metodoEntrega" class="form-control" required="required" onchange="LimpaCNPJ_CPF()">
                                             <option value="1" selected="">Cliente Retira</option>
                                             <option value="2">Sedex</option>
@@ -129,9 +141,11 @@
                                 <div class="form-group">
                                     <label>Valor Frete</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-truck fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-truck fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_valorFrete" asp-for="@Model.pedido.valorFrete" type="text" class="form-control" />
                                     </div>
                                 </div>
@@ -140,18 +154,22 @@
                                 <div class="form-group">
                                     <label>Valor Total</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-calculator fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_valorTotal" asp-for="@Model.pedido.valorTotal" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Anotação</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-comment-o fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <textarea id="osc_anotacao" asp-for="@Model.pedido.anotacao" class="form-control" rows="9" cols="4" placeholder="digite uma anotação"></textarea>
                                     </div>
                                 </div>
@@ -164,9 +182,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Criado Por</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-2x fa-user"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_criadoPor" asp-for="@Model.pedido.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -175,9 +195,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Criado Em</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-calendar fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_criadoEm" asp-for="@Model.pedido.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -186,9 +208,12 @@
                                 <div class="form-group">
                                     <label class="control-label">Modificado Por</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-2x fa-user"></span>
+                                            </span>
+                                        </div>
+
                                         <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -197,9 +222,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Modificado Em</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-calendar fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
