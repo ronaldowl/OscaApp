@@ -299,15 +299,19 @@
                                 <div id="barra_acoes_Foto">
                                     <label>
                                         <button id="osc_upload" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-plus" onclick="location.href='@Url.Action("AddImage", "Produto", new { idProduto = Model.produto.id })'"> <span>Upload</span></button>
-                                    </label>                                  
+                                    </label>
+                                    <label>
+                                        <button id="osc_destacar" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-plus" data-toggle="modal" data-target="#Produto"> <span>Destacar</span></button>
+
+                                    </label>
                                 </div>
                             </td>
-                        </tr>                   
+                        </tr>
                     </table>
                 </div>
             </div>
             <div class="card-body">
-                <img src="@Model.produto.urlProduto" style=" display: block;margin-left: auto; margin-right: auto " width="100" height="100" onclick="zoomToggle('100px','100px','450px','340px',this);" />
+                <img src="@Model.produto.urlProduto" style=" display: block;margin-left: auto; margin-right: auto " width="100" height="100"  />
             </div>
         </div>
         <div class="card card-success" id="osc_itensProdutoListaPreco">
@@ -355,9 +359,27 @@
         </div>
     </div>
 </div>
+<div class="modal fade modal-lg" id="Produto" tabindex="-1" role="dialog" aria-labelledby="sobreModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title " id="produtoModalLongTitle" style="color:white;font-weight:bold">@Model.produto.nome</h5>
+            </div>
+            <div class="modal-body text-center">
+                <picture>                                 
+
+                    <img src="@Model.produto.urlProduto" style="width:100%;height:100%"/>
+                </picture>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-   
+
 
 <script type='text/javascript'>
 

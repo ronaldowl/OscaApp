@@ -50,7 +50,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-user-o fa-2x"></span>&nbsp;
                                     </span>
-                                    <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required">
+                                    <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required" autocomplete="off">
                                     <span class="input-group-btn ">
                                         <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
                                             <span class="fa fa-search"></span>
@@ -64,7 +64,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupProfissional()" style="cursor:pointer"></i></span>&nbsp;
-                                        <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional">
+                                        <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" autocomplete="off">
                                         <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
@@ -113,7 +113,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                     </span>
-                                    <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control" onchange="Onchage_PedidoTipoDesconto();">
+                                    <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control"  >
                                         <option value="1" selected="">Valor</option>
                                         <option value="2">Percentual</option>
                                     </select>
@@ -128,17 +128,26 @@
                                     <input id="osc_valorDesconto" asp-for="@Model.pedidoRetirada.valorDesconto" type="text" class="form-control" />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Valor Total</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                    </span>
-                                    <input id="osc_valorTotal" asp-for="@Model.pedidoRetirada.valorTotal" type="text" class="form-control" disabled="disabled" />
-                                </div>
-                            </div>
                         </div>
                         <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Data Entrega</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.pedidoRetirada.dataEntrega" class="form-control" type="text" id="osc_dataEntrega" autocomplete="off" required="required" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Data Retirada</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.pedidoRetirada.dataRetirada" class="form-control" type="text" id="osc_dataRetirada" autocomplete="off" required="required" value="">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>Status do Pedido de Retirada</label>
                                 <div class="input-group">
@@ -148,8 +157,6 @@
                                     <select id="osc_statusPedido" asp-for="@Model.pedidoRetirada.statusPedidoRetirada" class="form-control" style="background-color:aquamarine">
                                         <option value="0">Em Aprovação</option>
                                         <option value="1">Em Andamento</option>
-                                        <option value="2">Fechado</option>
-                                        <option value="3">Cancelado</option>
                                     </select>
                                 </div>
                             </div>
@@ -222,5 +229,12 @@
 </div>
 <div class="modal fade" id="lookupCliente">
 </div>
+<script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_lookup.js"></script>
+<script src="~/lib/OscaJs/osc_pedidoRetirada.js"></script>
+
+<script>
+    OnLoad_PedidoRetirada();
+</script>
+
 

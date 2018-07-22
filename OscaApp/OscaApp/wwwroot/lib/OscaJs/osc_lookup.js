@@ -6,6 +6,15 @@
     }
 } 
 
+function OpenLookupProfissional() {
+    var id = $("#osc_IdProfissional").val();
+
+    if (id != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/Profissional/FormUpdateProfissional?id=" + id);
+    }
+}  
+
+
 function CarregaLookupCliente() {
     $("#lookupCliente").load("/Cliente/LookupCliente", function () {
         $("#lookupCliente").modal("show");

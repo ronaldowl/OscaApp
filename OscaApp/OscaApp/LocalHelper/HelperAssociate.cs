@@ -77,6 +77,21 @@ namespace OscaApp.framework
             }
             return retorno;
         }
+        public static List<PedidoRetiradaGridViewModel> ConvertToGridPedido(List<PedidoRetirada> itens)
+        {
+            List<PedidoRetiradaGridViewModel> retorno = new List<PedidoRetiradaGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                PedidoRetiradaGridViewModel X = new PedidoRetiradaGridViewModel();
+                X.cliente = sqldata.RetornaCliente(item.idCliente);
+                X.pedidoRetirada = item;
+
+                retorno.Add(X);
+            }
+            return retorno;
+        }
         public static List<PedidoGridViewModel> ConvertToGridPedido(List<Pedido> itens)
         {
             List<PedidoGridViewModel> retorno = new List<PedidoGridViewModel>();

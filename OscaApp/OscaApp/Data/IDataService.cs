@@ -153,9 +153,10 @@ namespace OscaApp.Data
     {
         void Add(PedidoRetirada pedidoRetirada);
         void Update(PedidoRetirada pedidoRetirada);
+        void UpdateStatus(PedidoRetirada pedidoRetirada);
         void Delete(PedidoRetirada pedidoRetirada);
         PedidoRetirada Get(Guid id, Guid idOrg);
-        List<PedidoRetirada> GetAll(Guid idOrg);
+        List<PedidoRetiradaGridViewModel> GetAll(Guid idOrg);
     }
     public interface IOrgConfigData
     {

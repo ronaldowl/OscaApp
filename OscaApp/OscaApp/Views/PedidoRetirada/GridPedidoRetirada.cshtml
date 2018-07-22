@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.PedidoRetirada>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.PedidoRetiradaGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -45,16 +45,34 @@
                         <table class="table table-hover table-bordered table-sm">
                             <thead class="thead-light">
                                 <tr>
-                                    <th></th>
-                                    <th>Código</th>
+                                    <th style="width:10px"></th>
+                                    <th>Código Pedido</th>
+                                    <th>Cliente</th>
+                                    <th>Telefone</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Total</th>
+                                    <th>Data de Criação</th>
+                                    <th>Data de Entrega</th>
+                                    <th>Data de Retirada</th>
+                                    <th>Data de Fechamento</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdatePedidoRetirada", "PedidoRetirada", new {id = item.id })'">
-                                    <td><i class="fa fa-desktop"></i></td>
-                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdatePedidoRetirada", new { id = item.id })</td>
-                                </tr>
+                            <tr style="cursor:pointer;font-size:12px" id="@item.pedidoRetirada.id" onclick="location.href='@Url.Action("FormUpdatePedidoRetirada", "PedidoRetirada", new {id = item.pedidoRetirada.id })'">
+                                <td><i class="fa fa-truck"></i></td>
+                                <td>@Html.ActionLink(item.pedidoRetirada.codigo.ToString(), "FormUpdatePedidoRetirada", new { id = item.pedidoRetirada.id })</td>
+                                <td>@item.cliente.nomeCliente</td>
+                                <td>@item.cliente.telefone</td>
+                                <td>@item.pedidoRetirada.quantidade</td>
+                                <td>R$ @item.pedidoRetirada.valorTotal</td>
+                                <td>@item.pedidoRetirada.criadoEm.ToShortDateString()</td>
+                                <td>@item.pedidoRetirada.dataEntrega.ToShortDateString()</td>
+                                <td>@item.pedidoRetirada.dataRetirada.ToShortDateString()</td>
+                                <td>@item.pedidoRetirada.dataFechamento.ToShortDateString()</td>
+                                <td>@item.pedidoRetirada.statusPedidoRetirada</td>
+                            </tr>
                             }
                         </table>
 

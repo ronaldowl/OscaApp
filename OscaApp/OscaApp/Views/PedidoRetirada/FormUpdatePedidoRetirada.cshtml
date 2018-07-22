@@ -8,9 +8,15 @@
 </div>
 
 <script>
+       function CarregaFormStatusPedidoRetirada() {
+           $("#ModalStatusPedidoRetirada").load("/PedidoRetirada/FormStatusPedidoRetirada?id=" + '@Model.pedidoRetirada.id' , function () {
+            $("#ModalStatusPedidoRetirada").modal("show");
+        });
+    }
     function Imprimir(){
         window.open("/PedidoRetirada/ImpressaoPedidoRetirada?id=" + '@Model.pedidoRetirada.id', "Print", "width=950,height=700");
-       }</script>
+    }
+</script>
 
 <div class="row">
     <div class="col-md-11">
@@ -44,7 +50,10 @@
                                             <button id="osc_imprimir" type="button" class="btn btn-info btn-sm fa fa-print" value="" onclick="Imprimir();"> <span>Emitir Pedido</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteRecurso('@Model.pedidoRetirada.id')"> <span>Excluir</span></button>
+                                            <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeletePedidoRetirada('@Model.pedidoRetirada.id')"> <span>Excluir</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_reabrir" type="button" class="btn btn-info btn-sm fa fa-close" value="" onclick="CarregaFormStatusPedidoRetirada()"> <span>Reabrir</span></button>
                                         </label>
                                     </div>
                                 </td>
@@ -85,7 +94,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-list fa-2x" onclick="OpenLookupProfissional()" style="cursor:pointer"></i></span>&nbsp;
-                                        <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional">
+                                        <input asp-for="@Model.profissional.idName" class="form-control" type="text" id="osc_IdNameProfissional" autocomplete="off">
                                         <input asp-for="@Model.profissional.id" class="form-control" type="hidden" id="osc_IdProfissional">
                                         <span class="input-group-btn ">
                                             <button type="button" class="btn btn-info" onclick="CarregaLookupProfissional()" id="osc_botaoBuscaProfissional">
@@ -127,6 +136,15 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label">Quantidade Total</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk  fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.pedidoRetirada.quantidade" class="form-control" type="text" id="osc_quantidade">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -135,7 +153,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                     </span>
-                                    <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control" onchange="Onchage_PedidoTipoDesconto();">
+                                    <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control">
                                         <option value="1" selected="">Valor</option>
                                         <option value="2">Percentual</option>
                                     </select>
@@ -156,23 +174,28 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-calculator fa-2x"></span>&nbsp;
                                     </span>
-                                    <input id="osc_valorTotal" asp-for="@Model.pedidoRetirada.valorTotal" type="text" class="form-control" disabled="disabled" />
+                                    <input id="osc_valorTotal" asp-for="@Model.pedidoRetirada.valorTotal" type="text" class="form-control" />
                                 </div>
                             </div>
+
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Status do Pedido de Retirada</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-exclamation fa-2x"></span>&nbsp;
-                                    </span>
-                                    <select id="osc_statusPedido" asp-for="@Model.pedidoRetirada.statusPedidoRetirada" class="form-control" style="background-color:aquamarine">
-                                        <option value="0">Em Aprovação</option>
-                                        <option value="1">Em Andamento</option>
-                                        <option value="2">Fechado</option>
-                                        <option value="3">Cancelado</option>
-                                    </select>
+                                <label class="control-label">Data Entrega</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.pedidoRetirada.dataEntrega" class="form-control" type="text" id="osc_dataEntrega" autocomplete="off" required="required">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Data Retirada</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.pedidoRetirada.dataRetirada" class="form-control" type="text" id="osc_dataRetirada" autocomplete="off" required="required">
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -182,6 +205,20 @@
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
                                         <input asp-for="@Model.pedidoRetirada.dataFechamento" class="form-control" type="date" id="osc_dataFechamento" disabled="disabled">
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Status do Pedido de Retirada</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-exclamation fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_statusPedidoRetirada" asp-for="@Model.pedidoRetirada.statusPedidoRetirada" class="form-control" style="background-color:aquamarine">
+                                        <option value="0">Em Aprovação</option>
+                                        <option value="1">Em Andamento</option>
+                                        <option value="2">Fechado</option>
+                                        <option value="3">Cancelado</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -253,5 +290,11 @@
 </div>
 <div class="modal fade" id="lookupCliente">
 </div>
-<script src="~/lib/OscaJs/osc_recurso.js"></script>
+<div class="modal fade" id="ModalStatusPedidoRetirada">
+</div>
+<script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_lookup.js"></script>
+<script src="~/lib/OscaJs/osc_pedidoRetirada.js"></script>
+<script>
+    OnLoad_PedidoRetirada();
+</script>

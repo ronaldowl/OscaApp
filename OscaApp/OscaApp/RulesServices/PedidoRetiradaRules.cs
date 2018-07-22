@@ -46,13 +46,48 @@ namespace OscaApp.RulesServices
                 modelo.idProfissional = entrada.profissional.id;
             }
 
+            if (entrada.pedidoRetirada.statusPedidoRetirada == CustomEnumStatus.StatusPedidoRetirada.Cancelado || entrada.pedidoRetirada.statusPedidoRetirada == CustomEnumStatus.StatusPedidoRetirada.Fechado)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }
+
             //************ Objetos de controle de acesso *******************
-         
+
             modelo.modificadoEm = DateTime.Now;
             modelo.modificadoPor = entrada.contexto.idUsuario;
             modelo.modificadoPorName = entrada.contexto.nomeUsuario;
             //************ FIM Objetos de controle de acesso ***************
             return true;
-        }       
+        }
+
+        public static bool PedidoRetiradaUpdateStatus(PedidoRetiradaViewModel entrada, out PedidoRetirada modelo)
+        {
+            modelo = new PedidoRetirada();
+            modelo = entrada.pedidoRetirada;
+            modelo.id = entrada.pedidoRetirada.id;
+
+
+            if (entrada.pedidoRetirada.statusPedidoRetirada == CustomEnumStatus.StatusPedidoRetirada.Cancelado || entrada.pedidoRetirada.statusPedidoRetirada == CustomEnumStatus.StatusPedidoRetirada.Fechado)
+            {
+                modelo.dataFechamento = DateTime.Now;
+            }
+
+            if (entrada.pedidoRetirada.statusPedidoRetirada == CustomEnumStatus.StatusPedidoRetirada.EmAndamento)
+            {
+                modelo.dataFechamento = new DateTime();
+            }
+    
+
+            //************ Objetos de controle de acesso *******************
+
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = entrada.contexto.idUsuario;
+            modelo.modificadoPorName = entrada.contexto.nomeUsuario;
+            //************ FIM Objetos de controle de acesso ***************
+
+            return true;
+        }
+
+
     }
 }

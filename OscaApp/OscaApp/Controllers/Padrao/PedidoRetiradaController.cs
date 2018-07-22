@@ -13,6 +13,7 @@ using X.PagedList;
 using OscaFramework.Models;
 using OscaApp.RulesServices;
 using OscaFramework.MicroServices;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
@@ -131,18 +132,18 @@ namespace OscaApp.Controllers
 
         public ViewResult GridPedidoRetirada(string filtro, int Page)
         {
-            IEnumerable<PedidoRetirada> retorno = modeloData.GetAll(contexto.idOrganizacao);
+            IEnumerable<PedidoRetiradaGridViewModel> retorno = modeloData.GetAll(contexto.idOrganizacao);
 
             if (!String.IsNullOrEmpty(filtro))
             {
-                retorno = from u in retorno where u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)
+                retorno = from u in retorno where u.pedidoRetirada.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)
                           select u;
             }
-            retorno = retorno.OrderBy(x => x.codigo);
+            retorno = retorno.OrderBy(x => x.pedidoRetirada.criadoEm);
 
             if (Page == 0) Page = 1;
 
-            return View(retorno.ToPagedList<PedidoRetirada>(Page, 20));
+            return View(retorno.ToPagedList<PedidoRetiradaGridViewModel>(Page, 100));
         }
         [HttpGet]
         public ViewResult ImpressaoPedidoRetirada(string id)
@@ -172,5 +173,56 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
+        [HttpPost]
+        public IActionResult FormStatusPedidoRetirada(PedidoRetiradaViewModel entrada)
+        {
+            PedidoRetirada pedidoRetirada = new PedidoRetirada();
+            entrada.contexto = this.contexto;
+
+            try
+            {
+                if (PedidoRetiradaRules.PedidoRetiradaUpdateStatus(entrada, out pedidoRetirada))
+                {
+                    modeloData.UpdateStatus(pedidoRetirada);
+
+                    return RedirectToAction("FormUpdatePedidoRetirada", new { id = pedidoRetirada.id.ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-post", ex.Message);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ViewResult FormStatusPedidoRetirada(string id)
+        {
+            PedidoRetiradaViewModel modelo = new PedidoRetiradaViewModel();
+            modelo.contexto = this.contexto;
+
+            try
+            {
+                PedidoRetirada retorno = new PedidoRetirada();
+
+                if (!String.IsNullOrEmpty(id))
+                {
+                    //campo que sempre contém valor
+                    retorno = modeloData.Get(new Guid(id),this.contexto.idOrganizacao);
+
+                    if (retorno != null)
+                    {
+                        modelo.pedidoRetirada = retorno;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormStatusPedido-get", ex.Message);
+            }
+            return View(modelo);
+        }
     }
 }
