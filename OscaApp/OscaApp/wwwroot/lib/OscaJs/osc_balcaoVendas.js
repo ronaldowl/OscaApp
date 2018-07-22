@@ -121,14 +121,17 @@ function SomaTotal() {
     var valorDesconto = $('#osc_valorDesconto').val();
 
     $('#produtosVendas > tbody tr .somaTD').each(function (i) {
-        VALORTOTAL += parseFloat($(this).val().replace('$', '').replace('R', '').replace('.', ''));
+
+    
+
+        VALORTOTAL += parseFloat( $(this).val().replace('$', '').replace('R', '').replace(',', '.'));
     });
 
     if (tipoDesconto == 1) {
 
         if (valorDesconto != undefined || valorDesconto > 0) {
 
-            totalDesconto = VALORTOTAL - valorDesconto;
+            VALORTOTAL = VALORTOTAL - valorDesconto;
         }
 
     } else {
@@ -136,10 +139,11 @@ function SomaTotal() {
         if (valorDesconto != undefined || valorDesconto > 0)
         {
             totalDesconto = (VALORTOTAL / 100) * valorDesconto;
+            VALORTOTAL = VALORTOTAL - totalDesconto;
         }
     }
 
-    VALORTOTAL = VALORTOTAL - totalDesconto;
+   
 
     $('#ValorTotalVendas').val('TOTAL: ' + FormatMoney(VALORTOTAL));
     $('#ValorTotalVendasDiag').val('TOTAL: ' + FormatMoney(VALORTOTAL));

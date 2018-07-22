@@ -61,7 +61,7 @@
                                 <td width="300px" align="center"></td>
                                 <td>
                                     <input style="font-weight:bold; font-size:x-large" id="ValorTotalVendas" value="TOTAL:R$ 0,00" readonly="" class="form-control">
-                                    <input type="text" asp-for="@Model.balcaoVendas.valorTotal" id="InputValorTotalVendas" hidden="hidden">
+                                    <input type="text"                                 id="InputValorTotalVendas" hidden="hidden">
 
                                 </td>
                             </tr>
@@ -137,12 +137,12 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="osc_tituloTipoDesconto" placeholder="Tipo de Desconto" readonly="readonly">
+                                            <input type="text" class="form-control" id="osc_tituloTipoDesconto" placeholder="Tipo de Desconto" readonly="readonly" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <select id="osc_tipoDesconto" asp-for="@Model.balcaoVendas.tipoDesconto" class="form-control" onchange="HabilitaParcela();">
+                                            <select id="osc_tipoDesconto" asp-for="@Model.balcaoVendas.tipoDesconto" class="form-control" onchange=" SomaTotal();">
                                                 <option value="1" selected="selected">Valor</option>
                                                 <option value="2">Percentual</option>
                                             </select>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="form-group" id="div_Desconto">
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="osc_valorDesconto" autocomplete="off" placeholder="0,00">
+                                            <input type="text" class="form-control" id="osc_valorDesconto" autocomplete="off" placeholder="0,00" onchange=" SomaTotal();">
                                         </div>
                                     </div>
                                 </div>

@@ -6,33 +6,16 @@
             $("#ModalStatus").modal("show");
         });
     }
-    function Imprimir() {
-        Inicializa();
-        ImprimeTextoSemFormatacao();
-        Finaliza();
-    }
+
         function Imprimir2(){
         window.open("/BalcaoVendas/ImpressaoCupom?id=" + '@Model.balcaoVendas.id', "Print", "width=950,height=700");
     }
 
-  
-    function ImprimeTextoSemFormatacao() {
-        
-            for (i = 0; i < 10; i++) {
-                BemaPrinter1.FormataTX("************** Texte de Impressão**********" + "\n", 3, 0, 0, 0, 0);
-            }
-        
-    }
 
-    function Inicializa() {
 
-        // Abre a porta de comunicacao
-        BemaPrinter1.IniciaPorta("COM11");
 
-    }
-    function Finaliza() {
-        BemaPrinter1.FechaPorta();
-    }
+
+
 
 </script>
 
@@ -139,9 +122,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Tipo de Desconto</label>
-                                        <div class="input-group">                                          
-                                            <select id="osc_tipoDesconto" asp-for="@Model.balcaoVendas.tipoDesconto" class="form-control"  disabled="disabled">
-                                                <option value="1" >Valor</option>
+                                        <div class="input-group">
+                                            <select id="osc_tipoDesconto" asp-for="@Model.balcaoVendas.tipoDesconto" class="form-control" disabled="disabled">
+                                                <option value="1">Valor</option>
                                                 <option value="2">Percentual</option>
                                             </select>
                                         </div>
@@ -174,8 +157,8 @@
                                     </div>
                                     <div class="form-group" id="div_Desconto">
                                         <label>Valor Desconto</label>
-                                        <div class="input-group">                                       
-                                            <input type="text" class="form-control" id="osc_valorDesconto" value="0,00" autocomplete="off" disabled="disabled">
+                                        <div class="input-group">
+                                            <input asp-for="@Model.balcaoVendas.valorDesconto" type="text" class="form-control" id="osc_valorDesconto"  disabled="disabled">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -255,7 +238,7 @@
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_lookup.js"></script>
 <script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
-<object id="BemaPrinter1" height="14" width="14" classid="clsid:310DBDAC-85FF-4008-82A8-E22A09F9460B" VIEWASTEXT ></object>
+<object id="BemaPrinter1" height="14" width="14" classid="clsid:310DBDAC-85FF-4008-82A8-E22A09F9460B" VIEWASTEXT></object>
 
 
 
