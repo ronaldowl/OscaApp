@@ -148,7 +148,7 @@ function SomaTotal() {
     $('#ValorTotalVendas').val('TOTAL: ' + FormatMoney(VALORTOTAL));
     $('#ValorTotalVendasDiag').val('TOTAL: ' + FormatMoney(VALORTOTAL));
 
-    $('#InputValorTotalVendas').val(VALORTOTAL);
+    $('#InputValorTotalVendas').val($.number(VALORTOTAL, 2));
 
 }
 

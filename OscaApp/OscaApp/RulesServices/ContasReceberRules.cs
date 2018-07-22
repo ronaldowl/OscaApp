@@ -87,7 +87,11 @@ namespace OscaApp.RulesServices
                 contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
                 contaReceber.titulo = "Parcela -" + i + "/" + balcaoVendas.parcelas.ToString() + " - Venda Balcão";
                 contaReceber.numeroReferencia = balcaoVendas.codigo;
-                contaReceber.dataPagamento = DateTime.Now.AddMonths(i);
+
+                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Boleto)
+                {
+                    contaReceber.dataPagamento = DateTime.Now.AddMonths(i).AddDays(balcaoVendas.diaVencimento);
+                }
 
                 ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
             }

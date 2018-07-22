@@ -58,6 +58,13 @@ function FormatMoney(valor) {
 
     return valor;
 }
+function FormatMoneyDecimal(valor) {
+
+    valor = Number(valor).toFixed(2);
+
+    return valor;
+}
+
 
 
 
