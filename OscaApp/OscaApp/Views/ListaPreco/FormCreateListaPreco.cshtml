@@ -1,5 +1,4 @@
-﻿@model OscaApp.ViewModels.ListaPrecoViewModel 
-     
+﻿@model OscaApp.ViewModels.ListaPrecoViewModel   
 
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
@@ -9,7 +8,7 @@
 </div>
  
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <form action="FormCreateListaPreco" method="post" id="FormCreateListaPreco">
                 <div class="card" id="osc_MainForm">
                     <div class="card-header">
@@ -39,7 +38,9 @@
                                     <label class="control-label">Nome</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-asterisk fa-2x"></i></span>
+                                            </div>
                                             <input id="osc_nome" asp-for="@Model.listaPreco.nome" placeholder="Nome" class="form-control" type="text" required="required">
                                         </div>
                                     </div>
@@ -48,16 +49,20 @@
                                     <label class="control-label" style="color:red">Data Inicio Validade *</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" id="osc_dataValidade" type="text" required="required" value="" autocomplete="off" >
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar fa-2x"></i></span>
+                                            </div>
+                                            <input asp-for="@Model.listaPreco.dataValidade" class="form-control" id="osc_dataValidade" type="text" required="required" value="" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label" >Data Fim Validade </label>
+                                    <label class="control-label">Data Fim Validade </label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-calendar fa-2x"></i></span>
+                                            </div>
                                             <input asp-for="@Model.listaPreco.fimValidade" class="form-control" id="osc_fimValidade" type="text" value="" autocomplete="off">
                                         </div>
                                     </div>
@@ -66,20 +71,22 @@
                                     <label class="control-label">Padrão?</label>
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-check-square fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.listaPreco.padrao" class="form-control" type="checkbox" id="osc_listaPrecoPadrao"  onchange="return ConsultaSeExisteListaPadrao();">
+                                                <span class="input-group-text"><i class="fa fa-check-square fa-2x"></i></span>
+                                            <input asp-for="@Model.listaPreco.padrao" class="form-control" type="checkbox" id="osc_listaPrecoPadrao" onchange="return ConsultaSeExisteListaPadrao();">
                                         </div>
                                     </div>
-                                </div>                           
+                                </div>
 
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Descrição</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-comment-o fa-2x"></i>
+                                            </span>
+                                        </div>
                                         <textarea id="osc_anotacao" asp-for="@Model.listaPreco.descricao" class="form-control" rows="4" cols="40" placeholder="digite uma anotação"></textarea>
                                     </div>
                                 </div>
@@ -92,9 +99,12 @@
                                 <div class="form-group">
                                     <label class="control-label">Criado Por</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-2x fa-user"></i>
+                                            </span>
+                                        </div>
+
                                         <input id="osc_criadoPor" asp-for="@Model.listaPreco.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -103,9 +113,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Criado Em</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-calendar fa-2x"></i>
+                                            </span>
+                                        </div>
                                         <input id="osc_criadoEm" asp-for="@Model.listaPreco.criadoEm" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -114,9 +126,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Modificado Por</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-2x fa-user"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
@@ -125,9 +139,11 @@
                                 <div class="form-group">
                                     <label class="control-label">Modificado Em</label>
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar fa-2x"></span>
+                                            </span>
+                                        </div>
                                         <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
                                     </div>
                                 </div>
