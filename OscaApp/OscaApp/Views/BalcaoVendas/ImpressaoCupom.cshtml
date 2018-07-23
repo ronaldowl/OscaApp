@@ -1,8 +1,8 @@
 ﻿@model OscaApp.ViewModels.ImpressaoCupomViewModel
 @{
-    Layout = "_LayoutFrame";
+    Layout = "_LayoutCupom";
 }
-<div style="width: 400px;margin: 0 auto;padding: 20px;height:90%;">
+<div  >
     <div class="text-center"><h2>@Model.organizacao.nomeAmigavel</h2></div>
     <table>
         <tr>
@@ -28,7 +28,7 @@
     </table>
     <span class="text-center d-inline-block
 
-          ">------------------------------------------------------------</span>
+          ">----------------------------------------</span>
     <table>
         <thead>
             <tr style="font-size:12px;">
@@ -39,7 +39,7 @@
             </tr>
         </thead>
     </table>
-    <span class="text-center d-inline-block">------------------------------------------------------------</span>
+    <span class="text-center d-inline-block">----------------------------------------</span>
     <table class="">
         <thead>
             <tr>
@@ -62,7 +62,7 @@
             }
         </tbody>
     </table>
-    <span class="text-center d-inline-block">------------------------------------------------------------</span>
+    <span class="text-center d-inline-block">----------------------------------------</span>
     <table>
         <tr>
             <td>Pagamento: </td>
@@ -77,12 +77,12 @@
             <td>@Model.balcaoVendas.valorTotal</td>
         </tr>
     </table>
-    <span class="text-center d-inline-block">------------------------------------------------------------</span>
+    <span class="text-center d-inline-block">----------------------------------------</span>
     <p>
         Cliente: @Model.cliente.nomeCliente
-        <span class="text-center d-inline-block">------------------------------------------------------------</span>
+        <span class="text-center d-inline-block">----------------------------------------</span>
     <p>@Model.orgConfig.mensagemCupom</p>
-    <span class="text-center d-inline-block">------------------------------------------------------------</span>
+    <span class="text-center d-inline-block">----------------------------------------</span>
 
 
 </div>

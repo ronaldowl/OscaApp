@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta lang="pt-br" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+
+   <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.js"></script>
+
+    <script src="~/lib/jquery.maskMoney/src/jquery.maskMoney.js"></script>
+    <script src="~/lib/popper.js/dist/umd/popper.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/OscaJs/osc_global.js"></script>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/OscaCss/style.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery-ui/themes/base/jquery-ui.css" />
+    <style>
+
+        html, body {
+            font-family: "courier";
+            font-size: 10pt;
+            background: #CCCCCC;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        .conteudo {
+            width: 400px;
+            background: #FFFFFF;
+            margin: 0 auto;
+            padding: 10px;
+            height: 90%;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="conteudo">
+        @RenderBody()
+
+        </div>
+</body>
+</html>
