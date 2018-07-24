@@ -85,7 +85,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                     </span>
-                                    <input id="osc_quantidade" asp-for="@Model.produto.quantidade" type="number" class="form-control" placeholder="Quantidade" />
+                                    <input id="osc_quantidade" asp-for="@Model.produto.quantidade" type="number" class="form-control" placeholder="Quantidade" value="1"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -94,7 +94,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-money fa-2x"></span>&nbsp;
                                     </span>
-                                    <input id="osc_valorCompra" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" pattern="[0-9]+([\.,][0-9]+)?" />
+                                    <input id="osc_valorCompra" asp-for="@Model.produto.valorCompra" type="text" class="form-control" placeholder="Valor de compra" pattern="[0-9]+([\.,][0-9]+)?" value="0"/>
                                 </div>
                             </div>
                             <div class="form-group">

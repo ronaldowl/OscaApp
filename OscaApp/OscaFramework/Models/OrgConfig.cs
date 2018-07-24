@@ -23,6 +23,12 @@ namespace OscaFramework.Models
 
         public string tituloImpressao { get; set; }
 
+        public string cupom_altura { get; set; }
+        public string cupom_largura { get; set; }
+        public string cupom_fontesize { get; set; }
+
+
+
 
         public OrgConfig()
         {

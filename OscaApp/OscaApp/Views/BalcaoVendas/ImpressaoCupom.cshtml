@@ -1,88 +1,117 @@
 ﻿@model OscaApp.ViewModels.ImpressaoCupomViewModel
 @{
+
     Layout = "_LayoutCupom";
 }
-<div  >
-    <div class="text-center"><h2>@Model.organizacao.nomeAmigavel</h2></div>
-    <table>
-        <tr>
-            <td>
-                <p>Endereço: @Model.organizacao.logradouro</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Telefone: @Model.organizacao.TelefoneEmpresa</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>CUPOM NÃO FISCAL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; N° @Model.balcaoVendas.codigo</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Data:  @DateTime.Now.ToShortDateString() </p>
-            </td>
-        </tr>
-    </table>
-    <span class="text-center d-inline-block
 
-          ">----------------------------------------</span>
-    <table>
-        <thead>
-            <tr style="font-size:12px;">
-                <td style="width:210px;">DESCRIÇÃO</td>
-                <td style="width:30px;">QTD </td>
-                <td style="width:50px;"> PREÇO</td>
-                <td style="width:10px;">TOTAL</td>
-            </tr>
-        </thead>
-    </table>
-    <span class="text-center d-inline-block">----------------------------------------</span>
-    <table class="">
-        <thead>
-            <tr>
-                <td style="width:215px;"></td>
-                <td style="width:20px;"></td>
-                <td style="width:50px;"></td>
-                <td style="width:60px;"></td>
-            </tr>
-        </thead>
-        <tbody>
+<html>
+<head>
+    <meta lang="pt-br" charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
 
-            @foreach (var item in Model.produtosBalcao)
-            {
-                <tr style="font-size:12px;">
-                    <td>@item.nome</td>
-                    <td>@item.quantidade</td>
-                    <td>R$@item.valor.ToString("N2")</td>
-                    <td>R$@item.valorTotal.ToString("N2")</td>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/lib/OscaCss/style.css" />
+    <style>
+
+    html, body {
+        font-family: "courier";
+        font-size: @Model.orgConfig.cupom_fontesize;
+
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .conteudo {
+        width: @Model.orgConfig.cupom_largura;
+        background: #FFFFFF;
+        margin: 0 auto;
+        padding: 10px;
+        height: @Model.orgConfig.cupom_altura;
+    }
+    </style>
+</head>
+<body>
+    <div class="conteudo">
+        <div>
+
+            <table>
+                <tr>
+                    <td>
+                        <label>@Model.organizacao.nomeAmigavel</label>
+                    </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <span class="text-center d-inline-block">----------------------------------------</span>
-    <table>
-        <tr>
-            <td>Pagamento: </td>
-            <td>@Model.balcaoVendas.condicaoPagamento</td>
-        </tr>
-        <tr>
-            <td>Desconto R$: </td>
-            <td>@Model.balcaoVendas.valorDesconto</td>
-        </tr>
-        <tr>
-            <td>TOTAL R$: </td>
-            <td>@Model.balcaoVendas.valorTotal</td>
-        </tr>
-    </table>
-    <span class="text-center d-inline-block">----------------------------------------</span>
-    <p>
-        Cliente: @Model.cliente.nomeCliente
-        <span class="text-center d-inline-block">----------------------------------------</span>
-    <p>@Model.orgConfig.mensagemCupom</p>
-    <span class="text-center d-inline-block">----------------------------------------</span>
+                <tr>
+                    <td>
+                        <label>CNPJ:@Model.organizacao.cpf_cnpj @Model.organizacao.TelefoneEmpresa</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>@Model.organizacao.logradouro , @Model.organizacao.bairro</label>
+                    </td>
+                </tr>
+             
+                <tr>
+                    <td>
+                        <label>CUPOM NAO FISCAL &nbsp;&nbsp;@Model.balcaoVendas.codigo</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Data:  @DateTime.Now.ToShortDateString() </label>
+                    </td>
+                </tr>
+            </table>           
+            <span class="text-center d-inline-block">----------------------------------------</span>
+            <table class="">
+                <thead>
+                    <tr>
+                        <td style="width:215px;"></td>
+                        <td style="width:20px;"></td>
+                        <td style="width:50px;"></td>
+                        <td style="width:60px;"></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:215px;">DESCRICAO</td>
+                        <td style="width:20px;">QTD</td>
+                        <td style="width:50px;">VALOR</td>
+                        <td style="width:60px;">TOTAL</td>
+                    </tr>
+                    @foreach (var item in Model.produtosBalcao)
+                    {
+                        <tr>
+                            <td>@item.nome</td>
+                            <td>@item.quantidade</td>
+                            <td>R$@item.valor.ToString("N2")</td>
+                            <td>R$@item.valorTotal.ToString("N2")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <span class="text-center d-inline-block">----------------------------------------</span>
+            <table>
+                <tr>
+                    <td>Pagamento: </td>
+                    <td>@Model.balcaoVendas.condicaoPagamento</td>
+                </tr>
+                <tr>
+                    <td>Desconto R$: </td>
+                    <td>@Model.balcaoVendas.valorDesconto</td>
+                </tr>
+                <tr>
+                    <td>TOTAL R$: </td>
+                    <td>@Model.balcaoVendas.valorTotal</td>
+                </tr>
+            </table> 
+            <p>
+               CLIENTE: @Model.cliente.nomeCliente
+                <span class="text-center d-inline-block">----------------------------------------</span>
+            <p>@Model.orgConfig.mensagemCupom</p>
 
-
-</div>
+        </div>
+    </div>
+</body>
+</html>
