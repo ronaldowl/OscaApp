@@ -114,7 +114,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(id))
             {
 
-                retorno = produtoData.Get(modelo.produto.id, contexto.idOrganizacao);
+                retorno = produtoData.Get(modelo.produto.id);
                 modelo.itensListaPreco = new List<ItemProdutoLista>();
                 modelo.itensListaPreco = ProdutoRules.RetornaItemListaProduto(itemListaPrecoData.GetAllByProduto(modelo.produto.id));
 

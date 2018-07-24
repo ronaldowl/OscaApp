@@ -68,6 +68,24 @@ namespace OscaApp.Data
             }
 
         }
+        public void UpdateQuantity(Produto produto)
+        {
+            try
+            {
+                db.Attach(produto); 
+                db.Entry(produto).Property("quantidade").IsModified = true;
+                db.Entry(produto).Property("modificadoPorName").IsModified = true;
+                db.Entry(produto).Property("modificadoPor").IsModified = true;
+                db.Entry(produto).Property("modificadoEm").IsModified = true;
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
         public void UpdateImage(Produto produto)
         {
             try
@@ -89,10 +107,10 @@ namespace OscaApp.Data
             }
 
         }
-        public Produto Get(Guid id, Guid idOrg)
+        public Produto Get(Guid id )
         {
             List<Produto> retorno = new List<Produto>();
-            retorno = db.Produtos.FromSql("SELECT * FROM Produto where  id = '" + id.ToString() + "' and idOrganizacao = '"+ idOrg.ToString() + "'" ).ToList();
+            retorno = db.Produtos.FromSql("SELECT * FROM Produto where  id = '" + id.ToString() + "'" ).ToList();
             return retorno[0];
         }
 

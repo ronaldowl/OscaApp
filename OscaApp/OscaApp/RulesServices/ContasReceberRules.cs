@@ -73,29 +73,64 @@ namespace OscaApp.RulesServices
             return true;
         }
         
-        public static void GravaParcela(BalcaoVendas balcaoVendas, IContasReceberData contaReceberData, ContextPage contexto)
+        public static void GravaParcela(BalcaoVendas balcaoVendas, IContasReceberData contaReceberData, ContextPage contexto, OrgConfig orgConfig)
         {
             decimal valorParcela = balcaoVendas.valorTotal / balcaoVendas.parcelas;
-                                 
 
-            for (int i = 1; i < balcaoVendas.parcelas; i++)
-            {
+            int parcela = 1;
+            for (int i = 0; i < balcaoVendas.parcelas; i++)
+            {               
+
                 ContasReceber contaReceber = new ContasReceber();
                 contaReceber.valor = valorParcela;
                 contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
                 contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
                 contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
-                contaReceber.titulo = "Parcela -" + i + "/" + balcaoVendas.parcelas.ToString() + " - Venda Balcão";
+    
                 contaReceber.numeroReferencia = balcaoVendas.codigo;
 
-                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Boleto)
+                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Boleto || balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Cheque)
                 {
-                    contaReceber.dataPagamento = DateTime.Now.AddMonths(i).AddDays(balcaoVendas.diaVencimento);
+                    contaReceber.titulo = "Parcela Boleto/Cheque -" + parcela.ToString() + "/" + balcaoVendas.parcelas.ToString() + " - Venda Balcão";
+                    contaReceber.dataPagamento = new DateTime(DateTime.Now.Year, DateTime.Now.Month, balcaoVendas.diaVencimento);
+                    contaReceber.dataPagamento = contaReceber.dataPagamento.AddMonths(parcela);
+                    ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
+                }
+               
+                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoCredito)
+                {
+                    contaReceber.titulo = "Parcela Cartão Crédito -" + parcela.ToString() + "/" + balcaoVendas.parcelas.ToString() + " - Venda Balcão";
+
+                    contaReceber.dataPagamento = new DateTime(DateTime.Now.Year, DateTime.Now.Month, orgConfig.qtdDiasCartaoCredito);
+                    contaReceber.dataPagamento = contaReceber.dataPagamento.AddMonths(parcela);
+                    ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
                 }
 
-                ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
+                parcela++;
             }
 
         }
+
+        public static void GravaDebito(BalcaoVendas balcaoVendas, IContasReceberData contaReceberData, ContextPage contexto, OrgConfig orgConfig)
+        {
+                   
+                ContasReceber contaReceber = new ContasReceber();
+                contaReceber.valor = balcaoVendas.valorTotal;
+                contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
+                contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
+                contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
+
+                contaReceber.numeroReferencia = balcaoVendas.codigo; 
+
+                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito)
+                {
+                    contaReceber.titulo = "Débito - Venda Balcão";
+                    contaReceber.dataPagamento = DateTime.Now;
+                    contaReceber.dataPagamento = contaReceber.dataPagamento.AddDays(orgConfig.qtdDiasCartaoDebito);
+                    ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
+                }
+   
+        }
+
     }
 }

@@ -48,9 +48,9 @@ function ConsultaProduto(evento) {
     }
 }
 
-function AdicionaProduto(idItemListaPreco) {
+function AdicionaProduto(idProduto) {
 
-    var chaveLinha = "#key_" + idItemListaPreco + " td";
+    var chaveLinha = "#key_" + idProduto + " td";
     var listaPreco = $('#osc_listaPreco').val();
     var TdCodigo = "";
     var TdProduto = "";
@@ -66,21 +66,21 @@ function AdicionaProduto(idItemListaPreco) {
 
     }).fadeOut();
 
-    inserirLinha(idItemListaPreco, TdCodigo, TdProduto, TdValor, listaPreco);
+    inserirLinha(idProduto, TdCodigo, TdProduto, TdValor, listaPreco);
 
     SomaTotal();
 
     LimpaBusca();
 }
 
-function inserirLinha(idItemListaPreco, codigo, NomeProduto, valorProduto, lista) {
-    html = '<tr id="keyPro_' + idItemListaPreco + '" class="item">'
-        + '<td   id="osc_KeyProdCodigo_' + idItemListaPreco + '" ><input type="text"  class="form-control "  id="osc_ProdCodigo"   value="' + codigo + '" min="1" readonly/><input type="hidden" value="' + lista + '" class="lista"/><input type="hidden" value="' + idItemListaPreco + '" class="idItemListaPreco"/></td>'
-        + '<td   id="osc_KeyProdNome_' + idItemListaPreco + '"   ><input type="text"  class="form-control "  id="osc_ProdNome"       value="' + NomeProduto + '" readonly /></td>'
-        + '<td   id="osc_KeyProdQtd_' + idItemListaPreco + '"    ><input class="qtd"   type="number" class="form-control"  id="osc_ProdQtd_' + idItemListaPreco + '"        value="1" min="1" onchange="calcularLinha(' + "'" + idItemListaPreco + "'" + ')" /></td>'
-        + '<td   id="osc_KeyProdValor_' + idItemListaPreco + '"  ><input class="valor" type="text"   class="form-control"  id="osc_ProdValor_' + idItemListaPreco + '"      value="' + valorProduto + '" readonly /></td>'
-        + '<td   id="osc_KeyProdTotal_' + idItemListaPreco + '"  ><input class="somaTD" type="text" class="form-control"  id="osc_ProdTotal_' + idItemListaPreco + '"       value=" ' + valorProduto + '" readonly /></td>'
-        + '<td   id="osc_acaoRemover_' + idItemListaPreco + '"   ><button type="button" class="btn btn-danger btn-md fa fa-remove"   onclick="RemoveLinhaProduto(' + "'" + idItemListaPreco + "'" + ');"> Remover..</button></td>'
+function inserirLinha(idProduto, codigo, NomeProduto, valorProduto, lista) {
+    html = '<tr id="keyPro_' + idProduto + '" class="item">'
+        + '<td   id="osc_KeyProdCodigo_' + idProduto + '" ><input type="text"  class="form-control "  id="osc_ProdCodigo"   value="' + codigo + '" min="1" readonly/><input type="hidden" value="' + lista + '" class="lista"/><input type="hidden" value="' + idProduto + '" class="idProduto"/></td>'
+        + '<td   id="osc_KeyProdNome_' + idProduto + '"   ><input type="text"  class="form-control "  id="osc_ProdNome"       value="' + NomeProduto + '" readonly /></td>'
+        + '<td   id="osc_KeyProdQtd_' + idProduto + '"    ><input class="qtd"   type="number" class="form-control"  id="osc_ProdQtd_' + idProduto + '"        value="1" min="1" onchange="calcularLinha(' + "'" + idProduto + "'" + ')" /></td>'
+        + '<td   id="osc_KeyProdValor_' + idProduto + '"  ><input class="valor" type="text"   class="form-control"  id="osc_ProdValor_' + idProduto + '"      value="' + valorProduto + '" readonly /></td>'
+        + '<td   id="osc_KeyProdTotal_' + idProduto + '"  ><input class="somaTD" type="text" class="form-control"  id="osc_ProdTotal_' + idProduto + '"       value=" ' + valorProduto + '" readonly /></td>'
+        + '<td   id="osc_acaoRemover_' + idProduto + '"   ><button type="button" class="btn btn-danger btn-md fa fa-remove"   onclick="RemoveLinhaProduto(' + "'" + idProduto + "'" + ');"> Remover..</button></td>'
         + '</tr>';
     $('#produtosVendas').append(html);
 };
@@ -120,9 +120,7 @@ function SomaTotal() {
     var tipoDesconto = $('#osc_tipoDesconto').val();
     var valorDesconto = $('#osc_valorDesconto').val();
 
-    $('#produtosVendas > tbody tr .somaTD').each(function (i) {
-
-    
+    $('#produtosVendas > tbody tr .somaTD').each(function (i) {    
 
         VALORTOTAL += parseFloat( $(this).val().replace('$', '').replace('R', '').replace(',', '.'));
     });
@@ -206,6 +204,8 @@ function MontaObjetoEntrada() {
     ObjetoEntrada.diaVencimento = $('#osc_diaVencimento').val();
     ObjetoEntrada.valorDesconto = $('#osc_valorDesconto').val();
     ObjetoEntrada.tipoDesconto = $('#osc_tipoDesconto').val();
+   
+
 
 
     return ObjetoEntrada;
@@ -232,7 +232,7 @@ function MontaListaObjeto() {
     $('#produtosVendas > tbody tr').each(function (index, object) {
 
         var entidade = {
-            idItemListaPreco: $(this).find('.idItemListaPreco').val(),
+            idProduto: $(this).find('.idProduto').val(),
             quantidade: $(this).find('.qtd').val(),
             idListaPreco: $(this).find('.lista').val(),
             valor: $(this).find('.valor').val().replace('$', '').replace('R', '').replace('.', ''),

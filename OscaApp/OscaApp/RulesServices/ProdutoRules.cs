@@ -69,5 +69,25 @@ namespace OscaApp.RulesServices
            
             return retorno;
         }
+
+        public static bool BaixaProdutoBalcao(ProdutoBalcao[] produtosBalcao, ContextPage contexto, IProdutoData produtoData)
+        {
+            
+                foreach (var item in produtosBalcao)
+                {
+                    //recupera Quantidade Atual
+              
+                  Produto prodBase =   produtoData.Get(item.idProduto);
+
+                  prodBase.quantidade = prodBase.quantidade - item.quantidade;
+                  produtoData.UpdateQuantity(prodBase);
+
+                }
+
+                return true;
+        
+
+        }
+
     }
 }

@@ -22,16 +22,24 @@ namespace OscaAPI.Controllers
         private readonly ContextPage contexto;
         private readonly IBalcaoVendasData balcaoVendasData;
         private readonly IContasReceberData contaReceberData;
+        private readonly IProdutoData produtoData;
+        private readonly OrgConfig orgConfig;
+        private readonly IOrgConfigData orgConfigData;
+
+
         private readonly ClienteData clienteData;
 
         public BalcaoVendasAPIController(SqlGeneric _sqlGeneric, SqlGenericRules _sqlRules, IHttpContextAccessor httpContext, ContexDataService db)
         {
             this.balcaoVendasData = new BalcaoVendasData(db);
             this.contaReceberData = new ContasReceberData(db);
+            this.produtoData = new ProdutoData(db);
+            this.orgConfigData = new OrgConfigData(db);
             this.sqlServices = _sqlRules;
             this.sqlGeneric =  _sqlGeneric;
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.clienteData = new ClienteData(db);
+            this.orgConfig = this.orgConfigData.Get(this.contexto.idOrganizacao);
         }
 
         [Route("api/[controller]/ConsultaProduto")]
@@ -68,7 +76,7 @@ namespace OscaAPI.Controllers
          
             try
             {
-                if (cliente.id.ToString() != "00000000-0000-0000-0000-000000000000")
+                if (cliente.id != Guid.Empty)
                 {
                     entrada.cliente = new Relacao();
                     entrada.cliente.id = cliente.id;
@@ -91,10 +99,19 @@ namespace OscaAPI.Controllers
                     FaturamentoRules.InsereFaturamento(entrada.balcaoVendas, this.contexto.idOrganizacao);
 
                     //Grava Parcelas
-                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Prazo)
+                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Prazo )
                     {
-                        ContasReceberRules.GravaParcela(entrada.balcaoVendas, this.contaReceberData, this.contexto);
+                        ContasReceberRules.GravaParcela(entrada.balcaoVendas, this.contaReceberData, this.contexto, this.orgConfig);
                     }
+
+                    //Grava Debito
+                    if (entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito)
+                    {
+                        ContasReceberRules.GravaDebito(entrada.balcaoVendas, this.contaReceberData, this.contexto, this.orgConfig);
+                    }
+
+                    //Baixa Estoque
+                    ProdutoRules.BaixaProdutoBalcao(produtosBalcao, contexto, produtoData);
 
                     retorno.id = idBalcaoVendas.ToString();
                     retorno.statusOperation = true;

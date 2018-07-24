@@ -277,7 +277,9 @@ namespace OscaApp.Data
     {
         void Add(Produto produto);
         void Update(Produto produto);
-        Produto Get(Guid id, Guid idOrg);
+        void UpdateQuantity(Produto produto);
+        Produto Get(Guid id);      
+
         Relacao GetRelacao(Guid id);
         List<Produto> GetAll(Guid idOrg);
     }
