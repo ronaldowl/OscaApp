@@ -7,29 +7,60 @@
 <html>
 <head>
     <meta lang="pt-br" charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/lib/OscaCss/style.css" />
+ 
+    <title></title>    
+ 
     <style>
 
-    html, body {
-        font-family: "courier";
-        font-size: @Model.orgConfig.cupom_fontesize;
+        html, body {
+               font-family: "Arial";
+               font-size:@Model.orgConfig.cupom_fontesize;
+               background: #CCCCCC;
+               margin: 0;
+               font-weight: 900;
+           }
 
-        margin: 0;
-        font-weight: bold;
-    }
+           .conteudo{
+               width: @Model.orgConfig.cupom_largura;
+               background: #FFFFFF;
+               margin: 0 auto;
+               padding: 10px;
+               height:@Model.orgConfig.cupom_altura;
+           }
 
-    .conteudo {
-        width: @Model.orgConfig.cupom_largura;
-        background: #FFFFFF;
-        margin: 0 auto;
-        padding: 10px;
-        height: @Model.orgConfig.cupom_altura;
-    }
+
+           .text-center{
+             text-align: center;
+           }
+
+           .text-left{
+               text-align: left;
+           }
+
+           .text-right{
+               text-align: right;
+           }
+
+             .rodape {
+                   position: fixed;
+                   left: 0px;
+                   bottom: 20px;
+                   right: 0px;
+                   text-align: center;
+                   width: 100%;
+                   border-top: #000000 solid 1px
+             }
+             .rodape h2{
+               margin: 0
+             }
+
+             table th, table td{
+
+             }
+
+
     </style>
+   
 </head>
 <body>
     <div class="conteudo">
@@ -51,7 +82,7 @@
                         <label>@Model.organizacao.logradouro , @Model.organizacao.bairro</label>
                     </td>
                 </tr>
-             
+
                 <tr>
                     <td>
                         <label>CUPOM NAO FISCAL &nbsp;&nbsp;@Model.balcaoVendas.codigo</label>
@@ -62,31 +93,26 @@
                         <label>Data:  @DateTime.Now.ToShortDateString() </label>
                     </td>
                 </tr>
-            </table>           
-            <span class="text-center d-inline-block">----------------------------------------</span>
-            <table class="">
-                <thead>
-                    <tr>
-                        <td style="width:215px;"></td>
-                        <td style="width:20px;"></td>
-                        <td style="width:50px;"></td>
-                        <td style="width:60px;"></td>
-                    </tr>
-                </thead>
+            </table>
+            <span class="text-center d-inline-block">----------------------------------------</span><br />
+            <span class="text-center d-inline-block">DESCRICAO &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; QTD &nbsp;  VALOR &nbsp;&nbsp;  TOTAL</span>
+
+            <table class="" cellpadding="0" cellspacing="0" border="0" width="100%">
+
                 <tbody>
                     <tr>
-                        <td style="width:215px;">DESCRICAO</td>
-                        <td style="width:20px;">QTD</td>
-                        <td style="width:50px;">VALOR</td>
-                        <td style="width:60px;">TOTAL</td>
+                        <td style="width:250px"></td>
+                        <td style="width:45px"></td>
+                        <td style="width:100px"></td>
+                        <td style="width:180px"></td>
                     </tr>
                     @foreach (var item in Model.produtosBalcao)
                     {
                         <tr>
                             <td>@item.nome</td>
                             <td>@item.quantidade</td>
-                            <td>R$@item.valor.ToString("N2")</td>
-                            <td>R$@item.valorTotal.ToString("N2")</td>
+                            <td>@item.valor.ToString("N2")</td>
+                            <td>@item.valorTotal.ToString("N2")</td>
                         </tr>
                     }
                 </tbody>
@@ -105,10 +131,9 @@
                     <td>TOTAL R$: </td>
                     <td>@Model.balcaoVendas.valorTotal</td>
                 </tr>
-            </table> 
+            </table>
             <p>
-               CLIENTE: @Model.cliente.nomeCliente
-                <span class="text-center d-inline-block">----------------------------------------</span>
+                CLIENTE: @Model.cliente.nomeCliente               
             <p>@Model.orgConfig.mensagemCupom</p>
 
         </div>
