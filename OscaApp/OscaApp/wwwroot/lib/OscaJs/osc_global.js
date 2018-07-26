@@ -64,9 +64,41 @@ function FormatMoneyDecimal(valor) {
 
     return valor;
 }
+ 
 
 
 
+function onBlur(el) {
+
+    if (el.value == '') el.value = '0,00';
+
+    var valor = el.value.indexOf(',') > 0 ? (el.value.substr(el.value.indexOf(",") + 1).length < 2 ? parseFloat((el.value + "0").replace(/\D/g, '')) / 100 : parseFloat(el.value.replace(/\D/g, '')) / 100) : parseFloat(el.value.replace(/\D/g, ''));
+
+    el.value = Number(valor).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+
+}
+
+
+
+function FormataDecimal(number, decimals, dec_point, thousands_sep) {
+
+    var n = number, c = isNaN(decimals = Math.abs(decimals)) ? 2 : decimals;
+
+    var d = dec_point == undefined ? "," : dec_point;
+
+    var t = thousands_sep == undefined ? "." : thousands_sep, s = n < 0 ? "-" : "";
+
+    var i = parseInt(n = Math.abs(+n || 0).toFixed(c)) + "", j = (j = i.length) > 3 ? j % 3 : 0;
+
+    return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+
+}
+
+function PrepCalcDecimal(valor) {
+
+    return valor.replace('.', '').replace(',', '.');
+
+}
 
 function ValidaCPF() {
 

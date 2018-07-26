@@ -65,7 +65,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
-                                            <input asp-for="@Model.itemlistaPreco.valor" class="form-control" type="text">
+                                            <input asp-for="@Model.itemlistaPreco.valor" class="form-control" type="text" placeholder="0,00" onblur="onBlur(this)">
                                         </div>
                                     </div>
                                 </div>

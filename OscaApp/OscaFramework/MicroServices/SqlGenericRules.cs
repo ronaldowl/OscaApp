@@ -28,7 +28,7 @@ namespace OscaFramework.MicroServices
             List<ProdutoBalcao> Listaretorno = new List<ProdutoBalcao>();
             SqlDataReader dataReader;
 
-            string SelectProduto = "select P.id, P.codigo, P.nome, Lp.valor, P.quantidade,isnull( P.fabricante,'Ausente')fabricante, isnull(P.modelo, 'Ausente')modelo from itemListaPreco LP inner join produto as P on P.id = Lp.idProduto where Lp.idListaPreco = '" + idLista +"' and(P.nome like('%"+ filtro +"%')  or P.codigo = '"+ filtro + "' or P.codigoBarra = '"+ filtro +"')";
+            string SelectProduto = "select Lp.id idItemLista, P.id, P.codigo, P.nome, Lp.valor, P.quantidade,isnull( P.fabricante,'Ausente')fabricante, isnull(P.modelo, 'Ausente')modelo from itemListaPreco LP inner join produto as P on P.id = Lp.idProduto where Lp.idListaPreco = '" + idLista +"' and(P.nome like('%"+ filtro +"%')  or P.codigo = '"+ filtro + "' or P.codigoBarra = '"+ filtro +"')";
 
             try
             {
@@ -52,6 +52,7 @@ namespace OscaFramework.MicroServices
                             ProdutoBalcao retorno = new ProdutoBalcao();
 
                             retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idItemListaPreco = new Guid(dataReader["idItemLista"].ToString());
                             retorno.nome = dataReader["nome"].ToString();
                             retorno.fabricante = dataReader["fabricante"].ToString();
                             retorno.modelo = dataReader["modelo"].ToString();

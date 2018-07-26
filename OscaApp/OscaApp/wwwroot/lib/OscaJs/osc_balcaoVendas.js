@@ -1,4 +1,5 @@
-﻿
+﻿ 
+
 function ConsultaProduto(evento) {
 
     if (evento.keyCode != 13) return false;
@@ -27,7 +28,7 @@ function ConsultaProduto(evento) {
                     //Caso traga apenas um produto adiciona direto na lista
                     if (dados.listaProdutoBalcao.length == 1) {
 
-                        inserirLinha(dados.listaProdutoBalcao[0].id, dados.listaProdutoBalcao[0].codigo, dados.listaProdutoBalcao[0].nome, dados.listaProdutoBalcao[0].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }), $('#osc_listaPreco').val())
+                        inserirLinha(dados.listaProdutoBalcao[0].id, dados.listaProdutoBalcao[0].codigo, dados.listaProdutoBalcao[0].nome, FormataDecimal(dados.listaProdutoBalcao[0].valor, 2, ',', '.'), $('#osc_listaPreco').val(), dados.listaProdutoBalcao[0].idItemListaPreco);
 
                         SomaTotal();
 
@@ -38,7 +39,7 @@ function ConsultaProduto(evento) {
 
                         $.each(dados.listaProdutoBalcao, function (idx, obj) {
 
-                            $('#produtosPequisa').append('<tr id="key_' + dados.listaProdutoBalcao[idx].id + '" ><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td>' + dados.listaProdutoBalcao[idx].valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) + '</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="AdicionaProduto(' + "'" + dados.listaProdutoBalcao[idx].id + "'" + ');"> <span>Adicionar..</span></button></div> </td></tr>');
+                            $('#produtosPequisa').append('<tr id="key_' + dados.listaProdutoBalcao[idx].id + '" ><td style="width:20px"> <i class="fa fa-cubes"></i></td><td style="width:8%">' + dados.listaProdutoBalcao[idx].codigo + '</td><td> ' + dados.listaProdutoBalcao[idx].nome + '</td><td>' + dados.listaProdutoBalcao[idx].fabricante + '</td><td>' + dados.listaProdutoBalcao[idx].modelo + '</td><td style="width:7%">' + dados.listaProdutoBalcao[idx].quantidade + '</td><td>' + FormataDecimal(dados.listaProdutoBalcao[idx].valor, 2, ',', '.') + '</td><td style="width:45px"> <div class="form-group col-md-2"><button id="osc_edit" type="button" class="btn btn-success btn-sm fa fa-edit" value="voltar"  onclick="AdicionaProduto(' + "'" + dados.listaProdutoBalcao[idx].id + "','" + dados.listaProdutoBalcao[idx].idItemListaPreco + "');" + '"' + '""><span>Adicionar..</span></button></div> </td></tr>');
 
                         });
                     }
@@ -48,9 +49,10 @@ function ConsultaProduto(evento) {
     }
 }
 
-function AdicionaProduto(idProduto) {
+function AdicionaProduto(idProduto, idItemLista ) {
 
     var chaveLinha = "#key_" + idProduto + " td";
+    
     var listaPreco = $('#osc_listaPreco').val();
     var TdCodigo = "";
     var TdProduto = "";
@@ -66,16 +68,16 @@ function AdicionaProduto(idProduto) {
 
     }).fadeOut();
 
-    inserirLinha(idProduto, TdCodigo, TdProduto, TdValor, listaPreco);
+    inserirLinha(idProduto, TdCodigo, TdProduto, TdValor, listaPreco, idItemLista);
 
     SomaTotal();
 
     LimpaBusca();
 }
 
-function inserirLinha(idProduto, codigo, NomeProduto, valorProduto, lista) {
+function inserirLinha(idProduto, codigo, NomeProduto, valorProduto, lista, idItemLista) {
     html = '<tr id="keyPro_' + idProduto + '" class="item">'
-        + '<td   id="osc_KeyProdCodigo_' + idProduto + '" ><input type="text"  class="form-control "  id="osc_ProdCodigo"   value="' + codigo + '" min="1" readonly/><input type="hidden" value="' + lista + '" class="lista"/><input type="hidden" value="' + idProduto + '" class="idProduto"/></td>'
+        + '<td   id="osc_KeyProdCodigo_' + idProduto + '" ><input type="text"  class="form-control "  id="osc_ProdCodigo"   value="' + codigo + '" min="1" readonly/><input type="hidden" value="' + lista + '" class="lista"/><input type="hidden" value="' + idProduto + '" class="idProduto"/><input type="hidden" value="' + lista + '" class="lista"/><input type="hidden" value="' + idItemLista + '" class="idItemListaPreco"/></td>'
         + '<td   id="osc_KeyProdNome_' + idProduto + '"   ><input type="text"  class="form-control "  id="osc_ProdNome"       value="' + NomeProduto + '" readonly /></td>'
         + '<td   id="osc_KeyProdQtd_' + idProduto + '"    ><input class="qtd"   type="number" class="form-control"  id="osc_ProdQtd_' + idProduto + '"        value="1" min="1" onchange="calcularLinha(' + "'" + idProduto + "'" + ')" /></td>'
         + '<td   id="osc_KeyProdValor_' + idProduto + '"  ><input class="valor" type="text"   class="form-control"  id="osc_ProdValor_' + idProduto + '"      value="' + valorProduto + '" readonly /></td>'
@@ -102,13 +104,12 @@ function calcularLinha(chaveLinha) {
 
     var QTD = $(chaveQTD).val();
     var VALOR = $(chaveVALOR).val();
-
-    VALOR = VALOR.replace('R', '').replace('$', '');
-    VALOR = parseFloat(VALOR.replace(',', '.'));
+     
+    VALOR = parseFloat(PrepCalcDecimal(VALOR));
 
     TOTAL = QTD * VALOR;
 
-    $(chaveTOTAL).val(FormatMoney(TOTAL));
+    $(chaveTOTAL).val($.number(TOTAL, 2));
 
     SomaTotal();
 }
@@ -120,21 +121,21 @@ function SomaTotal() {
     var tipoDesconto = $('#osc_tipoDesconto').val();
     var valorDesconto = $('#osc_valorDesconto').val();
 
-    $('#produtosVendas > tbody tr .somaTD').each(function (i) {    
-
-        VALORTOTAL += parseFloat( $(this).val().replace('$', '').replace('R', '').replace(',', '.'));
+    $('#produtosVendas > tbody tr .somaTD').each(function (i) {  
+                
+        VALORTOTAL   += parseFloat(PrepCalcDecimal($(this).val()));
     });
 
-    if (tipoDesconto == 1) {
+    if (tipoDesconto == 1 & valorDesconto > 0) {
 
-        if (valorDesconto != undefined || valorDesconto > 0) {
+        if (valorDesconto != undefined ) {
 
             VALORTOTAL = VALORTOTAL - valorDesconto;
         }
 
     } else {
 
-        if (valorDesconto != undefined || valorDesconto > 0)
+        if (valorDesconto != undefined & valorDesconto > 0)
         {
             totalDesconto = (VALORTOTAL / 100) * valorDesconto;
             VALORTOTAL = VALORTOTAL - totalDesconto;
@@ -143,10 +144,10 @@ function SomaTotal() {
 
    
 
-    $('#ValorTotalVendas').val('TOTAL: ' + FormatMoney(VALORTOTAL));
-    $('#ValorTotalVendasDiag').val('TOTAL: ' + FormatMoney(VALORTOTAL));
+    $('#ValorTotalVendas').val('TOTAL: ' + FormataDecimal(VALORTOTAL, 2, ',', '.'));
+    $('#ValorTotalVendasDiag').val('TOTAL: ' + FormataDecimal(VALORTOTAL, 2, ',', '.'));
 
-    $('#InputValorTotalVendas').val($.number(VALORTOTAL, 2));
+    $('#InputValorTotalVendas').val(FormataDecimal(VALORTOTAL));
 
 }
 
@@ -233,10 +234,11 @@ function MontaListaObjeto() {
 
         var entidade = {
             idProduto: $(this).find('.idProduto').val(),
+            idItemListaPreco: $(this).find('.idItemListaPreco').val(),
             quantidade: $(this).find('.qtd').val(),
             idListaPreco: $(this).find('.lista').val(),
-            valor: $(this).find('.valor').val().replace('$', '').replace('R', '').replace('.', ''),
-            valorTotal: $(this).find('.somaTD').val().replace('$', '').replace('R', '').replace('.', '')
+            valor: $(this).find('.valor').val(),
+            valorTotal: $(this).find('.somaTD').val()
         };
 
         todos.push(entidade);
@@ -253,7 +255,7 @@ function CalcularParcela() {
 
     calcResult = valorTotal / parcelas;
 
-    $('#osc_valorParcela').val(FormatMoney(calcResult));
+    $('#osc_valorParcela').val(calcResult);
 }
 
 function HabilitaParcela() {
@@ -278,4 +280,20 @@ function HabilitaParcela() {
         $("#osc_valorParcela").val('R$ 0,00');
 
     }
+}
+
+
+function ValidaProdutoVenda() {
+
+    var mensagem = true;
+
+    $('#produtosVendas > tbody tr .somaTD').each(function (i) {
+
+        mensagem = false;
+    });
+
+    if (mensagem) {
+        alert('Por favor, adicione os produtos primeiro, antes de fechar a venda.');
+        return false;
+    } else { return true}
 }

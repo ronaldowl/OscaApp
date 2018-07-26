@@ -74,7 +74,12 @@
                 </tr>
                 <tr>
                     <td>
-                        <label>CNPJ:@Model.organizacao.cpf_cnpj @Model.organizacao.TelefoneEmpresa</label>
+                        <label>CNPJ: @Model.organizacao.cpf_cnpj </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Telefone: @Model.organizacao.TelefoneEmpresa</label>
                     </td>
                 </tr>
                 <tr>
@@ -101,8 +106,8 @@
 
                 <tbody>
                     <tr>
-                        <td style="width:250px"></td>
-                        <td style="width:45px"></td>
+                        <td style="width:270px"></td>
+                        <td style="width:50px"></td>
                         <td style="width:100px"></td>
                         <td style="width:180px"></td>
                     </tr>
@@ -120,16 +125,16 @@
             <span class="text-center d-inline-block">----------------------------------------</span>
             <table>
                 <tr>
-                    <td>Pagamento: </td>
-                    <td>@Model.balcaoVendas.condicaoPagamento</td>
+                    <td>Pagamento:</td>
+                    <td>@Model.balcaoVendas.condicaoPagamento / @Model.balcaoVendas.tipoPagamento </td>
                 </tr>
                 <tr>
-                    <td>Desconto R$: </td>
-                    <td>@Model.balcaoVendas.valorDesconto</td>
+                    <td>Desconto:</td>
+                    <td>R$ @Model.balcaoVendas.valorDesconto.ToString("N2") &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;QTD Parcelas: @Model.balcaoVendas.parcelas  </td>
                 </tr>
                 <tr>
-                    <td>TOTAL R$: </td>
-                    <td>@Model.balcaoVendas.valorTotal</td>
+                    <td>TOTAL:</td>
+                    <td>R$ @Model.balcaoVendas.valorTotal.ToString("N2")</td>
                 </tr>
             </table>
             <p>

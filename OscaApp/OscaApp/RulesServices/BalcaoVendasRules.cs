@@ -54,27 +54,7 @@ namespace OscaApp.RulesServices
             }
           
         }
-
-        public static bool BaixaProduto(ProdutoBalcao[] produtosBalcao, ContextPage contexto, IProdutoData produtoData)
-        {
-            try
-            {
-                foreach (var item in produtosBalcao)
-                {
-                      
-
-                }
-
-                return true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
-
-
+           
         public static bool FechaVenda(int valor, string idCliente, ClienteData clienteData, ContextPage contexto)
         {
 

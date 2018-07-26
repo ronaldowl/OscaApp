@@ -56,7 +56,7 @@
                                     <div class="inputGroupContainer">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.contasPagar.valor" class="form-control" type="text" id="osc_valor" required="required">
+                                            <input asp-for="@Model.contasPagar.valor" class="form-control" type="text" id="osc_valor" required="required" value="" placeholder="0,00" onblur="onBlur(this)">
                                         </div>
                                     </div>
                                 </div>
