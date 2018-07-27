@@ -23,14 +23,14 @@
     "Gemfile.lock",
     "*.md"
   ],
-  "version": "4.7.0",
-  "_release": "4.7.0",
+  "version": "5.2.0",
+  "_release": "5.2.0",
   "_resolution": {
     "type": "version",
-    "tag": "v4.7.0",
+    "tag": "v5.2.0",
     "commit": "a3fe90fa5f6fac55d197f9cbd18e3f57dafb716c"
   },
   "_source": "https://github.com/FortAwesome/Font-Awesome.git",
-  "_target": "4.7.0",
+  "_target": "5.2.0",
   "_originalSource": "font-awesome"
 }

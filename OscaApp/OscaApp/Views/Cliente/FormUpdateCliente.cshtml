@@ -18,13 +18,13 @@
 <div class="row">
     <div class="col-md-8">
         @if (!String.IsNullOrEmpty(Model.StatusMessage))
-    {
+        {
 
-        <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
-            <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            @Model.StatusMessage
-        </div>
-}
+            <div class="alertPers alert alert-success alert-dismissible alert-dismissiblePers" role="alert">
+                <button type="button" class="closePers close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @Model.StatusMessage
+            </div>
+        }
         <form action="FormUpdateCliente" method="post" id="osc_MainFormUpdate">
             <div class="card  " id="osc_MainForm">
                 <div class="card-header">
@@ -287,6 +287,7 @@
             </div>
         </form>
         <br />
+        <br /> <br /> <br />
     </div>
     <div class="col-md-4">
             <div class="card card-success" id="osc_formEndereco">

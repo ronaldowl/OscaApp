@@ -80,8 +80,8 @@ function inserirLinha(idProduto, codigo, NomeProduto, valorProduto, lista, idIte
         + '<td   id="osc_KeyProdCodigo_' + idProduto + '" ><input type="text"  class="form-control "  id="osc_ProdCodigo"   value="' + codigo + '" min="1" readonly/><input type="hidden" value="' + lista + '" class="lista"/><input type="hidden" value="' + idProduto + '" class="idProduto"/><input type="hidden" value="' + lista + '" class="lista"/><input type="hidden" value="' + idItemLista + '" class="idItemListaPreco"/></td>'
         + '<td   id="osc_KeyProdNome_' + idProduto + '"   ><input type="text"  class="form-control "  id="osc_ProdNome"       value="' + NomeProduto + '" readonly /></td>'
         + '<td   id="osc_KeyProdQtd_' + idProduto + '"    ><input class="qtd"   type="number" class="form-control"  id="osc_ProdQtd_' + idProduto + '"        value="1" min="1" onchange="calcularLinha(' + "'" + idProduto + "'" + ')" /></td>'
-        + '<td   id="osc_KeyProdValor_' + idProduto + '"  ><input class="valor" type="text"   class="form-control"  id="osc_ProdValor_' + idProduto + '"      value="' + valorProduto + '" readonly /></td>'
-        + '<td   id="osc_KeyProdTotal_' + idProduto + '"  ><input class="somaTD" type="text" class="form-control"  id="osc_ProdTotal_' + idProduto + '"       value=" ' + valorProduto + '" readonly /></td>'
+        + '<td   id="osc_KeyProdValor_' + idProduto + '"  ><input class="valor" type="text"   class="form-control"  id="osc_ProdValor_' + idProduto + '"      value="' + valorProduto + '"onblur="onBlur(this)" onchange="calcularLinha(' + "'" + idProduto + "'" + ')" /></td>'
+        + '<td   id="osc_KeyProdTotal_' + idProduto + '"  ><input class="somaTD" type="text" class="form-control"  id="osc_ProdTotal_' + idProduto + '"       value=" ' + valorProduto + '" disabled="disabled" /></td>'
         + '<td   id="osc_acaoRemover_' + idProduto + '"   ><button type="button" class="btn btn-danger btn-md fa fa-remove"   onclick="RemoveLinhaProduto(' + "'" + idProduto + "'" + ');"> Remover..</button></td>'
         + '</tr>';
     $('#produtosVendas').append(html);

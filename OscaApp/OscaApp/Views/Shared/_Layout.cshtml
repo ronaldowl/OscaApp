@@ -32,16 +32,25 @@
             color: black;
             padding-top: 5px;
         }
-
+    
         .footer {
             position: fixed;
-            bottom: 0;
             left: 0;
             right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            text-align: center;
             background: linear-gradient(to right bottom, #1c177f,#66dbff);
-            height: 35px;
-            margin-top: 5px;
-            z-index: 1000;
+        }
+
+        .centro {
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .fontPainel {
+            font-weight: bold
         }
 
         .osca {
@@ -62,7 +71,7 @@
 </head>
 <body>
     <div id="barra_main" class="col-md-12 barraMain sticky-top">
-        <a asp-controller="Paineis" asp-action="PainelHome" class="osca"><i class="fa fa-1x fa-home" aria-hidden="true"></i>OSCAS</a>
+        <a asp-controller="Paineis" asp-action="PainelHome" class="osca"><i class="fa fa-1x fa-home" aria-hidden="true"></i> @await Component.InvokeAsync("Footer")</a>
         <div style="float:right;">@await Html.PartialAsync("_LoginPartial") </div>
     </div>
     <div class="container-fluid" style="margin-bottom:5px;">
@@ -95,9 +104,60 @@
     </div>
     @*@RenderSection("scripts", required: false)*@
     @*@{Html.RenderPartial("~/Views/Shared/Components/Mensagem/_Mensagem.cshtml");}*@
-    <div>
-        <footer class="footer">
-            @await Component.InvokeAsync("Footer");
+
+    <div class="footer">
+        <footer>
+            <div class="row" id="barraNavegacao">
+               
+                <div class="col-sm-3">
+                    <div class="card m-1">
+                        <div class="card-body centro">
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-money"></i></td>
+                                    <td><a href="/Paineis/PainelFinanceiro"><h4 class="fontPainel">Financeiro</h4></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card m-1">
+                        <div class="card-body centro">
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-handshake-o"></i></td>
+                                    <td><a href="/Paineis/PainelVendas"><h4 class="fontPainel">Vendas</h4></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card m-1">
+                        <div class="card-body centro">
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-wrench"></i></td>
+                                    <td><a href="/Paineis/PainelServico"><h4 class="fontPainel">Serviços</h4></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card m-1">
+                        <div class="card-body centro">
+                            <table>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-cog"></i></td>
+                                    <td><a href="/Paineis/PainelConfiguracoes"><h4 class="fontPainel">Configurações</h4></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>       
         </footer>
     </div>
 </body>

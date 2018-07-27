@@ -113,7 +113,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                     </span>
-                                    <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control"  >
+                                    <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control">
                                         <option value="1" selected="">Valor</option>
                                         <option value="2">Percentual</option>
                                     </select>
@@ -172,56 +172,57 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <br /><br /><br /><br />
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Criado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-2x fa-user"></span>
-                                </span> &nbsp;
-                                <input id="osc_criadoPor" asp-for="@Model.pedidoRetirada.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.pedidoRetirada.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Criado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-2x"></span>
-                                </span> &nbsp;
-                                <input id="osc_criadoEm" asp-for="@Model.pedidoRetirada.criadoEm" type="text" class="form-control" disabled="disabled" />
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.pedidoRetirada.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Modificado Por</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-2x fa-user"></span>
-                                </span> &nbsp;
-                                <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label">Modificado Em</label>
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="fa fa-calendar fa-2x"></span>
-                                </span> &nbsp;
-                                <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <br /><br /><br /><br />
+            
         </form>
     </div>
 </div>
