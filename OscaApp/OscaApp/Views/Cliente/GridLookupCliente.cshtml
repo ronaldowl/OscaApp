@@ -12,21 +12,22 @@
         <tr style="font-size:12px">
             <th></th>
             <th style="width:100px">Código</th>
-            <th style="width:300px">Cliente</th>
-            <th style="width:300px">Razão Social</th>
+            <th style="width:400px">Cliente</th>
+            <th style="width:300px">E-mail</th>
+            <th style="width:300px">Telefone</th>
             <th style="width:150px">CNPJ/CPF</th>
-            <th style="width:150px">Tipo de Pessoa</th>
+           
         </tr>
     </thead>
     @foreach (var item in Model)
     {
-    <tr style="font-size:12px" id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeCliente.ToString()') " data-dismiss="modal">
+    <tr style="font-size:12px" id="@item.id" onclick="ConfigLookup('@item.id.ToString()','@item.nomeCliente.ToString()','@item.email.ToString()','@item.telefone.ToString()') " data-dismiss="modal">
         <td><i class="fa  fa-users"></i></td>
         <td>@item.codigo.ToString()</td>
         <td>@item.nomeCliente</td>
-        <td>@item.razaoSocial</td>
-        <td>@item.cnpj_cpf</td>
-        <td>@item.tipoPessoa</td>
+        <td>@item.email</td>
+        <td>@item.telefone</td>
+        <td>@item.cnpj_cpf</td>      
 
     </tr>
     }

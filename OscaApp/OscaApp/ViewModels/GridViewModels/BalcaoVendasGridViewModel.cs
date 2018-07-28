@@ -10,7 +10,8 @@ namespace OscaApp.ViewModels.GridViewModels
 {
     public class BalcaoVendasGridViewModel
     {
-        public BalcaoVendas balcaoVendas { get; set; }     
+        public BalcaoVendas balcaoVendas { get; set; }  
+        public Cliente cliente { get; set; }
      
     }
 }

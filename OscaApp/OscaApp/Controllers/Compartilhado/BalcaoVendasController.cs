@@ -94,6 +94,9 @@ namespace OscaApp.Controllers
                 itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao) );
                 modelo.listaPrecos = itens;
 
+                //Se passar o id carrega o cliente
+                if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = Sqlservice.RetornaRelacaoCliente(new Guid(idCliente));
+
             }
             catch (Exception ex)
             {
@@ -125,6 +128,30 @@ namespace OscaApp.Controllers
             {
                 LogOsca log = new LogOsca();
                 log.GravaLog(1,4, this.contexto.idUsuario, this.contexto.idOrganizacao, "GridPedido", ex.Message);
+            }
+
+            return View();
+        }
+
+        public ViewResult GridClienteBalcaoVendas(string idCliente)
+        {
+            SqlGenericData genericData = new SqlGenericData();
+            Guid id =  new Guid(idCliente);
+            try
+            {
+                List<BalcaoVendas> retorno;
+
+                ViewBag.Cliente = genericData.RetornaCliente(id);
+
+                retorno = balcaoVendasData.GetAllByIdCliente(id);
+               
+                return View(retorno);
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "GridPedido", ex.Message);
             }
 
             return View();

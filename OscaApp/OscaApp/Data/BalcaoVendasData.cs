@@ -112,7 +112,16 @@ namespace OscaApp.Data
             retorno = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
             return retorno;
 
-        }       
+        }
+
+        public List<BalcaoVendas> GetAllByIdCliente(Guid idCliente)
+        {
+            List<BalcaoVendas> retorno = new List<BalcaoVendas>();
+            retorno = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            return retorno;
+
+        }      
+
 
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {

@@ -443,6 +443,9 @@ namespace OscaFramework.Models
             PedidoRetirada = 33,
             Orgconfig = 34,
             ServicoPedidoRetirada = 35,
+            LocalProduto = 36,
+            MovimentacaoProduto = 37,
+            DetalheMovimentacaoProduto = 38,
 
             Organizacao = 1000
 

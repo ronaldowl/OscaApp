@@ -1,0 +1,68 @@
+﻿@model List<OscaFramework.Models.PedidoRetirada>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+
+<div class="row">
+    <div class="col-md-12">      
+        <div class="card  " id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table style="margin-left:auto;margin-right:auto">
+                            <tr onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new { id = @ViewBag.Cliente.id })'" style="cursor:pointer">
+                                <td style="width:400px">
+                                    <h5 style="font-weight:bold">Pedidos de Retirada para o Cliente:@ViewBag.Cliente.codigo</h5>
+                                </td>
+                                <td style="width:700px"><center><h2>@ViewBag.Cliente.nomeCliente  </h2></center>                            
+                                </td>
+                                <td>
+                                    <label>
+                                        <button id="osc_cliente" type="button" class="btn btn-info btn-sm fa fa-1x fa-user" onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new { id = @ViewBag.Cliente.id })'"  > <span>Voltar para o Cliente</span></button>
+                                    </label>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover   table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Código Pedido</th>                                
+                                <th>Valor</th>
+                                <th>Condição Pagamento</th>
+                                <th>Tipo Pagamento</th>
+                                <th>Vendido Por</th>
+                                <th>Data Venda</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                        <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdatePedidoRetirada", "PedidoRetirada", new { id = item.id })'">
+                            <td><i class="fa fa-cart-plus fa-2x"></i></td>
+                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdatePedidoRetirada", new { id = item.id })</td>
+                     
+                            <td>R$@item.valorTotal.ToString("N2")</td>
+                            <td>@item.condicaoPagamento</td>
+                            <td>@item.tipoPagamento</td>
+                            <td>@item.criadoPorName</td>
+                            <td>@item.criadoEm</td>
+                            <td>@item.statusPedidoRetirada</td>
+
+                        </tr>
+                        }
+                    </table>
+
+                </div>
+            </div>
+     
+        </div>
+    </div>
+</div>
+
+

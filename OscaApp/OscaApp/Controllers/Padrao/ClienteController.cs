@@ -24,6 +24,9 @@ namespace OscaApp.Controllers
         private readonly PedidoData pedidoData;
         private readonly AtendimentoData atendimentoData;
         private readonly ContasReceberData contasReceberData;
+        private readonly BalcaoVendasData balcaoVendasData;
+        private readonly PedidoRetiradaData pedidoRetiradaData;
+
         public string urlAmbiente { get; set; }
 
         private readonly SqlGenericData sqlData;
@@ -36,8 +39,10 @@ namespace OscaApp.Controllers
             this.pedidoData = new PedidoData(db);
             this.atendimentoData = new AtendimentoData(db);
             this.contasReceberData = new ContasReceberData(db);
-
+            this.balcaoVendasData = new BalcaoVendasData(db);
             this.ordemServicoData = new OrdemServicoData(db);
+            this.pedidoRetiradaData = new PedidoRetiradaData(db);
+
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.sqlData = _sqlData;
         }
@@ -122,8 +127,15 @@ namespace OscaApp.Controllers
                         //Preenche informações do grid de Atendiemento
                         modelo.atendimentos = atendimentoData.GetAllByIdCliente(new Guid(id));
 
-                        //Preenche informações do grid de Atendiemento
+                        //Preenche informações do grid de Contas Receber
                         modelo.contasReceber = contasReceberData.GetAllByIdCliente(new Guid(id));
+
+                        //Preenche informações do grid de Balcao
+                        modelo.balcaoVendas =  balcaoVendasData.GetAllByIdCliente(new Guid(id));
+
+
+                        //Preenche informações do grid de Pedido Retirada
+                        modelo.pedidoRetiradas = pedidoRetiradaData.GetAllByIdCliente(new Guid(id));
 
                         //apresenta mensagem de cliente atualizado com sucesso
                         modelo.StatusMessage = StatusMessage;
@@ -163,42 +175,7 @@ namespace OscaApp.Controllers
 
             return RedirectToAction("FormUpdateCliente", new { id = modelo.id.ToString() });
         }
-
-        //[HttpGet]
-        //public ViewResult GridCliente(string filtro,  int view)
-        //{
-        //    try
-        //    {
-        //        ViewBag.viewContexto = 1;
-
-
-        //        IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, view);
-
-        //        if (!String.IsNullOrEmpty(filtro))
-        //        {
-        //            retorno = from u in retorno
-        //                      where (u.nomeCliente.Contains(filtro)) ||
-        //                            (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
-        //                      select u;
-
-        //        }
-        //        retorno = retorno.OrderBy(x => x.nomeCliente);
-
-        //        //if (Page == 0) Page = 1;
-
-        //        return View(retorno.ToPagedList<Cliente>(1, 20));
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        LogOsca log = new LogOsca();
-        //        log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
-        //    }
-
-        //    return View();
-        //}
-
-
+                
        
         public ViewResult GridCliente(string filtro, int Page,int view)
         {

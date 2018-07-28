@@ -48,8 +48,8 @@
                         <thead class="thead-light">
                             <tr>
                                 <th></th>
-                                <th>Código</th>
-                                <th>CPF</th>
+                                <th>Código Venda</th>
+                                <th>Cliente</th>
                                 <th>Valor</th>
                                 <th>Condição Pagamento</th>
                                 <th>Tipo Pagamento</th>
@@ -60,10 +60,10 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                        <tr style="cursor:pointer;font-size:12px" id="@item.balcaoVendas.id" onclick="location.href='@Url.Action("BalcaoVendasView", "BalcaoVendas", new {id = item.balcaoVendas.id })'">
+                        <tr style="cursor:pointer;font-size:12px" id="@item.balcaoVendas.id" onclick="location.href='@Url.Action("BalcaoVendasView", "BalcaoVendas", new { id = item.balcaoVendas.id })'">
                             <td><i class="fa fa-cart-plus fa-2x"></i></td>
                             <td>@Html.ActionLink(item.balcaoVendas.codigo.ToString(), "BalcaoVendasView", new { id = item.balcaoVendas.id })</td>
-                            <td>@item.balcaoVendas.cpf</td>
+                            <td>@if(item.cliente != null){ @item.cliente.nomeCliente } </td>
                             <td>R$@item.balcaoVendas.valorTotal.ToString("N2")</td>
                             <td>@item.balcaoVendas.condicaoPagamento</td>
                             <td>@item.balcaoVendas.tipoPagamento</td>

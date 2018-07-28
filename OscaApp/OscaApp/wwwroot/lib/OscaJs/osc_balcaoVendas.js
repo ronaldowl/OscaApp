@@ -219,8 +219,8 @@ function MontaObjetoCliente() {
     ObjetoCliente.id = $('#osc_clienteId').val();
     ObjetoCliente.nomeCliente = $('#osc_clienteIdName').val();
     ObjetoCliente.tipoPessoa = $('#osc_tipopessoa').val();
-    ObjetoCliente.email = $('#osc_email').val();
-    ObjetoCliente.telefone = $('#osc_telefone').val();
+    ObjetoCliente.email = $('#osc_clienteEmail').val();
+    ObjetoCliente.telefone = $('#osc_clienteTelefone').val();
     ObjetoCliente.cnpj_cpf = $('#osc_cnpj_cpf').val();
 
     return ObjetoCliente;

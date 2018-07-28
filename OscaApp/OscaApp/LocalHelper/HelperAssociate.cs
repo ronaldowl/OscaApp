@@ -72,6 +72,8 @@ namespace OscaApp.framework
                 BalcaoVendasGridViewModel X = new BalcaoVendasGridViewModel();
 
                 X.balcaoVendas = item;
+               
+                if(item.idCliente != Guid.Empty) X.cliente = sqldata.RetornaCliente(item.idCliente);
 
                 retorno.Add(X);
             }

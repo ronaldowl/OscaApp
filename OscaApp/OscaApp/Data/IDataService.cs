@@ -149,6 +149,28 @@ namespace OscaApp.Data
         List<Recurso> GetAll(Guid idOrg);
     }
 
+    public interface ILocalProdutoData
+    {
+        void Add(LocalProduto localProduto);
+        void Update(LocalProduto localProduto);
+        LocalProduto Get(Guid id, Guid idOrg);
+        List<LocalProduto> GetAll(Guid idOrg);
+    }
+    public interface IMovimentacaoProdutoData
+    {
+        void Add(MovimentacaoProduto movimentacaoProduto);
+        void Update(MovimentacaoProduto movimentacaoProduto);
+        MovimentacaoProduto Get(Guid id, Guid idOrg);
+        List<MovimentacaoProduto> GetAll(Guid idOrg);
+    }
+    public interface IDetalheMovimentacaoProdutoData
+    {
+        void Add(DetalheMovimentacaoProduto detalheMovimentacaoProduto);
+        void Update(DetalheMovimentacaoProduto detalheMovimentacaoProduto);
+        DetalheMovimentacaoProduto Get(Guid id, Guid idOrg);
+        List<DetalheMovimentacaoProduto> GetAll(Guid idOrg);
+    }
+
     public interface IPedidoRetiradaData
     {
         void Add(PedidoRetirada pedidoRetirada);
@@ -157,6 +179,8 @@ namespace OscaApp.Data
         void Delete(PedidoRetirada pedidoRetirada);
         PedidoRetirada Get(Guid id, Guid idOrg);
         List<PedidoRetiradaGridViewModel> GetAll(Guid idOrg);
+        List<PedidoRetirada> GetAllByIdCliente(Guid idCliente);
+
     }
     public interface IOrgConfigData
     {
@@ -206,10 +230,9 @@ namespace OscaApp.Data
         void Delete(BalcaoVendas balcaoVendas);
         BalcaoVendas Get(Guid id);
         List<BalcaoVendas> GetAll(Guid idOrg);
+        List<BalcaoVendas> GetAllByIdCliente(Guid idCliente);
         List<Relacao> GetAllRelacao(Guid idOrg);
-        List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg);
-        //List<BalcaoVendasGridViewModel> GetAllGridViewModelByCliente(Guid idCliente);
-
+        List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg);  
 
     }
 

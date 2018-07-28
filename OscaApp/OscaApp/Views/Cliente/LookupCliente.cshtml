@@ -9,10 +9,14 @@
 <script type="text/javascript">
 
     //Função para tratamento do Lookup padrão do Cliente
-    function ConfigLookup(id, name) {       
+    function ConfigLookup(id, name, email, telefone) {       
                
         $("#osc_clienteIdName").val(name);
         $("#osc_clienteId").val(id);
+
+        $("#osc_clienteEmail").val(email);
+        $("#osc_clienteTelefone").val(telefone);
+
         $('#lookupCliente').modal('hide');         
     }
 

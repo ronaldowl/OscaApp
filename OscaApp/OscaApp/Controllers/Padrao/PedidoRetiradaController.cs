@@ -41,13 +41,16 @@ namespace OscaApp.Controllers
         public string StatusMessage { get; set; }
 
         [HttpGet]
-        public ViewResult FormCreatePedidoRetirada()
+        public ViewResult FormCreatePedidoRetirada(string idCliente)
         {
             PedidoRetiradaViewModel modelo = new PedidoRetiradaViewModel();
             modelo.pedidoRetirada = new PedidoRetirada();
             modelo.contexto = contexto;
             modelo.pedidoRetirada.criadoEm = DateTime.Now;
             modelo.pedidoRetirada.criadoPorName = contexto.nomeUsuario;
+
+            //Se passar o id carrega o cliente
+            if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = Sqlservice.RetornaRelacaoCliente(new Guid(idCliente));
 
             return View(modelo);
         }
@@ -145,6 +148,22 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<PedidoRetiradaGridViewModel>(Page, 100));
         }
+
+        public ViewResult GridClientePedidoRetirada(string idCliente)
+        {
+
+            Guid id = new Guid(idCliente);
+
+
+            ViewBag.Cliente = Sqlservice.RetornaCliente(id);
+
+            List<PedidoRetirada> retorno = modeloData.GetAllByIdCliente(id);      
+           
+
+            return View(retorno);
+        }
+
+
         [HttpGet]
         public ViewResult ImpressaoPedidoRetirada(string id)
         {
