@@ -601,8 +601,9 @@
             <div class="card-header card-success">
                 <div class="card-title">
                     <table>
+                        <tr><td colspan="4" style="font-weight:bold">Pedidos Retirada</td><tr>
                         <tr>
-                            <td style="width:200px">Pedidos Retirada </td>
+                           
                             <td style="width:30px">
                                 <label>
                                     <button id="osc_verPedidoRetirada" data-toggle="collapse" data-target="#conteudoPedidoRetirada" class="btn btn-info btn-sm fa fa-1x fa-angle-double-down"></button>
@@ -610,7 +611,7 @@
                             </td>
                             <td style="width:30px">
                                 <label>
-                                    <button id="osc_PedidoRetirada" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("FormCreatePedidoRetirada", "PedidoRetirada", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
+                                    <button id="osc_PedidoRetirada" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("FormCreatePedidoRetirada", "PedidoRetirada", new { idCliente = @Model.cliente.id })'"></button>
                                 </label>
                             </td>
                             <td style="width:30px">
@@ -621,14 +622,14 @@
                             </td>
                             <td style="width:30px">
                                 <label>
-                                    Total:@Model.pedidoRetiradas.Count
+                                    QTD:@Model.pedidoRetiradas.Count
                                 </label>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div class="card-body collapse" id="conteudoPedidoRetirada">
+            <div class="card-body collapse"  id="conteudoPedidoRetirada">
                 <table class="table table-hover table-responsive table-sm">
                     <thead class="thead-light">
                         <tr style="font-size:13px">
@@ -637,21 +638,24 @@
                             <th style="width:100px">Data Retirada</th>
                             <th style="width:100px">Valor</th>
                             <th style="width:100px">Status</th>
+
+
                         </tr>
                     </thead>
                     @{int contadorRetirada = 0;}
                     @foreach (var item in Model.pedidoRetiradas)
                     {
                         @if (contadorRetirada == 5) { break; }
-                        <tr style="font-size:12px">
-                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdatePedidoRetirada", "PedidoRetirada", new { id = item.id })</td>
+                    <tr style="font-size:12px">
+                        <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdatePedidoRetirada", "PedidoRetirada", new { id = item.id })</td>
 
-                            <td>@item.dataEntrega.ToShortDateString()</td>
-                            <td>@item.dataRetirada.ToShortDateString()</td>
-                            <td>R$@item.valorTotal.ToString("N2")</td>
-                            <td>@item.statusPedidoRetirada</td>
+                        <td>@item.dataEntrega.ToShortDateString()</td>
+                        <td>@item.dataRetirada.ToShortDateString()</td>
+                        <td>R$@item.valorTotal.ToString("N2")</td>
+                        <td>@item.statusPedidoRetirada</td>
 
-                        </tr>
+
+                    </tr>
                         contadorRetirada++;
                     }
                 </table>
