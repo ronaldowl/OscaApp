@@ -99,7 +99,13 @@ namespace OscaFramework.Models
 
     public class CustomEnum
     {
-        
+        public enum Periodo
+        {
+            manha = 0,
+            tarde = 1,
+            noite = 2
+        }
+
         public enum TipoProduto
         {
             produto = 0,

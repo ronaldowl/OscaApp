@@ -292,10 +292,12 @@
     <div class="col-md-3">
         <div class="card card-success" id="osc_formEndereco">
             <div class="card-header card-success">
-                <div class="card-title">
+                <div class="card-title" style="height:33px">
                     <table>
+                        <tr><td colspan="4" style="font-weight:bold">Endereços</td>
+
                         <tr>
-                            <td>Endereços &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
                             <td>
                                 <div id="barra_acoes_endereco">
                                     <label>
@@ -341,10 +343,12 @@
         </div>
         <div class="card card-success" id="osc_formOrdemServico">
             <div class="card-header card-success">
-                <div class="card-title">
+                <div class="card-title" style="height:33px">
                     <table>
+                        <tr><td colspan="4" style="font-weight:bold">Ordens de Serviço</td>
+
                         <tr>
-                            <td>Ordens &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; </td>
+
                             <td>
                                 <div id="barra_acoes_ordemSevico">
                                     <label>
@@ -392,10 +396,12 @@
         </div>
         <div class="card card-success" id="osc_formAtendimento">
             <div class="card-header card-success">
-                <div class="card-title">
+                <div class="card-title" style="height:33px">
                     <table>
+                        <tr><td colspan="4" style="font-weight:bold">Atendimentos</td>
+
                         <tr>
-                            <td>Atendimentos</td>
+
                             <td>
                                 <div id="barra_acoes_atendimento">
                                     <label>
@@ -443,10 +449,12 @@
         </div>
         <div class="card card-success" id="osc_formPedido">
             <div class="card-header card-success ">
-                <div class="card-title">
+                <div class="card-title" style="height:33px">
                     <table>
+                        <tr><td colspan="4" style="font-weight:bold">Pedidos</td>
+
                         <tr>
-                            <td>Pedidos&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
                             <td>
                                 <div id="barra_acoes_pedido">
                                     <label>
@@ -497,10 +505,12 @@
         </div>
         <div class="card card-success" id="osc_formContaReceber">
             <div class="card-header card-success">
-                <div class="card-title">
+                <div class="card-title" style="height:33px">
                     <table>
+                        <tr><td colspan="4" style="font-weight:bold">Contas a Receber</td>
                         <tr>
-                            <td>Contas Re&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
+                        <tr>
+
                             <td>
                                 <div id="barra_acoes_conta">
                                     <label>
@@ -547,10 +557,12 @@
         </div>
         <div class="card card-success" id="osc_BalcaoVendas">
             <div class="card-header card-success">
-                <div class="card-title">
+                <div class="card-title" style="height:33px">
                     <table>
+                        <tr><td colspan="4" style="font-weight:bold">Balcão de Vendas</td>
                         <tr>
-                            <td>Balcão Vendas&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; </td>
+                        <tr>
+
                             <td>
                                 <div id="barra_acoes_balcaoVendas">
                                     <label>
@@ -599,37 +611,33 @@
         </div>
         <div class="card card-success" id="osc_PedidoRetirada">
             <div class="card-header card-success">
-                <div class="card-title">
+                <div class="card-title" style="height:33px">
                     <table>
-                        <tr><td colspan="4" style="font-weight:bold">Pedidos Retirada</td><tr>
+                        <tr><td colspan="4" style="font-weight:bold">Pedidos de Retirada</td>
                         <tr>
-                           
-                            <td style="width:30px">
-                                <label>
-                                    <button id="osc_verPedidoRetirada" data-toggle="collapse" data-target="#conteudoPedidoRetirada" class="btn btn-info btn-sm fa fa-1x fa-angle-double-down"></button>
-                                </label>
-                            </td>
-                            <td style="width:30px">
-                                <label>
-                                    <button id="osc_PedidoRetirada" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("FormCreatePedidoRetirada", "PedidoRetirada", new { idCliente = @Model.cliente.id })'"></button>
-                                </label>
-                            </td>
-                            <td style="width:30px">
-                                <label>
-                                    <button id="osc_gridPedidoRetirada" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridClientePedidoRetirada", "PedidoRetirada", new {idCliente = @Model.cliente.id })'">Ver +</button>
+                        <tr>
+                            <td>
+                                <div id="barra_acoes_balcaoVendas">
 
-                                </label>
-                            </td>
-                            <td style="width:30px">
-                                <label>
-                                    QTD:@Model.pedidoRetiradas.Count
-                                </label>
+                                    <label>
+                                        <button id="osc_verPedidoRetirada" data-toggle="collapse" data-target="#conteudoPedidoRetirada" class="btn btn-info btn-sm fa fa-1x fa-angle-double-down"></button>
+                                    </label>
+
+                                    <label>
+                                        <button id="osc_PedidoRetirada" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("FormCreatePedidoRetirada", "PedidoRetirada", new { idCliente = @Model.cliente.id })'"><span>Novo</span></button>
+                                    </label>
+
+                                    <label>
+                                        <button id="osc_gridPedidoRetirada" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridClientePedidoRetirada", "PedidoRetirada", new {idCliente = @Model.cliente.id })'">Ver +</button> Total:@Model.pedidoRetiradas.Count
+
+                                    </label>
+                                </div>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
-            <div class="card-body collapse"  id="conteudoPedidoRetirada">
+            <div class="card-body collapse" id="conteudoPedidoRetirada">
                 <table class="table table-hover table-responsive table-sm">
                     <thead class="thead-light">
                         <tr style="font-size:13px">
@@ -637,7 +645,7 @@
                             <th style="width:100px">Data Entrega</th>
                             <th style="width:100px">Data Retirada</th>
                             <th style="width:100px">Valor</th>
-                            <th style="width:100px">Status</th>
+                            <th style="width:100px">Status</th">
 
 
                         </tr>
@@ -646,16 +654,16 @@
                     @foreach (var item in Model.pedidoRetiradas)
                     {
                         @if (contadorRetirada == 5) { break; }
-                    <tr style="font-size:12px">
-                        <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdatePedidoRetirada", "PedidoRetirada", new { id = item.id })</td>
+                        <tr style="font-size:12px">
+                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdatePedidoRetirada", "PedidoRetirada", new { id = item.id })</td>
 
-                        <td>@item.dataEntrega.ToShortDateString()</td>
-                        <td>@item.dataRetirada.ToShortDateString()</td>
-                        <td>R$@item.valorTotal.ToString("N2")</td>
-                        <td>@item.statusPedidoRetirada</td>
+                            <td>@item.dataEntrega.ToShortDateString()</td>
+                            <td>@item.dataRetirada.ToShortDateString()</td>
+                            <td>R$@item.valorTotal.ToString("N2")</td>
+                            <td>@item.statusPedidoRetirada</td>
 
 
-                    </tr>
+                        </tr>
                         contadorRetirada++;
                     }
                 </table>
