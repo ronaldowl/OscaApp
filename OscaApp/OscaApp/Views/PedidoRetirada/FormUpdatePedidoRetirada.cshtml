@@ -221,15 +221,69 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label>Anotação</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                    </span>
-                                    <textarea id="osc_anotacao" asp-for="@Model.pedidoRetirada.anotacao" class="form-control" rows="4" cols="4" placeholder="digite uma anotação"></textarea>
-                                </div>
-                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <td style="width:5px"></td>
+                                <td style="width:5px">Habilitar?</td>
+                                <td style="width:15px">Servico</td>
+                                <td style="width:10px">QTD</td>
+                                <td style="width:30px">Valor</td>
+                                <td style="width:30px">Valor Toltal</td>
+                                <td style="width:30px">Endereço</td>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td style="width:5px"><i class="fa fa-2x fa-truck"></i></td>
+                                <td style="width:5px"><input type="checkbox" asp-for="@Model.pedidoRetirada.cacamba1" class="input-group-sm" /></td>
+                                <td style="width:15px">Servico</td>
+                                <td style="width:10px">     <input asp-for="@Model.pedidoRetirada.quantidade1" class="form-control" type="number" id="osc_quantidade1"></td>
+                                <td style="width:30px">
+                                    <input id="osc_valor1" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" />
+                                </td>
+                                <td style="width:30px">
+                                    <input id="osc_valor1" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" disabled="disabled" />
+                                </td>
+                                <td>Endereço</td>
+                            </tr>
+                            <tr>
+                                <td style="width:5px"><i class="fa fa-2x fa-truck"></i></td>
+                                <td style="width:5px"><input type="checkbox" asp-for="@Model.pedidoRetirada.cacamba2" class="input-group-sm" /></td>
+                                <td style="width:15px">Servico</td>
+                                <td style="width:10px">     <input asp-for="@Model.pedidoRetirada.quantidade1" class="form-control" type="number" id="osc_quantidade2"></td>
+                                <td style="width:30px">
+                                    <input id="osc_valor2" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" />
+                                </td>
+                                <td style="width:30px">
+                                    <input id="osc_valor1" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" disabled="disabled" />
+                                </td>
+                                <td>Endereço</td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Anotação</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                            </span>
+                            <textarea id="osc_anotacao" asp-for="@Model.pedidoRetirada.anotacao" class="form-control" rows="6" cols="4" placeholder="digite uma anotação"></textarea>
                         </div>
                     </div>
                 </div>

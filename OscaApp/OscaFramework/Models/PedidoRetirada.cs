@@ -28,6 +28,24 @@ namespace OscaFramework.Models
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
         public CustomEnumStatus.StatusPedidoRetirada statusPedidoRetirada { get; set; }
 
+        public int quantidade1 { get; set; }
+        public int quantidade2 { get; set; }
+
+        public decimal valor1 { get; set; }
+        public decimal valor2 { get; set; }
+
+        public decimal valorTotal1 { get; set; }
+        public decimal valorTotal2 { get; set; }
+
+        public bool cacamba1 { get; set; }
+        public bool cacamba2 { get; set; }
+
+        ////public Guid idservico1 { get; set; }
+        ////public Guid idservico2 { get; set; }
+
+        ////public Guid idendereco1 { get; set; }
+        ////public Guid idendereco2 { get; set; }
+
 
         public int quantidade { get; set; }
 
