@@ -3,7 +3,7 @@
 @{
     Layout = "_LayoutFrame";
 }
-<div class="card">
+<div class="card" style="align-items:flex-start">
     <div class="card-header bg-primary">
         <table>
             <tr>
@@ -13,10 +13,10 @@
         </table>
     </div>
     <div class="card-body">
-        <ol style="font-size:12px;font-weight:bold;list-style-type:circle">
-            <li>QTD de Clientes: @Model.qtdCliente</li>
-            <li>QTD de Contatos: @Model.qtdContato</li>
-            <li>QTD de Produtos: @Model.qtdProduto</li>
+        <ol style="font-size:12px;font-weight:bold;list-style-type:circle;font-size:12px">
+            <li>Clientes: @Model.qtdCliente</li>
+            <li>Contatos: @Model.qtdContato</li>
+            <li>Produtos: @Model.qtdProduto</li>
         </ol>
     </div>
 </div>

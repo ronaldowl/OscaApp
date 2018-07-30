@@ -27,6 +27,7 @@ namespace OscaFramework.Models
         public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }
         public CustomEnum.tipoDesconto tipoDesconto { get; set; }
         public CustomEnumStatus.StatusPedidoRetirada statusPedidoRetirada { get; set; }
+        public CustomEnum.Periodo periodo { get; set; }
 
         public int quantidade1 { get; set; }
         public int quantidade2 { get; set; }

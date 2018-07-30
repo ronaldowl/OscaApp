@@ -1,62 +1,138 @@
 ﻿@model OscaApp.Data.ContextPage
+@*<div class="row">
+    &nbsp;   &nbsp;  &nbsp;  <h3>Painel Home</h3>
+</div>*@
 <div class="row">
-    <h3>Painel Home</h3>
-</div>
-<div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header bg-warning">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
-                        </tr>
-                    </table>
-                </div>
+    <div class="col-md-2">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-cogs iconPanel" aria-hidden="true"></i></td>
+                        <td><a asp-controller="Paineis" asp-action="PainelOperacional"><h6>Operacional</h6></a></td>
+                    </tr>
+                </table>
             </div>
-            <div class="card">
-                <div class="card-header bg-info">
-                    <table>
-                        <tr>
-                            <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
-                            <td><h5>Institucional</h5></td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="card-body">
-                    <ol style="font-size:12px;font-weight:bold;list-style-type:circle;padding:5px;">
-                        <li><a href="www.oscas.com.br">www.oscas.com.br</a></li>
-                        <li><a href="www.loja.oscas.com.br">www.loja.oscas.com.br </a></li>
-                        <li><a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br </a></li>
-                        <li>suporte@oscas.com.br</li>
-                        <li>WhatsApp (11) 9-8872-2348</li>
-                    </ol>
+        </div>
+        <div class="card">
+            <div class="card-header bg-info">
+                <table>
+                    <tr>
+                        <td><i class="fa fa-2x fa-home iconPanel" aria-hidden="true"></i></td>
+                        <td><h5>Institucional</h5></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-body">
+                <ol style="font-size:10px;font-weight:bold;list-style-type:circle;padding:5px;">
+                    <li><a href="www.oscas.com.br">www.oscas.com.br</a></li>
+                    <li><a href="www.loja.oscas.com.br">www.loja.oscas.com.br </a></li>
+                    <li><a href="www.intranet.oscas.com.br">www.intranet.oscas.com.br </a></li>
+                    <li>suporte@oscas.com.br</li>
+                    <li>WhatsApp:</li>
+                    <li>(11) 9-8872-2348</li>
 
-                </div>
-            </div>
-            <div id="volumetria">
+                </ol>
 
             </div>
         </div>
-        <div class="col-md-8" id="comunicados">
-        </div>   
+        <div id="volumetria">
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div id="contasReceber">
+        </div>
+        <br />
+        <div id="tarefas">
+        </div>
+
+    </div>
+    <div class="col-md-4">
+
+        <div id="contasPagar">
+        </div>
+        <br />
+        <div id="agendamentos">
+        </div>
+    </div>
+    <div id="osc_atalhos">
+        <table>
+            <tr>
+                <td >
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
+                    </label>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
 </div>
 <br />
-<div class="row"> 
-    <div class="col-md-4" id="tarefas">
-    </div>
-    <div class="col-md-4" id="agendamentos">
-    </div>
-    <div class="col-md-4" id="contasReceber">
+ 
+<div class="row" style="align-content:center">
+    <div class="col-md-8" id="comunicados">
     </div>
 </div>
-
 
 <script>
     CarregaComunicados();
     CarregaTarefas();
     CarregaAgendamentos();
     CarregaContasReceber();
+    CarregaContasPagar();
+
     CarregaVolumetria();
     function CarregaComunicados() {
         $.ajax("/Comunicado/QuadroComunicadoResumido").done(function (data) {
@@ -76,6 +152,11 @@
     function CarregaContasReceber() {
         $.ajax("/contasReceber/GridContasReceberDia").done(function (data) {
             $("#contasReceber").html(data);
+        });
+    }
+    function CarregaContasPagar() {
+        $.ajax("/contasPagar/GridContasPagarDia").done(function (data) {
+            $("#contasPagar").html(data);
         });
     }
     function CarregaVolumetria() {
