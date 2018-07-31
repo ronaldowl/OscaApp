@@ -260,7 +260,30 @@ namespace OscaFramework.Models
             DuasHoras = 2,
             TresHoras = 3
 
-        }  
+        }
+
+        public enum TipoServico
+        {
+            Manutencao = 0,
+            Holistico = 1,
+            RetiradaEntulho = 2, 
+            Outros = 3
+        }
+
+        public enum ClassificacaoProduto
+        {
+            Peca = 0,
+            Acessorio = 1,
+            Eletrica = 2,
+            Cosmetico = 3,
+            MateriaPrima = 4,
+            Equipamento = 5,
+            Informatica = 6,
+            Telefonia = 7,
+            Ferramenta = 8,
+            Outros = 9
+
+        }
 
         public enum itemHora
         {

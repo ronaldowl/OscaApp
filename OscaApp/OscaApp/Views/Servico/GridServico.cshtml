@@ -5,7 +5,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        
+
         <div class="card" id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
@@ -49,20 +49,23 @@
                                     <th>Código</th>
                                     <th>Servico</th>
                                     <th>Forma de Venda</th>
+                                    <th>Tipo de Serviço</th>
+
                                     <th>Valor</th>
                                     <th>Criado Por</th>
                                 </tr>
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateServico", "Servico", new {id = item.id })'">
-                                    <td><i class="fa fa-shield"></i></td>
-                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateServico", new { id = item.id })</td>
-                                    <td>@item.nomeServico</td>
-                                    <td>@item.formaVendaServico</td>
-                                    <td>@item.valor.ToString("N2")</td>
-                                    <td>@item.criadoPorName</td>
-                                </tr>
+                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateServico", "Servico", new {id = item.id })'">
+                                <td><i class="fa fa-shield"></i></td>
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateServico", new { id = item.id })</td>
+                                <td>@item.nomeServico</td>
+                                <td>@item.formaVendaServico</td>
+                                <td>@item.tipoServico</td>
+                                <td>R$@item.valor.ToString("N2")</td>
+                                <td>@item.criadoPorName</td>
+                            </tr>
                             }
                         </table>
 
@@ -80,3 +83,5 @@
         </div>
     </div>
 </div>
+
+<div style="height:500px"></div>

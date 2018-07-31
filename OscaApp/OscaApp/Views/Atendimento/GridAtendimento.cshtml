@@ -11,7 +11,7 @@
             <div class="card-header">
                 <div class="card-title">
 
-                    <form class="form-inline" asp-route-view="@viewContexto" >
+                    <form class="form-inline" asp-route-view="@viewContexto">
                         <table>
                             <tr>
                                 <td>
@@ -73,18 +73,18 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                        <tr style="cursor:pointer; font-size:12px" id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
-                            <td><i class="fa fa-user-md"></i></td>
-                            <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
-                            <td>@item.cliente.nomeCliente</td>
+                            <tr style="cursor:pointer; font-size:12px" id="@item.atendimento.id" onclick="location.href='@Url.Action("FormUpdateAtendimento", "Atendimento", new {id = item.atendimento.id })'">
+                                <td><i class="fa fa-user-md"></i></td>
+                                <td>@Html.ActionLink(item.atendimento.codigo.ToString(), "FormUpdateAtendimento", new { id = item.atendimento.id })</td>
+                                <td>@item.cliente.nomeCliente</td>
 
-                            <td>@item.servico.nomeServico</td>
-                            <td>@item.atendimento.CondicaoPagamento</td>
+                                <td>@item.servico.nomeServico</td>
+                                <td>@item.atendimento.CondicaoPagamento</td>
 
-                            <td>R$@item.atendimento.valor.ToString("N2")</td>
+                                <td>R$@item.atendimento.valor.ToString("N2")</td>
 
-                            <td>@item.atendimento.statusAtendimento</td>
-                        </tr>
+                                <td>@item.atendimento.statusAtendimento</td>
+                            </tr>
                         }
                     </table>
 
@@ -102,6 +102,7 @@
     </div>
 </div>
 
+<div style="height:500px"></div>
 <script src="~/lib/OscaJs/osc_atendimento.js"></script>
 <script>
 

@@ -55,15 +55,15 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateProfissional", "Profissional", new {id = item.id })'">
-                                <td><i class="fa fa-black-tie"></i></td>
-                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProfissional", new { id = item.id })</td>
-                                <td>@item.nomeProfissional</td>
-                                <td>@item.numeroConta</td>
-                                <td>@item.agencia</td>                            
-                                <td>@(@item.comissionado ? "Sim" : "Não")</td>
-                                <td>@item.percentualComissao</td>
-                            </tr>
+                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateProfissional", "Profissional", new {id = item.id })'">
+                                    <td><i class="fa fa-black-tie"></i></td>
+                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProfissional", new { id = item.id })</td>
+                                    <td>@item.nomeProfissional</td>
+                                    <td>@item.numeroConta</td>
+                                    <td>@item.agencia</td>
+                                    <td>@(@item.comissionado ? "Sim" : "Não")</td>
+                                    <td>@item.percentualComissao</td>
+                                </tr>
                             }
                         </table>
 
@@ -84,3 +84,4 @@
 
 
 
+<div style="height:500px"></div>

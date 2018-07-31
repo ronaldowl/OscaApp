@@ -121,7 +121,7 @@ namespace OscaApp.Controllers
                              
  
                 if (Page == 0) Page = 1;
-                return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 100));
+                return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 50));
 
             }
             catch (Exception ex)

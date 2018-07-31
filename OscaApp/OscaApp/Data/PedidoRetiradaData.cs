@@ -61,6 +61,15 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("dataRetirada").IsModified             = true;    
                 db.Entry(modelo).Property("periodo").IsModified                  = true;
 
+                db.Entry(modelo).Property("quantidade1").IsModified = true;
+                db.Entry(modelo).Property("quantidade2").IsModified = true;
+                db.Entry(modelo).Property("valor1").IsModified = true;
+                db.Entry(modelo).Property("valor2").IsModified = true;
+                db.Entry(modelo).Property("cacamba1").IsModified = true;
+                db.Entry(modelo).Property("cacamba2").IsModified = true;
+                db.Entry(modelo).Property("valorTotal1").IsModified = true;
+                db.Entry(modelo).Property("valorTotal2").IsModified = true;
+
 
                 db.Entry(modelo).Property("idProfissional").IsModified = true;
                 db.Entry(modelo).Property("quantidade").IsModified = true;

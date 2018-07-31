@@ -4,7 +4,7 @@
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 
 <div class="row">
-    <div class="col-md-12">      
+    <div class="col-md-12">
         <div class="card  " id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
@@ -60,18 +60,19 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                        <tr style="cursor:pointer;font-size:12px" id="@item.balcaoVendas.id" onclick="location.href='@Url.Action("BalcaoVendasView", "BalcaoVendas", new { id = item.balcaoVendas.id })'">
-                            <td><i class="fa fa-cart-plus fa-2x"></i></td>
-                            <td>@Html.ActionLink(item.balcaoVendas.codigo.ToString(), "BalcaoVendasView", new { id = item.balcaoVendas.id })</td>
-                            <td>@if(item.cliente != null){ @item.cliente.nomeCliente } </td>
-                            <td>R$@item.balcaoVendas.valorTotal.ToString("N2")</td>
-                            <td>@item.balcaoVendas.condicaoPagamento</td>
-                            <td>@item.balcaoVendas.tipoPagamento</td>
-                            <td>@item.balcaoVendas.criadoPorName</td>
-                            <td>@item.balcaoVendas.criadoEm</td>
-                            <td>@item.balcaoVendas.statusBalcaoVendas</td>
+                            <tr style="cursor:pointer;font-size:12px" id="@item.balcaoVendas.id" onclick="location.href='@Url.Action("BalcaoVendasView", "BalcaoVendas", new { id = item.balcaoVendas.id })'">
+                                <td><i class="fa fa-cart-plus fa-2x"></i></td>
+                                <td>@Html.ActionLink(item.balcaoVendas.codigo.ToString(), "BalcaoVendasView", new { id = item.balcaoVendas.id })</td>
+                                <td>@if (item.cliente != null)
+                                {@item.cliente.nomeCliente} </td>
+                                <td>R$@item.balcaoVendas.valorTotal.ToString("N2")</td>
+                                <td>@item.balcaoVendas.condicaoPagamento</td>
+                                <td>@item.balcaoVendas.tipoPagamento</td>
+                                <td>@item.balcaoVendas.criadoPorName</td>
+                                <td>@item.balcaoVendas.criadoEm</td>
+                                <td>@item.balcaoVendas.statusBalcaoVendas</td>
 
-                        </tr>
+                            </tr>
                         }
                     </table>
 
@@ -90,3 +91,5 @@
 </div>
 
 
+
+<div style="height:500px"></div>

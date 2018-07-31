@@ -4,7 +4,7 @@
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 
 <div class="row">
-    <div class="col-md-12">        
+    <div class="col-md-12">
         <div class="card  " id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
@@ -57,17 +57,17 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                        <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = item.id })'">
-                            <td><i class="fa fa-cubes"></i></td>
-                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProduto", new { id = item.id })</td>
-                            <td>@item.nome</td>
-                            <td>@item.quantidade</td>
-                            <td>@item.formaVendaProduto</td>
-                            <td>@item.fabricante</td>
-                            <td>@item.modelo</td>
-                            <td>R$ @item.valorCompra.ToString("N")</td>
-                            <td>@item.criadoPorName</td>
-                        </tr>
+                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = item.id })'">
+                                <td><i class="fa fa-cubes"></i></td>
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProduto", new { id = item.id })</td>
+                                <td>@item.nome</td>
+                                <td>@item.quantidade</td>
+                                <td>@item.formaVendaProduto</td>
+                                <td>@item.fabricante</td>
+                                <td>@item.modelo</td>
+                                <td>R$ @item.valorCompra.ToString("N")</td>
+                                <td>@item.criadoPorName</td>
+                            </tr>
                         }
                     </table>
 
@@ -85,3 +85,5 @@
     </div>
 </div>
 
+
+<div style="height:500px"></div>

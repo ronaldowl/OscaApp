@@ -61,7 +61,9 @@ namespace OscaFramework.Models
         public CustomEnum.FormaVendaProduto formaVendaProduto { get; set; }
 
         public CustomEnum.TipoProduto tipoProduto { get; set; }
-        
+
+        public CustomEnum.ClassificacaoProduto classificacaoProduto { get; set; }
+
         public Guid idOrganizacao { get; set; }
 
 

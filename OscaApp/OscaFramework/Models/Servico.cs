@@ -19,6 +19,8 @@ namespace OscaFramework.Models
         public decimal valor { get; set; }
 
         public CustomEnum.FormaVendaProduto formaVendaServico { get; set; }
+        public CustomEnum.TipoServico tipoServico { get; set; }
+
 
         public Servico()
         {

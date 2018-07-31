@@ -5,11 +5,11 @@
 @{int viewContexto = ViewBag.viewContexto; }
 
 <div class="row">
-    <div class="col-md-12">        
+    <div class="col-md-12">
         <div class="card" id="osc_Grid">
             <div class="card-header">
                 <div class="card-title">
-                    <form class="form-inline" asp-route-view="@viewContexto" >
+                    <form class="form-inline" asp-route-view="@viewContexto">
                         <table>
                             <tr>
                                 <td>
@@ -69,20 +69,20 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                        <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
-                            <td><i class="fa fa-envelope-open-o"></i></td>
-                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
-                            <td>@item.numeroReferencia</td>
-                            <td>@item.titulo</td>
+                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
+                                <td><i class="fa fa-envelope-open-o"></i></td>
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
+                                <td>@item.numeroReferencia</td>
+                                <td>@item.titulo</td>
 
-                            <td>@item.origemContaReceber</td>
-                            <td>@item.tipoLancamento</td>
-                            <td>@item.criadoEm.ToShortDateString()</td>
-                            <td>@item.dataPagamento.ToShortDateString()</td>
-                            <td>R$@item.valor.ToString("N2")</td>
-                            <td>@item.statusContaReceber</td>
+                                <td>@item.origemContaReceber</td>
+                                <td>@item.tipoLancamento</td>
+                                <td>@item.criadoEm.ToShortDateString()</td>
+                                <td>@item.dataPagamento.ToShortDateString()</td>
+                                <td>R$@item.valor.ToString("N2")</td>
+                                <td>@item.statusContaReceber</td>
 
-                        </tr>
+                            </tr>
                         }
                     </table>
 
@@ -100,6 +100,7 @@
     </div>
 </div>
 
+<div style="height:500px"></div>
 
 <script src="~/lib/OscaJs/osc_contaReceber.js"></script>
 <script>

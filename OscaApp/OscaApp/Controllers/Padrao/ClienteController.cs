@@ -198,7 +198,7 @@ namespace OscaApp.Controllers
 
                 if (Page == 0) Page = 1;
 
-                return View(retorno.ToPagedList<Cliente>(Page, 20));
+                return View(retorno.ToPagedList<Cliente>(Page, 50));
 
             }
             catch (Exception ex)

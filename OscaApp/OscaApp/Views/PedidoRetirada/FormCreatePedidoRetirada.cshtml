@@ -128,6 +128,18 @@
                                     <input id="osc_valorDesconto" asp-for="@Model.pedidoRetirada.valorDesconto" type="text" class="form-control" />
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Status do Pedido de Retirada</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-exclamation fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_statusPedido" asp-for="@Model.pedidoRetirada.statusPedidoRetirada" class="form-control" style="background-color:aquamarine">
+                                        <option value="0">Em Aprovação</option>
+                                        <option value="1">Em Andamento</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -161,28 +173,8 @@
                                         <input asp-for="@Model.pedidoRetirada.dataRetirada" class="form-control" type="text" id="osc_dataRetirada" autocomplete="off" required="required" value="">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Status do Pedido de Retirada</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-exclamation fa-2x"></span>&nbsp;
-                                    </span>
-                                    <select id="osc_statusPedido" asp-for="@Model.pedidoRetirada.statusPedidoRetirada" class="form-control" style="background-color:aquamarine">
-                                        <option value="0">Em Aprovação</option>
-                                        <option value="1">Em Andamento</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Anotação</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                    </span>
-                                    <textarea id="osc_anotacao" asp-for="@Model.pedidoRetirada.anotacao" class="form-control" rows="4" cols="4" placeholder="digite uma anotação"></textarea>
-                                </div>
-                            </div>
+                            </div>                          
+                
                         </div>
                     </div>
                 </div>

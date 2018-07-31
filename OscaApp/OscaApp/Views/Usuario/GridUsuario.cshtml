@@ -3,7 +3,7 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
 
- 
+
 <div class="row">
     <div class="col-md-12">
         <div class="card  " id="osc_Grid">
@@ -55,16 +55,16 @@
                     </thead>
                     @foreach (var item in Model)
                     {
-                    <tr style="cursor:pointer;font-size:12px" id="@item.Id" onclick="location.href='@Url.Action("FormUpdateUsuario", "Usuario", new {id = item.Id })'">
-                        <td><i class="fa fa-user-circle"></i></td>
-                        <td>@item.nomeAmigavel</td>
-                        <td>@item.Email</td>
-                        <td>@item.PhoneNumber</td>
-                        <td>@(@item.userAdmin ? "Sim" : "Não")</td>
-                        <td>@(@item.LockoutEnabled ? "Sim" : "Não")</td>
+                        <tr style="cursor:pointer;font-size:12px" id="@item.Id" onclick="location.href='@Url.Action("FormUpdateUsuario", "Usuario", new {id = item.Id })'">
+                            <td><i class="fa fa-user-circle"></i></td>
+                            <td>@item.nomeAmigavel</td>
+                            <td>@item.Email</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@(@item.userAdmin ? "Sim" : "Não")</td>
+                            <td>@(@item.LockoutEnabled ? "Sim" : "Não")</td>
 
 
-                    </tr>}
+                        </tr>}
                 </table>
             </div>
             <div class="card-footer">
@@ -78,4 +78,6 @@
         </div>
     </div>
 </div>
- 
+
+
+<div style="height:500px"></div>

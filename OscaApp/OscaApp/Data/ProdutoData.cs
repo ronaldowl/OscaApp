@@ -59,6 +59,10 @@ namespace OscaApp.Data
                 db.Entry(produto).Property("modificadoPorName").IsModified = true;
                 db.Entry(produto).Property("modificadoPor").IsModified = true;
                 db.Entry(produto).Property("modificadoEm").IsModified = true;
+                db.Entry(produto).Property("classificacaoProduto").IsModified = true;
+
+
+                
 
                 db.SaveChanges(); 
             }

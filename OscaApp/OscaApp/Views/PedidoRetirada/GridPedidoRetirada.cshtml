@@ -60,19 +60,19 @@
                             </thead>
                             @foreach (var item in Model)
                             {
-                            <tr style="cursor:pointer;font-size:12px" id="@item.pedidoRetirada.id" onclick="location.href='@Url.Action("FormUpdatePedidoRetirada", "PedidoRetirada", new {id = item.pedidoRetirada.id })'">
-                                <td><i class="fa fa-truck"></i></td>
-                                <td>@Html.ActionLink(item.pedidoRetirada.codigo.ToString(), "FormUpdatePedidoRetirada", new { id = item.pedidoRetirada.id })</td>
-                                <td>@item.cliente.nomeCliente</td>
-                                <td>@item.cliente.telefone</td>
-                                <td>@item.pedidoRetirada.quantidade</td>
-                                <td>R$ @item.pedidoRetirada.valorTotal</td>
-                                <td>@item.pedidoRetirada.criadoEm.ToShortDateString()</td>
-                                <td>@item.pedidoRetirada.dataEntrega.ToShortDateString()</td>
-                                <td>@item.pedidoRetirada.dataRetirada.ToShortDateString()</td>
-                                <td>@item.pedidoRetirada.dataFechamento.ToShortDateString()</td>
-                                <td>@item.pedidoRetirada.statusPedidoRetirada</td>
-                            </tr>
+                                <tr style="cursor:pointer;font-size:12px" id="@item.pedidoRetirada.id" onclick="location.href='@Url.Action("FormUpdatePedidoRetirada", "PedidoRetirada", new {id = item.pedidoRetirada.id })'">
+                                    <td><i class="fa fa-truck"></i></td>
+                                    <td>@Html.ActionLink(item.pedidoRetirada.codigo.ToString(), "FormUpdatePedidoRetirada", new { id = item.pedidoRetirada.id })</td>
+                                    <td>@item.cliente.nomeCliente</td>
+                                    <td>@item.cliente.telefone</td>
+                                    <td>@item.pedidoRetirada.quantidade</td>
+                                    <td>R$ @item.pedidoRetirada.valorTotal</td>
+                                    <td>@item.pedidoRetirada.criadoEm.ToShortDateString()</td>
+                                    <td>@item.pedidoRetirada.dataEntrega.ToShortDateString()</td>
+                                    <td>@item.pedidoRetirada.dataRetirada.ToShortDateString()</td>
+                                    <td>@item.pedidoRetirada.dataFechamento.ToShortDateString()</td>
+                                    <td>@item.pedidoRetirada.statusPedidoRetirada</td>
+                                </tr>
                             }
                         </table>
 
@@ -91,3 +91,4 @@
     </div>
 </div>
 
+<div style="height:500px"></div>
