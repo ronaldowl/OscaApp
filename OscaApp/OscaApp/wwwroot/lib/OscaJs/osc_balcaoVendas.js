@@ -109,7 +109,7 @@ function calcularLinha(chaveLinha) {
 
     TOTAL = QTD * VALOR;
 
-    $(chaveTOTAL).val($.number(TOTAL, 2));
+    $(chaveTOTAL).val(FormataDecimal(TOTAL));
 
     SomaTotal();
 }
