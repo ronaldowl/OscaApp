@@ -15,6 +15,8 @@ namespace OscaFramework.Models
         public string anotacao { get; set; }
         public string numeroReferencia { get; set; }
         public DateTime dataPagamento { get; set; }
+        public DateTime dataRecebimento { get; set; }
+        
 
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valor { get; set; }

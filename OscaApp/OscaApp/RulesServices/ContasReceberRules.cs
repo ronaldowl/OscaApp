@@ -64,6 +64,15 @@ namespace OscaApp.RulesServices
             contasReceber = entrada.contasReceber;
             if (entrada.cliente != null) contasReceber.idCliente = entrada.cliente.id;
 
+            if (entrada.contasReceber.statusContaReceber == CustomEnumStatus.StatusContaReceber.recebido)
+            {
+                contasReceber.dataRecebimento = DateTime.Now;
+            }
+
+            if (entrada.contasReceber.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || entrada.contasReceber.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado || entrada.contasReceber.statusContaReceber == CustomEnumStatus.StatusContaReceber.cancelado)
+            {
+                contasReceber.dataRecebimento = new DateTime();
+            }
 
             //************ Objetos de controle de acesso *******************
             contasReceber.modificadoEm = DateTime.Now;

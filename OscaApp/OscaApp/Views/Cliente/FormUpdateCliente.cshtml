@@ -542,7 +542,7 @@
                     @{int contadorCR = 0;}
                     @foreach (var item in Model.contasReceber)
                     {
-                        @if (contadorP == 5) { break; }
+                        @if (contadorCR == 5) { break; }
                         <tr style="font-size:12px">
                             <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", "ContasReceber", new { id = item.id })</td>
                             <td>@item.titulo</td>

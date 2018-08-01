@@ -61,6 +61,8 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
+                db.Entry(modelo).Property("dataRecebimento").IsModified = true;
+
 
                 db.SaveChanges();
             }
@@ -76,6 +78,8 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
 
+                
+                db.Entry(modelo).Property("dataRecebimento").IsModified = true;
                 db.Entry(modelo).Property("statusContaReceber").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
