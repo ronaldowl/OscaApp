@@ -89,5 +89,16 @@ namespace OscaApp.RulesServices
 
         }
 
+        public static bool RollbackProdutoBalcao(ProdutoBalcao[] produtosBalcao, ContextPage contexto, IProdutoData produtoData)
+        {
+            foreach (var item in produtosBalcao)
+            {   
+                Produto prodBase = produtoData.Get(item.idProduto);
+                prodBase.quantidade = prodBase.quantidade + item.quantidade;
+                produtoData.UpdateQuantity(prodBase);
+            }
+
+            return true;
+        }
     }
 }

@@ -59,12 +59,10 @@ namespace OscaApp.Controllers
                 modelo.contexto = this.contexto;
                 retorno = balcaoVendasData.Get(new Guid(id));
                 modelo.balcaoVendas = retorno;
-
                 modelo.listapreco = Sqlservice.RetornaRelacaoListaPreco(modelo.balcaoVendas.idListaPreco);
                 modelo.produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(new Guid(id));
 
                 if (retorno.idCliente != null) modelo.cliente = Sqlservice.RetornaRelacaoCliente(retorno.idCliente);
-
 
             }
             catch (Exception ex)
@@ -174,6 +172,10 @@ namespace OscaApp.Controllers
 
                     SqlGenericRules sqlGenericRules = new SqlGenericRules();
                     sqlGenericRules.CancelaFaturamentoBalcao(entrada.balcaoVendas.id.ToString());
+
+                    List<ProdutoBalcao> produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(entrada.balcaoVendas.id);
+
+                    ProdutoRules.RollbackProdutoBalcao(produtosBalcao.ToArray(), contexto, produtoData);
 
                     return RedirectToAction("BalcaoVendasView", new { id = entrada.balcaoVendas.id.ToString() });
                 }

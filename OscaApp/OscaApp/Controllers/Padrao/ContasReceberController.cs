@@ -21,12 +21,21 @@ namespace OscaApp.Controllers
         private readonly IContasReceberData contasReceberData;
         private ContextPage contexto;
         private readonly SqlGenericData sqlData;
+        private readonly IBalcaoVendasData balcaoVendasData;
+        private readonly IPedidoData pedidoData;
+        private readonly IOrdemServicoData ordemServicoData;
+        private readonly IAtendimentoData atendimentoData;
+
 
         public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
-            this.contasReceberData = new ContasReceberData(db);
-            this.sqlData = _sqlData;
-            this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.contasReceberData  = new ContasReceberData(db);
+            //this.balcaoVendasData   = new BalcaoVendasData(db);
+            //this.pedidoData         = new PedidoData(db);
+            //this.ordemServicoData   = new OrdemServicoData(db);
+            //this.atendimentoData    = new AtendimentoData(db);
+            this.sqlData            = _sqlData;
+            this.contexto           = new ContextPage().ExtractContext(httpContext);
         }
 
         [TempData]
@@ -107,6 +116,15 @@ namespace OscaApp.Controllers
                 if (ContasReceberRules.ContasReceberUpdate(entrada, out modelo))
                 {
                     contasReceberData.Update(modelo);
+
+                    if (entrada.contasReceber.statusContaReceber == CustomEnumStatus.StatusContaReceber.recebido)
+                    {
+                                              
+                     FaturamentoRules.InsereFaturamento((int)entrada.contasReceber.origemContaReceber, entrada.contasReceber.id, entrada.contasReceber.valor, this.contexto.idOrganizacao);
+                        
+ 
+                    }
+
                     StatusMessage = "Registro Atualizado com Sucesso!";
 
                     return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
@@ -214,7 +232,7 @@ namespace OscaApp.Controllers
           
                          retorno = from u in retorno
                           where
-                            (u.dataPagamento.Date == DateTime.Now.Date)
+                            (u.dataPagamento.Date == DateTime.Now.Date ) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado) 
                           
                           select u;           
 

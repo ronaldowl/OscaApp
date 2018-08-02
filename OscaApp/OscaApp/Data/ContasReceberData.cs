@@ -128,7 +128,19 @@ namespace OscaApp.Data
                 itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
 
             }
- 
+
+            //Todos Contas  a receber hoje 
+            if (view == 3)
+            {
+                itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+                IEnumerable<ContasReceber> retorno = itens;
+
+                retorno = from u in retorno where (u.dataPagamento.Date == DateTime.Now.Date) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado) select u;
+
+                itens =  retorno.ToList();
+            }
+
             return itens;
         }              
              

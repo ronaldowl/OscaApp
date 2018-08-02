@@ -122,7 +122,19 @@ namespace OscaApp.Data
                 itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
 
             }
-             
+
+            //Todos Contas  a Pagar hoje 
+            if (view == 3)
+            {
+                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+                IEnumerable<ContasPagar> retorno = itens;
+
+                retorno = from u in retorno where (u.dataPagamento.Date == DateTime.Now.Date) & (u.statusContaPagar == CustomEnumStatus.StatusContaPagar.agendado || u.statusContaPagar == CustomEnumStatus.StatusContaPagar.atrasado) select u;
+
+                itens = retorno.ToList();
+            }
+
             return itens;
 
         }

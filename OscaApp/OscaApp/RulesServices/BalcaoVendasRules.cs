@@ -84,6 +84,6 @@ namespace OscaApp.RulesServices
             return retorno;
         }
 
- 
+        
     }
 }

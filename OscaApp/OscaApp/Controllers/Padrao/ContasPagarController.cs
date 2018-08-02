@@ -191,14 +191,9 @@ namespace OscaApp.Controllers
         {
             IEnumerable<ContasPagar> retorno;
 
-
             retorno = contasPagarData.GetAll(contexto.idOrganizacao, 0);
 
-            retorno = from u in retorno
-                      where
-                        (u.dataPagamento.Date == DateTime.Now.Date)
-
-                      select u;
+            retorno = from u in retorno where (u.dataPagamento.Date == DateTime.Now.Date) & (u.statusContaPagar == CustomEnumStatus.StatusContaPagar.agendado || u.statusContaPagar == CustomEnumStatus.StatusContaPagar.atrasado) select u;
 
             retorno = retorno.OrderByDescending(x => x.dataPagamento);
 

@@ -21,11 +21,12 @@
                                             <label>Filtros</label>
                                             <div class="input-group">
                                                 &nbsp;<div class="col-2">
-                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
-                                                        <option value="0" selected="">Todas em Aberto</option>
-                                                        <option value="1">Todas Fechadas</option>
-                                                        <option value="2">Todas Contas</option>
-                                                    </select>
+                                                          <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                              <option value="0" selected="">Todas em Aberto</option>
+                                                              <option value="1">Todas Fechadas</option>
+                                                              <option value="2">Todas Contas</option>
+                                                              <option value="3">Todas Contas de Hoje</option>
+                                                          </select>
                                                 </div>
                                             </div>
                                         </div>&nbsp;
@@ -115,6 +116,7 @@
     if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
     if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
     if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
 
 
     function OnChangeFiltro() {
@@ -124,6 +126,7 @@
         if (filtro == "0") { $(window.document.location).attr('href', "GridContasReceber?view=0"); }
         if (filtro == "1") { $(window.document.location).attr('href', "GridContasReceber?view=1"); }
         if (filtro == "2") { $(window.document.location).attr('href', "GridContasReceber?view=2"); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridContasReceber?view=3"); }
 
     }
 

@@ -220,7 +220,8 @@ namespace OscaFramework.Models
             Cheque = 3,
             Deposito = 4,    
             CartaoCredito =5,
-            Boleto = 6
+            Boleto = 6,
+            Online = 7
         }
         public enum metodoEntrega
         {

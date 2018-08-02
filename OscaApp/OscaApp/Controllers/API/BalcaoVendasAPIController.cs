@@ -96,18 +96,25 @@ namespace OscaAPI.Controllers
                 {
                     //Grava lançamento na tabela de faturamento
                     entrada.balcaoVendas.id = idBalcaoVendas;
-                    FaturamentoRules.InsereFaturamento(entrada.balcaoVendas, this.contexto.idOrganizacao);
-
+                    
                     //Grava Parcelas
-                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Prazo )
+                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Prazo || entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Parcelado)
                     {
                         ContasReceberRules.GravaParcela(entrada.balcaoVendas, this.contaReceberData, this.contexto, this.orgConfig);
                     }
 
-                    //Grava Debito
-                    if (entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito)
+                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Avista)
                     {
-                        ContasReceberRules.GravaDebito(entrada.balcaoVendas, this.contaReceberData, this.contexto, this.orgConfig);
+                        //Grava Debito
+                        if (entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito)
+                        {
+                            ContasReceberRules.GravaDebito(entrada.balcaoVendas, this.contaReceberData, this.contexto, this.orgConfig);
+                        }
+
+                        if (entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Dinheiro || entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Online)
+                        {
+                            FaturamentoRules.InsereFaturamento(entrada.balcaoVendas, this.contexto.idOrganizacao);
+                        }
                     }
 
                     //Baixa Estoque

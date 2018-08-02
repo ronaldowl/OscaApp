@@ -263,7 +263,6 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
-
         public List<Atendimento> RetornaAtendimentosDia(string  data, string idProfissional, string idOrg)
         {
             SqlDataReader dataReader;
