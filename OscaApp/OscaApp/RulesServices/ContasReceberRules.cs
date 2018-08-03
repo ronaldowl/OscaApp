@@ -86,9 +86,12 @@ namespace OscaApp.RulesServices
         {
             decimal valorParcela = balcaoVendas.valorTotal / balcaoVendas.parcelas;
 
+            DateTime dataCredito = DateTime.Now.AddDays(orgConfig.qtdDiasCartaoCredito);
+
             int parcela = 1;
             for (int i = 0; i < balcaoVendas.parcelas; i++)
             {               
+
 
                 ContasReceber contaReceber = new ContasReceber();
                 contaReceber.valor = valorParcela;
@@ -104,25 +107,32 @@ namespace OscaApp.RulesServices
                     contaReceber.dataPagamento = new DateTime(DateTime.Now.Year, DateTime.Now.Month, balcaoVendas.diaVencimento);
                     contaReceber.dataPagamento = contaReceber.dataPagamento.AddMonths(parcela);
                     ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
-                }
-               
+                }              
+
                 if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoCredito)
                 {
                     contaReceber.titulo = "Parcela Cartão Crédito -" + parcela.ToString() + "/" + balcaoVendas.parcelas.ToString() + " - Venda Balcão";
 
-                    contaReceber.dataPagamento = new DateTime(DateTime.Now.Year, DateTime.Now.Month, orgConfig.qtdDiasCartaoCredito);
-                    contaReceber.dataPagamento = contaReceber.dataPagamento.AddMonths(parcela);
+                    if (i == 0)
+                    {
+                        contaReceber.dataPagamento = dataCredito;
+                    }
+                    else
+                    {
+                        dataCredito = dataCredito.AddMonths(1);
+                        contaReceber.dataPagamento = dataCredito;
+
+                    }
+                    
                     ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
                 }
 
                 parcela++;
             }
-
         }
 
         public static void GravaDebito(BalcaoVendas balcaoVendas, IContasReceberData contaReceberData, ContextPage contexto, OrgConfig orgConfig)
-        {
-                   
+        {                   
                 ContasReceber contaReceber = new ContasReceber();
                 contaReceber.valor = balcaoVendas.valorTotal;
                 contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
@@ -137,9 +147,7 @@ namespace OscaApp.RulesServices
                     contaReceber.dataPagamento = DateTime.Now;
                     contaReceber.dataPagamento = contaReceber.dataPagamento.AddDays(orgConfig.qtdDiasCartaoDebito);
                     ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
-                }
-   
+                }   
         }
-
     }
 }

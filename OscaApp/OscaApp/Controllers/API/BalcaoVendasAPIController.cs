@@ -98,7 +98,7 @@ namespace OscaAPI.Controllers
                     entrada.balcaoVendas.id = idBalcaoVendas;
                     
                     //Grava Parcelas
-                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Prazo || entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Parcelado)
+                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Prazo)
                     {
                         ContasReceberRules.GravaParcela(entrada.balcaoVendas, this.contaReceberData, this.contexto, this.orgConfig);
                     }
@@ -115,6 +115,17 @@ namespace OscaAPI.Controllers
                         {
                             FaturamentoRules.InsereFaturamento(entrada.balcaoVendas, this.contexto.idOrganizacao);
                         }
+
+                        if (entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Tranferencia || entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Deposito || entrada.balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Cheque)
+                        {
+                            FaturamentoRules.InsereFaturamento(entrada.balcaoVendas, this.contexto.idOrganizacao);
+
+                        }
+                    }
+
+                    if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Consignado)
+                    {
+                        //Lançamento Manual
                     }
 
                     //Baixa Estoque

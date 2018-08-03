@@ -207,10 +207,10 @@ namespace OscaFramework.Models
 
         public enum codicaoPagamento
         {
-            Avista = 1,
-            Parcelado = 2,     
+            Avista = 1,            
             Prazo = 3,
-            SemPagamento = 4
+            SemPagamento = 4,
+            Consignado = 5
         }
 
         public enum tipoPagamento
@@ -221,7 +221,9 @@ namespace OscaFramework.Models
             Deposito = 4,    
             CartaoCredito =5,
             Boleto = 6,
-            Online = 7
+            Online = 7 ,
+            Tranferencia = 8,
+            Outros = 9
         }
         public enum metodoEntrega
         {

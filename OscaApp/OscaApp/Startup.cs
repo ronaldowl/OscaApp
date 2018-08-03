@@ -82,7 +82,7 @@ namespace OscaApp
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(100000000);
+                options.IdleTimeout = TimeSpan.FromHours(8);
                 options.Cookie.HttpOnly = true;
             });                       
  
