@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static OscaFramework.Models.CustomEnum;
 
 namespace OscaFramework.Models
 {
@@ -25,7 +26,7 @@ namespace OscaFramework.Models
 
         public CustomEnum.tipoPagamento tipoPagamento { get; set; }
         public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }
-        public CustomEnum.tipoDesconto tipoDesconto { get; set; }
+       
         public CustomEnumStatus.StatusPedidoRetirada statusPedidoRetirada { get; set; }
         public CustomEnum.Periodo periodo { get; set; }
 
@@ -37,22 +38,14 @@ namespace OscaFramework.Models
 
         public decimal valorTotal1 { get; set; }
         public decimal valorTotal2 { get; set; }
-
-        public bool cacamba1 { get; set; }
-        public bool cacamba2 { get; set; }
-
-        ////public Guid idservico1 { get; set; }
-        ////public Guid idservico2 { get; set; }
+     
+        public ModeloCacamba modeloCacamba1 { get; set; }
+        public ModeloCacamba modeloCacamba2 { get; set; }
 
         ////public Guid idendereco1 { get; set; }
         ////public Guid idendereco2 { get; set; }
 
-
-        public int quantidade { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
-        public decimal valorDesconto { get; set; }
-
+        public int quantidade { get; set; }    
             
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valorTotal { get; set; }

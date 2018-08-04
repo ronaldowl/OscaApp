@@ -30,7 +30,7 @@
         }
         <form action="FormUpdatePedidoRetirada" method="post">
             <div class="card" id="osc_MainForm">
-                <div class="card-header">
+                <div class="card-header"style="height:50px">
                     <div class="card-title">
                         <table>
                             <tr>
@@ -141,31 +141,8 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fa fa-asterisk  fa-2x"></i></span>&nbsp;
-                                        <input asp-for="@Model.pedidoRetirada.quantidade" class="form-control" type="text" id="osc_quantidade">
+                                        <input asp-for="@Model.pedidoRetirada.quantidade" class="form-control" type="text" id="osc_quantidade" readonly="readonly">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Tipo de Desconto</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
-                                    <select id="osc_tipoDesconto" asp-for="@Model.pedidoRetirada.tipoDesconto" class="form-control">
-                                        <option value="1" selected="">Valor</option>
-                                        <option value="2">Percentual</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Valor Desconto</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">
-                                        <span class="fa fa-calculator fa-2x"></span>&nbsp;
-                                    </span>
-                                    <input id="osc_valorDesconto" asp-for="@Model.pedidoRetirada.valorDesconto" type="text" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group">
@@ -174,9 +151,13 @@
                                     <span class="input-group-text">
                                         <span class="fa fa-calculator fa-2x"></span>&nbsp;
                                     </span>
-                                    <input id="osc_valorTotal" asp-for="@Model.pedidoRetirada.valorTotal" type="text" class="form-control" />
+                                    <input id="osc_valorTotal" asp-for="@Model.pedidoRetirada.valorTotal" type="text" class="form-control" readonly="readonly" />
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="col-md-3">
+
                             <div class="form-group">
                                 <label>Status do Pedido de Retirada</label>
                                 <div class="input-group">
@@ -189,6 +170,15 @@
                                         <option value="2">Fechado</option>
                                         <option value="3">Cancelado</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Anotação</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_anotacao" asp-for="@Model.pedidoRetirada.anotacao" class="form-control" rows="9" cols="4" placeholder="digite uma anotação"></textarea>
                                 </div>
                             </div>
 
@@ -231,7 +221,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                        <input asp-for="@Model.pedidoRetirada.dataFechamento" class="form-control" type="date" id="osc_dataFechamento" disabled="disabled">
+                                        <input asp-for="@Model.pedidoRetirada.dataFechamento" class="form-control" type="text" id="osc_dataFechamento" readonly="readonly">
                                     </div>
                                 </div>
                             </div>
@@ -243,66 +233,51 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-
                     <table class="table table-bordered table-responsive">
-
                         <tbody>
-
                             <tr>
                                 <td><i class="fa fa-2x fa-truck"></i></td>
-                                <td><input type="checkbox" asp-for="@Model.pedidoRetirada.cacamba1" class="input-group-sm" /></td>
+                               
                                 <td>
-
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-search fa-2x"></i></span>
-                                        <input asp-for="@Model.servico1.idName" class="form-control" type="text" id="osc_IdNameServico" required="required" disabled="disabled">
-                                        <input asp-for="@Model.servico1.id" class="form-control" type="hidden" id="osc_IdServico">
+                                        <select id="osc_modeloCacamba1" asp-for="@Model.pedidoRetirada.modeloCacamba1" class="form-control" required="required">
+                                            <option value="0" selected="selected">Caçamba 3 M3</option>
+                                            <option value="1">Caçamba 4 M3</option>
+                                            <option value="2">Caçamba 5 M3</option>
 
+                                        </select>
                                     </div>
-
                                 </td>
-                                <td><input asp-for="@Model.pedidoRetirada.quantidade1" class="form-control" type="number" id="osc_quantidade1"></td>
-                                <td><input id="osc_valor1" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" /></td>
-                                <td><input id="osc_valorTotal1" asp-for="@Model.pedidoRetirada.valorTotal1" type="text" class="form-control" disabled="disabled" /></td>
-                                <td><input id="osc_endereco2" asp-for="@Model.pedidoRetirada.cacamba1" type="text" class="form-control" readonly="readonly" />
+                                <td><input asp-for="@Model.pedidoRetirada.quantidade1" class="form-control" type="number" id="osc_quantidade1" onchange="CalculaLinha1()"></td>
+                                <td><input id="osc_valor1" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" onchange="CalculaLinha1()" onblur="onBlur(this)" placeholder="R$ 0,00"/></td>
+                                <td><input id="osc_valorTotal1" asp-for="@Model.pedidoRetirada.valorTotal1" type="text" class="form-control" readonly="readonly"/></td>
+                                <td width="530px"> <input id="osc_endereco2" asp-for="@Model.pedidoRetirada" type="text" class="form-control" readonly="readonly" />
                                 <td>
+
                             </tr>
                             <tr>
                                 <td><i class="fa fa-2x fa-truck"></i></td>
-                                <td><input type="checkbox" asp-for="@Model.pedidoRetirada.cacamba2" class="input-group-sm" /></td>
+                               
                                 <td>
-
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-search fa-2x"></i></span>
-                                        <input asp-for="@Model.servico1.idName" class="form-control" type="text" id="osc_IdNameServico" required="required" disabled="disabled">
-                                        <input asp-for="@Model.servico1.id" class="form-control" type="hidden" id="osc_IdServico">
-
+                                        <select id="osc_modeloCacamba2" asp-for="@Model.pedidoRetirada.modeloCacamba2" class="form-control" required="required">
+                                            <option value="0">Caçamba 3 M3</option>
+                                            <option value="1">Caçamba 4 M3</option>
+                                            <option value="2">Caçamba 5 M3</option>
+                                        </select>
                                     </div>
-
                                 </td>
-                                <td><input asp-for="@Model.pedidoRetirada.quantidade2" class="form-control" type="number" id="osc_quantidade2"></td>
-                                <td><input id="osc_valor2" asp-for="@Model.pedidoRetirada.valor2" type="text" class="form-control" />                                </td>
-                                <td> <input id="osc_valorTotal2" asp-for="@Model.pedidoRetirada.valorTotal2" type="text" class="form-control" disabled="disabled" />   </td>
-                                <td> <input id="osc_endereco2" asp-for="@Model.pedidoRetirada.cacamba2" type="text" class="form-control" readonly="readonly" />
+                                <td><input asp-for="@Model.pedidoRetirada.quantidade2" class="form-control" type="number" id="osc_quantidade2" onchange="CalculaLinha2()"></td>
+                                <td><input id="osc_valor2" asp-for="@Model.pedidoRetirada.valor2" type="text" class="form-control" onchange="CalculaLinha2()" onblur="onBlur(this)" placeholder="R$ 0,00"/>                                </td>
+                                <td> <input id="osc_valorTotal2" asp-for="@Model.pedidoRetirada.valorTotal2" type="text" class="form-control" readonly="readonly" />   </td>
+                                <td> <input id="osc_endereco2" asp-for="@Model.pedidoRetirada" type="text" class="form-control" readonly="readonly" />
                                 <td>
+
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <label>Anotação</label>
-                        <div class="input-group">
-                            <span class="input-group-text">
-                                <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                            </span>
-                            <textarea id="osc_anotacao" asp-for="@Model.pedidoRetirada.anotacao" class="form-control" rows="6" cols="4" placeholder="digite uma anotação"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div>      
 
             <div class="card-footer">
                 <div class="row">
@@ -357,7 +332,7 @@
     <br /><br /><br /><br />
 
 </div>
-
+<br /><br /><br /><br />
 <div class="modal fade" id="lookupProfissional">
 </div>
 <div class="modal fade" id="lookupCliente">

@@ -48,9 +48,7 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
                 db.Entry(modelo).Property("tipoPagamento").IsModified            = true;
-                db.Entry(modelo).Property("condicaoPagamento").IsModified        = true;
-                db.Entry(modelo).Property("tipoDesconto").IsModified             = true;
-                db.Entry(modelo).Property("valorDesconto").IsModified            = true;
+                db.Entry(modelo).Property("condicaoPagamento").IsModified        = true;          
                 db.Entry(modelo).Property("valorTotal").IsModified               = true;
                 db.Entry(modelo).Property("statusPedidoRetirada").IsModified     = true;
                 db.Entry(modelo).Property("anotacao").IsModified                 = true;
@@ -60,20 +58,17 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
                 db.Entry(modelo).Property("dataRetirada").IsModified             = true;    
                 db.Entry(modelo).Property("periodo").IsModified                  = true;
-
-                db.Entry(modelo).Property("quantidade1").IsModified = true;
+                db.Entry(modelo).Property("quantidade1").IsModified              = true;
                 db.Entry(modelo).Property("quantidade2").IsModified = true;
                 db.Entry(modelo).Property("valor1").IsModified = true;
-                db.Entry(modelo).Property("valor2").IsModified = true;
-                db.Entry(modelo).Property("cacamba1").IsModified = true;
-                db.Entry(modelo).Property("cacamba2").IsModified = true;
+                db.Entry(modelo).Property("valor2").IsModified = true;     
                 db.Entry(modelo).Property("valorTotal1").IsModified = true;
                 db.Entry(modelo).Property("valorTotal2").IsModified = true;
-
-
                 db.Entry(modelo).Property("idProfissional").IsModified = true;
                 db.Entry(modelo).Property("quantidade").IsModified = true;
                 db.Entry(modelo).Property("dataEntrega").IsModified = true;
+                db.Entry(modelo).Property("modeloCacamba1").IsModified = true;
+                db.Entry(modelo).Property("modeloCacamba2").IsModified = true;
 
 
 

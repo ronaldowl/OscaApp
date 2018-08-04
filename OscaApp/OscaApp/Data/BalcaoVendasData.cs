@@ -107,9 +107,10 @@ namespace OscaApp.Data
         }
 
         public List<BalcaoVendas> GetAll(Guid idOrg)
-        {
-            List<BalcaoVendas> retorno = new List<BalcaoVendas>();
-            retorno = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+        {         
+       
+            List<BalcaoVendas> retorno = (from bl in db.BalcaoVendas where bl.criadoEm == DateTime.Now.Date & bl.idOrganizacao == idOrg select bl).ToList();
+                                              
             return retorno;
 
         }
@@ -135,9 +136,7 @@ namespace OscaApp.Data
 
         public List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg)
         {
-            List<BalcaoVendas> itens = new List<BalcaoVendas>();                      
-           
-            itens = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            List<BalcaoVendas> itens = (from bl in db.BalcaoVendas where (bl.criadoEm.Date == DateTime.Now.Date) & (bl.idOrganizacao.Equals(idOrg))  select bl).ToList();
              
             return HelperAssociate.ConvertToGridBalcaoVendas(itens);
         }

@@ -99,6 +99,13 @@ namespace OscaFramework.Models
 
     public class CustomEnum
     {
+        public enum ModeloCacamba
+        {
+            cacamba3M3 = 0,
+            cacamba4M3 = 2,
+            cacamba5M3 = 2,
+
+        }
         public enum Periodo
         {
             manha = 0,
