@@ -1204,7 +1204,7 @@ namespace OscaFramework.MicroServices
                     var _Command = new SqlCommand()
                     {
                         Connection = Connection,
-                        CommandText = "Select Logradouro + ' - Nº ' + numero + ' Bairro:' + bairro as endereco, id, status from Endereco where id = '" + id.ToString() + "'",
+                        CommandText = "Select Logradouro + ' - Nº ' + isNull(numero,'ausente') + ' Bairro:' + isNull(bairro,'ausente') as endereco, id, status from Endereco where id = '" + id.ToString() + "'",
                         CommandType = CommandType.Text
                     };
 

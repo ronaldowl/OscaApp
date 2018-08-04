@@ -229,78 +229,79 @@
 
                         </div>
                     </div>
+                    <div class="row">
+                        <div style="height:10px; width:100%" class="bg-info"></div>
+                        <table class="table table-bordered  ">
+                            <tbody>
+                                <tr>
+                                    <td width="10px"><i class="fa fa-2x fa-truck"></i></td>
+
+                                    <td width="100px">
+                                        <div class="input-group">
+                                            <select id="osc_modeloCacamba1" asp-for="@Model.pedidoRetirada.modeloCacamba1" class="form-control" required="required">
+                                                <option value="0" selected="selected">Caçamba 3 M3</option>
+                                                <option value="1">Caçamba 4 M3</option>
+                                                <option value="2">Caçamba 5 M3</option>
+
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td width="5px"><input asp-for="@Model.pedidoRetirada.quantidade1" class="form-control input-group-sm" type="number" id="osc_quantidade1" onchange="CalculaLinha1()"></td>
+                                    <td width="50px"> <input id="osc_valor1" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" onchange="CalculaLinha1()" onblur="onBlur(this)" placeholder="R$ 0,00" /></td>
+                                    <td width="50px"><input id="osc_valorTotal1" asp-for="@Model.pedidoRetirada.valorTotal1" value="@Model.pedidoRetirada.valorTotal1.ToString("N2")" type="text" class="form-control" readonly="readonly" /></td>
+                                    <td width="530px">
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-search fa-2x" onclick="CarregaLookupEndereco('@Model.pedidoRetirada.idCliente')" style="cursor:pointer"></span>
+                                            </span>
+                                            <input id="osc_enderecoIdName" asp-for="@Model.endereco.idName" type="text" readonly="readonly" onclick="OpenLookupEndereco('@Model.pedidoRetirada.idCliente')" style="cursor:pointer; width:430px">
+                                            <input id="osc_enderecoId" asp-for="@Model.endereco.id" type="hidden" class="form-control" value="@Model.endereco.id" />
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-2x fa-minus-circle" onclick="LimpaEndereco1()"></i>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-2x fa-truck"></i></td>
+
+                                    <td>
+                                        <div class="input-group">
+                                            <select id="osc_modeloCacamba2" asp-for="@Model.pedidoRetirada.modeloCacamba2" class="form-control" required="required">
+                                                <option value="0">Caçamba 3 M3</option>
+                                                <option value="1">Caçamba 4 M3</option>
+                                                <option value="2">Caçamba 5 M3</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td><input asp-for="@Model.pedidoRetirada.quantidade2" class="form-control" type="number" id="osc_quantidade2" onchange="CalculaLinha2()"></td>
+                                    <td><input id="osc_valor2" asp-for="@Model.pedidoRetirada.valor2" type="text" class="form-control" onchange="CalculaLinha2()" onblur="onBlur(this)" placeholder="R$ 0,00" />                                </td>
+                                    <td> <input id="osc_valorTotal2" asp-for="@Model.pedidoRetirada.valorTotal2" value="@Model.pedidoRetirada.valorTotal2.ToString("N2")" type="text" class="form-control" readonly="readonly" />   </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span class="input-group-text">
+                                                <span class="fa fa-search fa-2x" onclick="CarregaLookupEndereco2('@Model.pedidoRetirada.idCliente')" style="cursor:pointer"></span>
+                                            </span>
+                                            <input id="osc_enderecoIdName2" asp-for="@Model.endereco2.idName" type="text" readonly="readonly" onclick="OpenLookupEndereco2('@Model.pedidoRetirada.idCliente')" style="cursor:pointer; width:430px" />
+
+                                            <input id="osc_enderecoId2" asp-for="@Model.endereco2.id" type="hidden" class="form-control" value="@Model.endereco2.id" />
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <i class="fa fa-2x fa-minus-circle" onclick="LimpaEndereco2()"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
                 </div>
             </div>
-            <div class="row">
-               <div style="height:10px; width:100%" class="bg-info"></div>
-                    <table class="table table-bordered  ">
-                        <tbody>
-                            <tr>
-                                <td width="10px" ><i class="fa fa-2x fa-truck"></i></td>
-
-                                <td width="100px">
-                                    <div class="input-group">
-                                        <select id="osc_modeloCacamba1" asp-for="@Model.pedidoRetirada.modeloCacamba1" class="form-control" required="required">
-                                            <option value="0" selected="selected">Caçamba 3 M3</option>
-                                            <option value="1">Caçamba 4 M3</option>
-                                            <option value="2">Caçamba 5 M3</option>
-
-                                        </select>
-                                    </div>
-                                </td>
-                                <td width="5px"><input asp-for="@Model.pedidoRetirada.quantidade1" class="form-control input-group-sm" type="number" id="osc_quantidade1" onchange="CalculaLinha1()"></td>
-                                <td width="50px"> <input id="osc_valor1" asp-for="@Model.pedidoRetirada.valor1" type="text" class="form-control" onchange="CalculaLinha1()" onblur="onBlur(this)" placeholder="R$ 0,00" /></td>
-                                <td width="50px"><input id="osc_valorTotal1" asp-for="@Model.pedidoRetirada.valorTotal1" value="@Model.pedidoRetirada.valorTotal1.ToString("N2")" type="text" class="form-control" readonly="readonly" /></td>
-                                <td width="530px">
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <span class="fa fa-search fa-2x" onclick="CarregaLookupEndereco('@Model.pedidoRetirada.idCliente')" style="cursor:pointer"></span>
-                                        </span>
-                                        <input id="osc_enderecoIdName" asp-for="@Model.endereco.idName" type="text"  readonly="readonly" onclick="OpenLookupEndereco('@Model.pedidoRetirada.idCliente')" style="cursor:pointer; width:430px">
-                                        <input id="osc_enderecoId" asp-for="@Model.endereco.id" type="hidden" class="form-control" value="@Model.endereco.id" /> 
-                                       
-                                    </div>
-                                    </td>
-                                <td>
-                                    <i class="fa fa-2x fa-minus-circle" onclick="LimpaEndereco1()"></i>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td><i class="fa fa-2x fa-truck"></i></td>
-
-                                <td>
-                                    <div class="input-group">
-                                        <select id="osc_modeloCacamba2" asp-for="@Model.pedidoRetirada.modeloCacamba2" class="form-control" required="required">
-                                            <option value="0">Caçamba 3 M3</option>
-                                            <option value="1">Caçamba 4 M3</option>
-                                            <option value="2">Caçamba 5 M3</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td><input asp-for="@Model.pedidoRetirada.quantidade2" class="form-control" type="number" id="osc_quantidade2" onchange="CalculaLinha2()"></td>
-                                <td><input id="osc_valor2" asp-for="@Model.pedidoRetirada.valor2" type="text" class="form-control" onchange="CalculaLinha2()" onblur="onBlur(this)" placeholder="R$ 0,00" />                                </td>
-                                <td> <input id="osc_valorTotal2" asp-for="@Model.pedidoRetirada.valorTotal2" value="@Model.pedidoRetirada.valorTotal2.ToString("N2")" type="text" class="form-control" readonly="readonly" />   </td>
-                                <td>
-                                    <div class="input-group">
-                                        <span class="input-group-text">
-                                            <span class="fa fa-search fa-2x" onclick="CarregaLookupEndereco2('@Model.pedidoRetirada.idCliente')" style="cursor:pointer"></span>
-                                        </span>
-                                        <input id="osc_enderecoIdName2" asp-for="@Model.endereco2.idName" type="text" readonly="readonly" onclick="OpenLookupEndereco2('@Model.pedidoRetirada.idCliente')" style="cursor:pointer; width:430px" />
-
-                                        <input id="osc_enderecoId2" asp-for="@Model.endereco2.id" type="hidden" class="form-control" value="@Model.endereco2.id" />
-
-                                    </div>
-                                </td>
-                                <td>
-                                    <i class="fa fa-2x fa-minus-circle" onclick="LimpaEndereco2()"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-           
-            </div>
-
+          
             <div class="card-footer">
                 <div class="row">
                     <div class="col-md-3">
