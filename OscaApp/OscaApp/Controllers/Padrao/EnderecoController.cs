@@ -141,5 +141,28 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Endereco>(Page, 10));
         }
+
+        public ViewResult LookupEndereco(int Page, string idCliente)
+        {
+            IEnumerable<Endereco> retorno = enderecoData.GetAllByIdClinte(new Guid(idCliente));
+
+            ViewBag.idcliente = idCliente;
+            retorno = retorno.OrderBy(x => x.logradouro);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Endereco>(Page, 10));
+        }
+        public ViewResult LookupEndereco2(int Page, string idCliente)
+        {
+            IEnumerable<Endereco> retorno = enderecoData.GetAllByIdClinte(new Guid(idCliente));
+
+            ViewBag.idcliente = idCliente;
+            retorno = retorno.OrderBy(x => x.logradouro);
+
+            if (Page == 0) Page = 1;
+
+            return View(retorno.ToPagedList<Endereco>(Page, 10));
+        }
     }
 }

@@ -1,171 +1,183 @@
 ﻿@model OscaApp.ViewModels.ImpressaoPedidoRetiradaViewModel
-@{ 
-    Layout = "_LayoutImpressao";
-}
-<header>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h1>@Model.organizacao.nomeAmigavel</h1>
-            <h2>Contato: 3447-9461 / 3483-5530 </h2>
-        </div>
-    </div>
-</header>
-<main>
-    <div class="row mt-4">
-        <div class="col-12">
-            <h5 class="text-center">CAÇAMBA ESTACIONÁRIA DE 4 METROS PARA RETIRADA DE ENTULHO</h5>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <form action="">
-                <div class="row">
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Pedido Nº:</span>
-                            </div>
-                            <input type="text" asp-for="@Model.pedidoRetirada.codigo" id="numPedido" name="numPedido" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Data:</span>
-                            </div>
-                            <input type="text" id="data" asp-for="@Model.pedidoRetirada.dataFechamento" name="data" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Horário:</span>
-                            </div>
-                            <input type="text" id="horario" for="" name="horario" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Responsável:</span>
-                            </div>
-                            <input type="text" id="responsavel" asp-for="@Model.cliente.nomeCliente"  name="responsavel" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Telefone:</span>
-                            </div>
-                            <input type="text" id="telefone" asp-for="@Model.cliente.telefone" name="telefone" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Endereço de entrega:</span>
-                            </div>
-                            <input type="text" id="endEntrega" for="" name="endEntrega" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Bairro:</span>
-                            </div>
-                            <input type="text" id="bairro" for="" name="bairro" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Valor Total:</span>
-                            </div>
-                            <input type="text" id="vlrUnitario" asp-for="@Model.pedidoRetirada.valorTotal" name="vlrUnitario" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Caçamba:</span>
-                            </div>
-                            <input type="text" id="numCacamba" name="numCacamba" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Retirada:</span>
-                            </div>
-                            <input type="text" id="dataRetirada" name="dataRetirada" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 mb-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Obs</span>
-                            </div>
-                            <textarea class="form-control" asp-for="@Model.pedidoRetirada.anotacao" rows="5"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-12">
-            <h5 class="fonte-kac text-center">IMPORTANTE!</h5>
-        </div>
-        <div class="col-12 my-1">
-            <p>
-                @Model.orgConfig.mensagemPedido
-            </p>
-            @*<ul class="mt-1">
-                <strong>A falta de pagamento implicará na devolução do material.</strong>
-                <li>É expressamente proibido lixo domiciliar, hospitalar ou industrial, podas de árvores e material de jardinagem nas caçambas.</li>
-                <li>O entulho não deverá ultrapassar as bordas da caçamba.</li>
-                <li>É proibido atear fogo nos materiais depositados nas caçambas.</li>
-                <li>É proibido colocar materiais pontiagudos que ultrapassem as dimensões da caçamba.</li>
-                <li>O prazo de locação é de 3 (três) dias úteis.</li>
-                <li>É proibido colocar a caçamba em cima de passeio para pedestres.</li>
-                <li>Horário de atendimento: de segunda a sexta das 8 às 18 horas, sábado das 8 às 12 horas.</li>
-            </ul>*@
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12 text-center">
-            <p class="">(&nbsp;&nbsp;&nbsp;&nbsp;) C &nbsp;&nbsp; (&nbsp;&nbsp;&nbsp;&nbsp;) T</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4 border-top mt-2 offset-1">
-            <p class="text-center">Recebido por</p>
-        </div>
-        <div class="col-4 border-top mt-2 offset-2">
-            <p class="text-center">Motorista</p>
-        </div>
-    </div>
-
-    <!-- cópia da Vera -->
-    <div class="mt-5">
+@using OscaFramework.Helper
+    @{
+        Layout = "_LayoutImpressao";
+    }
+    <header>
         <div class="row">
-            <div class="col-md-12 mt-3 text-center">
+            <div class="col-md-12 text-center">
                 <h1>@Model.organizacao.nomeAmigavel</h1>
-                <h2>Contato: 3447-9461 / 3483-5530 </h2>
+                <h2>Contato: @Model.organizacao.TelefoneEmpresa </h2>
             </div>
         </div>
-    </div>
+    </header>
+    <main>
         <div class="row mt-4">
             <div class="col-12">
-                <h5 class="text-center">CAÇAMBA ESTACIONÁRIA DE 4 METROS PARA RETIRADA DE ENTULHO</h5>
+                <h5 class="text-center">CAÇAMBA ESTACIONÁRIA PARA RETIRADA DE ENTULHO</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Pedido Nº:</span>
+                                </div>
+                                <input type="text" asp-for="@Model.pedidoRetirada.codigo" id="numPedido" name="numPedido" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Data Entrega:</span>
+                                </div>
+                                <input type="text" id="data" asp-for="@Model.pedidoRetirada.dataEntrega" name="data" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Horário:</span>
+                                </div>
+                                <input type="text" id="horario" value="@HelperEnum.FormatEnumPeriodo(Model.pedidoRetirada.periodo)" name="horario" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Cliente:</span>
+                                </div>
+                                <input type="text" id="responsavel" asp-for="@Model.cliente.nomeCliente" name="responsavel" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Telefone:</span>
+                                </div>
+                                <input type="text" id="telefone" asp-for="@Model.cliente.telefone" name="telefone" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Endereço:</span>
+                                </div>
+                                <input type="text" id="endEntrega" value="@Model.endereco.logradouro Nº @Model.endereco.numero" name="endEntrega" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Bairro:</span>
+                                </div>
+                                <input type="text" id="bairro" for="" name="bairro" class="form-control" value="@Model.endereco.bairro" >
+                            </div>
+                        </div>
+                    </div>
+                    @if(Model.endereco2.logradouro != null)
+                    {
+                    <div class="row">
+                        <div class="col-md-8 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Endereço 2:</span>
+                                </div>
+                                <input type="text" id="endEntrega2" value="@Model.endereco2.logradouro Nº @Model.endereco2.numero" name="endEntrega" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Bairro:</span>
+                                </div>
+                                <input type="text" id="bairro2" for="" name="bairro" class="form-control" value="@Model.endereco2.bairro">
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Valor Total:</span>
+                                </div>
+                                <input type="text" id="vlrUnitario" asp-for="@Model.pedidoRetirada.valorTotal" name="vlrUnitario" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">QTD Caçamba:</span>
+                                </div>
+                                <input type="text" id="numCacamba" name="numCacamba" class="form-control" asp-for="@Model.pedidoRetirada.quantidade">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Retirada:</span>
+                                </div>
+                                <input type="text" id="dataRetirada" name="dataRetirada" class="form-control" asp-for="@Model.pedidoRetirada.dataRetirada">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Obs</span>
+                                </div>
+                                <textarea class="form-control" asp-for="@Model.pedidoRetirada.anotacao" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <h5 class="fonte-kac text-center">IMPORTANTE!</h5>
+            </div>
+            <div class="col-12 my-1">
+                <p>
+                    @Model.orgConfig.mensagemPedido
+                </p>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-4 border-top mt-2 offset-1">
+                <p class="text-center">Recebido por</p>
+            </div>
+            <div class="col-4 border-top mt-2 offset-2">
+                <p class="text-center">Representante</p>
+            </div>
+        </div>
+        <br />
+        <br />
+
+        <!-- cópia da Vera -->
+        <div style="border:dotted"></div>
+        <div class="mt-5">
+            <div class="row">
+                <div class="col-md-12 mt-3 text-center">
+                    <h1>@Model.organizacao.nomeAmigavel</h1>
+                    <h2>Contato: @Model.organizacao.TelefoneEmpresa </h2>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12">
+                <h5 class="text-center">CAÇAMBA ESTACIONÁRIA PARA RETIRADA DE ENTULHO</h5>
             </div>
         </div>
         <div class="row">
@@ -183,9 +195,9 @@
                         <div class="col-md-4 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Data:</span>
+                                    <span class="input-group-text">Data Entrega:</span>
                                 </div>
-                                <input type="text" id="data_2" asp-for="@Model.pedidoRetirada.dataFechamento" name="data_2" class="form-control">
+                                <input type="text" id="data_2" asp-for="@Model.pedidoRetirada.dataEntrega" name="data_2" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
@@ -193,7 +205,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Horário:</span>
                                 </div>
-                                <input type="text" id="horario" name="horario" class="form-control">
+                                <input type="text" id="horario2" name="horario"  value="@HelperEnum.FormatEnumPeriodo(Model.pedidoRetirada.periodo)"class="form-control">
                             </div>
                         </div>
                     </div>
@@ -201,9 +213,9 @@
                         <div class="col-md-8 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Responsável:</span>
+                                    <span class="input-group-text">Cliente:</span>
                                 </div>
-                                <input type="text" id="responsavel_2"  name="responsavel_2" asp-for="@Model.cliente.nomeCliente" class="form-control">
+                                <input type="text" id="responsavel_2" name="responsavel_2" asp-for="@Model.cliente.nomeCliente" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
@@ -219,9 +231,9 @@
                         <div class="col-md-8 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Endereço de entrega:</span>
+                                    <span class="input-group-text">Endereço:</span>
                                 </div>
-                                <input type="text" id="endEntrega" name="endEntrega" class="form-control">
+                                <input type="text" id="endEntrega222" value="@Model.endereco.logradouro Nº @Model.endereco.numero" name="endEntrega" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
@@ -229,10 +241,31 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Bairro:</span>
                                 </div>
-                                <input type="text" id="bairro" name="bairro" class="form-control">
+                                <input type="text" id="bairro222" for="" name="bairro" class="form-control" value="@Model.endereco.bairro">
                             </div>
                         </div>
                     </div>
+                    @if (Model.endereco2.logradouro != null)
+                    {
+                        <div class="row">
+                            <div class="col-md-8 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Endereço 2:</span>
+                                    </div>
+                                    <input type="text" id="endEntrega22" value="@Model.endereco2.logradouro Nº @Model.endereco2.numero" name="endEntrega" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Bairro:</span>
+                                    </div>
+                                    <input type="text" id="2bairro22" for="" name="bairro" class="form-control" value="@Model.endereco2.bairro">
+                                </div>
+                            </div>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-md-4 mb-2">
                             <div class="input-group">
@@ -245,9 +278,9 @@
                         <div class="col-md-4 mb-2">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text">Caçamba:</span>
+                                    <span class="input-group-text">QTD Caçamba:</span>
                                 </div>
-                                <input type="text" id="numCacamba" name="numCacamba" class="form-control">
+                                <input type="text" id="numCacamba2" name="numCacamba" class="form-control" asp-for="@Model.pedidoRetirada.quantidade">
                             </div>
                         </div>
                         <div class="col-md-4 mb-2">
@@ -255,34 +288,28 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Retirada:</span>
                                 </div>
-                                <input type="text" id="dataRetirada" name="dataRetirada" class="form-control">
+                                <input type="text" id="dataRetirada2" name="dataRetirada" asp-for="@Model.pedidoRetirada.dataRetirada" class="form-control">
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 mb-2">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Obs</span>
-                                </div>
-                                <textarea class="form-control" id="obs_2" name="obs_2" asp-for="@Model.pedidoRetirada.anotacao" rows="5"></textarea>
-                            </div>
+
+                        <div class="col-12 my-1">
+                            <p>
+                                @Model.orgConfig.mensagemPedido
+                            </p>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-2 offset-5">
-                <p class="text-center">(&nbsp;&nbsp;&nbsp;&nbsp;) C &nbsp;&nbsp; (&nbsp;&nbsp;&nbsp;&nbsp;) T</p>
-            </div>
-        </div>
+        <br />
         <div class="row">
             <div class="col-4 border-top mt-4 offset-1">
                 <p class="text-center">Recebido por</p>
             </div>
             <div class="col-4 border-top mt-4 offset-2">
-                <p class="text-center">Motorista</p>
+                <p class="text-center">Representante</p>
             </div>
         </div>
     </main>

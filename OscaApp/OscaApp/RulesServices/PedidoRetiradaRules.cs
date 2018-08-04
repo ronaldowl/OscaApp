@@ -17,8 +17,11 @@ namespace OscaApp.RulesServices
             SqlGeneric sqlServic = new SqlGeneric();
             modelo.codigo = sqlServic.RetornaNovaPosicao(33,contexto.idOrganizacao);
             modelo.idCliente = entrada.cliente.id;
-            modelo.idProfissional = entrada.profissional.id;                                 
- 
+            modelo.idProfissional = entrada.profissional.id;
+            modelo.idEndereco = entrada.endereco.id;
+            modelo.idEndereco2 = entrada.endereco2.id;
+
+
             if (modelo.codigo != null)
             {
                 //************ Objetos de controle de acesso ******************
@@ -40,6 +43,16 @@ namespace OscaApp.RulesServices
         {
             modelo = new PedidoRetirada();
             modelo = entrada.pedidoRetirada;
+
+            if (entrada.endereco != null)
+            {
+                modelo.idEndereco = entrada.endereco.id;
+            }
+
+            if (entrada.endereco2 != null)
+            {
+                modelo.idEndereco2 = entrada.endereco2.id;
+            }
 
             if (entrada.profissional != null)
             {

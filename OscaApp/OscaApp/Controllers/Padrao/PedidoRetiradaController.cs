@@ -26,6 +26,8 @@ namespace OscaApp.Controllers
         private readonly IOrganizacaoData organizacaoData;
         private ContextPage contexto;
         private readonly SqlGenericData Sqlservice;
+        private readonly IEnderecoData enderecoData;
+
 
         public PedidoRetiradaController(ContexDataService db, IHttpContextAccessor httpContext)
         {
@@ -35,6 +37,7 @@ namespace OscaApp.Controllers
             this.organizacaoData = new OrganizacaoData(db);
             this.Sqlservice = new SqlGenericData();
             this.contexto = new ContextPage().ExtractContext(httpContext);
+            this.enderecoData = new EnderecoData(db);
         }
 
         [TempData]
@@ -96,6 +99,10 @@ namespace OscaApp.Controllers
                 {
                     modelo.pedidoRetirada = retorno;
                     modelo.cliente = Sqlservice.RetornaRelacaoCliente(retorno.idCliente);
+                    modelo.endereco = Sqlservice.RetornaRelacaoEndereco(retorno.idEndereco);
+                    modelo.endereco2 = Sqlservice.RetornaRelacaoEndereco(retorno.idEndereco2);
+
+
 
                     if (modelo.pedidoRetirada.idProfissional != null)
                     {
@@ -174,6 +181,9 @@ namespace OscaApp.Controllers
             modelo.cliente = new Cliente();
             modelo.orgConfig = new OrgConfig();
             modelo.organizacao = new Organizacao();
+            modelo.endereco = new Endereco();
+            modelo.endereco2 = new Endereco();
+
 
             PedidoRetirada retorno = new PedidoRetirada();
 
@@ -183,6 +193,11 @@ namespace OscaApp.Controllers
                 modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
                 modelo.orgConfig = orgConfigData.Get(contexto.idOrganizacao);
                 modelo.organizacao = organizacaoData.Get(contexto.idOrganizacao);
+
+                if(retorno.idEndereco != Guid.Empty)  modelo.endereco = enderecoData.Get(retorno.idEndereco);
+
+                if (retorno.idEndereco2 != Guid.Empty) modelo.endereco2 = enderecoData.Get(retorno.idEndereco2);
+                
 
                 if (retorno != null)
                 {

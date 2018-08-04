@@ -69,6 +69,11 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("dataEntrega").IsModified = true;
                 db.Entry(modelo).Property("modeloCacamba1").IsModified = true;
                 db.Entry(modelo).Property("modeloCacamba2").IsModified = true;
+                db.Entry(modelo).Property("idEndereco").IsModified = true;
+                db.Entry(modelo).Property("idEndereco2").IsModified = true;
+
+
+
 
 
 

@@ -42,8 +42,8 @@ namespace OscaFramework.Models
         public ModeloCacamba modeloCacamba1 { get; set; }
         public ModeloCacamba modeloCacamba2 { get; set; }
 
-        ////public Guid idendereco1 { get; set; }
-        ////public Guid idendereco2 { get; set; }
+        public Guid idEndereco { get; set; }
+        public Guid idEndereco2 { get; set; }
 
         public int quantidade { get; set; }    
             

@@ -94,19 +94,25 @@ function CalculaValorTotal() {
     VALOR1 = parseFloat(PrepCalcDecimal(VALOR1));
     VALOR2 = parseFloat(PrepCalcDecimal(VALOR2));
 
-
     QTD1 = parseFloat(PrepCalcDecimal(QTD1));
     QTD2 = parseFloat(PrepCalcDecimal(QTD2));
     TOTAL = VALOR1 + VALOR2;
-    TOTALQTD = QTD1 + QTD2;
-
-  
+    TOTALQTD = QTD1 + QTD2;  
 
     $("#osc_valorTotal").val(FormataDecimal(TOTAL));
     $("#osc_quantidade").val(TOTALQTD);
+        
+}
 
-
-    
+function LimpaEndereco1()
+{
+    $("#osc_enderecoId").val("");
+    $("#osc_enderecoIdName").val("");
 
 }
 
+function LimpaEndereco2() {
+    $("#osc_enderecoId2").val("");
+    $("#osc_enderecoIdName2").val("");
+
+}

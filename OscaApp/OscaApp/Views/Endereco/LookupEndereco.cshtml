@@ -1,0 +1,72 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Endereco>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+
+<script type="text/javascript">
+
+    //Função para tratamento do Lookup simples do endereço
+    function ConfigLookupEndereco(id, name, bairro, numero) {
+
+        $("#osc_enderecoIdName").val(name + ' Nº ' + numero + '- Bairro:' + bairro);
+        $("#osc_enderecoId").val(id);
+
+
+        $('#lookupEndereco').modal('hide');
+    }
+
+
+</script>
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="card" id="osc_Lookup">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Lista de Endereços do Cliente: &nbsp;&nbsp;</h5>
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover   table-bordered table-sm">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Logradouro</th>
+                                        <th>Número</th>
+                                        <th>Bairro</th>
+
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                <tr style="cursor:pointer;" id="@item.id" onclick="ConfigLookupEndereco('@item.id.ToString()','@item.logradouro.ToString()','@item.bairro','@item.numero') " data-dismiss="modal">
+                                    <td>@item.logradouro</td>
+                                    <td>@item.numero</td>
+                                    <td>@item.bairro</td>
+                                </tr>
+                                }
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

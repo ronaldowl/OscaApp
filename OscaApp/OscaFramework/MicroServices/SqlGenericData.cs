@@ -1193,5 +1193,45 @@ namespace OscaFramework.MicroServices
             return retorno;
         }
 
+        public Relacao RetornaRelacaoEndereco(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "Select Logradouro + ' - Nº ' + numero + ' Bairro:' + bairro as endereco, id, status from Endereco where id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idName = dataReader["endereco"].ToString();                         
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+
+
     }
 }
