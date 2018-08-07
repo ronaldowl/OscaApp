@@ -12,6 +12,7 @@ using System.Linq;
 using X.PagedList;
 using OscaFramework.Models;
 using OscaFramework.MicroServices;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Controllers
 {
@@ -141,7 +142,7 @@ namespace OscaApp.Controllers
 
         public ViewResult GridContasReceber(string filtro, int Page, int view)
         {
-            IEnumerable<ContasReceber> retorno;
+            IEnumerable<ContasReceberGridViewModel> retorno;
 
             ViewBag.viewContexto = view;
            
@@ -150,15 +151,15 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
-                          where u.titulo.ToLower().Contains(filtro.ToLower()) || u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)     
+                          where u.contasReceber.titulo.ToLower().Contains(filtro.ToLower()) || u.contasReceber.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.contasReceber.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)     
                          select u;
             }
 
-            retorno = retorno.OrderByDescending(x => x.dataPagamento);
+            retorno = retorno.OrderByDescending(x => x.contasReceber.dataPagamento);
 
 
             if (Page == 0) Page = 1;
-            return View(retorno.ToPagedList<ContasReceber>(Page, 100));
+            return View(retorno.ToPagedList<ContasReceberGridViewModel>(Page, 100));
         }
 
         public ViewResult GridContasReceberCliente(string idCliente,int page)
@@ -233,7 +234,7 @@ namespace OscaApp.Controllers
             IEnumerable<ContasReceber> retorno;
                   
            
-           retorno = contasReceberData.GetAll(contexto.idOrganizacao, 0);
+           retorno = (IEnumerable < ContasReceber > )contasReceberData.GetAllDia(contexto.idOrganizacao);
           
                          retorno = from u in retorno
                           where

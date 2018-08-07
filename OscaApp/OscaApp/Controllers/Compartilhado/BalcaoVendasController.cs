@@ -19,7 +19,7 @@ namespace OscaApp.Controllers
 {
     [Authorize]
     public class BalcaoVendasController : Controller
-    {        
+    {
         private readonly IBalcaoVendasData balcaoVendasData;
         private readonly IClienteData clienteData;
         private readonly IOrganizacaoData organizacaoData;
@@ -34,8 +34,8 @@ namespace OscaApp.Controllers
 
         public BalcaoVendasController(ContexDataService db, IHttpContextAccessor httpContext)
         {
-             
-            this.balcaoVendasData = new BalcaoVendasData(db);        
+
+            this.balcaoVendasData = new BalcaoVendasData(db);
             this.listaprecoData = new ListaPrecoData(db);
             this.clienteData = new ClienteData(db);
             this.organizacaoData = new OrganizacaoData(db);
@@ -86,10 +86,10 @@ namespace OscaApp.Controllers
                 modelo.contexto = contexto;
                 modelo.balcaoVendas.criadoEm = DateTime.Now;
                 modelo.balcaoVendas.criadoPorName = contexto.nomeUsuario;
-          
+
                 //Prenche lista de preço para o contexto da página
                 List<SelectListItem> itens = new List<SelectListItem>();
-                itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao) );
+                itens = HelperAttributes.PreencheDropDownList(listaprecoData.GetAllRelacao(this.contexto.idOrganizacao));
                 modelo.listaPrecos = itens;
 
                 //Se passar o id carrega o cliente
@@ -102,22 +102,37 @@ namespace OscaApp.Controllers
                 LogOsca log = new LogOsca();
                 log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreatePedido-get", ex.Message);
             }
-          
+
             return View(modelo);
         }
-            
-        public ViewResult GridBalcaoVendas(string filtro, int Page, string idCliente, int view)
+
+        public ViewResult GridBalcaoVendas(string filtro, int Page, int view, DateTime inicio, DateTime fim)
         {
             try
-            {                
-                IEnumerable <BalcaoVendasGridViewModel> retorno ;
+            {
+                IEnumerable<BalcaoVendasGridViewModel> retorno;
 
-                ViewBag.viewContexto = view;
+                if (inicio.Year > 1800)
+                {
+                    view = 3;
+                    ViewBag.viewContexto = view;
+                }
+                else { ViewBag.viewContexto = view; }
 
-             
-                    retorno = balcaoVendasData.GetAllGridViewModel(contexto.idOrganizacao);
-                             
- 
+
+
+
+                if (!String.IsNullOrEmpty(filtro))
+                {
+                    retorno = balcaoVendasData.GetByCodigo(contexto.idOrganizacao, filtro);
+
+                    if (Page == 0) Page = 1;
+                    return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 50));
+
+                }
+
+                retorno = balcaoVendasData.GetAll(contexto.idOrganizacao, view, inicio, fim);
+
                 if (Page == 0) Page = 1;
                 return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 50));
 
@@ -125,7 +140,7 @@ namespace OscaApp.Controllers
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,4, this.contexto.idUsuario, this.contexto.idOrganizacao, "GridPedido", ex.Message);
+                log.GravaLog(1, 4, this.contexto.idUsuario, this.contexto.idOrganizacao, "GridPedido", ex.Message);
             }
 
             return View();
@@ -134,7 +149,7 @@ namespace OscaApp.Controllers
         public ViewResult GridClienteBalcaoVendas(string idCliente)
         {
             SqlGenericData genericData = new SqlGenericData();
-            Guid id =  new Guid(idCliente);
+            Guid id = new Guid(idCliente);
             try
             {
                 List<BalcaoVendas> retorno;
@@ -142,7 +157,7 @@ namespace OscaApp.Controllers
                 ViewBag.Cliente = genericData.RetornaCliente(id);
 
                 retorno = balcaoVendasData.GetAllByIdCliente(id);
-               
+
                 return View(retorno);
 
             }
@@ -158,7 +173,7 @@ namespace OscaApp.Controllers
 
         [HttpPost]
         public IActionResult FormStatusBalcaoVendas(BalcaoVendasViewModel entrada)
-        {          
+        {
             try
             {
                 if (entrada != null)
@@ -234,7 +249,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = balcaoVendasData.Get(modelo.balcaoVendas.id);
-                if(retorno.idCliente != Guid.Empty) modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
+                if (retorno.idCliente != Guid.Empty) modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
                 modelo.orgConfig = orgConfigData.Get(contexto.idOrganizacao);
                 modelo.produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(new Guid(id));
                 modelo.organizacao = organizacaoData.Get(contexto.idOrganizacao);

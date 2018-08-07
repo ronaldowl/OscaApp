@@ -8,13 +8,9 @@ using X.PagedList;
 
 namespace OscaApp.ViewModels.GridViewModels
 {
-    public class BalcaoVendasGridViewModel
+    public class ContasReceberGridViewModel
     {
-        public BalcaoVendas balcaoVendas { get; set; }  
+        public ContasReceber contasReceber { get; set; }      
         public Cliente cliente { get; set; }
-        public DateTime inicio { get; set; }
-        public DateTime fim { get; set; }
-
-
     }
 }

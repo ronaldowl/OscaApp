@@ -2,23 +2,42 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{int viewContexto = ViewBag.viewContexto; }
 
 <div class="row">
     <div class="col-md-12">
         <div class="card  " id="osc_Grid">
             <div class="card-header" style="height:60px">
                 <div class="card-title">
-                    <form class="form-inline">
+                    <form class="form-inline" asp-route-view="@viewContexto">
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold" class="fa fa-2x fa-cart-plus">Vendas Realizadas Hoje: &nbsp;&nbsp;</h5>
+                                    <i style="font-weight:bold" class="fa fa-2x fa-cart-plus"></i>
                                 </td>
                                 <td>
                                     <div class="input-group">
                                         <label>
                                             <button id="osc_novo" type="button" class="btn btn-success btn-lg fa fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas", null)'"> <span>Nova venda</span></button>
-                                        </label>
+                                        </label>&nbsp;
+                                        <div class="form-group">
+                                            <label>Filtros</label>
+                                            <div class="input-group">
+                                                &nbsp;<div class="col-2">
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                        <option value="0" selected="">Vendas do Dia</option>
+                                                        <option value="1">Vendas dos últimos 3 dias</option>
+                                                        @*<option value="2">Vendas do Mes</option>*@
+                                                        <option value="3">Vendas do Período</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>&nbsp;
+                                        <div class="form-group mx-sm-3 mb-2">
+                                            <input type="text" class="form-control" id="osc_DataInicio" placeholder="Data Início" name="inicio" autocomplete="off" asp-route-inicio="10/12/2014">
+                                            &nbsp;
+                                            <input type="text" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="fim"  autocomplete="off" asp-route-fim="10/12/2014">
+                                        </div>
                                         &nbsp;&nbsp;
                                         <span>
                                             @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
@@ -28,13 +47,11 @@
                                         <label>
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
                                         </label>&nbsp;&nbsp;
+
                                         <label>
-                                            <button id="osc_back_Produto" type="button" class="btn btn-info btn-lg fa fa-cubes" value="voltar" onclick="location.href='@Url.Action("GridProduto", "Produto", null)'"><span>Produtos</span></button>
-                                            &nbsp;&nbsp;
-                                            <label>
-                                                <button id="osc_back_contaReceber" type="button" class="btn btn-info btn-lg fa fa-envelope-open-o" value="voltar" onclick="location.href='@Url.Action("GridContasReceber", "ContasReceber", null)'"><span>Contas Receber</span></button>
-                                            </label>
+                                            <button id="osc_back_contaReceber" type="button" class="btn btn-info btn-sm fa fa-envelope-open-o" value="voltar" onclick="location.href='@Url.Action("GridContasReceber", "ContasReceber", null)'"><span>Contas Receber</span></button>
                                         </label>
+
                                     </div>
                                 </td>
                             </tr>
@@ -63,8 +80,10 @@
                             <tr style="cursor:pointer;font-size:12px" id="@item.balcaoVendas.id" onclick="location.href='@Url.Action("BalcaoVendasView", "BalcaoVendas", new { id = item.balcaoVendas.id })'">
                                 <td><i class="fa fa-cart-plus fa-2x"></i></td>
                                 <td>@Html.ActionLink(item.balcaoVendas.codigo.ToString(), "BalcaoVendasView", new { id = item.balcaoVendas.id })</td>
-                                <td>@if (item.cliente != null)
-                                {@item.cliente.nomeCliente} </td>
+                                <td>
+                                    @if (item.cliente != null)
+                                    {@item.cliente.nomeCliente}
+                                </td>
                                 <td>R$@item.balcaoVendas.valorTotal.ToString("N2")</td>
                                 <td>@item.balcaoVendas.condicaoPagamento</td>
                                 <td>@item.balcaoVendas.tipoPagamento</td>
@@ -93,3 +112,38 @@
 
 
 <div style="height:500px"></div>
+
+<script>
+    //Configura calendario
+    Calendario("#osc_DataInicio");
+    Calendario("#osc_DataFim");
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+
+
+
+
+    function OnChangeFiltro() {
+
+        var filtro = $("#osc_filtro").val();
+
+        if (filtro == "0") { $(window.document.location).attr('href', "GridBalcaoVendas?view=0"); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridBalcaoVendas?view=1"); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridBalcaoVendas?view=2"); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridBalcaoVendas?view=3"); }
+
+
+
+    }
+
+</script>

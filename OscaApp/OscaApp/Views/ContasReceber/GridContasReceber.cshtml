@@ -1,4 +1,4 @@
-﻿@model X.PagedList.PagedList<OscaFramework.Models.ContasReceber>
+﻿@model X.PagedList.PagedList<OscaApp.ViewModels.GridViewModels.ContasReceberGridViewModel>
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
@@ -60,31 +60,32 @@
                                 <th>Código</th>
                                 <th>Referência</th>
                                 <th>Título</th>
+                                <th>Cliente</th>
                                 <th>Origem</th>
                                 <th>Tipo Lancamento</th>
                                 <th>Data Lançamento</th>
-                                <th>Data Prevista Pag</th>
+                                <th>Data Prevista</th>
                                 <th>Valor</th>
-                                <th>Status Recebimento</th>
+                                <th>Status</th>
 
                             </tr>
                         </thead>
                         @foreach (var item in Model)
                         {
-                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
-                                <td><i class="fa fa-envelope-open-o"></i></td>
-                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
-                                <td>@item.numeroReferencia</td>
-                                <td>@item.titulo</td>
+                        <tr style="cursor:pointer;font-size:12px" id="@item.contasReceber.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.contasReceber.id })'">
+                            <td><i class="fa fa-envelope-open-o"></i></td>
+                            <td>@Html.ActionLink(item.contasReceber.codigo.ToString(), "FormUpdateContasReceber", new { id = item.contasReceber.id })</td>
+                            <td>@item.contasReceber.numeroReferencia</td>
+                            <td>@item.contasReceber.titulo</td>
+                            <td>@if(item.cliente != null){@item.cliente.nomeCliente; }</td>
+                            <td>@item.contasReceber.origemContaReceber</td>
+                            <td>@item.contasReceber.tipoLancamento</td>
+                            <td>@item.contasReceber.criadoEm.ToShortDateString()</td>
+                            <td>@item.contasReceber.dataPagamento.ToShortDateString()</td>
+                            <td>R$@item.contasReceber.valor.ToString("N2")</td>
+                            <td>@item.contasReceber.statusContaReceber</td>
 
-                                <td>@item.origemContaReceber</td>
-                                <td>@item.tipoLancamento</td>
-                                <td>@item.criadoEm.ToShortDateString()</td>
-                                <td>@item.dataPagamento.ToShortDateString()</td>
-                                <td>R$@item.valor.ToString("N2")</td>
-                                <td>@item.statusContaReceber</td>
-
-                            </tr>
+                        </tr>
                         }
                     </table>
 

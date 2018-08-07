@@ -5,6 +5,8 @@ using OscaApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Data.SqlClient;
 using OscaFramework.Models;
+using OscaApp.framework;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.Data
 {
@@ -12,7 +14,7 @@ namespace OscaApp.Data
     {
         private ContexDataService db;
 
-          public ContasReceberData (ContexDataService dbContext)
+        public ContasReceberData(ContexDataService dbContext)
         {
             this.db = dbContext;
         }
@@ -57,10 +59,10 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("dataPagamento").IsModified = true;
                 db.Entry(modelo).Property("statusContaReceber").IsModified = true;
                 db.Entry(modelo).Property("numeroReferencia").IsModified = true;
-                db.Entry(modelo).Property("idCliente").IsModified = true;                
-                db.Entry(modelo).Property("modificadoPor").IsModified            = true;
-                db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
-                db.Entry(modelo).Property("modificadoEm").IsModified             = true;
+                db.Entry(modelo).Property("idCliente").IsModified = true;
+                db.Entry(modelo).Property("modificadoPor").IsModified = true;
+                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+                db.Entry(modelo).Property("modificadoEm").IsModified = true;
                 db.Entry(modelo).Property("dataRecebimento").IsModified = true;
 
 
@@ -78,7 +80,7 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
 
-                
+
                 db.Entry(modelo).Property("dataRecebimento").IsModified = true;
                 db.Entry(modelo).Property("statusContaReceber").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
@@ -105,7 +107,7 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
-        public List<ContasReceber> GetAll(Guid idOrg, int view)
+        public List<ContasReceberGridViewModel> GetAll(Guid idOrg, int view)
         {
             List<ContasReceber> itens = new List<ContasReceber>();
 
@@ -138,7 +140,7 @@ namespace OscaApp.Data
 
                 retorno = from u in retorno where (u.dataPagamento.Date == DateTime.Now.Date) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado) select u;
 
-                itens =  retorno.ToList();
+                itens = retorno.ToList();
             }
 
             //Todos Contas  a receber em Atraso
@@ -153,9 +155,8 @@ namespace OscaApp.Data
                 itens = retorno.ToList();
             }
 
-            return itens;
-        }              
-             
+            return HelperAssociate.ConvertToGridContasReceber(itens.ToList());
+        }
 
         public List<ContasReceber> GetAllByIdCliente(Guid idCliente)
         {
@@ -164,6 +165,11 @@ namespace OscaApp.Data
             return retorno;
 
         }
-        
+        public List<ContasReceber> GetAllDia(Guid idOrg)
+        {
+            List<ContasReceber> itens = (from bl in db.ContasR where (bl.criadoEm.Date == DateTime.Now.Date) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();
+
+            return itens;
+        }
     }
 }

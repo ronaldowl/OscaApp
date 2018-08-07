@@ -66,17 +66,21 @@ namespace OscaApp.framework
         {
             List<BalcaoVendasGridViewModel> retorno = new List<BalcaoVendasGridViewModel>();
             SqlGenericData sqldata = new SqlGenericData();
-
-            foreach (var item in itens)
+            try
             {
-                BalcaoVendasGridViewModel X = new BalcaoVendasGridViewModel();
 
-                X.balcaoVendas = item;
-               
-                if(item.idCliente != Guid.Empty) X.cliente = sqldata.RetornaCliente(item.idCliente);
+                foreach (var item in itens)
+                {
+                    BalcaoVendasGridViewModel X = new BalcaoVendasGridViewModel();
 
-                retorno.Add(X);
+                    X.balcaoVendas = item;
+
+                    if (item.idCliente != Guid.Empty) X.cliente = sqldata.RetornaCliente(item.idCliente);
+
+                    retorno.Add(X);
+                }
             }
+            catch (Exception ex) { throw; }
             return retorno;
         }
         public static List<PedidoRetiradaGridViewModel> ConvertToGridPedido(List<PedidoRetirada> itens)
@@ -89,6 +93,21 @@ namespace OscaApp.framework
                 PedidoRetiradaGridViewModel X = new PedidoRetiradaGridViewModel();
                 X.cliente = sqldata.RetornaCliente(item.idCliente);
                 X.pedidoRetirada = item;
+
+                retorno.Add(X);
+            }
+            return retorno;
+        }
+        public static List<ContasReceberGridViewModel> ConvertToGridContasReceber(List<ContasReceber> itens)
+        {
+            List<ContasReceberGridViewModel> retorno = new List<ContasReceberGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                ContasReceberGridViewModel X = new ContasReceberGridViewModel();
+               if(item.idCliente != Guid.Empty) X.cliente = sqldata.RetornaCliente(item.idCliente);
+                X.contasReceber = item;
 
                 retorno.Add(X);
             }

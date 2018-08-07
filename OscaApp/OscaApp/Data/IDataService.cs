@@ -205,7 +205,8 @@ namespace OscaApp.Data
         void Delete(ContasReceber contasReceber);
 
         ContasReceber Get(Guid id );
-        List<ContasReceber> GetAll(Guid idOrg, int view);
+        List<ContasReceberGridViewModel> GetAll(Guid idOrg, int view);
+        List<ContasReceber> GetAllDia(Guid idOrg);
         List<ContasReceber> GetAllByIdCliente(Guid idCliente);
         
     }
@@ -229,10 +230,10 @@ namespace OscaApp.Data
 
         void Delete(BalcaoVendas balcaoVendas);
         BalcaoVendas Get(Guid id);
-        List<BalcaoVendas> GetAll(Guid idOrg);
+        List<BalcaoVendasGridViewModel> GetAll(Guid idOrg, int view, DateTime inicio, DateTime fim);
         List<BalcaoVendas> GetAllByIdCliente(Guid idCliente);
         List<Relacao> GetAllRelacao(Guid idOrg);
-        List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg);  
+        List<BalcaoVendasGridViewModel> GetByCodigo(Guid idOrg, string codigo);
 
     }
 

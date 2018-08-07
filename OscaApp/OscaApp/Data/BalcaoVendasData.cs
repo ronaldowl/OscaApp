@@ -134,9 +134,9 @@ namespace OscaApp.Data
 
         }
 
-        public List<BalcaoVendasGridViewModel> GetAllGridViewModel(Guid idOrg)
+        public List<BalcaoVendasGridViewModel> GetByCodigo(Guid idOrg, string codigo)
         {
-            List<BalcaoVendas> itens = (from bl in db.BalcaoVendas where (bl.criadoEm.Date == DateTime.Now.Date) & (bl.idOrganizacao.Equals(idOrg))  select bl).ToList();
+            List<BalcaoVendas> itens = (from bl in db.BalcaoVendas where (bl.codigo == codigo) & (bl.idOrganizacao.Equals(idOrg))  select bl).ToList();
              
             return HelperAssociate.ConvertToGridBalcaoVendas(itens);
         }
@@ -149,5 +149,40 @@ namespace OscaApp.Data
 
             return HelperAssociate.ConvertToGridBalcaoVendas(itens);
         }
+        public List<BalcaoVendasGridViewModel> GetAll(Guid idOrg, int view, DateTime inicio, DateTime fim)
+        {
+            List<BalcaoVendas> itens = new List<BalcaoVendas>();
+
+
+            //Contas do dia
+            if (view == 0)
+            {
+                itens = (from bl in db.BalcaoVendas where (bl.criadoEm.Date == DateTime.Now.Date) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();
+            }
+
+            //Contas do ultimos 7
+            if (view == 1)
+            {
+                itens = (from bl in db.BalcaoVendas where (bl.criadoEm.Date >= DateTime.Now.Date.AddDays( -3)) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();
+                
+            }
+
+            //Todos Contas do Mes
+            if (view == 2)
+            {
+
+                itens = (from bl in db.BalcaoVendas where (bl.criadoEm.Date.Month == DateTime.Now.Date.Month) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();
+            }
+
+            //Todos Contas do Periodo
+            if (view == 3)
+            {
+                itens = (from bl in db.BalcaoVendas where  (bl.idOrganizacao.Equals(idOrg)) & ((bl.criadoEm.Date >= inicio.Date & bl.criadoEm.Date <= fim.Date)) select bl).ToList();
+
+            }
+
+            return HelperAssociate.ConvertToGridBalcaoVendas(itens);
+        }
+
     }
 }
