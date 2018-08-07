@@ -139,37 +139,42 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridContasReceber(string filtro, int Page, int view, string idCliente)
+        public ViewResult GridContasReceber(string filtro, int Page, int view)
         {
             IEnumerable<ContasReceber> retorno;
 
             ViewBag.viewContexto = view;
-
-            if (String.IsNullOrEmpty(idCliente))
-            {
-               
-                retorno = contasReceberData.GetAll(contexto.idOrganizacao, view);
-            }
-            else
-            {
-                retorno = contasReceberData.GetAllByIdCliente(new Guid(idCliente));
-            }
+           
+            retorno = contasReceberData.GetAll(contexto.idOrganizacao, view);         
 
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
-                          where
-                            (u.titulo.ToLower().Contains(filtro.ToLower()))
-                            || (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))                        
-                          select u;
+                          where u.titulo.ToLower().Contains(filtro.ToLower()) || u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)     
+                         select u;
             }
 
             retorno = retorno.OrderByDescending(x => x.dataPagamento);
 
 
             if (Page == 0) Page = 1;
-            return View(retorno.ToPagedList<ContasReceber>(Page, 20));
+            return View(retorno.ToPagedList<ContasReceber>(Page, 100));
         }
+
+        public ViewResult GridContasReceberCliente(string idCliente,int page)
+        {
+            IEnumerable<ContasReceber> retorno;
+            retorno = contasReceberData.GetAllByIdCliente(new Guid(idCliente));
+
+            ViewBag.viewContexto = idCliente;
+
+            retorno = retorno.OrderByDescending(x => x.dataPagamento);
+
+            if (page == 0) page = 1;
+
+            return View(retorno.ToPagedList<ContasReceber>(page, 50));
+        }
+
 
         [HttpGet]
         public ViewResult FormStatusContasReceber(string id)

@@ -1,0 +1,87 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.ContasReceber>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{string viewContexto = ViewBag.viewContexto; }
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="osc_Grid">
+            <div class="card-header" style="height:60px">
+                <div class="card-title">
+                    <form class="form-inline" asp-route-view="@viewContexto">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold" class="fa fa-2x fa-envelope-open-o">Contas a Receber: &nbsp;&nbsp;</h5>
+                                </td>        
+                                <td>
+                                    <div class="input-group">
+                                      
+                                        <label>
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new {id = Model[0].idCliente })'"> <span>Voltar</span></button>
+                                        </label>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover  table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Código</th>
+                                <th>Referência</th>
+                                <th>Título</th>
+                                <th>Origem</th>
+                                <th>Tipo Lancamento</th>
+                                <th>Data Lançamento</th>
+                                <th>Data Prevista Pag</th>
+                                <th>Valor</th>
+                                <th>Status Recebimento</th>
+
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
+                                <td><i class="fa fa-envelope-open-o"></i></td>
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
+                                <td>@item.numeroReferencia</td>
+                                <td>@item.titulo</td>
+
+                                <td>@item.origemContaReceber</td>
+                                <td>@item.tipoLancamento</td>
+                                <td>@item.criadoEm.ToShortDateString()</td>
+                                <td>@item.dataPagamento.ToShortDateString()</td>
+                                <td>R$@item.valor.ToString("N2")</td>
+                                <td>@item.statusContaReceber</td>
+
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr>
+                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasReceberCliente", "ContasReceber", new { page, idCliente = viewContexto }))</td>
+                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="height:500px"></div>
+
+<script src="~/lib/OscaJs/osc_contaReceber.js"></script>
+
+
+

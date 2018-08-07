@@ -7,13 +7,13 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card" id="osc_Grid">
-            <div class="card-header">
+            <div class="card-header" style="height:60px">
                 <div class="card-title">
                     <form class="form-inline" asp-route-view="@viewContexto">
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold">Contas a Receber: &nbsp;&nbsp;</h5>
+                                    <h5 style="font-weight:bold" class="fa fa-2x fa-envelope-open-o">Contas a Receber: &nbsp;&nbsp;</h5>
                                 </td>
                                 <td>
                                     <div class="input-group">
@@ -26,6 +26,7 @@
                                                               <option value="1">Todas Fechadas</option>
                                                               <option value="2">Todas Contas</option>
                                                               <option value="3">Todas Contas de Hoje</option>
+                                                              <option value="4">Todas Contas em Atraso</option>
                                                           </select>
                                                 </div>
                                             </div>
@@ -117,6 +118,8 @@
     if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
     if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
     if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+    if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
+
 
 
     function OnChangeFiltro() {
@@ -127,6 +130,8 @@
         if (filtro == "1") { $(window.document.location).attr('href', "GridContasReceber?view=1"); }
         if (filtro == "2") { $(window.document.location).attr('href', "GridContasReceber?view=2"); }
         if (filtro == "3") { $(window.document.location).attr('href', "GridContasReceber?view=3"); }
+        if (filtro == "4") { $(window.document.location).attr('href', "GridContasReceber?view=4"); }
+
 
     }
 

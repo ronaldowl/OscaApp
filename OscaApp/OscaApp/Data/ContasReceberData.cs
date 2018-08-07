@@ -141,6 +141,18 @@ namespace OscaApp.Data
                 itens =  retorno.ToList();
             }
 
+            //Todos Contas  a receber em Atraso
+            if (view == 4)
+            {
+                itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+                IEnumerable<ContasReceber> retorno = itens;
+
+                retorno = from u in retorno where (u.dataPagamento.Date < DateTime.Now.Date) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado) select u;
+
+                itens = retorno.ToList();
+            }
+
             return itens;
         }              
              

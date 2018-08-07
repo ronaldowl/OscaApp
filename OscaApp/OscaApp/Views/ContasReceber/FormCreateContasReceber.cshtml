@@ -1,12 +1,5 @@
 ﻿@model OscaApp.ViewModels.ContasReceberViewModel
-<script>
-    function CarregaLookupCliente() {
-        $("#lookupCliente").load("/Cliente/LookupCliente", function () {
-            $("#lookupCliente").modal("show");
-        })
-    }
 
-</script>
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
     @Html.HiddenFor(m => m.contexto.organizacao)
@@ -16,195 +9,198 @@
 </div>
 
 <div class="row">
-        <div class="col-md-11">
-            <form action="FormCreateContasReceber" method="post" id="osc_Mainform">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <table>
-                                <tr>
-                                    <td><h3> Conta a Receber:&nbsp;&nbsp;</h3></td>
-                                    <td>
-                                        <div id="osc_barrabotoes">
-                                            <label>
-                                                <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"><span>Salvar</span></button>
-                                            </label>
-                                            &nbsp;
-                                            <label>
-                                                <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridContasReceber","ContasReceber", null)'"><span>Fechar</span></button>
-                                            </label>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+    <div class="col-md-11">
+        <form action="FormCreateContasReceber" method="post" id="osc_Mainform">
+            <div class="card">
+                <div class="card-header" style="height:50px">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3 class="fa fa-2x fa-envelope-open-o"> Conta a Receber:&nbsp;&nbsp;</h3></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value="Salvar"><span>Salvar</span></button>
+                                        </label>
+                                        &nbsp;
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Fechar" onclick="location.href='@Url.Action("GridContasReceber","ContasReceber", null)'"><span>Fechar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Código</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_codigo" asp-for="@Model.contasReceber.codigo" class="form-control" type="text" disabled="disabled">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Título</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_codigo" asp-for="@Model.contasReceber.titulo" class="form-control" type="text" required="required">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:deepskyblue">Cliente</label>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Código</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-user-o fa-2x"></span>
-                                        </span>
-                                        <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required" autocomplete="off">
-                                        <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
-                                        <span class="input-group-btn ">
-                                            <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
-                                                <span class="fa fa-search"></span>
-                                            </button>
-                                        </span>
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_codigo" asp-for="@Model.contasReceber.codigo" class="form-control" type="text" disabled="disabled">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Valor *</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.contasReceber.valor" class="form-control" type="text" id="osc_valor" required="required" value="" placeholder="0,00" onblur="onBlur(this)">
-                                        </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Título</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_codigo" asp-for="@Model.contasReceber.titulo" class="form-control" type="text" required="required">
                                     </div>
-                                </div>                            
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="color:deepskyblue">Cliente</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-user-o fa-2x"></span>
+                                    </span>
+                                    <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required" autocomplete="off">
+                                    <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
+                                    <span class="input-group-btn ">
+                                        <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="color:red">Valor *</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.contasReceber.valor" class="form-control" type="text" id="osc_valor" required="required" value="" placeholder="0,00" onblur="onBlur(this)">
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label>Tipo de Lançamento</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_tipoLancamento" asp-for="@Model.contasReceber.tipoLancamento" class="form-control" disabled="disabled">
+                                        <option value="0" selected="selected">Manual</option>
+                                        <option value="1">Automático</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                            
-                                <div class="form-group">
-                                    <label>Tipo de Lançamento</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_tipoLancamento" asp-for="@Model.contasReceber.tipoLancamento" class="form-control" disabled="disabled">
-                                            <option value="0" selected="selected">Manual</option>
-                                            <option value="1">Automático</option>
-                                        </select>
-                                    </div>
+                            <div class="form-group">
+                                <label>Origem</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control">
+                                        <option value="0">Pedido</option>
+                                        <option value="1">Atendimento</option>
+                                        <option value="2">Ordem de Serviço</option>
+                                        <option value="3">Balcão Vendas</option>
+                                        <option value="100">Outros</option>
+                                    </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Origem</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                        </span>
-                                        <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control">
-                                            <option value="0">Pedido</option>
-                                            <option value="1">Atendimento</option>
-                                            <option value="2">Ordem de Serviço</option>
-                                            <option value="3">Balcão Vendas</option>
-                                            <option value="100">Outros</option>
-                                        </select>
-                                    </div>
-                                </div>
-                             
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Número de Ref</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                            <input id="osc_numeroReferencia" asp-for="@Model.contasReceber.numeroReferencia" class="form-control" type="text" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Anotação</label>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Número de Ref</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-comment-o fa-2x"></span>&nbsp;
-                                        </span>
-                                        <textarea id="osc_anotacao" asp-for="@Model.contasReceber.anotacao" class="form-control" rows="5" cols="40" placeholder="digite uma anotação"></textarea>
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_numeroReferencia" asp-for="@Model.contasReceber.numeroReferencia" class="form-control" type="text" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label" style="color:red">Data Prevista *</label>
-                                    <div class="inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                            <input asp-for="@Model.contasReceber.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required" value="" autocomplete="off">
-                                        </div>
-                                    </div>
+                            <div class="form-group">
+                                <label>Anotação</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-comment-o fa-2x"></span>&nbsp;
+                                    </span>
+                                    <textarea id="osc_anotacao" asp-for="@Model.contasReceber.anotacao" class="form-control" rows="5" cols="40" placeholder="digite uma anotação"></textarea>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" style="color:red">Data Prevista *</label>
+                                <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.contasReceber.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.contasReceber.criadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                        <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.contasReceber.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required" value="" autocomplete="off">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.contasReceber.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.contasReceber.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" for="" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 <div class="modal fade" id="lookupCliente">
 </div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
+<script src="~/lib/OscaJs/osc_contaReceber.js"></script>
+<script src="~/lib/OscaJs/osc_lookup.js"></script>
+
 <script>
     Calendario("#osc_dataPagamento");
 </script>
