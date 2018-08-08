@@ -4,6 +4,7 @@ function OnLoad() {
 
     var status = $("#osc_status").val();
     desabilita_Cliente(status);
+    ValorEmAberto();
   
 }
  
@@ -316,3 +317,28 @@ function LimpaCNPJ_CPF()
     val.value = "";
 }
 
+function ValorEmAberto() {
+
+    var url = '/API/ContasReceberAPI/RetornaValorEmAberto';
+
+    var valorVenda = 0;
+    var idCli = $('#osc_id').val();
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        datatype: 'json',
+        data: {           
+            id: idCli
+        }, 
+        ContentType: 'application/json;utf-8'
+    }).done(function (resp) {
+
+        if (resp.statusOperation == true) {
+
+            $('#valorEmAberto').val(FormataDecimal(parseFloat(resp.valor), 2, ',', '.'));
+        }
+
+    });
+
+}

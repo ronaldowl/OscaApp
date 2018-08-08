@@ -1,16 +1,6 @@
 ﻿@model OscaApp.ViewModels.BalcaoVendasViewModel
 
-<script>
-
-    function Imprimir() {
-
-    }
-
-    function CarregaLookupCliente() {
-        $("#lookupCliente").load("/Cliente/LookupCliente", function () {
-            $("#lookupCliente").modal("show");
-        })
-    }
+<script>    
 
     function ValidaClienteCPF() {
 
@@ -320,6 +310,8 @@
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
 <script src="~/lib/OscaJs/osc_cliente.js"></script>
+<script src="~/lib/OscaJs/osc_lookup.js"></script>
+
 <script>
     $("#osc_pesquisaProduto").focus();
 </script>

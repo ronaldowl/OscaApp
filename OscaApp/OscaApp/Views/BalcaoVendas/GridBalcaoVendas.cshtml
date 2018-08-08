@@ -36,7 +36,7 @@
                                         <div class="form-group mx-sm-3 mb-2">
                                             <input type="text" class="form-control" id="osc_DataInicio" placeholder="Data Início" name="inicio" autocomplete="off" asp-route-inicio="10/12/2014">
                                             &nbsp;
-                                            <input type="text" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="fim"  autocomplete="off" asp-route-fim="10/12/2014">
+                                            <input type="text" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="fim" autocomplete="off" asp-route-fim="10/12/2014">
                                         </div>
                                         &nbsp;&nbsp;
                                         <span>
@@ -46,10 +46,10 @@
                                         &nbsp;&nbsp;
                                         <label>
                                             <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </label>&nbsp;&nbsp;
-
-                                        <label>
-                                            <button id="osc_back_contaReceber" type="button" class="btn btn-info btn-sm fa fa-envelope-open-o" value="voltar" onclick="location.href='@Url.Action("GridContasReceber", "ContasReceber", null)'"><span>Contas Receber</span></button>
+                                        </label>
+                                        &nbsp;
+                                        <label style="font-weight:bold">
+                                             Hoje R$<input id="valorDiario" type="text" style="width:120px; height:30px; font-weight:bold; background-color:aquamarine" disabled="disabled"/>
                                         </label>
 
                                     </div>
@@ -112,7 +112,7 @@
 
 
 <div style="height:500px"></div>
-
+<script src="~/lib/OscaJs/osc_balcaoVendas.js"></script>
 <script>
     //Configura calendario
     Calendario("#osc_DataInicio");
@@ -131,7 +131,7 @@
     if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
 
 
-
+    ValorDiario();
 
     function OnChangeFiltro() {
 

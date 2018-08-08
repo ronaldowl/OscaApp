@@ -297,3 +297,56 @@ function ValidaProdutoVenda() {
         return false;
     } else { return true}
 }
+
+
+function BalcaoViewOnload() {
+
+    var status = document.getElementById("osc_statusBalcaoVendas").value;
+    desabilitaCampos_BalcaoView(status)
+
+}
+
+function desabilitaCampos_BalcaoView(status) {
+
+    if (status == 1 || status == 2) {
+
+        //Desabilita todos campos do Form
+        $("input,select, textarea").prop("disabled", true);
+
+        //Esconde botoes
+        $("#osc_salvar").hide();
+
+        $("#botaoLookupCliente").hide();  
+
+    } else {
+
+        //Desabilita botões
+        //Esconde botoes
+        $("#osc_reabrir").hide();
+
+    }
+}
+
+
+
+function ValorDiario() {
+
+    var url = '/API/BalcaoVendasAPI/RetornaValorVendaDiario';
+
+    var valorVenda = 0;
+
+    $.ajax({
+        url: url,
+        type: "GET",      
+        datatype: 'json',
+        ContentType: 'application/json;utf-8'
+    }).done(function (resp) {
+
+        if (resp.statusOperation == true) {
+
+            $('#valorDiario').val(FormataDecimal(parseFloat(resp.valor), 2, ',', '.'));
+        } 
+
+    });
+
+}

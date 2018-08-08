@@ -44,3 +44,4 @@ function RecarregarGridContaReceber() {
     $(window.document.location).attr('href', "GridContasReceber?view=0");
 
 }
+

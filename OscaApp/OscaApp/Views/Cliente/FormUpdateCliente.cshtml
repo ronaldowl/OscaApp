@@ -520,7 +520,10 @@
                                         <button id="osc_conta" type="button" class="btn btn-info btn-sm fa fa-1x fa-plus" value="Nova OS" onclick="location.href='@Url.Action("FormCreateContasReceber", "ContasReceber", new { idCliente = @Model.cliente.id })'"> <span>Novo</span></button>
                                     </label>
                                     <label>
-                                        <button id="osc_gridconta" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridContasReceberCliente", "ContasReceber", new {idCliente = @Model.cliente.id, Page = 0 })'">Ver +</button> Total:@Model.contasReceber.Count
+                                        <button id="osc_gridconta" type="button" class="btn btn-info btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridContasReceberCliente", "ContasReceber", new {idCliente = @Model.cliente.id, Page = 0 })'">Ver +</button>
+                                    </label>
+                                    <label style="font-weight:bold">
+                                        R$<input id="valorEmAberto" type="text" style="width:120px; height:30px; font-weight:bold; background-color:aquamarine" disabled="disabled" />
                                     </label>
                                 </div>
                             </td>
@@ -674,6 +677,8 @@
 <div class="modal fade" id="lookupContato">
 </div>
 <script src="~/lib/OscaJs/osc_cliente.js"></script>
+<script src="~/lib/OscaJs/osc_global.js"></script>
+
 <script>
     //Executa regras de carregamento do Form
     OnLoad();

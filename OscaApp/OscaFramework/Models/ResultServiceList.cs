@@ -12,5 +12,7 @@ namespace OscaFramework.Models
         public bool statusOperation {get;set;}
         public string statusMensagem { get; set; }
         public string id { get; set; }
+        public string valor { get; set; }
+
     }
 }

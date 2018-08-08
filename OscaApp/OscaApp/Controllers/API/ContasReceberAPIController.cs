@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OscaApp.Models;
 using OscaFramework.Models;
 using OscaApp.Data;
+using OscaFramework.MicroServices;
 
 namespace OscaAPI.Controllers
 {
@@ -13,11 +14,13 @@ namespace OscaAPI.Controllers
     public class ContasReceberAPIController : Controller
     {
         private readonly IContasReceberData serviceData;
-        
+        private readonly SqlGenericRules sqlServices;
 
-        public ContasReceberAPIController(ContexDataService db)
+
+        public ContasReceberAPIController(ContexDataService db, SqlGenericRules _sqlRules)
         {
-            this.serviceData = new ContasReceberData(db);          
+            this.serviceData = new ContasReceberData(db);
+            this.sqlServices = _sqlRules;
         }    
 
         [Route("api/[controller]/Delete")]
@@ -33,6 +36,26 @@ namespace OscaAPI.Controllers
                 serviceData.Delete(modelo);
                 retorno.statusOperation = true;
                return Json(retorno);
+            }
+            catch (Exception ex)
+            {
+                retorno.statusMensagem = ex.Message;
+            }
+
+            return Json(retorno);
+        }
+
+        [Route("api/[controller]/RetornaValorEmAberto")]
+        [HttpGet("{id}")]
+        public JsonResult RetornaValorEmAberto(string id)
+        {
+            ResultServiceList retorno = new ResultServiceList();
+            try
+            {
+                retorno.valor = sqlServices.RetornaValorEmAberto(id);
+                retorno.statusOperation = true;
+
+                return Json(retorno);
             }
             catch (Exception ex)
             {

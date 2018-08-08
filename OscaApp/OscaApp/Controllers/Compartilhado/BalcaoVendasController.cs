@@ -75,6 +75,36 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
+        [HttpPost]
+        public IActionResult BalcaoVendasView(BalcaoVendasViewModel entrada)
+        {
+
+            BalcaoVendas modelo = new BalcaoVendas();
+            entrada.contexto = this.contexto;
+            modelo = entrada.balcaoVendas;
+
+            if (entrada.cliente.id != Guid.Empty) modelo.idCliente = entrada.cliente.id;
+
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = contexto.idUsuario;
+            modelo.modificadoPorName = contexto.nomeUsuario;
+
+            try
+            {
+                balcaoVendasData.Update(modelo);                                   
+                StatusMessage = "Registro Atualizado com Sucesso!";            
+              
+            } 
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 11, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdatePerfilAcesso-post", ex.Message);
+            }
+
+            return RedirectToAction("BalcaoVendasView", new { id = modelo.id.ToString() });
+
+        }
+
 
         [HttpGet]
         public ViewResult BalcaoVendas(string idCliente)
@@ -178,7 +208,6 @@ namespace OscaApp.Controllers
             {
                 if (entrada != null)
                 {
-                    entrada.balcaoVendas.statusBalcaoVendas = CustomEnumStatus.StatusBalcaoVendas.Cancelado;
                     entrada.balcaoVendas.modificadoEm = DateTime.Now;
                     entrada.balcaoVendas.modificadoPor = contexto.idUsuario;
                     entrada.balcaoVendas.modificadoPorName = contexto.nomeUsuario;
@@ -186,7 +215,11 @@ namespace OscaApp.Controllers
                     balcaoVendasData.UpdateStatus(entrada.balcaoVendas);
 
                     SqlGenericRules sqlGenericRules = new SqlGenericRules();
-                    sqlGenericRules.CancelaFaturamentoBalcao(entrada.balcaoVendas.id.ToString());
+
+                    if (entrada.balcaoVendas.statusBalcaoVendas == CustomEnumStatus.StatusBalcaoVendas.Cancelado)
+                    {
+                        sqlGenericRules.CancelaFaturamentoBalcao(entrada.balcaoVendas.id.ToString());
+                    }
 
                     List<ProdutoBalcao> produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(entrada.balcaoVendas.id);
 
