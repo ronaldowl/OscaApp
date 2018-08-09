@@ -7,9 +7,9 @@
 <html>
 <head>
     <meta lang="pt-br" charset="utf-8" />
- 
-    <title></title>    
- 
+
+    <title></title>
+
     <style>
 
         html, body {
@@ -60,7 +60,7 @@
 
 
     </style>
-   
+
 </head>
 <body>
     <div class="conteudo">
@@ -130,15 +130,21 @@
                 </tr>
                 <tr>
                     <td>Desconto:</td>
-                    <td>R$ @Model.balcaoVendas.valorDesconto.ToString("N2") &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;QTD Parcelas: @Model.balcaoVendas.parcelas  </td>
+                    <td>R$ @Model.balcaoVendas.valorDesconto.ToString("N2") &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;QTD Parcelas: @if(Model.balcaoVendas.parcelas > 0){@Model.balcaoVendas.parcelas;} </td>
                 </tr>
                 <tr>
                     <td>TOTAL:</td>
                     <td>R$ @Model.balcaoVendas.valorTotal.ToString("N2")</td>
                 </tr>
+                <tr>
+                    <td>CLIENTE:</td>
+                    <td>@Model.cliente.nomeCliente</td>
+                </tr>
+                <tr>
+                    <td>CPF/CNPJ:</td>
+                    <td>@Model.cliente.cnpj_cpf</td>
+                </tr>
             </table>
-            <p>
-                CLIENTE: @Model.cliente.nomeCliente               
             <p>@Model.orgConfig.mensagemCupom</p>
 
         </div>

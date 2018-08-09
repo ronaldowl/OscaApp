@@ -207,7 +207,7 @@ namespace OscaApp.Data
         ContasReceber Get(Guid id );
         List<ContasReceberGridViewModel> GetAll(Guid idOrg, int view);
         List<ContasReceber> GetAllDia(Guid idOrg);
-        List<ContasReceber> GetAllByIdCliente(Guid idCliente);
+        List<ContasReceber> GetAllByIdCliente(Guid idCliente, int view);
         
     }
 

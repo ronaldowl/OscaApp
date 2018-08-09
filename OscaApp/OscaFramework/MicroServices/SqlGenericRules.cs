@@ -206,11 +206,80 @@ namespace OscaFramework.MicroServices
 
         }
 
-        public string RetornaValorEmAberto(string idCliente)
+        public string RetornaValorEmAbertoCliente(string idCliente)
         {
             string retorno = String.Empty;
 
             string SelectProduto = "Select isnull(sum(valor),0) from ContasReceber where idCliente = '" + idCliente + "' and statusContaReceber in(0, 3)   ";
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = SelectProduto,
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    var valor = _Command.ExecuteScalar();
+                    retorno = valor.ToString();
+
+                    Connection.Close();
+
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+
+        }
+        public string RetornaValorEmAberto(string idOrg)
+        {
+            string retorno = String.Empty;
+
+            string SelectProduto = "Select isnull(sum(valor),0) from ContasReceber where idOrganizacao = '" + idOrg + "' and statusContaReceber in(0, 3)   ";
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = SelectProduto,
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    var valor = _Command.ExecuteScalar();
+                    retorno = valor.ToString();
+
+                    Connection.Close();
+
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+
+        }
+
+        public string RetornaValorRecebidoCliente(string idCliente)
+        {
+            string retorno = String.Empty;
+
+            string SelectProduto = "Select isnull(sum(valor),0) from ContasReceber where idCliente = '" + idCliente + "' and statusContaReceber = 1   ";
 
             try
             {

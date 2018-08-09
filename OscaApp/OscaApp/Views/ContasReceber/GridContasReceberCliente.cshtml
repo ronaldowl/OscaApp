@@ -2,23 +2,78 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
-@{string viewContexto = ViewBag.viewContexto; }
+@{int viewContexto = ViewBag.viewContexto;
+    string idCliente = ViewBag.idCliente;
+}
 <div class="row">
     <div class="col-md-12">
         <div class="card" id="osc_Grid">
+            <input type="hidden" id="osc_id" value="@idCliente" />
             <div class="card-header" style="height:60px">
                 <div class="card-title">
-                    <form class="form-inline" asp-route-view="@viewContexto">
+                    <div class="form-inline">
                         <table>
                             <tr>
                                 <td>
-                                    <h5 style="font-weight:bold" class="fa fa-2x fa-envelope-open-o">Contas a Receber: &nbsp;&nbsp;</h5>
-                                </td>        
+                                    <h5 style="font-weight:bold" class="fa fa-2x fa-envelope-open-o">Contas a Receber:</h5>
+                                </td>
+                                <td>
+                                    <h5 style="font-weight:bold;font-size:25px">@ViewBag.nomeCliente &nbsp; &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <label style="font-weight:bold">
+                                        Total em Aberto: R$<input id="valorEmAberto" type="text" style="width:120px; height:30px; font-weight:bold; background-color:aquamarine" disabled="disabled" />
+                                    </label>
+                                </td>
+                                <td>
+                                    <label style="font-weight:bold">
+                                        Total Recebido: R$<input id="valorRecebido" type="text" style="width:120px; height:30px; font-weight:bold; background-color:aquamarine" disabled="disabled" />
+                                    </label>
+                                </td>
+                                <td style="width:10px"></td>
+
+                                <td>
+
+                                    <div class="input-group">
+
+                                        <label>
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new {id = idCliente })'"> <span>Voltar</span></button>
+                                        </label>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <form class="form-inline" asp-route-view="@viewContexto" asp-route-idCliente="@idCliente">
+                        <table>
+                            <tr>
                                 <td>
                                     <div class="input-group">
-                                      
+                                        <div class="form-group">
+                                            <label>Filtros</label>
+                                            <div class="input-group">
+                                                &nbsp;<div class="col-2">
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                        <option value="0" selected="">Todas em Aberto</option>
+                                                        <option value="1">Todas Fechadas</option>
+                                                        <option value="2">Todas Contas</option>
+                                                        <option value="3">Todas Contas de Hoje</option>
+                                                        <option value="4">Todas Contas em Atraso</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        &nbsp;&nbsp;
+                                        <span>
+                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                        </span>
+                                        <button type="submit" class="btn btn-info fa fa-search"></button>
+                                        &nbsp;&nbsp;
                                         <label>
-                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("FormUpdateCliente", "Cliente", new {id = Model[0].idCliente })'"> <span>Voltar</span></button>
+                                            <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridContaReceberCliente('@idCliente')"> <span>Limpar</span></button>
                                         </label>
 
                                     </div>
@@ -27,61 +82,100 @@
                         </table>
                     </form>
                 </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <table class="table table-hover  table-bordered table-sm">
-                        <thead class="thead-light">
-                            <tr>
-                                <th></th>
-                                <th>Código</th>
-                                <th>Referência</th>
-                                <th>Título</th>
-                                <th>Origem</th>
-                                <th>Tipo Lancamento</th>
-                                <th>Data Lançamento</th>
-                                <th>Data Prevista Pag</th>
-                                <th>Valor</th>
-                                <th>Status Recebimento</th>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-hover  table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th></th>
+                                    <th>Código</th>
+                                    <th>Referência</th>
+                                    <th>Título</th>
+                                    <th>Origem</th>
+                                    <th>Tipo Lancamento</th>
+                                    <th>Data Lançamento</th>
+                                    <th>Data Prevista Pag</th>
+                                    <th>Valor</th>
+                                    <th>Status Recebimento</th>
 
-                            </tr>
-                        </thead>
-                        @foreach (var item in Model)
-                        {
-                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
-                                <td><i class="fa fa-envelope-open-o"></i></td>
-                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
-                                <td>@item.numeroReferencia</td>
-                                <td>@item.titulo</td>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
+                                    <td><i class="fa fa-envelope-open-o"></i></td>
+                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
+                                    <td>@item.numeroReferencia</td>
+                                    <td>@item.titulo</td>
 
-                                <td>@item.origemContaReceber</td>
-                                <td>@item.tipoLancamento</td>
-                                <td>@item.criadoEm.ToShortDateString()</td>
-                                <td>@item.dataPagamento.ToShortDateString()</td>
-                                <td>R$@item.valor.ToString("N2")</td>
-                                <td>@item.statusContaReceber</td>
+                                    <td>@item.origemContaReceber</td>
+                                    <td>@item.tipoLancamento</td>
+                                    <td>@item.criadoEm.ToShortDateString()</td>
+                                    <td>@item.dataPagamento.ToShortDateString()</td>
+                                    <td>R$@item.valor.ToString("N2")</td>
+                                    <td>@item.statusContaReceber</td>
 
-                            </tr>
-                        }
-                    </table>
+                                </tr>
+                            }
+                        </table>
 
+                    </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <table>
-                    <tr>
-                        <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasReceberCliente", "ContasReceber", new { page, idCliente = viewContexto }))</td>
-                        <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
-                    </tr>
-                </table>
+                <div class="card-footer">
+                    <table>
+                        <tr>
+                            <td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridContasReceberCliente", "ContasReceber", new { page, idCliente = idCliente, view = viewContexto }))</td>
+                            <td><h6>Registros de @Model.FirstItemOnPage até  @Model.LastItemOnPage - Total:@Model.TotalItemCount</h6></td>
+                        </tr>
+                    </table>
+                </div>
+              <div style="height:500px"></div>
             </div>
         </div>
     </div>
 </div>
 
-<div style="height:500px"></div>
 
 <script src="~/lib/OscaJs/osc_contaReceber.js"></script>
+<script src="~/lib/OscaJs/osc_servicesWeb.js"></script>
+<script src="~/lib/OscaJs/osc_global.js"></script>
+<script>
+    var id = $("#osc_id").val();
+    ValorEmAbertoCliente(id);
+    ValorRecebidoCliente(id);
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+    if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
+
+
+
+    function OnChangeFiltro() {
+
+        var filtro = $("#osc_filtro").val();
+        var id = $("#osc_id").val();
+
+
+        if (filtro == "0") { $(window.document.location).attr('href', "GridContasReceberCliente?view=0&idCliente=" + id); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridContasReceberCliente?view=1&idCliente=" + id); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridContasReceberCliente?view=2&idCliente=" + id); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridContasReceberCliente?view=3&idCliente=" + id); }
+        if (filtro == "4") { $(window.document.location).attr('href', "GridContasReceberCliente?view=4&idCliente=" + id); }
+
+
+    }
+
+</script>
+
 
 
 

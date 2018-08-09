@@ -159,21 +159,30 @@ namespace OscaApp.Controllers
 
 
             if (Page == 0) Page = 1;
-            return View(retorno.ToPagedList<ContasReceberGridViewModel>(Page, 100));
+            return View(retorno.ToPagedList<ContasReceberGridViewModel>(Page, 50));
         }
 
-        public ViewResult GridContasReceberCliente(string idCliente,int page)
+        public ViewResult GridContasReceberCliente(string idCliente,int page, string filtro, int view)
         {
             IEnumerable<ContasReceber> retorno;
-            retorno = contasReceberData.GetAllByIdCliente(new Guid(idCliente));
+            retorno = contasReceberData.GetAllByIdCliente(new Guid(idCliente), view);
 
-            ViewBag.viewContexto = idCliente;
+            ViewBag.viewContexto = view;
+            ViewBag.idCliente = idCliente;
+            ViewBag.nomeCliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente)).idName;
+
+            if (!String.IsNullOrEmpty(filtro))
+            {
+                retorno = from u in retorno
+                          where u.titulo.ToLower().Contains(filtro.ToLower()) || u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)
+                          select u;
+            }
 
             retorno = retorno.OrderByDescending(x => x.dataPagamento);
 
             if (page == 0) page = 1;
 
-            return View(retorno.ToPagedList<ContasReceber>(page, 50));
+            return View(retorno.ToPagedList<ContasReceber>(page, 20));
         }
 
 

@@ -125,7 +125,7 @@ namespace OscaAPI.Controllers
 
                     if (entrada.balcaoVendas.condicaoPagamento == CustomEnum.codicaoPagamento.Consignado)
                     {
-                        //Lançamento Manual
+                        ContasReceberRules.GravaConsignado(entrada.balcaoVendas, this.contaReceberData, this.contexto, this.orgConfig);
                     }
 
                     //Baixa Estoque

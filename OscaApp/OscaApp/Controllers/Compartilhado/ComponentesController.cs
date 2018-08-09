@@ -109,5 +109,13 @@ namespace OscaApp.Controllers
 
             return View(modelo);
         }
+
+        [HttpGet]
+        public ViewResult ResumoFinanceiro()
+        {
+          
+
+            return View();
+        }
     }
 }

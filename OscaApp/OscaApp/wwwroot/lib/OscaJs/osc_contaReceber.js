@@ -44,4 +44,9 @@ function RecarregarGridContaReceber() {
     $(window.document.location).attr('href', "GridContasReceber?view=0");
 
 }
+function RecarregarGridContaReceberCliente(idCliente) {
+
+    $(window.document.location).attr('href', "GridContasReceberCliente?view=0&idCliente=" + idCliente);
+
+}
 

@@ -7,6 +7,7 @@ using OscaApp.Models;
 using OscaFramework.Models;
 using OscaApp.Data;
 using OscaFramework.MicroServices;
+using Microsoft.AspNetCore.Http;
 
 namespace OscaAPI.Controllers
 {
@@ -15,12 +16,13 @@ namespace OscaAPI.Controllers
     {
         private readonly IContasReceberData serviceData;
         private readonly SqlGenericRules sqlServices;
+        private readonly ContextPage contexto;
 
-
-        public ContasReceberAPIController(ContexDataService db, SqlGenericRules _sqlRules)
+        public ContasReceberAPIController(ContexDataService db, SqlGenericRules _sqlRules, IHttpContextAccessor httpContext)
         {
             this.serviceData = new ContasReceberData(db);
             this.sqlServices = _sqlRules;
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }    
 
         [Route("api/[controller]/Delete")]
@@ -45,14 +47,54 @@ namespace OscaAPI.Controllers
             return Json(retorno);
         }
 
-        [Route("api/[controller]/RetornaValorEmAberto")]
+        [Route("api/[controller]/RetornaValorEmAbertoCliente")]
         [HttpGet("{id}")]
-        public JsonResult RetornaValorEmAberto(string id)
+        public JsonResult RetornaValorEmAbertoCliente(string id)
         {
             ResultServiceList retorno = new ResultServiceList();
             try
             {
-                retorno.valor = sqlServices.RetornaValorEmAberto(id);
+                retorno.valor = sqlServices.RetornaValorEmAbertoCliente(id);
+                retorno.statusOperation = true;
+
+                return Json(retorno);
+            }
+            catch (Exception ex)
+            {
+                retorno.statusMensagem = ex.Message;
+            }
+
+            return Json(retorno);
+        }
+
+        [Route("api/[controller]/RetornaValorEmAberto")]
+        [HttpGet()]
+        public JsonResult RetornaValorEmAberto()
+        {
+            ResultServiceList retorno = new ResultServiceList();
+            try
+            {
+                retorno.valor = sqlServices.RetornaValorEmAberto(this.contexto.idOrganizacao.ToString());
+                retorno.statusOperation = true;
+
+                return Json(retorno);
+            }
+            catch (Exception ex)
+            {
+                retorno.statusMensagem = ex.Message;
+            }
+
+            return Json(retorno);
+        }
+
+        [Route("api/[controller]/RetornaValorRecebidoCliente")]
+        [HttpGet("{id}")]
+        public JsonResult RetornaValorRecebidoCliente(string id)
+        {
+            ResultServiceList retorno = new ResultServiceList();
+            try
+            {
+                retorno.valor = sqlServices.RetornaValorRecebidoCliente(id);
                 retorno.statusOperation = true;
 
                 return Json(retorno);

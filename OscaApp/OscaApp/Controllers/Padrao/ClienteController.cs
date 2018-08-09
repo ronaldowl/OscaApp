@@ -128,7 +128,7 @@ namespace OscaApp.Controllers
                         modelo.atendimentos = atendimentoData.GetAllByIdCliente(new Guid(id));
 
                         //Preenche informações do grid de Contas Receber
-                        modelo.contasReceber = contasReceberData.GetAllByIdCliente(new Guid(id));
+                        modelo.contasReceber = contasReceberData.GetAllByIdCliente(new Guid(id),0);
 
                         //Preenche informações do grid de Balcao
                         modelo.balcaoVendas =  balcaoVendasData.GetAllByIdCliente(new Guid(id));

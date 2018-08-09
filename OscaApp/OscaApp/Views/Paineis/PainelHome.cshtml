@@ -56,73 +56,53 @@
         <div id="agendamentos">
         </div>
     </div>
-    @*<div id="osc_atalhos">
-            <table>
-                <tr>
-                    <td >
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label>
-                            <button id="osc_fechar" type="button" class="btn btn-info  btn-lg fa fa-2x fa-users" value="Clientes" onclick="location.href='@Url.Action("GridCliente", "Cliente" , new {view = 1 })'"></button>
-                        </label>
-                    </td>
-                </tr>
+    <div id="osc_atalhos">
+        <table>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_produtos" type="button" class="btn btn-info  btn-lg fa fa-2x fa-cubes" onclick="location.href='@Url.Action("GridProduto", "Produto" , null)'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_receber" type="button" class="btn btn-info  btn-lg fa fa-2x fa-envelope-open-o" onclick="location.href='@Url.Action("GridContasReceber", "ContasReceber" , null)'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_vendas" type="button" class="btn btn-info  btn-lg fa fa-2x fa-cart-plus" onclick="location.href='@Url.Action("GridBalcaoVendas", "BalcaoVendas" , null)'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_retirada" type="button" class="btn btn-info  btn-lg fa fa-2x fa-truck" onclick="location.href='@Url.Action("GridPedidoRetirada", "PedidoRetirada" , null)'"></button>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        <button id="osc_calendario" type="button" class="btn btn-info  btn-lg fa fa-2x fa-calendar" onclick="location.href='@Url.Action("Mes", "Calendario" , null)'"></button>
+                    </label>
+                </td>
+            </tr>
+        </table>
 
-            </table>
-
-        </div>*@
+        </div>
 </div>
 <br />
 
 <div class="row" style="align-content:center">
     <div class="col-md-8" id="comunicados">
+    </div>
+    <div class="col-md-4" id="resumoFinanceiro">
     </div>
 </div>
 <div style="height:400px"></div>
@@ -133,8 +113,8 @@
     CarregaAgendamentos();
     CarregaContasReceber();
     CarregaContasPagar();
-
     CarregaVolumetria();
+    CarregaResumoFinanceiro();
     function CarregaComunicados() {
         $.ajax("/Comunicado/QuadroComunicadoResumido").done(function (data) {
             $("#comunicados").html(data);
@@ -163,6 +143,11 @@
     function CarregaVolumetria() {
         $.ajax("/Volumetria/VolumetriaResumo").done(function (data) {
             $("#volumetria").html(data);
+        });
+    }
+    function CarregaResumoFinanceiro() {
+        $.ajax("/componentes/ResumoFinanceiro").done(function (data) {
+            $("#resumoFinanceiro").html(data);
         });
     }
 </script>

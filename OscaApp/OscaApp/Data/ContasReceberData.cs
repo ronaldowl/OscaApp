@@ -158,11 +158,55 @@ namespace OscaApp.Data
             return HelperAssociate.ConvertToGridContasReceber(itens.ToList());
         }
 
-        public List<ContasReceber> GetAllByIdCliente(Guid idCliente)
+        public List<ContasReceber> GetAllByIdCliente(Guid idCliente, int view)
         {
-            List<ContasReceber> retorno = new List<ContasReceber>();
-            retorno = db.ContasR.FromSql("SELECT * FROM ContasReceber WHERE  idCliente = '" + idCliente.ToString() + "'").ToList();
-            return retorno;
+            List<ContasReceber> itens = new List<ContasReceber>();
+
+
+            //Contas em Aberto
+            if (view == 0)
+            {
+                itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where statusContaReceber in (0,3) and idcliente = '" + idCliente.ToString() + "'").ToList();
+            }
+
+            //Contas Fechadas
+            if (view == 1)
+            {
+                itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where statusContaReceber in (1,2) and  idcliente = '" + idCliente.ToString() + "'").ToList();
+            }
+
+            //Todos Contas   
+            if (view == 2)
+            {
+                itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where  idcliente = '" + idCliente.ToString() + "'").ToList();
+
+            }
+
+            //Todos Contas  a receber hoje 
+            if (view == 3)
+            {
+                itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where  idcliente = '" + idCliente.ToString() + "'").ToList();
+
+                IEnumerable<ContasReceber> retorno = itens;
+
+                retorno = from u in retorno where (u.dataPagamento.Date == DateTime.Now.Date) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado) select u;
+
+                itens = retorno.ToList();
+            }
+
+            //Todos Contas  a receber em Atraso
+            if (view == 4)
+            {
+                itens = db.ContasR.FromSql("SELECT * FROM ContasReceber  where  idcliente = '" + idCliente.ToString() + "'").ToList();
+
+                IEnumerable<ContasReceber> retorno = itens;
+
+                retorno = from u in retorno where (u.dataPagamento.Date < DateTime.Now.Date) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado) select u;
+
+                itens = retorno.ToList();
+            }
+
+            return itens;
 
         }
         public List<ContasReceber> GetAllDia(Guid idOrg)

@@ -8,7 +8,7 @@ namespace OscaApp.RulesServices
 {
     public static class ContasReceberRules
     {
-        public static bool ContasReceberCreate(ContasReceberViewModel entrada,out ContasReceber contasReceber, ContextPage contexto )
+        public static bool ContasReceberCreate(ContasReceberViewModel entrada, out ContasReceber contasReceber, ContextPage contexto)
         {
             contasReceber = new ContasReceber();
             contasReceber = entrada.contasReceber;
@@ -16,7 +16,7 @@ namespace OscaApp.RulesServices
             if (entrada.cliente != null) contasReceber.idCliente = entrada.cliente.id;
 
             contasReceber.codigo = AutoNumber.GeraCodigo(21, contexto.idOrganizacao);
-         
+
             if (contasReceber.codigo != null)
             {
                 //************ Objetos de controle de acesso ******************
@@ -30,13 +30,13 @@ namespace OscaApp.RulesServices
                 //************ FIM Objetos de controle de acesso ***************
 
                 return true;
-            }                
+            }
             return false;
         }
 
         public static bool ContasReceberCreate(ContasReceber entrada, IContasReceberData contaReceberData, ContextPage contexto)
         {
-            
+
             entrada.codigo = AutoNumber.GeraCodigo(21, contexto.idOrganizacao);
 
             if (entrada.codigo != null)
@@ -81,7 +81,7 @@ namespace OscaApp.RulesServices
             //************ FIM Objetos de controle de acesso ***************
             return true;
         }
-        
+
         public static void GravaParcela(BalcaoVendas balcaoVendas, IContasReceberData contaReceberData, ContextPage contexto, OrgConfig orgConfig)
         {
             decimal valorParcela = balcaoVendas.valorTotal / balcaoVendas.parcelas;
@@ -90,7 +90,7 @@ namespace OscaApp.RulesServices
 
             int parcela = 1;
             for (int i = 0; i < balcaoVendas.parcelas; i++)
-            {               
+            {
 
 
                 ContasReceber contaReceber = new ContasReceber();
@@ -98,7 +98,9 @@ namespace OscaApp.RulesServices
                 contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
                 contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
                 contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
-    
+
+                if (balcaoVendas.idCliente != Guid.Empty) contaReceber.idCliente = balcaoVendas.idCliente;
+
                 contaReceber.numeroReferencia = balcaoVendas.codigo;
 
                 if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Boleto || balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.Cheque)
@@ -107,7 +109,7 @@ namespace OscaApp.RulesServices
                     contaReceber.dataPagamento = new DateTime(DateTime.Now.Year, DateTime.Now.Month, balcaoVendas.diaVencimento);
                     contaReceber.dataPagamento = contaReceber.dataPagamento.AddMonths(parcela);
                     ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
-                }              
+                }
 
                 if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoCredito)
                 {
@@ -123,7 +125,7 @@ namespace OscaApp.RulesServices
                         contaReceber.dataPagamento = dataCredito;
 
                     }
-                    
+
                     ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
                 }
 
@@ -132,22 +134,41 @@ namespace OscaApp.RulesServices
         }
 
         public static void GravaDebito(BalcaoVendas balcaoVendas, IContasReceberData contaReceberData, ContextPage contexto, OrgConfig orgConfig)
-        {                   
-                ContasReceber contaReceber = new ContasReceber();
-                contaReceber.valor = balcaoVendas.valorTotal;
-                contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
-                contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
-                contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
+        {
+            ContasReceber contaReceber = new ContasReceber();
+            contaReceber.valor = balcaoVendas.valorTotal;
+            contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
+            contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
+            contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
 
-                contaReceber.numeroReferencia = balcaoVendas.codigo; 
+            if (balcaoVendas.idCliente != Guid.Empty) contaReceber.idCliente = balcaoVendas.idCliente;
 
-                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito)
-                {
-                    contaReceber.titulo = "Débito - Venda Balcão";
-                    contaReceber.dataPagamento = DateTime.Now;
-                    contaReceber.dataPagamento = contaReceber.dataPagamento.AddDays(orgConfig.qtdDiasCartaoDebito);
-                    ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
-                }   
+            contaReceber.numeroReferencia = balcaoVendas.codigo;
+
+            if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito)
+            {
+                contaReceber.titulo = "Débito - Venda Balcão";
+                contaReceber.dataPagamento = DateTime.Now;
+                contaReceber.dataPagamento = contaReceber.dataPagamento.AddDays(orgConfig.qtdDiasCartaoDebito);
+                ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
+            }
+        }
+        public static void GravaConsignado(BalcaoVendas balcaoVendas, IContasReceberData contaReceberData, ContextPage contexto, OrgConfig orgConfig)
+        {
+            ContasReceber contaReceber = new ContasReceber();
+            contaReceber.valor = balcaoVendas.valorTotal;
+            contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
+            contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
+            contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
+
+            if (balcaoVendas.idCliente != Guid.Empty) contaReceber.idCliente = balcaoVendas.idCliente;
+
+            contaReceber.numeroReferencia = balcaoVendas.codigo;
+            contaReceber.titulo = "Consignado - Venda Balcão";
+            contaReceber.dataPagamento = DateTime.Now;
+            contaReceber.dataPagamento = contaReceber.dataPagamento.AddDays(1);
+            ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
+
         }
     }
 }

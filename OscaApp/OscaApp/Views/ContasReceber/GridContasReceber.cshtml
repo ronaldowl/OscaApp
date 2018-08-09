@@ -21,13 +21,13 @@
                                             <label>Filtros</label>
                                             <div class="input-group">
                                                 &nbsp;<div class="col-2">
-                                                          <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
-                                                              <option value="0" selected="">Todas em Aberto</option>
-                                                              <option value="1">Todas Fechadas</option>
-                                                              <option value="2">Todas Contas</option>
-                                                              <option value="3">Todas Contas de Hoje</option>
-                                                              <option value="4">Todas Contas em Atraso</option>
-                                                          </select>
+                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                        <option value="0" selected="">Todas em Aberto</option>
+                                                        <option value="1">Todas Fechadas</option>
+                                                        <option value="2">Todas Contas</option>
+                                                        <option value="3">Todas Contas de Hoje</option>
+                                                        <option value="4">Todas Contas em Atraso</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>&nbsp;
@@ -42,6 +42,10 @@
                                         &nbsp;&nbsp;
                                         <label>
                                             <button id="osc_recarregar" type="button" class="btn btn-info btn-sm fa fa-remove" value="Limpar" onclick="RecarregarGridContaReceber()"> <span>Limpar</span></button>
+                                        </label>
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <label style="font-weight:bold">
+                                            Em Aberto R$<input id="valorEmAberto" type="text" style="width:120px; height:30px; font-weight:bold; background-color:aquamarine" disabled="disabled" />
                                         </label>
 
                                     </div>
@@ -72,20 +76,22 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                        <tr style="cursor:pointer;font-size:12px" id="@item.contasReceber.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.contasReceber.id })'">
-                            <td><i class="fa fa-envelope-open-o"></i></td>
-                            <td>@Html.ActionLink(item.contasReceber.codigo.ToString(), "FormUpdateContasReceber", new { id = item.contasReceber.id })</td>
-                            <td>@item.contasReceber.numeroReferencia</td>
-                            <td>@item.contasReceber.titulo</td>
-                            <td>@if(item.cliente != null){@item.cliente.nomeCliente; }</td>
-                            <td>@item.contasReceber.origemContaReceber</td>
-                            <td>@item.contasReceber.tipoLancamento</td>
-                            <td>@item.contasReceber.criadoEm.ToShortDateString()</td>
-                            <td>@item.contasReceber.dataPagamento.ToShortDateString()</td>
-                            <td>R$@item.contasReceber.valor.ToString("N2")</td>
-                            <td>@item.contasReceber.statusContaReceber</td>
+                            <tr style="cursor:pointer;font-size:12px" id="@item.contasReceber.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.contasReceber.id })'">
+                                <td><i class="fa fa-envelope-open-o"></i></td>
+                                <td>@Html.ActionLink(item.contasReceber.codigo.ToString(), "FormUpdateContasReceber", new { id = item.contasReceber.id })</td>
+                                <td>@item.contasReceber.numeroReferencia</td>
+                                <td>@item.contasReceber.titulo</td>
+                                <td>@if (item.cliente != null)
+                                {@item.cliente.nomeCliente;
+                            }</td>
+                                <td>@item.contasReceber.origemContaReceber</td>
+                                <td>@item.contasReceber.tipoLancamento</td>
+                                <td>@item.contasReceber.criadoEm.ToShortDateString()</td>
+                                <td>@item.contasReceber.dataPagamento.ToShortDateString()</td>
+                                <td>R$@item.contasReceber.valor.ToString("N2")</td>
+                                <td>@item.contasReceber.statusContaReceber</td>
 
-                        </tr>
+                            </tr>
                         }
                     </table>
 
@@ -106,6 +112,8 @@
 <div style="height:500px"></div>
 
 <script src="~/lib/OscaJs/osc_contaReceber.js"></script>
+<script src="~/lib/OscaJs/osc_servicesWeb.js"></script>
+
 <script>
 
     var url = window.location.search.replace("?", "");
@@ -121,7 +129,7 @@
     if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
     if (array.valor == "view=4") { $("#osc_filtro").val("4"); }
 
-
+    ValorEmAberto();
 
     function OnChangeFiltro() {
 

@@ -329,24 +329,3 @@ function desabilitaCampos_BalcaoView(status) {
 
 
 
-function ValorDiario() {
-
-    var url = '/API/BalcaoVendasAPI/RetornaValorVendaDiario';
-
-    var valorVenda = 0;
-
-    $.ajax({
-        url: url,
-        type: "GET",      
-        datatype: 'json',
-        ContentType: 'application/json;utf-8'
-    }).done(function (resp) {
-
-        if (resp.statusOperation == true) {
-
-            $('#valorDiario').val(FormataDecimal(parseFloat(resp.valor), 2, ',', '.'));
-        } 
-
-    });
-
-}
