@@ -77,7 +77,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                        <input id="osc_codigo" asp-for="@Model.contasReceber.titulo" class="form-control" type="text" required="required">
+                                        <input id="osc_titulo" asp-for="@Model.contasReceber.titulo" class="form-control" type="text" required="required">
                                     </div>
                                 </div>
                             </div>
@@ -85,26 +85,27 @@
                                 <label class="control-label" style="color:deepskyblue">Cliente</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
-                                        <span class="fa fa-user-o fa-2x"></span>
+                                        <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>
                                     </span>
                                     <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" required="required" autocomplete="off">
                                     <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                     <span class="input-group-btn ">
-                                        <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()">
+                                        <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="osc_botaolookupcliente">
                                             <span class="fa fa-search"></span>
                                         </button>
                                     </span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" style="color:red">Valor *</label>
+                                <label>Número de Ref</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                        <input asp-for="@Model.contasReceber.valor" class="form-control" type="text" id="osc_valor" required="required" placeholder="0,00" onblur="onBlur(this)">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_numeroReferencia" asp-for="@Model.contasReceber.numeroReferencia" class="form-control" type="text" />
                                     </div>
                                 </div>
                             </div>
+                      
 
 
                         </div>
@@ -137,19 +138,6 @@
                                     </select>
                                 </div>
                             </div>
-
-
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Número de Ref</label>
-                                <div class="inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                        <input id="osc_numeroReferencia" asp-for="@Model.contasReceber.numeroReferencia" class="form-control" type="text" />
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label>Anotação</label>
                                 <div class="input-group">
@@ -159,6 +147,37 @@
                                     <textarea id="osc_anotacao" asp-for="@Model.contasReceber.anotacao" class="form-control" rows="5" cols="40" placeholder="digite uma anotação"></textarea>
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" style="color:red">Valor*</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.contasReceber.valor" class="form-control" type="text" id="osc_valor" required="required" placeholder="0,00"  readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="color:red">Valor Pago*</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.contasReceber.valorPago" class="form-control" type="text" id="osc_valorPago" required="required" placeholder="0,00"  readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" style="color:red">Valor Restante*</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
+                                        <input asp-for="@Model.contasReceber.valorRestante" class="form-control" type="text" id="osc_valorRestante" required="required" readonly="readonly">
+                                    </div>
+                                </div>
+                            </div>
+                        
 
                         </div>
                         <div class="col-md-3">
@@ -181,7 +200,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label" style="color:red">Data Recebimento*</label>
+                                <label class="control-label" style="color:red">Data Fechamento*</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;

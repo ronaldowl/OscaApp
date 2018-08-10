@@ -53,6 +53,8 @@ namespace OscaApp.Data
                 db.Attach(modelo);
                 db.Entry(modelo).Property("titulo").IsModified = true;
                 db.Entry(modelo).Property("valor").IsModified = true;
+                db.Entry(modelo).Property("valorRestante").IsModified = true;
+                db.Entry(modelo).Property("valorPago").IsModified = true;
                 db.Entry(modelo).Property("anotacao").IsModified = true;
                 db.Entry(modelo).Property("tipoLancamento").IsModified = true;
                 db.Entry(modelo).Property("origemContaReceber").IsModified = true;
@@ -64,7 +66,8 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
                 db.Entry(modelo).Property("dataRecebimento").IsModified = true;
-
+                db.Entry(modelo).Property("valorRestante").IsModified = true;
+                
 
                 db.SaveChanges();
             }
@@ -80,12 +83,17 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
 
-
+                db.Entry(modelo).Property("valorRestante").IsModified = true;
+                db.Entry(modelo).Property("valorPago").IsModified = true;
                 db.Entry(modelo).Property("dataRecebimento").IsModified = true;
                 db.Entry(modelo).Property("statusContaReceber").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
+              
+
+
+                
 
                 db.SaveChanges();
             }

@@ -3,6 +3,9 @@ function OnLoad_ContaReceber() {
     Calendario("#osc_dataPagamento");
     
     var status = document.getElementById("osc_statusContaReceber").value; 
+    var tipoLancamento = document.getElementById("osc_tipoLancamento").value; 
+
+    ControleCamposAutomaticos(tipoLancamento)
     desabilitaCampos_ContaReceber(status)
 }
 
@@ -23,6 +26,26 @@ function desabilitaCampos_ContaReceber(status) {
         $("#osc_reabrir").hide();  
 
     }
+}
+
+function ControleCamposAutomaticos(Lancamento) {
+
+    if (Lancamento == 1  ) {
+
+       //ProtegeCampo
+        $("#osc_valor").prop("readonly", true);
+        $("#osc_origemContaReceber").prop("readonly", true);
+        $("#osc_titulo").prop("readonly", true);
+        $("#osc_botaolookupcliente").prop("readonly", true);
+        $("#osc_clienteIdName").prop("readonly", true);
+        $("#osc_numeroReferencia").prop("readonly", true);
+
+
+
+        
+
+
+    }  
 }
 
 function OpenLookupCliente() {

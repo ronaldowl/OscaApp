@@ -30,13 +30,13 @@ namespace OscaApp.Controllers
 
         public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
-            this.contasReceberData  = new ContasReceberData(db);
+            this.contasReceberData = new ContasReceberData(db);
             //this.balcaoVendasData   = new BalcaoVendasData(db);
             //this.pedidoData         = new PedidoData(db);
             //this.ordemServicoData   = new OrdemServicoData(db);
             //this.atendimentoData    = new AtendimentoData(db);
-            this.sqlData            = _sqlData;
-            this.contexto           = new ContextPage().ExtractContext(httpContext);
+            this.sqlData = _sqlData;
+            this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         [TempData]
@@ -116,17 +116,32 @@ namespace OscaApp.Controllers
             {
                 if (ContasReceberRules.ContasReceberUpdate(entrada, out modelo))
                 {
-                    contasReceberData.Update(modelo);
+
 
                     if (entrada.contasReceber.statusContaReceber == CustomEnumStatus.StatusContaReceber.recebido)
                     {
-                                              
-                     FaturamentoRules.InsereFaturamento((int)entrada.contasReceber.origemContaReceber, entrada.contasReceber.id, entrada.contasReceber.valor, this.contexto.idOrganizacao);
-                        
- 
+
+                        //Valida se houve Pagamento total
+                        if (entrada.contasReceber.valorPago == entrada.contasReceber.valor)
+                        {
+                            contasReceberData.Update(modelo);
+
+                            FaturamentoRules.InsereFaturamento((int)entrada.contasReceber.origemContaReceber, entrada.contasReceber.id, entrada.contasReceber.valor, this.contexto.idOrganizacao);
+                        }
+                        else
+                        {
+                            StatusMessage = "Valor Pago inconsistente, favor verificar";
+
+                        }
+                    }
+                    else
+                    {
+
+                        contasReceberData.Update(modelo);
+                        StatusMessage = "Registro Atualizado com Sucesso!";
                     }
 
-                    StatusMessage = "Registro Atualizado com Sucesso!";
+
 
                     return RedirectToAction("FormUpdateContasReceber", new { id = modelo.id.ToString() });
                 }
@@ -145,14 +160,14 @@ namespace OscaApp.Controllers
             IEnumerable<ContasReceberGridViewModel> retorno;
 
             ViewBag.viewContexto = view;
-           
-            retorno = contasReceberData.GetAll(contexto.idOrganizacao, view);         
+
+            retorno = contasReceberData.GetAll(contexto.idOrganizacao, view);
 
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
-                          where u.contasReceber.titulo.ToLower().Contains(filtro.ToLower()) || u.contasReceber.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.contasReceber.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)     
-                         select u;
+                          where u.contasReceber.titulo.ToLower().Contains(filtro.ToLower()) || u.contasReceber.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.contasReceber.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)
+                          select u;
             }
 
             retorno = retorno.OrderByDescending(x => x.contasReceber.dataPagamento);
@@ -162,7 +177,7 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<ContasReceberGridViewModel>(Page, 50));
         }
 
-        public ViewResult GridContasReceberCliente(string idCliente,int page, string filtro, int view)
+        public ViewResult GridContasReceberCliente(string idCliente, int page, string filtro, int view)
         {
             IEnumerable<ContasReceber> retorno;
             retorno = contasReceberData.GetAllByIdCliente(new Guid(idCliente), view);
@@ -238,21 +253,21 @@ namespace OscaApp.Controllers
             return View();
         }
 
-        public ViewResult GridContasReceberDia( )
+        public ViewResult GridContasReceberDia()
         {
             IEnumerable<ContasReceber> retorno;
-                  
-           
-           retorno = (IEnumerable < ContasReceber > )contasReceberData.GetAllDia(contexto.idOrganizacao);
-          
-                         retorno = from u in retorno
-                          where
-                            (u.dataPagamento.Date == DateTime.Now.Date ) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado) 
-                          
-                          select u;           
+
+
+            retorno = (IEnumerable<ContasReceber>)contasReceberData.GetAllDia(contexto.idOrganizacao);
+
+            retorno = from u in retorno
+                      where
+                        (u.dataPagamento.Date == DateTime.Now.Date) & (u.statusContaReceber == CustomEnumStatus.StatusContaReceber.agendado || u.statusContaReceber == CustomEnumStatus.StatusContaReceber.atrasado)
+
+                      select u;
 
             retorno = retorno.OrderByDescending(x => x.dataPagamento);
-            
+
             return View(retorno.ToPagedList<ContasReceber>(1, 10));
         }
 

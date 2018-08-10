@@ -61,37 +61,44 @@
                         <thead class="thead-light">
                             <tr>
                                 <th></th>
-                                <th>Código</th>
-                                <th>Referência</th>
-                                <th>Título</th>
-                                <th>Cliente</th>
-                                <th>Origem</th>
-                                <th>Tipo Lancamento</th>
-                                <th>Data Lançamento</th>
-                                <th>Data Prevista</th>
-                                <th>Valor</th>
+                                <th style="width:70px" >Código</th>
+                                <th style="width:90px">Referência</th>
+                                <th style="width:250px">Título</th>
+                                <th style="width:250px">Cliente</th>
+                                <th style="width:90px">Origem</th>
+                                <th style="width:70px" >Tipo</th>
+                                <th style="width:150px">Data Lançamento</th>
+                                <th style="width:150px">Data Prevista</th>
+                                <th style="width:50px">Valor</th>
+                                <th style="width:100px">Valor Pago</th>
+                                <th style="width:140px">Valor Restante</th>
+
                                 <th>Status</th>
 
                             </tr>
                         </thead>
                         @foreach (var item in Model)
                         {
-                            <tr style="cursor:pointer;font-size:12px" id="@item.contasReceber.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.contasReceber.id })'">
-                                <td><i class="fa fa-envelope-open-o"></i></td>
-                                <td>@Html.ActionLink(item.contasReceber.codigo.ToString(), "FormUpdateContasReceber", new { id = item.contasReceber.id })</td>
-                                <td>@item.contasReceber.numeroReferencia</td>
-                                <td>@item.contasReceber.titulo</td>
-                                <td>@if (item.cliente != null)
+                        <tr style="cursor:pointer;font-size:12px" id="@item.contasReceber.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.contasReceber.id })'">
+                            <td><i class="fa fa-envelope-open-o"></i></td>
+                            <td>@Html.ActionLink(item.contasReceber.codigo.ToString(), "FormUpdateContasReceber", new { id = item.contasReceber.id })</td>
+                            <td>@item.contasReceber.numeroReferencia</td>
+                            <td>@item.contasReceber.titulo</td>
+                            <td>
+                                @if (item.cliente != null)
                                 {@item.cliente.nomeCliente;
-                            }</td>
-                                <td>@item.contasReceber.origemContaReceber</td>
-                                <td>@item.contasReceber.tipoLancamento</td>
-                                <td>@item.contasReceber.criadoEm.ToShortDateString()</td>
-                                <td>@item.contasReceber.dataPagamento.ToShortDateString()</td>
-                                <td>R$@item.contasReceber.valor.ToString("N2")</td>
-                                <td>@item.contasReceber.statusContaReceber</td>
+                            }
+                            </td>
+                            <td>@item.contasReceber.origemContaReceber</td>
+                            <td>@item.contasReceber.tipoLancamento</td>
+                            <td>@item.contasReceber.criadoEm.ToShortDateString()</td>
+                            <td>@item.contasReceber.dataPagamento.ToShortDateString()</td>
+                            <td>R$@item.contasReceber.valor.ToString("N2")</td>
+                            <td>R$@item.contasReceber.valorPago.ToString("N2")</td>
+                            <td>R$@item.contasReceber.valorRestante.ToString("N2")</td>
+                            <td>@item.contasReceber.statusContaReceber</td>
 
-                            </tr>
+                        </tr>
                         }
                     </table>
 

@@ -21,6 +21,13 @@ namespace OscaFramework.Models
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valor { get; set; }
 
+
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        public decimal valorPago { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        public decimal valorRestante { get; set; }
+
         public CustomEnum.OrigemContaReceber origemContaReceber { get; set; }
         public CustomEnum.TipoLancamento tipoLancamento { get; set; }
         public CustomEnumStatus.StatusContaReceber statusContaReceber { get; set; }

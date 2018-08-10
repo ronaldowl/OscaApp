@@ -120,6 +120,7 @@ function SomaTotal() {
     var totalDesconto = 0;
     var tipoDesconto = $('#osc_tipoDesconto').val();
     var valorDesconto = $('#osc_valorDesconto').val();
+    valorDesconto = parseFloat(PrepCalcDecimal(valorDesconto));
 
     $('#produtosVendas > tbody tr .somaTD').each(function (i) {  
                 
@@ -253,9 +254,12 @@ function CalcularParcela() {
     var parcelas = $('#osc_parcelas').val();
     var calcResult = 0;
 
+    valorTotal = parseFloat(PrepCalcDecimal(valorTotal));
+
+
     calcResult = valorTotal / parcelas;
 
-    $('#osc_valorParcela').val(calcResult);
+    $('#osc_valorParcela').val(FormataDecimal(calcResult));
 }
 
 function HabilitaParcela() {
