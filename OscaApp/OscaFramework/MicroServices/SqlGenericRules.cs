@@ -309,5 +309,40 @@ namespace OscaFramework.MicroServices
             return retorno;
 
         }
+        public string RetornaValorDiarioVendaDinheiro(Guid idOrg)
+        {
+            string retorno = String.Empty;
+
+            string SelectProduto = "Select isnull(sum(valorTotal),0) from BalcaoVendas where tipoPagamento = 1 and Cast(criadoEm as date) = Cast(getdate() as date) and StatusBalcaoVendas = 1  and idOrganizacao =  '" + idOrg + "'";
+
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = SelectProduto,
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    var valor = _Command.ExecuteScalar();
+                    retorno = valor.ToString();
+
+                    Connection.Close();
+
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+
+        }
+
     }
 }

@@ -24,6 +24,96 @@ namespace OscaFramework.MicroServices
             this.Configuration = Configuration; 
             this.conectService = Configuration.GetConnectionString("databaseService");
         }
+        public List<Report> RetornaReportsNativo()
+        {
+            List<Report> retorno = new List<Report>();
+            SqlDataReader dataReader;
+            try
+            {
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "Select * from Report where tipoReport = 0",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Report item = new Report();
+                            item.id = new Guid(dataReader["id"].ToString());                    
+                            item.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
+                            item.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            item.nomeAmigavel = dataReader["nomeAmigavel"].ToString();
+                            item.nomeRDL = dataReader["nomeRDL"].ToString();
+                            item.tipoReport = (CustomEnum.TipoReport)Convert.ToInt32(dataReader["tiporeport"].ToString());
+                            item.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
+
+                            retorno.Add(item);
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
+        public List<Report> RetornaReportsCustom(Guid idOrganizacao)
+        {
+            List<Report> retorno = new List<Report>();
+            SqlDataReader dataReader;
+            try
+            {
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "Select * from Report where tipoReport = 1 and idOrganizacao = '" + idOrganizacao + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            Report item = new Report();
+                            item.id = new Guid(dataReader["id"].ToString());
+                            item.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
+                            item.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            item.nomeAmigavel = dataReader["nomeAmigavel"].ToString();
+                            item.nomeRDL = dataReader["nomeRDL"].ToString();
+                            item.tipoReport = (CustomEnum.TipoReport)Convert.ToInt32(dataReader["tiporeport"].ToString());
+                            item.idOrganizacao = new Guid(dataReader["idOrganizacao"].ToString());
+
+                            retorno.Add(item);
+                        }
+                    }
+                    Connection.Close();
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
         public Faturamento RetornaFaturamento(string id)
         {
             Faturamento retorno = new Faturamento();

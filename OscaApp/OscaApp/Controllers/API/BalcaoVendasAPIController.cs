@@ -165,5 +165,25 @@ namespace OscaAPI.Controllers
 
             return Json(retorno);
         }
+
+        [Route("api/[controller]/RetornaValorVendaDiarioDinheiro")]
+        [HttpGet()]
+        public JsonResult RetornaValorVendaDiarioDinheiro()
+        {
+            ResultServiceList retorno = new ResultServiceList();
+            try
+            {
+                retorno.valor = sqlServices.RetornaValorDiarioVendaDinheiro(this.contexto.idOrganizacao);
+                retorno.statusOperation = true;
+
+                return Json(retorno);
+            }
+            catch (Exception ex)
+            {
+                retorno.statusMensagem = ex.Message;
+            }
+
+            return Json(retorno);
+        }
     }
 }

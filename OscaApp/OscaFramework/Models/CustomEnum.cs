@@ -146,6 +146,11 @@ namespace OscaFramework.Models
             manual = 0,
             automatico = 1            
         }
+        public enum TipoReport
+        {
+            nativo = 0,
+            custom = 1
+        }
 
         public enum OrigemContaReceber
         {
@@ -159,8 +164,23 @@ namespace OscaFramework.Models
         public enum OrigemContaPagar
         {
             Fornecedor = 0,
-            DespesaEmpresa = 1,
-            Outros = 2             
+            DespesaEmpresa = 1,            
+            Outros = 2,             
+            Agua = 3,
+            Luz = 4,
+            TvAssinatura = 5,
+            Correios = 6,
+            Vestuario = 7,
+            Alimentacao = 8,
+            Combustivel = 9,
+            ManutencaoVeiculo =10,
+            PrestadorServico = 11,
+            Salario = 12,
+            Aluguel = 13,
+            Marketing = 14,
+            Gas  = 15
+
+
         }
 
         public enum Sexo
@@ -230,7 +250,11 @@ namespace OscaFramework.Models
             Boleto = 6,
             Online = 7 ,
             Tranferencia = 8,
-            Outros = 9
+            Outros = 9,
+            DebitoCredito = 10,
+            DinheiroCredito = 11,
+            TransferenciaCredito = 12,
+            ChequeCredito = 13
         }
         public enum metodoEntrega
         {
@@ -485,7 +509,7 @@ namespace OscaFramework.Models
             LocalProduto = 36,
             MovimentacaoProduto = 37,
             DetalheMovimentacaoProduto = 38,
-
+            Report = 39,
             Organizacao = 1000
 
         }

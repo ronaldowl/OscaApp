@@ -17,7 +17,7 @@ function ValorEmAbertoCliente(idCli) {
 
         if (resp.statusOperation == true) {
 
-            $('#valorEmAberto').val(FormataDecimal(parseFloat(resp.valor), 2, ',', '.'));
+            $('#valorEmAberto').val(FormatMoneyCompleto(resp.valor));
         }
 
     });
@@ -40,7 +40,7 @@ function ValorEmAberto() {
 
         if (resp.statusOperation == true) {
 
-            $('#valorEmAberto').val(FormataDecimal(parseFloat(resp.valor), 2, ',', '.'));
+            $('#valorEmAberto').val(FormatMoneyCompleto(resp.valor));
         }
 
     });
@@ -65,7 +65,7 @@ function ValorRecebidoCliente(idCli) {
 
         if (resp.statusOperation == true) {
 
-            $('#valorRecebido').val(FormataDecimal(parseFloat(resp.valor), 2, ',', '.'));
+            $('#valorRecebido').val(FormatMoneyCompleto(resp.valor));
         }
 
     });
@@ -87,7 +87,29 @@ function ValorDiario() {
 
         if (resp.statusOperation == true) {
 
-            $('#valorDiario').val(FormataDecimal(parseFloat(resp.valor), 2, ',', '.'));
+            $('#valorDiario').val(FormatMoneyCompleto(resp.valor));
+        }
+
+    });
+
+}
+
+function ValorDiarioDinheiro() {
+
+    var url = '/API/BalcaoVendasAPI/RetornaValorVendaDiarioDinheiro';
+
+    var valorVenda = 0;
+
+    $.ajax({
+        url: url,
+        type: "GET",
+        datatype: 'json',
+        ContentType: 'application/json;utf-8'
+    }).done(function (resp) {
+
+        if (resp.statusOperation == true) {
+
+            $('#valorDiarioDinheiro').val(FormatMoneyCompleto(resp.valor));
         }
 
     });

@@ -33,9 +33,18 @@ namespace OscaApp.RulesServices
         public static bool ContasPagarUpdate(ContasPagarViewModel entrada, out ContasPagar contasPagar)
         {
             contasPagar = new ContasPagar();
+            contasPagar = entrada.contasPagar;
+
+            if (entrada.contasPagar.statusContaPagar == CustomEnumStatus.StatusContaPagar.pago)
+                contasPagar.dataFechamento = DateTime.Now;
+
+
+            if (entrada.contasPagar.statusContaPagar == CustomEnumStatus.StatusContaPagar.agendado)
+                contasPagar.dataFechamento = new DateTime();
+
 
             //************ Objetos de controle de acesso *******************
-            contasPagar = entrada.contasPagar;
+
             contasPagar.modificadoEm = DateTime.Now;
             contasPagar.modificadoPor = entrada.contexto.idUsuario;
             contasPagar.modificadoPorName = entrada.contexto.nomeUsuario;

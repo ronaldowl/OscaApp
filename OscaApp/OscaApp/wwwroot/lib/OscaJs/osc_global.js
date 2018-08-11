@@ -185,3 +185,9 @@ function formatCPF(valor) {
     var traco = "-";
     return cpf_Pt1 + ponto + cpf_Pt2 + ponto + cpf_Pt3 + traco + cpf_Pt4;
 }
+
+function FormatMoneyCompleto(valor) {
+
+    return FormatMoney(parseFloat(PrepCalcDecimal(valor)));
+
+}

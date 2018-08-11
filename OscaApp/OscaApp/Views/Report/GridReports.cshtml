@@ -1,0 +1,104 @@
+﻿@model OscaApp.ViewModels.GridViewModels.ReportGridViewModel
+
+<div class="row">
+    <div class="col-md-4 offset-2">
+
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Lista de Relatórios Nativo: &nbsp;&nbsp;</h5>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover   table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Nome</th>
+
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model.reportsNativo)
+                        {
+                        <tr style="font-size:12px" onclick="OpenReport('@item.nomeRDL')">
+                            <td><i class="fa fa-1x fa-university"></i></td>
+                            <td>@item.nomeAmigavel</td>
+
+                        </tr>
+                        }
+                    </table>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <form class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold">Lista de Relatórios Customizados: &nbsp;&nbsp;</h5>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <table class="table table-hover   table-bordered table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th></th>
+                                <th>Nome</th>
+                            </tr>
+                        </thead>@if(Model.reportsCustomizado != null)
+                        {
+                            foreach (var item in Model.reportsCustomizado)
+                            {
+                            <tr style="font-size:12px" onclick="OpenReport('@item.nomeRDL')">
+                                <td><i class="fa fa-1x fa-university"></i></td>
+                                <td>@item.nomeAmigavel</td>
+                            </tr>
+                            }
+                        }
+                    </table>
+
+                </div>
+            </div>
+            <div class="card-footer">
+                <table>
+                    <tr></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="height:500px"></div>
+<script>
+      function OpenReport(nome)
+       {
+           window.open("/Report/OpenReport?nome=" + nome, "Print", "width=950,height=700");
+       }
+</script>
