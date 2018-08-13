@@ -18,13 +18,13 @@ function desabilitaCampos_ContaReceber(status) {
 
         //Esconde botoes
         $("#osc_salvar").hide();    
+        $("#osc_novoPagamento").hide();                
 
     } else {
 
         //Desabilita botões
         //Esconde botoes
         $("#osc_reabrir").hide();  
-
     }
 }
 

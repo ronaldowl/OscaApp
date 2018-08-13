@@ -1,0 +1,71 @@
+﻿@model OscaApp.ViewModels.PagamentoViewModel
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+
+
+
+ 
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-body">
+            <form asp-controller="Pagamento" asp-action="FormCreatePagamento" method="post" id="FormCreatePagamento">
+                <input asp-for="@Model.contasReceber.id" class="form-control" type="hidden" id="osc_contasReceberId" value="@Model.contasReceber.id">
+
+                <div class="card" id="osc_MainForm">
+                    <div class="">
+                        <table>
+                            <tr>
+                                <td><h5>Pagamento: &nbsp;&nbsp;</h5></td>
+                                <td>
+                                    <div id="osc_barrabotoes">
+                                        <label>
+                                            <button id="osc_salvar" type="submit" class="btn btn-info btn-sm fa fa-floppy-o" value""> <span>Salvar e Fechar</span></button>
+                                        </label>&nbsp;
+                                        <label>
+                                            <button id="osc_fechar" type="button" class="btn btn-info btn-sm fa fa-close" value"" data-dismiss="modal"> <span>Fechar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-5 offset-1">
+                                <div class="form-group">
+                                    <label class="control-label" style="color:red">Valor*</label>
+                                    <div class="inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-money fa-1x"></i></span>
+
+                                            <input asp-for="@Model.pagamento.valor" class="form-control" type="text" id="osc_valor">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tipo Pagamento</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                        </span>
+                                        <select id="osc_tipoPagamento" asp-for="@Model.pagamento.tipoPagamento" class="form-control" required="required">
+                                            <option value="1" selected="selected">Dinheiro</option>
+                                            <option value="2">Cartão Débito</option>                                                                      
+                                            <option value="4">Déposito</option>
+                                            <option value="8">Tranferência</option>                                     
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

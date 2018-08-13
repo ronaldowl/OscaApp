@@ -3,6 +3,7 @@ using OscaApp.Models;
 using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
+using System.Collections.Generic;
 
 namespace OscaApp.RulesServices
 {
@@ -169,6 +170,25 @@ namespace OscaApp.RulesServices
             contaReceber.dataPagamento = contaReceber.dataPagamento.AddDays(1);
             ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
 
+        }
+
+        public static void CalculoPagamento(ref ContasReceber contasReceber, IPagamentoData pagamentoData, IContasReceberData contasReceberData)
+        {
+            List<Pagamento> pagamentos = new List<Pagamento>();
+
+            pagamentos = pagamentoData.GetAllByContasReceber(contasReceber.id);         
+
+            decimal Total = 0;            
+
+            foreach (var item in pagamentos)
+            {
+                Total += item.valor;
+            }
+
+            contasReceber.valorPago = Total;
+            contasReceber.valorRestante = contasReceber.valor - Total;
+
+            
         }
     }
 }

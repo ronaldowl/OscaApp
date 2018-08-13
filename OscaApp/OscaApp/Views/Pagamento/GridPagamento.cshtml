@@ -1,0 +1,70 @@
+﻿@model List<OscaFramework.Models.Pagamento>
+ 
+@{
+    Layout = "_LayoutFrame";
+}
+ 
+<script>
+ 
+    function CarregaProdutoPedidoUpdate(id) {
+
+        $('#ModalProdutoPedido', parent.document).load("/ProdutoPedido/FormUpdateProdutoPedido?idProdutoPedido=" + id, function () {
+
+            $('#ModalProdutoPedido', parent.document).modal("show");
+        });                
+    }
+
+</script>
+<div class="card" id="osc_Grid">   
+    <div class="card-body">        
+        <div class="row">           
+                <table class="table table-hover   table-bordered table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th></th>
+                            <th>Data Pagamento</th>
+                            <th>Tipo Pagamento</th>
+                            <th>Valor</th>
+                            <th>Lançando Por</th>
+                            <th>Lançando Em</th>
+                        </tr>
+                    </thead>   
+                 
+                    @foreach (var item in Model)
+                    {
+                     
+
+
+                    <tr>
+                        <td><i class="fa fa-money"></i></td>
+                        <td>@item.dataPagamento.ToShortDateString()</td>
+                        <td>@item.tipoPagamento</td>
+                        <td>R$@item.valor.ToString("N2")</td>
+                        <td>@item.criadoPorName</td>
+                        <td>@item.criadoEm.ToShortDateString()</td>
+                        <td>
+                            <div class="form-group col-md-2">
+                                <button id="osc_remove" type="button" class="btn btn-danger btn-sm fa fa-remove" value="voltar" onclick="location.href='@Url.Action("DeletePagamento", "Pagamento", new { idPagamento = item.id, idContasReceber = item.idContasReceber})'"> <span>Remover</span></button>
+                            </div>
+                        </td>
+                    </tr>
+                        }
+              
+                </table>
+             
+            </div>
+        </div>
+    </div>
+
+<script> 
+    //Preenche variaves do contexto pai para criar um novo Produto do Pedido
+    var idListaPreco = window.parent.document.getElementById('osc_idListaPreco').value;
+    var idPedido = window.parent.document.getElementById('osc_id').value;  
+    var statusPedido = window.parent.document.getElementById('osc_statusPedido').value;   
+    
+
+    if (statusPedido == 2 || statusPedido == 5) $("input,select, textarea, button").prop("disabled", true);
+
+ 
+
+</script>

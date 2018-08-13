@@ -58,6 +58,15 @@ namespace OscaApp.Data
         Comunicado Get(Guid id, Guid idOrg);
         List<Comunicado> GetAll(Guid idOrg);
     }
+
+    public interface IPagamentoData
+    {
+        void Add(Pagamento pagamento);
+        void Update(Pagamento pagamento);
+        void Delete(Pagamento pagamento);
+        Pagamento Get(Guid id);
+        List<Pagamento> GetAllByContasReceber(Guid id);
+    }
     public interface IProfissionalData
     {
         void Add(Profissional profissional);

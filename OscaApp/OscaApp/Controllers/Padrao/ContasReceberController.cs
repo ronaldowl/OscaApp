@@ -26,17 +26,21 @@ namespace OscaApp.Controllers
         private readonly IPedidoData pedidoData;
         private readonly IOrdemServicoData ordemServicoData;
         private readonly IAtendimentoData atendimentoData;
+        private readonly IPagamentoData pagamentoData;
 
 
         public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
             this.contasReceberData = new ContasReceberData(db);
+            this.pagamentoData = new PagamentoData(db);
             //this.balcaoVendasData   = new BalcaoVendasData(db);
             //this.pedidoData         = new PedidoData(db);
             //this.ordemServicoData   = new OrdemServicoData(db);
             //this.atendimentoData    = new AtendimentoData(db);
             this.sqlData = _sqlData;
             this.contexto = new ContextPage().ExtractContext(httpContext);
+
+        
         }
 
         [TempData]
@@ -85,6 +89,8 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormUpdateContasReceber(string id)
         {
+          
+
             ContasReceberViewModel modelo = new ContasReceberViewModel();
             modelo.contasReceber = new ContasReceber();
             modelo.contasReceber.id = new Guid(id);
@@ -124,6 +130,7 @@ namespace OscaApp.Controllers
                         //Valida se houve Pagamento total
                         if (entrada.contasReceber.valorPago == entrada.contasReceber.valor)
                         {
+                          
                             contasReceberData.Update(modelo);
 
                             FaturamentoRules.InsereFaturamento((int)entrada.contasReceber.origemContaReceber, entrada.contasReceber.id, entrada.contasReceber.valor, this.contexto.idOrganizacao);
@@ -136,7 +143,7 @@ namespace OscaApp.Controllers
                     }
                     else
                     {
-
+                        ContasReceberRules.CalculoPagamento(ref modelo, pagamentoData, contasReceberData);
                         contasReceberData.Update(modelo);
                         StatusMessage = "Registro Atualizado com Sucesso!";
                     }
