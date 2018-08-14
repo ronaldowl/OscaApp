@@ -6,58 +6,49 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="card  " id="osc_Grid">
+        <div class="card" id="osc_Grid">
             <div class="card-header" style="height:60px">
-                <div class="card-title">
-                    <form class="form-inline" asp-route-view="@viewContexto">
-                        <table>
-                            <tr>
-                                <td>
-                                    <i style="font-weight:bold" class="fa fa-2x fa-cart-plus"></i>
-                                </td>
-                                <td>
-                                    <div class="input-group">
-                                        <label>
-                                            <button id="osc_novo" type="button" class="btn btn-success btn-lg fa fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas", null)'"> <span>Nova venda</span></button>
-                                        </label>&nbsp;
-                                        <div class="form-group">
-                                            <label>Filtros</label>
-                                            <div class="input-group">
-                                                &nbsp;<div class="col-2">
-                                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
-                                                        <option value="0" selected="">Vendas do Dia</option>
-                                                        <option value="1">Vendas dos últimos 3 dias</option>
-                                                        @*<option value="2">Vendas do Mes</option>*@
-                                                        <option value="3">Vendas do Período</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>&nbsp;
-                                        <div class="form-group mx-sm-3 mb-2">
-                                            <input type="text" style="width:120px" class="form-control" id="osc_DataInicio" placeholder="Data Início" name="inicio" autocomplete="off" asp-route-inicio="10/12/2014">
-                                            &nbsp;
-                                            <input type="text" style="width:120px" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="fim" autocomplete="off" asp-route-fim="10/12/2014">
-                                        </div>
-                                        &nbsp;&nbsp;
-                                        <span>
-                                            @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
-                                        </span>
-                                        <button type="submit" class="btn btn-info fa fa-search"></button>
-                                        &nbsp;&nbsp;
-                                        <label>
-                                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
-                                        </label>
-                                        &nbsp;
-                                        <label style="font-weight:bold">
-                                            Total Hoje<input id="valorDiario" type="text" style="width:120px; height:30px; font-weight:bold; background-color:aquamarine" disabled="disabled" />
-                                        </label>
+                <form class="form-inline" asp-route-view="@viewContexto">
+                    <div class="row">
+                        <i class="fa fa-2x fa-cart-plus ml-1"></i>
+                        <div class="col-md-1 mr-2">
+                            <button id="osc_novo" type="button" class="btn btn-info btn-lg fa fa-plus" value="Nova Venda" onclick="location.href='@Url.Action("BalcaoVendas", "BalcaoVendas", null)'"> Venda</button>
+                        </div>
+                        <label class="border-right border-dark ml-2 pr-1">Filtros</label>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                        <option value="0" selected="selected">Vendas do Dia</option>
+                                        @*<option value="1">Vendas dos últimos 3 dias</option>*@
+                                        @*<option value="2">Vendas do Mes</option>*@
+                                        <option value="3">Vendas do Período</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 p-0">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="osc_DataInicio" placeholder="Data Início" name="inicio" autocomplete="off" asp-route-inicio="10/12/2014">
 
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
+                                <input type="text" class="form-control" id="osc_DataFim" placeholder="Data Fim" name="fim" autocomplete="off" asp-route-fim="10/12/2014">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="input-group">
+                                @Html.TextBox("filtro", "", new { @class = "form-control", @style = "max-width:150px;", placeholder = "Pesquisar", id = "grid" })
+                                <button type="submit" class="btn btn-info fa fa-search"></button>
+                            </span>
+                        </div>
+                        <div class="col-md-1 p-0">
+                            <button id="osc_recarregar" type="submit" class="btn btn-info btn-lg fa fa-remove" value="Limpar" onclick="RecarregarGrid()"> <span>Limpar</span></button>
+                        </div>
+                        <label class="pr-1 mr-1">Total Hoje: </label>
+                        <div class="col-md-1 p-0">
+                            <input id="valorDiario" style="background:aquamarine; max-width:130px" type="text" class="form-control" disabled="disabled" />
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="card-body">
                 <div class="row">
