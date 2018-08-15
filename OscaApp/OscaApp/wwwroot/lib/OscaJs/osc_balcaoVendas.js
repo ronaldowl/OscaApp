@@ -141,15 +141,11 @@ function SomaTotal() {
             totalDesconto = (VALORTOTAL / 100) * valorDesconto;
             VALORTOTAL = VALORTOTAL - totalDesconto;
         }
-    }
-
-   
+    }   
 
     $('#ValorTotalVendas').val('TOTAL: ' + FormataDecimal(VALORTOTAL, 2, ',', '.'));
     $('#ValorTotalVendasDiag').val('TOTAL: ' + FormataDecimal(VALORTOTAL, 2, ',', '.'));
-
     $('#InputValorTotalVendas').val(FormataDecimal(VALORTOTAL));
-
 }
 
 function LimpaBusca() {
@@ -206,10 +202,9 @@ function MontaObjetoEntrada() {
     ObjetoEntrada.diaVencimento = $('#osc_diaVencimento').val();
     ObjetoEntrada.valorDesconto = $('#osc_valorDesconto').val();
     ObjetoEntrada.tipoDesconto = $('#osc_tipoDesconto').val();
-   
-
-
-
+    ObjetoEntrada.troco = $('#osc_troco').val();
+    ObjetoEntrada.valorDinheiroPago = $('#osc_valorDinheiroPago').val();
+     
     return ObjetoEntrada;
 }
 
@@ -261,17 +256,39 @@ function CalcularParcela() {
 
     $('#osc_valorParcela').val(FormataDecimal(calcResult));
 }
+function HabilitaTroco() {
+
+    var tipoPagamento = document.getElementById("osc_tipoPagamento");
+    var condicaoPagamento = document.getElementById("osc_condicaoPagamento");
+
+
+    if (tipoPagamento.value == 1 & condicaoPagamento.value == 1) {
+
+        document.getElementById("div_troco").hidden = false;
+        document.getElementById("div_valorDinheiro").hidden = false;
+      
+        $("#osc_valorDinheiro").att('required', 'required');      
+        
+    } else {
+
+        document.getElementById("div_troco").hidden = true;
+        document.getElementById("div_valorDinheiro").hidden = true;
+
+        $("#osc_troco").val('0,00');
+        $("#osc_valorDinheiro").val('0,00');
+    }
+}
 
 function HabilitaParcela() {
+ 
+    var condPag = document.getElementById("osc_condicaoPagamento");    
 
-    var condPag = document.getElementById("osc_condicaoPagamento");
 
     if (condPag.value == 3) {
 
         document.getElementById("div_Parcela").hidden = false;
         document.getElementById("div_DiaVencimento").hidden = false;
         document.getElementById("div_valorParcela").hidden = false;
-
 
     } else {
 
@@ -285,7 +302,6 @@ function HabilitaParcela() {
 
     }
 }
-
 
 function ValidaProdutoVenda() {
 
@@ -301,7 +317,6 @@ function ValidaProdutoVenda() {
         return false;
     } else { return true}
 }
-
 
 function BalcaoViewOnload() {
 
@@ -331,5 +346,44 @@ function desabilitaCampos_BalcaoView(status) {
     }
 }
 
+function CalculaTroco() {
 
+    var valorVenda = $('#InputValorTotalVendas').val();
+    valorVenda = parseFloat(PrepCalcDecimal(valorVenda));
 
+    var valorDinheiro = $('#osc_valorDinheiroPago').val();
+    valorDinheiro = parseFloat(PrepCalcDecimal(valorDinheiro));
+
+    var troco = valorDinheiro - valorVenda;
+    
+    $('#osc_troco').val(FormataDecimal(troco));
+
+}
+
+function limpaTroco() {
+    $('#osc_troco').val();
+    $('#osc_valorDinheiroPago').val();
+}
+
+function ValidaValorDinheiro() {
+
+    var ev = $('#osc_valorDinheiroPago').val();
+
+    if (ev == '' || ev == undefined) {
+        alert('Favor preecher o valor em dinheiro');
+        return false;
+    }
+
+    var valorVenda = $('#InputValorTotalVendas').val();
+    valorVenda = parseFloat(PrepCalcDecimal(valorVenda));
+
+    ev = parseFloat(PrepCalcDecimal(ev));
+
+    if (ev < valorVenda) {
+
+        alert("O valor pago é menor que o valor da venda!");
+        return false;
+    }
+
+    return true;
+}

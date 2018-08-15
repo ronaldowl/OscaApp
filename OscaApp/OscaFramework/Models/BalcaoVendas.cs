@@ -24,6 +24,12 @@ namespace OscaFramework.Models
         [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
         public decimal valorDesconto { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal troco { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:f2}", ApplyFormatInEditMode = true)]
+        public decimal valorDinheiroPago { get; set; }
+
         public CustomEnum.codicaoPagamento condicaoPagamento { get; set; }
         public CustomEnum.tipoPagamento tipoPagamento { get; set; } 
         public CustomEnumStatus.StatusBalcaoVendas statusBalcaoVendas { get; set; }    

@@ -4,17 +4,7 @@
     Layout = "_LayoutFrame";
 }
  
-<script>
- 
-    function CarregaProdutoPedidoUpdate(id) {
 
-        $('#ModalProdutoPedido', parent.document).load("/ProdutoPedido/FormUpdateProdutoPedido?idProdutoPedido=" + id, function () {
-
-            $('#ModalProdutoPedido', parent.document).modal("show");
-        });                
-    }
-
-</script>
 <div class="card" id="osc_Grid">   
     <div class="card-body">        
         <div class="row">           
@@ -31,10 +21,8 @@
                     </thead>   
                  
                     @foreach (var item in Model)
-                    {
-                     
-
-
+                    {                   
+                        
                     <tr>
                         <td><i class="fa fa-money"></i></td>
                         <td>@item.dataPagamento.ToShortDateString()</td>
@@ -48,22 +36,18 @@
                             </div>
                         </td>
                     </tr>
-                        }
-              
-                </table>
-             
+                        }              
+                </table>             
             </div>
         </div>
     </div>
-
 <script> 
     //Preenche variaves do contexto pai para criar um novo Produto do Pedido
-    var idListaPreco = window.parent.document.getElementById('osc_idListaPreco').value;
-    var idPedido = window.parent.document.getElementById('osc_id').value;  
-    var statusPedido = window.parent.document.getElementById('osc_statusPedido').value;   
+  
+    var statusContasReceber = window.parent.document.getElementById('osc_statusContaReceber').value;   
     
 
-    if (statusPedido == 2 || statusPedido == 5) $("input,select, textarea, button").prop("disabled", true);
+    if (statusContasReceber == 1) $("input,select, textarea, button").prop("disabled", true);
 
  
 

@@ -40,7 +40,7 @@ namespace OscaApp.Controllers
             this.sqlData = _sqlData;
             this.contexto = new ContextPage().ExtractContext(httpContext);
 
-        
+
         }
 
         [TempData]
@@ -89,7 +89,7 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormUpdateContasReceber(string id)
         {
-          
+
 
             ContasReceberViewModel modelo = new ContasReceberViewModel();
             modelo.contasReceber = new ContasReceber();
@@ -130,10 +130,17 @@ namespace OscaApp.Controllers
                         //Valida se houve Pagamento total
                         if (entrada.contasReceber.valorPago == entrada.contasReceber.valor)
                         {
-                          
-                            contasReceberData.Update(modelo);
 
-                            FaturamentoRules.InsereFaturamento((int)entrada.contasReceber.origemContaReceber, entrada.contasReceber.id, entrada.contasReceber.valor, this.contexto.idOrganizacao);
+                            if (ContasReceberRules.ValidaCalculoPagamento(ref modelo, pagamentoData, contasReceberData))
+                            {                                
+                                contasReceberData.Update(modelo);
+                                FaturamentoRules.InsereFaturamento((int)entrada.contasReceber.origemContaReceber, entrada.contasReceber.id, entrada.contasReceber.valor, this.contexto.idOrganizacao);
+                            }
+                            else
+                            {
+                                StatusMessage = "Valor Pago inconsistente, favor Atualizar Calculo";
+                            }
+
                         }
                         else
                         {

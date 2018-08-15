@@ -237,7 +237,7 @@
                                             <span class="input-group-addon">
                                                 <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                             </span>
-                                            <select id="osc_condicaoPagamento" asp-for="@Model.balcaoVendas.condicaoPagamento" class="form-control" required="required" onchange="HabilitaParcela();">
+                                            <select id="osc_condicaoPagamento" asp-for="@Model.balcaoVendas.condicaoPagamento" class="form-control" required="required" onchange="limpaTroco(); HabilitaParcela(); HabilitaTroco();">
                                                 <option value="1">Á Vista</option>
                                                 <option value="3">Á Prazo</option>
                                                 <option value="5">Consignado</option>
@@ -251,7 +251,7 @@
                                             <span class="input-group-addon">
                                                 <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                             </span>
-                                            <select id="osc_tipoPagamento" asp-for="@Model.balcaoVendas.tipoPagamento" class="form-control" required="required">
+                                            <select id="osc_tipoPagamento" asp-for="@Model.balcaoVendas.tipoPagamento" class="form-control" required="required" onchange="limpaTroco();HabilitaTroco();">
                                                 <option value="1" selected="selected">Dinheiro</option>
                                                 <option value="2">Cartão Débito</option>
                                                 <option value="5">Cartão Crédito</option>
@@ -270,7 +270,7 @@
                                             <span class="input-group-addon">
                                                 <span class="fa fa-asterisk fa-2x"></span>&nbsp;
                                             </span>
-                                            <input type="text" class="form-control" id="osc_parcelas" value="1" autocomplete="off" onchange="CalcularParcela();">
+                                            <input type="text" class="form-control" id="osc_parcelas" value="0" autocomplete="off" onchange="CalcularParcela();">
                                         </div>
                                     </div>
                                     <div class="form-group" hidden="hidden" id="div_DiaVencimento">
@@ -297,14 +297,32 @@
                                             <span class="input-group-addon">
                                                 <span class="fa fa-money fa-2x"></span>&nbsp;
                                             </span>
-                                            <input type="text" class="form-control" id="osc_valorDebito" value="" placeholder="R$ 0,00" autocomplete="off"  >
+                                            <input type="text" class="form-control" id="osc_valorDebito" value="" placeholder="R$ 0,00" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="div_valorDinheiro" >
+                                        <label>Valor Dinheiro</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-money fa-2x"></span>&nbsp;
+                                            </span>
+                                            <input type="text" class="form-control" id="osc_valorDinheiroPago"  placeholder="R$ 0,00" autocomplete="off" onchange="CalculaTroco();" onblur="onBlur(this)"  >
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="div_troco">
+                                        <label>Troco</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-money fa-2x"></span>&nbsp;
+                                            </span>
+                                            <input type="text" class="form-control" id="osc_troco" placeholder="R$ 0,00" autocomplete="off" readonly="readonly">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-lg" onclick="if (!ValidaProdutoVenda()) { return false }; Execute();">Concluir</button>
-                                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Voltar</button>
+                                <button type="button" class="btn btn-primary btn-lg" onclick="if (!ValidaProdutoVenda()) { return false }; if (!ValidaValorDinheiro()) { return false;}  Execute();">Concluir</button>
+                                <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal" onclick="limpaTroco();">Voltar</button>
                             </div>
                         </div>
                     </div>

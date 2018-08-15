@@ -313,7 +313,7 @@ namespace OscaFramework.MicroServices
         {
             string retorno = String.Empty;
 
-            string SelectProduto = "Select isnull(sum(valorTotal),0) from BalcaoVendas where tipoPagamento = 1 and Cast(criadoEm as date) = Cast(getdate() as date) and StatusBalcaoVendas = 1  and idOrganizacao =  '" + idOrg + "'";
+            string SelectProduto = "Select isnull(sum(valor),0) from BalcaoVendas where tipoPagamento = 1 and Cast(criadoEm as date) = Cast(getdate() as date) and StatusBalcaoVendas = 1  and idOrganizacao =  '" + idOrg + "'";
 
             try
             {

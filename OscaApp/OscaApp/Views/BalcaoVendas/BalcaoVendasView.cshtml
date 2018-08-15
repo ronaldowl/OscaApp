@@ -167,6 +167,14 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Valor Pago Dinheiro</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <input id="osc_valorPagoDinheiro" value="R$ @Model.balcaoVendas.valorDinheiroPago.ToString("N2")" type="text" class="form-control" disabled="disabled" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="form-group">
@@ -183,11 +191,11 @@
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><i class="fa fa-list fa-1x"></i></span>
                                                     <select id="osc_statusBalcaoVendas" asp-for="@Model.balcaoVendas.statusBalcaoVendas" class="form-control" required="required" style="background-color:aquamarine" data-toggle="tooltip" data-placement="top" title="O cancelamento deste item, irá cancelar a linha de Faturamento!">
-                                                        <option value="2" >Cancelado</option>
-                                                        <option value="0" >Em Andamento</option>
-                                                        <option value="1" >Fechado</option>
+                                                        <option value="2">Cancelado</option>
+                                                        <option value="0">Em Andamento</option>
+                                                        <option value="1">Fechado</option>
                                                     </select>
-                                                 
+
                                                 </div>
                                             </div>
                                         </div>
@@ -196,6 +204,14 @@
                                             <div class="inputGroupContainer">
                                                 <div class="input-group">
                                                     <input id="osc_dataVendas" value="@Model.balcaoVendas.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Troco</label>
+                                            <div class="inputGroupContainer">
+                                                <div class="input-group">
+                                                    <input id="osc_troco" value="R$ @Model.balcaoVendas.troco.ToString("N2")" type="text" class="form-control" disabled="disabled" />
                                                 </div>
                                             </div>
                                         </div>

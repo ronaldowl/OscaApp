@@ -190,5 +190,29 @@ namespace OscaApp.RulesServices
 
             
         }
+
+        public static bool ValidaCalculoPagamento(ref ContasReceber contasReceber, IPagamentoData pagamentoData, IContasReceberData contasReceberData)
+        {
+            List<Pagamento> pagamentos = new List<Pagamento>();
+
+            pagamentos = pagamentoData.GetAllByContasReceber(contasReceber.id);
+
+            decimal Total = 0;
+
+            foreach (var item in pagamentos)
+            {
+                Total += item.valor;
+            }          
+
+            if (Total == contasReceber.valor)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+
     }
 }

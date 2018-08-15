@@ -65,7 +65,7 @@
                                             <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteContasReceber('@Model.contasReceber.id')"> <span>Excluir</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_calcular" type="submit" class="btn btn-info  btn-sm fa fa-1x fa-calculator"  > <span>Atualizar</span></button>
+                                            <button id="osc_calcular" type="submit" class="btn btn-info  btn-sm fa fa-1x fa-calculator"> <span>Atualizar</span></button>
                                         </label>
                                         <label>
                                             <button id="osc_novoPagamento" type="button" class="btn btn-info  btn-sm fa fa-plus" value="Novo" onclick="CarregaPagamento()"> <span>Adicionar Pagamento</span></button>
@@ -103,7 +103,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-user-o fa-2x" onclick="OpenLookupCliente()" style="cursor:pointer"></span>
                                     </span>
-                                    <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control"  autocomplete="off">
+                                    <input id="osc_clienteIdName" asp-for="@Model.cliente.idName" type="text" class="form-control" autocomplete="off">
                                     <input id="osc_clienteId" asp-for="@Model.cliente.id" type="hidden" class="form-control" />
                                     <span class="input-group-btn ">
                                         <button type="button" class="btn btn-info" onclick="CarregaLookupCliente()" id="osc_botaolookupcliente">
@@ -167,11 +167,11 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label" style="color:red">Valor*</label>
+                                <label class="control-label" style="color:red">Valor da Conta*</label>
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-money fa-2x"></i></span>&nbsp;
-                                        <input asp-for="@Model.contasReceber.valor" class="form-control" type="text" id="osc_valor" readonly="readonly" placeholder="0,00" >
+                                        <input asp-for="@Model.contasReceber.valor" class="form-control" type="text" id="osc_valor" readonly="readonly" placeholder="0,00">
                                     </div>
                                 </div>
                             </div>
@@ -240,70 +240,67 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-11">
-                            <div class="card-header">
-                                <div id="GridPagamento" class="embed-responsive embed-responsive-21by9" style="height:300px" >
-                                    <iframe height="200" class="embed-responsive-item" src="/Pagamento/GridPagamento?idContasReceber=@Model.contasReceber.id" id="osc_framePagamento"></iframe>
-                                </div>
-                            </div>
-                        </div>
+
+                    <div id="GridPagamento" class="embed-responsive embed-responsive-21by9" style="height:300px">
+                        <iframe height="200" class="embed-responsive-item" src="/Pagamento/GridPagamento?idContasReceber=@Model.contasReceber.id" id="osc_framePagamento"></iframe>
                     </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.contasReceber.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.contasReceber.criadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoPor" asp-for="@Model.contasReceber.modificadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoEm" asp-for="@Model.contasReceber.modificadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <br />
-                    <br />
+
                 </div>
-               </div>
-        </form>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.contasReceber.criadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.contasReceber.criadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" asp-for="@Model.contasReceber.modificadoPorName" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" asp-for="@Model.contasReceber.modificadoEm" type="text" class="form-control" disabled="disabled" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+            </div>
     </div>
+    </form>
+</div>
 </div>
 
 <div class="modal fade" id="ModalStatus">

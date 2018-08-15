@@ -130,11 +130,23 @@
                 </tr>
                 <tr>
                     <td>Desconto:</td>
-                    <td>R$ @Model.balcaoVendas.valorDesconto.ToString("N2") &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;QTD Parcelas: @if(Model.balcaoVendas.parcelas > 0){@Model.balcaoVendas.parcelas;} </td>
+                    <td>
+                        R$ @Model.balcaoVendas.valorDesconto.ToString("N2") &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp;QTD Parcelas: @if (Model.balcaoVendas.parcelas > 0)
+                        {@Model.balcaoVendas.parcelas;
+                    }
+                    </td>
                 </tr>
                 <tr>
                     <td>TOTAL:</td>
                     <td>R$ @Model.balcaoVendas.valorTotal.ToString("N2")</td>
+                </tr>
+                <tr>
+                    <td>Valor Dinheiro:</td>
+                    <td>R$ @Model.balcaoVendas.valorDinheiroPago.ToString("N2")</td>
+                </tr>
+                <tr>
+                    <td>Troco:</td>
+                    <td>R$ @Model.balcaoVendas.troco.ToString("N2")</td>
                 </tr>
                 <tr>
                     <td>CLIENTE:</td>

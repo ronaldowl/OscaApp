@@ -19,7 +19,8 @@ namespace OscaApp.Controllers
     public class PagamentoController : Controller
     {
         private readonly IPagamentoData pagamentoData;
-      
+        private readonly IContasReceberData contasReceberData;
+
 
         private ContextPage contexto;
 
@@ -27,7 +28,7 @@ namespace OscaApp.Controllers
         {
 
             this.pagamentoData = new PagamentoData(db);
-            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.contasReceberData = new ContasReceberData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
 
         }
@@ -45,6 +46,7 @@ namespace OscaApp.Controllers
             modelo.pagamento.criadoPorName = contexto.nomeUsuario;
             modelo.contasReceber = new Relacao();
             modelo.contasReceber.id = new Guid(idContasReceber);
+            modelo.pagamento.valor = contasReceberData.Get(new Guid(idContasReceber)).valorRestante;
 
             return View(modelo);
         }

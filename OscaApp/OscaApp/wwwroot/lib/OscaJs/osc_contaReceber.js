@@ -5,16 +5,17 @@ function OnLoad_ContaReceber() {
     var status = document.getElementById("osc_statusContaReceber").value; 
     var tipoLancamento = document.getElementById("osc_tipoLancamento").value; 
 
-    ControleCamposAutomaticos(tipoLancamento)
-    desabilitaCampos_ContaReceber(status)
+    ControleCamposAutomaticos(tipoLancamento);
+    desabilitaCampos_ContaReceber(status);
+    ControlaBotaoAdicionarPagamento();
 }
 
 function desabilitaCampos_ContaReceber(status) {
 
-    if (status == 1 || status == 2 ) {
+    if (status == 1 ) {
 
         //Desabilita todos campos do Form
-        $("input,select, textarea").prop("disabled", true);
+        $("input,select, textarea, iframe").prop("disabled", true);         
 
         //Esconde botoes
         $("#osc_salvar").hide();    
@@ -38,12 +39,7 @@ function ControleCamposAutomaticos(Lancamento) {
         $("#osc_titulo").prop("readonly", true);
         $("#osc_botaolookupcliente").prop("readonly", true);
         $("#osc_clienteIdName").prop("readonly", true);
-        $("#osc_numeroReferencia").prop("readonly", true);
-
-
-
-        
-
+        $("#osc_numeroReferencia").prop("readonly", true);            
 
     }  
 }
@@ -55,7 +51,6 @@ function OpenLookupCliente() {
         $(window.document.location).attr('href', "/Cliente/FormUpdateCliente?id=" + idCliente);
     }
 } 
-
 
 function DeleteContasReceber(id) {
 
@@ -73,3 +68,14 @@ function RecarregarGridContaReceberCliente(idCliente) {
 
 }
 
+function ControlaBotaoAdicionarPagamento() {
+
+    var valor = document.getElementById("osc_valor").value; 
+    var valorPago = document.getElementById("osc_valorPago").value; 
+
+
+    if (valor == valorPago) {
+        $("#osc_novoPagamento").hide();
+    }
+
+}

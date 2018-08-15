@@ -56,33 +56,37 @@
                         <thead class="thead-light">
                             <tr>
                                 <th></th>
-                                <th>Código Venda</th>
-                                <th>Cliente</th>
-                                <th>Valor</th>
-                                <th>Condição Pagamento</th>
-                                <th>Tipo Pagamento</th>
+                                <th style="width:80px">Código</th>
+                                <th style="width:350px">Cliente</th>
+                                <th style="width:100px">Valor</th>
+                                <th style="width:130px">Valor Dinheiro</th>
+                                <th style="width:130px">Condição Pag</th>
+                                <th style="width:130px">Tipo Pag</th>
                                 <th>Vendido Por</th>
-                                <th>Data Venda</th>
+                                <th>Data Venda</th>                              
+
                                 <th>Status</th>
                             </tr>
                         </thead>
                         @foreach (var item in Model)
                         {
-                            <tr style="cursor:pointer;font-size:12px" id="@item.balcaoVendas.id" onclick="location.href='@Url.Action("BalcaoVendasView", "BalcaoVendas", new { id = item.balcaoVendas.id })'">
-                                <td><i class="fa fa-cart-plus fa-2x"></i></td>
-                                <td>@Html.ActionLink(item.balcaoVendas.codigo.ToString(), "BalcaoVendasView", new { id = item.balcaoVendas.id })</td>
-                                <td>
-                                    @if (item.cliente != null)
-                                    {@item.cliente.nomeCliente}
-                                </td>
-                                <td>R$@item.balcaoVendas.valorTotal.ToString("N2")</td>
-                                <td>@item.balcaoVendas.condicaoPagamento</td>
-                                <td>@item.balcaoVendas.tipoPagamento</td>
-                                <td>@item.balcaoVendas.criadoPorName</td>
-                                <td>@item.balcaoVendas.criadoEm</td>
-                                <td>@item.balcaoVendas.statusBalcaoVendas</td>
+                        <tr style="cursor:pointer;font-size:12px" id="@item.balcaoVendas.id" onclick="location.href='@Url.Action("BalcaoVendasView", "BalcaoVendas", new { id = item.balcaoVendas.id })'">
+                            <td><i class="fa fa-cart-plus fa-2x"></i></td>
+                            <td>@Html.ActionLink(item.balcaoVendas.codigo.ToString(), "BalcaoVendasView", new { id = item.balcaoVendas.id })</td>
+                            <td>
+                                @if (item.cliente != null)
+                                {@item.cliente.nomeCliente}
+                            </td>
+                            <td>R$@item.balcaoVendas.valorTotal.ToString("N2")</td>
+                            <td>R$@item.balcaoVendas.valorDinheiroPago.ToString("N2")</td>
 
-                            </tr>
+                            <td>@item.balcaoVendas.condicaoPagamento</td>
+                            <td>@item.balcaoVendas.tipoPagamento</td>
+                            <td>@item.balcaoVendas.criadoPorName</td>
+                            <td>@item.balcaoVendas.criadoEm</td>
+                            <td>@item.balcaoVendas.statusBalcaoVendas</td>
+
+                        </tr>
                         }
                     </table>
 
