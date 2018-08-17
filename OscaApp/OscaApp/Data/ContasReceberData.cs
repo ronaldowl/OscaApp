@@ -115,7 +115,7 @@ namespace OscaApp.Data
             }
             return retorno[0];
         }
-        public List<ContasReceberGridViewModel> GetAll(Guid idOrg, int view)
+        public List<ContasReceberGridViewModel> GetAll(Guid idOrg, int view, ClienteData clienteData)
         {
             List<ContasReceber> itens = new List<ContasReceber>();
 
@@ -163,7 +163,7 @@ namespace OscaApp.Data
                 itens = retorno.ToList();
             }
 
-            return HelperAssociate.ConvertToGridContasReceber(itens.ToList());
+            return HelperAssociate.ConvertToGridContasReceber(itens.ToList(), clienteData);
         }
 
         public List<ContasReceber> GetAllByIdCliente(Guid idCliente, int view)

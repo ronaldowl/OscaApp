@@ -19,8 +19,9 @@ function desabilitaCampos_ContaReceber(status) {
 
         //Esconde botoes
         $("#osc_salvar").hide();    
-        $("#osc_novoPagamento").hide();                
-
+        $("#osc_novoPagamento").hide();        
+        $("#osc_calcular").hide();       
+               
     } else {
 
         //Desabilita botões
@@ -34,13 +35,16 @@ function ControleCamposAutomaticos(Lancamento) {
     if (Lancamento == 1  ) {
 
        //ProtegeCampo
-        $("#osc_valor").prop("readonly", true);
-        $("#osc_origemContaReceber").prop("readonly", true);
+        $("#osc_valor").prop("readonly", true);      
         $("#osc_titulo").prop("readonly", true);
         $("#osc_botaolookupcliente").prop("readonly", true);
         $("#osc_clienteIdName").prop("readonly", true);
-        $("#osc_numeroReferencia").prop("readonly", true);            
+        $("#osc_numeroReferencia").prop("readonly", true);  
+        $("#osc_origemContaReceber").prop("disabled", true); 
+        $("#osc_dataPagamento").prop("disabled", true);           
 
+
+   
     }  
 }
 
@@ -72,8 +76,7 @@ function ControlaBotaoAdicionarPagamento() {
 
     var valor = document.getElementById("osc_valor").value; 
     var valorPago = document.getElementById("osc_valorPago").value; 
-
-
+    
     if (valor == valorPago) {
         $("#osc_novoPagamento").hide();
     }

@@ -61,7 +61,9 @@ namespace OscaApp.Controllers
                 {
                     if (PagamentoRules.PagamentoCreate(entrada, out pagamento, contexto))
                     {
-                        pagamentoData.Add(pagamento);                      
+                        pagamentoData.Add(pagamento);
+
+                        ContasReceberRules.CalculoPagamento(entrada.contasReceber.id, pagamentoData, contasReceberData);
 
                         return RedirectToAction("FormUpdateContasReceber", "ContasReceber",new { id = entrada.contasReceber.id.ToString() });
                     }
@@ -74,60 +76,7 @@ namespace OscaApp.Controllers
             }
             return View();
         }
-
-        [HttpGet]
-        public ViewResult FormUpdatePagamento(string id)
-        {
-            PagamentoViewModel modelo = new PagamentoViewModel();
-            modelo.pagamento = new Pagamento();
-            modelo.pagamento.id = new Guid(id);
-            try
-            {
-                Pagamento retorno = new Pagamento();
-                {
-                    retorno = pagamentoData.Get(new Guid(id));
-
-                    if (retorno != null)
-                    {
-                        modelo.pagamento = retorno;
-                        //apresenta mensagem de registro atualizado com sucesso
-                        modelo.StatusMessage = StatusMessage;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1,12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdatePagamento-get", ex.Message);
-            }
-            return View(modelo);
-        }
-
-        [HttpPost]
-        public IActionResult FormUpdatePagamento(PagamentoViewModel entrada)
-        {
-            Pagamento listapreco = new Pagamento();
-            entrada.contexto = this.contexto;
-            try
-            {
-                if (PagamentoRules.PagamentoUpdate(entrada, out listapreco))
-                {
-                    pagamentoData.Update(listapreco);
-                    StatusMessage = "Registro Atualizado com Sucesso!";
-
-                    return RedirectToAction("FormUpdatePagamento", new { id = listapreco.id.ToString(), idOrg = contexto.idOrganizacao });
-                }
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-                log.GravaLog(1,12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormUpdatePagamento-post", ex.Message);
-            }
-
-            return RedirectToAction("FormUpdatePagamento", new { id = listapreco.id.ToString() });
-        }
-        
+   
         public ViewResult GridPagamento(string idContasReceber)
         {
             IEnumerable<Pagamento> retorno = pagamentoData.GetAllByContasReceber(new Guid(idContasReceber));
@@ -141,7 +90,10 @@ namespace OscaApp.Controllers
         {
             Pagamento modelo = new Pagamento();
             modelo.id = new Guid(idPagamento);
-            pagamentoData.Delete(modelo);        
+            pagamentoData.Delete(modelo);
+
+            ContasReceberRules.CalculoPagamento( new Guid(idContasReceber), pagamentoData, contasReceberData);
+
             return RedirectToAction("GridPagamento", "Pagamento", new { idContasReceber = idContasReceber });
         }
     }

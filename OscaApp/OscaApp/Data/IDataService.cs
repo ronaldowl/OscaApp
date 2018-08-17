@@ -214,7 +214,7 @@ namespace OscaApp.Data
         void Delete(ContasReceber contasReceber);
 
         ContasReceber Get(Guid id );
-        List<ContasReceberGridViewModel> GetAll(Guid idOrg, int view);
+        List<ContasReceberGridViewModel> GetAll(Guid idOrg, int view, ClienteData clienteData);
         List<ContasReceber> GetAllDia(Guid idOrg);
         List<ContasReceber> GetAllByIdCliente(Guid idCliente, int view);
         

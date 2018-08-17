@@ -95,27 +95,34 @@
                                     <th>Tipo Lancamento</th>
                                     <th>Data Lançamento</th>
                                     <th>Data Prevista Pag</th>
-                                    <th>Valor</th>
+                                    <th style="width:100px">Valor</th>
+                                    <th>Valor Pago</th>
+                                    <th>Valor Restante</th>
                                     <th>Status Recebimento</th>
 
                                 </tr>
                             </thead>
                             @foreach (var item in Model)
                             {
-                                <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
-                                    <td><i class="fa fa-envelope-open-o"></i></td>
-                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
-                                    <td>@item.numeroReferencia</td>
-                                    <td>@item.titulo</td>
+                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new {id = item.id })'">
+                                <td><i class="fa fa-envelope-open-o"></i></td>
+                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateContasReceber", new { id = item.id })</td>
+                                <td>@item.numeroReferencia</td>
+                                <td>@item.titulo</td>
 
-                                    <td>@item.origemContaReceber</td>
-                                    <td>@item.tipoLancamento</td>
-                                    <td>@item.criadoEm.ToShortDateString()</td>
-                                    <td>@item.dataPagamento.ToShortDateString()</td>
-                                    <td>R$@item.valor.ToString("N2")</td>
-                                    <td>@item.statusContaReceber</td>
+                                <td>@item.origemContaReceber</td>
+                                <td>@item.tipoLancamento</td>
+                                <td>@item.criadoEm.ToShortDateString()</td>
+                                <td>@item.dataPagamento.ToShortDateString()</td>
+                                <td>R$@item.valor.ToString("N2")</td>
+                                <td>R$@item.valorPago.ToString("N2")</td>
+                                <td>R$@item.valorRestante.ToString("N2")</td>
 
-                                </tr>
+
+
+                                <td>@item.statusContaReceber</td>
+
+                            </tr>
                             }
                         </table>
 

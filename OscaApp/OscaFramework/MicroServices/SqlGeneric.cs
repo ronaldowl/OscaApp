@@ -641,9 +641,36 @@ namespace OscaFramework.MicroServices
             return false;
         }
 
+        public bool AtualizaContasReceber(decimal valorPago, decimal valorRestante, Guid id)
+        {
 
-        //Update direto no banco de dados
+            try
+            {
+                SqlDataReader dataReader;
 
-   
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = @"update ContasReceber set valorPago = '" + valorPago.ToString().Replace(".", "").Replace(",", ".") + "', valorRestante = '" + valorRestante.ToString().Replace(".", "").Replace(",", ".") + "' where id = '" + id + "'"
+
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    //Fechando conexao após tratar o retorno
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }     
+        
     }
 }

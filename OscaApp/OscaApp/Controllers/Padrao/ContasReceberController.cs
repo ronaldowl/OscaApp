@@ -22,24 +22,17 @@ namespace OscaApp.Controllers
         private readonly IContasReceberData contasReceberData;
         private ContextPage contexto;
         private readonly SqlGenericData sqlData;
-        private readonly IBalcaoVendasData balcaoVendasData;
-        private readonly IPedidoData pedidoData;
-        private readonly IOrdemServicoData ordemServicoData;
-        private readonly IAtendimentoData atendimentoData;
         private readonly IPagamentoData pagamentoData;
+        private readonly ClienteData clienteData;
 
 
         public ContasReceberController(ContexDataService db, IHttpContextAccessor httpContext, SqlGenericData _sqlData)
         {
             this.contasReceberData = new ContasReceberData(db);
             this.pagamentoData = new PagamentoData(db);
-            //this.balcaoVendasData   = new BalcaoVendasData(db);
-            //this.pedidoData         = new PedidoData(db);
-            //this.ordemServicoData   = new OrdemServicoData(db);
-            //this.atendimentoData    = new AtendimentoData(db);
             this.sqlData = _sqlData;
             this.contexto = new ContextPage().ExtractContext(httpContext);
-
+            this.clienteData = new ClienteData(db);
 
         }
 
@@ -89,8 +82,7 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormUpdateContasReceber(string id)
         {
-
-
+            
             ContasReceberViewModel modelo = new ContasReceberViewModel();
             modelo.contasReceber = new ContasReceber();
             modelo.contasReceber.id = new Guid(id);
@@ -122,8 +114,7 @@ namespace OscaApp.Controllers
             {
                 if (ContasReceberRules.ContasReceberUpdate(entrada, out modelo))
                 {
-
-
+                    
                     if (entrada.contasReceber.statusContaReceber == CustomEnumStatus.StatusContaReceber.recebido)
                     {
 
@@ -131,7 +122,7 @@ namespace OscaApp.Controllers
                         if (entrada.contasReceber.valorPago == entrada.contasReceber.valor)
                         {
 
-                            if (ContasReceberRules.ValidaCalculoPagamento(ref modelo, pagamentoData, contasReceberData))
+                            if (ContasReceberRules.ValidaCalculoPagamento(ref modelo, pagamentoData))
                             {                                
                                 contasReceberData.Update(modelo);
                                 FaturamentoRules.InsereFaturamento((int)entrada.contasReceber.origemContaReceber, entrada.contasReceber.id, entrada.contasReceber.valor, this.contexto.idOrganizacao);
@@ -149,8 +140,7 @@ namespace OscaApp.Controllers
                         }
                     }
                     else
-                    {
-                        ContasReceberRules.CalculoPagamento(ref modelo, pagamentoData, contasReceberData);
+                    {                      
                         contasReceberData.Update(modelo);
                         StatusMessage = "Registro Atualizado com Sucesso!";
                     }
@@ -175,14 +165,13 @@ namespace OscaApp.Controllers
 
             ViewBag.viewContexto = view;
 
-            retorno = contasReceberData.GetAll(contexto.idOrganizacao, view);
+            retorno = contasReceberData.GetAll(contexto.idOrganizacao, view, clienteData);
 
             if (!String.IsNullOrEmpty(filtro))
             {
-                retorno = from u in retorno
-                          where u.contasReceber.titulo.ToLower().Contains(filtro.ToLower()) || u.contasReceber.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.contasReceber.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)
-                          select u;
-            }
+                retorno = from u in retorno     where u.contasReceber.titulo.ToLower().Contains(filtro.ToLower()) || u.contasReceber.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.contasReceber.numeroReferencia == filtro select u;
+                            
+              }
 
             retorno = retorno.OrderByDescending(x => x.contasReceber.dataPagamento);
 
@@ -203,8 +192,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(filtro))
             {
                 retorno = from u in retorno
-                          where u.titulo.ToLower().Contains(filtro.ToLower()) || u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.numeroReferencia.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase)
-                          select u;
+                          where u.titulo.ToLower().Contains(filtro.ToLower()) || u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase) || u.numeroReferencia == filtro     select u;
             }
 
             retorno = retorno.OrderByDescending(x => x.dataPagamento);

@@ -23,6 +23,7 @@ namespace OscaApp.RulesServices
 
                 pagamento = entrada.pagamento;
                 pagamento.idContasReceber = entrada.contasReceber.id;
+                pagamento.dataPagamento = DateTime.Now;
 
                 //************ Objetos de controle de acesso ******************
                 pagamento.criadoEm = DateTime.Now;

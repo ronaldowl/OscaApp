@@ -369,21 +369,28 @@ function ValidaValorDinheiro() {
 
     var ev = $('#osc_valorDinheiroPago').val();
 
-    if (ev == '' || ev == undefined) {
-        alert('Favor preecher o valor em dinheiro');
-        return false;
+
+    var tipoPagamento = document.getElementById("osc_tipoPagamento");
+    var condicaoPagamento = document.getElementById("osc_condicaoPagamento");
+
+
+    if (tipoPagamento.value == 1 & condicaoPagamento.value == 1) {
+
+        if (ev == '' || ev == undefined) {
+            alert('Favor preecher o valor em dinheiro');
+            return false;
+        }
+
+        var valorVenda = $('#InputValorTotalVendas').val();
+        valorVenda = parseFloat(PrepCalcDecimal(valorVenda));
+
+        ev = parseFloat(PrepCalcDecimal(ev));
+
+        if (ev < valorVenda) {
+
+            alert("O valor pago é menor que o valor da venda!");
+            return false;
+        }
     }
-
-    var valorVenda = $('#InputValorTotalVendas').val();
-    valorVenda = parseFloat(PrepCalcDecimal(valorVenda));
-
-    ev = parseFloat(PrepCalcDecimal(ev));
-
-    if (ev < valorVenda) {
-
-        alert("O valor pago é menor que o valor da venda!");
-        return false;
-    }
-
     return true;
 }

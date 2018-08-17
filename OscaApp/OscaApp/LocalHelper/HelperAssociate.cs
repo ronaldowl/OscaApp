@@ -98,7 +98,7 @@ namespace OscaApp.framework
             }
             return retorno;
         }
-        public static List<ContasReceberGridViewModel> ConvertToGridContasReceber(List<ContasReceber> itens)
+        public static List<ContasReceberGridViewModel> ConvertToGridContasReceber(List<ContasReceber> itens, ClienteData clienteData)
         {
             List<ContasReceberGridViewModel> retorno = new List<ContasReceberGridViewModel>();
             SqlGenericData sqldata = new SqlGenericData();
@@ -106,7 +106,11 @@ namespace OscaApp.framework
             foreach (var item in itens)
             {
                 ContasReceberGridViewModel X = new ContasReceberGridViewModel();
-               if(item.idCliente != Guid.Empty) X.cliente = sqldata.RetornaCliente(item.idCliente);
+                //if (item.idCliente != Guid.Empty)
+                //{
+                //    X.cliente = clienteData.Get(item.idCliente, item.idOrganizacao);
+                //}
+
                 X.contasReceber = item;
 
                 retorno.Add(X);

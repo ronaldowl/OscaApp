@@ -210,7 +210,7 @@ namespace OscaFramework.MicroServices
         {
             string retorno = String.Empty;
 
-            string SelectProduto = "Select isnull(sum(valor),0) from ContasReceber where idCliente = '" + idCliente + "' and statusContaReceber in(0, 3)   ";
+            string SelectProduto = "Select isnull(sum(valorRestante),0) from ContasReceber where idCliente = '" + idCliente + "' and statusContaReceber in(0, 3)   ";
 
             try
             {
@@ -244,7 +244,7 @@ namespace OscaFramework.MicroServices
         {
             string retorno = String.Empty;
 
-            string SelectProduto = "Select isnull(sum(valor),0) from ContasReceber where idOrganizacao = '" + idOrg + "' and statusContaReceber in(0, 3)   ";
+            string SelectProduto = "Select isnull(sum(valorRestante),0) from ContasReceber where idOrganizacao = '" + idOrg + "' and statusContaReceber in(0, 3)   ";
 
             try
             {
@@ -279,7 +279,7 @@ namespace OscaFramework.MicroServices
         {
             string retorno = String.Empty;
 
-            string SelectProduto = "Select isnull(sum(valor),0) from ContasReceber where idCliente = '" + idCliente + "' and statusContaReceber = 1   ";
+            string SelectProduto = "Select isnull(sum(valorPago),0) from ContasReceber where idCliente = '" + idCliente + "' and statusContaReceber = 1   ";
 
             try
             {

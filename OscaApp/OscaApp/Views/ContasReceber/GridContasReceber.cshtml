@@ -85,9 +85,10 @@
                             <td>@item.contasReceber.numeroReferencia</td>
                             <td>@item.contasReceber.titulo</td>
                             <td>
-                                @if (item.cliente != null)
-                                {@item.cliente.nomeCliente;
-                            }
+                                @if(item.contasReceber.idCliente != Guid.Empty)
+                                {
+                                   @item.sqlservice.RetornaRelacaoCliente(item.contasReceber.idCliente).idName;
+                             }
                             </td>
                             <td>@item.contasReceber.origemContaReceber</td>
                             <td>@item.contasReceber.tipoLancamento</td>

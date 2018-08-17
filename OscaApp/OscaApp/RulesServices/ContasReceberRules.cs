@@ -4,6 +4,7 @@ using OscaApp.ViewModels;
 using System;
 using OscaFramework.Models;
 using System.Collections.Generic;
+using OscaFramework.MicroServices;
 
 namespace OscaApp.RulesServices
 {
@@ -20,6 +21,8 @@ namespace OscaApp.RulesServices
 
             if (contasReceber.codigo != null)
             {
+
+                contasReceber.valorRestante = contasReceber.valor;
                 //************ Objetos de controle de acesso ******************
                 contasReceber.criadoEm = DateTime.Now;
                 contasReceber.criadoPor = contexto.idUsuario;
@@ -96,6 +99,7 @@ namespace OscaApp.RulesServices
 
                 ContasReceber contaReceber = new ContasReceber();
                 contaReceber.valor = valorParcela;
+                contaReceber.valorRestante = valorParcela;
                 contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
                 contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
                 contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
@@ -138,6 +142,8 @@ namespace OscaApp.RulesServices
         {
             ContasReceber contaReceber = new ContasReceber();
             contaReceber.valor = balcaoVendas.valorTotal;
+            contaReceber.valorRestante = balcaoVendas.valorTotal;
+
             contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
             contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
             contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
@@ -158,6 +164,8 @@ namespace OscaApp.RulesServices
         {
             ContasReceber contaReceber = new ContasReceber();
             contaReceber.valor = balcaoVendas.valorTotal;
+            contaReceber.valorRestante = balcaoVendas.valorTotal;
+
             contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
             contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
             contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
@@ -172,26 +180,26 @@ namespace OscaApp.RulesServices
 
         }
 
-        public static void CalculoPagamento(ref ContasReceber contasReceber, IPagamentoData pagamentoData, IContasReceberData contasReceberData)
+        public static void CalculoPagamento(Guid idContasReceber, IPagamentoData pagamentoData, IContasReceberData contasReceberData)
         {
             List<Pagamento> pagamentos = new List<Pagamento>();
+            ContasReceber contasReceber = contasReceberData.Get(idContasReceber);
 
-            pagamentos = pagamentoData.GetAllByContasReceber(contasReceber.id);         
+            pagamentos = pagamentoData.GetAllByContasReceber(idContasReceber);         
 
             decimal Total = 0;            
 
             foreach (var item in pagamentos)
             {
                 Total += item.valor;
-            }
+            } 
 
-            contasReceber.valorPago = Total;
-            contasReceber.valorRestante = contasReceber.valor - Total;
+            SqlGeneric sql = new SqlGeneric();
+            sql.AtualizaContasReceber(Total, contasReceber.valor - Total, contasReceber.id);
 
-            
         }
 
-        public static bool ValidaCalculoPagamento(ref ContasReceber contasReceber, IPagamentoData pagamentoData, IContasReceberData contasReceberData)
+        public static bool ValidaCalculoPagamento(ref ContasReceber contasReceber, IPagamentoData pagamentoData)
         {
             List<Pagamento> pagamentos = new List<Pagamento>();
 
@@ -212,7 +220,5 @@ namespace OscaApp.RulesServices
             return false;
 
         }
-
-
     }
 }

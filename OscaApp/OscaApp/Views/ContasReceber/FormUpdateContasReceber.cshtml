@@ -65,7 +65,7 @@
                                             <button id="osc_excluir" type="button" class="btn btn-info btn-sm fa fa-remove" onclick="DeleteContasReceber('@Model.contasReceber.id')"> <span>Excluir</span></button>
                                         </label>
                                         <label>
-                                            <button id="osc_calcular" type="submit" class="btn btn-info  btn-sm fa fa-1x fa-calculator"> <span>Atualizar</span></button>
+                                            <button id="osc_calcular" type="button" class="btn btn-info  btn-sm fa fa-1x fa-calculator"  onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber" , new {id = Model.contasReceber.id })'"> <span>Atualizar</span></button>
                                         </label>
                                         <label>
                                             <button id="osc_novoPagamento" type="button" class="btn btn-info  btn-sm fa fa-plus" value="Novo" onclick="CarregaPagamento()"> <span>Adicionar Pagamento</span></button>
@@ -144,7 +144,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                     </span>
-                                    <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control">
+                                    <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control" >
                                         <option value="0">Pedido</option>
                                         <option value="1">Atendimento</option>
                                         <option value="2">Ordem de Serviço</option>
@@ -202,7 +202,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                        <input asp-for="@Model.contasReceber.criadoEm" class="form-control" type="text" id="osc_dataLancamento" disabled="disabled">
+                                        <input asp-for="@Model.contasReceber.criadoEm" class="form-control" type="text" id="osc_dataLancamento" disabled="disabled"  value="@Model.contasReceber.criadoEm.ToShortDateString()">
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                        <input asp-for="@Model.contasReceber.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required" autocomplete="off">
+                                        <input asp-for="@Model.contasReceber.dataPagamento" class="form-control" type="text" id="osc_dataPagamento" required="required" autocomplete="off" value="@Model.contasReceber.dataPagamento.ToShortDateString()">
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                                 <div class="inputGroupContainer">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="fa fa-calendar fa-2x"></i></span>&nbsp;
-                                        <input asp-for="@Model.contasReceber.dataRecebimento" class="form-control" type="text" id="osc_dataRecebimento" autocomplete="off" disabled="disabled">
+                                        <input asp-for="@Model.contasReceber.dataRecebimento" class="form-control" type="text" id="osc_dataRecebimento" autocomplete="off" disabled="disabled"  value="@Model.contasReceber.dataRecebimento.ToShortDateString()">
                                     </div>
                                 </div>
                             </div>
@@ -298,10 +298,11 @@
                 <br />
                 <br />
             </div>
+        </form>
     </div>
-    </form>
+
 </div>
-</div>
+
 
 <div class="modal fade" id="ModalStatus">
 </div>
