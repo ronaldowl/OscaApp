@@ -82,3 +82,25 @@ function CarregaLookupEndereco2(id) {
     })
 
 }
+
+function CarregaLookupFornecedor() {
+    $("#lookupFornecedor").load("/Fornecedor/LookupFornecedor", function () {
+        $("#lookupFornecedor").modal("show");
+    })
+}
+
+function ConfigLookupFornecedor(id, name) {
+
+    $("#osc_fornecedorIdName").val(name);
+    $("#osc_fornecedorId").val(id);  
+
+    $('#lookupFornecedor').modal('hide');
+}
+
+function OpenLookupFornecedor() {
+    var id = $("#osc_fornecedorId").val();
+
+    if (id != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/Fornecedor/FormUpdateFornecedor?id=" + id);
+    }
+}  

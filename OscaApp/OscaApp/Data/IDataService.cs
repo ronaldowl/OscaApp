@@ -46,8 +46,8 @@ namespace OscaApp.Data
     public interface IFornecedorData
     {
         void Add(Fornecedor fornecedor);
-        void Update(Fornecedor fornecedor);
-        Fornecedor Get(Guid id, Guid idOrg);
+        void Update(Fornecedor fornecedor);       
+        Fornecedor Get(Guid id);
         List<Fornecedor> GetAll(Guid idOrg);
     }
     public interface IComunicadoData
@@ -255,8 +255,18 @@ namespace OscaApp.Data
         List<Relacao> GetAllRelacao(Guid idOrg);
         List<LookupItemLista> GetAllByListaPreco(Guid idLista);
         List<LookupItemLista> GetAllByIdProduto(Guid idProduto);
+    }
 
+    public interface IProdutoFornecedorData
+    {
+        void Add(ProdutoFornecedor produtoFornecedor);
+        void Update(ProdutoFornecedor produtoFornecedor);
+        void Delete(ProdutoFornecedor produtoFornecedor);
 
+        ProdutoFornecedor Get(Guid id);
+        List<ProdutoFornecedor> GetAll(Guid idOrg);
+        List<Relacao> GetAllRelacao(Guid idOrg);
+        List<ProdutoFornecedorGridViewModel> GetAllByProduto(Guid idProduto);        
     }
 
     public interface IProdutoPedidoData

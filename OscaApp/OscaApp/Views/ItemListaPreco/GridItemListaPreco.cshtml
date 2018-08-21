@@ -44,19 +44,23 @@
                             <th>Código Produto</th>
                             <th>Fabricante</th>
                             <th>Lista de Preço</th>
-                            <th>Valor Venda</th>                                         
+                            <th>Valor Venda</th>
+                            <th>Valor Mínimo</th>
+
                         </tr>
                     </thead>
                     @foreach (var item in Model)
                     {
-                        <tr style="cursor:pointer;font-size:12px" id="@item.produto.id" value="@item.produto.nome" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new {id = item.itemlistaPreco.id })'">
-                            <td><i class="fa fa-list-ul"></i></td> 
-                            <td>@item.produto.nome</td>
-                            <td>@item.produto.codigo</td> 
-                            <td>@item.produto.fabricante</td> 
-                            <td>@item.listapreco.nome</td> 
-                            <td>@item.itemlistaPreco.valor.ToString("N2")</td>                                                                      
-                        </tr>
+                    <tr style="cursor:pointer;font-size:12px" id="@item.produto.id" value="@item.produto.nome" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new {id = item.itemlistaPreco.id })'">
+                        <td><i class="fa fa-list-ul"></i></td>
+                        <td>@item.produto.nome</td>
+                        <td>@item.produto.codigo</td>
+                        <td>@item.produto.fabricante</td>
+                        <td>@item.listapreco.nome</td>
+                        <td>@item.itemlistaPreco.valor.ToString("N2")</td>
+                        <td>@item.itemlistaPreco.valorMinimo.ToString("N2")</td>
+
+                    </tr>
                     }
                 </table>
             </div>

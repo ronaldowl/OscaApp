@@ -47,10 +47,7 @@ namespace OscaApp.Data
         public DbSet<ProdutoBalcao> ProdutosBalcao { get; set; }
         public DbSet<OrgConfig> OrgsConfig { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
-
-
-
-
+        public DbSet<ProdutoFornecedor> ProdutosFornecedor { get; set; }
 
     }
 }

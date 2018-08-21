@@ -15,6 +15,9 @@ namespace OscaFramework.Models
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public decimal valor { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        public decimal valorMinimo { get; set; }
+
         public Guid idProduto { get; set; } 
         public Guid idListaPreco { get; set; }    
         public Guid idOrganizacao { get; set; }

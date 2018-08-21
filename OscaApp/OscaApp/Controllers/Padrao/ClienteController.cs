@@ -211,23 +211,9 @@ namespace OscaApp.Controllers
         }
 
         public ViewResult LookupCliente()
-        {
-            //try
-            //{
-            //    IEnumerable<Cliente> retorno = clienteData.GetAll(contexto.idOrganizacao, 1);
-
-            //    return View(retorno.ToPagedList<Cliente>(1, 10));
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    LogOsca log = new LogOsca();
-            //    log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
-            
-
+        {       
             return View();
         }
-
         
         public ViewResult GridLookupCliente(string filtro, int Page)
         {
@@ -259,8 +245,6 @@ namespace OscaApp.Controllers
 
             return View();
         }
-
-
-       
+                       
     }
 }

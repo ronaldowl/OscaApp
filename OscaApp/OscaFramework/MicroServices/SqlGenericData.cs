@@ -511,6 +511,51 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
+        public Fornecedor RetornaFornecedor(Guid id)
+        {
+            Fornecedor retorno = new Fornecedor();
+            SqlDataReader dataReader;
+            try
+            {
+
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.id , o.nomeFornecedor ,  status, codigo, email, nomeVendedor, telefone from Fornecedor as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.nomeFornecedor = dataReader["nomeFornecedor"].ToString();
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+                            retorno.codigo = dataReader["codigo"].ToString();
+                            retorno.telefone = dataReader["telefone"].ToString();
+                            retorno.email = dataReader["email"].ToString();
+                            retorno.nomeVendedor = dataReader["nomeVendedor"].ToString();
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
         public List<Relacao> RetornaTodasRelacaoProfissional(Guid idOrganizacao)
         {
             List<Relacao> retorno = new List<Relacao>();
@@ -1282,7 +1327,6 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
-
         public Relacao RetornaRelacaoEndereco(Guid id)
         {
             Relacao retorno = new Relacao();
@@ -1321,7 +1365,45 @@ namespace OscaFramework.MicroServices
             }
             return retorno;
         }
+        public Relacao RetornaRelacaoFornecedor(Guid id)
+        {
+            Relacao retorno = new Relacao();
+            SqlDataReader dataReader;
+            try
+            {
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "select O.id , o.nomeFornecedor, o.codigo,  status from Fornecedor as O where O.id = '" + id.ToString() + "'",
+                        CommandType = CommandType.Text
+                    };
 
+                    Connection.Open();
+                    dataReader = _Command.ExecuteReader();
+
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            retorno.id = new Guid(dataReader["id"].ToString());
+                            retorno.idName = dataReader["nomeFornecedor"].ToString();
+                            retorno.codigo = dataReader["codigo"].ToString();
+                            retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
+
+                        }
+                    }
+                    Connection.Close();
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return retorno;
+        }
 
     }
 }

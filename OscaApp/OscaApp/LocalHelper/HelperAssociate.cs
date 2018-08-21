@@ -277,5 +277,22 @@ namespace OscaApp.framework
             }       
             return retorno;
         }
+
+        public static List<ProdutoFornecedorGridViewModel> ConvertToGridProdutoFornecedor(List<ProdutoFornecedor> itens)
+        {
+            List<ProdutoFornecedorGridViewModel> retorno = new List<ProdutoFornecedorGridViewModel>();
+            SqlGenericData sqldata = new SqlGenericData();
+
+            foreach (var item in itens)
+            {
+                ProdutoFornecedorGridViewModel X = new ProdutoFornecedorGridViewModel();
+                X.fornecedor = sqldata.RetornaFornecedor(item.idFornecedor);
+                X.produtoFornecedor = item;          
+
+                retorno.Add(X);
+            }
+            return retorno;
+        }
+
     }
 }

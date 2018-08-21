@@ -13,7 +13,7 @@
                         <table>
                             <tr>
                                 <td>
-                                    <h4 style="font-weight:bold">Lista de Fornecedores: &nbsp;&nbsp;</h4>
+                                    <h4 style="font-weight:bold" class="fa fa-2x fa-id-badge">&nbsp;Lista de Fornecedores: </h4>
                                 </td>
                                 <td>
                                     <div class="input-group">
@@ -41,6 +41,7 @@
                     <table class="table table-hover   table-bordered table-sm">
                         <thead class="thead-light">
                             <tr>
+                                <th></th>
                                 <th>Código</th>
                                 <th>Nome do Fornecedor</th>
                                 <th>CNPJ</th>
@@ -53,6 +54,7 @@
                         @foreach (var item in Model)
                         {
                             <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateFornecedor", "Fornecedor", new {id = item.id })'">
+                                <td><i class="fa fa-1x fa-id-badge"></i></td>
                                 <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateFornecedor", new { id = item.id })</td>
                                 <td>@item.nomeFornecedor</td>
                                 <td>@item.cnpj</td>

@@ -1,0 +1,35 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.Fornecedor>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+
+
+<table class="table table-hover   table-bordered table-sm">
+    <thead class="thead-light">
+        <tr style="font-size:12px">
+            <th></th>
+            <th style="width:100px">Código</th>
+            <th style="width:400px">Nome</th>
+            <th style="width:300px">E-mail</th>
+            <th style="width:300px">Telefone</th>
+            <th style="width:150px">CNPJ/CPF</th>
+           
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+    <tr style="font-size:12px" id="@item.id" onclick="ConfigLookupFornecedor('@item.id.ToString()','@item.nomeFornecedor') " data-dismiss="modal">
+        <td><i class="fa  fa-users"></i></td>
+        <td>@item.codigo.ToString()</td>
+        <td>@item.nomeFornecedor</td>
+        <td>@item.email</td>
+        <td>@item.telefone</td>
+        <td>@item.cnpj</td>      
+
+    </tr>
+    }
+</table>
+<script src="~/lib/OscaJs/osc_lookup.js"></script>

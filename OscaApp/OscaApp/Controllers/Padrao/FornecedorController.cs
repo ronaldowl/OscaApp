@@ -82,7 +82,7 @@ namespace OscaApp.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = fornecedorData.Get(modelo.Fornecedor.id, contexto.idOrganizacao);            
+                retorno = fornecedorData.Get(modelo.Fornecedor.id);            
 
                 if (retorno != null)
                 {
@@ -136,5 +136,43 @@ namespace OscaApp.Controllers
 
             return View(retorno.ToPagedList<Fornecedor>(Page, 20));
         }
+
+        public ViewResult LookupFornecedor()
+        {
+            return View();
+        }
+
+
+        public ViewResult GridLookupFornecedor(string filtro, int Page)
+        {
+            try
+            {
+                IEnumerable<Fornecedor> retorno = fornecedorData.GetAll(contexto.idOrganizacao);
+
+                if (!String.IsNullOrEmpty(filtro))
+                {
+                    retorno = from u in retorno
+                              where (u.nomeFornecedor.ToLower().Contains(filtro.ToLower())) ||
+                                    (u.codigo.StartsWith(filtro, StringComparison.InvariantCultureIgnoreCase))
+                              select u;
+
+                }
+                retorno = retorno.OrderBy(x => x.nomeFornecedor);
+
+                //Se não passar a número da página, caregar a primeira
+                if (Page == 0) Page = 1;
+
+                return View(retorno.ToPagedList<Fornecedor>(Page, 10));
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
+            }
+
+            return View();
+        }
+
     }
 }

@@ -21,6 +21,8 @@ namespace OscaApp.Controllers
     {
 
         private readonly ProdutoData produtoData;
+        private readonly ProdutoFornecedorData produtoFornecedorData;
+
         private readonly ItemListaPrecoData itemListaPrecoData;
         private ContextPage contexto;
         private OscaConfig oscaConfig;
@@ -33,6 +35,7 @@ namespace OscaApp.Controllers
         {
             this.produtoData = new ProdutoData(db);
             this.itemListaPrecoData = new ItemListaPrecoData(db);
+            this.produtoFornecedorData = new ProdutoFornecedorData(db);
             this.orgConfig = new OrgConfigData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.oscaConfig = _oscaConfig;
@@ -87,6 +90,7 @@ namespace OscaApp.Controllers
                             itemLista.idProduto = prod.id;
                             itemLista.idListaPreco = lista.id;
                             itemLista.valor = (prod.valorCompra / 100) * prod.margemLucroBase + prod.valorCompra;
+                            itemLista.valorMinimo = itemLista.valor;
                             ItemListaPrecoRules.ItemListaPrecoCreateRelacionado(itemLista, contexto);
                             itemListaPrecoData.Add(itemLista);
                         }
@@ -117,7 +121,7 @@ namespace OscaApp.Controllers
                 retorno = produtoData.Get(modelo.produto.id);
                 modelo.itensListaPreco = new List<ItemProdutoLista>();
                 modelo.itensListaPreco = ProdutoRules.RetornaItemListaProduto(itemListaPrecoData.GetAllByProduto(modelo.produto.id));
-
+                modelo.produtoFornecedor = produtoFornecedorData.GetAllByProduto(retorno.id);
                 retorno.urlProduto = "http://" + retorno.urlProduto;
 
                 //apresenta mensagem de registro atualizado com sucesso

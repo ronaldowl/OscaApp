@@ -39,6 +39,7 @@ namespace OscaApp.Data
             {
                 db.Attach(modelo);
                 db.Entry(modelo).Property("valor").IsModified               = true;
+                db.Entry(modelo).Property("valorMinimo").IsModified = true;
                 db.Entry(modelo).Property("idListaPreco").IsModified        = true;             
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;

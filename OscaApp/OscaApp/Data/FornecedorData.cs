@@ -52,13 +52,13 @@ namespace OscaApp.Data
             }
 
         }
-        public Fornecedor Get(Guid id, Guid idOrg)
+        public Fornecedor Get(Guid id)
         {
             List<Fornecedor> retorno = new List<Fornecedor>();
             try
             {
 
-                retorno = db.Fornecedores.FromSql("SELECT * FROM fornecedor where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = db.Fornecedores.FromSql("SELECT * FROM fornecedor where  id = '" + id.ToString() + "'").ToList();
             }
             catch (SqlException ex)
             {

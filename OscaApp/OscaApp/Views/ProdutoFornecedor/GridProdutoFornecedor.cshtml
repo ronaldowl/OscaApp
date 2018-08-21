@@ -1,0 +1,66 @@
+﻿@model List<OscaApp.ViewModels.GridViewModels.ProdutoFornecedorGridViewModel>
+
+@{
+    string idProduto = ViewBag.idProduto;
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="osc_Grid">
+            <input type="hidden" id="osc_id" value="@idProduto" />
+            <div class="card-header" style="height:60px">
+                <div class="card-title">
+                    <div class="form-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <h5 style="font-weight:bold" class="fa fa-2x fa-cube">Fornecedores do Produto:</h5>
+                                </td>
+                                <td>
+                                    <h5 style="font-weight:bold;font-size:25px">@ViewBag.nomeProduto &nbsp; &nbsp;&nbsp;</h5>
+                                </td>
+                              
+                                <td>
+                                    <div class="input-group">
+                                        <label>
+                                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = idProduto })'"> <span>Voltar</span></button>
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>         
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-hover  table-bordered table-sm">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th></th>
+                                    <th>Fornecedor</th>
+                                    <th>Cód Produto Fornecedor</th>
+                                    <th>Valor Compra</th>                              
+                                   
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                            <tr style="cursor:pointer;font-size:12px" id="@item.produtoFornecedor.id" onclick="location.href='@Url.Action("FormUpdateProdutoFornecedor", "ProdutoFornecedor", new {id = item.produtoFornecedor.id })'">
+                                <td><i class="fa fa-cube"></i></td>
+                                <td>@Html.ActionLink(item.fornecedor.nomeFornecedor, "FormUpdateProdutoFornecedor", new { id = item.produtoFornecedor.id })</td>
+                                <td>@item.produtoFornecedor.codigoProdutoFornecedor</td>
+                                <td>R$@item.produtoFornecedor.valorCompra</td>
+                            </tr>
+                            }
+                        </table>
+                    </div>
+                </div>         
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

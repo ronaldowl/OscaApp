@@ -511,6 +511,7 @@ namespace OscaFramework.Models
             DetalheMovimentacaoProduto = 38,
             Report = 39,
             Pagamento = 40,
+            ProdutoFornecedor = 41,
             Organizacao = 1000
 
         }
