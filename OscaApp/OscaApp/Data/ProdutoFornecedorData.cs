@@ -89,14 +89,7 @@ namespace OscaApp.Data
             return retorno;
 
         }
-        //public List<ProdutoFornecedorGridViewModel> GetAllByProduto(Guid idProduto)
-        //{
-        //    List<ProdutoFornecedor> itens = new List<ProdutoFornecedor>();
-
-        //    itens = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idProduto = '" + idProduto.ToString() + "'").ToList();
-
-        //    return itens;
-        //}
+     
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
             List<ProdutoFornecedor> retorno = new List<ProdutoFornecedor>();
@@ -106,19 +99,21 @@ namespace OscaApp.Data
             return Relacao.ConvertToRelacao(retorno);
 
         }
-        //public List<LookupItemLista> List<Fornecedor> GetAllByProduto(Guid idProduto)(Guid idLista)
-        //{            
-        //    List<ItemListaPreco> itens = new List<ItemListaPreco>();
-
-        //    itens =  db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idListaPreco = '" + idLista.ToString() + "'").ToList();
-
-        //    return HelperAssociate.ConvertToLookupItemLista( itens);
-        //}
+    
         public List<ProdutoFornecedorGridViewModel> GetAllByProduto(Guid idProduto)
         {
             List<ProdutoFornecedor> itens = new List<ProdutoFornecedor>();
 
             itens = db.ProdutosFornecedor.FromSql("SELECT * FROM ProdutoFornecedor  where  idProduto= '" + idProduto.ToString() + "'").ToList();
+
+            return HelperAssociate.ConvertToGridProdutoFornecedor(itens);
+        }
+
+        public List<ProdutoFornecedorGridViewModel> GetAllByFornecedor(Guid idFornecedor)
+        {
+            List<ProdutoFornecedor> itens = new List<ProdutoFornecedor>();
+
+            itens = db.ProdutosFornecedor.FromSql("SELECT * FROM ProdutoFornecedor  where  idFornecedor = '" + idFornecedor.ToString() + "'").ToList();
 
             return HelperAssociate.ConvertToGridProdutoFornecedor(itens);
         }

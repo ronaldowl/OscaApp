@@ -106,6 +106,9 @@
     <Content Update="Views\Fornecedor\LookupFornecedor.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\ProdutoFornecedor\GridFornecedorProduto.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\ProdutoFornecedor\GridProdutoFornecedor.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

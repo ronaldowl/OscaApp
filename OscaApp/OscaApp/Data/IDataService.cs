@@ -266,7 +266,9 @@ namespace OscaApp.Data
         ProdutoFornecedor Get(Guid id);
         List<ProdutoFornecedor> GetAll(Guid idOrg);
         List<Relacao> GetAllRelacao(Guid idOrg);
-        List<ProdutoFornecedorGridViewModel> GetAllByProduto(Guid idProduto);        
+        List<ProdutoFornecedorGridViewModel> GetAllByProduto(Guid idProduto);  
+        List<ProdutoFornecedorGridViewModel> GetAllByFornecedor(Guid idFornecedor);
+
     }
 
     public interface IProdutoPedidoData

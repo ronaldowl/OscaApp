@@ -287,8 +287,8 @@ namespace OscaApp.framework
             {
                 ProdutoFornecedorGridViewModel X = new ProdutoFornecedorGridViewModel();
                 X.fornecedor = sqldata.RetornaFornecedor(item.idFornecedor);
-                X.produtoFornecedor = item;          
-
+                X.produtoFornecedor = item;
+                X.produto = sqldata.RetornaProduto(item.idProduto);
                 retorno.Add(X);
             }
             return retorno;

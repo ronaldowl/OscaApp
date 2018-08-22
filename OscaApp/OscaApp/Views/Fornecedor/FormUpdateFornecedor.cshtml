@@ -8,7 +8,7 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-8 offset-2">
             @if (!String.IsNullOrEmpty(Model.StatusMessage))
             {
 
@@ -123,6 +123,61 @@
                         </div>
                     </div>
                 </div>
+            
+            </form>
+
+        </div>
+    
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <div class="card card-success" id="osc_itensProdutoFornecedor">
+                <div class="card-header card-success">
+                    <div class="card-title">
+                        <table>
+                            <tr>
+                                <td><h3>Produtos:&nbsp;</h3></td>
+                                <td>
+                                    <div id="barra_acoes_itemProdutoFornecedor">                                   
+                                        <label>
+                                            <button id="osc_gridProdutoFornecedor" type="button" class="btn btn-info btn-lg btn-sm fa fa-1x fa-search-plus" value="Ver mais" onclick="location.href='@Url.Action("GridFornecedorProduto", "ProdutoFornecedor", new {idFornecedor = @Model.Fornecedor.id})'">Ver mais</button> Total:@Model.produtoFornecedor.Count
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th style="width:5px">Item</th>
+                                <th style="width:150px">Nome</th>
+                                <th style="width:250px">Código Produto Fornecedor</th>
+                                <th> Quantidade</th>
+                                <th> Valor Compra</th>
+
+
+                            </tr>
+                        </thead>
+                        @{int contadorF = 0;}
+                        @foreach (var item in Model.produtoFornecedor)
+                        {
+                            @if (contadorF == 5) { break; }
+                        <tr>
+                            <td><a class="fa fa-1x fa-cube" onclick="location.href='@Url.Action("FormUpdateProdutoFornecedor", "ProdutoFornecedor", new { id = item.produtoFornecedor.id })'"></a></td>
+                            <td>@Html.ActionLink(item.produto.nome, "FormUpdateProdutoFornecedor", "ProdutoFornecedor", new { id = item.produtoFornecedor.id })</td>
+                            <td>@item.produtoFornecedor.codigoProdutoFornecedor</td>
+                            <td>@item.produto.quantidade</td>
+                            <td>R$@item.produtoFornecedor.valorCompra.ToString("N2")</td>
+
+
+                        </tr>
+                            contadorF++;
+                        }
+                    </table>
+                </div>
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-md-3">
@@ -171,9 +226,16 @@
                         </div>
                     </div>
                 </div>
-            </form>
-
-        </div>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+        
+            </div>
+        </div>      
+   
     </div>
 </div>
 

@@ -155,7 +155,16 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
+        public ViewResult GridFornecedorProduto(string idFornecedor)
+        {
+            List<ProdutoFornecedorGridViewModel> modelo = produtoFornecedorData.GetAllByFornecedor(new Guid(idFornecedor));
 
-        
+            ViewBag.idProduto = idFornecedor;
+            ViewBag.nomeFornecedor = fornecedorData.Get(new Guid(idFornecedor)).nomeFornecedor;
+
+            return View(modelo);
+        }
+
+
     }
 }

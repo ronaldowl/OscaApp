@@ -3,7 +3,8 @@ using OscaApp.framework.Models;
 using OscaApp.Data;
 using OscaApp.Models;
 using OscaFramework.Models;
-
+using System.Collections.Generic;
+using OscaApp.ViewModels.GridViewModels;
 
 namespace OscaApp.ViewModels
 {
@@ -11,7 +12,7 @@ namespace OscaApp.ViewModels
     {
         public Fornecedor Fornecedor { get; set; }
         public ContextPage Contexto { get; set; }
-
+        public List<ProdutoFornecedorGridViewModel> produtoFornecedor { get; set; }
         public string StatusMessage { get; set; }
     }
 }

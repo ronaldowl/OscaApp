@@ -20,14 +20,14 @@ namespace OscaApp.Controllers
     public class FornecedorController : Controller
     {
         private readonly IFornecedorData fornecedorData;
+        private readonly IProdutoFornecedorData produtoFornecedorData;
+
         private ContextPage contexto;
-
-
 
         public FornecedorController(ContexDataService db, IHttpContextAccessor httpContext)
         {
             this.fornecedorData = new FornecedorData(db);
-            // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
+            this.produtoFornecedorData = new ProdutoFornecedorData(db);
             this.contexto = new ContextPage().ExtractContext(httpContext);
 
         }
@@ -77,12 +77,12 @@ namespace OscaApp.Controllers
             FornecedorViewModel modelo = new FornecedorViewModel();
             modelo.Fornecedor = new Fornecedor();
             modelo.Fornecedor.id = new Guid(id);
-
             Fornecedor retorno = new Fornecedor();
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = fornecedorData.Get(modelo.Fornecedor.id);            
+                retorno = fornecedorData.Get(modelo.Fornecedor.id);
+                modelo.produtoFornecedor = produtoFornecedorData.GetAllByFornecedor(modelo.Fornecedor.id);
 
                 if (retorno != null)
                 {
