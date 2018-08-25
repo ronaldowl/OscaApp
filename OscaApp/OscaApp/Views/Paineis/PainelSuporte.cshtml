@@ -74,17 +74,30 @@
         </div>
         <div class="col-md-4">
             <!-- CARD -->
-            <div class="card m-2">
+            @*<div class="card m-2">
                 <div class="card-header">
                     <table>
                         <tr>
                             <td> <i class="fa fa-2x fa-info-circle iconPanel" aria-hidden="true"></i></td>
-                            <td><a asp-controller="LogOsca" asp-action="GridLogOsca"><h4>Logs</h4></a></td>
+                            <td><a asp-controller="LogOsca" asp-action="GridLogOsca"><h4>Logs de Erro</h4></a></td>
                         </tr>
                     </table>
                 </div>
                 <div class="card-body">
                     <p>Consulte os logs de erros da sua organização para auxiliar no suporte</p>
+                </div>
+            </div>*@
+            <div class="card m-2">
+                <div class="card-header">
+                    <table>
+                        <tr>
+                            <td> <i class="fa fa-2x fa-info-circle iconPanel" aria-hidden="true"></i></td>
+                            <td><a asp-controller="LogOsca" asp-action="GridLogAcesso"><h4>Log de Acesso</h4></a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <p>Consulte os logs de acesso a plataforma, com o nome e data do login</p>
                 </div>
             </div>
             <!-- CARD -->

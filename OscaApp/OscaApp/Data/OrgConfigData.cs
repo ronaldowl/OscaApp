@@ -39,15 +39,15 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("qtdDiasCartaoCredito").IsModified      = true;
                 db.Entry(modelo).Property("qtdDiasCartaoDebito").IsModified       = true;
                 db.Entry(modelo).Property("mensagemCupom").IsModified             = true;
-                db.Entry(modelo).Property("tituloImpressao").IsModified           = true;
-                db.Entry(modelo).Property("modificadoPor").IsModified             = true;
-                db.Entry(modelo).Property("modificadoPorName").IsModified         = true;
-                db.Entry(modelo).Property("modificadoEm").IsModified              = true;
-
+                db.Entry(modelo).Property("tituloImpressao").IsModified           = true;        
+                db.Entry(modelo).Property("quantidadeMinimaProduto").IsModified  = true;
                 db.Entry(modelo).Property("cupom_altura").IsModified = true;
                 db.Entry(modelo).Property("cupom_largura").IsModified = true;
                 db.Entry(modelo).Property("cupom_fontesize").IsModified = true;
 
+                db.Entry(modelo).Property("modificadoPor").IsModified = true;
+                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+                db.Entry(modelo).Property("modificadoEm").IsModified = true;
 
                 db.SaveChanges();
             }

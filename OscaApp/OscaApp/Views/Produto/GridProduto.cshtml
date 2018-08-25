@@ -48,6 +48,7 @@
                                 <th>Código</th>
                                 <th>Nome</th>
                                 <th>Qtd</th>
+                                <th>Qtd Mínima</th>
                                 <th>Tipo de Venda</th>
                                 <th>Fabricante</th>
                                 <th>Modelo</th>
@@ -57,17 +58,21 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                            <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = item.id })'">
-                                <td><i class="fa fa-cubes"></i></td>
-                                <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProduto", new { id = item.id })</td>
-                                <td>@item.nome</td>
-                                <td>@item.quantidade</td>
-                                <td>@item.formaVendaProduto</td>
-                                <td>@item.fabricante</td>
-                                <td>@item.modelo</td>
-                                <td>R$ @item.valorCompra.ToString("N")</td>
-                                <td>@item.criadoPorName</td>
-                            </tr>
+                            
+                        <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = item.id })'">
+                            <td><i class="fa fa-cubes"></i></td>
+                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProduto", new { id = item.id })</td>
+                            <td>@item.nome</td>
+                            @if(item.quantidade == 0){<td class="bg-danger">@item.quantidade</td>}else{<td >@item.quantidade</td>}
+                            
+                            <td>@item.quantidadeMinima</td>
+
+                            <td>@item.formaVendaProduto</td>
+                            <td>@item.fabricante</td>
+                            <td>@item.modelo</td>
+                            <td>R$ @item.valorCompra.ToString("N")</td>
+                            <td>@item.criadoPorName</td>
+                        </tr>
                         }
                     </table>
 

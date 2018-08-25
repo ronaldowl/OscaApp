@@ -64,6 +64,8 @@ namespace OscaApp.RulesServices
                 X.idListaPreco = item.idListaPreco;
                 X.nomeListaPreco = sqldata.RetornaListaPreco(item.idListaPreco).nome;
                 X.valorVenda = item.valor.ToString("N2");
+                X.valorMinimo = item.valorMinimo.ToString("N2");
+
                 retorno.Add(X);
             }
            

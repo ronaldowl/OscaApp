@@ -1,0 +1,56 @@
+﻿@model List<OscaFramework.Models.LogAcesso>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" id="osc_Grid">
+            <div class="card-header">
+                <div class="card-title">
+                    <table>
+                        <tr>
+                            <td>
+                                <h5 style="font-weight:bold" class="fa fa-2x fa-info-circle"> Logs de Acesso: &nbsp;&nbsp;</h5>
+                            </td>
+                            <td>
+                                <div class="input-group">
+                                    <label>
+                                        <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-backward" value="voltar" onclick="history.back()"> <span>Voltar</span></button>
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <table class="table table-hover table-striped table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>ID</th>
+                                    <th>ID do usuário</th>
+                                    <th>Nome do usuário</th>
+                                    <th>Data de Acesso</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td><i class="fa fa-info-circle"></i></td>
+                                <td>@item.id</td>
+                                <td>@item.idUsuario</td>
+                                <td>@item.NomeUsuario</td>
+                                <td>@item.dataLogin</td>
+                            </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/js/osc_cliente.js" asp-append-version="true"></script>
+<script src="~/js/osc_global.js" asp-append-version="true"></script>

@@ -1,25 +1,20 @@
-﻿
-using OscaFramework.Models;
+﻿using OscaFramework.Models;
 using System;
 using System.Data;
 using System.Data.SqlClient;
- 
 using Microsoft.Extensions.Configuration;
 using System.IO;
- 
+using System.Collections.Generic;
 
 namespace OscaFramework.MicroServices
 {
-    public   class SqlGenericManager  
-     {
-
+    public class SqlGenericManager
+    {
         public string conectStringManager { get; set; }
         public string conectStringData { get; set; }
-
-
         public IConfiguration Configuration { get; }
 
-        public SqlGenericManager( )
+        public SqlGenericManager()
         {
             var builder = new ConfigurationBuilder()
            .SetBasePath(Directory.GetCurrentDirectory())
@@ -32,8 +27,8 @@ namespace OscaFramework.MicroServices
             this.conectStringManager = Configuration.GetConnectionString("DefaultConnection");
             this.conectStringData = Configuration.GetConnectionString("databaseService");
         }
-        
-        public bool ExisteOrganizacao(string org,out Guid id)
+
+        public bool ExisteOrganizacao(string org, out Guid id)
         {
             try
             {
@@ -48,9 +43,9 @@ namespace OscaFramework.MicroServices
                         CommandText = "select O.id from Organizacao as O where O.nomeLogin = '" + org + "'",
                         CommandType = CommandType.Text
                     };
-                 
+
                     Connection.Open();
-                    retorno =  _Command.ExecuteScalar();
+                    retorno = _Command.ExecuteScalar();
                     Connection.Close();
 
                     if (retorno != null)
@@ -68,12 +63,12 @@ namespace OscaFramework.MicroServices
         }
 
         public Organizacao RetornaOrganizacao(Guid idOrg)
-        { 
-              Organizacao retorno = new Organizacao();
-              SqlDataReader dataReader;
+        {
+            Organizacao retorno = new Organizacao();
+            SqlDataReader dataReader;
             try
             {
-             
+
 
                 using (SqlConnection Connection = new SqlConnection(conectStringData))
                 {
@@ -84,16 +79,16 @@ namespace OscaFramework.MicroServices
                         CommandText = "select O.id , o.nomeLogin ,o.nomeAmigavel, status, statusOrg, dataExpiracao, servicoPaginaCapturaLead from Organizacao as O where O.id = '" + idOrg.ToString() + "'",
                         CommandType = CommandType.Text
                     };
-                 
+
                     Connection.Open();
-                    dataReader =  _Command.ExecuteReader();
+                    dataReader = _Command.ExecuteReader();
 
 
                     if (dataReader.HasRows)
                     {
                         while (dataReader.Read())
                         {
-                            retorno.id = new Guid(dataReader["id"].ToString()); 
+                            retorno.id = new Guid(dataReader["id"].ToString());
                             retorno.nomeLogin = dataReader["nomeLogin"].ToString();
                             retorno.nomeAmigavel = dataReader["nomeAmigavel"].ToString();
                             retorno.status = (CustomEnumStatus.Status)Convert.ToInt32(dataReader["status"].ToString());
@@ -105,7 +100,7 @@ namespace OscaFramework.MicroServices
                     }
                     Connection.Close();
 
-                   
+
                 };
             }
             catch (SqlException ex)
@@ -121,7 +116,7 @@ namespace OscaFramework.MicroServices
             Relacao retorno = new Relacao();
             try
             {
-                SqlDataReader dataReader;              
+                SqlDataReader dataReader;
 
                 using (SqlConnection Connection = new SqlConnection(conectStringData))
                 {
@@ -129,14 +124,14 @@ namespace OscaFramework.MicroServices
                     {
                         Connection = Connection,
                         CommandText = "osc_RetornaContextoOrg",
-                        CommandType = CommandType.StoredProcedure                         
+                        CommandType = CommandType.StoredProcedure
                     };
 
                     _Command.Parameters.AddWithValue("Org", org);
                     _Command.Parameters.AddWithValue("Email", email);
 
                     Connection.Open();
-                    dataReader = _Command.ExecuteReader();                   
+                    dataReader = _Command.ExecuteReader();
 
                     if (dataReader.HasRows)
                     {
@@ -156,11 +151,77 @@ namespace OscaFramework.MicroServices
             }
             catch (SqlException ex)
             {
-               throw;
+                throw;
             }
             return retorno;
         }
-                 
 
+        public bool LogaUsuario(string idOrg, string idUsuario)
+        {
+            try
+            {
+                object retorno;
+
+                using (SqlConnection Connection = new SqlConnection(conectStringData))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "insert into LogAcesso  values(newid(), '" + idUsuario + "','" + idOrg + "', '"+ DateTime.Now.AddHours(4) +"')",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    retorno = _Command.ExecuteScalar();
+                    Connection.Close();
+
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+        public List<LogAcesso> ListaLogAcesso(string idOrg)
+        {
+            List<LogAcesso> listaLog = new List<LogAcesso>();
+            SqlDataReader dataReader;
+
+            using (SqlConnection Connection = new SqlConnection(conectStringData))
+            {
+                var _Command = new SqlCommand()
+                {
+                    Connection = Connection,
+                    CommandText = @"select L.id, L.idUsuario, L.idOrganizacao, L.dataLogin, A.userName NomeUsuario from LogAcesso as L
+                                       inner join AspNetUsers as A on L.idUsuario = A.id where L.idOrganizacao ='" + idOrg + "' order by L.dataLogin desc",
+                    CommandType = CommandType.Text
+                };
+
+                Connection.Open();
+                dataReader = _Command.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    while (dataReader.Read())
+                    {
+                        LogAcesso log = new LogAcesso();
+
+                        log.id = dataReader["id"].ToString();
+                        log.idOrganizacao = dataReader["idOrganizacao"].ToString();
+                        log.idUsuario = dataReader["idUsuario"].ToString();
+                        log.NomeUsuario = dataReader["NomeUsuario"].ToString();
+                        log.dataLogin = dataReader["dataLogin"].ToString();
+
+                        listaLog.Add(log);
+                    }
+                }
+                Connection.Close();
+            };
+            return listaLog;
+        }
     }
 }

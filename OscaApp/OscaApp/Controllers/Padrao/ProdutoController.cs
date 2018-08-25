@@ -51,6 +51,7 @@ namespace OscaApp.Controllers
         [HttpGet]
         public ViewResult FormCreateProduto()
         {
+            var orgParan = orgConfig.Get(this.contexto.idOrganizacao);
 
             ProdutoViewModel modelo = new ProdutoViewModel();
             modelo.produto = new Produto();
@@ -58,7 +59,8 @@ namespace OscaApp.Controllers
             modelo.produto.criadoEm = DateTime.Now;
             modelo.produto.criadoPorName = contexto.nomeUsuario;
 
-            modelo.produto.margemLucroBase = orgConfig.Get(this.contexto.idOrganizacao).margemBaseProduto;
+            modelo.produto.margemLucroBase = orgParan.margemBaseProduto;
+            modelo.produto.quantidadeMinima = orgParan.quantidadeMinimaProduto;
 
             return View(modelo);
         }

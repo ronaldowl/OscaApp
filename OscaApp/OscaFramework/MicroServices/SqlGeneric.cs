@@ -58,6 +58,37 @@ namespace OscaFramework.MicroServices
 
         }
 
+        public bool LogaUsuario(string idOrg, string idUsuario)
+        {
+            try
+            {
+                object retorno;
+
+                using (SqlConnection Connection = new SqlConnection(conectService))
+                {
+
+                    var _Command = new SqlCommand()
+                    {
+                        Connection = Connection,
+                        CommandText = "insert into LogAcesso  values(newid(), '" + idUsuario + "','" + idOrg + "', getdate())",
+                        CommandType = CommandType.Text
+                    };
+
+                    Connection.Open();
+                    retorno = _Command.ExecuteScalar();
+                    Connection.Close();
+
+
+                };
+            }
+            catch (SqlException ex)
+            {
+                throw;
+            }
+            return false;
+        }
+
+
         public void InicializaOrg(string idOrg, string nomeLogin, string nomeUsuario)
         {           
             try

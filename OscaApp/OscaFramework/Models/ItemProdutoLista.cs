@@ -16,6 +16,10 @@ namespace OscaFramework.Models
         
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
         public string valorVenda { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = true)]
+        public string valorMinimo { get; set; }
+
         public DateTime dataCriacao { get; set; }
 
         [NotMapped]

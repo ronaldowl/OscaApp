@@ -88,7 +88,14 @@ namespace OscaApp.Controllers
                     HttpContext.Session.SetString("nomeUsuario", contexto.nomeUsuario.ToString());
 
                     //*****************************************************************************
-                    
+
+                    //Loga acesso do usuario
+                    try
+                    {
+                        sqlgeneric.LogaUsuario( contexto.idOrganizacao.ToString(), contexto.idUsuario.ToString());
+                    }
+                    catch (Exception) { }
+
                     return RedirectToAction("PainelHome", "Paineis", new { });
 
                 }

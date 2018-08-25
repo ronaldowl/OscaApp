@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OscaApp.Data;
 using OscaApp.framework;
 using OscaApp.ViewModels;
+using OscaFramework.MicroServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,13 @@ namespace OscaApp.Controllers
             if (filtro > 0) modelo = from A in modelo where (A.codigoErro == filtro) select A;
 
             return View(modelo.ToList());
+        }
+
+        public ViewResult GridLogAcesso()
+        {
+            SqlGenericManager sqlService = new SqlGenericManager();
+
+            return View(sqlService.ListaLogAcesso(this.contexto.idOrganizacao.ToString()));
         }
 
         [HttpGet]

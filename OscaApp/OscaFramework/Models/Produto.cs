@@ -23,6 +23,9 @@ namespace OscaFramework.Models
 
         public int quantidade { get; set; }
 
+        public int quantidadeMinima { get; set; }
+
+
         [Column(TypeName = "decimal(18, 2)")]
         [DisplayFormat(DataFormatString = "{0:N}", ApplyFormatInEditMode = true)]
         public decimal margemLucroBase { get; set; }

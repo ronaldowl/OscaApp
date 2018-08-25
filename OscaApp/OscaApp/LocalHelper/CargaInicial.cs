@@ -140,10 +140,23 @@ namespace OscaApp.framework
         {
             OrgConfig modelo = new OrgConfig();
 
+            //sessão Produto
+            modelo.quantidadeMinimaProduto = 5;
             modelo.margemBaseProduto = 25;
+            //sessão contas Receber
             modelo.qtdDiasCartaoCredito = 28;
             modelo.qtdDiasCartaoDebito = 1;
+            //sessão Cupom
+            modelo.cupom_altura = "90%";
+            modelo.cupom_largura = "450px";
+            modelo.cupom_fontesize = "12px";
+            modelo.cupom_altura = "90%";
+            modelo.mensagemCupom = "Defina sua mensagem personalizada";
+
+            //sessão Pedido Retirada
             modelo.mensagemPedido = " Defina a sua mensagem personalidada no caminhjo  Configurações - Parametros - Configurações do Sistema";
+            modelo.tituloImpressao = "Defina o seu titulo";
+
 
             //************ Objetos de controle de acesso ******************
             modelo.criadoEm = DateTime.Now;

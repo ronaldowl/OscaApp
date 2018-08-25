@@ -94,6 +94,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\LogOsca\GridLogAcesso.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\ProdutoFornecedor\FormCreateProdutoFornecedor.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
