@@ -146,6 +146,8 @@ namespace OscaApp.framework
             //sessão contas Receber
             modelo.qtdDiasCartaoCredito = 28;
             modelo.qtdDiasCartaoDebito = 1;
+            modelo.creditoGeraContasReceber = false;
+            modelo.debitoGeraContasReceber = false;
             //sessão Cupom
             modelo.cupom_altura = "90%";
             modelo.cupom_largura = "450px";

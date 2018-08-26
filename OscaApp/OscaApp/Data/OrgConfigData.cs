@@ -45,6 +45,9 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("cupom_largura").IsModified = true;
                 db.Entry(modelo).Property("cupom_fontesize").IsModified = true;
 
+                db.Entry(modelo).Property("creditoGeraContasReceber").IsModified = true;
+                db.Entry(modelo).Property("debitoGeraContasReceber").IsModified = true;
+                
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;

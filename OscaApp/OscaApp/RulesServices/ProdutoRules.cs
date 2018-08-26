@@ -102,5 +102,21 @@ namespace OscaApp.RulesServices
 
             return true;
         }
+
+        public static bool SetStatus(int valor, string idProduto, ProdutoData produtoData, ContextPage contexto)
+        {
+
+            Produto modelo = new Produto();
+            modelo.id = new Guid(idProduto);
+            modelo.modificadoEm = DateTime.Now;
+            modelo.modificadoPor = contexto.idUsuario;
+            modelo.modificadoPorName = contexto.nomeUsuario;
+            modelo.status = (CustomEnumStatus.Status)valor;
+            produtoData.SetStatus(modelo);
+
+            return true;
+
+        }
+
     }
 }

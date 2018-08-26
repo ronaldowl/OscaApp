@@ -116,7 +116,7 @@ namespace OscaApp.RulesServices
                     ContasReceberRules.ContasReceberCreate(contaReceber, contaReceberData, contexto);
                 }
 
-                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoCredito)
+                if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoCredito & orgConfig.creditoGeraContasReceber == true)
                 {
                     contaReceber.titulo = "Parcela Cartão Crédito -" + parcela.ToString() + "/" + balcaoVendas.parcelas.ToString() + " - Venda Balcão";
 
@@ -152,7 +152,7 @@ namespace OscaApp.RulesServices
 
             contaReceber.numeroReferencia = balcaoVendas.codigo;
 
-            if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito)
+            if (balcaoVendas.tipoPagamento == CustomEnum.tipoPagamento.CartaoDebito & orgConfig.debitoGeraContasReceber == true)
             {
                 contaReceber.titulo = "Débito - Venda Balcão";
                 contaReceber.dataPagamento = DateTime.Now;

@@ -35,7 +35,12 @@
                                         <label>
                                             <button id="osc_novo" type="button" class="btn btn-info  btn-sm fa fa-1x fa-plus" value="Novo" onclick="location.href='@Url.Action("FormCreateProduto", "Produto", null)'"> <span>Novo</span></button>
                                         </label>
-
+                                        <label>
+                                            <button id="osc_inativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusProduto('@Model.produto.id', 0)"> <span>Inativar</span></button>
+                                        </label>
+                                        <label>
+                                            <button id="osc_ativar" type="button" class="btn btn-info btn-sm fa fa-asterisk" onclick="SetStatusProduto('@Model.produto.id', 1)"> <span>Ativar</span></button>
+                                        </label>
                                     </div>
                                 </td>
                             </tr>
@@ -125,7 +130,7 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-percent fa-2x"></span>&nbsp;
                                     </span>
-                                    <input id="osc_margemLucroBase" asp-for="@Model.produto.margemLucroBase" type="text" class="form-control" placeholder="Margem" pattern="[0-9]+([\.,][0-9]+)?" onblur="onBlur(this)"/>
+                                    <input id="osc_margemLucroBase" asp-for="@Model.produto.margemLucroBase" type="text" class="form-control" placeholder="Margem" pattern="[0-9]+([\.,][0-9]+)?" onblur="onBlur(this)" />
                                 </div>
                             </div>
                         </div>
@@ -255,6 +260,18 @@
                                     <input id="osc_icms" asp-for="@Model.produto.icms" type="text" class="form-control" pattern="[0-9]+([\.,][0-9]+)?" />
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>
+                                    </span> &nbsp;
+                                    <select id="osc_status" class="form-control" asp-for="produto.status" disabled="disabled">
+                                        <option value="0">Inativo</option>
+                                        <option value="1">Ativo</option>
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label>Descrição</label>
@@ -266,63 +283,63 @@
                                 </div>
                             </div>
                         </div>
-                    </div>               
-                </div>             
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoPor" asp-for="@Model.produto.criadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoPor" asp-for="@Model.produto.criadoPorName" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Criado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_criadoEm" asp-for="@Model.produto.criadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Criado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_criadoEm" asp-for="@Model.produto.criadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Por</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-2x fa-user"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoPor" asp-for="@Model.produto.modificadoPorName" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Por</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-2x fa-user"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoPor" asp-for="@Model.produto.modificadoPorName" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Modificado Em</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-calendar fa-2x"></span>
-                                        </span> &nbsp;
-                                        <input id="osc_modificadoEm" asp-for="@Model.produto.modificadoEm" type="text" class="form-control" disabled="disabled" />
-                                    </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Modificado Em</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar fa-2x"></span>
+                                    </span> &nbsp;
+                                    <input id="osc_modificadoEm" asp-for="@Model.produto.modificadoEm" type="text" class="form-control" disabled="disabled" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-</form>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+        </form>
     </div>
     <div class="col-md-4">
         <div class="card">
@@ -383,13 +400,13 @@
                     @foreach (var item in Model.itensListaPreco)
                     {
                         @if (contador == 5) { break; }
-                    <tr>
-                        <td><a class="fa fa-1x fa-shopping-basket" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })'"></a></td>
-                        <td>@Html.ActionLink(item.nomeListaPreco, "FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })</td>
-                        <td>R$ @item.valorVenda</td>
-                        <td>R$ @item.valorMinimo</td>
+                        <tr>
+                            <td><a class="fa fa-1x fa-shopping-basket" onclick="location.href='@Url.Action("FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })'"></a></td>
+                            <td>@Html.ActionLink(item.nomeListaPreco, "FormUpdateItemListaPreco", "ItemListaPreco", new { id = item.id })</td>
+                            <td>R$ @item.valorVenda</td>
+                            <td>R$ @item.valorMinimo</td>
 
-                    </tr>
+                        </tr>
                         contador++;
                     }
                 </table>
@@ -461,6 +478,16 @@
         </div>
     </div>
 </div>
+<script src="~/lib/OscaJs/osc_produto.js"></script>
+<script src="~/lib/OscaJs/osc_global.js"></script>
+<script src="~/lib/OscaJs/osc_servicesWeb.js"></script>
+
+
+<script>
+    //Executa regras de carregamento do Form
+    OnLoad_Produto();
+</script>
+
 
 <script type='text/javascript'>
 

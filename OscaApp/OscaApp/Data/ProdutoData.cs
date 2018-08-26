@@ -36,13 +36,11 @@ namespace OscaApp.Data
         {
             try
             {
-                db.Attach(produto);
-                
+                db.Attach(produto);                
                 db.Entry(produto).Property("codigoBarra").IsModified = true;
                 db.Entry(produto).Property("nome").IsModified = true;
                 db.Entry(produto).Property("quantidade").IsModified = true;
                 db.Entry(produto).Property("quantidadeMinima").IsModified = true;
-
                 db.Entry(produto).Property("icms").IsModified = true;
                 db.Entry(produto).Property("iss").IsModified = true;
                 db.Entry(produto).Property("ipi").IsModified = true;
@@ -61,10 +59,7 @@ namespace OscaApp.Data
                 db.Entry(produto).Property("modificadoPorName").IsModified = true;
                 db.Entry(produto).Property("modificadoPor").IsModified = true;
                 db.Entry(produto).Property("modificadoEm").IsModified = true;
-                db.Entry(produto).Property("classificacaoProduto").IsModified = true;
-
-
-                
+                db.Entry(produto).Property("classificacaoProduto").IsModified = true;                
 
                 db.SaveChanges(); 
             }
@@ -80,6 +75,24 @@ namespace OscaApp.Data
             {
                 db.Attach(produto); 
                 db.Entry(produto).Property("quantidade").IsModified = true;
+                db.Entry(produto).Property("modificadoPorName").IsModified = true;
+                db.Entry(produto).Property("modificadoPor").IsModified = true;
+                db.Entry(produto).Property("modificadoEm").IsModified = true;
+
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+        }
+        public void SetStatus(Produto produto)
+        {
+            try
+            {
+                db.Attach(produto);
+                db.Entry(produto).Property("status").IsModified = true;
                 db.Entry(produto).Property("modificadoPorName").IsModified = true;
                 db.Entry(produto).Property("modificadoPor").IsModified = true;
                 db.Entry(produto).Property("modificadoEm").IsModified = true;
@@ -119,7 +132,6 @@ namespace OscaApp.Data
             retorno = db.Produtos.FromSql("SELECT * FROM Produto where  id = '" + id.ToString() + "'" ).ToList();
             return retorno[0];
         }
-
         public Relacao GetRelacao(Guid id)
         {
             Relacao relacao = new Relacao();
@@ -133,11 +145,36 @@ namespace OscaApp.Data
 
             return relacao;
         }
-        public List<Produto> GetAll(Guid idOrg)
+        public List<Produto> GetAll(Guid idOrg, int view)
         {
-            List<Produto> retorno = new List<Produto>();
-            retorno = db.Produtos.FromSql("SELECT * FROM Produto where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            return retorno;
+            List<Produto> itens = new List<Produto>();
+
+            //Produtos Ativos
+            if (view == 0)
+            {
+                itens = db.Produtos.FromSql("SELECT * FROM Produto  where Status = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            }
+
+            //Produtos inativos
+            if (view == 1)
+            {
+                itens = db.Produtos.FromSql("SELECT * FROM Produto  where Status = 0 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+
+            }
+
+            //Produto - Quantidade =< 0
+            if (view == 2)
+            {
+                itens = (from bl in db.Produtos where (bl.quantidade <= 0) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();
+            }
+
+            //Todas Atividades
+            if (view == 3)
+            {
+                itens = (from bl in db.Produtos where (bl.quantidade <= bl.quantidadeMinima  ) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();
+            }
+          
+            return itens;
 
         }
     }

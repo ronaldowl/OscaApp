@@ -326,7 +326,7 @@ namespace OscaApp.Data
         Produto Get(Guid id);      
 
         Relacao GetRelacao(Guid id);
-        List<Produto> GetAll(Guid idOrg);
+        List<Produto> GetAll(Guid idOrg, int view);
     }
     public interface IEnderecoData
     {

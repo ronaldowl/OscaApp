@@ -191,3 +191,27 @@ function FormatMoneyCompleto(valor) {
     return FormatMoney(parseFloat(PrepCalcDecimal(valor)));
 
 }
+
+function SetStatus(id, valor, controller) {
+
+
+    $.ajax({
+        dataType: "json",
+        type: "GET",
+        url: "/API/" + controller + "API/SetStatus",
+        data: {
+            valor: valor,
+            idRegistro: id
+
+        },
+        success: function (dados) {
+            if (dados.statusOperation == true) {
+                alert('Registro atualizado com sucesso!');
+                $(window.document.location).attr('href', 'FormUpdate' + controller + '?id=' + id);
+            } else {
+                alert('Falha ao atualizar! - ' + dados.statusMensagem);
+            }
+        }
+    });
+
+} 

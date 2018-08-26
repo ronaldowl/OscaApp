@@ -165,10 +165,10 @@ namespace OscaApp.Controllers
             return RedirectToAction("FormUpdateProduto", new { id = modelo.id.ToString() });
         }
 
-        public ViewResult GridProduto(string filtro, int Page)
+        public ViewResult GridProduto(string filtro, int Page, int view)
         {
-            IEnumerable<Produto> retorno = produtoData.GetAll(contexto.idOrganizacao);
-
+            IEnumerable<Produto> retorno = produtoData.GetAll(contexto.idOrganizacao, view);
+            ViewBag.viewContexto = view;
 
             if (!String.IsNullOrEmpty(filtro))
             {
@@ -192,7 +192,7 @@ namespace OscaApp.Controllers
         }
         public ViewResult LookupProduto(string filtro, int Page)
         {
-            IEnumerable<Produto> retorno = produtoData.GetAll(contexto.idOrganizacao);
+            IEnumerable<Produto> retorno = produtoData.GetAll(contexto.idOrganizacao, 0);
 
 
             if (!String.IsNullOrEmpty(filtro))

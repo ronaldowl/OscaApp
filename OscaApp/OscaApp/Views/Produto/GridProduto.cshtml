@@ -2,6 +2,7 @@
 @using X.PagedList.Mvc;
 @using X.PagedList;
 @using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{int viewContexto = ViewBag.viewContexto; }
 
 <div class="row">
     <div class="col-md-12">
@@ -13,6 +14,21 @@
                             <tr>
                                 <td>
                                     <h5 style="font-weight:bold" class="fa fa-2x fa-cubes"> Lista de Produtos: &nbsp;&nbsp;</h5>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label>Filtros</label>
+                                        <div class="input-group">
+                                            &nbsp;<div class="col-2">
+                                                <select id="osc_filtro" class="form-control custom-select-sm" required="required" onchange="OnChangeFiltro();" asp-for="@viewContexto">
+                                                    <option value="0" selected="">Produtos Ativos</option>
+                                                    <option value="1">Produtos Inativos</option>
+                                                    <option value="2">Produtos - Quantidade menor ou igual 0</option>
+                                                    <option value="3">Produtos - Quantidade menor ou igual ao Mínimo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>&nbsp;&nbsp;
                                 </td>
                                 <td>
                                     <div class="input-group">
@@ -58,23 +74,22 @@
                         </thead>
                         @foreach (var item in Model)
                         {
-                            
-                        <tr style="cursor:pointer;font-size:12px" id="@item.id" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new {id = item.id })'">
-                            <td><i class="fa fa-cubes"></i></td>
-                            <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProduto", new { id = item.id })</td>
-                            <td>@item.nome</td>
-                            @if(item.quantidade == 0){<td class="bg-danger">@item.quantidade</td>}else{<td >@item.quantidade</td>}
-                            
-                            <td>@item.quantidadeMinima</td>
-
-                            <td>@item.formaVendaProduto</td>
-                            <td>@item.fabricante</td>
-                            <td>@item.modelo</td>
-                            <td>R$ @item.valorCompra.ToString("N")</td>
-                            <td>@item.criadoPorName</td>
-                        </tr>
-                        }
-                    </table>
+                            string alerta = string.Empty;
+                            if (item.quantidade <= 0){ alerta = "badge-warning"; }
+                            <tr style="cursor:pointer;font-size:12px" id="item.id" onclick="location.href='@Url.Action("FormUpdateProduto", "Produto", new { id = item.id, view = viewContexto })'" class="@alerta"> 
+                                    <td><i class="fa fa-cubes"></i></td>
+                                    <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProduto", new { id = item.id })</td>
+                                    <td>@item.nome</td>
+                                    <td>@item.quantidade</td>
+                                    <td>@item.quantidadeMinima</td>
+                                    <td>@item.formaVendaProduto</td>
+                                    <td>@item.fabricante</td>
+                                    <td>@item.modelo</td>
+                                    <td>R$ @item.valorCompra.ToString("N")</td>
+                                    <td>@item.criadoPorName</td>
+                                </tr>
+                       }
+                       </table>
 
                 </div>
             </div>
@@ -92,3 +107,30 @@
 
 
 <div style="height:500px"></div>
+<script>
+
+    var url = window.location.search.replace("?", "");
+    var items = url.split("&");
+
+    var array = {
+        'valor': items[0]
+    }
+
+    if (array.valor == "view=0") { $("#osc_filtro").val("0"); }
+    if (array.valor == "view=1") { $("#osc_filtro").val("1"); }
+    if (array.valor == "view=2") { $("#osc_filtro").val("2"); }
+    if (array.valor == "view=3") { $("#osc_filtro").val("3"); }
+
+
+    function OnChangeFiltro() {
+
+        var filtro = $("#osc_filtro").val();
+
+        if (filtro == "0") { $(window.document.location).attr('href', "GridProduto?view=0"); }
+        if (filtro == "1") { $(window.document.location).attr('href', "GridProduto?view=1"); }
+        if (filtro == "2") { $(window.document.location).attr('href', "GridProduto?view=2"); }
+        if (filtro == "3") { $(window.document.location).attr('href', "GridProduto?view=3"); }
+
+    }
+
+</script>

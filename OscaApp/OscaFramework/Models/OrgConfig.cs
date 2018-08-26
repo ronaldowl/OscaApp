@@ -18,8 +18,9 @@ namespace OscaFramework.Models
 
         //Sessão Contas Receber
         public int qtdDiasCartaoCredito { get; set; }
-
         public int qtdDiasCartaoDebito { get; set; }
+        public bool creditoGeraContasReceber { get; set; }
+        public bool debitoGeraContasReceber { get; set; }
 
         //Sessão Impressão Cupom        
         public string mensagemCupom { get; set; }        
