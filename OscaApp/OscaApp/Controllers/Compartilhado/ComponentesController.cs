@@ -117,5 +117,11 @@ namespace OscaApp.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ViewResult ResumoAlertas()
+        {            
+            return View();
+        }
     }
 }

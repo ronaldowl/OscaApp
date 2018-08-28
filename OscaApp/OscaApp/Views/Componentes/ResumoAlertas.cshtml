@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "_LayoutFrame";
+}
+
+
+<div class="card" id="osc_MainFormAlertas"  >
+    <div class="card-header" style="height:60px">
+        <div class="card-title">
+            <table>
+                <tr>
+                    <td style="align-content:center"><center><h3 class="fa fa-2x fa-asterisk">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Alertas</h3></center></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered  " >
+            <tbody style="cursor:pointer;font-size:12px;" >
+                <tr   onclick="location.href='@Url.Action("GridProduto", "Produto", new { view = 3 })'">
+                    <td class="badge-danger">Existem Produtos abaixo da quantidade mínima!</td>
+                <tr>
+                <tr  > 
+                    <td class="badge-danger">O nome da empresa não foi definido!</td>
+                <tr>
+                <tr  >
+                    <td class="badge-danger">O nome do usuário não foi definido!</td>
+                <tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script src="~/lib/OscaJs/osc_servicesWeb.js"></script>
+<script src="~/lib/OscaJs/osc_global.js"></script>
+
+<script>
+    CarregaAlertas();
+</script>

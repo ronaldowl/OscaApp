@@ -5,6 +5,7 @@
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -94,6 +95,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Componentes\ResumoAlertas.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\LogOsca\GridLogAcesso.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
