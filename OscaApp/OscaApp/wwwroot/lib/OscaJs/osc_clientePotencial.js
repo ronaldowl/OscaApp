@@ -3,7 +3,7 @@
 function OnLoadLead() {
 
     var status = $("#osc_statusLead").val();
-    desabilita_Cliente(status);
+    desabilita_ClientePotencial(status);
   
 }
 
@@ -57,7 +57,7 @@ function SetStatusClientePotencial(id, valor) {
 
         if (confirm("Deseja Inativar o Registro? não será possivel mais usar esse registro!")) {
 
-            SetStatus(id, valor);
+            SetStatus(id, valor, 'ClientePotencial');
         }
     }
 
@@ -65,34 +65,11 @@ function SetStatusClientePotencial(id, valor) {
 
         if (confirm("Deseja Converter o Registro para base de Clientes?")) {
 
-            SetStatus(id, valor);
+            SetStatus(id, valor, 'ClientePotencial');
         }
     }
 
 }
-
-function SetStatus(id, valor ) {
-
-    
-        $.ajax({
-            dataType: "json",
-            type: "GET",
-            url: "/API/ClientePotencialAPI/SetStatus",
-            data: {
-                valor: valor,
-                idCliente: id
-            },
-            success: function (dados) {
-                if (dados.statusOperation == true) {
-                    alert('Registro atualizado com sucesso!');
-                    $(window.document.location).attr('href', 'FormUpdateClientePotencial?id=' + id);
-                } else {
-                    alert('Falha ao atualizar! - ' + dados.statusMensagem);
-                }
-            }
-        });
-    
-} 
 
 function OnChangeTipoPessoa()
 {   
@@ -101,7 +78,7 @@ function OnChangeTipoPessoa()
 
  
  
-function desabilita_Cliente(status) {
+function desabilita_ClientePotencial(status) {
 
     if (status == 1 || status == 2) {
 

@@ -282,7 +282,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = balcaoVendasData.Get(modelo.balcaoVendas.id);
-                if (retorno.idCliente != Guid.Empty) modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
+                if (retorno.idCliente != Guid.Empty) modelo.cliente = clienteData.Get(retorno.idCliente);
                 modelo.orgConfig = orgConfigData.Get(contexto.idOrganizacao);
                 modelo.produtosBalcao = sqlGeneric.RetornaProdutoBalcaoByBalcao(new Guid(id));
                 modelo.organizacao = organizacaoData.Get(contexto.idOrganizacao);

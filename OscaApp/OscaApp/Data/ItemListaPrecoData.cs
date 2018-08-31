@@ -22,21 +22,14 @@ namespace OscaApp.Data
         }
         public void Add(ItemListaPreco modelo)
         {
-            try
-            {
+           
                 db.ItemListaPrecos.Add(modelo);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-               
-            }
+                db.SaveChanges();        
            
         }
         public void Update(ItemListaPreco modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("valor").IsModified               = true;
                 db.Entry(modelo).Property("valorMinimo").IsModified = true;
@@ -44,52 +37,38 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
-            
-            
-                db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                        
+                db.SaveChanges();         
 
         }
         public ItemListaPreco Get(Guid id )
         {
             List<ItemListaPreco> retorno = new List<ItemListaPreco>();
-            try
-            {
-               
-                retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco where  id = '" + id.ToString() +  "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+                          
+            retorno = (from bl in db.ItemListaPrecos where bl.id.Equals(id) select bl).ToList();
+
             return retorno[0];
         }
         public List<ItemListaPreco> GetAll(Guid idOrg)
         {
             List<ItemListaPreco> retorno = new List<ItemListaPreco>();
-            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from bl in db.ItemListaPrecos where bl.idOrganizacao.Equals(idOrg) select bl).ToList();
             return retorno;
 
         }
         public List<ItemListaPreco> GetAllByProduto(Guid idProduto)
         {
-            List<ItemListaPreco> itens = new List<ItemListaPreco>();        
+            List<ItemListaPreco> itens = new List<ItemListaPreco>();
 
-            itens = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idProduto = '" + idProduto.ToString() + "'").ToList();
-        
+            itens = (from bl in db.ItemListaPrecos where bl.idProduto.Equals(idProduto) select bl).ToList();
+
             return itens;
         }      
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
-            List<ItemListaPreco> retorno = new List<ItemListaPreco>();         
+            List<ItemListaPreco> retorno = new List<ItemListaPreco>();
 
-            retorno = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from bl in db.ItemListaPrecos where bl.idOrganizacao.Equals(idOrg) select bl).ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 
@@ -97,16 +76,16 @@ namespace OscaApp.Data
         public List<LookupItemLista> GetAllByListaPreco(Guid idLista)
         {            
             List<ItemListaPreco> itens = new List<ItemListaPreco>();
+                      
+            itens = (from bl in db.ItemListaPrecos where bl.idListaPreco.Equals(idLista) select bl).ToList();
 
-            itens =  db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idListaPreco = '" + idLista.ToString() + "'").ToList();
-            
             return HelperAssociate.ConvertToLookupItemLista( itens);
         }
         public List<LookupItemLista> GetAllByIdProduto(Guid idProduto)
         {
             List<ItemListaPreco> itens = new List<ItemListaPreco>();
 
-            itens = db.ItemListaPrecos.FromSql("SELECT * FROM itemlistapreco  where  idProduto= '" + idProduto.ToString() + "'").ToList();
+            itens = (from bl in db.ItemListaPrecos where bl.idProduto.Equals(idProduto) select bl).ToList();
 
             return HelperAssociate.ConvertToLookupItemLista(itens);
         }

@@ -52,14 +52,14 @@ namespace OscaAPI.Controllers
         }
 
         [Route("api/[controller]/SetStatus")]
-        [HttpGet("{valor, idCliente}")]
-        public JsonResult SetStatus(string idCliente, int valor)
+        [HttpGet("{valor, idRegistro}")]
+        public JsonResult SetStatus(string idRegistro, int valor)
         {
             ResultService retorno = new ResultService();
             SqlGenericData sqlServices = new SqlGenericData();
             try
             {
-                if (ClientePotencialRules.SetStatus(valor, idCliente, clientePotencialData, clienteData, this.contexto, sqlServices))
+                if (ClientePotencialRules.SetStatus(valor, idRegistro, clientePotencialData, clienteData, this.contexto, sqlServices))
                 {
                     
                     retorno.statusOperation = true;

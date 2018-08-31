@@ -109,7 +109,7 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(id))
                 {
                     //campo que sempre contém valor
-                    retorno = clienteData.Get(new Guid(id), contexto.idOrganizacao);
+                    retorno = clienteData.Get(new Guid(id));
 
                     modelo.contato = sqlData.RetornaRelacaoContato(retorno.idContato);
                     if (retorno != null)

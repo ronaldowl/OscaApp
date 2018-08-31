@@ -45,8 +45,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
-            
-            
+                        
                 db.SaveChanges(); 
             }
             catch (Exception ex)
@@ -55,36 +54,27 @@ namespace OscaApp.Data
             }
 
         }
-        public ListaPreco Get(Guid id, Guid idOrg)
+        public ListaPreco Get(Guid id )
         {
             List<ListaPreco> retorno = new List<ListaPreco>();
-            try
-            {
-               
-                retorno = db.ListaPrecos.FromSql("SELECT * FROM listapreco where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+           
+            retorno = retorno = (from A in db.ListaPrecos where A.id.Equals(id) select A).ToList();
+        
             return retorno[0];
         }
         public List<ListaPreco> GetAll(Guid idOrg)
         {
             List<ListaPreco> retorno = new List<ListaPreco>();
-            retorno = db.ListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.ListaPrecos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
-
         }
 
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
-            List<ListaPreco> retorno = new List<ListaPreco>();
-            List<Relacao> lista = new List<Relacao>();
-
-            retorno = db.ListaPrecos.FromSql("SELECT * FROM listapreco  where  idOrganizacao = '" + idOrg.ToString() + "' order by padrao desc").ToList();         
+            List<ListaPreco> retorno = new List<ListaPreco>();          
+                         
+            retorno = (from A in db.ListaPrecos where A.idOrganizacao.Equals(idOrg) select A ).ToList();
+            retorno = retorno.OrderByDescending(A => A.padrao).ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 

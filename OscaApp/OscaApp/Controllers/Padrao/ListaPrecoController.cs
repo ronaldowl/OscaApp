@@ -84,7 +84,7 @@ namespace OscaApp.Controllers
             {
                 ListaPreco retorno = new ListaPreco();
                 {
-                    retorno = listaPrecoData.Get(new Guid(id), contexto.idOrganizacao);
+                    retorno = listaPrecoData.Get(new Guid(id));
 
                     if (retorno != null)
                     {

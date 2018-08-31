@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using OscaApp.Models;
-using OscaApp.Data;
-using Microsoft.EntityFrameworkCore;
-using OscaApp.framework.Models;
+using System.Linq; 
 using OscaFramework.Models;
 
 namespace OscaApp.Data
@@ -12,25 +8,15 @@ namespace OscaApp.Data
     public class ProdutoData : IProdutoData
     {
         private ContexDataService db;
-        //public DbSet<Cliente> Books { get; set; }
-
+     
         public ProdutoData(ContexDataService dbContext)
         {
             this.db = dbContext;        
         }
         public void Add(Produto produto)
-        {
-            try
-            {
+        {      
                 db.Produtos.Add(produto);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-           
+                db.SaveChanges();    
         }
         public void Update(Produto produto)
         {
@@ -129,7 +115,7 @@ namespace OscaApp.Data
         public Produto Get(Guid id )
         {
             List<Produto> retorno = new List<Produto>();
-            retorno = db.Produtos.FromSql("SELECT * FROM Produto where  id = '" + id.ToString() + "'" ).ToList();
+            retorno = (from A in db.Produtos where A.id.Equals(id) select A).ToList();
             return retorno[0];
         }
         public Relacao GetRelacao(Guid id)
@@ -138,7 +124,8 @@ namespace OscaApp.Data
             relacao.tipoObjeto = CustomEntityEnum.Entidade.Produto;
 
             List<Produto> retorno = new List<Produto>();
-            retorno = db.Produtos.FromSql("SELECT * FROM Produto where  id = '" + id.ToString() +  "'").ToList();
+           
+            retorno = (from A in db.Produtos where A.id.Equals(id) select A).ToList();
             relacao.id = retorno[0].id;
             relacao.idName = retorno[0].nome;
             relacao.idOrganizacao = retorno[0].idOrganizacao;
@@ -152,23 +139,22 @@ namespace OscaApp.Data
             //Produtos Ativos
             if (view == 0)
             {
-                itens = db.Produtos.FromSql("SELECT * FROM Produto  where Status = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Produtos where A.status == CustomEnumStatus.Status.Ativo & A.idOrganizacao.Equals(idOrg) select A).ToList();
             }
 
             //Produtos inativos
             if (view == 1)
-            {
-                itens = db.Produtos.FromSql("SELECT * FROM Produto  where Status = 0 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-
+            {              
+                itens = (from A in db.Produtos where A.status == CustomEnumStatus.Status.Inativo & A.idOrganizacao.Equals(idOrg) select A).ToList();
             }
 
-            //Produto - Quantidade =< 0
+            //Produto - Quantidade <= 0
             if (view == 2)
             {
                 itens = (from bl in db.Produtos where (bl.quantidade <= 0) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();
             }
 
-            //Todas Atividades
+            //Produto - Quantidade Minima <= 0
             if (view == 3)
             {
                 itens = (from bl in db.Produtos where (bl.quantidade <= bl.quantidadeMinima  ) & (bl.idOrganizacao.Equals(idOrg)) select bl).ToList();

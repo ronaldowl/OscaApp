@@ -190,7 +190,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 retorno = modeloData.Get(modelo.pedidoRetirada.id, contexto.idOrganizacao);
-                modelo.cliente = clienteData.Get(retorno.idCliente, contexto.idOrganizacao);
+                modelo.cliente = clienteData.Get(retorno.idCliente);
                 modelo.orgConfig = orgConfigData.Get(contexto.idOrganizacao);
                 modelo.organizacao = organizacaoData.Get(contexto.idOrganizacao);
 

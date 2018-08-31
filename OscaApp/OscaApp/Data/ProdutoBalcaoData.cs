@@ -21,35 +21,24 @@ namespace OscaApp.Data
 
         public void Add(ProdutoBalcao modelo)
         {
-            try
-            {
+           
                 db.ProdutosBalcao.Add(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+         
         } // end of method Add
 
         public ProdutoBalcao Get(Guid id)
         {
             List<ProdutoBalcao> retorno = new List<ProdutoBalcao>();
-            try
-            {
-                retorno = db.ProdutosBalcao.FromSql("SELECT * FROM ProdutoBalcao WHERE  id = '" + id.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+            retorno = (from bl in db.ProdutosBalcao where bl.id.Equals(id) select bl).ToList();
+          
             return retorno[0];
         }
 
         public List<ProdutoBalcao> GetAll(Guid idOrg)
         {
             List<ProdutoBalcao> retorno = new List<ProdutoBalcao>();
-            retorno = db.ProdutosBalcao.FromSql("SELECT * FROM ProdutoBalcao WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from bl in db.ProdutosBalcao where bl.idOrganizacao.Equals(idOrg) select bl).ToList();
             return retorno;
         }
 

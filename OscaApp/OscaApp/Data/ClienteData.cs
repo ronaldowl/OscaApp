@@ -76,20 +76,12 @@ namespace OscaApp.Data
             }
 
         }
-        public Cliente Get(Guid id, Guid idOrg)
+        public Cliente Get(Guid id)
         {
             List<Cliente> retorno = new List<Cliente>();
-            try
-            {
-               
-                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+          
+            retorno = (from A in db.Clientes where A.id.Equals(id) select A).ToList();
+        
             return retorno[0];
         }
         public List<Cliente> GetAll(Guid idOrg,int view)
@@ -99,20 +91,20 @@ namespace OscaApp.Data
 
             //Cliente Inativo
             if (view == 0)
-            {
-                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where status = 0 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {                
+                retorno = (from A in db.Clientes where A.idOrganizacao.Equals(idOrg) & A.status == CustomEnumStatus.Status.Inativo select A).ToList();
             }
 
             //Cliente Ativo
             if (view == 1)
             {
-                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where status = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = (from A in db.Clientes where A.idOrganizacao.Equals(idOrg) & A.status == CustomEnumStatus.Status.Ativo select A).ToList();
             }
 
             //Todos Clientes  
             if (view == 2)
             {
-                retorno = db.Clientes.FromSql("SELECT * FROM Cliente where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                retorno = (from A in db.Clientes where A.idOrganizacao.Equals(idOrg) select A).ToList();
             }
 
             return retorno;

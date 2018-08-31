@@ -33,7 +33,7 @@ function SetStatusCliente(id, valor) {
 
         if (confirm("Deseja Inativar o Registro? não será possivel mais usar esse cliente!")) {
 
-            SetStatus(id, valor);
+            SetStatus(id, valor, 'Cliente');
         }
     }
 
@@ -41,35 +41,11 @@ function SetStatusCliente(id, valor) {
 
         if (confirm("Deseja Ativar o Registro?")) {
 
-            SetStatus(id, valor);
+            SetStatus(id, valor, 'Cliente');
         }
     }
 
 }
-
-function SetStatus(id, valor ) {
-
-    
-        $.ajax({
-            dataType: "json",
-            type: "GET",
-            url: "/API/ClienteAPI/SetStatus",
-            data: {
-                valor: valor,
-                idCliente: id
-                
-            },
-            success: function (dados) {
-                if (dados.statusOperation == true) {
-                    alert('Registro atualizado com sucesso!');
-                    $(window.document.location).attr('href', 'FormUpdateCliente?id=' + id);
-                } else {
-                    alert('Falha ao atualizar! - ' + dados.statusMensagem);
-                }
-            }
-        });
-    
-} 
 
 function OnChangeTipoPessoa()
 {   

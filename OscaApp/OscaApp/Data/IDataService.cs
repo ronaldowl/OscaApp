@@ -99,14 +99,14 @@ namespace OscaApp.Data
         void Add(Cliente cliente);
         void Update(Cliente cliente);
         void SetStatus(Cliente modelo);
-        Cliente Get(Guid id, Guid idOrg);
+        Cliente Get(Guid id);
         List<Cliente> GetAll(Guid idOrg, int view);       
     }
     public interface IListaPrecoData
     {
         void Add(ListaPreco listaPreco);
         void Update(ListaPreco listaPreco);
-        ListaPreco Get(Guid id, Guid idOrg);
+        ListaPreco Get(Guid id);
         List<ListaPreco> GetAll(Guid idOrg);       
         List<Relacao> GetAllRelacao(Guid idOrg);
     }

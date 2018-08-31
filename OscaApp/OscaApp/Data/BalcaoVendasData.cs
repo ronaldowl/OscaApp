@@ -23,34 +23,18 @@ namespace OscaApp.Data
         }
         public void Delete(BalcaoVendas modelo)
         {
-            try
-            {
-                db.BalcaoVendas.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
-        }
+               db.BalcaoVendas.Remove(modelo);
+                db.SaveChanges();      
+         }
         public void Add(BalcaoVendas modelo)
-        {
-            try
-            {
+        {          
                 db.BalcaoVendas.Add(modelo);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-               
-            }
+                db.SaveChanges();         
            
         }
         public void Update(BalcaoVendas modelo)
         {
-            try
-            {
+            
                 db.Attach(modelo);              
                   
                 db.Entry(modelo).Property("statusBalcaoVendas").IsModified  = true;              
@@ -58,51 +42,28 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
                 db.Entry(modelo).Property("idCliente").IsModified = true;
-
-
-
-                db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                       
+                db.SaveChanges();          
 
         }
         public BalcaoVendas Get(Guid id )
         {
             List<BalcaoVendas> retorno = new List<BalcaoVendas>();
-            try
-            {
-               
-                retorno = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas where  id = '" + id.ToString() +  "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+           
+            retorno = (from bl in db.BalcaoVendas where bl.id.Equals(id) select bl).ToList();
+
             return retorno[0];
         }
 
         public void UpdateStatus(BalcaoVendas modelo)
-        {
-            try
-            {
+        {            
                 db.Attach(modelo);          
                 db.Entry(modelo).Property("statusBalcaoVendas").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
-
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+         
         }
 
         public List<BalcaoVendas> GetAll(Guid idOrg)
@@ -111,23 +72,20 @@ namespace OscaApp.Data
             List<BalcaoVendas> retorno = (from bl in db.BalcaoVendas where bl.criadoEm == DateTime.Now.Date & bl.idOrganizacao == idOrg select bl).ToList();
                                               
             return retorno;
-
         }
 
         public List<BalcaoVendas> GetAllByIdCliente(Guid idCliente)
         {
             List<BalcaoVendas> retorno = new List<BalcaoVendas>();
-            retorno = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            retorno = (from bl in db.BalcaoVendas where bl.idCliente.Equals(idCliente) select bl).ToList();
             return retorno;
-
         }      
-
-
+        
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
-            List<BalcaoVendas> retorno = new List<BalcaoVendas>(); 
+            List<BalcaoVendas> retorno = new List<BalcaoVendas>();
 
-            retorno = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from bl in db.BalcaoVendas where bl.idOrganizacao.Equals(idOrg) select bl).ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 
@@ -144,7 +102,7 @@ namespace OscaApp.Data
         {
             List<BalcaoVendas> itens = new List<BalcaoVendas>();
 
-            itens = db.BalcaoVendas.FromSql("SELECT * FROM BalcaoVendas  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            itens = (from bl in db.BalcaoVendas where bl.idOrganizacao.Equals(idOrg) select bl).ToList();
 
             return HelperAssociate.ConvertToGridBalcaoVendas(itens);
         }

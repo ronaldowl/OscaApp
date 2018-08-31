@@ -18,21 +18,14 @@ namespace OscaApp.Data
         }
         public void Add(Fornecedor fornecedor)
         {
-            try
-            {
+             
                 db.Fornecedores.Add(fornecedor);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+          
         }
         public void Update(Fornecedor modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("nomeFornecedor").IsModified           = true;
                 db.Entry(modelo).Property("cnpj").IsModified                     = true;
@@ -45,30 +38,19 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+        
 
         }
         public Fornecedor Get(Guid id)
         {
-            List<Fornecedor> retorno = new List<Fornecedor>();
-            try
-            {
-
-                retorno = db.Fornecedores.FromSql("SELECT * FROM fornecedor where  id = '" + id.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+            List<Fornecedor> retorno = new List<Fornecedor>();            
+            retorno = (from bl in db.Fornecedores where bl.id.Equals(id) select bl).ToList();        
             return retorno[0];
         }
         public List<Fornecedor> GetAll(Guid idOrg)
         {
             List<Fornecedor> retorno = new List<Fornecedor>();
-            retorno = db.Fornecedores.FromSql("SELECT * FROM fornecedor where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno   = (from bl in db.Fornecedores where bl.idOrganizacao.Equals(idOrg) select bl).ToList();
             return retorno;
 
         }
