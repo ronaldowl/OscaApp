@@ -20,85 +20,56 @@ namespace OscaApp.Data
             this.db = dbContext;        
         }
         public void Add(Atividade atividade)
-        {
-            try
-            {
+        {           
                 db.Atividades.Add(atividade);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-           
+                db.SaveChanges();             
         }
         public void Delete(Atividade atividade)
         {
-            try
-            {
                 db.Atividades.Remove(atividade);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         public void Update(Atividade modelo)
         {
-            try
-            {
+       
                 db.Attach(modelo);
                 db.Entry(modelo).Property("descricao").IsModified           = true;
                 db.Entry(modelo).Property("tipo").IsModified                = true;
                 db.Entry(modelo).Property("idProfissional").IsModified      = true;
                 db.Entry(modelo).Property("dataAlvo").IsModified            = true;
                 db.Entry(modelo).Property("assunto").IsModified             = true;
-                db.Entry(modelo).Property("statusAtividade").IsModified = true;
-                
+                db.Entry(modelo).Property("statusAtividade").IsModified = true;                
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
-
                 db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+       
         }
         public void UpdateStatus(Atividade modelo)
-        {
-            try
-            {
+        {         
                 db.Attach(modelo);
                 db.Entry(modelo).Property("dataFechamento").IsModified = true;              
                 db.Entry(modelo).Property("statusAtividade").IsModified = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
-
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+      
         }
         public Atividade Get(Guid id)
         {
             List<Atividade> retorno = new List<Atividade>();
-            retorno = db.Atividades.FromSql("SELECT * FROM Atividade where  id = '" + id.ToString() +  "'" ).ToList();
+
+            retorno = (from A in db.Atividades where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Atividade> GetAll(Guid idOrg)
         {
             List<Atividade> retorno = new List<Atividade>();
-            retorno = db.Atividades.FromSql("SELECT * FROM Atividade where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+ 
+            retorno = (from A in db.Atividades where A.idOrganizacao.Equals(idOrg) select A).ToList();
+            
             return retorno;
         }
 
@@ -109,26 +80,26 @@ namespace OscaApp.Data
             
             //Minhas Atividades Abertas
             if (view == 0)
-            {
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade = 0 and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            { 
+                itens = (from A in db.Atividades where A.idProfissional.Equals(idProfissional) & A.statusAtividade == CustomEnumStatus.StatusAtividade.Aberta select A).ToList();
             }
 
             //Minhas Atividades Fechadas
             if (view == 1)
-            {
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,2) and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {              
+                itens = (from A in db.Atividades where A.idProfissional.Equals(idProfissional) & (A.statusAtividade == CustomEnumStatus.StatusAtividade.Cancelada || A.statusAtividade == CustomEnumStatus.StatusAtividade.Concluida) select A).ToList();
             }
 
             //Atividades Fechadas
             if (view == 2)
-            {
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade in (1,2) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {               
+                itens = (from A in db.Atividades where A.idOrganizacao.Equals(idOrg) & (A.statusAtividade == CustomEnumStatus.StatusAtividade.Cancelada || A.statusAtividade == CustomEnumStatus.StatusAtividade.Concluida) select A).ToList();
             }
 
             //Todas Atividades
             if (view == 3)
             {
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Atividades where A.idOrganizacao.Equals(idOrg) select A).ToList();
             }
 
             return HelperAssociate.ConvertToGridAtividade(itens);
@@ -136,13 +107,10 @@ namespace OscaApp.Data
         public List<AtividadeGridViewModel> GetAllGridDia( string idProfissional)
         {
             List<Atividade> itens = new List<Atividade>();
-  
-                itens = db.Atividades.FromSql("SELECT * FROM Atividade  where StatusAtividade = 0 and idProfissional = '" + idProfissional + "'").ToList();
-        
+   
+            itens = (from A in db.Atividades where A.idProfissional.Equals(idProfissional) & A.dataAlvo == DateTime.Now.Date select A).ToList();
 
             return HelperAssociate.ConvertToGridAtividade(itens);
         }
-
-
     }
 }

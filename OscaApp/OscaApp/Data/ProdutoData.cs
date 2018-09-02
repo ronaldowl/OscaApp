@@ -20,8 +20,7 @@ namespace OscaApp.Data
         }
         public void Update(Produto produto)
         {
-            try
-            {
+            
                 db.Attach(produto);                
                 db.Entry(produto).Property("codigoBarra").IsModified = true;
                 db.Entry(produto).Property("nome").IsModified = true;
@@ -48,69 +47,46 @@ namespace OscaApp.Data
                 db.Entry(produto).Property("classificacaoProduto").IsModified = true;                
 
                 db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+        
 
         }
         public void UpdateQuantity(Produto produto)
         {
-            try
-            {
+            
                 db.Attach(produto); 
                 db.Entry(produto).Property("quantidade").IsModified = true;
                 db.Entry(produto).Property("modificadoPorName").IsModified = true;
                 db.Entry(produto).Property("modificadoPor").IsModified = true;
                 db.Entry(produto).Property("modificadoEm").IsModified = true;
 
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();  
 
         }
         public void SetStatus(Produto produto)
         {
-            try
-            {
+           
                 db.Attach(produto);
                 db.Entry(produto).Property("status").IsModified = true;
                 db.Entry(produto).Property("modificadoPorName").IsModified = true;
                 db.Entry(produto).Property("modificadoPor").IsModified = true;
                 db.Entry(produto).Property("modificadoEm").IsModified = true;
 
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();       
 
         }
         public void UpdateImage(Produto produto)
         {
-            try
-            {
+           
                 db.Attach(produto);
                 db.Entry(produto).Property("urlProduto").IsModified = true;
               
                 db.Entry(produto).Property("modificadoPorName").IsModified = true;
                 db.Entry(produto).Property("modificadoPor").IsModified = true;
                 db.Entry(produto).Property("modificadoEm").IsModified = true;
-                
-
+      
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+            
         }
         public Produto Get(Guid id )
         {

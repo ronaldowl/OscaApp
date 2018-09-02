@@ -12,30 +12,23 @@ namespace OscaApp.Data
     {
         private ContexDataService db;
 
-          public CategoriaProfissionalData(ContexDataService dbContext)
+        public CategoriaProfissionalData(ContexDataService dbContext)
         {
             this.db = dbContext;
         }
 
-   
-
-
-        public CategoriaProfissional Get(Guid id, Guid idOrg)
+        public CategoriaProfissional Get(Guid id)
         {
             List<CategoriaProfissional> retorno = new List<CategoriaProfissional>();
-            try
-            {
-                retorno = db.CategoriasProfissionais.FromSql("SELECT * FROM CategoriaProfissional where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+
+            retorno = (from A in db.CategoriasProfissionais where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<CategoriaProfissional> GetAll()
         {
             List<CategoriaProfissional> retorno = new List<CategoriaProfissional>();
-            retorno = db.CategoriasProfissionais.FromSql("SELECT * FROM CategoriaProfissional").ToList();
+            retorno = (from A in db.CategoriasProfissionais  select A).ToList();
             return retorno;
         }
     }

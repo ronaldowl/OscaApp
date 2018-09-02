@@ -79,7 +79,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = profissionalData.Get(modelo.profissional.id, contexto.idOrganizacao);
+                retorno = profissionalData.Get(modelo.profissional.id);
 
                 modelo.banco = sqlData.RetornaRelacaoBanco(retorno.idBanco);
 

@@ -18,21 +18,14 @@ namespace OscaApp.Data
         }
         public void Add(Servico servico)
         {
-            try
-            {
+            
                 db.Servicos.Add(servico);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+       
         }
         public void Update(Servico modelo)
         {
-            try
-            {
+             
                 db.Attach(modelo);
                
                 db.Entry(modelo).Property("formaVendaServico").IsModified = true;
@@ -44,31 +37,21 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();         
 
         }
-        public Servico Get(Guid id, Guid idOrg)
+        public Servico Get(Guid id )
         {
-            List<Servico> retorno = new List<Servico>();
-            try
-            {
+            List<Servico> retorno = new List<Servico>();          
+               
+            retorno = (from A in db.Servicos where A.id.Equals(id) select A).ToList();
 
-                retorno = db.Servicos.FromSql("SELECT * FROM servico where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
             return retorno[0];
         }
         public List<Servico> GetAll(Guid idOrg)
         {
             List<Servico> retorno = new List<Servico>();
-            retorno = db.Servicos.FromSql("SELECT * FROM servico where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Servicos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }

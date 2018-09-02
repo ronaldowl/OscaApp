@@ -21,34 +21,22 @@ namespace OscaApp.Data
 
         public void Delete(ContasReceber contasReceber)
         {
-            try
-            {
+          
                 db.ContasR.Remove(contasReceber);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+        
         }
 
         public void Add(ContasReceber contasReceber)
         {
-            try
-            {
+          
                 db.ContasR.Add(contasReceber);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+        
         }
         public void Update(ContasReceber modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("titulo").IsModified = true;
                 db.Entry(modelo).Property("valor").IsModified = true;
@@ -68,17 +56,12 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("valorRestante").IsModified = true;
                 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+          
 
         }
         public void UpdateStatus(ContasReceber modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("valorRestante").IsModified = true;
                 db.Entry(modelo).Property("valorPago").IsModified = true;
@@ -88,12 +71,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;              
 
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();       
 
         }
         public ContasReceber Get(Guid id)

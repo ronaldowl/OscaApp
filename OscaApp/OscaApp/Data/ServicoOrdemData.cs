@@ -22,35 +22,20 @@ namespace OscaApp.Data
         }
 
         public void Delete(ServicoOrdem modelo)
-        {
-            try
-            {
+        {           
                 db.ServicosOrdem.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();       
 
         }
         public void Add(ServicoOrdem modelo)
-        {
-            try
-            {
+        {          
                 db.ServicosOrdem.Add(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();      
 
         }
         public void Update(ServicoOrdem modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("valor").IsModified = true;
                 db.Entry(modelo).Property("valorDescontoMoney").IsModified = true;
@@ -64,42 +49,31 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
-
-
+            
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+
 
         }
         public ServicoOrdem Get(Guid id)
         {
             List<ServicoOrdem> retorno = new List<ServicoOrdem>();
-            try
-            {
-                retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem where  id = '" + id.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+          
+            retorno = (from A in db.ServicosOrdem where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<ServicoOrdem> GetAll(Guid idOrg)
         {
             List<ServicoOrdem> retorno = new List<ServicoOrdem>();
-            retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.ServicosOrdem where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }
         public List<ServicoOrdem> GetByServicoOrdemId(Guid idOrdemServico)
         {
             List<ServicoOrdem> retorno = new List<ServicoOrdem>();
-            retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrdemServico = '" + idOrdemServico.ToString() + "'").ToList();
+            retorno = (from A in db.ServicosOrdem where A.idOrdemServico.Equals(idOrdemServico) select A).ToList();
+
             return retorno;
 
         }
@@ -108,7 +82,7 @@ namespace OscaApp.Data
             List<ServicoOrdem> retorno = new List<ServicoOrdem>();
             List<Relacao> lista = new List<Relacao>();
 
-            retorno = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.ServicosOrdem where A.idOrganizacao.Equals(idOrg) select A).ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 
@@ -117,7 +91,7 @@ namespace OscaApp.Data
         {
             List<ServicoOrdem> itens = new List<ServicoOrdem>();
 
-            itens = db.ServicosOrdem.FromSql("SELECT * FROM ServicoOrdem  where  idOrdemServico = '" + idOrdem.ToString() + "'").ToList();
+            itens = (from A in db.ServicosOrdem where A.idOrdemServico.Equals(idOrdem) select A).ToList();
 
             return HelperAssociate.ConvertToGridServicoOrdem(itens);
         }

@@ -78,7 +78,7 @@ namespace OscaApp.Controllers.Padrao
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = IncidenteData.Get(modelo.Incidente.id, contexto.idOrganizacao);
+                retorno = IncidenteData.Get(modelo.Incidente.id);
                 modelo.Incidente = retorno;
                 //apresenta mensagem de registro atualizado com sucesso
                 modelo.StatusMessage = StatusMessage;

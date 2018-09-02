@@ -20,48 +20,36 @@ namespace OscaApp.Data
         } // end of ctor
 
         public void Add(PerfilAcesso modelo)
-        {
-            try
-            {
+        {            
                 db.PerfilAcessos.Add(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
+       
         } // end of method Add
 
         public PerfilAcesso Get(Guid id )
         {
             List<PerfilAcesso> retorno = new List<PerfilAcesso>();
-            try
-            {
-                retorno = db.PerfilAcessos.FromSql("SELECT * FROM PerfilAcesso WHERE  id = '" + id.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+
+            retorno = (from A in db.PerfilAcessos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
 
         public List<PerfilAcesso> GetAll(Guid idOrg)
         {
             List<PerfilAcesso> retorno = new List<PerfilAcesso>();
-            retorno = db.PerfilAcessos.FromSql("SELECT * FROM PerfilAcesso WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+         
+            retorno = (from A in db.PerfilAcessos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
         }
 
         public void Update(PerfilAcesso modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
-
                 db.Entry(modelo).Property("nome").IsModified = true;
 
                 db.Entry(modelo).Property("permitePainelVendas").IsModified = true;
@@ -73,13 +61,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("permitePainelSuporte").IsModified = true;
                 db.Entry(modelo).Property("permitePainelGerenciamento").IsModified = true;       
        
-                db.SaveChanges();
-            } // end of try
-            catch (Exception ex)
-            {
-
-                throw ex;
-            } // end of catch
+                db.SaveChanges();   
 
         } // end of method Update
 

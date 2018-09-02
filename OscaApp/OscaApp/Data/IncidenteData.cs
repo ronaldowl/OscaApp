@@ -21,57 +21,38 @@ namespace OscaApp.Data
 
         public void Add(Incidente modelo)
         {
-            try
-            {
-                db.Incidente.Add(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
 
-                throw ex;
-            }
+            db.Incidente.Add(modelo);
+            db.SaveChanges();
+
         } // end of method Add
 
-        public Incidente Get(Guid id, Guid idOrganizacao)
+        public Incidente Get(Guid id)
         {
             List<Incidente> retorno = new List<Incidente>();
-            try
-            {
-                retorno = db.Incidente.FromSql("SELECT * FROM Incidente WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrganizacao.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+
+            retorno = (from A in db.Incidente where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
 
         public List<Incidente> GetAll(Guid idOrg)
         {
             List<Incidente> retorno = new List<Incidente>();
-            retorno = db.Incidente.FromSql("SELECT * FROM Incidente WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Incidente where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
         }
 
         public void Update(Incidente modelo)
         {
-            try
-            {
-                db.Attach(modelo);
-                db.Entry(modelo).Property("modificadoPor").IsModified = true;
-                db.Entry(modelo).Property("modificadoPorName").IsModified = true;
-                db.Entry(modelo).Property("modificadoEm").IsModified = true;
+            db.Attach(modelo);
+            db.Entry(modelo).Property("modificadoPor").IsModified = true;
+            db.Entry(modelo).Property("modificadoPorName").IsModified = true;
+            db.Entry(modelo).Property("modificadoEm").IsModified = true;
+            db.Entry(modelo).Property("descricao").IsModified = true;
+            db.Entry(modelo).Property("titulo").IsModified = true;
 
-                db.Entry(modelo).Property("descricao").IsModified = true;
-                db.Entry(modelo).Property("titulo").IsModified = true;
-
-                db.SaveChanges();
-            } // end of try
-            catch (Exception ex)
-            {
-
-                throw ex;
-            } // end of catch
+            db.SaveChanges();
 
         } // end of method Update
 

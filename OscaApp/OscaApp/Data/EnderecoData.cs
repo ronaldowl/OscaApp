@@ -18,35 +18,18 @@ namespace OscaApp.Data
         }
         public void Delete(Endereco end)
         {
-            try
-            {
                 db.Enderecos.Remove(end);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+                db.SaveChanges(); 
         }
         public void Add(Endereco end)
-        {
-            try
-            {
+        { 
                 db.Enderecos.Add(end);                
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
            
         }
         public void Update(Endereco end)
         {
-            try
-            {
+         
                 db.Attach(end);
         
                 db.Entry(end).Property("logradouro").IsModified = true;
@@ -59,31 +42,25 @@ namespace OscaApp.Data
                 db.Entry(end).Property("bairro").IsModified = true;
 
                 db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+  
         }
         public Endereco Get(Guid id)
         {
-            List<Endereco> retorno = new List<Endereco>();
-            retorno = db.Enderecos.FromSql("SELECT * FROM Endereco where  id = '" + id.ToString()  + "'" ).ToList();
+            List<Endereco> retorno = new List<Endereco>();          
+            retorno = (from A in db.Enderecos where A.id.Equals(id) select A).ToList();
             return retorno[0];
         }
         public List<Endereco> GetAll(Guid idOrg)
         {
             List<Endereco> retorno = new List<Endereco>();
-            retorno = db.Enderecos.FromSql("SELECT * FROM Endereco where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Enderecos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
-
         }
 
         public List<Endereco> GetAllByIdClinte(Guid idCliente)
         {
             List<Endereco> retorno = new List<Endereco>();
-            retorno = db.Enderecos.FromSql("SELECT * FROM Endereco where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            retorno = (from A in db.Enderecos where A.idCliente.Equals(idCliente) select A).ToList();
             return retorno;
 
         }
@@ -91,9 +68,8 @@ namespace OscaApp.Data
         public List<Endereco> GetByCliente(Guid idCliente)
         {
             List<Endereco> retorno = new List<Endereco>();
-            retorno = db.Enderecos.FromSql("SELECT * FROM Endereco where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            retorno = (from A in db.Enderecos where A.idCliente.Equals(idCliente) select A).ToList();
             return retorno;
-
         }
     }
 }

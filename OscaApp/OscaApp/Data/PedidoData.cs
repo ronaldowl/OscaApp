@@ -21,35 +21,18 @@ namespace OscaApp.Data
             this.db = dbContext;        
         }
         public void Delete(Pedido modelo)
-        {
-            try
-            {
+        {            
                 db.Pedidos.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-            }
-
+                db.SaveChanges();  
         }
         public void Add(Pedido modelo)
-        {
-            try
-            {
+        {           
                 db.Pedidos.Add(modelo);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-               
-            }
-           
+                db.SaveChanges();           
         }
         public void Update(Pedido modelo)
         {
-            try
-            {
+          
                 db.Attach(modelo);
                 db.Entry(modelo).Property("anotacao").IsModified                = true;
                 db.Entry(modelo).Property("valorTotal").IsModified              = true;
@@ -66,45 +49,29 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified       = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified            = true;
                
-
-                db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();     
 
         }
         public Pedido Get(Guid id )
         {
             List<Pedido> retorno = new List<Pedido>();
-            try
-            {
-               
-                retorno = db.Pedidos.FromSql("SELECT * FROM Pedido where  id = '" + id.ToString() +  "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+       
+            retorno = (from A in db.Pedidos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Pedido> GetAll(Guid idOrg)
         {
             List<Pedido> retorno = new List<Pedido>();
-            retorno = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Pedidos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }       
 
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
-            List<Pedido> retorno = new List<Pedido>(); 
-
-            retorno = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-
+            List<Pedido> retorno = new List<Pedido>();  
+            retorno = (from A in db.Pedidos where A.idOrganizacao.Equals(idOrg) select A).ToList();            
             return Relacao.ConvertToRelacao(retorno);
 
         }
@@ -115,33 +82,32 @@ namespace OscaApp.Data
 
             //Em Andamento
             if (view == 0)
-            {
-                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido = 1  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {                 
+                itens = (from A in db.Pedidos where A.idOrganizacao.Equals(idOrg) & (A.statusPedido == CustomEnumStatus.StatusPedido.EmAndamento) select A).ToList();
             }
 
             //Aguardando produto
             if (view == 1)
-            {
-                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido in (3)  and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {                 
+                itens = (from A in db.Pedidos where A.idOrganizacao.Equals(idOrg) & (A.statusPedido == CustomEnumStatus.StatusPedido.AguardandoProduto) select A).ToList();
             }
 
             //Para Entrega
             if (view == 2)
             {
-                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido in (4) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Pedidos where A.idOrganizacao.Equals(idOrg) & (A.statusPedido == CustomEnumStatus.StatusPedido.ParaEntrega) select A).ToList();
             }
 
             //Todos  Fechado
             if (view == 3)
-            {
-                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where statusPedido in (2,5) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {                
+                itens = (from A in db.Pedidos where A.idOrganizacao.Equals(idOrg) &   (A.statusPedido == CustomEnumStatus.StatusPedido.Fechado || A.statusPedido == CustomEnumStatus.StatusPedido.Cancelado) select A).ToList();
             }
 
             //Todos   
             if (view == 4)
-            {
-                itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-
+            {                 
+                itens = (from A in db.Pedidos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             }
 
 
@@ -151,19 +117,18 @@ namespace OscaApp.Data
         {
             List<Pedido> itens = new List<Pedido>();
 
-            itens = db.Pedidos.FromSql("SELECT * FROM Pedido  where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            itens = (from A in db.Pedidos where A.idCliente.Equals(idCliente) select A).ToList();
 
             return HelperAssociate.ConvertToGridPedido(itens);
         }
 
-
         public List<Pedido> GetAllByIdCliente(Guid idCliente)
         {
             List<Pedido> retorno = new List<Pedido>();
-            retorno = db.Pedidos.FromSql("SELECT * FROM Pedido where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            retorno = (from A in db.Pedidos where A.idCliente.Equals(idCliente) select A).ToList();
+
             return retorno;
 
         }
-
     }
 }

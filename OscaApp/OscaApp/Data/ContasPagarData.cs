@@ -18,35 +18,20 @@ namespace OscaApp.Data
         }
 
         public void Delete(ContasPagar modelo)
-        {
-            try
-            {
+        { 
                 db.ContasP.Remove(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
 
 
         public void Add(ContasPagar contasPagar)
-        {
-            try
-            {
+        {          
                 db.ContasP.Add(contasPagar);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
         public void Update(ContasPagar modelo)
         {
-            try
-            {
+       
                 db.Attach(modelo);
            
                 db.Entry(modelo).Property("titulo").IsModified                   = true;
@@ -63,17 +48,10 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;                               
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         public void UpdateStatus(ContasPagar modelo)
         {
-            try
-            {
+    
                 db.Attach(modelo);
            
                 db.Entry(modelo).Property("statusContaPagar").IsModified = true;
@@ -83,23 +61,13 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
                 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         public ContasPagar Get(Guid id)
         {
             List<ContasPagar> retorno = new List<ContasPagar>();
-            try
-            {
-                retorno = db.ContasP.FromSql("SELECT * FROM ContasPagar WHERE  id = '" + id.ToString() +  "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+           
+            retorno = (from A in db.ContasP where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<ContasPagar> GetAll(Guid idOrg, int view)
@@ -108,33 +76,27 @@ namespace OscaApp.Data
 
             //Contas em Aberto
             if (view == 0)
-            {
-                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where statusContaPagar in (0,3) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {              
+                itens = (from A in db.ContasP where A.idOrganizacao.Equals(idOrg) & (A.statusContaPagar == CustomEnumStatus.StatusContaPagar.agendado || A.statusContaPagar == CustomEnumStatus.StatusContaPagar.atrasado) select A).ToList();
             }
 
             //Contas Fechadas
             if (view == 1)
-            {
-                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where statusContaPagar in (1,2) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {                
+                itens = (from A in db.ContasP where A.idOrganizacao.Equals(idOrg) & (A.statusContaPagar == CustomEnumStatus.StatusContaPagar.cancelado || A.statusContaPagar == CustomEnumStatus.StatusContaPagar.pago) select A).ToList();
             }
 
             //Todos Contas   
             if (view == 2)
-            {
-                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-
+            {                
+                itens = (from A in db.ContasP where A.idOrganizacao.Equals(idOrg)  select A).ToList();
             }
 
             //Todos Contas  a Pagar hoje 
             if (view == 3)
             {
-                itens = db.ContasP.FromSql("SELECT * FROM ContasPagar  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-
-                IEnumerable<ContasPagar> retorno = itens;
-
-                retorno = from u in retorno where (u.dataPagamento.Date == DateTime.Now.Date) & (u.statusContaPagar == CustomEnumStatus.StatusContaPagar.agendado || u.statusContaPagar == CustomEnumStatus.StatusContaPagar.atrasado) select u;
-
-                itens = retorno.ToList();
+                itens = (from A in db.ContasP where A.idOrganizacao.Equals(idOrg) & (A.dataPagamento.Date == DateTime.Now.Date) & (A.statusContaPagar == CustomEnumStatus.StatusContaPagar.agendado || A.statusContaPagar == CustomEnumStatus.StatusContaPagar.atrasado) select A).ToList();
+                                 
             }
 
             return itens;

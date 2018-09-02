@@ -19,51 +19,36 @@ namespace OscaApp.Data
 
         public void Add(DetalheMovimentacaoProduto modelo)
         {
-            try
-            {
+           
                 db.DetalheMovimentacaoProdutos.Add(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+      
         }
         public void Update(DetalheMovimentacaoProduto modelo)
         {
-            try
-            {
+            
                 db.Attach(modelo);
                 db.Entry(modelo).Property("nome").IsModified                     = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
-
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();        
 
         }
-        public DetalheMovimentacaoProduto Get(Guid id, Guid idOrg)
+        public DetalheMovimentacaoProduto Get(Guid id)
         {
             List<DetalheMovimentacaoProduto> retorno = new List<DetalheMovimentacaoProduto>();
-            try
-            {
-                retorno = db.DetalheMovimentacaoProdutos.FromSql("SELECT * FROM DetalheMovimentacaoProduto WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+     
+            retorno = (from A in db.DetalheMovimentacaoProdutos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
 
         public List<DetalheMovimentacaoProduto> GetAll(Guid idOrg)
         {
             List<DetalheMovimentacaoProduto> retorno = new List<DetalheMovimentacaoProduto>();
-            retorno = db.DetalheMovimentacaoProdutos.FromSql("SELECT * FROM DetalheMovimentacaoProduto WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.DetalheMovimentacaoProdutos where A.idOrganizacao.Equals(idOrg) select A).ToList();
+
             return retorno;
         }
     }

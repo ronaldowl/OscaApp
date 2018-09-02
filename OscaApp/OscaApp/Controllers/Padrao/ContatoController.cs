@@ -84,7 +84,7 @@ namespace OscaApp.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 //campo que sempre contém valor
-                retorno = contatoData.Get(new Guid(id), contexto.idOrganizacao);
+                retorno = contatoData.Get(new Guid(id));
 
                 if (retorno != null)
                 {

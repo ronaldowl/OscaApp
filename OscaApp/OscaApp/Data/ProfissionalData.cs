@@ -17,22 +17,13 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
         public void Add(Profissional profissional)
-        {
-            try
-            {
+        {           
                 db.Profissionais.Add(profissional);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+                db.SaveChanges();     
         }
         public void Update(Profissional modelo)
         {
-            try
-            {
+         
                 db.Attach(modelo);
 
                 db.Entry(modelo).Property("tipoConta").IsModified = true;
@@ -51,29 +42,20 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
 
         }
-        public Profissional Get(Guid id, Guid idOrg)
+        public Profissional Get(Guid id)
         {
             List<Profissional> retorno = new List<Profissional>();
-            try
-            {
-                retorno = db.Profissionais.FromSql("SELECT * FROM profissional WHERE id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+ 
+            retorno = (from A in db.Profissionais where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Profissional> GetAll(Guid idOrg)
         {
             List<Profissional> retorno = new List<Profissional>();
-            retorno = db.Profissionais.FromSql("SELECT * FROM profissional where idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Profissionais where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
         }
     }

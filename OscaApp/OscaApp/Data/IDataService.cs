@@ -25,7 +25,7 @@ namespace OscaApp.Data
 
     public interface IBancoData
     {
-        Banco Get(Guid id, Guid idOrg);
+        Banco Get(Guid id);
         List<Banco> GetAll();
     }
 
@@ -33,13 +33,13 @@ namespace OscaApp.Data
     {
         void Add(Incidente incidente);
         void Update(Incidente incidente);
-        Incidente Get(Guid id, Guid idOrganizacao);
+        Incidente Get(Guid id);
         List<Incidente> GetAll(Guid idOrg);
     }
 
     public interface ICategoriaProfissionalData
     {
-        CategoriaProfissional Get(Guid id, Guid idOrg);
+        CategoriaProfissional Get(Guid id);
         List<CategoriaProfissional> GetAll();
     }
 
@@ -55,7 +55,7 @@ namespace OscaApp.Data
         void Add(Comunicado comunicado);
         void Update(Comunicado comunicado);
         void Delete(Comunicado comunicado);
-        Comunicado Get(Guid id, Guid idOrg);
+        Comunicado Get(Guid id);
         List<Comunicado> GetAll(Guid idOrg);
     }
 
@@ -71,7 +71,7 @@ namespace OscaApp.Data
     {
         void Add(Profissional profissional);
         void Update(Profissional profissional);
-        Profissional Get(Guid id, Guid idOrg);
+        Profissional Get(Guid id);
         List<Profissional> GetAll(Guid idOrg);
     }
     public interface IOrdemServicoData
@@ -91,7 +91,7 @@ namespace OscaApp.Data
     {
         void Add(Servico servico);
         void Update(Servico servico);
-        Servico Get(Guid id, Guid idOrg);
+        Servico Get(Guid id);
         List<Servico> GetAll(Guid idOrg);
     }
     public interface IClienteData
@@ -154,7 +154,7 @@ namespace OscaApp.Data
         void Add(Recurso recurso);
         void Update(Recurso recurso);
         void Delete(Recurso recurso);
-        Recurso Get(Guid id, Guid idOrg);
+        Recurso Get(Guid id);
         List<Recurso> GetAll(Guid idOrg);
     }
 
@@ -162,21 +162,21 @@ namespace OscaApp.Data
     {
         void Add(LocalProduto localProduto);
         void Update(LocalProduto localProduto);
-        LocalProduto Get(Guid id, Guid idOrg);
+        LocalProduto Get(Guid id);
         List<LocalProduto> GetAll(Guid idOrg);
     }
     public interface IMovimentacaoProdutoData
     {
         void Add(MovimentacaoProduto movimentacaoProduto);
         void Update(MovimentacaoProduto movimentacaoProduto);
-        MovimentacaoProduto Get(Guid id, Guid idOrg);
+        MovimentacaoProduto Get(Guid id);
         List<MovimentacaoProduto> GetAll(Guid idOrg);
     }
     public interface IDetalheMovimentacaoProdutoData
     {
         void Add(DetalheMovimentacaoProduto detalheMovimentacaoProduto);
         void Update(DetalheMovimentacaoProduto detalheMovimentacaoProduto);
-        DetalheMovimentacaoProduto Get(Guid id, Guid idOrg);
+        DetalheMovimentacaoProduto Get(Guid id);
         List<DetalheMovimentacaoProduto> GetAll(Guid idOrg);
     }
 
@@ -186,7 +186,7 @@ namespace OscaApp.Data
         void Update(PedidoRetirada pedidoRetirada);
         void UpdateStatus(PedidoRetirada pedidoRetirada);
         void Delete(PedidoRetirada pedidoRetirada);
-        PedidoRetirada Get(Guid id, Guid idOrg);
+        PedidoRetirada Get(Guid id);
         List<PedidoRetiradaGridViewModel> GetAll(Guid idOrg);
         List<PedidoRetirada> GetAllByIdCliente(Guid idCliente);
 
@@ -202,7 +202,7 @@ namespace OscaApp.Data
     {
         void Add(ServicoPedidoRetirada servicoPedidoRetirada);
         void Update(ServicoPedidoRetirada servicoPedidoRetirada);
-        ServicoPedidoRetirada Get(Guid id, Guid idOrg);
+        ServicoPedidoRetirada Get(Guid id);
         List<ServicoPedidoRetirada> GetAll(Guid idOrg);
     }
 
@@ -314,7 +314,7 @@ namespace OscaApp.Data
         void Add(Contato contato);
         void Update(Contato contato);
         void Delete(Contato contato);
-        Contato Get(Guid id, Guid idOrg);
+        Contato Get(Guid id);
         List<Contato> GetAll(Guid idOrg);
     }
 

@@ -18,37 +18,20 @@ namespace OscaApp.Data
             this.db = dbContext;        
         }
         public void Delete(Contato modelo)
-        {
-            try
-            {
+        { 
                 db.Contatos.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+                db.SaveChanges(); 
         }
 
 
         public void Add(Contato contato)
-        {
-            try
-            {
+        {      
                 db.Contatos.Add(contato);                
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-           
         }
         public void Update(Contato modelo)
         {
-            try
-            {
+          
                 db.Attach(modelo);
                 db.Entry(modelo).Property("nome").IsModified                = true;
                 db.Entry(modelo).Property("telefone").IsModified            = true;       
@@ -66,38 +49,22 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
-            
-            
+                        
                 db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+ 
         }
-        public Contato Get(Guid id, Guid idOrg)
+        public Contato Get(Guid id)
         {
             List<Contato> retorno = new List<Contato>();
-            try
-            {
-               
-                retorno = db.Contatos.FromSql("SELECT * FROM Contato where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+
+            retorno = (from A in db.Contatos where A.id.Equals(id) select A).ToList();
             return retorno[0];
         }
         public List<Contato> GetAll(Guid idOrg)
         {
             List<Contato> retorno = new List<Contato>();
-            retorno = db.Contatos.FromSql("SELECT * FROM Contato where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Contatos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
-
         }
     }
 }

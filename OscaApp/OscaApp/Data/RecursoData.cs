@@ -17,33 +17,17 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
         public void Delete(Recurso modelo)
-        {
-            try
-            {
+        {           
                 db.Recursos.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges(); 
         }
         public void Add(Recurso modelo)
-        {
-            try
-            {
+        {          
                 db.Recursos.Add(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
         public void Update(Recurso modelo)
-        {
-            try
-            {
+        {          
                 db.Attach(modelo);
                 db.Entry(modelo).Property("nome").IsModified                     = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
@@ -51,30 +35,22 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
 
         }
-        public Recurso Get(Guid id, Guid idOrg)
+        public Recurso Get(Guid id)
         {
-            List<Recurso> retorno = new List<Recurso>();
-            try
-            {
-                retorno = db.Recursos.FromSql("SELECT * FROM Recurso WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+            List<Recurso> retorno = new List<Recurso>();       
+
+            retorno = (from A in db.Recursos where A.id.Equals(id) select A).ToList();
+
+
             return retorno[0];
         }
 
         public List<Recurso> GetAll(Guid idOrg)
         {
             List<Recurso> retorno = new List<Recurso>();
-            retorno = db.Recursos.FromSql("SELECT * FROM Recurso WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Recursos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
         }
     }

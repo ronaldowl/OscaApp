@@ -17,36 +17,19 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
         public void Delete(Comunicado modelo)
-        {
-            try
-            {
+        {   
                 db.Comunicados.Remove(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
 
         public void Add(Comunicado comunicado)
-        {
-            try
-            {
+        { 
                 db.Comunicados.Add(comunicado);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
         }
         public void Update(Comunicado modelo)
         {
-            try
-            {
+
                 db.Attach(modelo);
                 db.Entry(modelo).Property("titulo").IsModified                   = true;
                 db.Entry(modelo).Property("dataInicio").IsModified               = true;
@@ -57,29 +40,19 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
-        public Comunicado Get(Guid id, Guid idOrg)
+        public Comunicado Get(Guid id)
         {
             List<Comunicado> retorno = new List<Comunicado>();
-            try
-            {
-                retorno = db.Comunicados.FromSql("SELECT * FROM comunicado where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+ 
+            retorno = (from A in db.Comunicados where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Comunicado> GetAll(Guid idOrg)
         {
             List<Comunicado> retorno = new List<Comunicado>();
-            retorno = db.Comunicados.FromSql("SELECT * FROM comunicado where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Comunicados where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }

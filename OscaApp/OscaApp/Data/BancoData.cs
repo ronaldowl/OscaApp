@@ -17,22 +17,18 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
 
-        public Banco Get(Guid id, Guid idOrg)
+        public Banco Get(Guid id)
         {
             List<Banco> retorno = new List<Banco>();
-            try
-            {
-                retorno = db.Bancos.FromSql("SELECT * FROM Banco where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+            retorno = (from A in db.Bancos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Banco> GetAll()
         {
             List<Banco> retorno = new List<Banco>();
-            retorno = db.Bancos.FromSql("SELECT * FROM Banco").ToList();
+        
+            retorno = (from A in db.Bancos select A).ToList();
             return retorno;
         }
     }

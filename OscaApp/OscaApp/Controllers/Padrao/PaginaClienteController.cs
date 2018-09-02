@@ -60,8 +60,7 @@ namespace OscaApp.Controllers
 
             ClientePotencial modelo = new ClientePotencial();           
 
-            try
-            {
+          
                 if (entrada.clientePotencial != null)
                 {
                     if (ClientePotencialRules.MontaClientePotencialCreateFomulario(entrada, out modelo, new Guid (idOrganizacao)))
@@ -76,13 +75,7 @@ namespace OscaApp.Controllers
                     //Apresenta mensagem para o usuário
                     return RedirectToAction("ContexError", "CustomError", new { entityType = 1 });
                 }
-            }
-            catch (Exception ex)
-            {
-                LogOsca log = new LogOsca();
-               
-
-            }
+        
             return View();
         }
            

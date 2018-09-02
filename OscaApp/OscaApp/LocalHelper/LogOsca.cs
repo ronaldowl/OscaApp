@@ -38,9 +38,7 @@ namespace OscaApp.framework
 
             string comando = "insert into LogOsca (codigoErro, codigoEntidade, idUsuario, idOrganizacao,evento, mensagem) values('" + codigoErro.ToString() + "', '" + codigoEntidade.ToString() + "', '" + idUsuario.ToString() + "', '" + idOrganizacao.ToString() + "', '" + evento + "', '" + mensagem + "')";
 
-            try
-            {
-
+          
                 using (SqlConnection Connection = new SqlConnection(conectStringManager))
                 {
 
@@ -55,11 +53,7 @@ namespace OscaApp.framework
                     _Command.ExecuteScalar();
                     Connection.Close();
                 };
-            }
-            catch (SqlException ex)
-            {
-
-            }
+         
         }
 
 
@@ -70,8 +64,7 @@ namespace OscaApp.framework
             string comando = "select id, codigoEntidade, evento, mensagem, idUsuario, dataCriacao, codigoErro from LogOsca where id =   '" + id.ToString() + "'";
 
             SqlDataReader dataReader;
-            try
-            {
+         
 
                 using (SqlConnection Connection = new SqlConnection(conectStringManager))
                 {
@@ -108,11 +101,7 @@ namespace OscaApp.framework
                     }
                     Connection.Close();
                 };
-            }
-            catch (SqlException ex)
-            {
-
-            }
+          
 
             return retorno;
         }
@@ -124,8 +113,7 @@ namespace OscaApp.framework
             string comando = "select id, codigoEntidade, evento, mensagem, idUsuario, dataCriacao, codigoErro from LogOsca where idOrganizacao =   '" + idOrganizacao.ToString() + "'";
 
             SqlDataReader dataReader;
-            try
-            {
+          
 
                 using (SqlConnection Connection = new SqlConnection(conectStringManager))
                 {
@@ -162,11 +150,7 @@ namespace OscaApp.framework
                     }
                     Connection.Close();
                 };
-            }
-            catch (SqlException ex)
-            {
-
-            }
+          
 
             return retorno;
         }

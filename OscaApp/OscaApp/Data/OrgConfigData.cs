@@ -17,22 +17,13 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
         public void Add(OrgConfig modelo)
-        {
-            try
-            {
+        {           
                 db.Add(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         public void Update(OrgConfig modelo)
         {
-            try
-            {
+          
                 db.Attach(modelo);
                 db.Entry(modelo).Property("mensagemPedido").IsModified            = true;
                 db.Entry(modelo).Property("margemBaseProduto").IsModified         = true;
@@ -52,24 +43,15 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
 
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();     
 
         }
         public OrgConfig Get(Guid id)
         {
             List<OrgConfig> retorno = new List<OrgConfig>();
-            try
-            {
-                retorno = db.OrgsConfig.FromSql("SELECT * FROM OrgConfig WHERE  idOrganizacao = '" + id.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+      
+            retorno = (from A in db.OrgsConfig where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }      
     }

@@ -78,7 +78,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = comunicadoData.Get(modelo.comunicado.id, contexto.idOrganizacao);
+                retorno = comunicadoData.Get(modelo.comunicado.id);
 
                 if (retorno != null)
                 {

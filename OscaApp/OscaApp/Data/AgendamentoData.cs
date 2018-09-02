@@ -22,112 +22,72 @@ namespace OscaApp.Data
         }
 
         public void Delete(Agendamento modelo)
-        {
-            try
-            {
+        {            
                 db.Agendamentos.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+                db.SaveChanges();        
         }
 
         public void Add(Agendamento modelo)
         {
-            try
-            {
                 db.Agendamentos.Add(modelo);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();       
            
         }
         public void Update(Agendamento modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("dataAgendada").IsModified             = true;
-                db.Entry(modelo).Property("idCliente").IsModified        = true;                    
-                     
-                db.Entry(modelo).Property("statusAgendamento").IsModified = true;
-           
-                      
+                db.Entry(modelo).Property("idCliente").IsModified        = true;    
+            
+                db.Entry(modelo).Property("statusAgendamento").IsModified = true;         
                 db.Entry(modelo).Property("idReferencia").IsModified = true;
                 db.Entry(modelo).Property("tipoReferencia").IsModified = true;
-
                 db.Entry(modelo).Property("idProfissional").IsModified = true;
                 db.Entry(modelo).Property("dataFechamento").IsModified = true;
-
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
-            
-            
+                        
                 db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+        
 
         }
         public void UpdateStatus(Agendamento modelo)
         {
-            try
-            {
+          
                 db.Attach(modelo);
                 db.Entry(modelo).Property("statusAgendamento").IsModified = true;
-                db.Entry(modelo).Property("dataFechamento").IsModified = true;               
+                db.Entry(modelo).Property("dataFechamento").IsModified = true;             
                 
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
-
-
+            
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+        
 
         }
         public Agendamento Get(Guid id)
         {
             List<Agendamento> retorno = new List<Agendamento>();
-            try
-            {
-               
-                retorno = db.Agendamentos.FromSql("SELECT * FROM Agendamento where  id = '" + id.ToString() + "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+
+            retorno = (from A in db.Agendamentos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Agendamento> GetAll(Guid idOrg)
         {
             List<Agendamento> retorno = new List<Agendamento>();
-            retorno = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Agendamentos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
            List<Agendamento> retorno = new List<Agendamento>();
-            //List<Relacao> lista = new List<Relacao>();
 
-            retorno = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Agendamentos where A.idOrganizacao.Equals(idOrg) select A).ToList();
 
             return Relacao.ConvertToRelacao(retorno);
             
@@ -137,34 +97,34 @@ namespace OscaApp.Data
         {
             List<Agendamento> itens = new List<Agendamento>();
 
-            //Meus Atendimentos abertos
+            //Meus Agendamentos Abertos
             if (view == 0)
-            {
-                itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where statusAgendamento = 0 and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {        
+                itens = (from A in db.Agendamentos where A.idProfissional.Equals(idProfissional) & A.statusAgendamento == CustomEnumStatus.StatusAgendamento.agendado select A).ToList();
             }
 
-            //Meus Atendimentos Fechados
+            //Meus Agendamentos Fechados
             if (view == 1)
-            {
-                itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where statusAgendamento in (1,2) and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {                
+                itens = (from A in db.Agendamentos where A.idProfissional.Equals(idProfissional) & (A.statusAgendamento == CustomEnumStatus.StatusAgendamento.cancelado  || A.statusAgendamento == CustomEnumStatus.StatusAgendamento.concluido) select A).ToList();
             }
 
-            //Todos Fechados
+            //Todos Agendamentos Fechados
             if (view == 2)
             {
-                itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where statusAgendamento in (1,2) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Agendamentos where A.idOrganizacao.Equals(idOrg) & (A.statusAgendamento == CustomEnumStatus.StatusAgendamento.cancelado || A.statusAgendamento == CustomEnumStatus.StatusAgendamento.concluido) select A).ToList();
             }
 
-            //Todos  Abertos
+            //Todos Agendamentos Abertos
             if (view == 3)
-            {
-                itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where statusAgendamento in (0) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {            
+                itens = (from A in db.Agendamentos where A.idOrganizacao.Equals(idOrg) & A.statusAgendamento == CustomEnumStatus.StatusAgendamento.agendado select A).ToList();
             }
 
-            //Todos   
+            //Todos Agendamentos  
             if (view == 4)
             {
-                itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Agendamentos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             }
 
            
@@ -174,7 +134,7 @@ namespace OscaApp.Data
         {
             List<Agendamento> itens = new List<Agendamento>();
 
-            itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            itens = (from A in db.Agendamentos where A.idCliente.Equals(idCliente) select A).ToList();
 
             return HelperAssociate.ConvertToGridAgendamento(itens);
        
@@ -182,15 +142,16 @@ namespace OscaApp.Data
         public List<AgendamentoGridViewModel> GetAllGridViewModelDia(Guid idProfissional)
         {
             List<Agendamento> itens = new List<Agendamento>();
-
-            itens = db.Agendamentos.FromSql("SELECT * FROM Agendamento  where  idProfissional = '" + idProfissional.ToString()  + "' and Cast(dataAgendada as date) = Cast(getdate() as date) order by criadoEm desc").ToList();
-
+            
+            itens = (from A in db.Agendamentos where A.idProfissional.Equals(idProfissional) & A.dataAgendada == DateTime.Now.Date select A).ToList();
+                      
             return HelperAssociate.ConvertToGridAgendamento(itens);
         }
         public List<Agendamento> GetAllByIdCliente(Guid idCliente)
         {
             List<Agendamento> retorno = new List<Agendamento>();
-            retorno = db.Agendamentos.FromSql("SELECT * FROM Agendamento where  idCliente = '" + idCliente.ToString() + "'").ToList();
+
+            retorno = (from A in db.Agendamentos where A.idCliente.Equals(idCliente) select A).ToList();
             return retorno;
 
         }

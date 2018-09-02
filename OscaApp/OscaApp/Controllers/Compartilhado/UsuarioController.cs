@@ -22,7 +22,7 @@ namespace OscaApp.Controllers
     public class UsuarioController : Controller
     {
         private ContextPage contexto;
-        private ApplicationDbContext db;
+  
         private SqlGenericData sqlData;
 
         private readonly UsuarioData usuarioData;

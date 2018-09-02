@@ -19,22 +19,12 @@ namespace OscaApp.Data
             this.db = dbContext;        
         }
         public void Add(ListaPreco listapreco)
-        {
-            try
-            {
+        {                  
                 db.ListaPrecos.Add(listapreco);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-           
+                db.SaveChanges();            
         }
         public void Update(ListaPreco modelo)
-        {
-            try
-            {
+        {           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("nome").IsModified                = true;
                 db.Entry(modelo).Property("descricao").IsModified           = true;
@@ -46,12 +36,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
                         
-                db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();   
 
         }
         public ListaPreco Get(Guid id )

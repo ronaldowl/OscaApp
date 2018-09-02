@@ -44,8 +44,7 @@ namespace OscaApp.Data
 
         public void Update(ProdutoBalcao modelo)
         {
-            try
-            {
+            
                 db.Attach(modelo);
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
@@ -55,12 +54,7 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("quantidade").IsModified = true;
          
                 db.SaveChanges();
-            } // end of try
-            catch (Exception ex)
-            {
-
-                throw ex;
-            } // end of catch
+  
 
         } // end of method Update
 

@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
 using OscaFramework.Models;
-using OscaApp.RulesServices;
 using OscaFramework.MicroServices;
 using OscaApp.ViewModels.GridViewModels;
 
@@ -93,7 +92,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = modeloData.Get(modelo.pedidoRetirada.id, contexto.idOrganizacao);
+                retorno = modeloData.Get(modelo.pedidoRetirada.id);
 
                 if (retorno != null)
                 {
@@ -189,7 +188,7 @@ namespace OscaApp.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = modeloData.Get(modelo.pedidoRetirada.id, contexto.idOrganizacao);
+                retorno = modeloData.Get(modelo.pedidoRetirada.id);
                 modelo.cliente = clienteData.Get(retorno.idCliente);
                 modelo.orgConfig = orgConfigData.Get(contexto.idOrganizacao);
                 modelo.organizacao = organizacaoData.Get(contexto.idOrganizacao);
@@ -243,7 +242,7 @@ namespace OscaApp.Controllers
                 if (!String.IsNullOrEmpty(id))
                 {
                     //campo que sempre contém valor
-                    retorno = modeloData.Get(new Guid(id),this.contexto.idOrganizacao);
+                    retorno = modeloData.Get(new Guid(id));
 
                     if (retorno != null)
                     {

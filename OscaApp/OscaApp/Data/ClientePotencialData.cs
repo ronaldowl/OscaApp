@@ -19,21 +19,13 @@ namespace OscaApp.Data
             this.db = dbContext;        
         }
         public void Add(ClientePotencial cliente)
-        {        
-                try
-                {
+        {                
                     db.ClientePotencial.Add(cliente);                
                     db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-            }     
+        }     
         public void Update(ClientePotencial modelo)
         {
-            try
-            {
+        
                 db.Attach(modelo);
                 db.Entry(modelo).Property("nomeCliente").IsModified        = true;
                 db.Entry(modelo).Property("telefone").IsModified           = true;       
@@ -45,19 +37,13 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified      = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified  = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified       = true;
-            
-            
+                        
                 db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+
         }
         public void SetStatus(ClientePotencial modelo)
         {
-            try
-            {
+ 
                 db.Attach(modelo);
                 db.Entry(modelo).Property("status").IsModified = true;                
                 db.Entry(modelo).Property("statusLead").IsModified = true;
@@ -65,56 +51,43 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
                 
-                db.SaveChanges();
-             
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();             
 
         }
         public ClientePotencial Get(Guid id )
         {
             List<ClientePotencial> retorno = new List<ClientePotencial>();
-            try
-            {
-               
-                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where  id = '" + id.ToString() +  "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+      
+            retorno = (from A in db.ClientePotencial where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<ClientePotencial> GetAll(Guid idOrg,int view)
         {
             List<ClientePotencial> retorno = new List<ClientePotencial>();
 
-
             //Cliente Ativo
             if (view == 0)
-            {
-                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where statusLead = 0 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {              
+                retorno = (from A in db.ClientePotencial where A.idOrganizacao.Equals(idOrg) & A.statusLead == CustomEnumStatus.StatusLead.Ativo select A).ToList();
+
             }
 
             //Cliente Inativo
             if (view == 1)
-            {
-                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where statusLead = 1 and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {             
+                retorno = (from A in db.ClientePotencial where A.idOrganizacao.Equals(idOrg) & A.statusLead == CustomEnumStatus.StatusLead.Inativo select A).ToList();
+
             }
 
             //Qualificados  
             if (view == 2)
-            {
-                retorno = db.ClientePotencial.FromSql("SELECT * FROM ClientePotencial where  statusLead = 2 and   idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            {             
+                retorno = (from A in db.ClientePotencial where A.idOrganizacao.Equals(idOrg) & A.statusLead == CustomEnumStatus.StatusLead.Qualificado select A).ToList();
+
             }
 
             return retorno;
-
         }
     }
 }

@@ -9,7 +9,7 @@ namespace OscaApp.Controllers
     [Authorize]
     public class PaineisController :Controller
     {
-        private ContextPage contexto;
+       
 
         public PaineisController(  IHttpContextAccessor httpContext)
         {
@@ -19,7 +19,7 @@ namespace OscaApp.Controllers
 
         public ViewResult PainelHome()
         {
-            return View(this.contexto);
+            return View();
         }
 
         public ViewResult PainelOperacional()

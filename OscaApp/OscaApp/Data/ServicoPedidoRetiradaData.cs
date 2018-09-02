@@ -18,21 +18,14 @@ namespace OscaApp.Data
         }
         public void Add(ServicoPedidoRetirada servicoPedidoRetirada)
         {
-            try
-            {
+             
                 db.ServicosPedidoRetirada.Add(servicoPedidoRetirada);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+      
         }
         public void Update(ServicoPedidoRetirada modelo)
         {
-            try
-            {
+            
                 db.Attach(modelo);
                 db.Entry(modelo).Property("valor").IsModified                    = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
@@ -40,30 +33,21 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+     
 
         }
-        public ServicoPedidoRetirada Get(Guid id, Guid idOrg)
+        public ServicoPedidoRetirada Get(Guid id)
         {
             List<ServicoPedidoRetirada> retorno = new List<ServicoPedidoRetirada>();
-            try
-            {
 
-                retorno = db.ServicosPedidoRetirada.FromSql("SELECT * FROM ServicoPedidoRetirada where  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+            retorno = (from A in db.ServicosPedidoRetirada where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<ServicoPedidoRetirada> GetAll(Guid idOrg)
         {
             List<ServicoPedidoRetirada> retorno = new List<ServicoPedidoRetirada>();
-            retorno = db.ServicosPedidoRetirada.FromSql("SELECT * FROM ServicoPedidoRetirada where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.ServicosPedidoRetirada where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }

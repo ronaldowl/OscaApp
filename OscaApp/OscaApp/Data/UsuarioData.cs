@@ -19,8 +19,8 @@ namespace OscaApp.Data
 
         public List<ApplicationUser> GetAll(Guid idOrg)
         {
-            List<ApplicationUser> retorno = new List<ApplicationUser>();
-            retorno = db.Users.FromSql("SELECT * FROM AspNetUsers where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            List<ApplicationUser> retorno = new List<ApplicationUser>();        
+            retorno = (from A in db.Users where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }
@@ -28,7 +28,7 @@ namespace OscaApp.Data
         public ApplicationUser Get(string id)
         {
             List<ApplicationUser> retorno = new List<ApplicationUser>();
-            retorno = db.Users.FromSql("SELECT * FROM AspNetUsers where  id = '" + id + "'").ToList();
+            retorno = (from A in db.Users where A.Id.Equals(id) select A).ToList();
             return retorno[0];
 
         }

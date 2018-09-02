@@ -19,33 +19,17 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
         public void Delete(PedidoRetirada modelo)
-        {
-            try
-            {
+        {          
                 db.PedidosRetirada.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();       
         }
         public void Add(PedidoRetirada modelo)
-        {
-            try
-            {
+        {        
                 db.PedidosRetirada.Add(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();      
         }
         public void Update(PedidoRetirada modelo)
-        {
-            try
-            {
+        {            
                 db.Attach(modelo);
                 db.Entry(modelo).Property("tipoPagamento").IsModified            = true;
                 db.Entry(modelo).Property("condicaoPagamento").IsModified        = true;          
@@ -71,25 +55,13 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modeloCacamba2").IsModified = true;
                 db.Entry(modelo).Property("idEndereco").IsModified = true;
                 db.Entry(modelo).Property("idEndereco2").IsModified = true;
-
-
-
-
-
-
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            
+                db.SaveChanges();       
 
         }
 
         public void UpdateStatus(PedidoRetirada modelo)
-        {
-            try
-            {
+        {            
                 db.Attach(modelo);   
                 db.Entry(modelo).Property("statusPedidoRetirada").IsModified = true;            
                 db.Entry(modelo).Property("dataFechamento").IsModified = true;
@@ -97,40 +69,29 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;                       
                 
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+                db.SaveChanges(); 
         }
 
-
-        public PedidoRetirada Get(Guid id, Guid idOrg)
+        public PedidoRetirada Get(Guid id)
         {
             List<PedidoRetirada> retorno = new List<PedidoRetirada>();
-            try
-            {
-                retorno = db.PedidosRetirada.FromSql("SELECT * FROM PedidoRetirada WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+
+            retorno = (from A in db.PedidosRetirada where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
 
         public List<PedidoRetiradaGridViewModel> GetAll(Guid idOrg)
         {
             List<PedidoRetirada> retorno = new List<PedidoRetirada>();
-            retorno = db.PedidosRetirada.FromSql("SELECT * FROM PedidoRetirada WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.PedidosRetirada where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return HelperAssociate.ConvertToGridPedido(retorno);
         }
 
         public List<PedidoRetirada> GetAllByIdCliente(Guid idCliente)
         {
             List<PedidoRetirada> retorno = new List<PedidoRetirada>();
-            retorno = db.PedidosRetirada.FromSql("SELECT * FROM PedidoRetirada WHERE  idCliente = '" + idCliente.ToString() + "'").ToList();
+            retorno = (from A in db.PedidosRetirada where A.idCliente.Equals(idCliente) select A).ToList();
             return (retorno);
         }
 

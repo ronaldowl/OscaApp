@@ -81,7 +81,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = servicoData.Get(modelo.servico.id, contexto.idOrganizacao);
+                retorno = servicoData.Get(modelo.servico.id);
 
                 //TODO Formata campos
 

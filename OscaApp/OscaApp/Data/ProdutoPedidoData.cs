@@ -22,35 +22,17 @@ namespace OscaApp.Data
         }
 
         public void Delete(ProdutoPedido modelo)
-        {
-            try
-            {
+        {            
                 db.ProdutosPedido.Remove(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         public void Add(ProdutoPedido modelo)
-        {
-            try
-            {
+        {           
                 db.ProdutosPedido.Add(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
         public void Update(ProdutoPedido modelo)
-        {
-            try
-            {
+        {      
                 db.Attach(modelo);
                 db.Entry(modelo).Property("valor").IsModified = true;
                 db.Entry(modelo).Property("valorDescontoMoney").IsModified = true;
@@ -63,42 +45,31 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
-
-
+            
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
 
         }
         public ProdutoPedido Get(Guid id)
         {
             List<ProdutoPedido> retorno = new List<ProdutoPedido>();
-            try
-            {
-                retorno = db.ProdutosPedido.FromSql("SELECT * FROM ProdutoPedido where  id = '" + id.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+            
+            retorno = (from A in db.ProdutosPedido where A.id.Equals(id) select A).ToList();
+        
             return retorno[0];
         }
         public List<ProdutoPedido> GetAll(Guid idOrg)
         {
             List<ProdutoPedido> retorno = new List<ProdutoPedido>();
-            retorno = db.ProdutosPedido.FromSql("SELECT * FROM ProdutoPedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+        
+            retorno = (from A in db.ProdutosPedido where A.idOrganizacao.Equals(idOrg) select A).ToList();
+
             return retorno;
 
         }
         public List<ProdutoPedido> GetByPedidoId(Guid idPedido)
         {
             List<ProdutoPedido> retorno = new List<ProdutoPedido>();
-            retorno = db.ProdutosPedido.FromSql("SELECT * FROM ProdutoPedido  where  idPedido = '" + idPedido.ToString() + "'").ToList();
+            retorno = (from A in db.ProdutosPedido where A.idPedido.Equals(idPedido) select A).ToList();
             return retorno;
 
         }
@@ -107,7 +78,7 @@ namespace OscaApp.Data
             List<ProdutoPedido> retorno = new List<ProdutoPedido>();
             List<Relacao> lista = new List<Relacao>();
 
-            retorno = db.ProdutosPedido.FromSql("SELECT * FROM ProdutoPedido  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.ProdutosPedido where A.idOrganizacao.Equals(idOrg) select A).ToList();
 
             return Relacao.ConvertToRelacao(retorno);
 
@@ -116,7 +87,7 @@ namespace OscaApp.Data
         {
             List<ProdutoPedido> itens = new List<ProdutoPedido>();
 
-            itens = db.ProdutosPedido.FromSql("SELECT * FROM ProdutoPedido  where  idPedido = '" + idPedido.ToString() + "'").ToList();
+            itens = (from A in db.ProdutosPedido where A.idPedido.Equals(idPedido) select A).ToList();
 
             return HelperAssociate.ConvertToGridProdutoPedido(itens);
         }

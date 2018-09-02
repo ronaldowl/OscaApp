@@ -17,36 +17,18 @@ namespace OscaApp.Data
             this.db = dbContext;
         }
         public void Delete(Pagamento modelo)
-        {
-            try
-            {
+        {         
                 db.Pagamentos.Remove(modelo);
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
         }
 
         public void Add(Pagamento modelo)
-        {
-            try
-            {
+        {          
                 db.Pagamentos.Add(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
+                db.SaveChanges();   
         }
         public void Update(Pagamento modelo)
-        {
-            try
-            {
+        {         
                 db.Attach(modelo);
                 db.Entry(modelo).Property("valor").IsModified                    = true;
                 db.Entry(modelo).Property("dataPagamento").IsModified            = true;
@@ -56,29 +38,20 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
 
         }
         public Pagamento Get(Guid id)
         {
             List<Pagamento> retorno = new List<Pagamento>();
-            try
-            {
-                retorno = db.Pagamentos.FromSql("SELECT * FROM Pagamento where  id = '" + id.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+   
+            retorno = (from A in db.Pagamentos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Pagamento> GetAllByContasReceber(Guid id)
         {
-            List<Pagamento> retorno = new List<Pagamento>();
-            retorno = db.Pagamentos.FromSql("SELECT * FROM Pagamento where  idContasReceber = '" + id.ToString() + "'").ToList();
+            List<Pagamento> retorno = new List<Pagamento>();          
+            retorno = (from A in db.Pagamentos where A.idContasReceber.Equals(id) select A).ToList();
             return retorno;
 
         }

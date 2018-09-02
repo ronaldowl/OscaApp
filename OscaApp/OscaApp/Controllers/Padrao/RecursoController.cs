@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
 using OscaFramework.Models;
-using OscaApp.RulesServices;
+
 
 namespace OscaApp.Controllers
 {
@@ -78,7 +78,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = modeloData.Get(modelo.recurso.id, contexto.idOrganizacao);
+                retorno = modeloData.Get(modelo.recurso.id);
 
                 if (retorno != null)
                 {

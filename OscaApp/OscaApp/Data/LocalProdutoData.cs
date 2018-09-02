@@ -18,52 +18,34 @@ namespace OscaApp.Data
         }
 
         public void Add(LocalProduto modelo)
-        {
-            try
-            {
+        {          
                 db.LocalProdutos.Add(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();     
         }
         public void Update(LocalProduto modelo)
-        {
-            try
-            {
+        {          
                 db.Attach(modelo);
                 db.Entry(modelo).Property("nome").IsModified                     = true;
                 db.Entry(modelo).Property("modificadoPor").IsModified            = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified        = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified             = true;
 
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+                db.SaveChanges();      
 
         }
-        public LocalProduto Get(Guid id, Guid idOrg)
+        public LocalProduto Get(Guid id)
         {
             List<LocalProduto> retorno = new List<LocalProduto>();
-            try
-            {
-                retorno = db.LocalProdutos.FromSql("SELECT * FROM LocalProduto WHERE  id = '" + id.ToString() + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
-            }
-            catch (SqlException ex)
-            {
-            }
+
+            retorno = (from A in db.LocalProdutos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
 
         public List<LocalProduto> GetAll(Guid idOrg)
         {
             List<LocalProduto> retorno = new List<LocalProduto>();
-            retorno = db.LocalProdutos.FromSql("SELECT * FROM LocalProduto WHERE  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.LocalProdutos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
         }
     }

@@ -20,8 +20,7 @@ namespace OscaApp.Data
     
         public void Update(Organizacao organizacao)
         {
-            try
-            {
+            
                 db.Attach(organizacao);
                 
                 db.Entry(organizacao).Property("nomeAmigavel").IsModified = true;
@@ -42,23 +41,13 @@ namespace OscaApp.Data
                 db.Entry(organizacao).Property("complemento").IsModified = true;
                 db.Entry(organizacao).Property("emailEmpresa").IsModified = true;
                 db.Entry(organizacao).Property("TelefoneEmpresa").IsModified = true;
-
                 db.Entry(organizacao).Property("anotacao").IsModified = true;
                 db.Entry(organizacao).Property("modificadoPor").IsModified = true;
                 db.Entry(organizacao).Property("modificadoPorName").IsModified = true;
                 db.Entry(organizacao).Property("modificadoEm").IsModified = true;
             
-
                 db.SaveChanges(); 
-            }
-            catch (SqlException ex)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+     
         }
         public Organizacao Get(Guid idOrg)
         {

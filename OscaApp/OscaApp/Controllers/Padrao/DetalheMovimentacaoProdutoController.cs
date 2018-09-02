@@ -77,7 +77,7 @@ namespace OscaApp.Controllers
        
             if (!String.IsNullOrEmpty(id))
             {
-                retorno = modeloData.Get(modelo.detalheMovimentacaoProduto.id, contexto.idOrganizacao);
+                retorno = modeloData.Get(modelo.detalheMovimentacaoProduto.id);
 
                 if (retorno != null)
                 {

@@ -22,36 +22,19 @@ namespace OscaApp.Data
         }
 
         public void Delete(Atendimento modelo)
-        {
-            try
-            {
+        {         
                 db.Atendimentos.Remove(modelo);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+                db.SaveChanges();     
         }
 
         public void Add(Atendimento modelo)
-        {
-            try
-            {
+        {     
                 db.Atendimentos.Add(modelo);                
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-           
+                db.SaveChanges();           
         }
         public void Update(Atendimento modelo)
         {
-            try
-            {
+           
                 db.Attach(modelo);
                 db.Entry(modelo).Property("dataAgendada").IsModified             = true;
                 db.Entry(modelo).Property("idCliente").IsModified        = true;                    
@@ -68,63 +51,42 @@ namespace OscaApp.Data
                 db.Entry(modelo).Property("modificadoPor").IsModified       = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified   = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified        = true;
-            
-            
+                        
                 db.SaveChanges(); 
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+            
         }
         public void UpdateStatus(Atendimento modelo)
         {
-            try
-            {
+      
                 db.Attach(modelo);
                 db.Entry(modelo).Property("statusAtendimento").IsModified = true;
-                db.Entry(modelo).Property("dataFechamento").IsModified = true;               
+                db.Entry(modelo).Property("dataFechamento").IsModified = true;              
                 
                 db.Entry(modelo).Property("modificadoPor").IsModified = true;
                 db.Entry(modelo).Property("modificadoPorName").IsModified = true;
                 db.Entry(modelo).Property("modificadoEm").IsModified = true;
-
-
+                
                 db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
+            
         }
         public Atendimento Get(Guid id)
         {
             List<Atendimento> retorno = new List<Atendimento>();
-            try
-            {
-               
-                retorno = db.Atendimentos.FromSql("SELECT * FROM Atendimento where  id = '" + id.ToString() + "'").ToList();
-            }         
-            catch (SqlException ex)
-            {
-            }
-            catch (Exception ex)
-            {
-            }
+ 
+            retorno = (from A in db.Atendimentos where A.id.Equals(id) select A).ToList();
+
             return retorno[0];
         }
         public List<Atendimento> GetAll(Guid idOrg)
         {
             List<Atendimento> retorno = new List<Atendimento>();
-            retorno = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            retorno = (from A in db.Atendimentos where A.idOrganizacao.Equals(idOrg) select A).ToList();
             return retorno;
 
         }
         public List<Relacao> GetAllRelacao(Guid idOrg)
         {
-           List<Relacao> retorno = new List<Relacao>();
+            List<Relacao> retorno = new List<Relacao>();
             //List<Relacao> lista = new List<Relacao>();
 
             //retorno = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
@@ -139,32 +101,32 @@ namespace OscaApp.Data
 
             //Meus Atendimentos abertos
             if (view == 0)
-            {
-                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento = 0 and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+            { 
+                itens = (from A in db.Atendimentos where A.idProfissional.Equals(idProfissional) & A.statusAtendimento == CustomEnumStatus.StatusAtendimento.agendado select A).ToList();
             }
 
             //Meus Atendimentos Fechados
             if (view == 1)
             {
-                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento in (1,2) and idProfissional = '" + idProfissional + "' and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Atendimentos where A.idProfissional.Equals(idProfissional) & (A.statusAtendimento == CustomEnumStatus.StatusAtendimento.cancelado || A.statusAtendimento == CustomEnumStatus.StatusAtendimento.atendido) select A).ToList();
             }
 
             //Todos Fechados
             if (view == 2)
             {
-                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento in (1,2) and idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Atendimentos where A.idOrganizacao.Equals(idOrg) & (A.statusAtendimento == CustomEnumStatus.StatusAtendimento.cancelado || A.statusAtendimento == CustomEnumStatus.StatusAtendimento.atendido) select A).ToList();
             }
 
             //Todos  Abertos
             if (view == 3)
             {
-                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where statusAtendimento in (0) and  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Atendimentos where A.idOrganizacao.Equals(idOrg) & A.statusAtendimento == CustomEnumStatus.StatusAtendimento.agendado select A).ToList();
             }
 
             //Todos   
             if (view == 4)
             {
-                itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idOrganizacao = '" + idOrg.ToString() + "'").ToList();
+                itens = (from A in db.Atendimentos where A.idOrganizacao.Equals(idOrg)   select A).ToList();
             }
 
            
@@ -174,7 +136,7 @@ namespace OscaApp.Data
         {
             List<Atendimento> itens = new List<Atendimento>();
 
-            itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            itens = (from A in db.Atendimentos where A.idCliente.Equals(idCliente) select A).ToList();
 
             return HelperAssociate.ConvertToGridAtendimento(itens);
        
@@ -183,14 +145,14 @@ namespace OscaApp.Data
         {
             List<Atendimento> itens = new List<Atendimento>();
 
-            itens = db.Atendimentos.FromSql("SELECT * FROM Atendimento  where  idProfissional = '" + idProfissional.ToString()  + "' and Cast(dataAgendada as date) = Cast(getdate() as date) ").ToList();
+            itens = (from A in db.Atendimentos where A.idProfissional.Equals(idProfissional) & A.dataAgendada == DateTime.Now.Date select A).ToList();
 
             return HelperAssociate.ConvertToGridAtendimento(itens);
         }
         public List<Atendimento> GetAllByIdCliente(Guid idCliente)
         {
             List<Atendimento> retorno = new List<Atendimento>();
-            retorno = db.Atendimentos.FromSql("SELECT * FROM Atendimento where  idCliente = '" + idCliente.ToString() + "'").ToList();
+            retorno = (from A in db.Atendimentos where A.idCliente.Equals(idCliente) select A).ToList();
             return retorno;
 
         }
