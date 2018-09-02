@@ -50,7 +50,7 @@ namespace OscaApp.Data
         {
             List<OrgConfig> retorno = new List<OrgConfig>();
       
-            retorno = (from A in db.OrgsConfig where A.id.Equals(id) select A).ToList();
+            retorno = (from A in db.OrgsConfig where A.idOrganizacao.Equals(id) select A).ToList();
 
             return retorno[0];
         }      

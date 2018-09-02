@@ -9,17 +9,17 @@ namespace OscaApp.Controllers
     [Authorize]
     public class PaineisController :Controller
     {
-       
+        public readonly ContextPage contexto;
 
         public PaineisController(  IHttpContextAccessor httpContext)
         {
             // this.contexto = new ContextPage(httpContext.HttpContext.Session.GetString("email"), httpContext.HttpContext.Session.GetString("organizacao"));
-           // this.contexto = new ContextPage().ExtractContext(httpContext);
+           this.contexto = new ContextPage().ExtractContext(httpContext);
         }
 
         public ViewResult PainelHome()
         {
-            return View();
+            return View(contexto);
         }
 
         public ViewResult PainelOperacional()
