@@ -40,6 +40,7 @@ namespace OscaApp.RulesServices
             
             return false;
         }
+
         public static bool PagamentoUpdate(PagamentoViewModel entrada,out Pagamento pagamento)
         {
             pagamento = new Pagamento();
@@ -54,6 +55,19 @@ namespace OscaApp.RulesServices
 
             return true;
         }
-     
+
+        public static bool ValidaCreate(PagamentoViewModel entrada, IContasReceberData contasReceberData)
+        {
+            
+            if (entrada.contasReceber != null)
+            {
+                ContasReceber contasReceber = contasReceberData.Get(entrada.contasReceber.id);
+
+                if(entrada.pagamento.valor > contasReceber.valorRestante)
+                return false;
+            }
+
+            return true;
+        }
     }
 }

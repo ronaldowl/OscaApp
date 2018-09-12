@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OscaApp.Data;
@@ -59,28 +59,35 @@ namespace OscaApp.Controllers
             {
                 if (entrada.pagamento != null)
                 {
-                    if (PagamentoRules.PagamentoCreate(entrada, out pagamento, contexto))
+                    if (PagamentoRules.ValidaCreate(entrada, contasReceberData))
                     {
-                        pagamentoData.Add(pagamento);
+                        if (PagamentoRules.PagamentoCreate(entrada, out pagamento, contexto))
+                        {
+                            pagamentoData.Add(pagamento);
 
-                        ContasReceberRules.CalculoPagamento(entrada.contasReceber.id, pagamentoData, contasReceberData);
+                            ContasReceberRules.CalculoPagamento(entrada.contasReceber.id, pagamentoData, contasReceberData);
 
-                        return RedirectToAction("FormUpdateContasReceber", "ContasReceber",new { id = entrada.contasReceber.id.ToString() });
+                            return RedirectToAction("FormUpdateContasReceber", "ContasReceber", new { id = entrada.contasReceber.id.ToString() });
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("MensagemPagamento", "Pagamento", new { idContasReceber = entrada.contasReceber.id.ToString() });
                     }
                 }
             }
             catch (Exception ex)
             {
                 LogOsca log = new LogOsca();
-                log.GravaLog(1,12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreatePagamento-post", ex.Message);
+                log.GravaLog(1, 12, this.contexto.idUsuario, this.contexto.idOrganizacao, "FormCreatePagamento-post", ex.Message);
             }
             return View();
         }
-   
+
         public ViewResult GridPagamento(string idContasReceber)
         {
             IEnumerable<Pagamento> retorno = pagamentoData.GetAllByContasReceber(new Guid(idContasReceber));
-                      
+
             retorno = retorno.OrderBy(x => x.dataPagamento);
 
             return View(retorno.ToList());
@@ -92,9 +99,18 @@ namespace OscaApp.Controllers
             modelo.id = new Guid(idPagamento);
             pagamentoData.Delete(modelo);
 
-            ContasReceberRules.CalculoPagamento( new Guid(idContasReceber), pagamentoData, contasReceberData);
+            ContasReceberRules.CalculoPagamento(new Guid(idContasReceber), pagamentoData, contasReceberData);
 
             return RedirectToAction("GridPagamento", "Pagamento", new { idContasReceber = idContasReceber });
+        }
+
+        public ViewResult MensagemPagamento(string idContasReceber)
+        {
+            PagamentoViewModel modelo = new PagamentoViewModel();
+            modelo.contasReceber = new Relacao();
+            modelo.contasReceber.id = new Guid(idContasReceber);
+
+            return View(modelo);
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿@model OscaApp.ViewModels.PagamentoViewModel
+
+@{
+    Layout = "_LayoutFrame";
+}
+<input asp-for="@Model.contasReceber.id" class="form-control" type="hidden" id="osc_contasReceberId" value="@Model.contasReceber.id">
+
+<div class="card col-md-7 offset-2" id="osc_MainForm">
+    <div class="card-header">
+        <table>
+            <tr>
+                <td><h5>Mensagem de Validação: &nbsp;&nbsp;</h5></td>
+                <td>
+                    <div id="osc_barrabotoes">
+                        <label>
+                            <button id="osc_back" type="button" class="btn btn-info btn-lg fa fa-back" value="voltar" onclick="location.href='@Url.Action("FormUpdateContasReceber", "ContasReceber", new{id = Model.contasReceber.id })'"><span>Voltar</span></button>
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <h4>O valor digitado está inconsistência!</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
