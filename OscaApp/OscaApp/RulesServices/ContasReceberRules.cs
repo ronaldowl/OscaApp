@@ -17,11 +17,13 @@ namespace OscaApp.RulesServices
 
             if (entrada.cliente != null) contasReceber.idCliente = entrada.cliente.id;
 
+            if (entrada.referencia != null) contasReceber.idReference = entrada.referencia.id;
+
             contasReceber.codigo = AutoNumber.GeraCodigo(21, contexto.idOrganizacao);
 
             if (contasReceber.codigo != null)
             {
-
+               
                 contasReceber.valorRestante = contasReceber.valor;
                 //************ Objetos de controle de acesso ******************
                 contasReceber.criadoEm = DateTime.Now;
@@ -40,7 +42,7 @@ namespace OscaApp.RulesServices
 
         public static bool ContasReceberCreate(ContasReceber entrada, IContasReceberData contaReceberData, ContextPage contexto)
         {
-
+                     
             entrada.codigo = AutoNumber.GeraCodigo(21, contexto.idOrganizacao);
 
             if (entrada.codigo != null)

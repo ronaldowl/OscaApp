@@ -95,6 +95,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\BalcaoVendas\GridLookupBalcaoVendas.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\BalcaoVendas\LookupBalcaoVendas.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Componentes\ResumoAlertas.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

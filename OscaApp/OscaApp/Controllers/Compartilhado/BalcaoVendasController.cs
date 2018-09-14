@@ -296,5 +296,38 @@ namespace OscaApp.Controllers
             return View(modelo);
         }
 
+
+        public ViewResult LookupBalcaoVendas()
+        {
+            return View();
+        }
+
+        public ViewResult GridLookupBalcaoVendas(string filtro, int Page)
+        {
+            try
+            {
+                IEnumerable<BalcaoVendasGridViewModel> retorno = balcaoVendasData.GetAll(contexto.idOrganizacao, 4, DateTime.Now, DateTime.Now);
+
+                if (!String.IsNullOrEmpty(filtro))
+                {
+                    retorno = from u in retorno
+                              where (u.balcaoVendas.codigo.ToLower().Contains(filtro.ToLower())) select u;
+
+                }   
+                //Se não passar a número da página, caregar a primeira
+                if (Page == 0) Page = 1;
+
+                return View(retorno.ToPagedList<BalcaoVendasGridViewModel>(Page, 10));
+
+            }
+            catch (Exception ex)
+            {
+                LogOsca log = new LogOsca();
+                log.GravaLog(1, 1, this.contexto.idUsuario, this.contexto.idOrganizacao, "Grid", ex.Message);
+            }
+
+            return View();
+        }
+
     }
 }

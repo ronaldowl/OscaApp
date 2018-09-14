@@ -47,6 +47,7 @@ namespace OscaApp.Controllers
             modelo.contexto = contexto;
             modelo.contasReceber.criadoEm = DateTime.Now;
             modelo.contasReceber.criadoPorName = contexto.nomeUsuario;
+            modelo.referencia = new Relacao();
 
             //Se passar o id carrega o cliente
             if (!String.IsNullOrEmpty(idCliente)) modelo.cliente = sqlData.RetornaRelacaoCliente(new Guid(idCliente));

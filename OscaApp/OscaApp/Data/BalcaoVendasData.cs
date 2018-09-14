@@ -138,6 +138,13 @@ namespace OscaApp.Data
 
             }
 
+            //Todos Contas da Base
+            if (view == 4)
+            {
+                itens = (from bl in db.BalcaoVendas where (bl.idOrganizacao.Equals(idOrg))  select bl).ToList();
+
+            }
+
             return HelperAssociate.ConvertToGridBalcaoVendas(itens);
         }
 

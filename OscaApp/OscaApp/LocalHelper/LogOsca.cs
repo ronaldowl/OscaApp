@@ -3,18 +3,32 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using OscaApp.Models;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace OscaApp.framework
 {
     public class LogOsca 
     {
 
-        public string conectStringManager { get; set; }
+         
+      
+        public string conectService { get; set; }
+        public IConfiguration Configuration { get; }
 
         public LogOsca()
         {
-            this.conectStringManager = @"Server=tcp:oscadbservices.database.windows.net,1433;Initial Catalog=OscadbManager;Persist Security Info=False;User ID=ronaldowl_admin;Password=P@ssw0rd;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var builder = new ConfigurationBuilder()
+          .SetBasePath(Directory.GetCurrentDirectory())
+          .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+
+            this.Configuration = Configuration;
+            this.conectService = Configuration.GetConnectionString("databaseService");
         }
+
+
         public Guid id { get; set; }
 
         public int codigoEntidade { get; set; }
@@ -39,7 +53,7 @@ namespace OscaApp.framework
             string comando = "insert into LogOsca (codigoErro, codigoEntidade, idUsuario, idOrganizacao,evento, mensagem) values('" + codigoErro.ToString() + "', '" + codigoEntidade.ToString() + "', '" + idUsuario.ToString() + "', '" + idOrganizacao.ToString() + "', '" + evento + "', '" + mensagem + "')";
 
           
-                using (SqlConnection Connection = new SqlConnection(conectStringManager))
+                using (SqlConnection Connection = new SqlConnection(conectService))
                 {
 
                     var _Command = new SqlCommand()
@@ -66,7 +80,7 @@ namespace OscaApp.framework
             SqlDataReader dataReader;
          
 
-                using (SqlConnection Connection = new SqlConnection(conectStringManager))
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
                 {
 
                     var _Command = new SqlCommand()
@@ -115,7 +129,7 @@ namespace OscaApp.framework
             SqlDataReader dataReader;
           
 
-                using (SqlConnection Connection = new SqlConnection(conectStringManager))
+                using (SqlConnection Connection = new SqlConnection(this.conectService))
                 {
 
                     var _Command = new SqlCommand()

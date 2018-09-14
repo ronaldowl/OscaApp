@@ -104,3 +104,30 @@ function OpenLookupFornecedor() {
         $(window.document.location).attr('href', "/Fornecedor/FormUpdateFornecedor?id=" + id);
     }
 }  
+
+function CarregaLookupBalcaoVendas() {
+    $("#lookupBalcaoVendas").load("/BalcaoVendas/LookupBalcaoVendas", function () {
+        $("#lookupBalcaoVendas").modal("show");
+    })
+}
+
+function CarregaMultiploLookup(){        
+
+    var tipo = document.getElementById("osc_origemContaReceber").value; 
+    
+    if (tipo == 0) {
+        CarregaLookupPedido();
+    }
+
+    if (tipo == 1) {
+        CarregaLookupAtendimento();
+    }
+
+    if (tipo == 2) {
+        CarregaLookupOrdemServico();
+    }
+
+    if (tipo == 3) {
+        CarregaLookupBalcaoVendas();
+    }
+}
