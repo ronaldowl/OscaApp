@@ -9,9 +9,7 @@
     function ConfigLookup(id, name) {       
                
         $("#osc_referenceIdName").val(name);
-        $("#osc_referenceId").val(id);
-
-     
+        $("#osc_referenceId").val(id);           
 
         $('#lookupBalcaoVendas').modal('hide');         
     }
@@ -25,7 +23,6 @@
     function CarregaGridFiltroEnter(evento) {
 
         if (evento.keyCode != 13) return false;
-
 
         var filtro = $("#grid").val();
 
@@ -98,8 +95,7 @@
                             <div id="paginacao">
                                 <table>
                                     <tr>
-                                        @*<td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridLookupCliente", "Cliente", new { page }))<span>Total de Clientes:@Model.TotalItemCount</span></td>*@
-                                       
+                                        @*<td style="width:75%">@Html.PagedListPager((IPagedList)Model, page => Url.Action("GridLookupBalcaoVendas", "BalcaoVendas", new { page }))<span>Total:@Model.TotalItemCount</span></td>*@                                       
                                     </tr>
                                 </table>
                             </div>

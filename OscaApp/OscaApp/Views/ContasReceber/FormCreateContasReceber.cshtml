@@ -69,15 +69,36 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Número de Ref</label>
-                                <div class="inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
-                                        <input id="osc_numeroReferencia" asp-for="@Model.contasReceber.numeroReferencia" class="form-control" type="text" />
-                                    </div>
+                                <label>Origem</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
+                                    </span>
+                                    <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control">
+                                        <option value="0">Pedido</option>
+                                        <option value="1">Atendimento</option>
+                                        <option value="2">Ordem de Serviço</option>
+                                        <option value="3">Balcão Vendas</option>
+                                        <option value="100">Outros</option>
+                                    </select>
                                 </div>
                             </div>
-                       
+
+                            <div class="form-group">
+                                <label class="control-label" style="color:deepskyblue">Referente à</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-asterisk fa-2x"></span>
+                                    </span>
+                                    <input id="osc_referenceIdName" asp-for="@Model.referencia.idName" type="text" class="form-control" required="required" autocomplete="off">
+                                    <input id="osc_referenceId" asp-for="@Model.referencia.id" type="hidden" class="form-control" />
+                                    <span class="input-group-btn ">
+                                        <button type="button" class="btn btn-info" onclick="CarregaMultiploLookup()">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="col-md-3">
@@ -95,35 +116,16 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>Origem</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-list-ul fa-2x"></span>&nbsp;
-                                    </span>
-                                    <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control">
-                                        <option value="0">Pedido</option>
-                                        <option value="1">Atendimento</option>
-                                        <option value="2">Ordem de Serviço</option>
-                                        <option value="3">Balcão Vendas</option>
-                                        <option value="100">Outros</option>
-                                    </select>
+                                <label>Número de Ref</label>
+                                <div class="inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-asterisk fa-2x"></i></span>&nbsp;
+                                        <input id="osc_numeroReferencia" asp-for="@Model.contasReceber.numeroReferencia" class="form-control" type="text" />
+                                    </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="control-label" style="color:deepskyblue">Referente à</label>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-asterisk fa-2x"></span>
-                                    </span>
-                                    <input id="osc_referenceIdName" asp-for="@Model.referencia.idName" type="text" class="form-control" required="required" autocomplete="off">
-                                    <input id="osc_referenceId" asp-for="@Model.referencia.id" type="hidden" class="form-control" />
-                                    <span class="input-group-btn ">
-                                        <button type="button" class="btn btn-info" onclick="CarregaMultiploLookup()">
-                                            <span class="fa fa-search"></span>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
+
+                        
                             <div class="form-group">
                                 <label>Anotação</label>
                                 <div class="input-group">

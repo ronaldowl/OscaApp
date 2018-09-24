@@ -23,6 +23,8 @@ namespace OscaApp.Controllers
         private ContextPage contexto;
         private readonly SqlGenericData sqlData;
         private readonly IPagamentoData pagamentoData;
+        private readonly IBalcaoVendasData balcaoVendasData;
+
         private readonly ClienteData clienteData;
 
 
@@ -33,6 +35,7 @@ namespace OscaApp.Controllers
             this.sqlData = _sqlData;
             this.contexto = new ContextPage().ExtractContext(httpContext);
             this.clienteData = new ClienteData(db);
+            this.balcaoVendasData = new BalcaoVendasData(db);
 
         }
 
@@ -95,6 +98,8 @@ namespace OscaApp.Controllers
                 retorno = contasReceberData.Get(modelo.contasReceber.id);
 
                 if (retorno.idCliente != null) modelo.cliente = sqlData.RetornaRelacaoCliente(retorno.idCliente);
+
+                if (retorno.idReference != Guid.Empty)  modelo.referencia = HelperLookup.PreencheOrigemContasReceber(retorno.origemContaReceber, retorno.idReference,sqlData );                     
 
                 if (retorno != null)
                 {

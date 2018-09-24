@@ -63,6 +63,7 @@
                                 <th></th>
                                 <th>Código</th>
                                 <th>Nome</th>
+                                <th>Cor</th>
                                 <th>Qtd</th>
                                 <th>Qtd Mínima</th>
                                 <th>Tipo de Venda</th>
@@ -80,6 +81,7 @@
                                     <td><i class="fa fa-cubes"></i></td>
                                     <td>@Html.ActionLink(item.codigo.ToString(), "FormUpdateProduto", new { id = item.id })</td>
                                     <td>@item.nome</td>
+                                    <td>@item.cor</td>
                                     <td>@item.quantidade</td>
                                     <td>@item.quantidadeMinima</td>
                                     <td>@item.formaVendaProduto</td>

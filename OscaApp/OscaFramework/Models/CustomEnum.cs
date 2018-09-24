@@ -99,6 +99,22 @@ namespace OscaFramework.Models
 
     public class CustomEnum
     {
+        public enum Cores
+        {
+            Preto = 0,
+            Branco = 1,
+            Azul = 2,
+            Vermelho = 3,
+            Amarelo = 4,
+            Verde = 5,
+            Laranja = 6,
+            Lilas = 7,
+            Dourado = 8,
+            Cinza = 9,
+            Marrom = 10,
+
+        }
+
         public enum ModeloCacamba
         {
             cacamba3M3 = 0,

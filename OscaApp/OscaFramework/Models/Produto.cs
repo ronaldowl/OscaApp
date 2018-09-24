@@ -67,6 +67,8 @@ namespace OscaFramework.Models
 
         public CustomEnum.ClassificacaoProduto classificacaoProduto { get; set; }
 
+        public CustomEnum.Cores cor { get; set; }
+
         public Guid idOrganizacao { get; set; }
 
 

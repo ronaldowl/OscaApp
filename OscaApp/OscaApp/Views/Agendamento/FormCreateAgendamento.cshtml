@@ -1,40 +1,5 @@
 ﻿@model OscaApp.ViewModels.AgendamentoViewModel
 
-<script>
-    function CarregaLookupCliente() {
-        $("#lookupCliente").load("/Cliente/LookupCliente", function () {
-            $("#lookupCliente").modal("show");
-        })
-    }
-
-    function CarregaLookupOS() {
-
-        $("#lookupOS").load("/OrdemServico/LookupOrdemServico", function () {
-            $("#lookupOS").modal("show");
-        });
-    }
-
-    function CarregaLookupPedido() {
-
-        $("#lookupPedido").load("/Pedido/LookupPedido", function () {
-            $("#lookupPedido").modal("show");
-        });
-    }
-
-    function CarregaLookupAtendimento() {
-
-        $("#lookupAtendimento").load("/Atendimento/LookupAtendimento", function () {
-            $("#lookupAtendimento").modal("show");
-        });
-    }
-
-    function CarregaLookupProfissional() {
-
-        $("#lookupProfissional").load("/Profissional/LookupProfissional", function () {
-            $("#lookupProfissional").modal("show");
-        });
-    }
-</script>
 
 <div id="contexto">
     @Html.HiddenFor(m => m.contexto.idOrganizacao)
@@ -349,5 +314,5 @@
 </div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_agendamento.js"></script>
-
+<script src="~/lib/OscaJs/osc_lookup.js"></script>
 <script>OnLoad_Agendamento();</script>

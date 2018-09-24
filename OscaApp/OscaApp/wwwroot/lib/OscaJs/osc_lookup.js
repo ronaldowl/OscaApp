@@ -73,14 +73,12 @@ function CarregaLookupEndereco(id) {
     $("#lookupEndereco").load("/Endereco/LookupEndereco?idCliente=" + id, function () {
         $("#lookupEndereco").modal("show");
     })
-
 }
 
 function CarregaLookupEndereco2(id) {
     $("#lookupEndereco2").load("/Endereco/LookupEndereco2?idCliente=" + id, function () {
         $("#lookupEndereco2").modal("show");
     })
-
 }
 
 function CarregaLookupFornecedor() {
@@ -111,6 +109,33 @@ function CarregaLookupBalcaoVendas() {
     })
 }
 
+function OpenLookupBalcaoVendas(idBalcaoVendas) { 
+
+    if (idBalcaoVendas != "00000000-0000-0000-0000-000000000000") {
+        $(window.document.location).attr('href', "/BalcaoVendas/BalcaoVendasView?id=" + idBalcaoVendas);
+    }
+} 
+
+function CarregaLookupPedido() {
+
+    $("#lookupPedido").load("/pedido/LookupPedido", function () {
+        $("#lookupPedido").modal("show");
+    });
+}
+
+function CarregaLookupOS() {
+
+    $("#lookupOS").load("/OrdemServico/LookupOrdemServico", function () {
+        $("#lookupOS").modal("show");
+    });
+}
+
+function CarregaLookupAtendimento() {
+    $("#lookupAtendimento").load("/Atendimento/LookupAtendimento", function () {
+        $("#lookupAtendimento").modal("show");
+    })
+}
+
 function CarregaMultiploLookup(){        
 
     var tipo = document.getElementById("osc_origemContaReceber").value; 
@@ -129,5 +154,27 @@ function CarregaMultiploLookup(){
 
     if (tipo == 3) {
         CarregaLookupBalcaoVendas();
+    }
+}
+
+function OpenMultiploLookup() {
+
+    var tipo = document.getElementById("osc_origemContaReceber").value;
+    var idReferencia = document.getElementById("osc_referenceId").value;
+    
+    if (tipo == 0) {
+        CarregaLookupPedido();
+    }
+
+    if (tipo == 1) {
+        CarregaLookupAtendimento();
+    }
+
+    if (tipo == 2) {
+        CarregaLookupOrdemServico();
+    }
+
+    if (tipo == 3) {
+        OpenLookupBalcaoVendas(idReferencia);
     }
 }

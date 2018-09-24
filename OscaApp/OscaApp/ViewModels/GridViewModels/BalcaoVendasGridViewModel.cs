@@ -15,6 +15,5 @@ namespace OscaApp.ViewModels.GridViewModels
         public DateTime inicio { get; set; }
         public DateTime fim { get; set; }
 
-
     }
 }
