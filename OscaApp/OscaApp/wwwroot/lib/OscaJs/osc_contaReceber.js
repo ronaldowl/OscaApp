@@ -82,3 +82,14 @@ function ControlaBotaoAdicionarPagamento() {
     }
 
 }
+
+function ProtegeMultiLookup()
+{
+    var tipo = document.getElementById("osc_origemContaReceber").value;
+
+    if (tipo == 100) {
+
+        $("#osc_referenceIdName").prop("disabled", true); 
+        
+    }
+}

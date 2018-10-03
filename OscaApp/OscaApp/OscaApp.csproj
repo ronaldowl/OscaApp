@@ -107,6 +107,9 @@
     <Content Update="Views\LogOsca\GridLogAcesso.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\OrdemServico\LookupMultiOrdemServico.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Pagamento\MensagemPagamento.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

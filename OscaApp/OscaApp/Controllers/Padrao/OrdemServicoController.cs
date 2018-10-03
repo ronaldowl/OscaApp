@@ -221,6 +221,15 @@ namespace OscaApp.Controllers
             return View(retorno.ToPagedList<OrdemServico>(1,10));
         }
 
+        public ViewResult LookupMultiOrdemServico()
+        {
+            IEnumerable<OrdemServico> retorno = ordemServicoData.GetAll(contexto.idOrganizacao);
+
+            retorno = retorno.OrderBy(x => x.codigo);
+
+            return View(retorno.ToPagedList<OrdemServico>(1, 10));
+        }
+
         [HttpGet]
         public ViewResult FormStatusOrdemServico(string id)
         {

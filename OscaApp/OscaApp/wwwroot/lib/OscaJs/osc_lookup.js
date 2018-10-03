@@ -116,6 +116,14 @@ function OpenLookupBalcaoVendas(idBalcaoVendas) {
     }
 } 
 
+function OpenLookupOS(idOs) {
+
+    if (idOs != "00000000-0000-0000-0000-000000000000") {
+     
+        $(window.document.location).attr('href', "/OrdemServico/FormUpdateOrdemServico?id=" + idOs);
+    }
+} 
+
 function CarregaLookupPedido() {
 
     $("#lookupPedido").load("/pedido/LookupPedido", function () {
@@ -125,7 +133,7 @@ function CarregaLookupPedido() {
 
 function CarregaLookupOS() {
 
-    $("#lookupOS").load("/OrdemServico/LookupOrdemServico", function () {
+    $("#lookupOS").load("/OrdemServico/LookupMultiOrdemServico", function () {
         $("#lookupOS").modal("show");
     });
 }
@@ -149,7 +157,7 @@ function CarregaMultiploLookup(){
     }
 
     if (tipo == 2) {
-        CarregaLookupOrdemServico();
+        CarregaLookupOS();
     }
 
     if (tipo == 3) {
@@ -171,7 +179,7 @@ function OpenMultiploLookup() {
     }
 
     if (tipo == 2) {
-        CarregaLookupOrdemServico();
+        OpenLookupOS(idReferencia);
     }
 
     if (tipo == 3) {

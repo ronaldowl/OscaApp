@@ -1,0 +1,106 @@
+﻿@model X.PagedList.PagedList<OscaFramework.Models.OrdemServico>
+@using X.PagedList.Mvc;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@{
+    Layout = "_LayoutFrame";
+}
+
+
+<script type="text/javascript">
+
+    //Função para tratamento do Lookup padrão
+    function ConfigLookup(id, name,valor) {
+
+        $("#osc_referenceIdName").val(name);
+        $("#osc_referenceId").val(id);
+
+        $('#lookupOS').modal('hide');
+    }
+
+    function CarregaGrid() {
+        $("#grid").val("");
+        $.ajax("/OrdemServico/GridLookupOrdemServico").done(function (data) {
+            $("#GridOrdemServico").html(data);
+        });
+    }
+    function CarregaGridFiltro() {
+        var filtro = $("#grid").val();
+        $.ajax("/OrdemServico/GridLookupOrdemServico?filtro=" + filtro).done(function (data) {
+            $("#GridOrdemServico").html(data);
+        });
+    } 
+    function CarregaGridPagina(Page) {
+       
+        $.ajax("/OrdemServico/GridLookupOrdemServico?Page=" + Page).done(function (data) {
+            $("#GridOrdemServico").html(data);
+        });
+    } 
+</script>
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Fechar</span></button>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div class="card" id="osc_Grid">
+                    <div class="card-header">                      
+                        <div class="card-title">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h5 style="font-weight:bold">Lista de OS: &nbsp;&nbsp;</h5>
+                                    </td>
+                                    <td>
+                                        <div class="form-inline">
+                                            <div class="form-group  col-md-7">
+                                                <div class="input-group">
+                                                    @Html.TextBox("filtro", "", new { @class = "form-control ", @style = "max-width:none;", placeholder = "Pesquisar", id = "grid" })
+                                                    <span class="input-group-btn ">
+                                                        <button type="button" class="btn  btn-info" onclick="CarregaGridFiltro();">
+                                                            <span class="fa fa-search"></span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <button id="osc_recarregar" type="button" class="btn btn-info btn-lg  fa fa-remove" value="Limpar" onclick="CarregaGrid()"> <span>Limpar</span></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" id="osc_valorLookup" required="required" value="" hidden="hidden"> </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card-body">
+                            <div id="GridOrdemServico">
+                            </div>
+                            <div id="paginacao">
+                                <table>
+                                    <tr>
+                                        <td style="width:75%"><span>Total de Ordens de Serviço:@Model.TotalItemCount </span></td>
+                   
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    CarregaGrid();
+    $('#paginacao').on('click', 'a', function (e) {
+
+        e.preventDefault();
+        CarregaGridPagina(this.text);
+
+    });
+</script>
+

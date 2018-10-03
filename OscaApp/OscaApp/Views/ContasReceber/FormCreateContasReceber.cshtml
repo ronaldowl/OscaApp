@@ -74,11 +74,11 @@
                                     <span class="input-group-addon">
                                         <span class="fa fa-list-ul fa-2x"></span>&nbsp;
                                     </span>
-                                    <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control">
-                                        <option value="0">Pedido</option>
-                                        <option value="1">Atendimento</option>
-                                        <option value="2">Ordem de Serviço</option>
+                                    <select id="osc_origemContaReceber" asp-for="@Model.contasReceber.origemContaReceber" class="form-control"  onchange="ProtegeMultiLookup()">
+                                        @*<option value="0">Pedido</option>
+                                           <option value="1">Atendimento</option>*@
                                         <option value="3">Balcão Vendas</option>
+                                        <option value="2">Ordem de Serviço</option>
                                         <option value="100">Outros</option>
                                     </select>
                                 </div>
@@ -93,7 +93,7 @@
                                     <input id="osc_referenceIdName" asp-for="@Model.referencia.idName" type="text" class="form-control" required="required" autocomplete="off">
                                     <input id="osc_referenceId" asp-for="@Model.referencia.id" type="hidden" class="form-control" />
                                     <span class="input-group-btn ">
-                                        <button type="button" class="btn btn-info" onclick="CarregaMultiploLookup()">
+                                        <button id="osc_botaoMultiLookup" type="button" class="btn btn-info" onclick="CarregaMultiploLookup()">
                                             <span class="fa fa-search"></span>
                                         </button>
                                     </span>
@@ -217,6 +217,10 @@
 <div class="modal fade" id="lookupCliente">
 </div>
 <div class="modal fade" id="lookupBalcaoVendas">
+</div>
+<div class="modal fade" id="lookupOS">
+</div>
+<div class="modal fade" id="lookupPedido">
 </div>
 <script src="~/lib/OscaJs/osc_global.js"></script>
 <script src="~/lib/OscaJs/osc_contaReceber.js"></script>
