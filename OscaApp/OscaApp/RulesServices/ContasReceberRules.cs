@@ -105,6 +105,7 @@ namespace OscaApp.RulesServices
                 contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
                 contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
                 contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
+                contaReceber.idReference = balcaoVendas.id;
 
                 if (balcaoVendas.idCliente != Guid.Empty) contaReceber.idCliente = balcaoVendas.idCliente;
 
@@ -145,7 +146,7 @@ namespace OscaApp.RulesServices
             ContasReceber contaReceber = new ContasReceber();
             contaReceber.valor = balcaoVendas.valorTotal;
             contaReceber.valorRestante = balcaoVendas.valorTotal;
-
+            contaReceber.idReference = balcaoVendas.id;
             contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
             contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
             contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;
@@ -167,7 +168,7 @@ namespace OscaApp.RulesServices
             ContasReceber contaReceber = new ContasReceber();
             contaReceber.valor = balcaoVendas.valorTotal;
             contaReceber.valorRestante = balcaoVendas.valorTotal;
-
+            contaReceber.idReference = balcaoVendas.id;
             contaReceber.tipoLancamento = CustomEnum.TipoLancamento.automatico;
             contaReceber.statusContaReceber = CustomEnumStatus.StatusContaReceber.agendado;
             contaReceber.origemContaReceber = CustomEnum.OrigemContaReceber.BalcaoVendas;

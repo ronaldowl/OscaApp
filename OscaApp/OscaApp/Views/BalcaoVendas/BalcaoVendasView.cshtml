@@ -248,8 +248,55 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Criado Por</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-user"></span>
+                                            </span>
+                                            <input id="osc_criadoPor" asp-for="@Model.balcaoVendas.criadoPorName " type="text" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Criado Em</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar fa-1x"></span>
+                                            </span>
+                                            <input id="osc_criadoEm" value="@Model.balcaoVendas.criadoEm.ToShortDateString()" type="text" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Modificado Por</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-user"></span>
+                                            </span>
+                                            <input id="osc_modificadoPor" asp-for="@Model.balcaoVendas.modificadoPorName " type="text" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="control-label">Modificado Em</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <span class="fa fa-calendar fa-1x"></span>
+                                            </span>
+                                            <input id="osc_modificadoEm" value="@Model.balcaoVendas.criadoEm.ToShortDateString()" type="text" class="form-control" disabled="disabled" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </form>
     </div>
